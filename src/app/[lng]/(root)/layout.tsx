@@ -3,5 +3,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <div>
+      <div>{"lng"}</div>
+      {children}
+    </div>
+  );
 }

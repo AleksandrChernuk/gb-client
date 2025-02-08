@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="text-2xl font-bold">{"title"}</h1>
       <p>description</p>
       <Link href="/search" className="text-blue-600 hover:underline">
-        {"go-home"}
+        {"/search"}
       </Link>
     </main>
   );
