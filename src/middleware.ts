@@ -3,6 +3,12 @@ import { routing } from "./i18n/routing";
 
 export default createMiddleware(routing);
 
-export const config = {
-  matcher: ["/", "/(uk|ru|en)/:path*"],
-};
+
+
+ export const config = {
+   matcher: [
+     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+     "/(en|ru|uk)/:path*",
+     "/(api|trpc)(.*)",
+   ],
+ };

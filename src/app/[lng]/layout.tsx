@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { Params } from "@/types/common.types";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { Locale } from "@/i18n/locales";
 
 const noto_sans = Noto_Sans({
@@ -32,9 +32,10 @@ export default async function RootLayout({
   const { lng } = await params;
 
   if (!routing.locales.includes(lng as Locale)) {
-    notFound();
+    return notFound();
   }
   const messages = await getMessages();
+  setRequestLocale(lng);
 
   return (
     <html lang={lng} suppressHydrationWarning>
