@@ -1,6 +1,6 @@
 import { IconLogo } from "@/components/icons/IconLogo";
-import Link from "next/link";
-
+import { Link } from "@/i18n/routing";
+ 
 export default function Logo() {
   return (
     <Link

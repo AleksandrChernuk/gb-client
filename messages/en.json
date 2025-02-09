@@ -109,12 +109,24 @@
     "sort_buy_arrival_time": "Arrival time",
     "sort_buy_time_on_road": "Shortest journey",
     "resul_count": "results",
-    "collapse_route": "Згорнути весь маршрут",
-    "show_route": "Show the entire route",
     "amenities": "Amenities",
     "return_policy": "Return policy",
     "luggage": "Luggage",
     "organized_transfer": "Organized transfer",
-    "places": "Places"
+    "places": "Places",
+    "selectButton": "Обрати",
+    "details": "Details",
+    "shortHours": "h",
+    "shortMinutes": "m",
+    "route": "Route",
+    "local_time": "Departure/arrival time is indicated in local time.",
+    "travel_time": "Travel time",
+    "collapse_route": "Collapse the entire route",
+    "show_route": "Show the entire route",
+    "collapse_details": "Collapse details",
+    "no_travel_dates": "No travel on these dates",
+    "something_happend": "Something happend",
+    "bus": "Bus",
+    "discounts": "Discounts"
   }
 }

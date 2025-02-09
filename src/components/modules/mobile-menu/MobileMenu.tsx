@@ -10,12 +10,12 @@ import { DrawerClose } from '@/components/ui/drawer';
 import MobileLanguageChanger from './MobileLanguageChanger';
 import useToggleOpen from '@/hooks/useToggleOpen';
 import MobileProfileLink from './MobileProfileLink';
-import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
-import { Suspense } from 'react';
+import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
-  const { t } = useTranslation(['common']);
+  const t = useTranslations("common");
 
   const { open, handleToggleOpen } = useToggleOpen();
 

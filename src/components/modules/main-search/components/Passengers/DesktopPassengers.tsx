@@ -6,14 +6,14 @@ import { PassengersButton } from "./PassengersButton";
 import { usePassengers } from "../../hooks/usePassengers";
 import { DropdownWrapper, StartIcon } from "../../ui";
 import { useShallow } from "zustand/react/shallow";
-import { useSearchStore } from '@/store/useSearch';
-import { useTranslation } from 'react-i18next';
-import { Separator } from '@radix-ui/react-dropdown-menu';
+import { useSearchStore } from "@/store/useSearch";
+ import { Separator } from "@radix-ui/react-dropdown-menu";
+import { useTranslations } from "next-intl";
 
 export const DesktopPassengers = memo(() => {
   const { open, handleToggleOpen, handleBlur } = usePassengers();
 
-  const { t } = useTranslation();
+  const t = useTranslations("common");
 
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));

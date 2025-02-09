@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from "next-intl";
 
 type Props = {
   handleSubmit: () => void;
@@ -10,11 +10,11 @@ type Props = {
 };
 
 export const SubmitButton = ({ handleSubmit, disabled }: Props) => {
-  const { t } = useTranslation(['common']);
+  const t = useTranslations("common");
 
   return (
-    <Button variant={'main'} size={'mainSearch'} disabled={disabled} onClick={handleSubmit}>
-      {disabled ? <LoaderCircle className='animate-spin' /> : t('searchBtn')}
+    <Button variant={"main"} size={"mainSearch"} disabled={disabled} onClick={handleSubmit}>
+      {disabled ? <LoaderCircle className="animate-spin" /> : t("searchBtn")}
     </Button>
   );
 };

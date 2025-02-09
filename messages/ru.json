@@ -112,6 +112,18 @@
     "return_policy": "Политика возврата",
     "luggage": "Багаж",
     "organized_transfer": "Организованная пересадка",
-    "places": "Мест"
+    "places": "Мест",
+    "selectButton": "Обрати",
+    "details": "Детальнее",
+    "shortHours": "ч",
+    "shortMinutes": "мин",
+    "route": "Маршрут",
+    "local_time": "Время отправления/прибытия указано по местному времени.",
+    "travel_time": "Время в пути",
+    "collapse_details": "Свернуть подробности",
+    "no_travel_dates": "В эту дату поездок нет",
+    "something_happend": "Что-то произошло",
+    "bus": "Автобус",
+    "discounts": "Скидки"
   }
 }

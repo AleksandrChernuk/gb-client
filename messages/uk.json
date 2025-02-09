@@ -123,6 +123,18 @@
     "return_policy": "Політика повернення",
     "luggage": "Багаж",
     "organized_transfer": "Організована пересадка",
-    "places": "Місць"
+    "places": "Місць",
+    "selectButton": "Обрати",
+    "details": "Детальніше",
+    "shortHours": "г",
+    "shortMinutes": "хв",
+    "route": "Маршрут",
+    "local_time": "Час відправлення/прибуття вказано за місцевим часом.",
+    "travel_time": "Час в дорозі",
+    "collapse_details": "Згорнути подробиці",
+    "no_travel_dates": "Подорожі у цю дату немає",
+    "something_happend": "Щось сталося",
+    "bus": "Автобус",
+    "discounts": "Знижки"
   }
 }

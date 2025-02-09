@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import noTravelImg from '../../../images/NoTravel.png';
 import { CustomCard } from '@/components/shared/CustomCard';
-import { useTranslation } from 'react-i18next';
-
+import { useTranslations } from "next-intl";
+ 
 export const NoTravel = () => {
-  const { t } = useTranslation();
+  const t = useTranslations("common");
 
   return (
     <CustomCard className='mx-auto flex flex-col items-center self-center gap-8 p-5 text-center w-fit shadow-[0_4px_10px_0_rgba(0,0,0,0.2)]'>

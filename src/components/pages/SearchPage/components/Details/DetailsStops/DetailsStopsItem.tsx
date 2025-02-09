@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { IStops } from '@/types/stops-interface';
-import { useTranslation } from 'react-i18next';
-
+import { useTranslations } from "next-intl";
+ 
 type Props = {
   isFirst?: boolean;
   isLast?: boolean;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function DetailsStopsItem({ isFirst, isLast, point }: Props) {
-  const { t } = useTranslation(['search']);
+  const t = useTranslations("search");
 
   return (
     <div

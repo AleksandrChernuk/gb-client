@@ -12,14 +12,14 @@ import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { memo } from 'react';
 import { useSearchStore } from '@/store/useSearch';
-import useDateLocale from '@/hooks/useDateLocale';
-import { useTranslation } from 'react-i18next';
-import { DrawerClose } from '@/components/ui/drawer';
+import useDateLocale from "@/hooks/useDateLocale";
+ import { DrawerClose } from "@/components/ui/drawer";
 import { IconBack } from '@/components/icons/IconBack';
+import { useTranslations } from "next-intl";
 
 export const MobileDate = memo(() => {
   const { open, handleToggleOpen, handleSelectDate } = useDate();
-  const { t } = useTranslation(['common']);
+  const t = useTranslations("common");
   const { locale } = useDateLocale();
 
   const currentDate = useSearchStore(useShallow((state) => state.date));

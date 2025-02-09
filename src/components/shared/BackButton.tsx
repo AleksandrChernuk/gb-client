@@ -4,10 +4,10 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-
+import { useTranslations } from "next-intl";
+ 
 export default function BackButton() {
-  const { t } = useTranslation(['common']);
+  const t = useTranslations("common");
 
   const route = useRouter();
   return (

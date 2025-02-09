@@ -1,64 +1,375 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-mulish: var(--font-mulish);
+
+  --breakpoint-mobile: 375px;
+  --breakpoint-tabs80: 560px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1280px;
+  --breakpoint-desktop: 1440px;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --shadow-custom: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+  --color-bg-slate-900: var(--bg-slate-900);
+  --color-primary_1: var(--primary_1);
+  --color-primary_2: var(--primary_2);
+  --color-light_primary: var(--light_primary);
+  --color-background_card: var(--background_card);
+  --color-hover: var(--hover);
+  --color-focused: var(--focused);
+  --color-red: var(--red);
+  --color-light_red: var(--light_red);
+  --color-red_input: var(--red_input);
+  --color-for_payment_icons: var(--for_payment_icons);
+  --color-black: var(--black);
+  --color-background_black_mode: var(--background_black_mode);
+  --color-dark_mode_main1: var(--dark_mode_main1);
+  --color-blackmode: var(--blackmode);
+  --color-additional_red: var(--additional-red);
+  --color-black_2_for_text: var(--black_2_for_text);
+  --color-gray_2_for_body: var(--gray_2_for_body);
+  --color-gray_3: var(--gray_3);
+  --color-gray_5: var(--gray_5);
+  --color-gray_0: var(--gray_0);
+  --color-gray_1: var(--gray_1);
+  --color-grayy: var(--grayy);
+  --color-gray_blue: var(--gray-blue);
+  --color-card_bg_primery: var(--card_bg_primery);
+  --color-white: var(--white);
+  --color-bw: var(--bw);
+  --color-icons: var(--icons);
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-text_secondary_color: var(--text_secondary_color);
+  --color-text_prymery_color: var(--text_prymery_color);
+  --color-label_color: var(--label_color);
+  --color-prymery_btn_color: var(--prymery_btn_color);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-gray_11: var(--gray_11);
+  --color-search_color: var(--search_color);
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
 }
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility h1 {
+  @apply text-[32px] font-bold tracking-normal leading-[38.4px];
+}
+
+@utility h2 {
+  @apply text-[32px] font-medium tracking-normal leading-[38.4px];
+}
+
+@utility h3 {
+  @apply text-2xl font-bold tracking-normal leading-[28.8px];
+}
+
+@utility h4 {
+  @apply text-2xl font-medium tracking-normal leading-[28.8px];
+}
+
+@utility h5 {
+  @apply text-base font-bold leading-6 tracking-normal;
+}
+
+@utility h6 {
+  @apply text-sm font-bold tracking-normal leading-[18px];
+}
+
+@utility main_text_body {
+  @apply text-base font-normal leading-6 tracking-normal;
+}
+
+@utility navigation_text_body {
+  @apply text-base font-medium tracking-tighter leading-[19.2px];
+}
+
+@utility button_underline_bolt_text {
+  @apply text-sm font-medium underline tracking-normal leading-[19.2px];
+}
+
+@utility body_medium {
+  @apply text-base font-medium tracking-normal leading-[24px];
+}
+
+@utility logo_small {
+  @apply text-[26.838px] font-extrabold tracking-normal leading-normal;
+}
+
+@utility logo_large {
+  @apply text-[31.88px] font-extrabold tracking-normal leading-[33.68px];
+}
+
+@utility large_button {
+  @apply text-lg font-bold tracking-normal leading-[21.6px];
+}
+
+@utility button_mobile {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility samll_button {
+  @apply text-[12px] font-bold tracking-normal leading-[18px];
+}
+
+@utility button_underline_text {
+  @apply text-sm font-normal underline tracking-normal leading-[19.2px];
+}
+
+@utility button_large_text {
+  @apply text-lg font-bold tracking-tighter leading-[21.6px];
+}
+
+@utility filter_input_medium_text {
+  @apply text-lg font-medium tracking-tighter leading-[21.6px];
+}
+
+@utility filter_input_normal_text {
+  @apply text-lg font-normal tracking-normal leading-[27px];
+}
+
+@utility addional_regular_text {
+  @apply text-sm font-normal leading-4 tracking-normal;
+}
+
+@utility addional {
+  @apply text-lg font-normal tracking-normal leading-[27px];
+}
+
+@utility addional_medium_text {
+  @apply text-base font-medium leading-4 tracking-normal;
+}
+
+@utility button_mobile_bolt_text {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility secondary_2_bolt_text {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility small_2_bolt_text {
+  @apply text-xs font-bold tracking-normal leading-[18px];
+}
+
+@utility small_text {
+  @apply text-xs font-normal tracking-normal leading-[18px];
+}
+
+@utility secondary_text {
+  @apply text-sm font-normal tracking-normal leading-[21px];
+}
+
+@utility flex_center {
+  @apply flex items-center;
+}
+
+@utility flex_col {
+  @apply flex flex-col;
+}
+
+@utility p_drawer_content {
+  @apply px-5 py-6;
+}
+
+@utility select_input_error {
+  @apply border-[2px] border-additional_red;
+}
+
+@utility jorney_search_submit_btn {
+  @apply h5 grow-0 text-black text-wrap inline-flex items-center justify-center min-h-full py-4 px-6 w-full rounded-none rounded-br-[16px] tablet:min-w-[108px] tablet:max-w-[108px] laptop:min-w-[187px] laptop:max-w-[187px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none;
+}
+
+@utility details_stops_item {
+  @apply relative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20
+}
+
+@layer utilities {
+
+  html,
+    body,
+    :root {
+      height: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+}
+
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --primary_1: #088537;
+      --background_card: #0D5A2B;
+      --primary_2: #7AF2A6;
+      --light_primary: #B4FFD0;
+      --hover: #05B446;
+      --focused: #0D6E32;
+      --red: #DE2A1A;
+      --light_red: #EF958D;
+      --red_input: #FFE7E5;
+      --for_payment_icons: linear-gradient(#62F1B0, #33C6EA);
+      --black: #000000;
+      --background_black_mode: #0F172A;
+      --dark_mode_main1: #1E293B;
+      --blackmode: #475569;
+      --black_2_for_text: #334155;
+      --gray_2_for_body: #6F8B90;
+      --gray_3: #8E8E8E;
+      --gray_5: #212529;
+      --gray_1: #E2E8F0;
+      --gray_0: #E6E6E6;
+      --gray_11: #0000004b;
+      --grayy: #F8FAFC;
+      --button-pay-gradient: linear-gradient(#62F1B0, #33C6EA);
+      --additional-red: #DE2A1A;
+      --additional-pink: #EF958D;
+      --additional-pink: #EF958D;
+      --gray-dark: #334155;
+    
+      --gray-blue: #6F8B90;
+      --bw: #000000;
+      --white: #ffffff;
+      --icons: #000000;
+      --text_prymery_color: #334155;
+      --text_secondary_color: #6F8B90;
+      --prymery_btn_color: #FFFF;
+      --label_color: #334155;
+      --search_color: #000000;
+    
+    
+      --card_bg_primery: #ffffff;
+      --background: 0, 0%, 100%;
+      --foreground: 215 25% 27%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --card-foreground: 215 25% 27%;
+      --popover: 210 40% 98%;
+      --popover-foreground: 215 25% 27%;
+      --primary: 142 87% 28%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 142 81% 71%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 0 0% 90%;
+      --muted-foreground: 0 0% 60%;
+      --accent: 214 32% 91%;
+      --accent-foreground: 0 0% 0%;
+      --destructive: 5 74% 74%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 210 40% 98%;
+      --input: 216 20% 95%;
+      --ring: 216 24% 96%;
+      --chart-1: 143 80% 24%;
+      --chart-2: 143 97% 85%;
+      --chart-3: 5 100% 95%;
+      --chart-4: 0 0% 90%;
+      --chart-5: 173 47% 36%;
+      --radius: 0.75rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --primary_1: #088537;
+      --primary_2: #7af2a6;
+      --bw: #ffffff;
+      --icons: #F8FAFC;
+      --card_bg_primery: #0F172A;
+      --text_seconddary_color: #E2E8F0;
+      --text_prymery_color: #F8FAFC;
+      --prymery_btn_color: #F8FAFC;
+      --label_color: #E2E8F0;
+      --search_color: #F8FAFC;
+    
+      --background: 222, 47%, 11%;
+      --foreground: 215, 25%, 27%, 1;
+      --card: 216 32% 17%;
+      --card-foreground: 0 0% 95%;
+      --popover: 216 32% 17%;
+      --popover-foreground: 0 0% 95%;
+      --primary: 142 87% 28%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 142 81% 71%;
+      --secondary-foreground: 215 25% 27%;
+      --muted: 215 25% 27%;
+      --muted-foreground: 210 40% 98%;
+      --accent: 215 25% 27%;
+      --accent-foreground: 210 40% 98%;
+      --destructive: 5 74% 74%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 224 45% 11%;
+      --input: 224 45% 11%;
+      --ring: 224 45% 11%;
+      --chart-1: 143 47% 36%;
+      --chart-2: 293 47% 36%;
+      --chart-3: 353 47% 36%;
+      --chart-4: 113 47% 36%;
+      --chart-5: 173 47% 36%;
   }
 }
 
@@ -66,6 +377,7 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

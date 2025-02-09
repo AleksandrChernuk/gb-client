@@ -1,11 +1,11 @@
 'use client';
 
 import { useCurrentRouteStore } from '@/store/useCurrentRoute';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-
+import { useTranslations } from "next-intl";
+import React from "react";
+ 
 export default function DetailsLuggage({ hasCardWrapp }: { hasCardWrapp?: boolean }) {
-  const { t } = useTranslation(['search']);
+  const t = useTranslations("search");
   const сurrentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
 
   if (!сurrentRoute?.details?.luggage_rules || сurrentRoute?.details?.luggage_rules.length === 0) {

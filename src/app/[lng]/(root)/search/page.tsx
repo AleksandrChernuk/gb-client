@@ -1,10 +1,13 @@
-import { Link } from "@/i18n/routing";
-import React from "react";
+import SecondFooter from "@/components/modules/footer/SecondFooter";
+import SearchModule from "@/components/pages/SearchPage";
 
-export default function Search() {
+export default async function SearchPage() {
   return (
-    <div>
-      <Link href={"/"}>home</Link>
-    </div>
+    <>
+      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_mode_main1">
+        <SearchModule />
+      </main>
+      <SecondFooter />
+    </>
   );
 }
