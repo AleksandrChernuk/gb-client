@@ -17,15 +17,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
  
-import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
-import { CircleAlert } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+ import { CircleAlert } from "lucide-react";
 import ViewPassword from './components/ViewPassword';
 import FormError from './components/FormError';
+import { useTranslations } from "next-intl";
 
 const SigninForm = () => {
-  const { t } = useTranslation(['common', 'zod']);
-
+    const t = useTranslations("common");
+ 
   const SigninSchema = createSigninSchema(t);
 
   const [error, setError] = useState<string | undefined>('');

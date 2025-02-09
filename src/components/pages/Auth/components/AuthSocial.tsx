@@ -2,10 +2,10 @@
 
 import { IconGoogle } from '@/components/icons/IconGoogle';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
-
+import { useTranslations } from "next-intl";
+ 
 const AuthSocial = () => {
-  const { t } = useTranslation(['common']);
+   const t = useTranslations("common");
   return (
     <form className='flex items-center w-full'>
       <div className='flex items-center w-full gap-x-2'>

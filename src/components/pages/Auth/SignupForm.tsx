@@ -17,14 +17,14 @@ import {
 import { Input } from '@/components/ui/input';
  
  import { Button } from '@/components/ui/button';
- import { CircleAlert } from 'lucide-react';
- import { useTranslation } from 'react-i18next';
- import { createSignupSchema } from '@/schemas/auth-schemas';
+ import { CircleAlert } from "lucide-react";
+  import { createSignupSchema } from "@/schemas/auth-schemas";
  import ViewPassword from './components/ViewPassword';
  import FormError from './components/FormError';
+import { useTranslations } from "next-intl";
 
  const SignupForm = () => {
-   const { t } = useTranslation(['common']);
+   const t = useTranslations("common");
    const SignupSchema = createSignupSchema(t);
 
    const [error, setError] = useState<string | undefined>('');
