@@ -19,14 +19,14 @@ export const Route = ({ route }: Props) => {
     <>
       <div className="flex flex-row items-center gap-2 tablet:hidden">
         <div className="flex flex-col items-center gap-4">
-          <div className="button_mobile text-text_prymery_color">
+          <div className="button_mobile text-text_prymery">
             {format(route.departure.date_time || new Date(), "HH:mm")}
           </div>
 
           <div className="small_text text-black.2.for.text  dark:text-gray_1">{`${durationArr[0]}${t("shortHours")},${
             durationArr[1]
           }${t("shortMinutes")}`}</div>
-          <div className="button_mobile text-text_prymery_color">
+          <div className="button_mobile text-text_prymery">
             {format(route.arrival.date_time || new Date(), "HH:mm")}
           </div>
         </div>

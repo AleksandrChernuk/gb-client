@@ -14,12 +14,9 @@ interface Props {
 
 export default function FilterCheckBoxItem({ name, count, checked, handleChange }: Props) {
   return (
-    <div className='flex items-center w-full gap-4'>
+    <div className="flex items-center w-full gap-4">
       <Checkbox id={name} checked={checked} onCheckedChange={handleChange} />
-      <Label
-        htmlFor={name}
-        className='flex items-center justify-between w-full main_text_body text-text_secondary_color'
-      >
+      <Label htmlFor={name} className="flex items-center justify-between w-full main_text_body text-text_secondary">
         <div>{name}</div>
         <div>{count}</div>
       </Label>

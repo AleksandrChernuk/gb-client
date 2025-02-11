@@ -4,7 +4,7 @@ import MainPage from "@/components/pages/MainPage";
 export default function Home() {
   return (
     <>
-      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_mode_main1">
+      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_main">
         <MainPage />
       </main>
       <MainFooter />

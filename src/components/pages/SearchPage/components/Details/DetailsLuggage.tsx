@@ -14,15 +14,14 @@ export default function DetailsLuggage({ hasCardWrapp }: { hasCardWrapp?: boolea
 
   return (
     <div
-      className={`space-y-1 ${hasCardWrapp && 'p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl dark:bg-dark_mode_main1'}`}
+      className={`space-y-1 ${
+        hasCardWrapp && "p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl dark:bg-dark_main"
+      }`}
     >
-      <h5 className='h6 text-text_prymery_color'>{t('luggage')}:</h5>
-      <ul className='flex flex-col gap-1'>
+      <h5 className="h6 text-text_prymery">{t("luggage")}:</h5>
+      <ul className="flex flex-col gap-1">
         {сurrentRoute?.details?.luggage_rules.map((el) => (
-          <li
-            key={el}
-            className='text-wrap text-text_secondary_color  text-[10px] mobile:small_text'
-          >
+          <li key={el} className="text-wrap text-text_secondary  text-[10px] mobile:small_text">
             {el}
           </li>
         ))}

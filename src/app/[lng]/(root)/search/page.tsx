@@ -4,7 +4,7 @@ import SearchModule from "@/components/pages/SearchPage";
 export default async function SearchPage() {
   return (
     <>
-      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_mode_main1">
+      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_main">
         <SearchModule />
       </main>
       <SecondFooter />

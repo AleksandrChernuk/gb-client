@@ -13,7 +13,7 @@ export default function MobileProfileLink() {
 
   if (!isAuth) {
     return (
-      <Button asChild variant={"link"} className="justify-start text-text_prymery_color body_medium">
+      <Button asChild variant={"link"} className="justify-start text-text_prymery body_medium">
         <Link href={"/signin"} replace>
           <User size={24} className="stroke-primary" />
           {t("mainNavProfileLink")}
@@ -24,7 +24,7 @@ export default function MobileProfileLink() {
 
   if (isAuth) {
     return (
-      <Button asChild variant={"link"} className="justify-start text-text_prymery_color body_medium">
+      <Button asChild variant={"link"} className="justify-start text-text_prymery body_medium">
         <Link href={"/profile"} replace>
           {t("mainNavProfileLink")}
         </Link>

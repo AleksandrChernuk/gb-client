@@ -9,19 +9,19 @@ import BackButton from '@/components/shared/BackButton';
 
 export default async function СheckoutHeader({ locale }: { locale: string }) {
   return (
-    <header className='bg-white border-b-2 dark:bg-dark_mode_main1'>
-      <Container size='l' className='flex items-center justify-between py-4'>
-        <div className='tablet:hidden'>
+    <header className="bg-white border-b-2 dark:bg-dark_main">
+      <Container size="l" className="flex items-center justify-between py-4">
+        <div className="tablet:hidden">
           <BackButton />
         </div>
 
-        <div className='hidden tablet:block'>
+        <div className="hidden tablet:block">
           <Logo />
         </div>
 
-        <nav className='hidden tablet:block'>
-          <ul className='items-center hidden tablet:flex tablet:gap-6 laptop:gap-8'>
-            <li className='laptop:hidden'>
+        <nav className="hidden tablet:block">
+          <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">
+            <li className="laptop:hidden">
               <Support />
             </li>
             <li>
@@ -33,7 +33,7 @@ export default async function СheckoutHeader({ locale }: { locale: string }) {
               <SwitchTheme />
             </li>
 
-            <li className='hidden laptop:block'>
+            <li className="hidden laptop:block">
               <Support />
             </li>
 

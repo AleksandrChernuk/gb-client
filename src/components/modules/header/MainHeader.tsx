@@ -9,13 +9,13 @@ import { Suspense } from 'react';
 
 export default async function MainHeader({ locale }: { locale: string }) {
   return (
-    <header className='bg-white border-b-2 dark:bg-dark_mode_main1 border-b-gray_0 dark:border-b-black_2_for_text'>
-      <Container size='l' className='flex items-center justify-between py-4'>
+    <header className="bg-white border-b-2 dark:bg-dark_main border-b-gray_0 dark:border-b-black_2_for_text">
+      <Container size="l" className="flex items-center justify-between py-4">
         <Logo />
 
         <nav>
-          <ul className='items-center hidden tablet:flex tablet:gap-6 laptop:gap-8'>
-            <li className='laptop:hidden'>
+          <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">
+            <li className="laptop:hidden">
               <Support />
             </li>
             <li>
@@ -27,7 +27,7 @@ export default async function MainHeader({ locale }: { locale: string }) {
               <SwitchTheme />
             </li>
 
-            <li className='hidden laptop:block'>
+            <li className="hidden laptop:block">
               <Support />
             </li>
 

@@ -16,7 +16,7 @@ export const ErrorTravel = () => {
         alt="errorImg"
         className="overflow-hidden rounded-3xl mx-auto w-auto h-auto tablet:w-[330px] tablet:h-[325px] laptop:w-[350px] laptop:h-[345px]"
       />{" "}
-      <h3 className="h3 text-text_prymery_color ">{t("something_happend")}!</h3>
+      <h3 className="h3 text-text_prymery ">{t("something_happend")}!</h3>
     </CustomCard>
   );
 };

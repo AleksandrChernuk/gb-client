@@ -20,8 +20,8 @@ export default function Buses() {
             />
           </li>
           <li className="tablet:w-1/2">
-            <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery_color">{t("buses_title")}</h3>
-            <p className="mb-4 tablet:mb-[72px] laptop:mb-[96px] body_text text-text_secondary_color max-w-[425px]">
+            <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery">{t("buses_title")}</h3>
+            <p className="mb-4 tablet:mb-[72px] laptop:mb-[96px] body_text text-text_secondary max-w-[425px]">
               {t("buses_description")}
             </p>
 

@@ -21,7 +21,7 @@ export default function AccountActions() {
         <div className="flex flex-row items-center gap-2">
           <CircleAlert className="w-4 h-4 stroke-gray_2_for_body" />
 
-          <p className="small_text text-text_secondary_color">
+          <p className="small_text text-text_secondary">
             {t("auth_terms_of_the")}{" "}
             <Link href={"/"} replace aria-label="go home page" className="text-primary">
               {t("auth_public_offer")}

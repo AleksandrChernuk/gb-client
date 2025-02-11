@@ -125,5 +125,6 @@
     "something_happend": "Что-то произошло",
     "bus": "Автобус",
     "discounts": "Скидки"
-  }
+  },
+  "new_order": { "passengers": "Пассажиры" }
 }

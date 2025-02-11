@@ -12,14 +12,14 @@ export default function BackButton() {
   const route = useRouter();
   return (
     <Button
-      variant={'link'}
+      variant={"link"}
       onClick={() => {
         route.back();
       }}
-      className='gap-0.2 text-text_prymery_color h5'
+      className="gap-0.2 text-text_prymery h5"
     >
       <ChevronLeft size={24} />
-      {t('backBtn')}
+      {t("backBtn")}
     </Button>
   );
 }

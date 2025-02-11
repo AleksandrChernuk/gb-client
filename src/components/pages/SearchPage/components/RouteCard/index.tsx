@@ -62,7 +62,7 @@ export const RouteCard = memo(({ element }: Props) => {
           <Route route={element} />
 
           <div className="flex flex-col items-center gap-4">
-            <p className="h4 laptop:h2 text-text_prymery_color">
+            <p className="h4 laptop:h2 text-text_prymery">
               {`${Math.floor(element.ticket_pricing.base_price || 0)}`}
               <span className="text-xs ml-[2px]">UAH</span>
             </p>
@@ -88,8 +88,8 @@ export const RouteCard = memo(({ element }: Props) => {
           </div>
 
           <div className="justify-self-center flex items-start gap-0.5 tablet:order-3 tablet:justify-self-end">
-            <span className="break-all small_text text-text_prymery_color">
-              <span className="text-text_secondary_color">{t("places")}:</span> {element.seats.free_seats}
+            <span className="break-all small_text text-text_prymery">
+              <span className="text-text_secondary">{t("places")}:</span> {element.seats.free_seats}
             </span>
           </div>
 
@@ -136,7 +136,7 @@ export const RouteCard = memo(({ element }: Props) => {
         {isOpen && (
           <div>
             {loadingDetails ? (
-              <div className="flex items-center justify-center gap-1 body_medium text-text_prymery_color tablet:min-w-[397px] mt-8">
+              <div className="flex items-center justify-center gap-1 body_medium text-text_prymery tablet:min-w-[397px] mt-8">
                 <IconLoader />
               </div>
             ) : (

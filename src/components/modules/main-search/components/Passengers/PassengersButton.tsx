@@ -23,9 +23,9 @@ export const PassengersButton = memo(({ value, type }: Props) => {
 
   return (
     <div className={`flex flex-row items-center justify-between gap-20 ${isAdult && "border-px border-gray_0"}`}>
-      <p className="addional_medium_text text-text_prymery_color text-nowrap">{isAdult ? t("adult") : t("children")}</p>
+      <p className="addional_medium_text text-text_prymery text-nowrap">{isAdult ? t("adult") : t("children")}</p>
 
-      <div className="bg-white flex gap-2 items-center justify-between p-1 w-24 dark:bg-background_black_mode dark:hover:bg-black border-[1px] border-gray_2_for_body dark:border-gray_2_for_body rounded-md transition-all">
+      <div className="bg-white flex gap-2 items-center justify-between p-1 w-24 dark:bg-dark_bg dark:hover:bg-black border-[1px] border-gray_2_for_body dark:border-gray_2_for_body rounded-md transition-all">
         <button
           className="p-1"
           onClick={() => decrementPassenger(type)}

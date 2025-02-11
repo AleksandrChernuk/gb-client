@@ -31,7 +31,7 @@ export const Support = () => {
           <Phone
             size={20}
             className={`stroke-black group-hover:stroke-gray_3 ${
-              open && "stroke-gray_2_for_body dark:stroke-dark_mode_main1"
+              open && "stroke-gray_2_for_body dark:stroke-dark_main"
             }  dark:stroke-black dark:group-hover:stroke-gray_1`}
           />
         </div>
@@ -40,14 +40,14 @@ export const Support = () => {
 
       {open && (
         <ul
-          className={`absolute top-10  z-50 p-4 border border-black dark:border-dark_mode_main1 dark:bg-black_2_for_text  rounded-2xl   bg-white  overflow-hidden max-h-fit min-w-fit space-y-2 `}
+          className={`absolute top-10  z-50 p-4 border border-black dark:border-dark_main dark:bg-black_2_for_text  rounded-2xl   bg-white  overflow-hidden max-h-fit min-w-fit space-y-2 `}
         >
           {supportNavlinks.map((item, idx) => (
             <li key={`${item.title}+${idx}`}>
               <Button
                 asChild
                 variant={"link"}
-                className="justify-start text-text_prymery_color secondary_text"
+                className="justify-start text-text_prymery secondary_text"
                 onClick={() => {
                   handleSetOpen(false);
                 }}

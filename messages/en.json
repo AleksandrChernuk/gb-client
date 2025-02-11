@@ -128,5 +128,6 @@
     "something_happend": "Something happend",
     "bus": "Bus",
     "discounts": "Discounts"
-  }
+  },
+  "new_order": { "passengers": "Passengers" }
 }

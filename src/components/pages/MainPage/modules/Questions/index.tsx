@@ -10,7 +10,7 @@ export default function Questions() {
   const t = useTranslations("home");
 
   return (
-    <section className="py-6 bg-background_card laptop:py-8 dark:bg-dark_mode_main1">
+    <section className="py-6 bg-background_card laptop:py-8 dark:bg-dark_main">
       <Container size="m">
         <h3 className="mb-4 text-white h3 laptop:h1 laptop:mb-8 dark:text-garyy">{t("questions_title")}</h3>
 

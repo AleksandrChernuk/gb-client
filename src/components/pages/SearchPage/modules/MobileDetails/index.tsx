@@ -42,7 +42,7 @@ export default function MobileDetails({ handleSetCurretRoute }: { handleSetCurre
         </Button>
       }
     >
-      <div className="flex items-center justify-between px-5 py-4 border-b border-b-gray_0 dark:border-b-dark_mode_main1 dark:bg-dark_mode_main1">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-b-gray_0 dark:border-b-dark_main dark:bg-dark_main">
         <h3 className="font-medium h5 text-primary_1"> {t("details")}</h3>
         <DrawerClose asChild>
           <Button variant={"default"} className="flex items-center gap-1 p-1 rounded-md h5 bg-primary_1">
@@ -50,9 +50,9 @@ export default function MobileDetails({ handleSetCurretRoute }: { handleSetCurre
           </Button>
         </DrawerClose>
       </div>
-      <ScrollArea className="relative px-5 overflow-y-scroll grow bg-grayy dark:bg-background_black_mode ">
+      <ScrollArea className="relative px-5 overflow-y-scroll grow bg-grayy dark:bg-dark_bg ">
         {loadingDetails ? (
-          <div className="flex items-center justify-center gap-1 body_medium text-text_prymery_color tablet:min-w-[397px] py-28">
+          <div className="flex items-center justify-center gap-1 body_medium text-text_prymery tablet:min-w-[397px] py-28">
             <IconLoader />
           </div>
         ) : (
@@ -69,7 +69,7 @@ export default function MobileDetails({ handleSetCurretRoute }: { handleSetCurre
           </div>
         )}
       </ScrollArea>
-      <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-t-gray_1 dark:border-t-black_2_for_text dark:bg-dark_mode_main1">
+      <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-t-gray_1 dark:border-t-black_2_for_text dark:bg-dark_main">
         <div className="mx-auto text-center">
           <div className="small_text text-gray_2_for_body dark:text-grayy">1 {t("placeholderPassenger")}</div>
           <div className="main_text_body text-black.2.for.text dark:text-gray_1">

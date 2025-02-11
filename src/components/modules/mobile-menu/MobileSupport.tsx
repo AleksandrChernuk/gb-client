@@ -14,7 +14,7 @@ export default function MobileSupport() {
   return (
     <div>
       <Button
-        className={`justify-between w-full text-text_prymery_color body_medium`}
+        className={`justify-between w-full text-text_prymery body_medium`}
         variant={"link"}
         onClick={handleToggleOpen}
       >

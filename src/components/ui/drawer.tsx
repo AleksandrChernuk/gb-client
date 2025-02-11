@@ -43,15 +43,15 @@ const DrawerContent = React.forwardRef<
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed inset-y-0 w-full tablet:w-[450px] right-0 z-50 bg-white dark:bg-background_black_mode min-h-dvh shadow-2xl",
-        className
+        "fixed inset-y-0 w-full tablet:w-[450px] right-0 z-50 bg-white dark:bg-dark_bg min-h-dvh shadow-2xl",
+        className,
       )}
       {...props}
     >
-       {children}
+      {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
-))
+));
 DrawerContent.displayName = "DrawerContent"
 
 const DrawerHeader = ({

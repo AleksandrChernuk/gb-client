@@ -8,18 +8,15 @@ type Props = {
 
 export default async function SecondFooter({ className }: Props) {
   return (
-    <footer
-      role='footer'
-      className={cn('w-full h-auto bg-grayy dark:bg-dark_mode_main1', className)}
-    >
+    <footer role="footer" className={cn("w-full h-auto bg-grayy dark:bg-dark_main", className)}>
       <Image
         src={secondFooter}
         priority={true}
-        alt='peaple wait bus'
-        placeholder='empty'
+        alt="peaple wait bus"
+        placeholder="empty"
         style={{
-          width: '100%',
-          height: 'auto',
+          width: "100%",
+          height: "auto",
         }}
       />
     </footer>

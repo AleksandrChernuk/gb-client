@@ -28,8 +28,8 @@
   --color-red_input: var(--red_input);
   --color-for_payment_icons: var(--for_payment_icons);
   --color-black: var(--black);
-  --color-background_black_mode: var(--background_black_mode);
-  --color-dark_mode_main1: var(--dark_mode_main1);
+  --color-dark_bg: var(--dark_bg);
+    --color-dark_main: var(--dark_main);
   --color-blackmode: var(--blackmode);
   --color-additional_red: var(--additional-red);
   --color-black_2_for_text: var(--black_2_for_text);
@@ -47,8 +47,8 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --color-text_secondary_color: var(--text_secondary_color);
-  --color-text_prymery_color: var(--text_prymery_color);
+  --color-text_secondary: var(--text_secondary);
+    --color-text_prymery: var(--text_prymery);
   --color-label_color: var(--label_color);
   --color-prymery_btn_color: var(--prymery_btn_color);
   --color-background: hsl(var(--background));
@@ -278,9 +278,12 @@
       --red_input: #FFE7E5;
       --for_payment_icons: linear-gradient(#62F1B0, #33C6EA);
       --black: #000000;
-      --background_black_mode: #0F172A;
-      --dark_mode_main1: #1E293B;
+    /* Это однострочный комментарий background_black_mode */
+      --dark_bg: #0F172A;
+      /* Это однострочный комментарий dark_mode_main1 */
+      --dark_main: #1E293B;
       --blackmode: #475569;
+    /* Это однострочный комментарий dark_mode_main1 */
       --black_2_for_text: #334155;
       --gray_2_for_body: #6F8B90;
       --gray_3: #8E8E8E;
@@ -299,8 +302,10 @@
       --bw: #000000;
       --white: #ffffff;
       --icons: #000000;
-      --text_prymery_color: #334155;
-      --text_secondary_color: #6F8B90;
+    /* Это однострочный комментарий text_prymery_color */
+      --text_prymery: #334155;
+      /* Это однострочный комментарий --text_secondary_color: #6F8B90; */
+      --text_secondary: #6F8B90;
       --prymery_btn_color: #FFFF;
       --label_color: #334155;
       --search_color: #000000;
@@ -340,8 +345,8 @@
       --bw: #ffffff;
       --icons: #F8FAFC;
       --card_bg_primery: #0F172A;
-      --text_seconddary_color: #E2E8F0;
-      --text_prymery_color: #F8FAFC;
+      --text_seconddary: #E2E8F0;
+        --text_prymery: #F8FAFC;
       --prymery_btn_color: #F8FAFC;
       --label_color: #E2E8F0;
       --search_color: #F8FAFC;

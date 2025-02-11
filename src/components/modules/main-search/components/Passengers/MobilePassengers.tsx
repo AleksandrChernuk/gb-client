@@ -45,14 +45,14 @@ export const MobilePassengers = memo(() => {
         </div>
       }
     >
-      <div className="flex items-center justify-between border-b-[2px] px-5 py-6  border-b-gray_1 dark:border-b-black_2_for_text dark:bg-dark_mode_main1">
-        <DrawerClose className="flex items-center gap-1 h5 text-text_prymery_color">
+      <div className="flex items-center justify-between border-b-[2px] px-5 py-6  border-b-gray_1 dark:border-b-black_2_for_text dark:bg-dark_main">
+        <DrawerClose className="flex items-center gap-1 h5 text-text_prymery">
           <IconBack />
           {t("backBtn")}
         </DrawerClose>
       </div>
-      <ScrollArea className="relative px-5 pt-4 overflow-y-scroll grow bg-grayy dark:bg-background_black_mode">
-        <h3 className="mb-6 h4 text-text_prymery_color"> {t("placeholderPassengers")}</h3>
+      <ScrollArea className="relative px-5 pt-4 overflow-y-scroll grow bg-grayy dark:bg-dark_bg">
+        <h3 className="mb-6 h4 text-text_prymery"> {t("placeholderPassengers")}</h3>
         <div>
           <PassengersButton type="adult" value={adult} />
           <Separator className="h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text" />

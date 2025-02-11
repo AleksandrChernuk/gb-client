@@ -42,7 +42,7 @@ export const Information = () => {
   return (
     <CustomCard className="p-5 space-y-4 shadow-xl ">
       <div className="flex items-center justify-between">
-        <h3 className="h3 laptop:h1 text-text_prymery_color first-letter:uppercase">
+        <h3 className="h3 laptop:h1 text-text_prymery first-letter:uppercase">
           {format(toDate(date), "eee ,d MMM", { locale })}
         </h3>
         <div>
@@ -50,7 +50,7 @@ export const Information = () => {
         </div>
       </div>
       <div className="flex items-center justify-between gap-1">
-        <div className="flex items-center gap-2 main_text_body text-text_secondary_color text-[12px] leading-4 tetx-black_2_for_text tablet:text-sm  dark:text-gray_1 text-nowrap truncate">
+        <div className="flex items-center gap-2 main_text_body text-text_secondary text-[12px] leading-4 tetx-black_2_for_text tablet:text-sm  dark:text-gray_1 text-nowrap truncate">
           {from ? (
             <div>
               {from && extractLocationDetails(from, currentLanguage).locationName},{" "}

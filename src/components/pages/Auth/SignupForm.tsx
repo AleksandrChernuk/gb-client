@@ -57,26 +57,29 @@ import { useTranslations } from "next-intl";
              render={({ field, fieldState }) => {
                return (
                  <FormItem>
-                   <FormLabel className='mb-2 secondary_text text-black_2_for_text dark:text-white'>
-                     {t('authName')}
+                   <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                     {t("authName")}
                    </FormLabel>
                    <FormControl>
-                     <div className='relative'>
+                     <div className="relative">
                        <Input
                          {...field}
                          disabled={isPending}
-                         type='text'
-                         placeholder={t('placeholderName')}
-                         className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-background_black_mode'}`}
+                         type="text"
+                         placeholder={t("placeholderName")}
+                         className={`${
+                           Boolean(fieldState?.error) &&
+                           "border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg"
+                         }`}
                        />
                        {Boolean(fieldState?.invalid) && (
-                         <div className='absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4'>
-                           <CircleAlert className='stroke-red ' />
+                         <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
+                           <CircleAlert className="stroke-red " />
                          </div>
                        )}
                      </div>
                    </FormControl>
-                   <FormMessage className='text-red' />
+                   <FormMessage className="text-red" />
                  </FormItem>
                );
              }}
@@ -100,7 +103,7 @@ import { useTranslations } from "next-intl";
                        type='email'
                        placeholder='user@example.com'
                        autoComplete='off'
-                       className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-background_black_mode'}`}
+                       className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg'}`}
                      />
                      {Boolean(fieldState?.error) && (
                        <div className='absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4'>
@@ -128,7 +131,7 @@ import { useTranslations } from "next-intl";
                        disabled={isPending}
                        type={!isViewPassword ? 'password' : 'text'}
                        placeholder='******'
-                       className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-background_black_mode'}`}
+                       className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg'}`}
                      />
                      <ViewPassword
                        error={Boolean(fieldState?.error)}

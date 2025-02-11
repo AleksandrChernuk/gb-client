@@ -17,10 +17,10 @@ export default function DetailsAmenities({ hasCardWrapp }: { hasCardWrapp?: bool
         hasCardWrapp && "p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl"
       }`}
     >
-      <h5 className="h6 text-text_prymery_color">{t("amenities")}:</h5>
+      <h5 className="h6 text-text_prymery">{t("amenities")}:</h5>
       <ul className="flex flex-row flex-wrap gap-2">
         {сurrentRoute?.details?.amenities.map((el) => (
-          <li key={el} className="text-wrap text-text_secondary_color  text-[10px] mobile:small_text">
+          <li key={el} className="text-wrap text-text_secondary  text-[10px] mobile:small_text">
             {el}
           </li>
         ))}

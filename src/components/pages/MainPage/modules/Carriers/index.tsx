@@ -14,9 +14,9 @@ export default function Carriers() {
               <CarriersList />
             </li>
             <li className="tablet:w-1/2">
-              <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery_color">{t("сarriers_title")}</h3>
+              <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery">{t("сarriers_title")}</h3>
 
-              <p className="mb-4 tablet:mb-[72px] laptop:mb-[96px] body_text text-text_secondary_color max-w-[425px]">
+              <p className="mb-4 tablet:mb-[72px] laptop:mb-[96px] body_text text-text_secondary max-w-[425px]">
                 {t("сarriers_description")}
               </p>
 

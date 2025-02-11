@@ -44,6 +44,6 @@ export function useMainForm() {
   const onSubmit = async (data: FormValues) => {
     console.log('Form Submitted:', data);
   };
-
+console.log(methods.getValues("phone"));
   return { methods, onSubmit, handleSubmit };
 }

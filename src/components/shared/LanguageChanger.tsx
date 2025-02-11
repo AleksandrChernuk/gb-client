@@ -16,7 +16,6 @@
     const locale = useLocale() as Locale;
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    console.log(pathname);
 
     const { open, handleToggleOpen, handleSetOpen } = useToggleOpen();
 
@@ -56,16 +55,16 @@
           }
         }}
       >
-        <Button className={`text-text_prymery_color gap-0.5`} variant={"link"} onClick={handleToggleOpen}>
+        <Button className={`text-text_prymery gap-0.5`} variant={"link"} onClick={handleToggleOpen}>
           <div className="w-7 h-7">{dispalyIcon(locale)?.icon}</div>
           <ChevronDown
             size={24}
-            className={`stroke-text_prymery_color ${open && "rotate-180"} transition-all duration-300 ease-in-out`}
+            className={`stroke-text_prymery ${open && "rotate-180"} transition-all duration-300 ease-in-out`}
           />
         </Button>
         {open && (
           <div
-            className={`absolute top-10  z-50 p-4 border border-black dark:border-dark_mode_main1 dark:bg-black_2_for_text  rounded-2xl   bg-white  overflow-hidden max-h-fit min-w-fit space-y-2 `}
+            className={`absolute top-10  z-50 p-4 border border-black dark:border-dark_main dark:bg-black_2_for_text  rounded-2xl   bg-white  overflow-hidden max-h-fit min-w-fit space-y-2 `}
           >
             {supportLocalesList.map((el) => {
               return (
@@ -73,7 +72,7 @@
                   key={el.value}
                   asChild
                   variant={"link"}
-                  className="justify-start text-text_prymery_color body_medium"
+                  className="justify-start text-text_prymery body_medium"
                   onClick={() => {
                     handleSetOpen(false);
                   }}

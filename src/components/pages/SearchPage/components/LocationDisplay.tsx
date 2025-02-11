@@ -12,21 +12,19 @@ export default function LocationDisplay({ location, address, time, variant }: Pr
     case 'mobile':
       return (
         <div>
-          <div className='body_medium text-text_prymery_color'>{location}</div>
-          <div className='text-[10px] leading-4 text-text_secondary_color  text-wrap'>
-            {address}
-          </div>
+          <div className="body_medium text-text_prymery">{location}</div>
+          <div className="text-[10px] leading-4 text-text_secondary  text-wrap">{address}</div>
         </div>
       );
 
     case 'desctop':
       return (
-        <div className='space-y-2'>
-          <h3 className='h5 text-text_secondary_color'>{time}</h3>
+        <div className="space-y-2">
+          <h3 className="h5 text-text_secondary">{time}</h3>
 
-          <div className='space-y-2 truncate text-wrap'>
-            <div className='h3 laptop:h4 text-text_prymery_color'>{location}</div>
-            <div className='text-sm leading-4 text-text_secondary_color'>{address}</div>
+          <div className="space-y-2 truncate text-wrap">
+            <div className="h3 laptop:h4 text-text_prymery">{location}</div>
+            <div className="text-sm leading-4 text-text_secondary">{address}</div>
           </div>
         </div>
       );

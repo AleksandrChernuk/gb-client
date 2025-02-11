@@ -3,7 +3,11 @@ export type TPassenger = {
   name: string;
   surname: string;
   date: string;
-  birthday: string;
+  birthday: {
+    day: string;
+    month: string;
+    year: string;
+  };
   notes: string;
   discount: string;
   isChildren: boolean;

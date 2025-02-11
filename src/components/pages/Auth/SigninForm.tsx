@@ -48,52 +48,58 @@ const SigninForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6' noValidate>
-        <div className='space-y-4'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
+        <div className="space-y-4">
           <FormField
             control={form.control}
-            name='email'
+            name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className='mb-2 secondary_text text-black_2_for_text dark:text-white'>
-                  {t('authEmail')}
+                <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                  {t("authEmail")}
                 </FormLabel>
                 <FormControl>
-                  <div className='relative'>
+                  <div className="relative">
                     <Input
                       {...field}
                       disabled={isPending}
-                      type='email'
-                      placeholder='user@example.com'
-                      className={`${Boolean(fieldState?.error) && 'border-red focus:border-red  bg-red_input placeholder:text-red  dark:bg-background_black_mode'}`}
+                      type="email"
+                      placeholder="user@example.com"
+                      className={`${
+                        Boolean(fieldState?.error) &&
+                        "border-red focus:border-red  bg-red_input placeholder:text-red  dark:bg-dark_bg"
+                      }`}
                     />
                     {Boolean(fieldState?.invalid) && (
-                      <div className='absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4'>
-                        <CircleAlert className='stroke-red' />
+                      <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
+                        <CircleAlert className="stroke-red" />
                       </div>
                     )}
                   </div>
                 </FormControl>
-                <FormMessage className='text-red' />
+                <FormMessage className="text-red" />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name='password'
+            name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className='mb-2 secondary_text text-black_2_for_text dark:text-white'>
-                  {t('authPassword')}
+                <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                  {t("authPassword")}
                 </FormLabel>
                 <FormControl>
-                  <div className='relative'>
+                  <div className="relative">
                     <Input
                       {...field}
                       disabled={isPending}
-                      type={!isViewPassword ? 'password' : 'text'}
-                      placeholder='******'
-                      className={`${Boolean(fieldState?.error) && 'border-red focus:border-red  bg-red_input placeholder:text-red  dark:bg-background_black_mode'}`}
+                      type={!isViewPassword ? "password" : "text"}
+                      placeholder="******"
+                      className={`${
+                        Boolean(fieldState?.error) &&
+                        "border-red focus:border-red  bg-red_input placeholder:text-red  dark:bg-dark_bg"
+                      }`}
                     />
                     <ViewPassword
                       error={Boolean(fieldState?.error)}
@@ -102,7 +108,7 @@ const SigninForm = () => {
                     />
                   </div>
                 </FormControl>
-                <FormMessage className='text-red' />
+                <FormMessage className="text-red" />
               </FormItem>
             )}
           />
@@ -111,11 +117,11 @@ const SigninForm = () => {
         <FormError message={error} />
 
         <Button
-          type='submit'
-          className='w-full py-[14px] px-6  tablet:py-4 text-white rounded-full h5 max-h-[48px] tablet:max-h-[52px] '
+          type="submit"
+          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full h5 max-h-[48px] tablet:max-h-[52px] "
           disabled={isPending}
         >
-          {t('signinTitle')}
+          {t("signinTitle")}
         </Button>
       </form>
     </Form>
