@@ -15,6 +15,7 @@ import { Carriers } from "./Carriers";
 import CardDetails from "./CardDetails";
 import { Route } from "./Route";
 import { useLocale, useTranslations } from "next-intl";
+import { setCookie } from "@/actions/setCookie";
 
 type Props = {
   element: IRouteResponse;
@@ -36,7 +37,7 @@ export const RouteCard = memo(({ element }: Props) => {
   const setCurrentRoute = useCurrentRouteStore((state) => state.setCurrentRoute);
   const loadingDetails = useCurrentRouteStore((state) => state.loadingDetails);
 
-  const handleSelect = () => {
+  const handleSelect = async () => {
     setLoading(true);
     setCurrentRoute({
       route: element,
@@ -46,6 +47,7 @@ export const RouteCard = memo(({ element }: Props) => {
       passCount: adult + children,
       travelDate: date,
     });
+    await setCookie({ name: "___pas", value: `${adult + children}` });
     router.push(`/${currentLocale}/new-order`);
   };
 
