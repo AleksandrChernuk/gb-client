@@ -7,25 +7,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import createPassList from '../helpers/createPassList';
-
-export function useMainForm() {
+ 
+export function useMainForm({ pass }: { pass: string }) {
   const methods = useForm<FormValues>({
-    mode: 'onSubmit',
+    mode: "onSubmit",
     resolver: zodResolver(CheckoutSchema),
     defaultValues: {
       passengers: createPassList({
-        adult: 1,
+        adult: Number(pass),
         children: 0,
       }),
-      email: '',
-      phone: '',
+      email: "",
+      phone: "",
     },
   });
 
   useEffect(() => {
-    const storedPassengers = localStorage.getItem('passengers');
+    const storedPassengers = localStorage.getItem("passengers");
 
-    if (typeof window !== 'undefined' && storedPassengers) {
+    if (typeof window !== "undefined" && storedPassengers) {
       const passengers = JSON.parse(storedPassengers);
       methods.reset({ passengers });
     }
@@ -33,7 +33,7 @@ export function useMainForm() {
 
   useEffect(() => {
     const subscription = methods.watch((value) => {
-      localStorage.setItem('passengers', JSON.stringify(value.passengers));
+      localStorage.setItem("passengers", JSON.stringify(value.passengers));
     });
 
     return () => subscription.unsubscribe();
@@ -42,8 +42,8 @@ export function useMainForm() {
   const { handleSubmit } = methods;
 
   const onSubmit = async (data: FormValues) => {
-    console.log('Form Submitted:', data);
+    console.log("Form Submitted:", data);
   };
-console.log(methods.getValues("phone"));
+  console.log(methods.getValues("phone"));
   return { methods, onSubmit, handleSubmit };
 }

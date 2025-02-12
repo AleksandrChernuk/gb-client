@@ -10,7 +10,7 @@ export default async function NewOrder() {
   return (
     <>
       <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_bg">
-        <NewOrderPage />
+        <NewOrderPage pass={___pas?.value || "1"} />
       </main>
       <SecondFooter className="bg-grayy dark:bg-dark_bg" />
     </>

@@ -11,8 +11,9 @@ import { useMainForm } from './hooks/useCheckoutForm';
 import Contacts from './modules/Contacts';
  
 
-export default function NewOrderPage() {
-  const { handleSubmit, onSubmit, methods } = useMainForm();
+export default function NewOrderPage({ pass }: { pass: string }) {
+  const { handleSubmit, onSubmit, methods } = useMainForm({ pass });
+  console.log(pass);
 
   return (
     <section>
