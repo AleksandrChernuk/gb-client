@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 export default async function NewOrder() {
   const cookieStore = await cookies();
   const ___pas = cookieStore.get("___pas");
-  console.log("___pas", ___pas);
+  console.log("___pas", ___pas?.value);
 
   return (
     <>
