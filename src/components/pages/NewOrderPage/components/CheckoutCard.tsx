@@ -11,7 +11,7 @@ type Props = {
 export default function CheckoutCard({ children, title, cardCount }: Props) {
   return (
     <ul className="space-y-4">
-      <li className="flex items-center gap-2 mb-4">
+      <li className="flex items-center gap-2">
         {cardCount && <StepNumber step={cardCount} />}
         <h3 className="h4 text-text_prymery">{title}</h3>
       </li>

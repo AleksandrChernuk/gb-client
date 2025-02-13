@@ -17,11 +17,11 @@ export default function Contacts() {
           name={`email`}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-text_prymery">Notes</FormLabel>
+              <FormLabel className="secondary_text mb-2">Email</FormLabel>
               <FormControl>
-                <Input {...field} type="text" />
+                <Input {...field} type="email" placeholder="Email" />
               </FormControl>
-              <FormMessage className="text-red" />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -37,7 +37,7 @@ export default function Contacts() {
               <FormControl>
                 <PhoneInput {...field} defaultCountry="UA" international limitMaxLength />
               </FormControl>
-              <FormMessage className="text-red" />
+              <FormMessage />
             </FormItem>
           )}
         />

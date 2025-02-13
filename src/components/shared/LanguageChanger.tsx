@@ -77,7 +77,7 @@
                     handleSetOpen(false);
                   }}
                 >
-                  <Link href={`${getPathWithoutLocale()}?${searchParamsString}`} locale={el.value}>
+                  <Link replace href={`${getPathWithoutLocale()}?${searchParamsString}`} locale={el.value}>
                     <div className="w-6 h-6"> {el.icon} </div>
                     {el.shortName}
                   </Link>

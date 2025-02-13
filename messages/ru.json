@@ -54,7 +54,7 @@
     "authAlreadyHaveAccount": "Уже есть аккаунт?",
     "authCreateAccount": "Создать аккаунт",
     "authLogin": "Войти",
-    "required": "Обязательное поле.",
+    "required": "Обязательное поле",
     "emailRequired": "Электронная почта обязательна.",
     "emailNotValid": "Это недействительный адрес электронной почты.",
     "passwordLength": "Пароль должен быть не менее 6 символов.",
@@ -126,5 +126,22 @@
     "bus": "Автобус",
     "discounts": "Скидки"
   },
-  "new_order": { "passengers": "Пассажиры" }
+  "new_order": { "passengers": "Пассажиры", "choose_place": "Выбрать место" },
+  "forms": {
+    "name": "Имя",
+    "name_placeholder": "Тарас",
+    "surname": "Фамилия",
+    "required": "Обязательное поле",
+    "surname_placeholder": "Шевченко",
+    "notes": "Заметки",
+    "dob": "Дата рождения",
+    "phone_umber": "Номер телефона",
+    "dob_placeholder": "дд.мм.гггг",
+    "Invalid date": "Недопустимая дата",
+    "invalid_date": "Недопустимая дата",
+
+    "invalid_number": "Неверный номер",
+    "invalid_email": "Некорректный email",
+    "Required": "Обязательное поле"
+  }
 }

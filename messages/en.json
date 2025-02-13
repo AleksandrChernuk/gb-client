@@ -129,5 +129,22 @@
     "bus": "Bus",
     "discounts": "Discounts"
   },
-  "new_order": { "passengers": "Passengers" }
+  "new_order": { "passengers": "Passengers", "choose_place": "Choose a place" },
+  "forms": {
+    "name": "Name",
+    "name_placeholder": "Taras",
+    "required": "Required field",
+    "surname": "Surname",
+    "surname_placeholder": "Shevchenko",
+    "notes": "Notes",
+    "dob": "Date of birth",
+    "phone_umber": "Phone Number",
+    "dob_placeholder": "dd.mm.yyyy",
+    "Invalid date": "Invalid date",
+    "invalid_date": "Invalid date",
+
+    "invalid_number": "Invalid number",
+    "invalid_email": "Incorrect email",
+    "Required": "Required field"
+  }
 }

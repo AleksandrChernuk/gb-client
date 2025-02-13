@@ -47,7 +47,10 @@ export const RouteCard = memo(({ element }: Props) => {
       passCount: adult + children,
       travelDate: date,
     });
-    await setCookie({ name: "___pas", value: `${adult + children}` });
+    
+    await setCookie({ name: "_a", value: `${adult}` });
+    await setCookie({ name: "_c", value: `${children}` });
+
     router.push(`/${currentLocale}/new-order`);
   };
 

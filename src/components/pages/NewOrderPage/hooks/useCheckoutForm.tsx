@@ -1,49 +1,55 @@
 'use client';
 
-/* eslint-disable react-hooks/exhaustive-deps */
-import { CheckoutSchema } from '@/schemas/checkout-form.shema';
-import { FormValues } from '@/types/checkout-from.types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import createPassList from '../helpers/createPassList';
- 
-export function useMainForm({ pass }: { pass: string }) {
-  const methods = useForm<FormValues>({
-    mode: "onSubmit",
-    resolver: zodResolver(CheckoutSchema),
-    defaultValues: {
-      passengers: createPassList({
-        adult: Number(pass),
-        children: 0,
-      }),
-      email: "",
-      phone: "",
-    },
-  });
+ import { createCheckoutSchema } from "@/schemas/checkout-form.shema";
+ import { FormValues } from "@/types/checkout-from.types";
+ import { zodResolver } from "@hookform/resolvers/zod";
+ import { useForm } from "react-hook-form";
+ import { useEffect } from "react";
+ import createPassList from "../helpers/createPassList";
+ import { useTranslations } from "next-intl";
 
-  useEffect(() => {
-    const storedPassengers = localStorage.getItem("passengers");
+ export function useMainForm({ adult, child }: { adult: string; child: string }) {
+   const t = useTranslations("forms");
 
-    if (typeof window !== "undefined" && storedPassengers) {
-      const passengers = JSON.parse(storedPassengers);
-      methods.reset({ passengers });
-    }
-  }, []);
+   const CheckoutSchema = createCheckoutSchema(t);
 
-  useEffect(() => {
-    const subscription = methods.watch((value) => {
-      localStorage.setItem("passengers", JSON.stringify(value.passengers));
-    });
+   const methods = useForm<FormValues>({
+     mode: "onSubmit",
+     resolver: zodResolver(CheckoutSchema),
+     defaultValues: {
+       passengers: createPassList({
+         adult: Number(adult),
+         children: Number(child),
+       }),
+       email: "",
+       payment: "booking",
+       phone: "",
+     },
+   });
 
-    return () => subscription.unsubscribe();
-  }, [methods.watch]);
+   useEffect(() => {
+     const storedPassengers = localStorage.getItem("passengers");
 
-  const { handleSubmit } = methods;
+     if (typeof window !== "undefined" && storedPassengers) {
+       const passengers = JSON.parse(storedPassengers);
+       methods.reset({ passengers });
+     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
-  const onSubmit = async (data: FormValues) => {
-    console.log("Form Submitted:", data);
-  };
-  console.log(methods.getValues("phone"));
-  return { methods, onSubmit, handleSubmit };
-}
+   useEffect(() => {
+     const subscription = methods.watch((value) => {
+       localStorage.setItem("passengers", JSON.stringify(value.passengers));
+     });
+
+     return () => subscription.unsubscribe();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [methods.watch]);
+
+   const { handleSubmit } = methods;
+
+   const onSubmit = async (data: FormValues) => {
+     console.log("Form Submitted:", data);
+   };
+   return { methods, onSubmit, handleSubmit };
+ }

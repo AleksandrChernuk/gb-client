@@ -137,5 +137,21 @@
     "bus": "Автобус",
     "discounts": "Знижки"
   },
-  "new_order": { "passengers": "Пасажири" }
+  "new_order": { "passengers": "Пасажири", "choose_place": "Обрати місце" },
+  "forms": {
+    "name": "Ім'я",
+    "name_placeholder": "Тарас",
+    "surname": "Прізвище",
+    "surname_placeholder": "Шевченко",
+    "notes": "Примітки",
+    "dob": "Дата народження",
+    "phone_umber": "Номер телефону",
+    "dob_placeholder": "дд.мм.рррр",
+    "required": "Обов'язкове поле",
+    "Invalid date": "Недійсна дата",
+    "invalid_date": "Недійсна дата",
+    "invalid_number": "Неправильний номер",
+    "invalid_email": "Невірний email",
+    "Required": "Обов'язкове поле"
+  }
 }

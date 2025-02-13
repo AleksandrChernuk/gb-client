@@ -13,14 +13,12 @@ export type TPassenger = {
   isChildren: boolean;
   seat: string;
 };
-
-export type TPayment = 'card' | 'payment at boarding' | 'booking';
-
+ 
 export type FormValues = {
   passengers: TPassenger[];
-  payment: TPayment;
   email: string;
   phone: string;
+  payment: "card" | "on_boarding" | "booking";
   accept_rules: boolean;
   processing_data: boolean;
 };

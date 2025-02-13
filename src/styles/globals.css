@@ -1,11 +1,13 @@
 @import 'tailwindcss';
-
+@plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
+
 
 @theme {
   --font-mulish: var(--font-mulish);
 
   --breakpoint-mobile: 375px;
+  --breakpoint-lg: 324px;
   --breakpoint-tabs80: 560px;
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1280px;
@@ -80,6 +82,17 @@
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
+    --animate-rotateCircle: rotateCircle 600s linear infinite;
+    
+      @keyframes rotateCircle {
+        0% {
+          transform: rotate(0deg);
+        }
+    
+        100% {
+          transform: rotate(360deg);
+        }
+      }
   @keyframes accordion-down {
     from {
       height: 0;
@@ -99,6 +112,7 @@
       height: 0;
     }
   }
+
 }
 
 /*

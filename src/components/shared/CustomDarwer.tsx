@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { DialogTitle } from "@/components/ui/dialog";
 import { DialogDescription } from "@/components/ui/dialog";
@@ -6,7 +6,7 @@ import { DialogDescription } from "@/components/ui/dialog";
 type Props = {
   open: boolean;
   toggleOpen: (value: boolean) => void;
-  trigger: ReactElement;
+  trigger: ReactNode;
   children: ReactNode;
   onClose?: () => void;
   title?: string;
@@ -25,5 +25,3 @@ export const CustomDarwer = ({ open, toggleOpen, title, description, trigger, ch
     </Drawer>
   );
 };
-
- 
