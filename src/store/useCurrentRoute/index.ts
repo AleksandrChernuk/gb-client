@@ -35,13 +35,14 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
             }
 
             let res: IRouteDetailsResponse | null = null;
-            const providersRequiringExtraRequest = ['Octobus', 'KLR', 'TransTempo', 'EWE'];
+            const providersRequiringExtraRequest = ["Octobus", "KLR", "TransTempo", "EWE", "ODRI"];
             // Проверяем, требуется ли дополнительный запрос
             if (providersRequiringExtraRequest.includes(route.provider_name)) {
               set({ loadingDetails: true });
 
               try {
                 res = await getRouteDetails({
+                  metadata: route.metadata,
                   fromCityId,
                   toCityId,
                   fromStationId: route.departure.station_id || 1,
@@ -51,10 +52,10 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
                   travelDate,
                   locale,
                   passengersCount: passCount,
-                  intervalId: route.intervalId || '',
+                  intervalId: route.intervalId || "",
                 });
               } catch (error) {
-                console.error('Ошибка при получении данных маршрута:', error);
+                console.error("Ошибка при получении данных маршрута:", error);
                 set({ loadingDetails: false });
               } finally {
                 set({ loadingDetails: false });

@@ -6,11 +6,10 @@ import { IconFlagUA } from '@/components/icons/IconFlagUA';
 import { Button } from '@/components/ui/button';
 import { supportLocalesList } from '@/constans/constans.support.locales';
 import useToggleOpen from '@/hooks/useToggleOpen';
-import { ChevronDown } from 'lucide-react';
-import { usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
-import { Locale } from "@/i18n/locales";
-import { Link, routing } from "@/i18n/routing";
+import { ChevronDown } from "lucide-react";
+ import { useLocale } from "next-intl";
+ import { Locale } from "@/i18n/locales";
+ import { Link, routing, usePathname } from "@/i18n/routing";
 
 export default function MobileLanguageChanger() {
   const locale = useLocale() as Locale;
@@ -41,6 +40,12 @@ export default function MobileLanguageChanger() {
     const regex = new RegExp(`^/(${routing.locales.join("|")})`);
     return pathname.replace(regex, "");
   };
+
+
+  if (pathname === "/checkout") {
+    return null;
+  }
+
 
   return (
     <div>

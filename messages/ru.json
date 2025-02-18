@@ -126,7 +126,21 @@
     "bus": "Автобус",
     "discounts": "Скидки"
   },
-  "new_order": { "passengers": "Пассажиры", "choose_place": "Выбрать место" },
+  "new_order": {
+    "passengers": "Пассажиры",
+    "choose_place": "Выбрать место",
+    "seat_reservation": "Бронирование места",
+    "contacts": "Контакты",
+    "payment": "Оплата",
+    "your_booking": "Ваша бронь",
+    "pay": "Оплатить",
+    "book": "Бронировать",
+    "payment_upon_boarding": "Оплата при посадке",
+    "bank_card": "Банковская карта",
+    "booking": "Бронирование",
+    "free_seating": "Свободная посадка",
+    "seat_guaranteed": "Место гарантировано"
+  },
   "forms": {
     "name": "Имя",
     "name_placeholder": "Тарас",
@@ -139,9 +153,9 @@
     "dob_placeholder": "дд.мм.гггг",
     "Invalid date": "Недопустимая дата",
     "invalid_date": "Недопустимая дата",
-
     "invalid_number": "Неверный номер",
     "invalid_email": "Некорректный email",
-    "Required": "Обязательное поле"
+    "Required": "Обязательное поле",
+    "phone_number": "Номер телефона"
   }
 }

@@ -14,6 +14,8 @@ export interface IRouteResponse {
   intervalId: string | null; //? Нужно для EWE
   distance: number | null; //? Нужно для EWE
   bus_id: string | null; //? Нужно для Transtempo
+  metadata: unknown | null; // new
+
   route_id: string;
   route_number: string | null;
   route_name: string | null;

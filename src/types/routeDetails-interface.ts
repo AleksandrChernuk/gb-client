@@ -6,9 +6,10 @@ import { IInsurer } from './insurer-interface';
 import { IFreeSeats } from './free_seats-interface';
 import { ITranstempoSeat } from './seat_transtempo-interface';
 
+
 export interface IGetRouteDetailsBody {
   routeId: string;
-  intervalId: string; // Для EWE обязательно передать этот параметр!
+  intervalId: string;
   fromCityId: number;
   toCityId: number;
   fromStationId: number;
@@ -17,6 +18,7 @@ export interface IGetRouteDetailsBody {
   travelDate: string;
   locale: string;
   passengersCount: number;
+  metadata: unknown | null; // new
 }
 
 export interface IRouteDetailsResponse {
@@ -28,12 +30,13 @@ export interface IRouteDetailsResponse {
   return_rules: IReturnRules[] | null;
   bus_id: string | null;
   bus_name: string | null;
+  bus_number: string | null; // new
   bus_pictures: string[] | null;
   seats_count: number | null;
   seats_map: ISeat[] | string | null;
   free_seats_map: IFreeSeats[] | null;
-  seats_transtempo: ITranstempoSeat | null; // карта мест для Transtempo
-  seats_transtempo_booked: number[] | null; // возвращает Transtempo
+  seats_transtempo: ITranstempoSeat | null;
+  seats_transtempo_booked: number[] | null;
   luggage_fee: number | null;
   luggage_max_count: number | null;
   luggage_rules: string[] | null;

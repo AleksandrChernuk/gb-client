@@ -134,10 +134,10 @@
   }
 }
 
+
 @utility h1 {
   @apply text-[32px] font-bold tracking-normal leading-[38.4px];
 }
-
 @utility h2 {
   @apply text-[32px] font-medium tracking-normal leading-[38.4px];
 }
@@ -400,4 +400,128 @@
   body {
     @apply bg-background text-foreground;
   }
+ }
+
+
+ @layer components {
+
+   .shadow {
+     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+     ;
+   }
+
+   .poit_to_wrapp::before {
+     content: '';
+     position: absolute;
+     border-radius: 100%;
+     border-width: 2px;
+     border-color: var(--primary_1);
+     width: 16px;
+     height: 16px;
+     top: 0;
+     left: 0;
+     transform: translateY(10%);
+     background-color: white;
+     transform: 0;
+     z-index: 40;
+   }
+
+   .dark .poit_to_wrapp::before {
+     background-color: var(--dark_main);
+   }
+
+   .poit_to::after {
+     content: '';
+     position: absolute;
+     border-radius: 100%;
+     background-color: var(--primary_1);
+     width: 8px;
+     height: 8px;
+     top: 0.25rem;
+     left: 0;
+     transform: translateX(48%) translateY(18%);
+     z-index: 40;
+     overflow: hidden;
+   }
+
+   .poit_to::before {
+     overflow: hidden;
+   }
+
+   .poit_from::before {
+     content: '';
+     position: absolute;
+     border-radius: 100%;
+     border-width: 2px;
+     border-color: var(--gray_2_for_body);
+     width: 16px;
+     height: 16px;
+     top: 0;
+     left: 0;
+     transform: translateY(10%);
+     background-color: white;
+     overflow: hidden;
+     z-index: 40;
+   }
+
+   .dark .poit_from::before {
+     border-color: var(--blackmode);
+     background-color: var(--dark_main);
+   }
+
+   .poit_divider::after {
+     content: '';
+     position: absolute;
+     border-style: dashed;
+     border-left-width: 2px;
+     border-left-color: var(--gray_2_for_body);
+     bottom: 0.25rem;
+     top: 0;
+     left: 7px;
+     transform: translateY(18px);
+     z-index: 30;
+   }
+
+   .dark .poit_divider::after {
+     border-left-color: var(--blackmode);
+   }
+
+   .stripes {
+     position: relative;
+     overflow: hidden;
+   }
+
+   .stripes::before {
+     position: absolute;
+     content: '';
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: calc(100% + 20px);
+     background-image: linear-gradient(-45deg, black 5%, transparent 5% 45%, black 45% 55%, transparent 55% 95%, black 95%);
+     background-size: 20px 20px;
+     animation: slide 1s infinite linear;
+   }
+
+   .dark .stripes::before {
+     position: absolute;
+     content: '';
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: calc(100% + 20px);
+     background-image: linear-gradient(-45deg, white 5%, transparent 5% 45%, white 45% 55%, transparent 55% 95%, white 95%);
+     background-size: 20px 20px;
+     animation: slide 1s infinite linear;
+   }
+ }
+
+ @keyframes slide {
+   0% {
+     background-position: 0 0;
+   }
+
+   100% {
+     background-position: 20px 20px;
+   }
 }

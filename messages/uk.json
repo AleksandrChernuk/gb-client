@@ -137,7 +137,21 @@
     "bus": "Автобус",
     "discounts": "Знижки"
   },
-  "new_order": { "passengers": "Пасажири", "choose_place": "Обрати місце" },
+  "new_order": {
+    "passengers": "Пасажири",
+    "choose_place": "Обрати місце",
+    "seat_reservation": "Бронювання місця",
+    "contacts": "Контакти",
+    "payment": "Оплата",
+    "your_booking": "Ваше бронювання",
+    "pay": "Оплатити",
+    "book": "Бронювати",
+    "payment_upon_boarding": "Оплата під час посадки",
+    "bank_card": "Банківська картка",
+    "booking": "Бронювання",
+    "free_seating": "Вільна посадка",
+    "seat_guaranteed": "Місце гарантовано"
+  },
   "forms": {
     "name": "Ім'я",
     "name_placeholder": "Тарас",
@@ -152,6 +166,7 @@
     "invalid_date": "Недійсна дата",
     "invalid_number": "Неправильний номер",
     "invalid_email": "Невірний email",
-    "Required": "Обов'язкове поле"
+    "Required": "Обов'язкове поле",
+    "phone_number": "Номер телефону"
   }
 }

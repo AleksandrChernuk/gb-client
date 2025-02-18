@@ -129,7 +129,21 @@
     "bus": "Bus",
     "discounts": "Discounts"
   },
-  "new_order": { "passengers": "Passengers", "choose_place": "Choose a place" },
+  "new_order": {
+    "passengers": "Passengers",
+    "choose_place": "Choose a place",
+    "seat_reservation": "Seat reservation",
+    "contacts": "Contacts",
+    "payment": "Payment",
+    "your_booking": "Your booking",
+    "pay": "Pay now",
+    "book": "Book now",
+    "payment_upon_boarding": "Payment upon boarding",
+    "bank_card": "Bank card",
+    "booking": "Booking",
+    "free_seating": "Вільна посадка",
+    "seat_guaranteed": "Seat guaranteed"
+  },
   "forms": {
     "name": "Name",
     "name_placeholder": "Taras",
@@ -142,9 +156,9 @@
     "dob_placeholder": "dd.mm.yyyy",
     "Invalid date": "Invalid date",
     "invalid_date": "Invalid date",
-
     "invalid_number": "Invalid number",
     "invalid_email": "Incorrect email",
-    "Required": "Required field"
+    "Required": "Required field",
+    "phone_number": "Phone Number"
   }
 }

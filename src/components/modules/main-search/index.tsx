@@ -1,6 +1,6 @@
 "use client"
 
-const Search = dynamic(() => import("./Search"), {
+const Search = dynamic(() => import("./MainSearchContainer"), {
   ssr: false,
   loading: () => <MainSearchSkeleton />,
 });
