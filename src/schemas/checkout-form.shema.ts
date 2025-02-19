@@ -42,8 +42,8 @@ export const useCheckoutSchema = (pass_count: number, t: (key: string) => string
       message: "You must accept the rules",
     }),
 
-    selected_seats: z.array(z.object({})).refine((seats) => seats.length === pass_count, {
-      message: "Number of seats must match the number of passengers",
+    selected_seats: z.array(z.object({})).refine((seats) => seats.length !== pass_count, {
+      message: "Не вірна кількість вибраних місць",
     }),
 
     processing_data: z.boolean().refine((val) => val === true, {

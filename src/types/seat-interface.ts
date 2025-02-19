@@ -4,5 +4,5 @@ export interface ISeat {
   number: string | null;
   coords: string | null;
   status: string | null;
-  floor: string | null;
-}
+  floor?: string | null;
+} 
