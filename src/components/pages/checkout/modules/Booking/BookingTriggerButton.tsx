@@ -7,16 +7,16 @@ import { useTranslations } from "next-intl";
 import IconSeat from "../../icons/IconSeat";
 import { ChevronRight } from "lucide-react";
 
-export default function SheetButton() {
+export default function BookingTriggerButton() {
   const t = useTranslations("new_order");
   const currentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
 
   return (
     <Button
+      disabled={!currentRoute?.details?.seats_map}
       variant={"outline"}
       type="button"
-      disabled={!currentRoute?.details?.seats_map}
-      className="stripes flex items-center justify-between rounded-lg w-full h-auto p-3 bg-inherit border border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg"
+      className="flex items-center justify-between rounded-lg w-full h-auto p-3 bg-inherit border border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg"
     >
       <div className="flex items-center gap-2">
         <div className="[&_svg]:fill-gray_2_for_body w-[45px] h-[56px]">

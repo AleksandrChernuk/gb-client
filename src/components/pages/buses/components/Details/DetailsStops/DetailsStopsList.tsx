@@ -5,8 +5,7 @@ import { getStopsProcessor } from '../../../helpers';
 export default function DetailsStopsList() {
   const currentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
   const stops = currentRoute?.details?.stops;
-console.log(stops);
-  if (!stops) return null;
+   if (!stops) return null;
   const processStops = getStopsProcessor(currentRoute);
 
   const processedStops = processStops(stops);

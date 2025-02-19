@@ -1,6 +1,6 @@
 'use client';
 
- import { createCheckoutSchema } from "@/schemas/checkout-form.shema";
+ import { useCheckoutSchema } from "@/schemas/checkout-form.shema";
  import { FormValues } from "@/types/checkout-from.types";
  import { zodResolver } from "@hookform/resolvers/zod";
  import { useForm } from "react-hook-form";
@@ -11,7 +11,7 @@
  export function useMainForm({ adult, child }: { adult: string; child: string }) {
    const t = useTranslations("forms");
 
-   const CheckoutSchema = createCheckoutSchema(t);
+   const CheckoutSchema = useCheckoutSchema(Number(adult) + Number(child), t);
 
    const methods = useForm<FormValues>({
      mode: "onSubmit",
@@ -24,27 +24,32 @@
        email: "",
        payment: "booking",
        phone: "",
+       selected_seats: [],
      },
    });
 
    useEffect(() => {
-     const storedPassengers = localStorage.getItem("passengers");
+     const storedPassengers = localStorage.getItem("form");
 
      if (typeof window !== "undefined" && storedPassengers) {
-       const passengers = JSON.parse(storedPassengers);
-       methods.reset({ passengers });
+       try {
+         const passengers = JSON.parse(storedPassengers); // Попробуем распарсить
+         methods.reset({ ...passengers });
+       } catch (error) {
+         console.error("Ошибка при парсинге данных из localStorage:", error);
+       }
      }
      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    useEffect(() => {
      const subscription = methods.watch((value) => {
-       localStorage.setItem("passengers", JSON.stringify(value.passengers));
+       localStorage.setItem("form", JSON.stringify(value));
      });
 
      return () => subscription.unsubscribe();
      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [methods.watch]);
+   }, []);
 
    const { handleSubmit } = methods;
 

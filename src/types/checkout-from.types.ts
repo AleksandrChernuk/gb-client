@@ -1,3 +1,5 @@
+import { ISeat } from "./seat-interface";
+
 export type TPassenger = {
   id: string;
   name: string;
@@ -13,7 +15,7 @@ export type TPassenger = {
   isChildren: boolean;
   seat: string;
 };
- 
+
 export type FormValues = {
   passengers: TPassenger[];
   email: string;
@@ -21,4 +23,5 @@ export type FormValues = {
   payment: "card" | "on_boarding" | "booking";
   accept_rules: boolean;
   processing_data: boolean;
+  selected_seats: ISeat[] | [];
 };

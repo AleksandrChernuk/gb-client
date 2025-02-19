@@ -1,9 +1,10 @@
+"use client";
 import { toDate } from "date-fns";
 import { z } from "zod";
 import { differenceInYears } from "date-fns";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 
-export const createCheckoutSchema = (t: (key: string) => string) =>
+export const useCheckoutSchema = (pass_count: number, t: (key: string) => string) =>
   z.object({
     passengers: z.array(
       z.object({
@@ -40,6 +41,11 @@ export const createCheckoutSchema = (t: (key: string) => string) =>
     accept_rules: z.boolean().refine((val) => val === true, {
       message: "You must accept the rules",
     }),
+
+    selected_seats: z.array(z.object({})).refine((seats) => seats.length === pass_count, {
+      message: "Number of seats must match the number of passengers",
+    }),
+
     processing_data: z.boolean().refine((val) => val === true, {
       message: "You must agree to data processing",
     }),
