@@ -7,7 +7,7 @@ import DetailsReturnPolicy from '@/components/pages/buses/components/Details/Det
 import DetailsStops from '@/components/pages/buses/components/Details/DetailsStops';
 import React from 'react';
 
-export default function CardDetails() {
+export default function TicketDetails() {
   return (
     <div className='mt-8 grid grid-cols-2 gap-2'>
       <div className='space-y-4'>
@@ -22,5 +22,5 @@ export default function CardDetails() {
         <DetailsBus />
       </div>
     </div>
-  );
+  )
 }

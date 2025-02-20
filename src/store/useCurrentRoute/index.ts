@@ -13,7 +13,6 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
         (set) => ({
           сurrentRoute: null,
           isHydrated: false,
-
           setCurrentRoute: async ({
             route,
             fromCityId,
@@ -30,40 +29,36 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
               !locale ||
               !travelDate
             ) {
-              set({ сurrentRoute: null });
-              return;
+              set({ сurrentRoute: null })
+              return
             }
 
-            let res: IRouteDetailsResponse | null = null;
-            const providersRequiringExtraRequest = ["Octobus", "KLR", "TransTempo", "EWE", "ODRI"];
-            // Проверяем, требуется ли дополнительный запрос
-            if (providersRequiringExtraRequest.includes(route.provider_name)) {
-              set({ loadingDetails: true });
+            let res: IRouteDetailsResponse | null = null
+            set({ loadingDetails: true })
 
-              try {
-                res = await getRouteDetails({
-                  metadata: route.metadata,
-                  fromCityId,
-                  toCityId,
-                  fromStationId: route.departure.station_id || 1,
-                  toStationId: route.arrival.station_id || 1,
-                  providerId: route.provider_id,
-                  routeId: route.route_id,
-                  travelDate,
-                  locale,
-                  passengersCount: passCount,
-                  intervalId: route.intervalId || "",
-                });
-              } catch (error) {
-                console.error("Ошибка при получении данных маршрута:", error);
-                set({ loadingDetails: false });
-              } finally {
-                set({ loadingDetails: false });
-              }
+            try {
+              res = await getRouteDetails({
+                routeId: route.identificators.route_id,
+                intervalId: route.identificators.intervalId || '',
+                fromCityId: fromCityId,
+                toCityId: toCityId,
+                fromStationId: route.departure.station_id || 1,
+                toStationId: route.arrival.station_id || 1,
+                providerId: route.identificators.provider_id,
+                travelDate: travelDate,
+                locale: locale,
+                passengersCount: passCount,
+                metadata: route.identificators.metadata,
+              })
+            } catch (error) {
+              console.error('Ошибка при получении данных маршрута:', error)
+              set({ loadingDetails: false })
+            } finally {
+              set({ loadingDetails: false })
             }
 
             const currentDetails: IRouteDetailsResponse =
-              route.details || ({} as IRouteDetailsResponse);
+              route.details || ({} as IRouteDetailsResponse)
 
             const updatedDetails = {
               ...currentDetails,
@@ -73,25 +68,25 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
                   value !== null ? value : currentDetails[key as keyof IRouteDetailsResponse],
                 ])
               ),
-            } as IRouteDetailsResponse;
+            } as IRouteDetailsResponse
 
             const updatedRoute: IRouteResponse = {
               ...route,
               details: updatedDetails,
-            };
+            }
 
-            set({ сurrentRoute: updatedRoute });
+            set({ сurrentRoute: updatedRoute })
           },
         }),
         {
           name: 'current-route',
           onRehydrateStorage: () => (state) => {
             if (state) {
-              state.isHydrated = true;
+              state.isHydrated = true
             }
           },
         }
       )
     )
   )
-);
+)

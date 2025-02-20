@@ -9,34 +9,34 @@
  import { useTranslations } from "next-intl";
 
  export function useMainForm({ adult, child }: { adult: string; child: string }) {
-   const t = useTranslations("forms");
+   const t = useTranslations('forms');
 
    const CheckoutSchema = useCheckoutSchema(Number(adult) + Number(child), t);
 
    const methods = useForm<FormValues>({
-     mode: "onSubmit",
+     mode: 'onSubmit',
      resolver: zodResolver(CheckoutSchema),
      defaultValues: {
        passengers: createPassList({
          adult: Number(adult),
          children: Number(child),
        }),
-       email: "",
-       payment: "booking",
-       phone: "",
+       email: '',
+       payment: 'booking',
+       phone: '',
        selected_seats: [],
      },
    });
 
    useEffect(() => {
-     const storedPassengers = localStorage.getItem("form");
+     const storedPassengers = localStorage.getItem('form');
 
-     if (typeof window !== "undefined" && storedPassengers) {
+     if (typeof window !== 'undefined' && storedPassengers) {
        try {
-         const passengers = JSON.parse(storedPassengers); // Попробуем распарсить
+         const passengers = JSON.parse(storedPassengers);
          methods.reset({ ...passengers });
        } catch (error) {
-         console.error("Ошибка при парсинге данных из localStorage:", error);
+         console.error('Ошибка при парсинге данных из localStorage:', error);
        }
      }
      // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,7 +44,7 @@
 
    useEffect(() => {
      const subscription = methods.watch((value) => {
-       localStorage.setItem("form", JSON.stringify(value));
+       localStorage.setItem('form', JSON.stringify(value));
      });
 
      return () => subscription.unsubscribe();
@@ -54,7 +54,8 @@
    const { handleSubmit } = methods;
 
    const onSubmit = async (data: FormValues) => {
-     console.log("Form Submitted:", data);
+     console.log('Form Submitted:', data);
    };
+
    return { methods, onSubmit, handleSubmit };
  }

@@ -1,16 +1,12 @@
 import { useCurrentRouteStore } from '@/store/useCurrentRoute';
-import DetailsStopsItem from './DetailsStopsItem';
-import { getStopsProcessor } from '../../../helpers';
-
+import DetailsStopsItem from './DetailsStopsItem'
+ 
 export default function DetailsStopsList() {
-  const currentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
-  const stops = currentRoute?.details?.stops;
-   if (!stops) return null;
-  const processStops = getStopsProcessor(currentRoute);
+  const currentRoute = useCurrentRouteStore((state) => state.сurrentRoute)
+  const stops = currentRoute?.details?.stops
+  if (!stops) return null
 
-  const processedStops = processStops(stops);
-
-  return processedStops.map((element, idx, array) => (
+  return stops.map((element, idx, array) => (
     <DetailsStopsItem
       station_address={element.station.address}
       station_name={element.station.name}
@@ -21,5 +17,5 @@ export default function DetailsStopsList() {
       isFirst={idx === 0}
       isLast={idx === array.length - 1}
     />
-  ));
+  ))
 }

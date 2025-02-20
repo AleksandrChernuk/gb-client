@@ -15,11 +15,17 @@ type Props = {
 
 export const CustomDarwer = ({ open, toggleOpen, title, description, trigger, children, onClose }: Props) => {
   return (
-    <Drawer direction="right" open={open} onOpenChange={toggleOpen} onClose={onClose} shouldScaleBackground={true}>
+    <Drawer
+      direction='right'
+      open={open}
+      onOpenChange={toggleOpen}
+      onClose={onClose}
+      shouldScaleBackground={true}
+    >
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className="flex flex-col m-0 rounded-none">
-        <DialogTitle className="hidden">{title}</DialogTitle>
-        <DialogDescription className="hidden">{description}</DialogDescription>
+      <DrawerContent className='flex flex-col m-0 rounded-none'>
+        <DialogTitle className='hidden h1'>{title}</DialogTitle>
+        <DialogDescription className='hidden'>{description}</DialogDescription>
         {children}
       </DrawerContent>
     </Drawer>

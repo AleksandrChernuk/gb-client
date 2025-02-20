@@ -115,8 +115,7 @@
     "places": "Мест",
     "selectButton": "Обрати",
     "details": "Детальнее",
-    "shortHours": "ч",
-    "shortMinutes": "мин",
+
     "route": "Маршрут",
     "local_time": "Время отправления/прибытия указано по местному времени.",
     "travel_time": "Время в пути",
@@ -126,6 +125,7 @@
     "bus": "Автобус",
     "discounts": "Скидки"
   },
+  "buses": { "shortHours": "ч", "shortMinutes": "мин" },
   "new_order": {
     "passengers": "Пассажиры",
     "choose_place": "Выбрать место",

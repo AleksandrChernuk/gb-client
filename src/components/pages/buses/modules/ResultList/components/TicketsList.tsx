@@ -8,7 +8,7 @@ export default function TicketsList({ routersList }: Props) {
   return (
     <ul className='flex flex-col space-y-10'>
       {routersList.map((route, i) => {
-        return <TicketCard key={`${route.route_id}_${i}`} element={route} />;
+        return <TicketCard key={`${route.identificators.route_id}_${i}`} element={route} />
       })}
     </ul>
   );

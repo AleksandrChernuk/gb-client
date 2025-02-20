@@ -1,14 +1,15 @@
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
+
 @custom-variant dark (&:is(.dark *));
 
 
 @theme {
   --font-mulish: var(--font-mulish);
 
-  --breakpoint-mobile: 375px;
-  --breakpoint-lg: 324px;
-  --breakpoint-tabs80: 560px;
+  --breakpoint-xs: 375px;
+    --breakpoint-md: 425px;
+    --breakpoint-lg: 560px;
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1280px;
   --breakpoint-desktop: 1440px;
@@ -115,14 +116,7 @@
 
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
 
   *,
@@ -419,8 +413,8 @@
      width: 16px;
      height: 16px;
      top: 0;
-     left: 0;
-     transform: translateY(10%);
+left: 0.50rem;
+  transform: translateY(10%);
      background-color: white;
      transform: 0;
      z-index: 40;
@@ -438,7 +432,7 @@
      width: 8px;
      height: 8px;
      top: 0.25rem;
-     left: 0;
+    left: 0.50rem;
      transform: translateX(48%) translateY(18%);
      z-index: 40;
      overflow: hidden;
@@ -457,8 +451,8 @@
      width: 16px;
      height: 16px;
      top: 0;
-     left: 0;
-     transform: translateY(10%);
+    left: 0.50rem;
+      transform: translateY(10%);
      background-color: white;
      overflow: hidden;
      z-index: 40;
@@ -477,8 +471,8 @@
      border-left-color: var(--gray_2_for_body);
      bottom: 0.25rem;
      top: 0;
-     left: 7px;
-     transform: translateY(18px);
+    left: 14.5px;
+      transform: translateY(19.5px);
      z-index: 30;
    }
 

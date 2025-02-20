@@ -11,7 +11,7 @@ export default async function RootLayout({
   const { lng } = await params;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className='   flex flex-col h-screen'>
       <MainHeader locale={lng} />
       {children}
     </div>

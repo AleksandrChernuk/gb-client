@@ -137,6 +137,7 @@
     "bus": "Автобус",
     "discounts": "Знижки"
   },
+  "buses": { "shortHours": "г", "shortMinutes": "хв" },
   "new_order": {
     "passengers": "Пасажири",
     "choose_place": "Обрати місце",

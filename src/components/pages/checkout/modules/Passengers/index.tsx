@@ -37,56 +37,63 @@ export default function Passengers() {
             const passenger = field as unknown as TPassenger;
             return (
               <li key={passenger.id}>
-                <CustomCard className="space-y-4 dark:bg-dark_main">
-                  <div className="flex flex-col gap-4 tablet:flex-row">
-                    <div className="w-full tablet:w-1/2">
+                <CustomCard className='space-y-4 dark:bg-dark_main'>
+                  <div className='flex flex-col gap-4 tablet:flex-row'>
+                    <div className='w-full tablet:w-1/2'>
                       <FormField
                         control={control}
                         name={`passengers.${i}.name`}
-                        render={({ field, fieldState }) => (
-                          <div>
-                            <label
-                              htmlFor={`passengers.${i}.name`}
-                              className="block text-black_2_for_text dark:text-white secondary_text mb-2"
-                            >
-                              {t_forms("name")}
-                            </label>
-
-                            <Input {...field} type="text" placeholder={t_forms("name_placeholder")} />
-
-                            <span className="text-sm font-medium text-red">{fieldState.error?.message}</span>
-                          </div>
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className='secondary_text mb-2'>{t_forms('name')}</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                type='text'
+                                placeholder={t_forms('name_placeholder')}
+                              />
+                            </FormControl>
+                            <FormMessage className='text-red' />
+                          </FormItem>
                         )}
                       />
                     </div>
 
-                    <div className="w-full tablet:w-1/2">
+                    <div className='w-full tablet:w-1/2'>
                       <FormField
                         control={control}
                         name={`passengers.${i}.surname`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="secondary_text  mb-2">{t_forms("surname")}</FormLabel>
+                            <FormLabel className='secondary_text  mb-2'>
+                              {t_forms('surname')}
+                            </FormLabel>
                             <FormControl>
-                              <Input {...field} type="text" placeholder={t_forms("surname_placeholder")} />
+                              <Input
+                                {...field}
+                                type='text'
+                                placeholder={t_forms('surname_placeholder')}
+                              />
                             </FormControl>
-                            <FormMessage className="text-red" />
+                            <FormMessage className='text-red' />
                           </FormItem>
                         )}
                       />
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4 tablet:flex-row">
-                    <div className="w-full tablet:w-1/2">
+                  <div className='flex flex-col gap-4 tablet:flex-row'>
+                    <div className='w-full tablet:w-1/2'>
                       <FormField
                         control={control}
                         name={`passengers.${i}.notes`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="secondary_text mb-2">{t_forms("notes")}</FormLabel>
+                            <FormLabel className='secondary_text mb-2'>
+                              {t_forms('notes')}
+                            </FormLabel>
                             <FormControl>
-                              <Input {...field} type="text" />
+                              <Input {...field} type='text' />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -94,47 +101,49 @@ export default function Passengers() {
                       />
                     </div>
 
-                    <div className="w-full tablet:w-1/2">
+                    <div className='w-full tablet:w-1/2'>
                       <FormField
                         control={control}
                         name={`passengers.${i}.dob`}
                         render={({ field, fieldState }) => {
                           return (
                             <FormItem>
-                              <FormLabel className="secondary_text mb-2">{t_forms("dob")}</FormLabel>
+                              <FormLabel className='secondary_text mb-2'>
+                                {t_forms('dob')}
+                              </FormLabel>
                               <FormControl>
-                                <div className="relative">
+                                <div className='relative'>
                                   <Input
                                     onChange={(value) => {
-                                      field.onChange(value);
+                                      field.onChange(value)
                                     }}
                                     onBlur={field.onBlur}
-                                    type="text"
-                                    ref={withMask("99.99.9999", {
+                                    type='text'
+                                    ref={withMask('99.99.9999', {
                                       showMaskOnFocus: true,
                                       showMaskOnHover: false,
                                     })}
-                                    placeholder={t_forms("dob_placeholder")}
+                                    placeholder={t_forms('dob_placeholder')}
                                   />
 
-                                  <Calendar className="stroke-gray-dark dark:stroke-grayy absolute -translate-y-1/2 right-5 top-1/2" />
+                                  <Calendar className='stroke-gray-dark dark:stroke-grayy absolute -translate-y-1/2 right-5 top-1/2' />
                                 </div>
                               </FormControl>
 
                               {fieldState.invalid && (
-                                <span className="text-sm font-medium text-red">
+                                <span className='text-sm font-medium text-red'>
                                   {t_forms(fieldState.error?.message)}
                                 </span>
                               )}
                             </FormItem>
-                          );
+                          )
                         }}
                       />
                     </div>
                   </div>
                 </CustomCard>
               </li>
-            );
+            )
           })}
         </ul>
       </li>

@@ -9,7 +9,7 @@ import Benefits from './modules/Benefits';
  
 export default async function MainPage() {
   return (
-    <main role="main" className="grow bg-grayy dark:bg-dark_bg">
+    <main role='main' className='grow  bg-grayy dark:bg-dark_bg'>
       <Herow />
       <Benefits />
       <Buses />

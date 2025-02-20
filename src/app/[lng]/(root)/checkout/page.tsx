@@ -1,7 +1,7 @@
 import SecondFooter from "@/components/modules/footer/SecondFooter";
 import NewOrderPage from "@/components/pages/checkout";
- import { cookies } from "next/headers";
- import { redirect } from "next/navigation";
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
  export default async function Checkout() {
    const cookieStore = await cookies();
@@ -14,10 +14,11 @@ import NewOrderPage from "@/components/pages/checkout";
 
    return (
      <>
-       <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_bg">
+       <main role='main' className='pb-16 grow bg-grayy dark:bg-dark_bg'>
+         <h1 className='sr-only'>CheckoutPage</h1>
          <NewOrderPage adult={adult.value} child={children.value} />
        </main>
-       <SecondFooter className="bg-grayy dark:bg-dark_bg" />
+       <SecondFooter className='bg-grayy dark:bg-dark_bg' />
      </>
-   );
+   )
  }

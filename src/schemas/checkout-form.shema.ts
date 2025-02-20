@@ -10,43 +10,42 @@ export const useCheckoutSchema = (pass_count: number, t: (key: string) => string
       z.object({
         id: z.string(),
         isChildren: z.boolean(),
-        name: z.string().min(1, t("required")),
-        surname: z.string().min(1, t("required")),
+        name: z.string().min(1, t('required')),
+        surname: z.string().min(1, t('required')),
         notes: z.string().optional(),
         dob: z
           .string()
-          .min(1, "required")
+          .min(1, 'required')
           .refine(
             (val) => {
-              const date = toDate(val);
-              const today = new Date();
-              const yearsDiff = differenceInYears(today, date);
-              return yearsDiff >= 0 && yearsDiff <= 90;
+              const date = toDate(val)
+              const today = new Date()
+              const yearsDiff = differenceInYears(today, date)
+              return yearsDiff >= 0 && yearsDiff <= 90
             },
-            { message: "invalid_date" },
+            { message: 'invalid_date' }
           ),
-      }),
+      })
     ),
-    email: z.string().min(1, t("required")).email(t("invalid_email")),
+    email: z.string().min(1, t('required')).email(t('invalid_email')),
     phone: z
       .string()
-      .min(8, t("required"))
+      .min(8, t('required'))
       .refine(
         (value) => {
-          const phoneNumber = parsePhoneNumberFromString(value);
-          return phoneNumber ? phoneNumber.isValid() : false;
+          const phoneNumber = parsePhoneNumberFromString(value)
+          return phoneNumber ? phoneNumber.isValid() : false
         },
-        { message: t("invalid_number") },
+        { message: t('invalid_number') }
       ),
     accept_rules: z.boolean().refine((val) => val === true, {
-      message: "You must accept the rules",
+      message: 'You must accept the rules',
     }),
 
-    selected_seats: z.array(z.object({})).refine((seats) => seats.length !== pass_count, {
-      message: "Не вірна кількість вибраних місць",
+    selected_seats: z.array(z.object({})).refine((seats) => seats.length === pass_count, {
+      message: 'Не вірна кількість вибраних місць',
     }),
-
     processing_data: z.boolean().refine((val) => val === true, {
-      message: "You must agree to data processing",
+      message: 'You must agree to data processing',
     }),
-  });
+  })
