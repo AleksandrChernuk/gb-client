@@ -1,89 +1,72 @@
-import { IRouteResponse } from '@/types/route.types';
-import { IStops } from '@/types/stops-interface';
-import { addDays } from 'date-fns';
-import { differenceInMilliseconds } from 'date-fns';
+import { addDays } from 'date-fns'
+import { sortBuy } from '@/constans/sortbuylist.constans'
+import { ICarriers } from '@/types/carriers.types'
+import { IRouteResponse } from '@/types/route.types'
+import { differenceInMilliseconds, toDate } from 'date-fns'
 
 export const createDateArr = (centerDate: Date, length: number, lastNum: number): Date[] => {
-  return Array.from({ length }, (_, index) => addDays(centerDate, index - lastNum));
-};
+  return Array.from({ length }, (_, index) => addDays(centerDate, index - lastNum))
+}
 
-export const getTimeOnRoad = (arrival: string, departure: string) => {
-  const durationMs = differenceInMilliseconds(new Date(arrival), new Date(departure));
+export const sortedRoutes = ({ sortBy, data }: { sortBy: string; data: IRouteResponse[] }) => {
+  return data.toSorted((a, b) => {
+    const getDuration = (route: IRouteResponse) =>
+      differenceInMilliseconds(
+        new Date(route?.arrival?.date_time || 0),
+        new Date(route?.departure?.date_time || 0)
+      )
 
-  const hours = Math.floor(durationMs / (1000 * 60 * 60));
-  const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+    switch (sortBy) {
+      case sortBuy.SORT_BUY_DEPARTURE_TIME:
+        return (
+          toDate(a?.departure?.date_time || new Date()).getTime() -
+          toDate(b?.departure?.date_time || new Date()).getTime()
+        )
 
-  return { hours, minutes, durationMs };
-};
+      case sortBuy.SORT_BUY_ARRIVAL_TIME:
+        return (
+          toDate(a?.arrival?.date_time || new Date()).getTime() -
+          toDate(b?.arrival?.date_time || new Date()).getTime()
+        )
 
-export const getStopsProcessor = (route: IRouteResponse) => {
-  switch (route.provider_name) {
-    case 'KLR':
-      return (stops: IStops[]) => {
-        const startIdx = stops.findIndex(
-          (el) => el.location.id === `${route?.details?.providerLocationFrom}`
-        );
-        const endIdx = stops.findIndex(
-          (el) => el.location.id === `${route?.details?.providerLocationTo}`
-        );
+      case sortBuy.SORT_BUY_TIME_ON_ROAD:
+        return getDuration(a) - getDuration(b)
 
-        return stops
-          .map((el) => ({ ...el, arrival_date_time: el.departure_date_time }))
-          .slice(startIdx === -1 ? 0 : startIdx, endIdx == -1 ? stops.length - 1 : endIdx + 1);
-      };
+      case sortBuy.SORT_BUY_PRICE:
+        return (
+          Math.floor(a?.ticket_pricing?.base_price || 0) -
+          Math.floor(b?.ticket_pricing?.base_price || 0)
+        )
 
-    case 'Octobus':
-      return (stops: IStops[]) => {
-        const startIdx = stops.findIndex(
-          (el) => el.station.id === `${route?.departure?.station_id}`
-        );
-        const endIdx = stops.findIndex((el) => el.station.id === `${route?.arrival?.station_id}`);
+      case sortBuy.SORT_BUY_POPULARITY:
+        return 0
 
-        return stops
-          .map((el) => ({ ...el, arrival_date_time: el.departure_date_time }))
-          .slice(startIdx === -1 ? 0 : startIdx, endIdx == -1 ? stops.length - 1 : endIdx + 1);
-      };
+      default:
+        return 0
+    }
+  })
+}
 
-    case 'TransTempo':
-      return (stops: IStops[]) => {
-        const startIdx = stops.findIndex(
-        (el) => el.location.id === `${route?.details?.providerLocationFrom}`
-      );
-      const endIdx = stops.findIndex(
-        (el) => el.location.id === `${route?.details?.providerLocationTo}`
-      );
+export const sortedCarriers = ({ data }: { data: IRouteResponse[] }) => {
+  const carriers = data.reduce(
+    (acc, el) => {
+      const carrierName = el.carrier?.name || 'Unknown Carrier'
 
-      return stops
-        .map((el) => ({ ...el, arrival_date_time: el.departure_date_time }))
-          .slice(startIdx === -1 ? 0 : startIdx, endIdx == -1 ? stops.length - 1 : endIdx + 1)
-      };
+      if (!acc[carrierName]) {
+        acc[carrierName] = { name: carrierName, id: Object.keys(acc).length + 1, count: 0 }
+      }
 
-    case 'EuroClub':
-      return (stops: IStops[]) => {
-        return stops.map((el) => ({
-          ...el,
-          departure_date_time:
-            el.departure_date_time === '' ? el.arrival_date_time : el.departure_date_time,
-          arrival_date_time:
-            el.arrival_date_time === '' ? el.departure_date_time : el.arrival_date_time,
-        }));
-      };
+      acc[carrierName].count++
+      return acc
+    },
+    {} as Record<string, ICarriers>
+  )
 
-    case 'EWE':
-      return (stops: IStops[]) => {
-        const startIdx = stops.findIndex(
-          (el) => el.location.id === `${route?.details?.providerLocationFrom}`
-        );
-        const endIdx = stops.findIndex(
-          (el) => el.location.id === `${route?.details?.providerLocationTo}`
-        );
+  return Object.values(carriers)
+}
 
-        return stops
-          .map((el) => ({ ...el, arrival_date_time: el.departure_date_time }))
-          .slice(startIdx === -1 ? 0 : startIdx, endIdx == -1 ? stops.length - 1 : endIdx + 1);
-      };
-
-    default:
-      return (stops: IStops[]) => stops;
-  }
-};
+export const filterRoutesByCarriers = (routes: IRouteResponse[], carriers: string[]) => {
+  return carriers.length > 0
+    ? routes.filter((route) => route.carrier?.name && carriers.includes(route.carrier.name))
+    : routes
+}

@@ -1,7 +1,7 @@
  
 import Image from "next/image";
-import loader from "../../../images/loader.gif"
-import loaderdark from "../../../images/loaderdark.gif";
+import loader from "../images/loader.gif"
+import loaderdark from '../images/loaderdark.gif'
 
 
 

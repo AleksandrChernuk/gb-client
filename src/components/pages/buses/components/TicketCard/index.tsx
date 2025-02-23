@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
 import { IRouteResponse } from '@/types/route.types'
 import { IconLoader } from '@/components/icons/IconLoader'
-import MobileDetails from '../../modules/MobileDetails'
+import MobileDetails from '../MobileDetails'
 import TicketDetails from './TicketDetails'
 import { useLocale, useTranslations } from 'next-intl'
 import TicketRouteMobile from '@/components/shared/TicketRouteMobile'
@@ -14,7 +14,7 @@ import useTicketCard from '../../hooks/useTicketCard'
 import { TicketCarriers } from './TicketCarriers'
 import TicketPlaces from './TicketPlaces'
 import TicketDetailsButton from '../TicketDetailsButton'
-  
+
 type Props = {
   element: IRouteResponse
 }
@@ -90,4 +90,4 @@ export const TicketCard = ({ element }: Props) => {
       />
     </div>
   )
-} 
+}

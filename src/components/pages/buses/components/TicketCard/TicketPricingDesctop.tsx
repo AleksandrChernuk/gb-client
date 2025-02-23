@@ -8,12 +8,11 @@ type Props = {
   price: string
   loading?: boolean
   handleSelect: () => void
-  
 }
 
 export default function TicketPricingDesctop({ price, handleSelect, loading }: Props) {
- const t = useTranslations('search')
-  
+  const t = useTranslations('search')
+
   return (
     <div className='hidden tablet:flex flex-col items-center gap-2 tablet:gap-4'>
       <div className='h4 laptop:h2 text-text_prymery'>

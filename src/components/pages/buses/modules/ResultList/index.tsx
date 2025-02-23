@@ -1,24 +1,29 @@
-"use client";
+'use client'
 
-import { Loader } from './components/Loader';
-import { NoTravel } from './components/NoTravel';
-import useSearchResult from '../../hooks/useSearchResult';
-import { useRoutesStore } from '@/store/useRouter';
- import { ErrorTravel } from './components/ErrorTravel';
- import TicketsList from './components/TicketsList';
+import { Loader } from '../../components/Loader'
+import { NoTravel } from '../../components/NoTravel'
+import { ErrorTravel } from '../../components/ErrorTravel'
+import { TicketCard } from '../../components/TicketCard'
+import useSearchTickets from '../../hooks/useSearchTickets'
+import { useFilterTicketsStore } from '@/store/useFilterTickets'
 
-export const ResultList = () => {
-  const { isFetching, error, data } = useSearchResult();
-
-  const filteredRoutes = useRoutesStore((state) => state.filteredRoutes);
+export default function ResultList() {
+  const { isFetching, data, error } = useSearchTickets()
+  const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets)
 
   if (isFetching) {
-    return <Loader />;
+    return <Loader />
   }
 
-  if (error) return <ErrorTravel />;
+  if (error) return <ErrorTravel />
 
-  if (!isFetching && data && !data.length) return <NoTravel />;
+  if (!isFetching && data && data.length === 0) return <NoTravel />
 
-  return <TicketsList routersList={filteredRoutes} />;
-};
+  return (
+    <ul className='flex flex-col space-y-10'>
+      {filteredTickets.map((route, i) => {
+        return <TicketCard key={`${route.identificators.route_id}_${i}`} element={route} />
+      })}
+    </ul>
+  )
+}

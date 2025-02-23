@@ -1,11 +1,11 @@
-import DetailsAmenities from '@/components/pages/buses/components/Details/DetailsAmenities';
-import DetailsBus from '@/components/pages/buses/components/Details/DetailsBus';
-import DetailsDiscounts from '@/components/pages/buses/components/Details/DetailsDiscounts';
-import DetailsInfo from '@/components/pages/buses/components/Details/DetailsInfo';
-import DetailsLuggage from '@/components/pages/buses/components/Details/DetailsLuggage';
-import DetailsReturnPolicy from '@/components/pages/buses/components/Details/DetailsReturnPolicy';
-import DetailsStops from '@/components/pages/buses/components/Details/DetailsStops';
-import React from 'react';
+import DetailsAmenities from '@/components/pages/buses/components/Details/DetailsAmenities'
+import DetailsBus from '@/components/pages/buses/components/Details/DetailsBus'
+import DetailsDiscounts from '@/components/pages/buses/components/Details/DetailsDiscounts'
+import DetailsInfo from '@/components/pages/buses/components/Details/DetailsInfo'
+import DetailsLuggage from '@/components/pages/buses/components/Details/DetailsLuggage'
+import DetailsReturnPolicy from '@/components/pages/buses/components/Details/DetailsReturnPolicy'
+import DetailsStops from '@/components/pages/buses/components/Details/DetailsStops'
+import React from 'react'
 
 export default function TicketDetails() {
   return (

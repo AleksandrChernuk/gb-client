@@ -6,7 +6,7 @@ import DetailsStopsList from './DetailsStopsList'
 import { useLocale, useTranslations } from 'next-intl'
 import DetailsStopsItem from './DetailsStopsItem'
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import TicketDetailsButton from '../../TicketDetailsButton'
+import TicketDetailsButton from '../TicketDetailsButton'
 
 export default function DetailsStops() {
   const [open, setOpen] = useState<boolean>(false);
@@ -34,6 +34,7 @@ export default function DetailsStops() {
             isFirst={true}
             isLast={false}
           />
+
           <DetailsStopsItem
             station_address={сurrentRoute?.arrival.station_address}
             station_name={сurrentRoute?.arrival.station_name}
@@ -49,12 +50,7 @@ export default function DetailsStops() {
         </div>
       )}
 
-      {open && (
-        <div className={`relative flex flex-col items-start gap-2 mt-4`}>
-          <span className='absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-gray_2_for_body dark:border-blackmode border-dashed translate-x-[56.5px]'></span>
-          <DetailsStopsList />
-        </div>
-      )}
+      {open && <DetailsStopsList />}
 
       {сurrentRoute?.details?.stops && сurrentRoute?.details?.stops?.length > 2 && (
         <TicketDetailsButton

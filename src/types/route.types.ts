@@ -14,8 +14,8 @@ export interface IGetRouteDetailsBody {
   intervalId: string
   fromCityId: number
   toCityId: number
-  fromStationId: number
-  toStationId: number
+  fromStationId: number | string
+  toStationId: number | string
   providerId: string
   travelDate: string
   locale: string

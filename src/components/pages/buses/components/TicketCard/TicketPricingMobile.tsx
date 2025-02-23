@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { LoaderCircle } from 'lucide-react'
 
-
 type Props = {
   price: string
   loading?: boolean
