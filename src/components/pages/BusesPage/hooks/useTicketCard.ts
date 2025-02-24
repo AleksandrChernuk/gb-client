@@ -41,7 +41,7 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
       })
     }
 
-    router.push('/checkout')
+    router.push('/checkout', { scroll: true })
   }
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {

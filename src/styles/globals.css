@@ -9,7 +9,7 @@
 
   --breakpoint-xs: 375px;
   --breakpoint-md: 425px;
-    --breakpoint-lg: 560px;
+  --breakpoint-lg: 560px;
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1280px;
   --breakpoint-desktop: 1440px;
@@ -84,16 +84,15 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   --animate-rotateCircle: rotateCircle 600s linear infinite;
-  
-    @keyframes rotateCircle {
-      0% {
-        transform: rotate(0deg);
-      }
-  
-      100% {
-        transform: rotate(360deg);
-      }
+@keyframes rotateCircle {
+    0% {
+      transform: rotate(0deg);
     }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   @keyframes accordion-down {
     from {
@@ -266,7 +265,7 @@
 
   html,
   body,
-    :root {
+  :root {
       height: 100%;
       min-height: 100vh;
       margin: 0;
@@ -279,7 +278,7 @@
   :root {
     --primary_1: #088537;
     --background_card: #0D5A2B;
-      --primary_2: #7AF2A6;
+    --primary_2: #7AF2A6;
       --light_primary: #B4FFD0;
       --hover: #05B446;
       --focused: #0D6E32;
@@ -290,12 +289,12 @@
       --black: #000000;
     /* Это однострочный комментарий background_black_mode */
     --dark_bg: #0F172A;
-      /* Это однострочный комментарий dark_mode_main1 */
+    /* Это однострочный комментарий dark_mode_main1 */
       --dark_main: #1E293B;
       --blackmode: #475569;
     /* Это однострочный комментарий dark_mode_main1 */
     --black_2_for_text: #334155;
-      --gray_2_for_body: #6F8B90;
+    --gray_2_for_body: #6F8B90;
       --gray_3: #8E8E8E;
       --gray_5: #212529;
       --gray_1: #E2E8F0;
@@ -314,7 +313,7 @@
       --icons: #000000;
     /* Это однострочный комментарий text_prymery_color */
     --text_prymery: #334155;
-      /* Это однострочный комментарий --text_secondary_color: #6F8B90; */
+    /* Это однострочный комментарий --text_secondary_color: #6F8B90; */
       --text_secondary: #6F8B90;
       --prymery_btn_color: #FFFF;
       --label_color: #334155;
@@ -327,7 +326,7 @@
     --card: 0 0% 100%;
     --card-foreground: 215 25% 27%;
     --popover: 210 40% 98%;
-      --popover-foreground: 215 25% 27%;
+    --popover-foreground: 215 25% 27%;
       --primary: 142 87% 28%;
       --primary-foreground: 0 0% 100%;
       --secondary: 142 81% 71%;
@@ -352,7 +351,7 @@
   .dark {
     --primary_1: #088537;
     --primary_2: #7af2a6;
-      --bw: #ffffff;
+    --bw: #ffffff;
       --icons: #F8FAFC;
       --card_bg_primery: #0F172A;
       --text_seconddary: #E2E8F0;
@@ -402,7 +401,7 @@
 @layer components {
 
   .shadow {
-      box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
       ;
     }
 
@@ -436,7 +435,7 @@
       top: 0.25rem;
     left: 0.50rem;
     transform: translateX(48%) translateY(18%);
-      z-index: 40;
+    z-index: 40;
       overflow: hidden;
     }
 
@@ -455,7 +454,7 @@
       top: 0;
     left: 0.50rem;
     transform: translateY(10%);
-      background-color: white;
+    background-color: white;
       overflow: hidden;
       z-index: 40;
     }
@@ -475,7 +474,7 @@
       top: 0;
     left: 14.5px;
     transform: translateY(19.5px);
-      z-index: 30;
+    z-index: 30;
     }
 
     .dark .poit_divider::after {

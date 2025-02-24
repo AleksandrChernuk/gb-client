@@ -39,7 +39,7 @@ export const useLocationsQuery = (value: string) => {
     if (searchData) {
       return searchData;
     }
-    return favoriteData || [];
+    return favoriteData?.slice(0, 4) || []
   }, [favoriteData, searchData]);
 
   return {

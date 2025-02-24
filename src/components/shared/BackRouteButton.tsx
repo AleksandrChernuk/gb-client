@@ -10,14 +10,12 @@ export default function BackRouteButton() {
   const t = useTranslations('common')
 
   const route = useRouter()
+
+  const handleGoBack = () => {
+    route.back()
+  }
   return (
-    <Button
-      variant={'link'}
-      onClick={() => {
-        route.back()
-      }}
-      className='gap-0.2 text-text_prymery h5'
-    >
+    <Button variant={'link'} onClick={handleGoBack} className='gap-0.2 text-text_prymery h5'>
       <ChevronLeft size={24} />
       {t('backBtn')}
     </Button>
