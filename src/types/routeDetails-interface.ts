@@ -8,10 +8,10 @@ import { IFreeSeats } from './free_seats-interface'
 export interface IGetRouteDetailsBody {
   routeId: string
   intervalId: string
-  fromCityId: number
-  toCityId: number
-  fromStationId: number
-  toStationId: number
+  fromCityId: number | string
+  toCityId: number | string
+  fromStationId: number | string
+  toStationId: number | string
   providerId: string
   travelDate: string
   locale: string
