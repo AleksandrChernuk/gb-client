@@ -1,13 +1,10 @@
-import DetailsAmenities from '@/components/pages/buses/components/Details/DetailsAmenities'
-import DetailsBus from '@/components/pages/buses/components/Details/DetailsBus'
-import DetailsDiscounts from '@/components/pages/buses/components/Details/DetailsDiscounts'
-import DetailsInfo from '@/components/pages/buses/components/Details/DetailsInfo'
-import DetailsLuggage from '@/components/pages/buses/components/Details/DetailsLuggage'
-import DetailsReturnPolicy from '@/components/pages/buses/components/Details/DetailsReturnPolicy'
-import DetailsStops from '@/components/pages/buses/components/Details/DetailsStops'
- 
-
- 
+import DetailsAmenities from '@/components/pages/Buses/components/Details/DetailsAmenities'
+import DetailsBus from '@/components/pages/Buses/components/Details/DetailsBus'
+import DetailsDiscounts from '@/components/pages/Buses/components/Details/DetailsDiscounts'
+import DetailsInfo from '@/components/pages/Buses/components/Details/DetailsInfo'
+import DetailsLuggage from '@/components/pages/Buses/components/Details/DetailsLuggage'
+import DetailsReturnPolicy from '@/components/pages/Buses/components/Details/DetailsReturnPolicy'
+import DetailsStops from '@/components/pages/Buses/components/Details/DetailsStops'
 
 export default function TicketDetails() {
   return (

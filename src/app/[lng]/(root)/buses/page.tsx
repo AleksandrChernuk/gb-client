@@ -1,5 +1,5 @@
 import SecondFooter from "@/components/modules/footer/SecondFooter";
-import BusesPage from "@/components/pages/buses";
+import BusesPage from '@/components/pages/Buses'
  
 export default async function Buses() {
   return (
