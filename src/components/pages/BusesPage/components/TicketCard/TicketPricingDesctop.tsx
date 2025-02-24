@@ -8,9 +8,10 @@ type Props = {
   price: string
   loading?: boolean
   handleSelect: () => void
+  disabled?: boolean
 }
 
-export default function TicketPricingDesctop({ price, handleSelect, loading }: Props) {
+export default function TicketPricingDesctop({ price, handleSelect, loading, disabled }: Props) {
   const t = useTranslations('search')
 
   return (
@@ -22,7 +23,7 @@ export default function TicketPricingDesctop({ price, handleSelect, loading }: P
 
       <Button
         variant={'default'}
-        disabled={loading}
+        disabled={disabled}
         onClick={handleSelect}
         className='py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] samll_button tablet:h5 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full'
       >

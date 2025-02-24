@@ -6,15 +6,16 @@ import { LoaderCircle } from 'lucide-react'
 type Props = {
   price: string
   loading?: boolean
+  disabled?: boolean
   handleSelect: () => void
 }
 
-export default function TicketPricingMobile({ handleSelect, loading, price }: Props) {
+export default function TicketPricingMobile({ handleSelect, loading, price, disabled }: Props) {
   return (
     <div className='tablet:hidden'>
       <Button
         variant={'default'}
-        disabled={loading}
+        disabled={disabled}
         onClick={handleSelect}
         className='w-full text-amber-50  py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl '
       >

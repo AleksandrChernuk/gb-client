@@ -1,7 +1,7 @@
 import AccountActions from '@/components/pages/AuthPage/components/AccountActions'
 import AuthCard from '@/components/pages/AuthPage/components/AuthCard'
 import SignupForm from '@/components/pages/AuthPage/SignupForm'
-import BackButton from '@/components/shared/BackButton'
+import BackRouteButton from '@/components/shared/BackRouteButton'
 import { Container } from '@/components/shared/Container'
 
 export default async function SignupPage() {
@@ -10,7 +10,7 @@ export default async function SignupPage() {
       <section className='py-4 tablet:pb-7 tablet:pt-4 laptop:pt-28 laptop:pb-28'>
         <Container size='s' className='flex flex-col items-start justify-center'>
           <div className='mb-4 laptop:mb-8'>
-            <BackButton />
+            <BackRouteButton />
           </div>
           <AuthCard
             headerLabel={'signupTitle'}

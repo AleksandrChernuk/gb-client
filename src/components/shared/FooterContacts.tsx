@@ -1,54 +1,45 @@
-'use client';
+'use client'
 
-import { supportNavlinks } from '@/constans/constans.supportNavlinks';
-import useToggleOpen from '@/hooks/useToggleOpen';
-import { Input } from '../ui/input';
-import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '../ui/button';
+import { supportNavlinks } from '@/constans/constans.supportNavlinks'
+import { ChevronUp } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '../ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 export default function FooterContacts() {
-  const { open, handleToggleOpen, handleSetOpen } = useToggleOpen();
-
   return (
-    <div
-      className="relative space-y-4 max-w-[231px]"
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) {
-          handleSetOpen(false);
-        }
-      }}
-    >
-      <div className="relative">
-        <div className="absolute inset-y-0 flex items-center justify-center pointer-events-none left-2 tablet:left-2 laptop:left-5">
-          <div className="w-6 h-6 ">{supportNavlinks[0].icon}</div>
-        </div>
-        <Input
-          type="button"
-          className={`text-left pl-10 w-full text-text_prymery secondary_text`}
-          onClick={handleToggleOpen}
-          value={supportNavlinks[0].title}
-          onChange={() => {}}
-        />
-        <div className="absolute inset-y-0 flex items-center justify-center right-2">
-          <ChevronDown className={` stroke-text_prymery  ${open && "rotate-180"}  `} />
-        </div>
-      </div>
-
-      {open && (
-        <ul className="absolute z-50 flex flex-col items-center justify-center p-4 overflow-hidden bg-white border border-black top-10 dark:border-dark_main dark:bg-black_2_for_text rounded-2xl max-h-fit min-w-fit">
+    <Popover>
+      <PopoverTrigger asChild className='group'>
+        <Button
+          className={`px-3 py-2 rounded-md flex items-center text-black secondary_text gap-1 dark:text-gray_1 hover:text-gray_3 dark:hover:text-gray_1 data-[state=open]:text-gray_2_for_body data-[state=open]:text-gray_2_for_body dark:text-grayy`}
+          variant={'outline'}
+        >
+          <div className='w-6 h-6 '>{supportNavlinks[0].icon}</div>
+          {supportNavlinks[0].title}
+          <ChevronUp
+            size={24}
+            className={`stroke-black group-data-[state=open]:stroke-gray_2_for_body group-data-[state=open]:dark:stroke-grayy  group-hover:stroke-gray_3 dark:stroke-gray_1 dark:group-hover:stroke-gray_1 group-data-[state=open]:rotate-180`}
+          />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent sideOffset={10} side='bottom' className='w-full'>
+        <ul className=' space-y-2'>
           {supportNavlinks.map((item, idx) => (
             <li key={`${item.title}+${idx}`}>
-              <Button variant={"link"} asChild>
-                <Link href={item.src} className="flex flex-row items-center justify-start gap-2 p-1">
-                  <span className="w-4 h-4">{item.icon && item.icon}</span>
-                  <span className="text-black secondary_text dark:text-grayy">{item.title}</span>
+              <Button
+                asChild
+                variant={'link'}
+                className='justify-start text-text_prymery secondary_text'
+              >
+                <Link href={item.src}>
+                  <div className='w-4 h-4'>{item.icon}</div>
+                  {item.title}
                 </Link>
               </Button>
             </li>
           ))}
         </ul>
-      )}
-    </div>
-  );
+      </PopoverContent>
+    </Popover>
+  )
 }

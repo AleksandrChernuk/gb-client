@@ -6,11 +6,10 @@ import { ErrorTravel } from '../../components/ErrorTravel'
 import { TicketCard } from '../../components/TicketCard'
 import useTicketsSearch from '../../hooks/useTicketsSearch'
 import { useFilterTicketsStore } from '@/store/useFilterTickets'
-
+ 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch()
   const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets)
-
   if (isFetching) {
     return <Loader />
   }

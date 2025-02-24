@@ -18,6 +18,7 @@ import TicketPlaces from './TicketPlaces'
 
 type Props = {
   element: IRouteResponse
+  disabled?: boolean
 }
 
 export const TicketCard = ({ element }: Props) => {

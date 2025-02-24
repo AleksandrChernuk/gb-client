@@ -1,27 +1,37 @@
-import Link from "next/link";
-import { IconsProfile } from '../icons/IconsProfile';
+import { Link } from '@/i18n/routing'
+import { Button } from '../ui/button'
+import { User } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 
 type IProfile = {
-  isMobile?: boolean;
-  locale: string;
-};
+  isMobile?: boolean
+  locale: string
+}
 
 export const ProfileLink = async ({ isMobile }: IProfile) => {
+  const t = await getTranslations('common')
   return (
-    <Link
-      href={'/signin'}
-      className='flex flex-row items-center gap-1 text-base font-medium text-black transition-all group hover:text-gray_medium active:text-gray_medium dark:text-grayy hover:underline hover:text-gray_3'
-    >
-      <span className={`${!isMobile && 'group-hover:fill-gray_medium bg-gray_1 rounded-full p-1'}`}>
-        <IconsProfile
-          className={`${
-            isMobile
-              ? 'stroke-primary_1'
-              : 'w-5 h-5  stroke-black group-hover:stroke-gray_3 transition-all'
-          }`}
-        />
-      </span>
-      <span className={`${!isMobile && 'hidden laptop:block'}`}>{'mainNavProfileLink'}</span>
-    </Link>
-  );
-};
+    <Button asChild variant={'link'}>
+      <Link
+        href={'/signin'}
+        className='group text-black! body_medium gap-1 dark:text-gray_1 hover:text-gray_3! dark:hover:text-gray_1 dark:text-grayy!'
+      >
+        <div
+          className={`flex items-center justify-center ${!isMobile && 'group-hover:fill-gray_medium bg-gray_1 rounded-full p-1'}`}
+        >
+          <User
+            size={20}
+            className={`${
+              isMobile ? 'stroke-primary_1' : ' stroke-black group-hover:stroke-gray_3'
+            }`}
+          />
+        </div>
+        <div className={`${!isMobile && 'hidden laptop:block'}`}>{t('mainNavProfileLink')}</div>
+      </Link>
+    </Button>
+  )
+}
+
+//  <span
+//           className={`${!isMobile && 'group-hover:fill-gray_medium bg-gray_1 rounded-full p-1'}`}
+//         ></span>

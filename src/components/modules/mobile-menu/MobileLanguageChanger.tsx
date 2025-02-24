@@ -1,76 +1,58 @@
-'use client';
+'use client'
 
-import { IconFlagEnglish } from '@/components/icons/IconFlagEnglish';
-import { IconFlagRus } from '@/components/icons/IconFlagRus';
-import { IconFlagUA } from '@/components/icons/IconFlagUA';
-import { Button } from '@/components/ui/button';
-import { supportLocalesList } from '@/constans/constans.support.locales';
-import useToggleOpen from '@/hooks/useToggleOpen';
-import { ChevronDown } from "lucide-react";
- import { useLocale } from "next-intl";
- import { Locale } from "@/i18n/locales";
- import { Link, routing, usePathname } from "@/i18n/routing";
+import { Button } from '@/components/ui/button'
+import { supportLocalesList } from '@/constans/constans.support.locales'
+import { useLocale } from 'next-intl'
+import { Locale } from '@/i18n/locales'
+import { Link, usePathname } from '@/i18n/routing'
+import { useSearchParams } from 'next/navigation'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 export default function MobileLanguageChanger() {
-  const locale = useLocale() as Locale;
-  const pathname = usePathname();
+  const locale = useLocale() as Locale
+  const pathname = usePathname()
+  const searchParams = useSearchParams().toString()
 
-  const dispalyIcon = (key: string) => {
-    switch (key) {
-      case "uk":
-        return { icon: <IconFlagUA />, name: "Українська мова (UK)", shortName: "Українська" };
-
-      case "en":
-        return {
-          icon: <IconFlagEnglish />,
-          name: "English language (EN)",
-          shortName: "English",
-        };
-
-      case "ru":
-        return { icon: <IconFlagRus />, name: "Русский язык (RU)", shortName: "Русский" };
-
-      default:
-        break;
-    }
-  };
-  const { open, handleToggleOpen } = useToggleOpen();
-
-  const getPathWithoutLocale = () => {
-    const regex = new RegExp(`^/(${routing.locales.join("|")})`);
-    return pathname.replace(regex, "");
-  };
-
-
-  if (pathname === "/checkout") {
-    return null;
+  if (pathname === '/checkout') {
+    return null
   }
 
-
   return (
-    <div>
-      text_prymery
-      <Button className={`  w-full text-text_prymery justify-between`} variant={"link"} onClick={handleToggleOpen}>
-        <div className="flex items-center gap-2 body_medium">
-          <div className="w-6 h-6">{dispalyIcon(locale)?.icon}</div>
-          {dispalyIcon(locale)?.name}
-        </div>
-        <ChevronDown className={`stroke-primary ${open && "rotate-180"} transition-all duration-300 ease-in-out`} />
-      </Button>
-      <ul
-        className={`transition-all duration-300 ease-in-out overflow-hidden ml-2 space-y-2 ${
-          open ? "max-h-96  pt-2 opacity-100" : "max-h-0 pt-0 opacity-100"
-        } flex flex-col gap-2 `}
-      >
-        {supportLocalesList.map((el) => (
-          <Button asChild key={el.name} variant={"link"} className="justify-start text-text_prymery body_medium">
-            <Link href={`/${locale}${getPathWithoutLocale()}`} locale={locale}>
-              <div className="w-6 h-6"> {el.icon} </div>
-              {el.shortName}
-            </Link>
-          </Button>
-        ))}
-      </ul>
-    </div>
-  );
+    <Accordion type='single' collapsible className=''>
+      <AccordionItem value='item-1'>
+        <AccordionTrigger className='py-0 '>
+          <div className='flex items-center gap-2 text-text_prymery body_medium'>
+            <div className='w-7 h-7'>
+              {supportLocalesList.find((item) => item.value === locale)?.icon}
+            </div>
+            {supportLocalesList.find((item) => item.value === locale)?.name}
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className='pb-0 pt-4 pl-1'>
+          <ul className=' space-y-2'>
+            {supportLocalesList.map((el) => (
+              <li key={el.value}>
+                <Button
+                  key={el.value}
+                  variant={'link'}
+                  asChild
+                  className='justify-start text-text_prymery body_medium'
+                >
+                  <Link href={`${pathname}?${searchParams}`} locale={el.value}>
+                    <div className='w-6 h-6'> {el.icon} </div>
+                    {el.shortName}
+                  </Link>
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
 }

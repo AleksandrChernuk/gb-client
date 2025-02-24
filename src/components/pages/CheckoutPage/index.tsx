@@ -1,6 +1,6 @@
 'use client'
 
-import BackButton from '@/components/shared/BackButton'
+import BackRouteButton from '@/components/shared/BackRouteButton'
 import { Container } from '@/components/shared/Container'
 import Trip from './modules/Trip'
 import CheckoutCard from './components/CheckoutCard'
@@ -45,7 +45,7 @@ export default function CheckoutPage({ adult, child }: { adult: string; child: s
     <section>
       <Container size='l'>
         <div className='my-4 laptop:my-8'>
-          <BackButton />
+          <BackRouteButton />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>

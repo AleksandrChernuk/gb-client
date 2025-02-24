@@ -5,23 +5,23 @@ import { ProfileLink } from '@/components/shared/ProfileLink';
 import { Support } from '@/components/shared/Support';
 import { SwitchTheme } from '@/components/shared/SwitchTheme';
 import { Suspense } from 'react';
-import BackButton from '@/components/shared/BackButton';
+import BackRouteButton from '@/components/shared/BackRouteButton'
 
 export default async function СheckoutHeader({ locale }: { locale: string }) {
   return (
-    <header className="bg-white border-b-2 dark:bg-dark_main">
-      <Container size="l" className="flex items-center justify-between py-4">
-        <div className="tablet:hidden">
-          <BackButton />
+    <header className='bg-white border-b-2 dark:bg-dark_main'>
+      <Container size='l' className='flex items-center justify-between py-4'>
+        <div className='tablet:hidden'>
+          <BackRouteButton />
         </div>
 
-        <div className="hidden tablet:block">
+        <div className='hidden tablet:block'>
           <Logo />
         </div>
 
-        <nav className="hidden tablet:block">
-          <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">
-            <li className="laptop:hidden">
+        <nav className='hidden tablet:block'>
+          <ul className='items-center hidden tablet:flex tablet:gap-6 laptop:gap-8'>
+            <li className='laptop:hidden'>
               <Support />
             </li>
             <li>
@@ -33,7 +33,7 @@ export default async function СheckoutHeader({ locale }: { locale: string }) {
               <SwitchTheme />
             </li>
 
-            <li className="hidden laptop:block">
+            <li className='hidden laptop:block'>
               <Support />
             </li>
 
@@ -44,5 +44,5 @@ export default async function СheckoutHeader({ locale }: { locale: string }) {
         </nav>
       </Container>
     </header>
-  );
+  )
 }

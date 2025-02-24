@@ -2,7 +2,7 @@ import { useSearchStore } from '@/store/useSearch'
 import { IRouteResponse } from '@/types/route.types'
 import { useLocale } from 'next-intl'
 import { useState } from 'react'
- import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
 import { useShallow } from 'zustand/react/shallow'
 import { useRouter } from '@/i18n/routing'
 import { setCookie } from '@/actions/cookie-actions'
@@ -17,10 +17,13 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
   const adult = useSearchStore(useShallow((state) => state.adult))
   const children = useSearchStore(useShallow((state) => state.children))
   const date = useSearchStore(useShallow((state) => state.date))
+  const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails)
+
   const currentLocale = useLocale()
   const router = useRouter()
 
   const handleSelect = async () => {
+    if (loadingDetails) return
     setLoading(true)
     await setCookie({
       name: '_p',
@@ -38,7 +41,7 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
       })
     }
 
-  router.push('/checkout')
+    router.push('/checkout')
   }
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
