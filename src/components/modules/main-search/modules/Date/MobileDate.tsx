@@ -66,7 +66,7 @@ export const MobileDate = () => {
           </SheetClose>
         </SheetHeader>
         <ScrollArea className='relative px-5 overflow-y-scroll grow bg-grayy dark:bg-dark_bg'>
-          <div className='sticky top-0 left-0 right-0 z-50 px-5'>
+          <div className='sticky top-0 left-0 right-0 z-50'>
             <div className='flex items-center justify-between w-full py-6 bg-grayy dark:bg-dark_bg'>
               <h3 className='grow h5 text-text_prymery'>{t('date_picker_title')}</h3>
               <div className='flex items-center justify-end gap-2'>
@@ -90,26 +90,24 @@ export const MobileDate = () => {
               </div>
             </div>
           </div>
-          <div className='px-5 my-5'>
-            <Calendar
-              mode='single'
-              month={month}
-              disableNavigation
-              selected={currentDate ? toDate(currentDate) : toDate(new Date())}
-              today={currentDate ? toDate(currentDate) : toDate(new Date())}
-              onSelect={(value) => {
-                if (value) {
-                  setMonth(toDate(value))
-                }
-                handleSelectDate(value || new Date())
-              }}
-              disabled={{ before: new Date() }}
-              className='rounded-none'
-              classNames={calendarStyles.mobile}
-              numberOfMonths={3}
-              locale={locale}
-            />
-          </div>
+          <Calendar
+            mode='single'
+            month={month}
+            disableNavigation
+            selected={currentDate ? toDate(currentDate) : toDate(new Date())}
+            today={currentDate ? toDate(currentDate) : toDate(new Date())}
+            onSelect={(value) => {
+              if (value) {
+                setMonth(toDate(value))
+              }
+              handleSelectDate(value || new Date())
+            }}
+            disabled={{ before: new Date() }}
+            className='rounded-none'
+            classNames={calendarStyles.mobile}
+            numberOfMonths={3}
+            locale={locale}
+          />
         </ScrollArea>
       </SheetContent>
     </Sheet>

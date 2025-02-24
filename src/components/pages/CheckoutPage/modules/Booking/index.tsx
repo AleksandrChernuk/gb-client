@@ -29,7 +29,7 @@ export default function BookingSheet() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          disabled={!isHydrated}
+          disabled={!сurrentTicket?.details?.seats_map}
           variant={'outline'}
           type='button'
           className='flex items-center justify-between rounded-lg w-full h-auto p-3 bg-inherit border border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg'

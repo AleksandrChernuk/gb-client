@@ -24,7 +24,7 @@ export const PassengersButton = ({ value, type }: Props) => {
     <div
       className={`flex flex-row items-center justify-between gap-20 ${isAdult && 'border-px border-gray_0'}`}
     >
-      <p className='addional_medium_text text-text_prymery text-nowrap'>
+      <p className='addional_regular_text text-text_prymery text-nowrap'>
         {isAdult ? t('adult') : t('children')}
       </p>
 
