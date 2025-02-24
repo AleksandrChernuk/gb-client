@@ -46,6 +46,10 @@ export const DesktopPassengers = () => {
             exit={{ opacity: 0, scale: 0 }}
             className='absolute right-0 top-full mt-5 w-fit p-4 rounded-2xl bg-white dark:bg-dark_main shadow space-y-2'
             key='box'
+            onMouseDown={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+            }}
           >
             <PassengersButton type='adult' value={adult} />
             <Separator className='h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text' />
