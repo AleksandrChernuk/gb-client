@@ -15,3 +15,10 @@ export async function setCookie({ name, value }: { name: string; value: string }
     // path: "/",
   });
 }
+
+
+export async function DeleteCookie(name: string) {
+  const cookieStore = await cookies()
+
+  cookieStore.delete(name)
+}

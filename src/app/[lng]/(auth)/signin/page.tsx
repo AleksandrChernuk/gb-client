@@ -1,6 +1,6 @@
-import AccountActions from '@/components/pages/Auth/components/AccountActions'
-import AuthCard from '@/components/pages/Auth/components/AuthCard'
-import SigninForm from '@/components/pages/Auth/SigninForm'
+import AccountActions from '@/components/pages/AuthPage/components/AccountActions'
+import AuthCard from '@/components/pages/AuthPage/components/AuthCard'
+import SigninForm from '@/components/pages/AuthPage/SigninForm'
 import BackButton from '@/components/shared/BackButton'
 import { Container } from '@/components/shared/Container'
 

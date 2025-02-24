@@ -16,8 +16,8 @@ import DetailsAmenities from '../Details/DetailsAmenities'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCurrentTicketStore } from '@/store/useCurrentTicket'
-import { setCookie } from '@/actions/setCookie'
-import { useSearchStore } from '@/store/useSearch'
+ import { useSearchStore } from '@/store/useSearch'
+import { setCookie } from '@/actions/cookie-actions'
 
 export default function MobileDetails({
   handleSetCurretRoute,

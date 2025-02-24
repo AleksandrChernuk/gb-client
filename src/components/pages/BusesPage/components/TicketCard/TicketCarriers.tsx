@@ -1,4 +1,4 @@
-import { IconCarriersBus } from '@/components/pages/Buses/icons/IconCarriersBus'
+import { IconCarriersBus } from '@/components/pages/BusesPage/icons/IconCarriersBus'
 
 type Props = {
   name: string

@@ -2,10 +2,10 @@ import { useSearchStore } from '@/store/useSearch'
 import { IRouteResponse } from '@/types/route.types'
 import { useLocale } from 'next-intl'
 import { useState } from 'react'
-import { setCookie } from '@/actions/setCookie'
-import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+ import { useCurrentTicketStore } from '@/store/useCurrentTicket'
 import { useShallow } from 'zustand/react/shallow'
 import { useRouter } from '@/i18n/routing'
+import { setCookie } from '@/actions/cookie-actions'
 
 export default function useTicketCard({ element }: { element?: IRouteResponse }) {
   const [isOpen, setIsOpen] = useState<boolean>(false)

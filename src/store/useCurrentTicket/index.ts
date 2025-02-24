@@ -5,8 +5,8 @@ import { IRouteDetailsResponse } from '@/types/routeDetails-interface'
 import { getRouteDetails } from '@/actions/route-actions'
 import { IRouteResponse } from '@/types/route.types'
 import { CurrentTicketStore } from './types'
-import { DeleteCookie } from '@/actions/delete-cookie'
-
+import { DeleteCookie } from '@/actions/cookie-actions'
+ 
 export const useCurrentTicketStore = create<CurrentTicketStore>()(
   devtools(
     immer(
