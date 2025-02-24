@@ -1,5 +1,5 @@
 import MainFooter from "@/components/modules/footer/MainFooter";
-import MainPage from "@/components/pages/main";
+import MainPage from '@/components/pages/Main'
 
 export default function Home() {
   return (

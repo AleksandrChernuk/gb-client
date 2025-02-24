@@ -12,9 +12,9 @@ import TicketDivider from './TicketDivider'
 import TicketPricingMobile from './TicketPricingMobile'
 import useTicketCard from '../../hooks/useTicketCard'
 import { TicketCarriers } from './TicketCarriers'
-import TicketPlaces from './TicketPlaces'
 import TicketDetailsButton from '../TicketDetailsButton'
 import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+import TicketPlaces from './TicketPlaces'
 
 type Props = {
   element: IRouteResponse

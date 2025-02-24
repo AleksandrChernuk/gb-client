@@ -1,39 +1,36 @@
-import { useFieldArray, useFormContext } from "react-hook-form";
-import IconHelm from "../../icons/IconHelm";
-import { ISeat, ISeatRow } from "@/types/seat-interface";
-import Seat from "./Seat";
- 
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { ISeat, ISeatRow } from '@/types/seat-interface'
+import Seat from './Seat'
+import IconHelm from '../../icons/IconHelm'
+
 type Props = {
   helm?: boolean
-  floorText?: string | false|undefined|null
+  floorText?: string | false | undefined | null
   seatRows: ISeatRow[]
 }
 
-
 export default function SeatsList({ floorText, helm, seatRows }: Props) {
-  const { watch, control } = useFormContext();
- 
-  const { append, remove ,} = useFieldArray({
-    name: "selected_seats",
-    control: control,
-  });
+  const { watch, control } = useFormContext()
 
-  const handleSetSeats = (seat: ISeat|null) => {
-    const selectedSeats = watch("selected_seats");
-    const isSelectedIndex = selectedSeats.findIndex((el: ISeat) => el.id === seat?.id);
-    const passengersCount = watch("passengers").length;
-     if (isSelectedIndex !== -1) {
-      remove(isSelectedIndex);
-      return;
+  const { append, remove } = useFieldArray({
+    name: 'selected_seats',
+    control: control,
+  })
+
+  const handleSetSeats = (seat: ISeat | null) => {
+    const selectedSeats = watch('selected_seats')
+    const isSelectedIndex = selectedSeats.findIndex((el: ISeat) => el.id === seat?.id)
+    const passengersCount = watch('passengers').length
+    if (isSelectedIndex !== -1) {
+      remove(isSelectedIndex)
+      return
     }
 
     if (selectedSeats.length < passengersCount) {
-      append(seat);
-      return;
+      append(seat)
+      return
     }
-  };
-
-
+  }
 
   return (
     <div className='mb-10 last:mb-0 w-fit mx-auto'>

@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import FilterSortByList from '../Filter/FilterRadioGroup'
 import FilterCheckBoxList from '../Filter/FilterCheckBoxList'
-
+ 
 export default async function DestopFilter({}: { locale: string }) {
   return (
     <aside>

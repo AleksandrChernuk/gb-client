@@ -1,4 +1,4 @@
-import FaqPage from '@/components/pages/faq'
+import FaqPage from '@/components/pages/Faq'
 
 export default async function Faq() {
   return (

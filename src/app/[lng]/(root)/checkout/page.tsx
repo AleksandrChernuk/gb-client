@@ -1,5 +1,5 @@
 import SecondFooter from '@/components/modules/footer/SecondFooter'
-import NewOrderPage from '@/components/pages/checkout'
+import NewOrderPage from '@/components/pages/Checkout'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
