@@ -19,9 +19,9 @@ import { Input } from '@/components/ui/input';
  import { Button } from '@/components/ui/button';
  import { CircleAlert } from "lucide-react";
   import { createSignupSchema } from "@/schemas/auth-schemas";
- import ViewPassword from './components/ViewPassword';
- import FormError from './components/FormError';
-import { useTranslations } from "next-intl";
+  import { useTranslations } from "next-intl";
+import ViewPassword from './components/ViewPassword';
+import FormError from './components/FormError';
 
  const SignupForm = () => {
    const t = useTranslations("common");

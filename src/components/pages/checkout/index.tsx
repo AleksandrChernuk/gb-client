@@ -27,7 +27,7 @@ export default function CheckoutPage({ adult, child }: { adult: string; child: s
 
   useEffect(() => {
     return () => {
-      localStorage.removeItem('form')
+    localStorage.removeItem('form')
       localStorage.removeItem('timer')
      resetCurrentTicket()
     }
