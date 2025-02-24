@@ -84,6 +84,10 @@ export const DesktopCitySearch = ({ name }: { name: 'from' | 'to' }) => {
             exit={{ opacity: 0, scale: 0 }}
             className='absolute left-0 top-full mt-5 w-fit p-4 rounded-2xl bg-white dark:bg-dark_main shadow space-y-2'
             key='box'
+            onMouseDown={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+            }}
           >
             {!loading &&
               cities &&

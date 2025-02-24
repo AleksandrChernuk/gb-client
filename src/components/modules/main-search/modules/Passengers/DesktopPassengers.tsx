@@ -44,14 +44,12 @@ export const DesktopPassengers = () => {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className='absolute rigth-0 top-full mt-5 w-fit p-4 rounded-2xl bg-white dark:bg-dark_main shadow space-y-2'
+            className='absolute right-0 top-full mt-5 w-fit p-4 rounded-2xl bg-white dark:bg-dark_main shadow space-y-2'
             key='box'
           >
-            <div>
-              <PassengersButton type='adult' value={adult} />
-              <Separator className='h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text' />
-              <PassengersButton type='children' value={children} />
-            </div>
+            <PassengersButton type='adult' value={adult} />
+            <Separator className='h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text' />
+            <PassengersButton type='children' value={children} />
           </motion.div>
         ) : null}
       </AnimatePresence>
