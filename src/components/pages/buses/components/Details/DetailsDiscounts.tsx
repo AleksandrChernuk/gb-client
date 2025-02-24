@@ -1,33 +1,29 @@
-'use client';
+'use client'
 
-import { useCurrentRouteStore } from "@/store/useCurrentRoute";
-import { useTranslations } from "next-intl";
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+import { useTranslations } from 'next-intl'
 
-export default function DetailsDiscounts({ hasCardWrapp }: { hasCardWrapp?: boolean }) {
-  const сurrentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
-  const t = useTranslations("search");
+export default function DetailsDiscounts() {
+  const сurrentTicket = useCurrentTicketStore((state) => state.сurrentTicket)
+  const t = useTranslations('search')
   if (
-    !сurrentRoute?.details?.discounts ||
-    сurrentRoute.details.discounts.length === 0 ||
-    !сurrentRoute?.details?.discounts[0].description
+    !сurrentTicket?.details?.discounts ||
+    сurrentTicket.details.discounts.length === 0 ||
+    !сurrentTicket?.details?.discounts[0].description
   ) {
-    return null;
+    return null
   }
 
   return (
-    <div
-      className={`space-y-1 ${
-        hasCardWrapp && "p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl"
-      }`}
-    >
-      <h5 className="h6 text-text_prymery">{t("discounts")}:</h5>
-      <ul className="flex flex-row flex-wrap gap-0.5">
-        {сurrentRoute?.details?.discounts.map((el) => (
-          <li key={el.id} className="text-wrap text-text_secondary  text-[10px] mobile:small_text">
+    <div className={`space-y-1`}>
+      <h5 className='h6 text-text_prymery'>{t('discounts')}:</h5>
+      <ul className='flex flex-row flex-wrap gap-0.5'>
+        {сurrentTicket?.details?.discounts.map((el) => (
+          <li key={el.id} className='text-wrap text-text_secondary  text-[10px] mobile:small_text'>
             {el.description}
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }

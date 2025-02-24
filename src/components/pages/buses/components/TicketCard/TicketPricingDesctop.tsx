@@ -22,9 +22,8 @@ export default function TicketPricingDesctop({ price, handleSelect, loading }: P
 
       <Button
         variant={'default'}
-        onClick={() => {
-          handleSelect()
-        }}
+        disabled={loading}
+        onClick={handleSelect}
         className='py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] samll_button tablet:h5 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full'
       >
         {loading ? <LoaderCircle className='animate-spin' /> : t('selectButton')}

@@ -6,7 +6,6 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { LoaderCircle, X } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { useCurrentRouteStore } from '@/store/useCurrentRoute'
 import { IconLoader } from '@/components/icons/IconLoader'
 import RoteDetails from '../Details/DetailsStops'
 import DetailsInfo from '../Details/DetailsInfo'
@@ -16,6 +15,9 @@ import DetailsDiscounts from '../Details/DetailsDiscounts'
 import DetailsAmenities from '../Details/DetailsAmenities'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+import { setCookie } from '@/actions/setCookie'
+import { useSearchStore } from '@/store/useSearch'
 
 export default function MobileDetails({
   handleSetCurretRoute,
@@ -25,10 +27,13 @@ export default function MobileDetails({
   const [open, setOpen] = useState<boolean>(false)
   const t = useTranslations('common')
   const currentLanguage = useLocale()
-  const сurrentRoute = useCurrentRouteStore((state) => state.сurrentRoute)
+  const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails)
+  const сurrentTicket = useCurrentTicketStore((state) => state.сurrentTicket)
+  const adult = useSearchStore((state) => state.adult)
+  const children = useSearchStore((state) => state.children)
+
   const router = useRouter()
 
-  const loadingDetails = useCurrentRouteStore((state) => state.loadingDetails)
   const [loading, setLoading] = useState<boolean>(false)
   return (
     <CustomDarwer
@@ -82,7 +87,7 @@ export default function MobileDetails({
             1 {t('placeholderPassenger')}
           </div>
           <div className='main_text_body text-black.2.for.text dark:text-gray_1'>
-            {Math.floor(сurrentRoute?.ticket_pricing.base_price || 0)}{' '}
+            {Math.floor(сurrentTicket?.ticket_pricing.base_price || 0)}{' '}
             <span className='text-xs ml-[2px]'>UAH</span>
           </div>
         </div>
@@ -90,8 +95,12 @@ export default function MobileDetails({
         <Button
           variant={'default'}
           className='w-1/2 px-5 py-3 rounded-full button_mobile'
-          onClick={() => {
+          onClick={async () => {
             setLoading(true)
+            await setCookie({
+              name: '_p',
+              value: JSON.stringify({ adult, children }),
+            })
             router.push(`/${currentLanguage}/checkout`)
           }}
           disabled={loadingDetails}

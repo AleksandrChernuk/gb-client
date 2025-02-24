@@ -1,19 +1,21 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { CurrentRouteStore } from './types';
-import { immer } from 'zustand/middleware/immer';
-import { IRouteDetailsResponse } from '@/types/routeDetails-interface';
-import { getRouteDetails } from '@/actions/route-actions';
-import { IRouteResponse } from '@/types/route.types';
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
+import { IRouteDetailsResponse } from '@/types/routeDetails-interface'
+import { getRouteDetails } from '@/actions/route-actions'
+import { IRouteResponse } from '@/types/route.types'
+import { CurrentTicketStore } from './types'
+import { DeleteCookie } from '@/actions/delete-cookie'
 
-export const useCurrentRouteStore = create<CurrentRouteStore>()(
+export const useCurrentTicketStore = create<CurrentTicketStore>()(
   devtools(
     immer(
       persist(
         (set) => ({
-          сurrentRoute: null,
+          сurrentTicket: null,
           isHydrated: false,
-          setCurrentRoute: async ({
+          loadingDetails: false,
+          setCurrentTicket: async ({
             route,
             fromCityId,
             toCityId,
@@ -29,7 +31,7 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
               !locale ||
               !travelDate
             ) {
-              set({ сurrentRoute: null })
+              set({ сurrentTicket: null })
               return
             }
 
@@ -75,11 +77,15 @@ export const useCurrentRouteStore = create<CurrentRouteStore>()(
               details: updatedDetails,
             }
 
-            set({ сurrentRoute: updatedRoute })
+            set({ сurrentTicket: updatedRoute })
+          },
+          resetCurrentTicket:  async()=> {
+            set({ сurrentTicket: null })
+            await DeleteCookie('_p')
           },
         }),
         {
-          name: 'current-route',
+          name: 'current-ticket',
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true

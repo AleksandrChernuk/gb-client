@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { LoaderCircle } from 'lucide-react'
 
@@ -12,9 +14,8 @@ export default function TicketPricingMobile({ handleSelect, loading, price }: Pr
     <div className='tablet:hidden'>
       <Button
         variant={'default'}
-        onClick={() => {
-          handleSelect()
-        }}
+        disabled={loading}
+        onClick={handleSelect}
         className='w-full text-amber-50  py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl '
       >
         {loading ? (

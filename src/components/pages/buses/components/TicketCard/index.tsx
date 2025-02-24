@@ -14,23 +14,18 @@ import useTicketCard from '../../hooks/useTicketCard'
 import { TicketCarriers } from './TicketCarriers'
 import TicketPlaces from './TicketPlaces'
 import TicketDetailsButton from '../TicketDetailsButton'
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
 
 type Props = {
   element: IRouteResponse
 }
 
 export const TicketCard = ({ element }: Props) => {
-  const {
-    loading,
-    loadingDetails,
-    handleSelect,
-    handleBlur,
-    handleOpenDetails,
-    isOpen,
-    handleSetCurretRoute,
-  } = useTicketCard({
+  const { loading, handleSelect, handleBlur, handleOpenDetails, isOpen } = useTicketCard({
     element,
   })
+
+  const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails)
 
   const currentLocale = useLocale()
   const t = useTranslations('search')
@@ -39,12 +34,13 @@ export const TicketCard = ({ element }: Props) => {
     <div
       tabIndex={0}
       onBlur={handleBlur}
-      className='relative shadow  tablet:shadow-none rounded-t-2xl tablet:rounded-none'
+      className='relative shadow tablet:shadow-none rounded-t-2xl tablet:rounded-none'
     >
       <div className='p-4 tablet:p-6 bg-card_bg_primery rounded-t-2xl tablet:rounded-2xl shadow-none tablet:shadow'>
         <div className='flex flex-row items-center justify-between gap-1 tablet:gap-2'>
           <TicketRouteMobile locale={currentLocale} route={element} />
           <TicketRouteDesctop locale={currentLocale} route={element} />
+
           <TicketPricingDesctop
             loading={loading}
             handleSelect={handleSelect}
@@ -66,7 +62,7 @@ export const TicketCard = ({ element }: Props) => {
           />
 
           <div className='flex items-center justify-center ml-auto tablet:hidden'>
-            <MobileDetails handleSetCurretRoute={handleSetCurretRoute} />
+            <MobileDetails handleSetCurretRoute={handleOpenDetails} />
           </div>
         </div>
 

@@ -19,7 +19,7 @@ import FilterSortByList from '../Filter/FilterRadioGroup'
 import { useFilterTicketsStore } from '@/store/useFilterTickets'
 import { useSearchStore } from '@/store/useSearch'
 import { useShallow } from 'zustand/react/shallow'
-import useSearchTickets from '../../hooks/useSearchTickets'
+import useTicketsSearch from '../../hooks/useTicketsSearch'
 
 type TMobileFilterHeader = {
   title: string
@@ -47,7 +47,7 @@ const MobileFilterHeader = ({ title }: TMobileFilterHeader) => {
 
 export const MobileFilter = () => {
   const resetFilters = useFilterTicketsStore((state) => state.resetFilters)
-  const { isFetching } = useSearchTickets()
+  const { isFetching } = useTicketsSearch()
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated))
 
   const t = useTranslations('common')

@@ -3,5 +3,7 @@
 import { cookies } from "next/headers";
 
 export async function DeleteCookie(name: string) {
-  (await cookies()).delete(name);
+    const cookieStore = await cookies()
+
+    cookieStore.delete(name)
 }

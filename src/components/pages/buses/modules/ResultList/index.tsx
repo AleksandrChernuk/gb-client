@@ -4,11 +4,11 @@ import { Loader } from '../../components/Loader'
 import { NoTravel } from '../../components/NoTravel'
 import { ErrorTravel } from '../../components/ErrorTravel'
 import { TicketCard } from '../../components/TicketCard'
-import useSearchTickets from '../../hooks/useSearchTickets'
+import useTicketsSearch from '../../hooks/useTicketsSearch'
 import { useFilterTicketsStore } from '@/store/useFilterTickets'
 
 export default function ResultList() {
-  const { isFetching, data, error } = useSearchTickets()
+  const { isFetching, data, error } = useTicketsSearch()
   const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets)
 
   if (isFetching) {

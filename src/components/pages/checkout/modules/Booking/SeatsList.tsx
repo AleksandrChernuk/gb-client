@@ -36,7 +36,7 @@ export default function SeatsList({ floorText, helm, seatRows }: Props) {
 
 
   return (
-    <div className='mb-10 last:mb-0 w-full'>
+    <div className='mb-10 last:mb-0 w-fit mx-auto'>
       <div className='text-center h5 text-text_prymery mb-1'>
         {floorText && <div>{floorText}</div>}
       </div>
@@ -51,7 +51,7 @@ export default function SeatsList({ floorText, helm, seatRows }: Props) {
           </li>
         )}
         {seatRows.map((row, rowIndex) => (
-          <li key={rowIndex} className='flex gap-1 justify-between tablet:gap-1'>
+          <li key={rowIndex} className='flex gap-2 justify-between tablet:gap-1'>
             {row.map((seat, seatIndex) =>
               seat.type ? (
                 <Seat

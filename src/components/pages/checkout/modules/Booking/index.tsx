@@ -13,23 +13,23 @@ import {
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useCurrentRouteStore } from '@/store/useCurrentRoute'
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
 import { useTranslations } from 'next-intl'
 import IconSeat from '../../icons/IconSeat'
 import SeatsList from './SeatsList'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function BookingSheet() {
-  const сurrentRoute = useCurrentRouteStore((state) => state.сurrentRoute)
-  const t = useTranslations('new_order')
+  const сurrentTicket = useCurrentTicketStore((state) => state.сurrentTicket)
+  const isHydrated = useCurrentTicketStore((state) => state.isHydrated)
 
-  if (!сurrentRoute) {
-    return null
-  }
+  const t = useTranslations('new_order')
 
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
+          disabled={!isHydrated}
           variant={'outline'}
           type='button'
           className='flex items-center justify-between rounded-lg w-full h-auto p-3 bg-inherit border border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg'
@@ -38,16 +38,20 @@ export default function BookingSheet() {
             <div className='[&_svg]:fill-gray_2_for_body w-[45px] h-[56px]'>
               <IconSeat />
             </div>
-            <div className='h5 text-text_prymery'>
-              {!сurrentRoute?.details?.seats_map ? (
-                <div className='flex flex-col items-start gap-1'>
-                  <span>{t('free_seating')}</span>
-                  <span className='addional_medium_text'>{t('seat_guaranteed')}</span>
-                </div>
-              ) : (
-                t('choose_place')
-              )}
-            </div>
+            {isHydrated ? (
+              <div className='h5 text-text_prymery'>
+                {!сurrentTicket?.details?.seats_map ? (
+                  <div className='flex flex-col items-start gap-1'>
+                    <span>{t('free_seating')}</span>
+                    <span className='addional_medium_text'>{t('seat_guaranteed')}</span>
+                  </div>
+                ) : (
+                  t('choose_place')
+                )}
+              </div>
+            ) : (
+              <Skeleton className='w-8 h-[24px]' />
+            )}
           </div>
           <ChevronRight size={32} className='stroke-gray_2_for_body' />
         </Button>
@@ -67,18 +71,18 @@ export default function BookingSheet() {
         </SheetHeader>
         <ScrollArea className='relative px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs  w-full'>
           <div className='my-10'>
-            {сurrentRoute &&
-              сurrentRoute?.details?.seats_map &&
-              Array.isArray(сurrentRoute?.details?.seats_map) &&
-              сurrentRoute?.details?.seats_map.map((block, i) => (
+            {сurrentTicket &&
+              сurrentTicket?.details?.seats_map &&
+              Array.isArray(сurrentTicket?.details?.seats_map) &&
+              сurrentTicket?.details?.seats_map.map((block, i) => (
                 <SeatsList
                   seatRows={block.seats}
                   key={i}
                   helm={!i}
                   floorText={
-                    сurrentRoute?.details?.seats_map &&
-                    Array.isArray(сurrentRoute?.details?.seats_map) &&
-                    сurrentRoute?.details?.seats_map.length === 2 &&
+                    сurrentTicket?.details?.seats_map &&
+                    Array.isArray(сurrentTicket?.details?.seats_map) &&
+                    сurrentTicket?.details?.seats_map.length === 2 &&
                     `Поверх ${i + 1}`
                   }
                 />

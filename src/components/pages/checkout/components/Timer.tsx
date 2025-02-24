@@ -43,91 +43,90 @@ export function DialogNewOrder({ open }: { open: boolean }) {
 }
 
 export default function Timer() {
-  const [timer, setTimer] = useState<number>(600);
-  const [isClient, setIsClient] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
+  const [timer, setTimer] = useState<number>(600)
+  const [isClient, setIsClient] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const intervalId = useRef<number | null>(null)
 
-  const id = useRef<number | undefined>(undefined);
+  const radius = 10
+  const circumference = 2 * Math.PI * radius
 
-  const radius = 10;
-  const circumference = 2 * Math.PI * radius;
-
-  const offset = (timer: number) => {
-    return circumference - (timer / 600) * circumference;
-  };
+  const offset = (timer: number) => circumference - (timer / 600) * circumference
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
 
-  useEffect(() => {
-    localStorage.setItem("timer", String(timer));
-  }, [timer]);
+    // Загружаем значение таймера из localStorage асинхронно
+    const savedTime = Number(localStorage.getItem('timer'))
+    if (savedTime) {
+      setTimer(savedTime)
+    }
 
-  useEffect(() => {
-    id.current = window.setInterval(() => {
-      setTimer((time) => time - 1);
-    }, 1000);
+    intervalId.current = window.setInterval(() => {
+      setTimer((prev) => {
+        if (prev > 0) {
+          localStorage.setItem('timer', String(prev - 1))
+          return prev - 1
+        } else {
+          setOpen(true)
+          clearInterval(intervalId.current!)
+          localStorage.removeItem('timer')
+          return 0
+        }
+      })
+    }, 1000)
 
     return () => {
-      if (id.current) {
-        window.clearInterval(id.current);
-        localStorage.removeItem("timer");
+      if (intervalId.current) {
+        clearInterval(intervalId.current)
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (timer === 0 && id.current) {
-      setOpen(true);
-      window.clearInterval(id.current);
-      localStorage.removeItem("timer");
     }
-  }, [timer]);
+  }, [])
 
   const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-  };
+    const minutes = Math.floor(time / 60)
+    const seconds = time % 60
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  }
 
   if (!isClient) {
-    return null;
+    return null
   }
 
   return (
-    <div className="flex items-center gap-1 p-1 ">
-      <div className="relative">
+    <div className='flex items-center gap-1 p-1 '>
+      <div className='relative'>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-circle stroke-gray_1 dark:stroke-black_2_for_text"
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          className='lucide lucide-circle stroke-gray_1 dark:stroke-black_2_for_text'
         >
-          <circle cx="12" cy="12" r="10" />
+          <circle cx='12' cy='12' r='10' />
         </svg>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          strokeWidth="4"
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          strokeWidth='4'
           strokeDasharray={circumference}
           strokeDashoffset={offset(timer)}
-          className="absolute top-0 left-0 transform rotate-90 origin-center stroke-primary animate-rotate"
+          className='absolute top-0 left-0 transform rotate-90 origin-center stroke-primary animate-rotate'
         >
-          <circle cx="12" cy="12" r={radius} />
+          <circle cx='12' cy='12' r={radius} />
         </svg>
       </div>
 
-      <div className="button_mobile text-primary">{formatTime(timer)}</div>
+      <div className='button_mobile text-primary'>{formatTime(timer)}</div>
       <DialogNewOrder open={open} />
     </div>
-  );
+  )
 }
+

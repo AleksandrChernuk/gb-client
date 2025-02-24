@@ -1,30 +1,25 @@
-'use client';
-import { useCurrentRouteStore } from '@/store/useCurrentRoute';
-import { useTranslations } from "next-intl";
-import React from "react";
- 
-export default function DetailsAmenities({ hasCardWrapp }: { hasCardWrapp?: boolean }) {
-  const сurrentRoute = useCurrentRouteStore((state) => state.сurrentRoute);
-  const t = useTranslations("search");
+'use client'
+import { useCurrentTicketStore } from '@/store/useCurrentTicket'
+import { useTranslations } from 'next-intl'
 
-  if (!сurrentRoute?.details?.amenities || сurrentRoute?.details?.amenities.length === 0) {
-    return null;
+export default function DetailsAmenities() {
+  const сurrentTicket = useCurrentTicketStore((state) => state.сurrentTicket)
+  const t = useTranslations('search')
+
+  if (!сurrentTicket?.details?.amenities || сurrentTicket?.details?.amenities.length === 0) {
+    return null
   }
 
   return (
-    <div
-      className={`space-y-1 ${
-        hasCardWrapp && "p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl"
-      }`}
-    >
-      <h5 className="h6 text-text_prymery">{t("amenities")}:</h5>
-      <ul className="flex flex-row flex-wrap gap-2">
-        {сurrentRoute?.details?.amenities.map((el) => (
-          <li key={el} className="text-wrap text-text_secondary  text-[10px] mobile:small_text">
+    <div className={`space-y-1`}>
+      <h5 className='h6 text-text_prymery'>{t('amenities')}:</h5>
+      <ul className='flex flex-row flex-wrap gap-2'>
+        {сurrentTicket?.details?.amenities.map((el) => (
+          <li key={el} className='text-wrap text-text_secondary  text-[10px] mobile:small_text'>
             {el}
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }

@@ -9,9 +9,9 @@ import useDateLocale from '@/hooks/useDateLocale'
 import { useSearchStore } from '@/store/useSearch'
 import { useLocale, useTranslations } from 'next-intl'
 import { extractLocationDetails } from '@/lib/extractLocationDetails'
-import useSearchTickets from '../../hooks/useSearchTickets'
 import { ArrowRight } from 'lucide-react'
 import { useFilterTicketsStore } from '@/store/useFilterTickets'
+import useTicketsSearch from '../../hooks/useTicketsSearch'
 
 export const Information = () => {
   const date = useSearchStore(useShallow((state) => state.date))
@@ -20,7 +20,7 @@ export const Information = () => {
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated))
   const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets)
 
-  const { isFetching } = useSearchTickets()
+  const { isFetching } = useTicketsSearch()
   const t = useTranslations('search')
   const currentLanguage = useLocale()
   const { locale } = useDateLocale()
