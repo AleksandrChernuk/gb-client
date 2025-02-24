@@ -1,8 +1,8 @@
-import { Container } from '@/components/shared/Container'
+import AccountActions from '@/components/pages/auth/components/AccountActions'
+import AuthCard from '@/components/pages/auth/components/AuthCard'
 import SigninForm from '@/components/pages/auth/SigninForm'
 import BackButton from '@/components/shared/BackButton'
-import AuthCard from '@/components/pages/auth/components/AuthCard'
-import AccountActions from '@/components/pages/auth/components/AccountActions'
+import { Container } from '@/components/shared/Container'
 
 export default async function SigninPage() {
   return (

@@ -1,7 +1,6 @@
 import AccountActions from '@/components/pages/auth/components/AccountActions'
 import AuthCard from '@/components/pages/auth/components/AuthCard'
 import SignupForm from '@/components/pages/auth/SignupForm'
-
 import BackButton from '@/components/shared/BackButton'
 import { Container } from '@/components/shared/Container'
 
