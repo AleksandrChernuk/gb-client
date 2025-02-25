@@ -36,7 +36,8 @@ export default function DetailsStopsItem({
         } text-text_prymery mr-9 min-w-[40px] max-w-[40px]`}
       >
         {isFirst
-          ? departure_date_time && departure_date_time?.split(' ')[1].replace(':00', '')
+          ? (departure_date_time && departure_date_time?.split(' ')[1].replace(':00', '')) ||
+            (arrival_date_time && arrival_date_time?.split(' ')[1].replace(':00', ''))
           : (arrival_date_time && arrival_date_time?.split(' ')[1].replace(':00', '')) ||
             (departure_date_time && departure_date_time?.split(' ')[1].replace(':00', ''))}
       </div>
