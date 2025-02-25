@@ -15,6 +15,8 @@ export default function DetailsStops() {
   const t = useTranslations('common')
   const currentLocale = useLocale()
 
+  console.log(сurrentTicket?.details)
+
   return (
     <div className='space-y-2'>
       {!open && (

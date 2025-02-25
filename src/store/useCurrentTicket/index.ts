@@ -36,6 +36,12 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
             }
 
             let res: IRouteDetailsResponse | null = null
+            
+            const blockedDdetailsGet = ['EuroClub']
+            if (blockedDdetailsGet.includes(route?.provider_name)) {
+              set({ сurrentTicket: route })
+              return
+            }
             set({ loadingDetails: true })
 
             try {
