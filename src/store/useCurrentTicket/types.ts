@@ -4,6 +4,7 @@ export type CurrentTicketState = {
   сurrentTicket: IRouteResponse | null
   loadingDetails?: boolean
   isHydrated: boolean
+  selectedTicketId: null | string
 }
 
 export type SetCurrentTicket = {
@@ -17,7 +18,8 @@ export type SetCurrentTicket = {
 
 export type CurrentTicketActions = {
   setCurrentTicket: ({ route, locale, passCount, fromCityId, toCityId }: SetCurrentTicket) => void
-  resetCurrentTicket: ( ) => void
+  setSelectedTicketId: (id: string | null) => void
+  resetCurrentTicket: () => void
 }
 
 export type CurrentTicketStore = CurrentTicketState & CurrentTicketActions

@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { LoaderCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-
+ 
 type Props = {
   price: string
   loading?: boolean
@@ -24,7 +24,9 @@ export default function TicketPricingDesctop({ price, handleSelect, loading, dis
       <Button
         variant={'default'}
         disabled={disabled}
-        onClick={handleSelect}
+        onClick={() => {
+          handleSelect()
+        }}
         className='py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] samll_button tablet:h5 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full'
       >
         {loading ? <LoaderCircle className='animate-spin' /> : t('selectButton')}

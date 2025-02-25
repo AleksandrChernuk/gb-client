@@ -7,9 +7,8 @@ import { useShallow } from 'zustand/react/shallow'
 import { useRouter } from '@/i18n/routing'
 import { setCookie } from '@/actions/cookie-actions'
 
-export default function useTicketCard({ element }: { element?: IRouteResponse }) {
+export default function useTicketCard() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
   const setCurrentTicket = useCurrentTicketStore((state) => state.setCurrentTicket)
 
   const from = useSearchStore(useShallow((state) => state.from))
@@ -17,14 +16,12 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
   const adult = useSearchStore(useShallow((state) => state.adult))
   const children = useSearchStore(useShallow((state) => state.children))
   const date = useSearchStore(useShallow((state) => state.date))
-  const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails)
 
   const currentLocale = useLocale()
   const router = useRouter()
 
-  const handleSelect = async () => {
-    if (loadingDetails) return
-    setLoading(true)
+  const handleSelect = async (element: IRouteResponse) => {
+    setIsOpen(false)
     await setCookie({
       name: '_p',
       value: JSON.stringify({ adult, children }),
@@ -46,12 +43,14 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
-      setIsOpen(false)
+      setTimeout(() => {
+        setIsOpen(false)
+      }, 100)
     }
   }
 
-  const handleOpenDetails = () => {
-    if (element) {
+  const handleOpenDetails = (element: IRouteResponse | null) => {
+    if (!isOpen) {
       setCurrentTicket({
         route: element,
         toCityId: to?.id,
@@ -65,7 +64,7 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
     setIsOpen(!isOpen)
   }
 
-  const handleSetCurretRoute = () => {
+  const handleSetCurretRoute = (element: IRouteResponse) => {
     if (element) {
       setCurrentTicket({
         route: element,
@@ -78,12 +77,20 @@ export default function useTicketCard({ element }: { element?: IRouteResponse })
     }
   }
 
+  const handleToggleDetails = (element: IRouteResponse) => {
+    if (isOpen) {
+      handleOpenDetails(null)
+    } else {
+      handleOpenDetails(element)
+    }
+  }
+
   return {
     handleOpenDetails,
     handleBlur,
     handleSelect,
-    loading,
     isOpen,
     handleSetCurretRoute,
+    handleToggleDetails,
   }
 }

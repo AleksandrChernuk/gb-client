@@ -15,6 +15,10 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
           сurrentTicket: null,
           isHydrated: false,
           loadingDetails: false,
+          selectedTicketId: null,
+          setSelectedTicketId(id) {
+            set({ selectedTicketId: id })
+          },
           setCurrentTicket: async ({
             route,
             fromCityId,
@@ -36,7 +40,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
             }
 
             let res: IRouteDetailsResponse | null = null
-            
+
             const blockedDdetailsGet = ['EuroClub']
             if (blockedDdetailsGet.includes(route?.provider_name)) {
               set({ сurrentTicket: route })
@@ -85,8 +89,9 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
 
             set({ сurrentTicket: updatedRoute })
           },
-          resetCurrentTicket:  async()=> {
-            set({ сurrentTicket: null })
+          resetCurrentTicket: async () => {
+            set({ сurrentTicket: null, selectedTicketId: null })
+
             await DeleteCookie('_p')
           },
         }),

@@ -19,4 +19,3 @@ export const CustomCard = ({ children, className }: Props) => {
   );
 };
 
- 

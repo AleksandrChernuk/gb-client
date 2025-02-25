@@ -20,8 +20,8 @@ export default function ResultList() {
 
   return (
     <ul className='flex flex-col space-y-10'>
-      {filteredTickets.map((route, i) => {
-        return <TicketCard key={`${route.identificators.route_id}_${i}`} element={route} />
+      {filteredTickets.map((route) => {
+        return <TicketCard key={`${route.identificators.route_id}`} element={route} />
       })}
     </ul>
   )

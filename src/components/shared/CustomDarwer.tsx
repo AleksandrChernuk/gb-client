@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { DialogTitle } from "@/components/ui/dialog";
-import { DialogDescription } from "@/components/ui/dialog";
+import { ReactNode } from 'react';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import { DialogTitle } from '@/components/ui/dialog';
+import { DialogDescription } from '@/components/ui/dialog';
 
 type Props = {
   open: boolean;
@@ -15,17 +15,11 @@ type Props = {
 
 export const CustomDarwer = ({ open, toggleOpen, title, description, trigger, children, onClose }: Props) => {
   return (
-    <Drawer
-      direction='right'
-      open={open}
-      onOpenChange={toggleOpen}
-      onClose={onClose}
-      shouldScaleBackground={true}
-    >
+    <Drawer direction="right" open={open} onOpenChange={toggleOpen} onClose={onClose} shouldScaleBackground={true}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className='flex flex-col m-0 rounded-none'>
-        <DialogTitle className='hidden h1'>{title}</DialogTitle>
-        <DialogDescription className='hidden'>{description}</DialogDescription>
+      <DrawerContent className="flex flex-col m-0 rounded-none">
+        <DialogTitle className="hidden h1">{title}</DialogTitle>
+        <DialogDescription className="hidden">{description}</DialogDescription>
         {children}
       </DrawerContent>
     </Drawer>

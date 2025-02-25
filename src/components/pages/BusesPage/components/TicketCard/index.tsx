@@ -15,6 +15,8 @@ import { TicketCarriers } from './TicketCarriers'
 import TicketDetailsButton from '../TicketDetailsButton'
 import { useCurrentTicketStore } from '@/store/useCurrentTicket'
 import TicketPlaces from './TicketPlaces'
+import { useMemo, useState } from 'react'
+import { motion } from 'motion/react'
 
 type Props = {
   element: IRouteResponse
@@ -22,18 +24,26 @@ type Props = {
 }
 
 export const TicketCard = ({ element }: Props) => {
-  const { loading, handleSelect, handleBlur, handleOpenDetails, isOpen } = useTicketCard({
-    element,
-  })
+  const [loading, setLoading] = useState(false)
+  const { handleSelect, handleBlur, handleOpenDetails, isOpen } = useTicketCard()
 
   const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails)
+  const selectedTicketId = useCurrentTicketStore((state) => state.selectedTicketId)
+  const setSelectedTicketId = useCurrentTicketStore((state) => state.setSelectedTicketId)
+
+  const isDisabled = useMemo(
+    () => selectedTicketId !== null && selectedTicketId !== element.identificators.route_id,
+    [selectedTicketId, element.identificators.route_id]
+  )
 
   const currentLocale = useLocale()
   const t = useTranslations('search')
 
+  const handleToggleDetails = () => (isOpen ? handleOpenDetails(null) : handleOpenDetails(element))
+
   return (
     <div
-      tabIndex={0}
+      tabIndex={-1}
       onBlur={handleBlur}
       className='relative shadow tablet:shadow-none rounded-t-2xl tablet:rounded-none'
     >
@@ -44,7 +54,12 @@ export const TicketCard = ({ element }: Props) => {
 
           <TicketPricingDesctop
             loading={loading}
-            handleSelect={handleSelect}
+            disabled={isDisabled}
+            handleSelect={async () => {
+              setLoading(true)
+              setSelectedTicketId(element.identificators.route_id)
+              await handleSelect(element)
+            }}
             price={`${Math.floor(element.ticket_pricing.base_price || 0)}`}
           />
         </div>
@@ -58,31 +73,50 @@ export const TicketCard = ({ element }: Props) => {
 
           <TicketDetailsButton
             isOpen={isOpen}
-            onClick={handleOpenDetails}
+            onClick={() => {
+              handleToggleDetails()
+            }}
             text={!isOpen ? t('details') : t('collapse_details')}
           />
 
           <div className='flex items-center justify-center ml-auto tablet:hidden'>
-            <MobileDetails handleSetCurretRoute={handleOpenDetails} />
+            <MobileDetails
+              onClick={() => {
+                handleToggleDetails()
+              }}
+            />
           </div>
         </div>
 
-        {isOpen && (
-          <div>
-            {loadingDetails ? (
-              <div className='flex items-center justify-center gap-1 body_medium text-text_prymery tablet:min-w-[397px] mt-8'>
-                <IconLoader />
-              </div>
-            ) : (
-              <TicketDetails />
-            )}
-          </div>
-        )}
+        <motion.div
+          initial={{ height: 0 }}
+          animate={{ height: isOpen ? 'auto' : 0 }}
+          transition={{ duration: 0.1 }}
+          style={{ overflow: 'hidden' }}
+          className={'hidden tablet:block'}
+        >
+          {isOpen && (
+            <div>
+              {loadingDetails ? (
+                <div className='flex  items-center justify-center gap-1 body_medium text-text_prymery tablet:min-w-[397px] mt-8'>
+                  <IconLoader />
+                </div>
+              ) : (
+                <TicketDetails />
+              )}
+            </div>
+          )}
+        </motion.div>
       </div>
 
       <TicketPricingMobile
         loading={loading}
-        handleSelect={handleSelect}
+        disabled={isDisabled}
+        handleSelect={async () => {
+          setLoading(true)
+          setSelectedTicketId(element.identificators.route_id)
+          await handleSelect(element)
+        }}
         price={`${Math.floor(element.ticket_pricing.base_price || 0)}`}
       />
     </div>

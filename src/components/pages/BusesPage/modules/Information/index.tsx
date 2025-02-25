@@ -40,7 +40,7 @@ export const Information = () => {
           <MobileFilter />
         </div>
       </div>
-      <div className='flex items-center justify-between gap-1'>
+      <div className='flex   items-center justify-between gap-1'>
         <div className='flex items-center gap-2 main_text_body text-text_secondary text-[12px] leading-4 tetx-black_2_for_text tablet:text-sm  dark:text-gray_1 text-nowrap truncate'>
           {from ? (
             <div>

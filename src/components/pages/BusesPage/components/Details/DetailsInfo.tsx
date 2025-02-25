@@ -34,7 +34,7 @@ export default function DetailsInfo() {
       <div className='gap-2 flex_center text-text_secondary text-[10px] mobile:small_text'>
         <Route className='rotate-90 stroke-gray_2_for_body dark:stroke-gray_1' size={16} />
         <span>{t('travel_time')}:</span>
-        <span>{`${durationArr[0]}${t('shortHours')},${durationArr[1]}${t('shortMinutes')}`}</span>
+        {/* <span>{`${durationArr[0]}${t('shortHours')},${durationArr[1]}${t('shortMinutes')}`}</span> */}
       </div>
 
       <div className='gap-2 flex_center '>

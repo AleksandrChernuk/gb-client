@@ -21,11 +21,11 @@ export default async function BusesPage() {
       </search>
 
       <Container size='m' className='relative'>
-        <div className='pt-4 pb-6 space-y-6 laptop:py-8 laptop:space-y-8'>
+        <div className='pt-4 pb-6 space-y-6         te  laptop:py-8 laptop:space-y-8'>
           <Information />
           <ResultList />
         </div>
       </Container>
-    </section>
+    </section> 
   )
 }

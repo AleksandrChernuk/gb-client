@@ -15,6 +15,7 @@ export default function DetailsStopsList() {
           <DetailsStopsItem
             station_address={element.station.address}
             station_name={element.station.name}
+            bus_changes={!!element.bus_changes}
             location_name={element.location.name}
             departure_date_time={element.departure_date_time}
             arrival_date_time={element.arrival_date_time}

@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Sheet,
   SheetClose,
@@ -25,7 +26,7 @@ type TMobileFilterHeader = {
   title: string
 }
 
-const MobileFilterHeader = ({ title }: TMobileFilterHeader) => {
+const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFilterHeader) => {
   return (
     <SheetHeader className='justify-between'>
       <SheetTitle className='sr-only'>Edit profile</SheetTitle>
