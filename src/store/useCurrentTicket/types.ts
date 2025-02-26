@@ -1,25 +1,27 @@
 import { IRouteResponse } from '@/types/route.types';
- 
-export type CurrentTicketState = {
-  сurrentTicket: IRouteResponse | null
-  loadingDetails?: boolean
-  isHydrated: boolean
-  selectedTicketId: null | string
-}
 
-export type SetCurrentTicket = {
-  route: IRouteResponse | null;
-  locale?: string;
-  passCount?: number;
-  fromCityId?: number;
-  toCityId?: number;
-  travelDate?: string;
+export type CurrentTicketState = {
+  isHydrated: boolean;
+  selectedTicketId: string | null;
+  tickets: Record<string, IRouteResponse>;
+  selectedTicket: IRouteResponse | null;
+  loadingTickets: Record<string, boolean>;
 };
 
-export type CurrentTicketActions = {
-  setCurrentTicket: ({ route, locale, passCount, fromCityId, toCityId }: SetCurrentTicket) => void
-  setSelectedTicketId: (id: string | null) => void
-  resetCurrentTicket: () => void
-}
+export type SetCurrentTicket = Partial<{
+  route: IRouteResponse;
+  locale: string;
+  passCount: number;
+  fromCityId: number;
+  toCityId: number;
+  travelDate: string;
+}>;
 
-export type CurrentTicketStore = CurrentTicketState & CurrentTicketActions
+export type CurrentTicketActions = {
+  getDetailsTicket: (ticket: SetCurrentTicket) => void;
+  setSelectedTicket: (ticket: SetCurrentTicket) => void;
+  setSelectedTicketId: (id: string | null) => void;
+  resetCurrentTicket: () => void;
+};
+
+export type CurrentTicketStore = CurrentTicketState & CurrentTicketActions;

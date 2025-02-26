@@ -5,15 +5,15 @@ import { LoaderCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { IconLoader } from '@/components/icons/IconLoader';
-import RoteDetails from '../Details/DetailsStops';
-import DetailsInfo from '../Details/DetailsInfo';
+// import RoteDetails from '../Details/DetailsStops';
+// import DetailsInfo from '../Details/DetailsInfo';
 import DetailsLuggage from '../Details/DetailsLuggage';
 import DetailsReturnPolicy from '../Details/DetailsReturnPolicy';
 import DetailsDiscounts from '../Details/DetailsDiscounts';
-import DetailsAmenities from '../Details/DetailsAmenities';
+// import DetailsAmenities from '../Details/DetailsAmenities';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+// import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { setCookie } from '@/actions/cookie-actions';
 
@@ -35,8 +35,8 @@ type Props = {
 export default function MobileDetails({ onClick }: Props) {
   const t = useTranslations('common');
   const currentLanguage = useLocale();
-  const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails);
-  const сurrentTicket = useCurrentTicketStore((state) => state.сurrentTicket);
+  // const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails);
+  // const currentTicket = useCurrentTicketStore((state) => state.currentTicket);
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
 
@@ -69,20 +69,20 @@ export default function MobileDetails({ onClick }: Props) {
           </SheetClose>
         </SheetHeader>
         <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs">
-          {loadingDetails ? (
+          {false ? (
             <div className="flex items-center justify-center gap-1 body_medium text-text_prymery tablet:min-w-[397px] py-28">
               <IconLoader />
             </div>
           ) : (
             <div className="my-6 space-y-6">
               <div className="space-y-4 ">
-                <DetailsInfo />
-                <RoteDetails />
+                {/* <DetailsInfo />
+                <RoteDetails /> */}
               </div>
 
               <DetailsLuggage />
               <DetailsReturnPolicy />
-              <DetailsAmenities />
+              {/* <DetailsAmenities /> */}
               <DetailsDiscounts />
             </div>
           )}
@@ -92,7 +92,7 @@ export default function MobileDetails({ onClick }: Props) {
           <div className="mx-auto text-center">
             <div className="small_text text-gray_2_for_body dark:text-grayy">1 {t('placeholderPassenger')}</div>
             <div className="main_text_body text-black.2.for.text dark:text-gray_1">
-              {Math.floor(сurrentTicket?.ticket_pricing.base_price || 0)} <span className="text-xs ml-[2px]">UAH</span>
+              {/* {Math.floor(currentTicket?.ticket_pricing.base_price || 0)} <span className="text-xs ml-[2px]">UAH</span> */}
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export default function MobileDetails({ onClick }: Props) {
               });
               router.push(`/${currentLanguage}/checkout`);
             }}
-            disabled={loadingDetails}
+            // disabled={loadingDetails}
           >
             {loading ? <LoaderCircle className="animate-spin" /> : t('selectButton')}
           </Button>
