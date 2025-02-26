@@ -36,7 +36,7 @@ export default function MobileDetails({ onClick }: Props) {
   const t = useTranslations('common');
   const currentLanguage = useLocale();
   // const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails);
-  // const currentTicket = useCurrentTicketStore((state) => state.currentTicket);
+  // const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
 

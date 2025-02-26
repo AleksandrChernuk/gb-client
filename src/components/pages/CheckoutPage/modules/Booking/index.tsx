@@ -20,7 +20,7 @@ import SeatsList from './SeatsList';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function BookingSheet() {
-  const currentTicket = useCurrentTicketStore((state) => state.currentTicket);
+  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
 
   const t = useTranslations('new_order');
@@ -29,7 +29,7 @@ export default function BookingSheet() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          disabled={!currentTicket?.details?.seats_map}
+          disabled={!selectedTicket?.details?.seats_map}
           variant={'outline'}
           type="button"
           className="flex items-center justify-between w-full h-auto p-3 border rounded-lg bg-inherit border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg"
@@ -40,7 +40,7 @@ export default function BookingSheet() {
             </div>
             {isHydrated ? (
               <div className="h5 text-text_prymery">
-                {!currentTicket?.details?.seats_map ? (
+                {!selectedTicket?.details?.seats_map ? (
                   <div className="flex flex-col items-start gap-1">
                     <span>{t('free_seating')}</span>
                     <span className="addional_medium_text">{t('seat_guaranteed')}</span>
@@ -71,18 +71,18 @@ export default function BookingSheet() {
         </SheetHeader>
         <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs">
           <div className="my-10">
-            {currentTicket &&
-              currentTicket?.details?.seats_map &&
-              Array.isArray(currentTicket?.details?.seats_map) &&
-              currentTicket?.details?.seats_map.map((block, i) => (
+            {selectedTicket &&
+              selectedTicket?.details?.seats_map &&
+              Array.isArray(selectedTicket?.details?.seats_map) &&
+              selectedTicket?.details?.seats_map.map((block, i) => (
                 <SeatsList
                   seatRows={block.seats}
                   key={i}
                   helm={!i}
                   floorText={
-                    currentTicket?.details?.seats_map &&
-                    Array.isArray(currentTicket?.details?.seats_map) &&
-                    currentTicket?.details?.seats_map.length === 2 &&
+                    selectedTicket?.details?.seats_map &&
+                    Array.isArray(selectedTicket?.details?.seats_map) &&
+                    selectedTicket?.details?.seats_map.length === 2 &&
                     `Поверх ${i + 1}`
                   }
                 />

@@ -39,7 +39,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               }
               return;
             }
-            const ticket_id = route.ticket_id; // Исправлено: убрана лишняя точка с запятой
+            const ticket_id = route.ticket_id;
             const tickets = get().tickets;
             if (tickets[ticket_id]?.details) {
               return;
@@ -129,7 +129,16 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               }
               return;
             }
-            const ticket_id = route.ticket_id; // Используем ticket_id
+
+            const ticket_id = route.ticket_id;
+            const tickets = get().tickets;
+            if (tickets[ticket_id] !== null) {
+              set((state) => ({
+                ...state,
+                selectedTicket: route,
+                selectedTicketId: ticket_id,
+              }));
+            }
 
             let res: IRouteDetailsResponse | null = null;
 
@@ -212,6 +221,9 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
         }),
         {
           name: 'current-ticket',
+          partialize: (state) => ({
+            selectedTicket: state.selectedTicket,
+          }),
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true;

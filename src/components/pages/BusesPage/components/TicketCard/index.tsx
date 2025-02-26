@@ -42,6 +42,7 @@ export const TicketCard = ({ element }: Props) => {
   const t = useTranslations('search');
 
   const isLoading = loadingDetails[element.ticket_id];
+
   const isDisabled: boolean = selectedTicketId !== null && selectedTicketId !== element.ticket_id;
   return (
     <div className="relative shadow tablet:shadow-none rounded-t-2xl tablet:rounded-none">
@@ -55,7 +56,7 @@ export const TicketCard = ({ element }: Props) => {
               loading={loading}
               disabled={isDisabled}
               handleSelect={async () => {
-                setLoading(true);
+                setLoading(false);
                 setSelectedTicketId(element.ticket_id);
                 await handleSetTicket(element);
               }}
@@ -111,7 +112,7 @@ export const TicketCard = ({ element }: Props) => {
           loading={loading}
           disabled={false}
           handleSelect={async () => {
-            setLoading(true);
+            setLoading(false);
             setSelectedTicketId(element.identificators.route_id);
             await handleSetTicket(element);
           }}

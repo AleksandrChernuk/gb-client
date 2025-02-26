@@ -18,7 +18,7 @@ import { useRouter } from '@/i18n/routing';
 
 export default function CheckoutPage({ adult, child }: { adult: string; child: string }) {
   const { handleSubmit, onSubmit, methods } = useMainForm({ adult, child });
-  const currentTicket = useCurrentTicketStore((state) => state.currentTicket);
+  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const resetCurrentTicket = useCurrentTicketStore((state) => state.resetCurrentTicket);
 
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
@@ -35,11 +35,11 @@ export default function CheckoutPage({ adult, child }: { adult: string; child: s
   }, []);
 
   useEffect(() => {
-    if (isHydrated && !currentTicket) {
+    if (isHydrated && !selectedTicket) {
       router.replace('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTicket]);
+  }, [selectedTicket]);
 
   return (
     <section>
