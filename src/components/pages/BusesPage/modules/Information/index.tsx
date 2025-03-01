@@ -3,7 +3,6 @@
 import { CustomCard } from '@/components/shared/CustomCard';
 import { format, toDate } from 'date-fns';
 import { useShallow } from 'zustand/react/shallow';
-import { MobileFilter } from '../../components/MobileFilter';
 import { Skeleton } from '@/components/ui/skeleton';
 import useDateLocale from '@/hooks/useDateLocale';
 import { useSearchStore } from '@/store/useSearch';
@@ -12,6 +11,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ArrowRight } from 'lucide-react';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import useTicketsSearch from '../../hooks/useTicketsSearch';
+import { MobileFilter } from '../Filter';
 
 export const Information = () => {
   const date = useSearchStore(useShallow((state) => state.date));

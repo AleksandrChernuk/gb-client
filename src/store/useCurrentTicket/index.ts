@@ -152,11 +152,6 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               return;
             }
 
-            set((state) => ({
-              ...state,
-              loadingTickets: { ...state.loadingTickets, [ticket_id]: true },
-            }));
-
             try {
               res = await getRouteDetails({
                 routeId: route.identificators.route_id,
@@ -173,15 +168,6 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               });
             } catch (error) {
               console.error('Ошибка при получении данных маршрута:', error);
-              set((state) => ({
-                ...state,
-                loadingTickets: { ...state.loadingTickets, [ticket_id]: false },
-              }));
-            } finally {
-              set((state) => ({
-                ...state,
-                loadingTickets: { ...state.loadingTickets, [ticket_id]: false },
-              }));
             }
 
             const currentDetails: IRouteDetailsResponse = route.details || ({} as IRouteDetailsResponse);

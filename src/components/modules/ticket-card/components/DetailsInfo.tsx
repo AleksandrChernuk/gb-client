@@ -4,8 +4,8 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
 import { ChevronRight, Clock3, Route } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useTicketDetailsContext } from '../../context/TicketDetailsContext';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useTicketDetailsContext } from '../context/TicketDetailsContext';
 
 export default function DetailsInfo() {
   const currentLocale = useLocale();

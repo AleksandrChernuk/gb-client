@@ -3,9 +3,9 @@
 import { Loader } from '../../components/Loader';
 import { NoTravel } from '../../components/NoTravel';
 import { ErrorTravel } from '../../components/ErrorTravel';
-import { TicketCard } from '../../components/TicketCard';
 import useTicketsSearch from '../../hooks/useTicketsSearch';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { TicketCard } from '@/components/modules/ticket-card';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();

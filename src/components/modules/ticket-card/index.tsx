@@ -1,23 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import { IRouteResponse } from '@/types/route.types';
 import { IconLoader } from '@/components/icons/IconLoader';
-import MobileDetails from '../MobileDetails';
-import TicketDetails from './TicketDetails';
 import { useLocale, useTranslations } from 'next-intl';
 import TicketRouteMobile from '@/components/shared/TicketRouteMobile';
-import TicketRouteDesctop from './TicketRouteDesctop';
-import TicketPricingDesctop from './TicketPricingDesctop';
-import TicketDivider from './TicketDivider';
-import TicketPricingMobile from './TicketPricingMobile';
-import useTicketCard from '../../hooks/useTicketCard';
-import { TicketCarriers } from './TicketCarriers';
-import TicketDetailsButton from '../TicketDetailsButton';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
-import TicketPlaces from './TicketPlaces';
-import { useState } from 'react';
 import { motion } from 'motion/react';
-import { TicketDetailsProvider } from '../../context/TicketDetailsContext';
+import useTicketCard from './hooks/useTicketCard';
+import TicketPricingDesctop from './components/TicketPricingDesctop';
+import TicketRouteDesctop from './components/TicketRouteDesctop';
+import { TicketDetailsProvider } from './context/TicketDetailsContext';
+import TicketDivider from './components/TicketDivider';
+import { TicketCarriers } from './components/TicketCarriers';
+import TicketPlaces from './components/TicketPlaces';
+import TicketDetailsButton from '@/components/pages/BusesPage/components/TicketDetailsButton';
+import MobileDetails from './modules/MobileDetails';
+import TicketPricingMobile from './components/TicketPricingMobile';
+import TicketDetails from './modules/Details';
 
 type Props = {
   element: IRouteResponse;
@@ -29,15 +29,11 @@ export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { handleGetDetails, handleSetTicket } = useTicketCard();
-
   const selectedTicketId = useCurrentTicketStore((state) => state.selectedTicketId);
   const tickets = useCurrentTicketStore((state) => state.tickets);
-
   const setSelectedTicketId = useCurrentTicketStore((state) => state.setSelectedTicketId);
-
   const loadingDetails = useCurrentTicketStore((state) => state.loadingTickets);
   const hasDetails = tickets[element.ticket_id]?.details != null;
-
   const currentLocale = useLocale();
   const t = useTranslations('search');
 
@@ -56,7 +52,7 @@ export const TicketCard = ({ element }: Props) => {
               loading={loading}
               disabled={isDisabled}
               handleSelect={async () => {
-                setLoading(false);
+                setLoading(true);
                 setSelectedTicketId(element.ticket_id);
                 await handleSetTicket(element);
               }}
@@ -112,7 +108,7 @@ export const TicketCard = ({ element }: Props) => {
           loading={loading}
           disabled={false}
           handleSelect={async () => {
-            setLoading(false);
+            setLoading(true);
             setSelectedTicketId(element.identificators.route_id);
             await handleSetTicket(element);
           }}

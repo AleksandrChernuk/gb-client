@@ -8,7 +8,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import { useTicketDetailsContext } from '../../context/TicketDetailsContext';
+import { useTicketDetailsContext } from '../context/TicketDetailsContext';
 
 export default function DetailsStops() {
   const { id } = useTicketDetailsContext();

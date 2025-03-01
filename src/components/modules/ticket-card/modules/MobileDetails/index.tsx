@@ -5,15 +5,9 @@ import { LoaderCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { IconLoader } from '@/components/icons/IconLoader';
-// import RoteDetails from '../Details/DetailsStops';
-// import DetailsInfo from '../Details/DetailsInfo';
-import DetailsLuggage from '../Details/DetailsLuggage';
-import DetailsReturnPolicy from '../Details/DetailsReturnPolicy';
-import DetailsDiscounts from '../Details/DetailsDiscounts';
-// import DetailsAmenities from '../Details/DetailsAmenities';
+
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-// import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { setCookie } from '@/actions/cookie-actions';
 
@@ -27,6 +21,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import DetailsLuggage from '../../components/DetailsLuggage';
+import DetailsReturnPolicy from '../../components/DetailsReturnPolicy';
+import DetailsDiscounts from '../../components/DetailsDiscounts';
 
 type Props = {
   onClick: () => void;
@@ -35,8 +32,6 @@ type Props = {
 export default function MobileDetails({ onClick }: Props) {
   const t = useTranslations('common');
   const currentLanguage = useLocale();
-  // const loadingDetails = useCurrentTicketStore((state) => state.loadingDetails);
-  // const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
 

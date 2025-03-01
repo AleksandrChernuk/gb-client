@@ -2,7 +2,7 @@
 
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
-import { useTicketDetailsContext } from '../../context/TicketDetailsContext';
+import { useTicketDetailsContext } from '../context/TicketDetailsContext';
 
 export default function DetailsLuggage() {
   const t = useTranslations('search');

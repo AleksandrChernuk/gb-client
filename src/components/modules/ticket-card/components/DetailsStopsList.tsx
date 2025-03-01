@@ -1,6 +1,6 @@
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
-import { useTicketDetailsContext } from '../../context/TicketDetailsContext';
 import DetailsStopsItem from './DetailsStopsItem';
+import { useTicketDetailsContext } from '../context/TicketDetailsContext';
 
 export default function DetailsStopsList() {
   const { id } = useTicketDetailsContext();
