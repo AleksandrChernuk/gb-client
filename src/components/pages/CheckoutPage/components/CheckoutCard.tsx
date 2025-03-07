@@ -1,6 +1,6 @@
 import { CustomCard } from '@/components/shared/CustomCard';
 import React, { ReactNode } from 'react';
-import StepNumber from "./StepNumber";
+import StepNumber from './StepNumber';
 
 type Props = {
   children: ReactNode;

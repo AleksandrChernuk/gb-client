@@ -10,7 +10,6 @@ import { useTranslations } from 'next-intl';
 export default function FilterSortByList() {
   const setSortByTickets = useFilterTicketsStore((state) => state.setSortByTickets);
   const sortBy = useFilterTicketsStore((state) => state.sortBy);
-
   const t = useTranslations('search');
 
   return (

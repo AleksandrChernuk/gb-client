@@ -38,8 +38,9 @@ export default function BookingSheet() {
             <div className="[&_svg]:fill-gray_2_for_body w-[45px] h-[56px]">
               <IconSeat />
             </div>
+
             {isHydrated ? (
-              <div className="h5 text-text_prymery">
+              <div className="h5 text-text_prymery ">
                 {!selectedTicket?.details?.seats_map ? (
                   <div className="flex flex-col items-start gap-1">
                     <span>{t('free_seating')}</span>
@@ -50,7 +51,7 @@ export default function BookingSheet() {
                 )}
               </div>
             ) : (
-              <Skeleton className="w-8 h-[24px]" />
+              <Skeleton className="min-w-18 h-[24px]" />
             )}
           </div>
           <ChevronRight size={32} className="stroke-gray_2_for_body" />

@@ -1,5 +1,5 @@
 import FaqPage from '@/components/pages/FaqPage';
 
-export default async function Faq() {
+export default function TicketRefund() {
   return <FaqPage />;
 }

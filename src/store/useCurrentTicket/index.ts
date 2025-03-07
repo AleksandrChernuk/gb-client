@@ -17,6 +17,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
           loadingTickets: {},
           selectedTicketId: null,
           selectedTicket: null,
+          loadingSelectTicket: false,
 
           setSelectedTicketId(id) {
             set({ selectedTicketId: id });
@@ -130,16 +131,6 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               return;
             }
 
-            const ticket_id = route.ticket_id;
-            const tickets = get().tickets;
-            if (tickets[ticket_id] !== null) {
-              set((state) => ({
-                ...state,
-                selectedTicket: route,
-                selectedTicketId: ticket_id,
-              }));
-            }
-
             let res: IRouteDetailsResponse | null = null;
 
             const blockedDetailsGet = ['EuroClub'];
@@ -190,7 +181,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
             set((state) => ({
               ...state,
               selectedTicket: updatedRoute,
-              selectedTicketId: ticket_id,
+              selectedTicketId: route.ticket_id,
             }));
           },
 

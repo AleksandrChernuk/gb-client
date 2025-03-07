@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { filterRoutesByCarriers, sortedCarriers, sortedRoutes } from './helpers';
 import { immer } from 'zustand/middleware/immer';
+import { filterRoutesByCarriers, sortedCarriers, sortedRoutes } from './helpers';
 import { FilterTicketsStore } from './types';
 
 export const useFilterTicketsStore = create<FilterTicketsStore>()(
@@ -15,9 +15,13 @@ export const useFilterTicketsStore = create<FilterTicketsStore>()(
 
       setTickets: (tickets) => {
         set((state) => {
-          state.tickets = sortedRoutes({ sortBy: state.sortBy, data: tickets });
-          state.filteredTickets = sortedRoutes({ sortBy: state.sortBy, data: tickets });
+          state.tickets = tickets;
+          state.filteredTickets = sortedRoutes({
+            sortBy: state.sortBy,
+            data: tickets,
+          });
           state.carriers = sortedCarriers({ data: tickets });
+          state.filterCarriers = [];
         });
       },
 
@@ -38,11 +42,10 @@ export const useFilterTicketsStore = create<FilterTicketsStore>()(
             : [...state.filterCarriers, carrier];
 
           state.filterCarriers = updatedFilterCarriers;
-
-          state.filteredTickets = filterRoutesByCarriers(
-            sortedRoutes({ sortBy: state.sortBy, data: state.tickets }),
-            updatedFilterCarriers,
-          );
+          state.filteredTickets = sortedRoutes({
+            sortBy: state.sortBy,
+            data: filterRoutesByCarriers(state.tickets, updatedFilterCarriers),
+          });
         });
       },
 
@@ -59,6 +62,17 @@ export const useFilterTicketsStore = create<FilterTicketsStore>()(
 
       resetSortByTickets: () => {
         set((state) => {
+          state.sortBy = 'sort_buy_popularity';
+          state.filteredTickets = sortedRoutes({
+            sortBy: 'sort_buy_popularity',
+            data: state.tickets,
+          });
+        });
+      },
+
+      resetAllFilters: () => {
+        set((state) => {
+          state.filterCarriers = [];
           state.sortBy = 'sort_buy_popularity';
           state.filteredTickets = sortedRoutes({
             sortBy: 'sort_buy_popularity',

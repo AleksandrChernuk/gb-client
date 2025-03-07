@@ -1,9 +1,9 @@
-import { addMonths, format, isBefore } from 'date-fns'
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import { devtools } from 'zustand/middleware'
-import { immer } from 'zustand/middleware/immer'
-import { SearchStore } from './types'
+import { addMonths, format, isBefore, startOfMonth } from 'date-fns';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { SearchStore } from './types';
 
 export const useSearchStore = create<SearchStore>()(
   devtools(
@@ -36,40 +36,40 @@ export const useSearchStore = create<SearchStore>()(
 
           incrementPassenger: (passengerType) => {
             set((state) => {
-              const newValue = state[passengerType] + 1
+              const newValue = state[passengerType] + 1;
               return {
                 ...state,
                 [passengerType]: newValue,
-              }
-            })
+              };
+            });
           },
 
           decrementPassenger: (passengerType) => {
             set((state) => {
-              const newValue = Math.max(0, state[passengerType] - 1)
+              const newValue = Math.max(0, state[passengerType] - 1);
               return {
                 ...state,
                 [passengerType]: newValue,
-              }
-            })
+              };
+            });
           },
 
           incrementMonth: () => {
-            const { month } = get()
+            const { month } = get();
 
             set((state) => ({
               ...state,
               month: addMonths(month, 1),
-            }))
+            }));
           },
 
           decrementMonth: () => {
-            const { month } = get()
+            const { month } = get();
 
             set((state) => ({
               ...state,
               month: addMonths(month, -1),
-            }))
+            }));
           },
 
           setMonth: (newMonth) =>
@@ -95,14 +95,20 @@ export const useSearchStore = create<SearchStore>()(
           name: 'main-search',
           onRehydrateStorage: () => (state) => {
             if (state) {
-              state.isHydrated = true
+              state.isHydrated = true;
               if (state.date && isBefore(new Date(state.date), new Date())) {
-                state.date = format(new Date(), 'yyyy-MM-dd')
+                state.date = format(new Date(), 'yyyy-MM-dd');
+              }
+
+              const currentMonth = startOfMonth(new Date());
+              const stateMonth = new Date(state.month);
+              if (isBefore(stateMonth, currentMonth)) {
+                state.month = new Date();
               }
             }
           },
-        }
-      )
-    )
-  )
-)
+        },
+      ),
+    ),
+  ),
+);

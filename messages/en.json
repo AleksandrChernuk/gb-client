@@ -75,7 +75,11 @@
     "no_travel_dates": "No travel on these dates",
     "something_happend": "Something happend",
     "bus": "Bus",
-    "discounts": "Discounts"
+    "discounts": "Discounts",
+    "to_be_paid": "To be paid",
+    "total_price": "Total (incl. VAT)",
+    "accept_rules": "I accept the terms of the public offer, privacy policy, and returns policy.",
+    "processing_data": "Consent for processing personal data."
   },
   "benefits": {
     "payment_title": "Without cash or queues",
@@ -161,6 +165,8 @@
     "invalid_number": "Invalid number",
     "invalid_email": "Incorrect email",
     "Required": "Required field",
-    "phone_number": "Phone Number"
+    "phone_number": "Phone Number",
+    "accept_rules": "You must accept the rules.",
+    "processing_data": "You must agree to data processing."
   }
 }

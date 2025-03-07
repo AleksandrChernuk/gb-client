@@ -6,6 +6,7 @@
     "placeholderTo": "Куди",
     "adult": "Дорослі",
     "children": "Діти (0-14 років)",
+
     "placeholderPassenger": "Пасажир",
     "placeholderPassengers": "Пасажири",
     "placeholderPassengersGenitive": "Пасажирів",
@@ -76,7 +77,11 @@
     "no_travel_dates": "Подорожі у цю дату немає",
     "something_happend": "Щось сталося",
     "bus": "Автобус",
-    "discounts": "Знижки"
+    "discounts": "Знижки",
+    "to_be_paid": "До оплати",
+    "total_price": "Разом (включно з ПДВ)",
+    "accept_rules": "Я приймаю умови публічної оферти, політику конфіденційності та політику повернення.",
+    "processing_data": "Згода на обробку персональних даних."
   },
   "benefits": {
     "payment_title": "Без готівки та черг",
@@ -168,6 +173,8 @@
     "invalid_number": "Неправильний номер",
     "invalid_email": "Невірний email",
     "Required": "Обов'язкове поле",
-    "phone_number": "Номер телефону"
+    "phone_number": "Номер телефону",
+    "accept_rules": " Ви повинні прийняти правила.",
+    "processing_data": "Ви повинні погодитися на обробку даних."
   }
 }

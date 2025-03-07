@@ -106,10 +106,10 @@ export const TicketCard = ({ element }: Props) => {
 
         <TicketPricingMobile
           loading={loading}
-          disabled={false}
+          disabled={isDisabled}
           handleSelect={async () => {
             setLoading(true);
-            setSelectedTicketId(element.identificators.route_id);
+            setSelectedTicketId(element.ticket_id);
             await handleSetTicket(element);
           }}
           price={`${Math.floor(element.ticket_pricing.base_price || 0)}`}
