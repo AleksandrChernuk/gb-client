@@ -16,18 +16,11 @@ export default function FaqPage() {
   const slug = pathname === '/faq' ? '/faq/bronjuvannja-mists' : (pathname as keyof typeof faqConstans);
 
   return (
-    <>
-      <div className="mb-8 lg:hidden">
+    <Container size="l">
+      <div className="flex flex-col gap-8 tablet:flex-row tablet:gap-10">
         <FaqNav slug={slug} />
+        <FaqDisplay slug={slug} value={searchValue ? searchValue : undefined} />
       </div>
-      <Container size="l">
-        <div className="flex flex-col gap-8 tablet:flex-row tablet:gap-10">
-          <div className="hidden lg:block">
-            <FaqNav slug={slug} />
-          </div>
-          <FaqDisplay slug={slug} value={searchValue ? searchValue : undefined} />
-        </div>
-      </Container>
-    </>
+    </Container>
   );
 }

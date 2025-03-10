@@ -168,5 +168,170 @@
     "phone_number": "Phone Number",
     "accept_rules": "You must accept the rules.",
     "processing_data": "You must agree to data processing."
+  },
+  "questions_answers": {
+    "title": "Questions and answers",
+    "search": "Search",
+    "search_for_topic_or_question": "Search for a topic or question",
+    "no_results_found": "No results found for the query",
+    "go_to_section": "Go to section",
+    "results_found": "Results found",
+    "booking_seats": "Seat reservation and ticket purchase",
+    "flights_and_buses": "Flights and buses",
+    "ticket_refund": "Ticket refund"
+  },
+  "questions": {
+    "concession_tickets": {
+      "title": "Concession tickets",
+      "text_1": "Unfortunately, at the moment, we are unable to apply a discount with a concession document, but we are actively working to ensure you can use this service in the near future."
+    },
+    "border_crossing": {
+      "title": "Border crossing",
+      "text_1": "The estimated time for border control on international flights is included in the overall flight duration listed on our website and tickets. Please note that the border crossing procedure and customs control are regulated solely by specialized government agencies and may take additional time. GreenBus and the carrier do not have the ability to expedite the border crossing process or influence the speed of customs control. We recommend familiarizing yourself with the border crossing rules in advance if you have chosen an international flight, as well as preparing all necessary documents.",
+      "text_2": "For detailed information about required documents and border crossing timings, please contact the customs authorities of the relevant country."
+    },
+    "can_send_parcel": {
+      "title": "Can the parcel be sent?",
+      "text_1": "GreenBus does not provide parcel shipping services on bus routes and is not responsible for your personal agreements with the carrier."
+    },
+    "can_skip_printing": {
+      "title": "Can the ticket be skipped from printing?",
+      "text_1": "Having a printed ticket is mandatory for boarding the bus. Exceptions apply to routes marked as ‘can be not printed’, where carriers allow you to present the ticket from your device's screen. Having an electronic ticket is mandatory for boarding the bus.",
+      "text_2": "Please note that if you cannot show the electronic ticket to the driver, they have the right to refuse you boarding the bus. If the route is not marked as ‘can be not printed’, you must print the ticket. Without a printed ticket, the carrier will not be able to board you onto the bus."
+    },
+    "how_to_book": {
+      "title": "How to book a ticket",
+      "text_1": "To book a ticket, you need to: Select the required route using the search form on the homepage. Fill in and verify all passenger data. Familiarize yourself with the refund conditions and public offer. Enter a valid phone number to later log into your Personal Account. Enter a valid email address where the tickets will be sent. Click the 'Pay' button and choose a convenient payment method.",
+      "text_2": "Please note, every booking has a deadline by which it must be paid, otherwise it will be automatically canceled. Tickets will be issued and valid only after the booking is paid."
+    },
+    "free_seating_how_to_choose": {
+      "title": "Free seating, how to choose a seat",
+      "text_1": "Free seating means that on this route, the carrier has limited the selection of a specific seat, and the actual seat number will be assigned by the dispatcher directly at the time of boarding.",
+      "text_2": "We recommend arriving at the boarding gate early. If the selected carrier allows you to choose a specific seat on the bus, you will be shown a bus layout with available seats when placing your order and clicking the ‘Seat selection’ button."
+    },
+    "international_flights": {
+      "title": "International flights",
+      "text_1": "You can check the schedule or the availability of your desired route using the search function on the homepage of the website.",
+      "text_2": "Before purchasing tickets for international flights, we strongly recommend familiarizing yourself with the border crossing requirements between countries along your chosen route and preparing all necessary documents."
+    },
+    "payment_and_receiving": {
+      "title": "How to pay and receive tickets",
+      "text_1": "You can pay for your ticket immediately after booking using any MasterCard or Visa card, or choose another convenient payment method from the options provided on the website after your order is processed.",
+      "text_2": "After payment, the issued tickets will be automatically sent to the email address provided during the booking process and will also be available in the 'Personal Account'."
+    },
+    "available_discounts": {
+      "title": "What discounts, promotions, and promo codes are available?",
+      "text_1": "We announce all promotions and discounts via email and in the 'Blog' section at the bottom of the homepage. We recommend subscribing to our newsletter, as most promotions are available only to subscribers."
+    },
+    "how_to_leave_review": {
+      "title": "How to leave a review about the trip and the carrier",
+      "text_1": "After the trip, an email with a trip evaluation survey will be sent to the email address provided when booking.",
+      "text_2": "You can leave a review and rate the carrier. Based on each review, a rating is formed, which is displayed on the website and helps customers choose the most reliable carrier."
+    },
+    "available_flights_schedule": {
+      "title": "What flights are available - flights and schedule",
+      "text_1": "Use the search form on the main page of our website: enter the departure and arrival points, preferred travel date, and the number of passengers, then click the ‘Find Ticket’ button.",
+      "text_2": "You will see a list of flights for the chosen route with prices and carrier ratings. Review the schedule and choose the appropriate flight. If there are no available seats or flights for the selected date, the website will suggest the closest date or an alternative departure point."
+    },
+    "flight_confirmation": {
+      "title": "Will the flight definitely operate?",
+      "text_1": "We receive information about any changes to the flight from the carrier, so we cannot rule out the possibility of the flight being canceled due to reasons beyond our control.",
+      "text_2": "As soon as the carrier informs us, we will immediately contact you and notify you of any changes to the flight.",
+      "text_3": "Additional details about the flight and the bus number can always be obtained by calling the carrier’s contact number listed on your ticket."
+    },
+    "ticket_purchase_advance": {
+      "title": "How far in advance should I buy the ticket?",
+      "text_1": "Usually, carriers open ticket sales for regular flights a month in advance, and you can buy a ticket for the desired route ahead of time."
+    },
+    "calculate_travel_time": {
+      "title": "How to calculate travel time and arrival time",
+      "text_1": "The estimated travel time, information about stops, and expected arrival time at the final destination are displayed on our website in the flight schedule and are always listed in the tickets. At the same time, there may be unpredictable situations during the journey: unexpected bus delays due to road conditions, border crossings, or technical issues.",
+      "text_2": "We strongly recommend allowing extra time for your trip and not planning a transfer to another flight or mode of transport less than 2 hours for domestic flights and less than 8 hours for international flights."
+    },
+    "bus_type": {
+      "title": "What type of bus will it be",
+      "text_1": "Information about the flight, bus model, available services, and amenities provided by the carrier is displayed on our website when purchasing the ticket.",
+      "text_2": "After purchasing the ticket, you will see the carrier's contact number to clarify additional details."
+    },
+    "travel_with_pets": {
+      "title": "Travel with pets",
+      "text_1": "When planning a trip with a pet, we strongly recommend preparing a veterinary passport with vaccination records, a health certificate for the pet, a portable carrier or cage with a solid bottom, and ensuring the availability of clean drinking water.",
+      "text_2": "The carrier has the right to regulate the rules for transporting pets on their buses, so this information should be clarified individually."
+    },
+    "luggage_transportation": {
+      "title": "Luggage transportation",
+      "text_1": "Please note that the carrier has the full right to refuse a passenger from transporting hand luggage or baggage if it obstructs the aisle for other passengers or does not comply with the quantity and size requirements.",
+      "text_2": "You can always clarify the baggage transportation conditions for specific routes with the carrier."
+    },
+    "route_and_stops": {
+      "title": "Route and stops",
+      "text_1": "In the schedule and information about the route, we indicate the entire route and stop points provided by the Carrier. Please note that only the Carrier regulates the route and stops, as well as determines the possibility of boarding and alighting outside the specified points. For additional questions about stops or route clarifications, you can contact the Carrier using the contact number listed on the ticket."
+    },
+    "if_no_route_found": {
+      "title": "If the desired route isn't found",
+      "text_1": "All current routes with available seats for the selected date and number of passengers are displayed on our site. We are continuously working to expand the number of routes and add new carriers. Your desired route may appear soon."
+    },
+    "what_you_need_for_boarding": {
+      "title": "What is needed for boarding",
+      "text_1": "To board the bus, you need to have your passport and ticket in printed form.",
+      "text_2": "The data in the passenger's passport and ticket must match completely. If one of the listed conditions is missing or if another document proving your identity is presented, we cannot guarantee boarding, and the Carrier has the right to refuse the trip."
+    },
+    "how_early_to_arrive_before_flight": {
+      "title": "How early should you arrive before the departure?",
+      "text_1": "Carefully review the information on your ticket, as in some cases, the Carrier specifies the mandatory time you must arrive at the departure point and check-in for boarding.",
+      "text_2": "In other cases, we recommend arriving at the departure address at least one hour before the scheduled departure time."
+    },
+    "exact_departure_address_how_to_find_the_bus": {
+      "title": "Exact departure address, how to find the bus",
+      "text_1": "All information about the flight, including the exact departure address provided to us by the Carrier, is displayed on the website in the schedule and always appears on the ticket.",
+      "text_2": "Additional landmarks or geolocation details can always be obtained by contacting the Carrier at the number provided on your ticket."
+    },
+    "departure_and_arrival_time": {
+      "title": "Departure and Arrival Time",
+      "text_1": "The ticket always specifies the local time of the location you are in. For example, if you have a ticket for a Warsaw-Minsk flight, the departure will be in Polish time, and the arrival will be in Minsk time.",
+      "text_2": "We recommend paying special attention to time zone differences if you plan a trip with transfers."
+    },
+    "what_to_do_if_passenger_details_are_incorrect_in_ticket": {
+      "title": "What to do if the passenger details in the ticket are incorrect",
+      "text_1": "Editing personal details of passengers or making corrections to the ticket is not possible. We kindly ask you to carefully check the entered details of all passengers before paying for the ticket. If an error is discovered, we recommend returning the ticket and making a new order with correct details.",
+      "text_2": "Before submitting a return request, please review the conditions of voluntary ticket return.",
+      "text_3": "Please note that if there are mistakes or typos in the ticket, we cannot guarantee successful boarding, as the carrier has the right to deny travel."
+    },
+    "how_to_process_refund": {
+      "title": "How to request a ticket refund",
+      "text_1": "You can submit a refund request in two ways:",
+      "text_2": "Method 1: Submit a request through the 'Personal Account'. To do this, go to the 'Personal Account' section, select the ticket for a refund, and click 'Return Ticket'. Specify the correct reason for the refund and confirm the request by clicking 'Return Ticket'. Our specialists will process the request within 1-10 days, and the decision will be sent to the email specified during booking and will also be available in the 'Personal Account' on the GreenBus website.",
+      "text_3": "Method 2: If, for any reason, you cannot access the 'Personal Account' section, you can submit a refund request by following the link in the email with the tickets, which was sent to the email provided when booking."
+    },
+    "how_to_know_return_terms_and_conditions": {
+      "title": "How to find out the refund conditions and terms",
+      "text_1": "The refund amount depends on the carrier's conditions and the time remaining before departure.",
+      "text_2": "The ticket refund conditions are publicly available and are specified on the website before booking, as well as duplicated at the bottom of the ticket itself.",
+      "text_3": "Carefully review the conditions before submitting a refund request. We will process your request within 1-10 days. You can check the status of your request in the 'Personal Account' section."
+    },
+    "can_i_change_flight_date_or_time": {
+      "title": "Is it possible to change the date or time of the trip",
+      "text_1": "It is not possible to edit the selected time or date of the trip, reschedule the trip for another day, or change the selected seats after paying for the tickets.",
+      "text_2": "In most cases, you can return the ticket before the trip begins and choose new tickets for a different time or date.",
+      "text_3": "Before requesting a refund, carefully review the carrier's conditions specified on the ticket."
+    },
+    "what_to_do_if_you_missed_the_flight": {
+      "title": "What to do if you miss your trip",
+      "text_1": "If you miss your trip, carefully review the refund conditions stated on your ticket.",
+      "text_2": "Some carriers allow ticket returns after the trip has started and refund part of the ticket price.",
+      "text_3": "If this option is available, follow the refund request instructions in the article 'How to request a refund'."
+    },
+    "what_to_do_if_my_flight_is_cancelled_or_bus_did_not_arrive": {
+      "title": "What to do if my trip is canceled or the bus didn't arrive",
+      "text_1": "If the trip is canceled by the carrier, you will receive an SMS notification in advance at the phone number provided during booking.",
+      "text_2": "It is very important to enter the correct phone number so we can notify you of any changes or confirm your ticket payment.",
+      "text_3": "If you arrive at the departure point and cannot find the bus, be sure to contact the carrier using the details provided in your ticket. The bus may not have arrived yet, or the platform might have changed.",
+      "text_4": "We remind you that in case of any issues with your trip, you can always contact support by submitting a request in your personal account under the 'My Tickets' section. Our specialists will process your request."
+    },
+    "what_to_do_if_i_have_problems_during_trip": {
+      "title": "What to do if I have issues during my trip",
+      "text_1": "If you encounter problems during your trip or were unable to use your ticket, please let us know by using the 'My Tickets' section in your personal account.",
+      "text_2": "You can submit a request with the reason 'Other' and describe the issue in detail. Our specialists will review your request and provide the carrier’s response with a resolution."
+    }
   }
 }

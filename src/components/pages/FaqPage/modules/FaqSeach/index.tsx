@@ -7,10 +7,12 @@ import { useRouter } from '@/i18n/routing';
 import { FaqSearchShema } from '@/schemas/faq.search.shema';
 import { IFaqSearchValue } from '@/types/faq.types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 
 export default function FaqSeach() {
   const router = useRouter();
+  const t = useTranslations('questions_answers');
 
   const form = useForm<IFaqSearchValue>({
     mode: 'onSubmit',
@@ -20,10 +22,11 @@ export default function FaqSeach() {
 
   const onSubmit = (data: IFaqSearchValue) => {
     router.push(`/faq/search?q=${data.qwery.trim()}`);
+    form.reset({ qwery: '' });
   };
 
   return (
-    <section className="pt-4 pb-10" role="search">
+    <section className="my-6 tablet:my-8 laptop:my-12" role="search">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full">
           <FormField
@@ -35,7 +38,7 @@ export default function FaqSeach() {
                   <Input
                     {...field}
                     type="text"
-                    placeholder="Пошук"
+                    placeholder={t('search_for_topic_or_question')}
                     className="h-full p-4 rounded-tr-none rounded-br-none laptop:p-6"
                   />
                 </FormControl>
@@ -47,9 +50,9 @@ export default function FaqSeach() {
             variant={'secondary'}
             className="p-4 rounded-tl-none rounded-bl-none laptop:p-6 laptop:large_button tablet:h5 tablet:min-h-[71px] tablet::min-w-[102px] laptop:min-w-[201px] laptop:min-h-[75px]"
           >
-            Search
+            {t('search')}
           </Button>
-        </form>{' '}
+        </form>
       </Form>
     </section>
   );
