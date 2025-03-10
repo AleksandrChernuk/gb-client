@@ -13,7 +13,6 @@ type Props = {
 
 export default function TicketPricingDesctop({ price, handleSelect, loading, disabled }: Props) {
   const t = useTranslations('search');
-  console.log(disabled);
   return (
     <div className="flex-col items-center hidden gap-2 tablet:flex tablet:gap-4">
       <div className="h4 laptop:h2 text-text_prymery">

@@ -7,7 +7,6 @@ import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 
 export const useCheckoutSchema = (pass_count: number, t: (key: string) => string) => {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  console.log(selectedTicket?.details?.seats_map);
   return z.object({
     passengers: z.array(
       z.object({

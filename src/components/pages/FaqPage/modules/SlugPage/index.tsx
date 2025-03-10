@@ -23,7 +23,6 @@ export default function SlugPage() {
   Object.entries(faqConstans).forEach(([slug, category]) => {
     category.questions.forEach(({ id, title, text, slug: textSlug }) => {
       const translatedText = text.map((paragraph) => t_questions(`${title}.text_${text.indexOf(paragraph) + 1}`));
-      console.log('translatedText', translatedText);
       if (translatedText.some((paragraph) => paragraph.toLowerCase().includes(searchQuery))) {
         matchedQuestions.push({ textSlug, slug, id, title, text: translatedText.join(' ') });
       }

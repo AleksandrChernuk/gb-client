@@ -12,8 +12,6 @@ export default function ToPay() {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
 
-  console.log(selectedTicket?.ticket_pricing.base_price);
-
   return (
     <div>
       {isHydrated ? (

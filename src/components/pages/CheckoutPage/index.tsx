@@ -22,7 +22,6 @@ export default function CheckoutPage({ adult, child }: { adult: string; child: s
   const { handleSubmit, onSubmit, methods } = useMainForm({ adult, child });
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const resetCurrentTicket = useCurrentTicketStore((state) => state.resetCurrentTicket);
-  console.log(selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
   const router = useRouter();
   const t = useTranslations('new_order');
