@@ -1,23 +1,3 @@
-// import MainHeader from '@/components/modules/header/MainHeader';
-// import { Params } from '@/types/common.types';
-
-// export default async function RootLayout({
-//   children,
-//   params,
-// }: Readonly<{
-//   children: React.ReactNode;
-//   params: Params;
-// }>) {
-//   const { lng } = await params;
-
-//   return (
-//     <div className="flex flex-col h-screen">
-//       <MainHeader locale={lng} />
-//       {children}
-//     </div>
-//   );
-// }
-
 import { Noto_Sans, Mulish } from 'next/font/google';
 
 import '@/styles/global.css';
@@ -30,7 +10,6 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import MainHeader from '@/components/modules/header/MainHeader';
 import { Params } from '@/types/common.types';
-import Script from 'next/script';
 
 const noto_sans = Noto_Sans({
   variable: '--font-geist-sans',
@@ -72,7 +51,6 @@ export default async function RootLayout({
           </Provider>
         </NextIntlClientProvider>
       </body>
-      <Script src="https://example.com/script.js" />
     </html>
   );
 }

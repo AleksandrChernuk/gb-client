@@ -1,5 +1,6 @@
 import { IconRoute } from '@/components/icons/IconRoute';
 import { IconRouteArrow } from '@/components/icons/IconRouteArrow';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -22,9 +23,9 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-1 tablet:gap-2">
           <span className="secondary_text tablet:main_text_body aptop:leading-6 text-text_prymery">{from}</span>
-          <div className="w-[62px] h-[20px]">
-            <IconRoute />
-          </div>
+
+          <Image src={'/icons/path.svg'} alt="route" width={62} height={20} />
+
           <span className="secondary_text tablet:main_text_body laptop:leading-6 text-text_prymery">{to}</span>
         </div>
         <div className="w-6 h-6">
