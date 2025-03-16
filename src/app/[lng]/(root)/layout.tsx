@@ -30,6 +30,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import MainHeader from '@/components/modules/header/MainHeader';
 import { Params } from '@/types/common.types';
+import Script from 'next/script';
 
 const noto_sans = Noto_Sans({
   variable: '--font-geist-sans',
@@ -71,6 +72,7 @@ export default async function RootLayout({
           </Provider>
         </NextIntlClientProvider>
       </body>
+      <Script src="https://example.com/script.js" />
     </html>
   );
 }
