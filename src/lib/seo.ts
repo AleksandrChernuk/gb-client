@@ -107,3 +107,39 @@ export const seoFaqSearch = {
     en: 'FAQ search, questions and answers, GreenBus, frequently asked questions, customer support',
   },
 };
+
+export const seoForCarriers = {
+  title: {
+    uk: 'GreenBus – автоматизація продажу квитків і перевезень',
+    ru: 'GreenBus – автоматизация продажи билетов и перевозок',
+    en: 'GreenBus – Ticket Sales and Transportation Automation',
+  },
+  description: {
+    uk: 'Оптимізуйте продаж квитків, керуйте рейсами та використовуйте аналітику для зростання бізнесу. GreenBus – безпечно, швидко, ефективно.',
+    ru: 'Оптимизируйте продажу билетов, управляйте рейсами и используйте аналитику для роста бизнеса. GreenBus – безопасно, быстро, эффективно.',
+    en: 'Optimize ticket sales, manage routes, and use analytics to grow your business. GreenBus – safe, fast, and efficient.',
+  },
+  keywords: {
+    uk: 'GreenBus, продаж квитків, автоматизація, пасажирські перевезення, управління рейсами, звітність, безпека даних',
+    ru: 'GreenBus, продажа билетов, автоматизация, пассажирские перевозки, управление рейсами, отчетность, безопасность данных',
+    en: 'GreenBus, ticket sales, automation, passenger transportation, route management, reporting, data security',
+  },
+};
+
+export const seoForAgents = {
+  title: {
+    uk: 'GreenBus – продаж квитків та управління перевезеннями',
+    ru: 'GreenBus – продажа билетов и управление перевозками',
+    en: 'GreenBus – Ticket Sales & Transport Management',
+  },
+  description: {
+    uk: 'Приєднуйтесь до GreenBus! Ми пропонуємо агентствам систему автоматизованого продажу квитків, управління перевезеннями та підтримку 24/7.',
+    ru: 'Присоединяйтесь к GreenBus! Мы предлагаем агентствам систему автоматизированной продажи билетов, управление перевозками и поддержку 24/7.',
+    en: 'Join GreenBus! We offer agencies an automated ticket sales system, transportation management, and 24/7 support.',
+  },
+  keywords: {
+    uk: 'продаж квитків, перевезення, підтримка, агентства, управління',
+    ru: 'продажа билетов, перевозки, поддержка, агентства, управление',
+    en: 'ticket sales, transportation, support, agencies, management',
+  },
+};

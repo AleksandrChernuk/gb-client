@@ -1,5 +1,5 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
-import MainPage from '@/components/pages/MainPage';
+import MainPage from '@/components/pages/main';
 import { seoMain } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 

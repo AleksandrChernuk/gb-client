@@ -81,17 +81,7 @@
     "accept_rules": "I accept the terms of the public offer, privacy policy, and returns policy.",
     "processing_data": "Consent for processing personal data."
   },
-  "benefits": {
-    "payment_title": "Without cash or queues",
-    "payment_description": "Buy tickets online anytime directly on the website. Forget about queues and cash — travel comfortably and conveniently.",
-    "destinations_title": "50 000 destinations",
-    "destinations_description": "Choose your destination from 50,000 options, whether you're traveling for business or leisure.",
-    "secure_title": "Secure payment",
-    "secure_description": "PCI DSS security standards for reliable protection of payment data during processing and storage.",
-    "refunds_title": "Ticket refunds",
-    "refunds_description": "Fast refunds in your personal account, with no unnecessary delays."
-  },
-  "home": {
+  "main": {
     "buses_title": "Buses to European destinations",
     "buses_description": "Travel by bus to the most beautiful destinations in Europe! Convenient routes, comfortable conditions, and affordable prices make your journey easy and enjoyable.",
     "buses_button": "Available countries",
@@ -105,7 +95,15 @@
     "get_started_button": "Available routes",
     "questions_title": "Questions and Answers",
     "questions_description": "Find answers to the most common questions about our services. If you have additional questions, feel free to contact us.",
-    "questions_button": "Support Center"
+    "questions_button": "Support Center",
+    "payment_title": "Without cash or queues",
+    "payment_description": "Buy tickets online anytime directly on the website. Forget about queues and cash — travel comfortably and conveniently.",
+    "destinations_title": "50 000 destinations",
+    "destinations_description": "Choose your destination from 50,000 options, whether you're traveling for business or leisure.",
+    "secure_title": "Secure payment",
+    "secure_description": "PCI DSS security standards for reliable protection of payment data during processing and storage.",
+    "refunds_title": "Ticket refunds",
+    "refunds_description": "Fast refunds in your personal account, with no unnecessary delays."
   },
   "search": {
     "sort_buy_price": "Price",
@@ -152,10 +150,9 @@
   },
   "forms": {
     "name": "Name",
-    "name_placeholder": "Taras",
     "required": "Required field",
     "surname": "Surname",
-    "surname_placeholder": "Shevchenko",
+    "surname_placeholder": "Enter Surname",
     "notes": "Notes",
     "dob": "Date of birth",
     "phone_umber": "Phone Number",
@@ -167,7 +164,17 @@
     "Required": "Required field",
     "phone_number": "Phone Number",
     "accept_rules": "You must accept the rules.",
-    "processing_data": "You must agree to data processing."
+    "processing_data": "You must agree to data processing.",
+    "contact_person": "Contact person",
+    "name_of_the_company": "Name of the company",
+    "type_of_business": "Type of business",
+    "e_mail": "E-mail",
+    "phone": "Phone",
+    "name_placeholder": "Enter name",
+    "type_placeholder": "Enter type",
+    "e_mail_placeholder": " Enter e-mail",
+    "phone_placeholder": "Enter phone",
+    "request_btn": "Leave a request"
   },
   "questions_answers": {
     "title": "Questions and answers",

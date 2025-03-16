@@ -30,6 +30,7 @@
   --color-for_payment_icons: var(--for_payment_icons);
   --color-black: var(--black);
   --color-dark_bg: var(--dark_bg);
+  --color-bg_main: var(--bg_main);
   --color-dark_main: var(--dark_main);
   --color-blackmode: var(--blackmode);
   --color-additional_red: var(--additional-red);
@@ -50,13 +51,14 @@
   --color-ring: hsl(var(--ring));
   --color-text_secondary: var(--text_secondary);
   --color-text_prymery: var(--text_prymery);
+  --color-text_muted: var(--text_muted);
   --color-label_color: var(--label_color);
   --color-prymery_btn_color: var(--prymery_btn_color);
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-gray_11: var(--gray_11);
   --color-search_color: var(--search_color);
-
+  --color-bg_green: var(--bg_green);
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
 
@@ -297,7 +299,8 @@
     --additional-pink: #ef958d;
     --additional-pink: #ef958d;
     --gray-dark: #334155;
-
+    --bg_main: #f8fafc;
+    --bg_green: #0d5a2b;
     --gray-blue: #6f8b90;
     --bw: #000000;
     --white: #ffffff;
@@ -306,10 +309,10 @@
     --text_prymery: #334155;
     /* Это однострочный комментарий --text_secondary_color: #6F8B90; */
     --text_secondary: #6f8b90;
+    --text_muted: #6f8b90;
     --prymery_btn_color: #ffff;
     --label_color: #334155;
     --search_color: #000000;
-
     --card_bg_primery: #ffffff;
     --background: 0, 0%, 100%;
     --foreground: 215 25% 27%;
@@ -341,15 +344,17 @@
   .dark {
     --primary_1: #088537;
     --primary_2: #7af2a6;
+    --bg_green: #0d5a2b;
     --bw: #ffffff;
     --icons: #f8fafc;
     --card_bg_primery: #0f172a;
     --text_seconddary: #e2e8f0;
     --text_prymery: #f8fafc;
+    --text_muted: #e2e8f0;
     --prymery_btn_color: #f8fafc;
     --label_color: #e2e8f0;
     --search_color: #f8fafc;
-
+    --bg_main: #0f172a;
     --background: 222, 47%, 11%;
     --foreground: 215, 25%, 27%, 1;
     --card: 216 32% 17%;

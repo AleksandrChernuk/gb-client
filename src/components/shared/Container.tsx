@@ -3,11 +3,12 @@ import { cn } from '@/lib/utils';
 
 interface ContainerProps {
   className?: string;
-  size: 's' | 'sm' | 'm' | 'l';
+  size: 'xs' | 's' | 'sm' | 'm' | 'l';
 }
 
 export const Container: FC<PropsWithChildren<ContainerProps>> = ({ className, size, children }) => {
   const sizeClasses = {
+    xs: 'max-w-[656px]',
     s: 'max-w-[805px]',
     sm: 'max-w-[960px]',
     m: 'max-w-[1156px]',

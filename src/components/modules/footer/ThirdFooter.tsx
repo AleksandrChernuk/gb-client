@@ -10,8 +10,8 @@ export default async function ThirdFooter() {
         alt="peaple wait bus"
         placeholder="empty"
         style={{
-          width: "100%",
-          height: "auto",
+          width: '100%',
+          height: 'auto',
         }}
       />
     </footer>
