@@ -26,6 +26,7 @@ export default async function MainPage() {
           alt="People waiting for the bus"
           placeholder="blur"
           priority
+          decoding="sync"
           width={1440}
           height={343}
           sizes="100vw"
