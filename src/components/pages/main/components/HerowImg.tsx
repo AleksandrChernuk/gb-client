@@ -8,18 +8,16 @@ export default function HerowImg() {
   } = getImageProps({
     ...common,
     width: 1440,
-    height: 875,
-    quality: 100,
-    src: '/images/herow_desctop.webp',
+    height: 263,
+    src: '/images/herow_desctop.avif',
   });
   const {
     props: { srcSet: mobile, ...rest },
   } = getImageProps({
     ...common,
-    width: 750,
-    height: 1334,
-    quality: 100,
-    src: '/images/herow_mobile.webp',
+    width: 744,
+    height: 223,
+    src: '/images/herow_mobile.avif',
   });
 
   return (
