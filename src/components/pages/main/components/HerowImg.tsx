@@ -1,23 +1,32 @@
-import Image from 'next/image';
-// import mobileImg from '../images/herow_mobile.webp';
-import descImg from '../images/main_1.png';
+/* eslint-disable jsx-a11y/alt-text */
+import { getImageProps } from 'next/image';
 
 export default function HerowImg() {
-  return (
-    <div className="relative flex items-center justify-center w-full  h-auto overflow-hidden">
-      <Image src={descImg} alt="peaple wait bus" priority placeholder="blur" quality={100} />
+  const common = { alt: 'Art Direction Example', sizes: '100vw', priority: true };
+  const {
+    props: { srcSet: desktop },
+  } = getImageProps({
+    ...common,
+    width: 1440,
+    height: 875,
+    quality: 100,
+    src: '/images/herow_desctop.webp',
+  });
+  const {
+    props: { srcSet: mobile, ...rest },
+  } = getImageProps({
+    ...common,
+    width: 750,
+    height: 1334,
+    quality: 100,
+    src: '/images/herow_mobile.webp',
+  });
 
-      {/* <Image
-        className="hidden tablet:block"
-        src={descImg}
-        priority={true}
-        alt="peaple wait bus"
-        placeholder="blur"
-        style={{
-          width: '100%',
-          height: 'auto',
-        }}
-      /> */}
-    </div>
+  return (
+    <picture>
+      <source media="(min-width: 1000px)" srcSet={desktop} />
+      <source media="(min-width: 500px)" srcSet={mobile} />
+      <img {...rest} style={{ width: '100%', height: 'auto' }} />
+    </picture>
   );
 }
