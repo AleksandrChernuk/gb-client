@@ -20,7 +20,7 @@ export default async function MainPage() {
 
   return (
     <main role="main" className="bg-grayy dark:bg-dark_bg">
-      <section className=" ">
+      <section>
         <h1 className="sr-only">Автобусні квитки з України в Європу – зручні перевезення з GreenBus</h1>
         <Image
           src={HerowImg}
@@ -41,8 +41,8 @@ export default async function MainPage() {
           alt="People waiting for the bus"
           placeholder="blur"
           priority
-          width={392}
-          height={140}
+          width={1440}
+          height={223}
           sizes="100vw"
           style={{
             width: '100%',
@@ -50,9 +50,8 @@ export default async function MainPage() {
           }}
           className="block tablet:hidden"
         />
-        {/* <HerowImg /> */}
 
-        <Container size="l" className="">
+        <Container size="l" className="-mt-10">
           <MainSearch />
         </Container>
       </section>
@@ -80,12 +79,24 @@ export default async function MainPage() {
         <Container size="m">
           <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
             <li className="tablet:order-2 shrink-0">
-              <Image
+              {/* <Image
                 src={buses}
                 placeholder="blur"
                 alt="peaple wait buses"
                 className="overflow-hidden rounded-3xl mx-auto w-auto h-auto tablet:w-[330px] tablet:h-[325px] laptop:w-[350px] laptop:h-[345px]"
-              />
+              /> */}
+
+              <div className=" relative overflow-hidden rounded-3xl mx-auto   w-[330px]  h-[325px] laptop:w-[350px] laptop:h-[345px]">
+                <Image
+                  alt="peaple wait buses"
+                  src={buses}
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
             </li>
             <li className="tablet:w-1/2">
               <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery">{t('buses_title')}</h3>
@@ -109,12 +120,24 @@ export default async function MainPage() {
         <Container size="m">
           <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
             <li className="shrink-0">
-              <Image
+              {/* <Image
                 src={getstarted}
                 placeholder="blur"
                 alt="people and bus"
                 className="overflow-hidden rounded-3xl mx-auto w-auto h-auto tablet:w-[330px] tablet:h-[325px] laptop:w-[350px] laptop:h-[345px]"
-              />
+              /> */}
+
+              <div className=" relative overflow-hidden rounded-3xl mx-auto   w-[330px]  h-[325px] laptop:w-[350px] laptop:h-[345px]">
+                <Image
+                  alt="people and bus"
+                  src={getstarted}
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
             </li>
             <li className="tablet:order-2 tablet:w-1/2">
               <h3 className="mb-4 h3 laptop:h1 laptop:mb-8 text-text_prymery">{t('get_started_title')}</h3>
