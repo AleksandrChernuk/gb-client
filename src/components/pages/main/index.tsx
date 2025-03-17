@@ -12,18 +12,30 @@ import { QuestionsMobileList } from './components/QuestionsMobileList';
 import { Link } from '@/i18n/routing';
 import { QuestionsTabletList } from './components/QuestionsTabletList';
 import { QuestionsLaptopList } from './components/QuestionsLaptopList';
-import descImg from './images/main.webp';
+import descImg from './images/main_2.webp';
 
 export default async function MainPage() {
   const t = await getTranslations('main');
 
   return (
-    <main role="main" className="grow bg-grayy dark:bg-dark_bg">
-      <section>
+    <main role="main" className="bg-grayy dark:bg-dark_bg">
+      <section className="">
         <h1 className="sr-only">Автобусні квитки з України в Європу – зручні перевезення з GreenBus</h1>
-        <Image src={descImg} alt="peaple wait bus" sizes="100vw" placeholder="blur" className="w-full h-auto" />
+        <Image
+          src={descImg}
+          alt="People waiting for the bus"
+          placeholder="blur"
+          priority
+          width={1440}
+          height={343}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
 
-        <Container size="l" className="-mt-10">
+        <Container size="l" className="">
           <MainSearch />
         </Container>
       </section>
