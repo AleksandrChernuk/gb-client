@@ -12,8 +12,8 @@ import { QuestionsMobileList } from './components/QuestionsMobileList';
 import { Link } from '@/i18n/routing';
 import { QuestionsTabletList } from './components/QuestionsTabletList';
 import { QuestionsLaptopList } from './components/QuestionsLaptopList';
-import MobImg from './images/herow_mobile.png';
-import HerowImg from './images/herow_desctop.png';
+import MobImg from './images/herow_mobile.avif';
+import HerowImg from './images/herow_desctop.avif';
 
 export default async function MainPage() {
   const t = await getTranslations('main');
