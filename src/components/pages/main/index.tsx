@@ -12,43 +12,36 @@ import { QuestionsMobileList } from './components/QuestionsMobileList';
 import { Link } from '@/i18n/routing';
 import { QuestionsTabletList } from './components/QuestionsTabletList';
 import { QuestionsLaptopList } from './components/QuestionsLaptopList';
-import MobImg from './images/herow_mobile.avif';
-import HerowImg from './images/herow_desctop.avif';
+import MobImg from './images/herow_mobile.webp';
+import HerowImg from './images/herow_mobile.webp';
 
 export default async function MainPage() {
   const t = await getTranslations('main');
 
   return (
     <main role="main" className="bg-grayy dark:bg-dark_bg">
-      <section>
+      <section className="">
         <h1 className="sr-only">Автобусні квитки з України в Європу – зручні перевезення з GreenBus</h1>
         <Image
           src={HerowImg}
           alt="People waiting for the bus"
           placeholder="blur"
+          loading="eager"
           priority
-          width={1440}
-          height={223}
+          width={0}
+          height={0}
           sizes="100vw"
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-          className="hidden tablet:block"
+          className="block tablet:hidden"
         />
         <Image
           src={MobImg}
           alt="People waiting for the bus"
           placeholder="blur"
-          priority
-          width={1440}
-          height={223}
+          loading="eager"
+          width={0}
+          height={0}
           sizes="100vw"
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-          className="block tablet:hidden"
+          className="hidden tablet:block"
         />
 
         <Container size="l" className="-mt-10">
