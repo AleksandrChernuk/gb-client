@@ -21,7 +21,7 @@ export default async function MainPage() {
   const t = await getTranslations('main');
 
   return (
-    <main role="main" className="bg-grayy dark:bg-dark_bg">
+    <main role="main" className="bg-grayy dark:bg-dark_bg ">
       <section className=" ">
         <Image
           src={mob_full}
@@ -29,7 +29,7 @@ export default async function MainPage() {
           width={392}
           height={140}
           priority
-          sizes="100vw"
+          sizes="(max-width: 767px) 100vw, 392px"
           placeholder="blur"
           className="w-full block tablet:hidden"
         />
@@ -40,7 +40,7 @@ export default async function MainPage() {
           width={1440}
           height={233}
           priority
-          sizes="100vw"
+          sizes="(max-width: 767px) 0vw, 100vw"
           placeholder="blur"
           className="w-full hidden tablet:block "
         />
