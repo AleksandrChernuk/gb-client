@@ -1,40 +1,63 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { getImageProps } from 'next/image';
-import MobImg from '../images/herow_mobile.webp';
-import DescImg from '../images/herow_desctop.webp';
 
 export default function HerowImage() {
-  const common = {
-    alt: 'Art Direction Example',
-    sizes: '100vw',
-    priority: true,
-  };
-
-  const {
-    props: { srcSet: desktop },
-  } = getImageProps({
-    ...common,
-    width: 1440,
-    height: 230,
-    quality: 100,
-    src: DescImg,
-  });
-
-  const {
-    props: { srcSet: mobile, ...rest },
-  } = getImageProps({
-    ...common,
-    width: 750,
-    height: 230,
-    quality: 70,
-    src: MobImg,
-  });
-
   return (
     <picture>
-      <source media="(min-width: 768px)" srcSet={desktop} />
-      <source media="(max-width: 767px)" srcSet={mobile} />
-      <img {...rest} style={{ width: '100%', height: 'auto' }} />
+      <source
+        media="(max-width: 767px)"
+        srcSet="
+        ./images/community/Ellipse@mob.webp  1x,
+        ./images/community/Ellipse@desk.webp 2x
+      "
+        type="image/webp"
+      />
+      <source
+        media="(max-width: 767px)"
+        srcSet="
+        ./images/community/Ellipse@mob.png  1x,
+        ./images/community/Ellipse@desk.png 2x
+      "
+        type="image/png"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcSet="
+        ./images/community/Ellipse@tab.webp   1x,
+        ./images/community/Ellipse@tab2x.webp 2x
+      "
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcSet="
+        ./images/community/Ellipse@tab.png   1x,
+        ./images/community/Ellipse@tab2x.png 2x
+      "
+        type="image/png"
+      />
+      <source
+        media="(min-width: 1440px)"
+        srcSet="
+        ./images/community/Ellipse@desk.webp   1x,
+        ./images/community/Ellipse@desk2x.webp 2x
+      "
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 1440px)"
+        srcSet="
+        ./images/community/Ellipse@desk.png   1x,
+        ./images/community/Ellipse@desk2x.png 2x
+      "
+        type="image/png"
+      />
+      <img
+        src="./images/community/Ellipse@desk.png"
+        alt="women near waterfall"
+        width="620"
+        height="620"
+        loading="lazy"
+      />
     </picture>
   );
 }

@@ -20,9 +20,7 @@ export async function generateMetadata({ params }: Props) {
 export default function Home() {
   return (
     <>
-      <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_main">
-        <MainPage />
-      </main>
+      <MainPage />
       <MainFooter />
     </>
   );
