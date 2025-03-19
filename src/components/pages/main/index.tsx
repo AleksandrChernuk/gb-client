@@ -26,25 +26,25 @@ export default async function MainPage() {
         <Image
           src={mob_full}
           alt="People waiting for the bus"
+          placeholder="blur"
           width={392}
           height={140}
           priority
-          quality={80}
-          sizes="(max-width: 767px) 768px, 392px"
-          placeholder="blur"
-          className="w-full block tablet:hidden"
+          sizes="(max-width: 767px) 100vw, 392px"
+          className="w-full block tablet:hidden desktop:hidden"
         />
 
         <Image
           src={desc_full}
           alt="People waiting for the bus"
+          placeholder="blur"
           width={1440}
           height={233}
           priority
           sizes="(max-width: 767px) 0vw, 100vw"
-          placeholder="blur"
           className="w-full hidden tablet:block "
         />
+
         <Container size="l" className="-mt-10">
           <div>
             <h1 className="sr-only">Доступні квитки — комфортні подорожі</h1>
