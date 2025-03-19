@@ -4,7 +4,11 @@ import MobImg from '../images/herow_mobile.webp';
 import DescImg from '../images/herow_desctop.webp';
 
 export default function HerowImage() {
-  const common = { alt: 'Art Direction Example', sizes: '100vw', priority: true };
+  const common = {
+    alt: 'Art Direction Example',
+    sizes: '100vw',
+    priority: true,
+  };
 
   const {
     props: { srcSet: desktop },
