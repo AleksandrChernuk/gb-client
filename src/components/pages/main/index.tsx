@@ -12,8 +12,9 @@ import { QuestionsMobileList } from './components/QuestionsMobileList';
 import { Link } from '@/i18n/routing';
 import { QuestionsTabletList } from './components/QuestionsTabletList';
 import { QuestionsLaptopList } from './components/QuestionsLaptopList';
-import MobImg from './images/herow_mobile.webp';
-import HerowImg from './images/herow_desctop.webp';
+// import MobImg from './images/mob_2.png';
+// import HerowImg from './images/des_2_2.png';
+import HerowImage from './components/HerowImage';
 
 export default async function MainPage() {
   const t = await getTranslations('main');
@@ -22,14 +23,12 @@ export default async function MainPage() {
     <main role="main" className="bg-grayy dark:bg-dark_bg">
       <section className="">
         <h1 className="sr-only">Автобусні квитки з України в Європу – зручні перевезення з GreenBus</h1>
-        <Image
+        {/* <Image
           src={MobImg}
           alt="People waiting for the bus"
           placeholder="blur"
           loading="eager"
           priority
-          width={0}
-          height={0}
           sizes="100vw"
           className="block tablet:hidden w-full h-full"
         />
@@ -37,12 +36,11 @@ export default async function MainPage() {
           src={HerowImg}
           alt="People waiting for the bus"
           placeholder="blur"
-          loading="eager"
-          width={0}
-          height={0}
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 768px) 0vw"
           className="hidden tablet:block w-full h-full"
-        />
+        /> */}
+
+        <HerowImage />
 
         <Container size="l" className="-mt-10">
           <MainSearch />
