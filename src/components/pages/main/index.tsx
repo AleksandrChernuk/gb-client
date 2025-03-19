@@ -14,8 +14,8 @@ import { CarriersList } from './components/CarriersList';
 // import { QuestionsLaptopList } from './components/QuestionsLaptopList';
 // import MobImg from './images/mob_2.png';
 // import HerowImg from './images/des_2_2.png';
-import mob_full from './images/mob_full.avif';
-import desc_full from './images/desc_full.avif';
+import mob_full from './images/mob_1.avif';
+import desc_full from './images/desc_1.avif';
 
 export default async function MainPage() {
   const t = await getTranslations('main');
@@ -31,7 +31,7 @@ export default async function MainPage() {
           priority
           sizes="100vw"
           placeholder="blur"
-          className="w-full block target:hidden"
+          className="w-full block tablet:hidden"
         />
 
         <Image
@@ -42,7 +42,7 @@ export default async function MainPage() {
           priority
           sizes="100vw"
           placeholder="blur"
-          className="w-full  hidden target:block "
+          className="w-full hidden tablet:block "
         />
         <Container size="l" className="-mt-10">
           <div>
