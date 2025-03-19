@@ -29,7 +29,8 @@ export default async function MainPage() {
           width={392}
           height={140}
           priority
-          sizes="(max-width: 767px) 100vw, 392px"
+          quality={80}
+          sizes="(max-width: 767px) 768px, 392px"
           placeholder="blur"
           className="w-full block tablet:hidden"
         />
