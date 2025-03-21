@@ -1,4 +1,4 @@
-import FaqPage from '@/components/pages/FaqPage';
+import FaqPage from '@/components/pages/faq';
 import { seoFaqBooking } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 

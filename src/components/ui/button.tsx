@@ -5,11 +5,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-2xl ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'cursor-pointer inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-2xl ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-white button_mobile  hover:bg-primary/90',
+        default: 'bg-primary text-white button_mobile hover:bg-primary/90',
         destructive: 'bg-destructive hover:bg-destructive/90',
         outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-black button_mobile hover:bg-secondary/80',
@@ -19,7 +19,8 @@ const buttonVariants = cva(
       },
       size: {
         default: '',
-        secondary: 'py-2 px-6 tablet:py-4 rounded-full tablet:h5 min-w-[168px] max-h-[48px] tablet:max-h-[52px]',
+        secondary:
+          'py-2 px-6 tablet:py-4 rounded-full tablet:h5 min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px]',
         sm: ' ',
         lg: ' ',
         icon: ' ',

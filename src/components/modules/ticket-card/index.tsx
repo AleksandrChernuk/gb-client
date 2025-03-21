@@ -14,7 +14,7 @@ import { TicketDetailsProvider } from './context/TicketDetailsContext';
 import TicketDivider from './components/TicketDivider';
 import { TicketCarriers } from './components/TicketCarriers';
 import TicketPlaces from './components/TicketPlaces';
-import TicketDetailsButton from '@/components/pages/BusesPage/components/TicketDetailsButton';
+import TicketDetailsButton from '@/components/pages/buses/components/TicketDetailsButton';
 import MobileDetails from './modules/MobileDetails';
 import TicketPricingMobile from './components/TicketPricingMobile';
 import TicketDetails from './modules/Details';

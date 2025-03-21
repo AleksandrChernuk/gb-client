@@ -6,7 +6,7 @@
     "placeholderTo": "Куди",
     "adult": "Дорослі",
     "children": "Діти (0-14 років)",
-
+    "learn_more": "Дізнатися більше",
     "placeholderPassenger": "Пасажир",
     "placeholderPassengers": "Пасажири",
     "placeholderPassengersGenitive": "Пасажирів",
@@ -98,6 +98,7 @@
     "questions_title": "Питання та відповіді",
     "questions_description": "Знайдіть відповіді на найбільш поширені запитання щодо наших послуг. Якщо у вас є додаткові питання, не вагайтесь звертатися до нас.",
     "questions_button": "Центр підтримки",
+    "learn_more": "Дізнатися більше",
     "payment_title": "Без готівки та черг",
     "payment_description": "Купуйте квитки онлайн у будь-який час прямо на сайті. Забудьте про черги та готівку — подорожуйте комфортно та зручно.",
     "destinations_title": "50 000 напрямків",

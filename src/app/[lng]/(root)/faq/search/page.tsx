@@ -1,4 +1,4 @@
-import SlugPage from '@/components/pages/FaqPage/modules/SlugPage';
+import SlugPage from '@/components/pages/faq/modules/FaqSearchResult';
 import { seoFaqSearch } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 

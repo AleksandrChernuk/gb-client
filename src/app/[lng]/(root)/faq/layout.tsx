@@ -1,5 +1,5 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
-import FaqSeach from '@/components/pages/FaqPage/modules/FaqSeach';
+import FaqSeach from '@/components/pages/faq/modules/FaqSeach';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { getTranslations } from 'next-intl/server';
