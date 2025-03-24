@@ -2,7 +2,7 @@
 
 import { ChevronUp } from 'lucide-react';
 import { Button } from '../ui/button';
-import { supportLocalesList } from '@/constans/constans.support.locales';
+import { supportLocalesList } from '@/constans/support-locales.constans';
 import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';

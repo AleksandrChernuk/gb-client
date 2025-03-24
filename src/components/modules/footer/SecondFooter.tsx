@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import secondFooter from './images/second-footer.png';
+import secondFooter from '@/public/images/second-footer.avif';
 import { cn } from '@/lib/utils';
 
 type Props = {
@@ -8,16 +8,16 @@ type Props = {
 
 export default async function SecondFooter({ className }: Props) {
   return (
-    <footer role="footer" className={cn("w-full h-auto bg-grayy dark:bg-dark_main", className)}>
+    <footer role="footer" className={cn('w-full h-auto bg-grayy dark:bg-dark_main', className)}>
       <Image
         src={secondFooter}
-        priority={true}
+        priority
         alt="peaple wait bus"
+        width={1440}
+        height={232}
         placeholder="empty"
-        style={{
-          width: "100%",
-          height: "auto",
-        }}
+        sizes="100vw"
+        className="w-full"
       />
     </footer>
   );

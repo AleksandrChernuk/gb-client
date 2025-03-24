@@ -1,9 +1,11 @@
-import { Container } from '@/components/shared/Container';
+import ThirdFooter from '@/components/modules/footer/ThirdFooter';
+import AboutPage from '@/components/pages/about';
 
 export default function About() {
   return (
-    <section>
-      <Container size="l">About page</Container>
-    </section>
+    <>
+      <AboutPage />
+      <ThirdFooter />
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import { Container } from '@/components/shared/Container';
-import { benefits } from '@/constans/constans.benefits';
+import { benefits } from '@/constans/benefits.constans';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Benefits() {

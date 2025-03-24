@@ -1,30 +1,29 @@
- 
-import Image from "next/image";
-import loader from "../images/loader.gif"
-import loaderdark from '../images/loaderdark.gif'
-
-
+import Image from 'next/image';
+import loader from '@/public/images/loader.gif';
+import loaderdark from '@/public/images/loaderdark.gif';
 
 export const Loader = () => {
   return (
-    <div className='flex items-center justify-center my-2'>
+    <div className="flex items-center justify-center my-2">
       <Image
         src={loader}
-        alt='Loading...'
+        alt="Loading..."
         height={200}
         width={200}
         priority
         unoptimized
-        className='dark:hidden'
+        className="dark:hidden"
+        sizes="100vw"
       />
       <Image
         src={loaderdark}
-        alt='Loading...'
+        alt="Loading..."
         priority
         unoptimized
         height={200}
         width={200}
-        className='hidden dark:block'
+        className="hidden dark:block"
+        sizes="100vw"
       />
     </div>
   );

@@ -4,6 +4,8 @@ import { CustomCard } from '@/components/shared/CustomCard';
 import { joinUsAgents } from '@/constans/join.us.agents.constans';
 import Image from 'next/image';
 import { Container } from '@/components/shared/Container';
+import busDirectly from '@/public/images/bus-directly-to-the-bus-stop.avif';
+import directionWith from '@/public/images/direction-with-a-road-in-the-city.avif';
 
 export default function ForAgentsPage() {
   return (
@@ -14,18 +16,16 @@ export default function ForAgentsPage() {
             <BackRouteButton />
           </div>
 
-          <ul className="grid grid-cols-1 gap-6 tablet:gap-12 tablet:grid-cols-2 tablet:items-center">
+          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24   tablet:items-center">
             <li>
               <Image
-                src={`/images/bus-directly-to-the-bus-stop.webp`}
-                width={680}
-                height={350}
-                quality={75}
-                priority
+                src={busDirectly}
+                width={766}
+                height={318}
                 alt="people-with-suitcases-looking-straight-ahead-goin"
               />
             </li>
-            <li>
+            <li className="tablet:w-1/2">
               <h1 className="mb-4 h3 laptop:h1 text-text_prymery">
                 GreenBus – автоматизуй продаж квитків та керуй перевезеннями!
               </h1>
@@ -62,8 +62,8 @@ export default function ForAgentsPage() {
 
       <section className="bg-bg_main pt-16">
         <Container size="l">
-          <ul className="grid grid-cols-1 gap-6 tablet:grid-cols-2 tablet:items-center">
-            <li>
+          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24 tablet:items-start">
+            <li className="tablet:w-1/2">
               <h2 className="mb-4 h3 laptop:h1 text-text_prymery">Можливості GreenBus</h2>
               <p className="secondary_text laptop:main_text_body text-text_muted">
                 GreenBus пропонує широкі можливості для партнерів: ефективна система продажу квитків, доступ до мережі
@@ -73,10 +73,11 @@ export default function ForAgentsPage() {
             </li>
             <li>
               <Image
-                src={'/images/people-with-suitcases-looking-straight-ahead--goin.webp'}
-                width={680}
-                height={350}
-                alt="people-with-suitcases-looking-straight-ahead-goin"
+                alt="direction-with-a-road-in-the-city"
+                src={directionWith}
+                width={766}
+                height={318}
+                className="overflow-hidden rounded-3xl mx-auto"
               />
             </li>
           </ul>

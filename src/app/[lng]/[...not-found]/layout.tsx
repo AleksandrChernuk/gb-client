@@ -39,7 +39,6 @@ export default async function NotFoundLayout({
     <html lang={lng} suppressHydrationWarning>
       <body className={`${noto_sans.variable} ${mulish.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          {' '}
           <div className="flex flex-col h-screen">{children}</div>;
         </NextIntlClientProvider>
       </body>

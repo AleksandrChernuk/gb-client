@@ -3,8 +3,9 @@ import FooterContacts from '@/components/shared/FooterContacts';
 import FooterLinksList from '@/components/shared/FooterLinksList';
 
 import Logo from '@/components/shared/Logo';
-import { footerNavLinks } from '@/constans/constans.footerNavLinks';
+import { footerNavLinks } from '@/constans/footer-nav-links.constans';
 import { cn } from '@/lib/utils';
+import { getTranslations } from 'next-intl/server';
 
 import Link from 'next/link';
 
@@ -13,23 +14,24 @@ type TMainFooter = {
 };
 
 export default async function MainFooter({ className }: TMainFooter) {
+  const t = await getTranslations('common');
   return (
     <footer role="footer" className={cn('w-full py-6 laptop:py-8', className)}>
       <Container size="m">
         <ul className="grid grid-cols-2 gap-x-[17px] gap-y-[32px] gap-4 tablet:grid-cols-3 laptop:grid-cols-4 laptop:gap-[114px] pb-8">
           <li>
-            <h5 className="mb-4 h5 text-text_prymery ">For passengers</h5>
+            <h5 className="mb-4 h5 text-text_prymery ">{t('forPassengersTitle')}</h5>
             <FooterLinksList navLinks={footerNavLinks['passengers']} />
           </li>
           <li>
-            <h5 className="mb-4 h5 text-text_prymery ">For employees</h5>
+            <h5 className="mb-4 h5 text-text_prymery ">{t('for_cooperation')}</h5>
             <FooterLinksList navLinks={footerNavLinks['employees']} />
           </li>
 
           <li className="col-span-2 tablet:col-span-1">
             <ul className="flex flex-col size-full">
               <li>
-                <h5 className="mb-4 h5 text-text_prymery ">Contacts</h5>
+                <h5 className="mb-4 h5 text-text_prymery">{t('contacts')}</h5>
                 <ul>
                   <li className="mb-2">
                     <FooterContacts />

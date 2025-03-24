@@ -1,6 +1,6 @@
 'use client';
 
-import { popularRoutersFakeData } from '@/constans/constans.popular-routers';
+import { popularRoutersFakeData } from '@/constans/popular-routers.constans';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import RoutersItem from './RoutersItem';

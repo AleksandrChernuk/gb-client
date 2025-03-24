@@ -4,6 +4,9 @@ import { CustomCard } from '@/components/shared/CustomCard';
 import RequestPartnershipForm from '@/components/modules/request-partnership';
 import { improveYourSalesList } from '@/constans/improve.your.sales.constans';
 import BackRouteButton from '@/components/shared/BackRouteButton';
+import peopleWithSuitcases from '@/public/images/people-with-suitcases-looking-straight-ahead-goin.avif';
+import busDirectly from '@/public/images/bus-directly-to-the-bus-stop.avif';
+import directionWith from '@/public/images/direction-with-a-road-in-the-city.avif';
 
 export default function ForСarriersPage() {
   return (
@@ -13,8 +16,8 @@ export default function ForСarriersPage() {
           <div className="mb-8">
             <BackRouteButton />
           </div>
-          <ul className="grid grid-cols-1 gap-6 tablet:gap-12 tablet:grid-cols-2 tablet:items-center">
-            <li>
+          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24   tablet:items-center">
+            <li className="w-1/2">
               <h1 className="mb-4 h3 laptop:h1 text-text_prymery">Чому варто приєднатися до GreenBus?</h1>
               <p className="secondary_text laptop:main_text_body text-text_muted">
                 GreenBus — це інноваційна онлайн-платформа для ефективного керування пасажирськими перевезеннями, що
@@ -24,9 +27,9 @@ export default function ForСarriersPage() {
             </li>
             <li>
               <Image
-                src={`/images/bus-directly-to-the-bus-stop.webp`}
-                width={680}
-                height={350}
+                src={busDirectly}
+                width={766}
+                height={318}
                 alt="people-with-suitcases-looking-straight-ahead-goin"
               />
             </li>
@@ -59,8 +62,8 @@ export default function ForСarriersPage() {
 
       <section className="py-16">
         <Container size="l">
-          <ul className="grid grid-cols-1 gap-6 tablet:grid-cols-2 tablet:items-center">
-            <li className="flex flex-col w-full">
+          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24   tablet:items-center ">
+            <li className="flex flex-col tablet:w-1/2">
               <h2 className="mb-4 h3 laptop:h1 text-text_prymery">Чому варто обрати саме нас?</h2>
               <p className="secondary_text laptop:main_text_body text-text_muted">
                 Ми пропонуємо найсучаснішу онлайн-систему для управління пасажирськими перевезеннями. Наші потужні
@@ -71,9 +74,9 @@ export default function ForСarriersPage() {
             </li>
             <li>
               <Image
-                src={'/images/people-with-suitcases-looking-straight-ahead--goin.webp'}
-                width={680}
-                height={350}
+                src={peopleWithSuitcases}
+                width={766}
+                height={318}
                 alt="people-with-suitcases-looking-straight-ahead-goin"
               />
             </li>
@@ -83,11 +86,17 @@ export default function ForСarriersPage() {
 
       <section>
         <Container size="l">
-          <ul className="grid grid-cols-1 gap-6 tablet:grid-cols-2 tablet:items-center">
-            <li className="flex items-center justify-center order-1 text-center tablet:order-1">
-              <Image src={`/images/direction-with-a-road-in-the-city.webp`} width={344} height={292} alt="busese" />
+          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24 tablet:items-start">
+            <li className="flex items-center justify-center order-1 text-center tablet:order-1 tablet:w-1/2">
+              <Image
+                alt="direction-with-a-road-in-the-city"
+                src={directionWith}
+                width={540}
+                height={466}
+                className="overflow-hidden rounded-3xl mx-auto"
+              />{' '}
             </li>
-            <li className="flex flex-col w-full  tablet:order-2">
+            <li className="flex flex-col w-full  tablet:order-2 tablet:w-1/2">
               <h2 className="mb-4 h3 laptop:h1 text-text_prymery">Ми гарантуємо безпеку ваших даних</h2>
               <p className="secondary_text laptop:main_text_body text-text_muted">
                 Використовуємо сучасну систему подвійного шифрування даних (end-to-end), що забезпечує найвищий рівень
