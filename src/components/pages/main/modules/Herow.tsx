@@ -1,8 +1,8 @@
 import MainSearch from '@/components/modules/main-search';
 import { Container } from '@/components/shared/Container';
 import Image from 'next/image';
-import mob_full from '../images/mob_full.avif';
-import desc_full from '../images/desc_full.avif';
+import mob_full from '@/public/images/mob_full.avif';
+import desc_full from '@/public/images/desc_full.avif';
 
 export default function Herow() {
   return (

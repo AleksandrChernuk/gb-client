@@ -2,7 +2,7 @@ import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import pointOnCurtfrom from '../images/point-on-curt.avif';
+import pointOnCurtfrom from '@/public/images/point-on-curt.avif';
 
 export default async function GetStarted() {
   const t = await getTranslations('main');

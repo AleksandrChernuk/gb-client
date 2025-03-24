@@ -1,7 +1,7 @@
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import travellerOnTheStreet from '../images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
+import travellerOnTheStreet from '@/public/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Buses() {
