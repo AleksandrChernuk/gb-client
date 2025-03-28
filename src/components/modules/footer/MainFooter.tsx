@@ -1,13 +1,12 @@
 import { Container } from '@/components/shared/Container';
-import FooterContacts from '@/components/shared/FooterContacts';
 import FooterLinksList from '@/components/shared/FooterLinksList';
 
 import Logo from '@/components/shared/Logo';
+import { Support } from '@/components/shared/Support';
 import { footerNavLinks } from '@/constans/footer-nav-links.constans';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';
-
-import Link from 'next/link';
 
 type TMainFooter = {
   className?: string;
@@ -34,17 +33,17 @@ export default async function MainFooter({ className }: TMainFooter) {
                 <h5 className="mb-4 h5 text-text_prymery">{t('contacts')}</h5>
                 <ul>
                   <li className="mb-2">
-                    <FooterContacts />
+                    <Support type="footer" />
                   </li>
 
                   <li>
                     <Link
-                      href={'mailto:greenbus@gmail.com'}
+                      href={'mailto:greenbus.ukraine@gmail.com'}
                       target="_blank"
-                      aria-label="greenbus@gmail.com"
+                      aria-label="greenbus.ukraine@gmail.com"
                       className="block secondary_text tablet:main_text_body text-text_secondary"
                     >
-                      greenbus@gmail.com
+                      greenbus.ukraine@gmail.com
                     </Link>
                   </li>
                 </ul>

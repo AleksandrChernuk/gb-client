@@ -10,10 +10,10 @@ export default function Herow() {
       <Image
         src={mob_full}
         alt="People waiting for the bus"
+        priority
         placeholder="blur"
         width={392}
         height={140}
-        priority
         sizes="(max-width: 767px) 100vw, 392px"
         className="w-full block tablet:hidden"
       />
@@ -22,9 +22,9 @@ export default function Herow() {
         src={desc_full}
         alt="People waiting for the bus"
         placeholder="blur"
+        priority
         width={1440}
         height={233}
-        priority
         sizes="(max-width: 767px) 0vw, 100vw"
         className="w-full hidden tablet:block "
       />

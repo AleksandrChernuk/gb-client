@@ -9,7 +9,7 @@ export default async function Questions() {
   const t_main = await getTranslations('main');
 
   return (
-    <section className="py-6 bg-background_card laptop:py-8 dark:bg-dark_main">
+    <section className="py-4 tablet:py-6 bg-background_card   dark:bg-dark_main">
       <Container size="m">
         <h3 className="mb-4 text-white h3 laptop:h1 laptop:mb-8 dark:text-garyy">{t_main('questions_title')}</h3>
         <ul className="grid grid-cols-1 tablet:grid-cols-3 gap-6 mb-4 last:border-b-0">

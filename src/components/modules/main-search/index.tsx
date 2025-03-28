@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
-const Search = dynamic(() => import('./Search'), {
+const MainSearchForm = dynamic(() => import('./modules/MainSearchForm'), {
   ssr: false,
   loading: () => <MainSearchSkeleton />,
 });
@@ -10,5 +10,5 @@ const Search = dynamic(() => import('./Search'), {
 import { MainSearchSkeleton } from '@/components/shared/MainSearchSkeleton';
 
 export default function MainSearch() {
-  return <Search />;
+  return <MainSearchForm />;
 }

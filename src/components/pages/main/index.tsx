@@ -4,6 +4,7 @@ import Buses from './modules/Buses';
 import Benefits from './modules/Benefits';
 import PopularRoutes from './modules/PopularRoutes';
 import Herow from './modules/Herow';
+import Carriers from './modules/Carriers';
 
 export default async function MainPage() {
   return (
@@ -13,6 +14,7 @@ export default async function MainPage() {
       <Buses />
       <PopularRoutes />
       <GetStarted />
+      <Carriers />
       <Questions />
     </main>
   );

@@ -5,7 +5,6 @@ import { ProfileLink } from '@/components/shared/ProfileLink';
 import { Support } from '@/components/shared/Support';
 import { SwitchTheme } from '@/components/shared/SwitchTheme';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
-import { Suspense } from 'react';
 
 export default async function MainHeader() {
   return (
@@ -16,23 +15,21 @@ export default async function MainHeader() {
         <nav>
           <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">
             <li className="laptop:hidden">
-              <Support />
+              <Support type="desctop" />
             </li>
             <li>
-              <Suspense>
-                <SelectLocale />
-              </Suspense>
+              <SelectLocale type="desctop" />
             </li>
             <li>
               <SwitchTheme />
             </li>
 
             <li className="hidden laptop:block">
-              <Support />
+              <Support type="desctop" />
             </li>
 
             <li>
-              <ProfileLink />
+              <ProfileLink type="desctop" />
             </li>
           </ul>
         </nav>

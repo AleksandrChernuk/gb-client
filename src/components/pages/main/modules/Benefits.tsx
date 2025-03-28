@@ -6,7 +6,7 @@ export default async function Benefits() {
   const t = await getTranslations('main');
 
   return (
-    <section className="py-6">
+    <section className="py-8 tablet:py-16">
       <Container size="l">
         <ul className="grid grid-cols-1 grid-rows-4 tablet:grid-cols-[repeat(2,minmax(auto,1fr))] tablet:grid-rows-2 laptop:grid-cols-[repeat(4,minmax(auto,auto))] laptop:grid-rows-1 gap-2 tablet:gap-8 laptop:gap-[117px]">
           {benefits &&

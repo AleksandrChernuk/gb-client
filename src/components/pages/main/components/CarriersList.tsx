@@ -22,7 +22,7 @@ export const CarriersList = () => {
   return (
     <ul className="space-y-4">
       {normalizeCarriersList(carriers).map((level, idx) => (
-        <ul key={idx} className="flex items-center justify-center gap-4">
+        <ul key={idx} className="flex items-center justify-center gap-2">
           {level.map(({ alt, src, w, h }) => (
             <li key={alt} className={`w-[${w}px] h-[${h}px]`}>
               <Image src={src} alt={alt} width={w} height={h} />

@@ -401,25 +401,6 @@
     background: linear-gradient(95deg, #62f1b0 8.31%, #33c6ea 99.48%);
   }
 
-  .bg_img {
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100%;
-    height: auto;
-  }
-
-  @media (max-width: 768px) {
-    .bg_img {
-      background-image: url('/images/herow_mobile.webp');
-    }
-  }
-
-  @media (min-width: 769px) {
-    .bg_img {
-      background-image: url('/images/herow_desctop.webp');
-    }
-  }
-
   .poit_to_wrapp::before {
     content: '';
     position: absolute;

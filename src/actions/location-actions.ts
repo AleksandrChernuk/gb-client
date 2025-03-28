@@ -1,10 +1,12 @@
-import { ILocation, ILocationQueryParams } from "@/types/location.types";
+'use server';
 
-const BASE_URL = "https://greenbus-backend.onrender.com/api/v1";
+import { ILocation, ILocationQueryParams } from '@/types/location.types';
+
+const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
 async function fetchFromApi<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${BASE_URL}/${endpoint}`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
     ...options,
   });
 
@@ -18,9 +20,9 @@ async function fetchFromApi<T>(endpoint: string, options: RequestInit = {}): Pro
 export const getLocations = async (params: ILocationQueryParams) => {
   const queryParams = new URLSearchParams();
 
-  if (params.query) queryParams.append("query", params.query);
-  if (params.page) queryParams.append("page", params.page.toString());
-  if (params.perPage) queryParams.append("perPage", params.perPage.toString());
+  if (params.query) queryParams.append('query', params.query);
+  if (params.page) queryParams.append('page', params.page.toString());
+  if (params.perPage) queryParams.append('perPage', params.perPage.toString());
 
   const endpoint = `locations?${queryParams.toString()}`;
   return fetchFromApi<{

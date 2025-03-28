@@ -1,3 +1,5 @@
+'use server';
+
 import { IGetRoutesBody, IRouteResponse } from '@/types/route.types';
 import { IGetRouteDetailsBody, IRouteDetailsResponse } from '@/types/routeDetails-interface';
 
@@ -20,9 +22,7 @@ export const getRoutes = async (body: IGetRoutesBody): Promise<IRouteResponse[]>
   return data;
 };
 
-export const getRouteDetails = async (
-  body: IGetRouteDetailsBody
-): Promise<IRouteDetailsResponse> => {
+export const getRouteDetails = async (body: IGetRouteDetailsBody): Promise<IRouteDetailsResponse> => {
   const response = await fetch(`${BASE_URL}/routes/route-details`, {
     method: 'POST',
     headers: {

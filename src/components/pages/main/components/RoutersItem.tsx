@@ -4,8 +4,8 @@ import Image from 'next/image';
 import React from 'react';
 
 type TIRoutersItem = {
-  from: string | undefined;
-  to: string | undefined;
+  from: string;
+  to: string;
 };
 
 export default function RoutersItem({ from, to }: TIRoutersItem) {

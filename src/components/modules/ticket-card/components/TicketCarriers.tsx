@@ -1,4 +1,4 @@
-import { IconCarriersBus } from '@/components/pages/buses/icons/IconCarriersBus';
+import { IconCarriersBus } from '@/public/icons/IconCarriersBus';
 
 type Props = {
   name: string;
