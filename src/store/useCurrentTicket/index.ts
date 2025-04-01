@@ -18,6 +18,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
           selectedTicketId: null,
           selectedTicket: null,
           loadingSelectTicket: false,
+          isButtonDisabled: false,
 
           setSelectedTicketId(id) {
             set({ selectedTicketId: id });
@@ -191,9 +192,17 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               tickets: {},
               selectedTicketId: null,
               selectedTicket: null,
+              isButtonDisabled: false,
             }));
 
             await DeleteCookie('_p');
+          },
+
+          SetIsButtonDisabled: () => {
+            set((state) => ({
+              ...state,
+              isButtonDisabled: true,
+            }));
           },
         }),
         {

@@ -1,3 +1,5 @@
+'use client';
+
 import { useSearchStore } from '@/store/useSearch';
 import { IRouteResponse } from '@/types/route.types';
 import { useLocale } from 'next-intl';
@@ -5,26 +7,35 @@ import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useShallow } from 'zustand/react/shallow';
 import { useRouter } from '@/i18n/routing';
 import { setCookie } from '@/actions/cookie-actions';
+import { useState } from 'react';
 
 export default function useTicketCard() {
-  const getDetailsTicket = useCurrentTicketStore((state) => state.getDetailsTicket);
-  const setSelectedTicket = useCurrentTicketStore((state) => state.setSelectedTicket);
+  const [loading, setLoading] = useState(false);
 
-  const from = useSearchStore(useShallow((state) => state.from));
-  const to = useSearchStore(useShallow((state) => state.to));
-  const adult = useSearchStore(useShallow((state) => state.adult));
-  const children = useSearchStore(useShallow((state) => state.children));
-  const date = useSearchStore(useShallow((state) => state.date));
+  const [getDetailsTicket, setSelectedTicket, setSelectedTicketId, SetIsButtonDisabled] = useCurrentTicketStore(
+    useShallow((state) => [
+      state.getDetailsTicket,
+      state.setSelectedTicket,
+      state.setSelectedTicketId,
+      state.SetIsButtonDisabled,
+    ]),
+  );
+
+  const [from, to, adult, children, date] = useSearchStore(
+    useShallow((state) => [state.from, state.to, state.adult, state.children, state.date]),
+  );
 
   const currentLocale = useLocale();
   const router = useRouter();
 
-  const handleSetTicket = async (element: IRouteResponse) => {
+  const handleSetTicket = async (id: string, element: IRouteResponse) => {
     await setCookie({
       name: '_p',
       value: JSON.stringify({ adult, children }),
     });
-
+    setLoading(true);
+    SetIsButtonDisabled();
+    setSelectedTicketId(id);
     if (element) {
       await setSelectedTicket({
         route: element,
@@ -55,5 +66,6 @@ export default function useTicketCard() {
   return {
     handleGetDetails,
     handleSetTicket,
+    loading,
   };
 }

@@ -21,6 +21,7 @@ export default async function Questions() {
               <p className="mb-4 secondary_text laptop:main_text_body text-gray_0 ">{t(`${title}.${text[0]}`)}</p>
               <Button asChild variant={'link'} className="mt-auto">
                 <Link
+                  prefetch={false}
                   className="block mb-6 text-base font-bold underline laptop:text-base text-primary_2"
                   href={`${'/faq/routes-and-buses'}?q=${slug}`}
                 >
@@ -32,7 +33,9 @@ export default async function Questions() {
         </ul>
         <div className="text-right">
           <Button asChild variant={'secondary'} size={'secondary'}>
-            <Link href={'/faq'}>{t_main('questions_button')}</Link>
+            <Link prefetch={false} href={'/faq'}>
+              {t_main('questions_button')}
+            </Link>
           </Button>
         </div>
       </Container>

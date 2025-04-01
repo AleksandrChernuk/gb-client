@@ -4,7 +4,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { cn } from '@/lib/utils';
 import { IRouteResponse } from '@/types/route.types';
 import { format } from 'date-fns';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 type TLocation = {
   className?: string;
@@ -14,7 +14,6 @@ type TLocation = {
 
 type TTicketRouteMobile = {
   route: IRouteResponse | null;
-  locale: string;
   className?: string;
 };
 
@@ -28,9 +27,7 @@ const DateDuration = ({ departure, duration, arrival }: TDateDuration) => {
   return (
     <div className="flex flex-col justify-between text-text_prymery">
       <div className="button_mobile">{departure}</div>
-
       <div className="small_text text-text_secondary">{duration}</div>
-
       <div className="button_mobile">{arrival}</div>
     </div>
   );
@@ -45,8 +42,9 @@ const Location = ({ location, address, className }: TLocation) => {
   );
 };
 
-export default function TicketRouteMobile({ route, locale, className }: TTicketRouteMobile) {
+export default function TicketRouteMobile({ route, className }: TTicketRouteMobile) {
   const t = useTranslations('buses');
+  const locale = useLocale();
 
   if (!route) {
     return null;

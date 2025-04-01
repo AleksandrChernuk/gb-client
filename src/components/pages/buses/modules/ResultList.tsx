@@ -10,6 +10,7 @@ import { TicketCard } from '@/components/modules/ticket-card';
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();
   const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets);
+
   if (isFetching) {
     return <Loader />;
   }
@@ -19,10 +20,10 @@ export default function ResultList() {
   if (!isFetching && data && data.length === 0) return <NoTravel />;
 
   return (
-    <ul className="flex flex-col space-y-10">
+    <div className="flex flex-col space-y-10">
       {filteredTickets.map((route) => {
         return <TicketCard key={`${route.ticket_id}`} element={route} />;
       })}
-    </ul>
+    </div>
   );
 }

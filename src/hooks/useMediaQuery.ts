@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from 'react';
 
 type UseMediaQueryOptions = {
   defaultValue?: boolean;
   initializeWithValue?: boolean;
 };
 
-const IS_SERVER = typeof window === "undefined";
+const IS_SERVER = typeof window === 'undefined';
 
 export function useMediaQuery(
   query: string,
@@ -39,14 +39,14 @@ export function useMediaQuery(
     const listener = (event: MediaQueryListEvent) => handleChange(event);
 
     if (matchMedia.addEventListener) {
-      matchMedia.addEventListener("change", listener);
+      matchMedia.addEventListener('change', listener);
     } else {
       matchMedia.addListener(listener);
     }
 
     return () => {
       if (matchMedia.removeEventListener) {
-        matchMedia.removeEventListener("change", listener);
+        matchMedia.removeEventListener('change', listener);
       } else {
         matchMedia.removeListener(listener);
       }
