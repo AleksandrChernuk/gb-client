@@ -20,8 +20,8 @@ export default function SelectButton({
     case 'mobile':
       return (
         <Button
-          variant={'default'}
           {...props}
+          variant={'default'}
           className="w-full text-amber-50  py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl "
         >
           {loading ? (

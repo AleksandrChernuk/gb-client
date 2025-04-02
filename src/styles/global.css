@@ -455,6 +455,34 @@
     z-index: 40;
   }
 
+  .custom_hidden {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .mobile-img {
+      display: none;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .desktop-img {
+      display: none;
+    }
+  }
+
+  .custom_block {
+    display: block;
+  }
+
+  .custom_flex {
+    display: flex;
+  }
+
+  .custom_grid {
+    display: grid;
+  }
+
   .dark .poit_from::before {
     border-color: var(--blackmode);
     background-color: var(--dark_main);
@@ -528,5 +556,19 @@
     100% {
       background-position: 20px 20px;
     }
+  }
+}
+
+.media_mobile {
+  display: block;
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.media_desc {
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
   }
 }

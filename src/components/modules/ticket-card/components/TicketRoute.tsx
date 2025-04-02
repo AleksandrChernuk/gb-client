@@ -27,7 +27,7 @@ export default function TicketRoute({ route }: Props) {
 
   return (
     <>
-      <div className="justify-between hidden w-full grid-cols-3 gap-2 tablet:grid">
+      <div className="justify-between custom_hidden w-full grid-cols-3 gap-2 tablet:custom_grid">
         <div className="flex flex-col gap-1">
           <div className="h3 laptop:h1 text-text_prymery">{date_time_from}</div>
           <div className="h5 laptop:h4 text-text_prymery">{location_from}</div>
@@ -53,7 +53,7 @@ export default function TicketRoute({ route }: Props) {
         </div>
       </div>
 
-      <div className="flex tablet:hidden">
+      <div className="flex tablet:custom_hidden">
         <div className="flex flex-col justify-between text-text_prymery">
           <div className="button_mobile">{date_time_from}</div>
           <div className="small_text text-text_secondary">{(duration && `${duration[0]}:${duration[1]}`) || ''}</div>
