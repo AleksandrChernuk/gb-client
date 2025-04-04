@@ -42,6 +42,7 @@ export default async function MainFooter({ className }: TMainFooter) {
                       target="_blank"
                       aria-label="greenbus.ukraine@gmail.com"
                       className="block secondary_text tablet:main_text_body text-text_secondary"
+                      prefetch={false}
                     >
                       greenbus.ukraine@gmail.com
                     </Link>

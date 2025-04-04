@@ -20,13 +20,17 @@ export default async function FooterLinksList({ navLinks, className }: Props) {
       {navLinks.map(({ title, href, icon }) =>
         icon ? (
           <li key={href}>
-            <Link href={href} className="inline-block  p-1 rounded-full bg-primary_2">
+            <Link prefetch={false} href={href} className="inline-block  p-1 rounded-full bg-primary_2">
               {icon}
             </Link>
           </li>
         ) : (
           <li key={href}>
-            <Link href={href} className="inline-block secondary_text tablet:main_text_body text-text_secondary">
+            <Link
+              prefetch={false}
+              href={href}
+              className="inline-block secondary_text tablet:main_text_body text-text_secondary"
+            >
               {t(`${title}`)}
             </Link>
           </li>

@@ -36,7 +36,7 @@ export default function FaqSearchResult() {
           <h3 className="h5 text-text_prymery">
             {t('no_results_found')} <span>{`"${searchQuery}"`}</span>
           </h3>
-          <Link className=" h5 text-text_secondary" href={'/faq'}>
+          <Link prefetch={false} className=" h5 text-text_secondary" href={'/faq'}>
             {t('go_to_section')} <span className="underline text-primary_1 dark:text-primary_2">«{t('title')}»</span>
           </Link>
         </CustomCard>

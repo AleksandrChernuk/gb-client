@@ -10,6 +10,7 @@ type TIRoutersItem = {
 export default function RoutersItem({ from, to }: TIRoutersItem) {
   return (
     <Link
+      prefetch={false}
       href={{
         pathname: '/about',
         query: { from: from, to: to },

@@ -41,6 +41,7 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
           </p>
           <Button asChild variant={'link'}>
             <Link
+              prefetch={false}
               href={backButtonHref}
               className="underline text-xs font-normal tracking-normal leading-[16.8px]"
               aria-label="go home page"

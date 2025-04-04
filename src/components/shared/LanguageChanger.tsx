@@ -43,7 +43,7 @@ export default function SelectLocale({ type }: Props) {
                     asChild
                     className="justify-start text-text_prymery body_medium"
                   >
-                    <Link href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
+                    <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
                       <div className="w-6 h-6"> {el.icon} </div>
                       {el.shortName}
                     </Link>
@@ -74,7 +74,7 @@ export default function SelectLocale({ type }: Props) {
             {supportLocalesList.map((el) => (
               <li key={el.value}>
                 <Button key={el.value} variant={'link'} asChild className="justify-start text-text_prymery body_medium">
-                  <Link href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
+                  <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
                     <div className="w-6 h-6"> {el.icon} </div>
                     {el.shortName}
                   </Link>

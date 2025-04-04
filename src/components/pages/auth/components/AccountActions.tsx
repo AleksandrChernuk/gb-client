@@ -23,11 +23,11 @@ export default function AccountActions() {
 
         <p className="small_text text-text_secondary">
           {t('auth_terms_of_the')}{' '}
-          <Link href={'/'} replace aria-label="go home page" className="text-primary">
+          <Link href={'/'} prefetch={false} replace aria-label="go home page" className="text-primary">
             {t('auth_public_offer')}
           </Link>
           , {t('auth_and')}{' '}
-          <Link href={'/'} className="text-primary">
+          <Link href={'/'} prefetch={false} className="text-primary">
             {t('auth_returns_policy')}
           </Link>
         </p>

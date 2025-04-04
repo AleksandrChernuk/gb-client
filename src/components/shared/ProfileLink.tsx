@@ -15,7 +15,7 @@ export const ProfileLink = ({ type }: Props) => {
   if (type === 'mobile') {
     return (
       <Button asChild variant={'link'} className="justify-start text-text_prymery body_medium">
-        <Link href={isAuth ? '/profile' : '/signin'} replace>
+        <Link prefetch={false} href={isAuth ? '/profile' : '/signin'} replace>
           <User size={24} className="stroke-primary" />
           {t('mainNavProfileLink')}
         </Link>
@@ -27,6 +27,7 @@ export const ProfileLink = ({ type }: Props) => {
     return (
       <Button asChild variant={'link'}>
         <Link
+          prefetch={false}
           href={isAuth ? '/profile' : '/signin'}
           className="group text-black! body_medium gap-1 hover:text-gray_3! dark:hover:text-gray_1 dark:text-grayy!"
         >

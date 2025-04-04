@@ -31,7 +31,11 @@ export const Support = ({ type }: Props) => {
               {supportNavlinks.map((item, idx) => (
                 <li key={`${item.title}+${idx}`}>
                   <Button asChild variant={'link'} aria-label={item.title} title={item.title}>
-                    <Link href={item.src} className="flex flex-row items-center justify-start gap-2 p-1 body_medium">
+                    <Link
+                      prefetch={false}
+                      href={item.src}
+                      className="flex flex-row items-center justify-start gap-2 p-1 body_medium"
+                    >
                       <span className="w-[22.5px] h-[22.5px]">{item.icon && item.icon}</span>
                       <span className="text-base font-normal text-black dark:text-grayy">{item.title}</span>
                     </Link>
@@ -75,7 +79,7 @@ export const Support = ({ type }: Props) => {
                   aria-label={item.title}
                   title={item.title}
                 >
-                  <Link href={item.src}>
+                  <Link prefetch={false} href={item.src}>
                     <div className="w-4 h-4">{item.icon}</div>
                     {item.title}
                   </Link>
@@ -114,7 +118,7 @@ export const Support = ({ type }: Props) => {
                   aria-label={item.title}
                   title={item.title}
                 >
-                  <Link href={item.src}>
+                  <Link prefetch={false} href={item.src}>
                     <div className="w-4 h-4">{item.icon}</div>
                     {item.title}
                   </Link>
