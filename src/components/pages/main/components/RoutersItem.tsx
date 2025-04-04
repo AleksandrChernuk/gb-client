@@ -1,7 +1,6 @@
 import { IconRouteArrow } from '@/components/icons/IconRouteArrow';
 import { Link } from '@/i18n/routing';
-import Image from 'next/image';
-import React from 'react';
+// import Image from 'next/image';
 
 type TIRoutersItem = {
   from: string;
@@ -23,7 +22,7 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
         <div className="flex flex-row items-center gap-1 tablet:gap-2">
           <span className="secondary_text tablet:main_text_body aptop:leading-6 text-text_prymery">{from}</span>
 
-          <Image src={'/icons/path.svg'} alt="route" width={62} height={20} />
+          {/* <Image src={'/icons/path.svg'} alt="route" width={62} height={20} /> */}
 
           <span className="secondary_text tablet:main_text_body laptop:leading-6 text-text_prymery">{to}</span>
         </div>

@@ -118,7 +118,7 @@ export default function Passengers() {
 
                               {fieldState.invalid && (
                                 <span className="text-sm font-medium text-red">
-                                  {t_forms(fieldState.error?.message)}
+                                  {t_forms(fieldState.error?.message || '')}
                                 </span>
                               )}
                             </FormItem>

@@ -37,7 +37,7 @@ export default async function MainLayout({
     return notFound();
   }
   const messages = await getMessages();
-  setRequestLocale(lng);
+  setRequestLocale(lng as Locale);
 
   return (
     <NextIntlClientProvider messages={messages}>

@@ -33,7 +33,7 @@ export default async function NotFoundLayout({
     return notFound();
   }
   const messages = await getMessages();
-  setRequestLocale(lng);
+  setRequestLocale(lng as Locale);
 
   return (
     <html lang={lng} suppressHydrationWarning>
