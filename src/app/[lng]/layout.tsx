@@ -5,11 +5,12 @@ import '@/styles/global.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import { Params } from '@/types/common.types';
 import { ThemeProvider } from 'next-themes';
 import ReactQueryContext from '@/providers/ReactQueryProvider';
+import { ReactNode } from 'react';
 
 const noto_sans = Noto_Sans({
   variable: '--font-geist-sans',
@@ -28,7 +29,7 @@ export default async function MainLayout({
   children,
   params,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
   params: Params;
 }>) {
   const { lng } = await params;
@@ -36,11 +37,11 @@ export default async function MainLayout({
   if (!routing.locales.includes(lng as Locale)) {
     return notFound();
   }
-  const messages = await getMessages();
+  // const messages = await getMessages();
   setRequestLocale(lng as Locale);
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
         <body className={`${noto_sans.variable} ${mulish.variable} antialiased`}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
