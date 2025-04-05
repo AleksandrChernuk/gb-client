@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 
 const MainSearchForm = dynamic(() => import('./modules/MainSearchForm'), {
-  ssr: false,
   loading: () => <MainSearchSkeleton />,
 });
 
