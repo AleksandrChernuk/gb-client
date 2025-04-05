@@ -1,29 +1,18 @@
-import { Noto_Sans, Mulish } from 'next/font/google';
-
 import '@/styles/global.css';
 
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import { Params } from '@/types/common.types';
 import { ThemeProvider } from 'next-themes';
 import ReactQueryContext from '@/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
-
-const noto_sans = Noto_Sans({
-  variable: '--font-geist-sans',
-  subsets: ['latin', 'cyrillic'],
-  display: 'swap',
-});
-
-const mulish = Mulish({
-  variable: '--font-mulish',
-  subsets: ['latin'],
-  weight: '800',
-  display: 'swap',
-});
+import { cn } from '@/lib/utils';
+import { cookies } from 'next/headers';
+import { fontVariables } from '@/lib/fonts';
+import { ActiveThemeProvider } from '@/providers/active-theme';
 
 export default async function MainLayout({
   children,
@@ -37,15 +26,47 @@ export default async function MainLayout({
   if (!routing.locales.includes(lng as Locale)) {
     return notFound();
   }
-  // const messages = await getMessages();
   setRequestLocale(lng as Locale);
+  const cookieStore = await cookies();
+  const activeThemeValue = cookieStore.get('active_theme')?.value;
+  const isScaled = activeThemeValue?.endsWith('-scaled');
+
+  const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages} locale={lng as Locale}>
       <html lang={lng} suppressHydrationWarning>
-        <body className={`${noto_sans.variable} ${mulish.variable} antialiased`}>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-            <ReactQueryContext>{children}</ReactQueryContext>
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              try {
+                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.querySelector('meta[name="theme-color"]').setAttribute('content', 'dark')
+                }
+              } catch (_) {}
+            `,
+            }}
+          />
+        </head>
+        <body
+          className={cn(
+            'bg-background overscroll-none font-sans antialiased',
+            activeThemeValue ? `theme-${activeThemeValue}` : '',
+            isScaled ? 'theme-scaled' : '',
+            fontVariables,
+          )}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            enableColorScheme
+          >
+            <ActiveThemeProvider initialTheme={activeThemeValue}>
+              <ReactQueryContext>{children}</ReactQueryContext>
+            </ActiveThemeProvider>
           </ThemeProvider>
         </body>
       </html>

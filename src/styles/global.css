@@ -558,21 +558,3 @@
     }
   }
 }
-
-.media_mobile {
-  display: block;
-  @media (min-width: 768px) {
-    display: none;
-  }
-}
-
-.media_desc {
-  display: none;
-  @media (min-width: 768px) {
-    display: block;
-  }
-}
-
-[hidden] {
-  display: none;
-}
