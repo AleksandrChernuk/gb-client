@@ -1,15 +1,18 @@
-import { Mulish, Noto_Sans_Mono } from 'next/font/google';
+import { Mulish, Noto_Sans } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
 
-const fontNotoMono = Noto_Sans_Mono({
-  subsets: ['latin'],
-  variable: '--font-noto-mono',
+const notoSans = Noto_Sans({
+  variable: '--font-geist-sans',
+  subsets: ['latin', 'cyrillic'],
+  display: 'swap',
 });
 
-const fontMullish = Mulish({
+const mullish = Mulish({
+  variable: '--font-mulish',
   subsets: ['latin'],
-  variable: '--font-mullish',
+  weight: '800',
+  display: 'swap',
 });
 
-export const fontVariables = cn(fontNotoMono.variable, fontMullish.variable);
+export const fontVariables = cn(notoSans.variable, mullish.variable);

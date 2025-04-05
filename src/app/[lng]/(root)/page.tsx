@@ -1,4 +1,5 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
+import MainHeader from '@/components/modules/header/MainHeader';
 import MainPage from '@/components/pages/main';
 import { seoMain } from '@/lib/seo';
 import { Params } from '@/types/common.types';
@@ -27,9 +28,10 @@ export default async function Home({
   const { lng } = await params;
   setRequestLocale(lng as Locale);
   return (
-    <>
+    <div className="flex flex-col h-screen">
+      <MainHeader />
       <MainPage />
       <MainFooter />
-    </>
+    </div>
   );
 }

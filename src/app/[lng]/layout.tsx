@@ -1,3 +1,5 @@
+// import { Noto_Sans, Mulish } from 'next/font/google';
+
 import '@/styles/global.css';
 
 import { NextIntlClientProvider } from 'next-intl';
