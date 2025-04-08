@@ -25,7 +25,9 @@ export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted 
           <div className="text-base font-medium leading-4 tracking-normal">{el.locationName}</div>
           <div className="">
             {el.countryName}.{' '}
-            <span className="text-sm font-normal leading-4 tracking-normal text-text_secondary">{el.regionName}</span>
+            <span className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200">
+              {el.regionName}
+            </span>
           </div>
         </div>
         <div>

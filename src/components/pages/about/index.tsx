@@ -31,7 +31,7 @@ export default function AboutPage() {
               <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
                 GreenBus in Ukraine
               </h1>
-              <p className="mb-4 body_text text-text_secondary">
+              <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                 laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                 ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -50,7 +50,7 @@ export default function AboutPage() {
               <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
                 Professional solutions for your business growth
               </h2>
-              <p className="mb-4 body_text text-text_secondary">
+              <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                 laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                 ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -71,7 +71,7 @@ export default function AboutPage() {
             {aboutUsStatistics.map(({ id, title, text }) => (
               <li key={id} className="space-y-2 laptop:space-y-4">
                 <h3 className="text-base font-bold leading-6 tracking-normal text-green-300 laptop:h1">{title}</h3>
-                <p className="text-xs font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-[27px] text-text_secondary">
+                <p className="text-xs font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-[27px] text-slate-400 dark:text-slate-200">
                   {text}
                 </p>
               </li>
@@ -105,7 +105,7 @@ export default function AboutPage() {
               <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
                 GreenBus in Ukraine
               </h2>
-              <p className="mb-4 body_text text-text_secondary">
+              <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                 laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                 ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -150,7 +150,7 @@ export default function AboutPage() {
       </section>
       <section className="py-16">
         <Container size="xs" className="my-auto">
-          <CustomCard className="shadow bg-card">
+          <CustomCard className="shadow-xs bg-slate-900 dark:bg-white">
             <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
               Залишити запит
             </h3>

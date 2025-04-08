@@ -35,7 +35,7 @@ export default function Details({ id }: Props) {
             <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
               {t('route')}:
             </h5>
-            <div className="flex items-center gap-2 text-green-300 text-text-text_secondary text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+            <div className="flex items-center gap-2  text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
               {` ${format(ticketDetails?.departure.date_time || new Date(), 'EEE dd')}, 
                     ${ticketDetails && extractLocationDetails(ticketDetails?.departure.fromLocation, currentLocale).locationName}`}
               <ChevronRight size={16} className="stroke-green-300" />
@@ -44,14 +44,14 @@ export default function Details({ id }: Props) {
             </div>
           </div>
 
-          <div className="gap-2 flex items-center text-text_secondary text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+          <div className="gap-2 flex items-center text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
             <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
             <span>{t('travel_time')}:</span>
           </div>
 
           <div className="flex items-center gap-2 ">
             <Clock3 className="stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
-            <p className="text-wrap text-text_secondary  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+            <p className="text-wrap text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
               {t('local_time')}
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function Details({ id }: Props) {
               {ticketDetails?.details?.luggage_rules.map((el) => (
                 <li
                   key={el}
-                  className="text-wrap text-text_secondary text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
+                  className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
                 >
                   {el}
                 </li>
@@ -88,7 +88,7 @@ export default function Details({ id }: Props) {
               <ul>
                 {ticketDetails?.details?.return_rules_description.map((el) => (
                   <li
-                    className="text-wrap text-text_secondary text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
+                    className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
                     key={el}
                   >
                     {el}
@@ -107,7 +107,7 @@ export default function Details({ id }: Props) {
               {ticketDetails?.details?.amenities.map((el) => (
                 <li
                   key={el}
-                  className="text-wrap text-text_secondary  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
+                  className="text-wrap text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
                 >
                   {el}
                 </li>
@@ -125,7 +125,7 @@ export default function Details({ id }: Props) {
               {ticketDetails?.details?.discounts.map((el) => (
                 <li
                   key={el.id}
-                  className="text-wrap text-text_secondary  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
+                  className="text-wrap text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
                 >
                   {el.description || el.name}
                 </li>
@@ -140,7 +140,7 @@ export default function Details({ id }: Props) {
               {t('bus')}:
             </h5>
             <div className="flex flex-row flex-wrap gap-0.5">
-              <p className="text-wrap text-text_secondary text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+              <p className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
                 {ticketDetails?.details?.bus_name}
                 {ticketDetails?.details?.bus_number}
               </p>

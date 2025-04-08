@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export const MainSearchSkeleton = () => {
   return (
-    <div className="relative overflow-hidden flex flex-col tablet:flex-row rounded-2xl bg-white dark:bg-slate-800 shadow-[0_4px_10px_0_rgba(0,0,0,0.1)]">
+    <div className="relative overflow-hidden flex flex-col tablet:flex-row rounded-2xl bg-white dark:bg-slate-800 shadow-xs">
       <div className="flex flex-col tablet:flex-row tablet:items-center p-4 tablet:px-4 tablet:py-3 tablet:gap-[25px] laptop:gap-10 w-full">
         <Skeleton className="h-[42px] tablet:h-[58px] laptop:h-[55.6px] w-full bg-green-50 dark:bg-slate-700" />
         <Skeleton className="h-[1px] tablet:hidden my-2 w-full bg-green-50 dark:bg-slate-700" />

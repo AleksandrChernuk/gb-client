@@ -58,7 +58,7 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
           </SheetClose>
         </SheetHeader>
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
           {children}
         </ScrollArea>
         <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">

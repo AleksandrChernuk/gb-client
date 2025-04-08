@@ -26,7 +26,7 @@ export default async function Buses() {
             <h3 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
               {t('buses_title')}
             </h3>
-            <p className="mb-4 text-base font-normal leading-6 tracking-normal text-text_secondary">
+            <p className="mb-4 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200">
               {t('buses_description')}
             </p>
 

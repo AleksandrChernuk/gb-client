@@ -23,7 +23,7 @@ export default function AccountActions() {
       <div className="flex flex-row items-center gap-2">
         <CircleAlert className="w-4 h-4 stroke-[#6f8b90]" />
 
-        <p className="text-xs font-normal tracking-normal leading-[18px] text-text_secondary">
+        <p className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
           {t('auth_terms_of_the')}{' '}
           <Link href={'/'} prefetch={false} replace aria-label="go home page" className="text-primary">
             {t('auth_public_offer')}

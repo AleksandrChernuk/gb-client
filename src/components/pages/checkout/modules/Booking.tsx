@@ -74,7 +74,7 @@ export default function BookingSheet() {
             </Button>
           </SheetClose>
         </SheetHeader>
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
           <div className="my-10">
             {selectedTicket &&
               selectedTicket?.details?.seats_map &&

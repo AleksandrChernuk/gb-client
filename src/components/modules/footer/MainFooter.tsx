@@ -47,7 +47,7 @@ export default async function MainFooter({ className }: TMainFooter) {
                       href={'mailto:greenbus.ukraine@gmail.com'}
                       target="_blank"
                       aria-label="greenbus.ukraine@gmail.com"
-                      className="block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-text_secondary"
+                      className="block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200"
                       prefetch={false}
                     >
                       greenbus.ukraine@gmail.com

@@ -34,10 +34,10 @@ export const getLocations = async (params: ILocationQueryParams) => {
   }>(endpoint);
 };
 
-export const getLocationById = async (id: number) => {
-  const endpoint = `locations/${id}`;
-  return fetchFromApi<ILocation>(endpoint);
-};
+// export const getLocationById = async (id: number) => {
+//   const endpoint = `locations/${id}`;
+//   return fetchFromApi<ILocation>(endpoint);
+// };
 
 export const getFavoriteLocations = async () => {
   const endpoint = `locations/favorites`;

@@ -17,7 +17,7 @@ export default function BenefitsItem({ icon, title, text }: IBenefitsItemProps) 
           </h3>
         </li>
         <li>
-          <p className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-text_secondary">
+          <p className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200">
             {text}
           </p>
         </li>

@@ -12,7 +12,7 @@ export const NotFoundCity = () => {
       <div className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
         {t('notFound')}
       </div>
-      <div className="text-sm font-normal leading-4 tracking-normal text-center text-text_secondary">
+      <div className="text-sm font-normal leading-4 tracking-normal text-center text-slate-400 dark:text-slate-200">
         {t('checkName')}
       </div>
     </div>

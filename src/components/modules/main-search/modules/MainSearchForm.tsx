@@ -47,7 +47,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative rounded-2xl bg-white dark:bg-slate-800 shadow">
+    <div className="relative rounded-2xl bg-white dark:bg-slate-800 shadow-xs">
       <div className="flex flex-col h-full tablet:flex-row">
         <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
           {matches ? (

@@ -29,7 +29,7 @@ export default async function FooterLinksList({ navLinks, className }: Props) {
             <Link
               prefetch={false}
               href={href}
-              className="inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-text_secondary"
+              className="inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200"
             >
               {t(`${title}`)}
             </Link>

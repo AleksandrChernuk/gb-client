@@ -38,7 +38,7 @@ export default function FaqSearchResult() {
           </h3>
           <Link
             prefetch={false}
-            className="text-base font-bold leading-6 tracking-normal  text-text_secondary"
+            className="text-base font-bold leading-6 tracking-normal text-slate-400 dark:text-slate-200"
             href={'/faq'}
           >
             {t('go_to_section')} <span className="text-green-300 underline dark:text-green-100">«{t('title')}»</span>

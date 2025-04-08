@@ -10,7 +10,7 @@ import directionWith from '@/public/images/direction-with-a-road-in-the-city.avi
 
 export default function ForСarriersPage() {
   return (
-    <main className="bg-bg_main">
+    <main className="bg-slate-50 dark:bg-slate-900">
       <section className="pt-8 pb-16">
         <Container size="l">
           <div className="mb-8">
@@ -21,7 +21,7 @@ export default function ForСarriersPage() {
               <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 Чому варто приєднатися до GreenBus?
               </h1>
-              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-text_muted">
+              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
                 GreenBus — це інноваційна онлайн-платформа для ефективного керування пасажирськими перевезеннями, що
                 дозволяє автоматизувати процеси обслуговування пасажирів і продажу автобусних квитків. З нашими
                 інструментами ви зможете значно підвищити ефективність вашої роботи.
@@ -39,7 +39,7 @@ export default function ForСarriersPage() {
         </Container>
       </section>
 
-      <section className="bg-bg_green">
+      <section className="bg-green-500">
         <Container size="l" className="py-8">
           <h2 className="mb-4 text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50 laptop:mb-8">
             4 потужні інструменти для оптимізації ваших продажів
@@ -69,7 +69,7 @@ export default function ForСarriersPage() {
               <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 Чому варто обрати саме нас?
               </h2>
-              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-text_muted">
+              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
                 Ми пропонуємо найсучаснішу онлайн-систему для управління пасажирськими перевезеннями. Наші потужні
                 інструменти дозволяють автоматизувати продаж квитків, управляти рейсами та тарифами, а також забезпечити
                 безпеку даних. Всі ці переваги надають вам можливість зосередитись на розвитку вашого бізнесу, ми
@@ -104,7 +104,7 @@ export default function ForСarriersPage() {
               <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 Ми гарантуємо безпеку ваших даних
               </h2>
-              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-text_muted">
+              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
                 Використовуємо сучасну систему подвійного шифрування даних (end-to-end), що забезпечує найвищий рівень
                 безпеки. Вся ваша конфіденційна інформація — від даних клієнтів до фінансових звітів — буде повністю
                 захищена. Наші сервери відповідають усім стандартам безпеки, що дозволяє уникнути витоків і зовнішніх
@@ -117,7 +117,7 @@ export default function ForСarriersPage() {
 
       <section className="py-16">
         <Container size="xs" className="my-auto">
-          <CustomCard className="shadow bg-card">
+          <CustomCard>
             <h2 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
               Залишити запит
             </h2>

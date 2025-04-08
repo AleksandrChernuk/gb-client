@@ -26,7 +26,7 @@ export const Information = () => {
   const { locale } = useDateLocale();
 
   return (
-    <CustomCard className="p-5 space-y-4 shadow">
+    <CustomCard className="p-5 space-y-4 shadow-xs">
       <div className="flex items-center justify-between">
         {isHydrated ? (
           <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
@@ -41,7 +41,7 @@ export const Information = () => {
         </div>
       </div>
       <div className="flex items-center justify-between gap-1">
-        <div className="flex items-center gap-2 text-base font-normal leading-6 tracking-normal text-text_secondary text-[12px] tablet:leading-4 tetx-slate-700 tablet:text-sm  dark:text-slate-200 text-nowrap truncate">
+        <div className="flex items-center gap-2 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200 text-[12px] tablet:leading-4 tetx-slate-700 tablet:text-sm  text-nowrap truncate">
           {from ? (
             <div>
               {from && extractLocationDetails(from, currentLanguage).locationName},{' '}

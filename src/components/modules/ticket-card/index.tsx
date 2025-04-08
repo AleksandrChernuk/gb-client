@@ -34,8 +34,8 @@ export const TicketCard = ({ element }: Props) => {
   const hasDetails = tickets[element.ticket_id]?.details != null;
 
   return (
-    <div className="relative shadow tablet:shadow-none rounded-t-2xl tablet:rounded-none">
-      <div className="p-4 shadow-none tablet:p-6 bg-card_bg_primery rounded-t-2xl tablet:rounded-2xl tablet:shadow">
+    <div className="relative shadow-xs tablet:shadow-none rounded-t-2xl tablet:rounded-none">
+      <div className="p-4 shadow-none tablet:p-6 bg-slate-900 dark:bg-white rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
         <div className="flex flex-row items-center justify-between gap-1 tablet:gap-2">
           <TicketRoute route={element} />
 
@@ -75,7 +75,7 @@ export const TicketCard = ({ element }: Props) => {
 
           <div className="hidden justify-self-center tablet:flex items-start gap-0.5 tablet:order-3 tablet:justify-self-end">
             <span className="break-all text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-              <span className="text-text_secondary">{t('places')}:</span>
+              <span className="text-slate-400 dark:text-slate-200">{t('places')}:</span>
               {element.seats.free_seats || 0}
             </span>
           </div>

@@ -9,7 +9,7 @@ import directionWith from '@/public/images/direction-with-a-road-in-the-city.avi
 
 export default function ForAgentsPage() {
   return (
-    <main className="bg-bg_main">
+    <main className="bg-">
       <section className="pt-8 pb-16">
         <Container size="l">
           <div className="mb-8">
@@ -29,7 +29,7 @@ export default function ForAgentsPage() {
               <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 GreenBus – автоматизуй продаж квитків та керуй перевезеннями!
               </h1>
-              <p className="text-sm leading-[21px] laptop:text-base font-normal laptop:leading-6 tracking-normal text-text_muted">
+              <p className="text-sm leading-[21px] laptop:text-base font-normal laptop:leading-6 tracking-normal text-slate-400 dark:text-slate-200">
                 На этой странице вы найдете всю необходимую информацию, инструменты и ресурсы для успешной работы. Мы
                 приглашаем к сотрудничеству агентства, занимающиеся продажей билетов на международные пассажирские
                 перевозки, а также компании, работающие в сфере трудоустройства в Европе.
@@ -39,7 +39,7 @@ export default function ForAgentsPage() {
         </Container>
       </section>
 
-      <section className="bg-bg_green">
+      <section className="bg-green-500">
         <Container size="l" className="py-8">
           <h2 className="mb-4 text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50 laptop:mb-8">
             Чому варто приєднатися до нас?
@@ -62,14 +62,14 @@ export default function ForAgentsPage() {
         </Container>
       </section>
 
-      <section className="pt-16 bg-bg_main">
+      <section className="pt-16 bg-slate-50 dark:bg-slate-900">
         <Container size="l">
           <ul className="flex flex-col gap-12 tablet:flex-row tablet:gap-24 tablet:items-start">
             <li className="tablet:w-1/2">
               <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 Можливості GreenBus
               </h2>
-              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base  laptop:leading-6 text-text_muted">
+              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
                 GreenBus пропонує широкі можливості для партнерів: ефективна система продажу квитків, доступ до мережі
                 перевізників та стабільний дохід. Ми підтримуємо наших партнерів на кожному етапі, надаючи всі необхідні
                 інструменти для успіху в бізнесі.
@@ -90,7 +90,7 @@ export default function ForAgentsPage() {
 
       <section className="py-16">
         <Container size="xs" className="my-auto">
-          <CustomCard className="shadow bg-card">
+          <CustomCard className="shadow-xs">
             <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
               Залишити запит
             </h3>

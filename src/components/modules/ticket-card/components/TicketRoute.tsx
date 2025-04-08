@@ -35,7 +35,7 @@ export default function TicketRoute({ route }: Props) {
           <div className="text-base font-bold leading-6 tracking-normal laptop:text-2xl laptop:font-medium laptop:leading-[28.8px] text-slate-700 dark:text-slate-50">
             {location_from}
           </div>
-          <div className="text-sm font-normal leading-4 tracking-normal text-text_secondary text-wrap">
+          <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
             {address_from}
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function TicketRoute({ route }: Props) {
           <div className="text-base font-bold leading-6 tracking-normal laptop:text-2xl laptop:font-medium laptop:leading-[28.8px] text-slate-700 dark:text-slate-50">
             {location_to}
           </div>
-          <div className="text-sm font-normal leading-4 tracking-normal text-text_secondary text-wrap">
+          <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
             {address_to}
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function TicketRoute({ route }: Props) {
       <div className="flex tablet:custom_hidden">
         <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
           <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_from}</div>
-          <div className="text-xs font-normal tracking-normal leading-[18px] text-text_secondary">
+          <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
             {(duration && `${duration[0]}:${duration[1]}`) || ''}
           </div>
           <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_to}</div>

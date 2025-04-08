@@ -27,7 +27,9 @@ const DateDuration = ({ departure, duration, arrival }: TDateDuration) => {
   return (
     <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
       <div className="text-sm font-bold tracking-normal leading-[16.8px]">{departure}</div>
-      <div className="text-xs font-normal tracking-normal leading-[18px] text-text_secondary">{duration}</div>
+      <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
+        {duration}
+      </div>
       <div className="text-sm font-bold tracking-normal leading-[16.8px]">{arrival}</div>
     </div>
   );

@@ -104,7 +104,7 @@ export default function CitySearch({ name, type }: Props) {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
+                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
                 key="box"
                 onMouseDown={(event) => {
                   event.preventDefault();

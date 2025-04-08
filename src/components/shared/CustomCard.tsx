@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 type Props = {
   children: ReactNode;
@@ -8,14 +8,6 @@ type Props = {
 
 export const CustomCard = ({ children, className }: Props) => {
   return (
-    <div
-      className={cn(
-        'p-4 tablet:p-6 bg-card_bg_primery shadow-(--shadow-custom) rounded-2xl',
-        className
-      )}
-    >
-      {children}
-    </div>
+    <div className={cn('p-4 tablet:p-6 bg-slate-900 dark:bg-white shadow-xs rounded-2xl', className)}>{children}</div>
   );
 };
-

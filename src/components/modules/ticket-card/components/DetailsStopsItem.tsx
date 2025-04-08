@@ -43,7 +43,7 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
           {location_name}
         </div>
 
-        <div className="text-text_secondary  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+        <div className="text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
           {station_name && `${station_name}, `}
           {station_address}
         </div>
