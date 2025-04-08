@@ -1,13 +1,13 @@
 'use client';
 
 import { usePathname } from '@/i18n/routing';
-import { FaqDisplay } from './modules/FaqDisplay';
+import { FaqDisplay } from './FaqDisplay';
 import { faqConstans } from '@/constans/faq.constans';
 import { Container } from '@/components/shared/Container';
-import FaqNav from './modules/FaqNav';
+import FaqNav from './FaqNav';
 import { useSearchParams } from 'next/navigation';
 
-export default function FaqPage() {
+export default function FaqTabs() {
   const pathname = usePathname();
   const params = useSearchParams();
 

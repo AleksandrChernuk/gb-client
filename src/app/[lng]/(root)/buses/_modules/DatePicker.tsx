@@ -1,11 +1,11 @@
 'use client';
 
 import { addDays, format, toDate, isBefore, isEqual } from 'date-fns';
-import { useDateTabs } from '../hooks/useDateTabs';
 import { Button } from '@/components/ui/button';
 import useDateLocale from '@/hooks/useDateLocale';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSearchStore } from '@/store/useSearch';
+import { useDateTabs } from './hooks/useDateTabs';
 
 export default function DateTabs() {
   const { locale } = useDateLocale();

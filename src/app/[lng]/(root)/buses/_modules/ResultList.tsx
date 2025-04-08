@@ -1,11 +1,11 @@
 'use client';
 
-import { Loader } from '../components/Loader';
-import { NoTravel } from '../components/NoTravel';
-import { ErrorTravel } from '../components/ErrorTravel';
-import useTicketsSearch from '../hooks/useTicketsSearch';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import { TicketCard } from '@/components/modules/ticket-card';
+import useTicketsSearch from './hooks/useTicketsSearch';
+import { Loader } from './components/Loader';
+import { ErrorTravel } from './components/ErrorTravel';
+import { NoTravel } from './components/NoTravel';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();

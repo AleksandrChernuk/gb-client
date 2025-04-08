@@ -11,7 +11,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ArrowRight } from 'lucide-react';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import useTicketsSearch from '../hooks/useTicketsSearch';
-import { MobileFilter } from './Filter';
+import { MobileFilter } from '../Filter';
 
 export const Information = () => {
   const date = useSearchStore(useShallow((state) => state.date));

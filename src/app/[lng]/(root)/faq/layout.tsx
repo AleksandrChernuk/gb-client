@@ -1,10 +1,10 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
-import FaqSeach from '@/components/pages/faq/modules/FaqSeach';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import FaqSeach from './_modules/FaqSeach';
 
 export default async function FaqLayout({
   children,

@@ -1,10 +1,16 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
 import MainHeader from '@/components/modules/header/MainHeader';
-import MainPage from '@/components/pages/main';
 import { seoMain } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import Herow from './_modules/Herow';
+import Benefits from './_modules/Benefits';
+import Buses from './_modules/Buses';
+import PopularRoutes from './_modules/PopularRoutes';
+import GetStarted from './_modules/GetStarted';
+import Questions from './_modules/Questions';
+import { CarriersList } from './_modules/components/CarriersList';
 
 type Props = {
   params: Params;
@@ -30,7 +36,15 @@ export default async function Home({
   return (
     <div className="flex flex-col h-screen">
       <MainHeader />
-      <MainPage />
+      <main role="main" className="bg-slate-50 dark:bg-slate-900">
+        <Herow />
+        <Benefits />
+        <Buses />
+        <PopularRoutes />
+        <GetStarted />
+        <CarriersList />
+        <Questions />
+      </main>
       <MainFooter />
     </div>
   );

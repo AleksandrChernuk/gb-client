@@ -4,7 +4,7 @@ import { Container } from '@/components/shared/Container';
 import { faqConstans } from '@/constans/faq.constans';
 import { Link } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
-import SearchCard from '../components/SearchCard';
+import SearchCard from './components/SearchCard';
 import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
 

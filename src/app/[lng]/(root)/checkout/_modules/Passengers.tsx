@@ -8,8 +8,8 @@ import { TPassenger } from '@/types/checkout-from.types';
 import { useTranslations } from 'next-intl';
 import { withMask } from 'use-mask-input';
 import { Calendar } from 'lucide-react';
-import StepNumber from '../components/StepNumber';
-import Timer from '../components/Timer';
+import StepNumber from './components/StepNumber';
+import Timer from './components/Timer';
 
 export default function Passengers() {
   const { control } = useFormContext();

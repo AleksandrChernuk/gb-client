@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 // import { sortBuy } from '@/constans/sortbuylist.constans';
-import { ICarriers } from '@/types/carriers.types';
-import { IRouteResponse } from '@/types/route.types';
+// import { ICarriers } from '@/types/carriers.types';
+// import { IRouteResponse } from '@/types/route.types';
 // import { differenceInMilliseconds, toDate } from 'date-fns';
 
 export const createDateArr = (centerDate: Date, length: number, lastNum: number): Date[] => {
@@ -40,26 +40,26 @@ export const createDateArr = (centerDate: Date, length: number, lastNum: number)
 //   });
 // };
 
-export const sortedCarriers = ({ data }: { data: IRouteResponse[] }) => {
-  const carriers = data.reduce(
-    (acc, el) => {
-      const carrierName = el.carrier?.name || 'Unknown Carrier';
+// export const sortedCarriers = ({ data }: { data: IRouteResponse[] }) => {
+//   const carriers = data.reduce(
+//     (acc, el) => {
+//       const carrierName = el.carrier?.name || 'Unknown Carrier';
 
-      if (!acc[carrierName]) {
-        acc[carrierName] = { name: carrierName, id: Object.keys(acc).length + 1, count: 0 };
-      }
+//       if (!acc[carrierName]) {
+//         acc[carrierName] = { name: carrierName, id: Object.keys(acc).length + 1, count: 0 };
+//       }
 
-      acc[carrierName].count++;
-      return acc;
-    },
-    {} as Record<string, ICarriers>,
-  );
+//       acc[carrierName].count++;
+//       return acc;
+//     },
+//     {} as Record<string, ICarriers>,
+//   );
 
-  return Object.values(carriers);
-};
+//   return Object.values(carriers);
+// };
 
-export const filterRoutesByCarriers = (routes: IRouteResponse[], carriers: string[]) => {
-  return carriers.length > 0
-    ? routes.filter((route) => route.carrier?.name && carriers.includes(route.carrier.name))
-    : routes;
-};
+// export const filterRoutesByCarriers = (routes: IRouteResponse[], carriers: string[]) => {
+//   return carriers.length > 0
+//     ? routes.filter((route) => route.carrier?.name && carriers.includes(route.carrier.name))
+//     : routes;
+// };

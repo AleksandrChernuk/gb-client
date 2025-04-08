@@ -19,9 +19,9 @@ import { useTranslations } from 'next-intl';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import { useSearchStore } from '@/store/useSearch';
 import { useShallow } from 'zustand/react/shallow';
-import useTicketsSearch from '../hooks/useTicketsSearch';
-import FilterSortByList from '../components/FilterRadioGroup';
-import FilterCheckBoxList from '../components/FilterCheckBoxList';
+import useTicketsSearch from './hooks/useTicketsSearch';
+import FilterSortByList from './components/FilterRadioGroup';
+import FilterCheckBoxList from './components/FilterCheckBoxList';
 
 type TMobileFilterHeader = {
   title: string;

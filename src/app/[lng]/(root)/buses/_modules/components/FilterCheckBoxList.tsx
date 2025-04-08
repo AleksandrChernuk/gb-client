@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import FilterCheckBoxItem from './FilterCheckBoxItem';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 

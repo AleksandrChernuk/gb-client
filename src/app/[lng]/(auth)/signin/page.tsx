@@ -1,11 +1,11 @@
-import AccountActions from '@/components/pages/auth/components/AccountActions';
-import AuthCard from '@/components/pages/auth/components/AuthCard';
-import SigninForm from '@/components/pages/auth/SigninForm';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import AuthCard from '../_modules/components/AuthCard';
+import SigninForm from '../_modules/SigninForm';
+import AccountActions from '../_modules/components/AccountActions';
 
 export default async function SigninPage({
   params,

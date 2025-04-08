@@ -16,8 +16,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import SeatsList from '../components/SeatsList';
-import IconSeat from '../icons/IconSeat';
+import SeatsList from './components/SeatsList';
+import IconSeat from './icons/IconSeat';
 
 export default function BookingSheet() {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);

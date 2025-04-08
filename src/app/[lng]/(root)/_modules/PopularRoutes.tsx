@@ -1,8 +1,8 @@
 import { Container } from '@/components/shared/Container';
-import RoutersDropdownList from '../components/RoutersDropdownList';
 import { getTranslations } from 'next-intl/server';
 import { popularRoutersFakeData } from '@/constans/popular-routers.constans';
-import RoutersItem from '../components/RoutersItem';
+import RoutersDropdownList from './components/RoutersDropdownList';
+import RoutersItem from './components/RoutersItem';
 
 export default async function PopularRoutes() {
   const t = await getTranslations('main');

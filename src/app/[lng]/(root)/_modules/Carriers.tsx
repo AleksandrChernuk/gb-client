@@ -1,7 +1,7 @@
 import { Container } from '@/components/shared/Container';
-import { CarriersList } from '../components/CarriersList';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
+import { CarriersList } from './components/CarriersList';
 
 export default async function Carriers() {
   const t = await getTranslations('main');

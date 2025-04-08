@@ -2,7 +2,7 @@ import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import { countPricing } from '../helpers/countPricing';
+import { countPricing } from './helpers/countPricing';
 
 export default function ToPay() {
   const adult = useSearchStore((state) => state.adult);
