@@ -14,17 +14,17 @@ export default async function AuthHeader() {
         <nav>
           <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">
             <li className="laptop:hidden">
-              <Support type="desctop" />
+              <Support variant="desktop" />
             </li>
             <li>
-              <SelectLocale type="desctop" />
+              <SelectLocale variant="desktop" />
             </li>
             <li>
               <SwitchTheme />
             </li>
 
             <li className="hidden laptop:block">
-              <Support type="desctop" />
+              <Support variant="desktop" />
             </li>
           </ul>
         </nav>

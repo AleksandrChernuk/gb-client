@@ -176,7 +176,7 @@ export default function DatePicker({ type }: Props) {
                   }}
                   disabled={{ before: new Date() }}
                   className="rounded-none"
-                  classNames={calendarStyles.desctop}
+                  classNames={calendarStyles.desktop}
                   locale={locale}
                 />
               </motion.div>

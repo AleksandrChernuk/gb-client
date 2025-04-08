@@ -6,7 +6,7 @@ type Props = {
   buttonText: string;
   loading: boolean;
   price?: number;
-  variant: 'mobile' | 'desctop';
+  variant: 'mobile' | 'desktop';
 };
 
 export default function SelectButton({
@@ -35,7 +35,7 @@ export default function SelectButton({
         </Button>
       );
 
-    case 'desctop':
+    case 'desktop':
       return (
         <Button
           variant={'default'}

@@ -46,7 +46,7 @@ export const TicketCard = ({ element }: Props) => {
             </div>
 
             <SelectButton
-              variant="desctop"
+              variant="desktop"
               loading={loading}
               buttonText={t('selectButton')}
               disabled={isButtonDisabled}
@@ -113,7 +113,7 @@ export const TicketCard = ({ element }: Props) => {
               }}
               selectButton={
                 <SelectButton
-                  variant="desctop"
+                  variant="desktop"
                   loading={loading}
                   buttonText={t('selectButton')}
                   disabled={isButtonDisabled}

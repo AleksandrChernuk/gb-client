@@ -1,5 +1,4 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
-import MainHeader from '@/components/modules/header/MainHeader';
 import { seoMain } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -10,7 +9,7 @@ import Buses from './_modules/Buses';
 import PopularRoutes from './_modules/PopularRoutes';
 import GetStarted from './_modules/GetStarted';
 import Questions from './_modules/Questions';
-import { CarriersList } from './_modules/components/CarriersList';
+import Carriers from './_modules/Carriers';
 
 type Props = {
   params: Params;
@@ -33,19 +32,19 @@ export default async function Home({
 }>) {
   const { lng } = await params;
   setRequestLocale(lng as Locale);
+
   return (
-    <div className="flex flex-col h-screen">
-      <MainHeader />
+    <>
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <Herow />
         <Benefits />
         <Buses />
         <PopularRoutes />
         <GetStarted />
-        <CarriersList />
+        <Carriers />
         <Questions />
       </main>
       <MainFooter />
-    </div>
+    </>
   );
 }

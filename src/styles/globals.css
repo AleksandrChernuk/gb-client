@@ -26,9 +26,9 @@
   --color-green-200: oklch(0.67 0.1954 147.59);
   --color-green-300: oklch(0.54 0.151 148.56);
   --color-green-400: oklch(0.47 0.1252 149.85);
-  --color-green-500: oklch(0.41 0.1044 150.81) / oklch(0.95 0.0265 23.36);
+  --color-green-500: oklch(0.41 0.1044 150.81);
 
-  --color-green-600: oklch(0.627 0.194 149.214);
+  --color-green-600: oklch(0.87 0.1528 153.96);
   --color-green-700: oklch(0.527 0.154 150.069);
   --color-green-800: oklch(0.448 0.119 151.328);
   --color-green-900: oklch(0.393 0.095 152.535);

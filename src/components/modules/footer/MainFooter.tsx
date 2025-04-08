@@ -39,7 +39,7 @@ export default async function MainFooter({ className }: TMainFooter) {
                 </h5>
                 <ul>
                   <li className="mb-2">
-                    <Support type="footer" />
+                    <Support variant="footer" />
                   </li>
 
                   <li>

@@ -1,5 +1,5 @@
 export const calendarStyles = {
-  desctop: {
+  desktop: {
     months: 'flex flex-col',
     month: 'space-y-4 ',
     caption: 'flex justify-center relative items-center mb-2',

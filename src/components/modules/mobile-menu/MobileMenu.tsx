@@ -48,15 +48,15 @@ export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
               </Button>
             </SheetClose>
           </SheetHeader>
-          <ScrollArea className="relative w-full mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
+          <ScrollArea className="relative w-full mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
             <div className="flex flex-col gap-4 p-5">
-              {!isAuthHeader && <ProfileLink type="mobile" />}
-              <Support type="mobile" />
+              {!isAuthHeader && <ProfileLink variant="mobile" />}
+              <Support variant="mobile" />
             </div>
             <Separator className="h-[1px] bg-[#e6e6e6] dark:bg-slate-700" />
             <div className="flex flex-col gap-4 p-5">
               <Suspense>
-                <SelectLocale type="mobile" />
+                <SelectLocale variant="mobile" />
               </Suspense>
 
               <div className="flex flex-row items-center justify-between">

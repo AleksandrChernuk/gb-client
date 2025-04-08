@@ -11,6 +11,7 @@ hover: #05b446  - green-200
 primary_1: #088537; - green-300
 focused #0d6e32 - green-400
 background_card #0d5a2b - green-500
+bg-secondary - #7AF2A6 - green-600
 blackmode: #475569 slate-600;
 gray-dark: #334155  slate-700;
 additional-red: #de2a1a - red-50 

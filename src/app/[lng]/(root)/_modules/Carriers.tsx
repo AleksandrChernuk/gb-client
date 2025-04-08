@@ -14,6 +14,7 @@ export default async function Carriers() {
             <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0 ">
               <CarriersList />
             </li>
+
             <li className="flex flex-col tablet:w-1/2">
               <h3 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
                 {t('сarriers_title')}

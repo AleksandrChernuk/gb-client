@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import MainHeader from '@/components/modules/header/MainHeader';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { Params } from '@/types/common.types';
+import MainHeader from '@/components/modules/header/MainHeader';
 
-export default async function Layout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
@@ -16,7 +16,7 @@ export default async function Layout({
   setRequestLocale(lng as Locale);
 
   return (
-    <div className="flex flex-col h-screen ">
+    <div className="flex flex-col h-screen">
       <MainHeader />
       {children}
     </div>

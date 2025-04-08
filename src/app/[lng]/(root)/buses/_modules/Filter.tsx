@@ -64,7 +64,7 @@ export const MobileFilter = () => {
       <SheetContent>
         <MobileFilterHeader title={t('filter')} />
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
           <div className="my-4">
             <ul>
               <li>
