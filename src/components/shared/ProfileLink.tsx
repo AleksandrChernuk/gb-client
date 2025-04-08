@@ -14,7 +14,11 @@ export const ProfileLink = ({ type }: Props) => {
 
   if (type === 'mobile') {
     return (
-      <Button asChild variant={'link'} className="justify-start text-text_prymery body_medium">
+      <Button
+        asChild
+        variant={'link'}
+        className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
+      >
         <Link prefetch={false} href={isAuth ? '/profile' : '/signin'} replace>
           <User size={24} className="stroke-primary" />
           {t('mainNavProfileLink')}
@@ -29,17 +33,14 @@ export const ProfileLink = ({ type }: Props) => {
         <Link
           prefetch={false}
           href={isAuth ? '/profile' : '/signin'}
-          className="group text-black! body_medium gap-1 hover:text-gray_3! dark:hover:text-gray_1 dark:text-grayy!"
+          className="group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
         >
           <div
-            className={`flex items-center justify-center ${type === 'desctop' && 'group-hover:fill-gray_medium bg-gray_1 rounded-full p-1'}`}
+            className={`flex items-center justify-center group-hover:fill-gray_medium bg-gray-1 p-1 dark:bg-gray rounded-full`}
           >
-            <User
-              size={20}
-              className={`${type !== 'desctop' ? 'stroke-primary_1' : ' stroke-black group-hover:stroke-gray_3'}`}
-            />
+            <User size={20} className={`stroke-green-300`} />
           </div>
-          <div className={`${type === 'desctop' && 'hidden laptop:block'}`}>{t('mainNavProfileLink')}</div>
+          <div className={`hidden laptop:block`}>{t('mainNavProfileLink')}</div>
         </Link>
       </Button>
     );

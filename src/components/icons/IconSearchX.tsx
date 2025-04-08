@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const IconSearchX = () => {
   return (
@@ -12,7 +12,7 @@ export const IconSearchX = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="lucide lucide-search stroke-primary_1"
+      className="lucide lucide-search stroke-green-300"
     >
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />

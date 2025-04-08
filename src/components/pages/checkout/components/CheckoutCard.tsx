@@ -13,10 +13,12 @@ export default function CheckoutCard({ children, title, cardCount }: Props) {
     <ul className="space-y-4">
       <li className="flex items-center gap-2">
         {cardCount && <StepNumber step={cardCount} />}
-        <h3 className="h4 text-text_prymery">{title}</h3>
+        <h3 className="text-2xl font-medium tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50">
+          {title}
+        </h3>
       </li>
       <li>
-        <CustomCard className="space-y-4 dark:bg-dark_main">{children}</CustomCard>
+        <CustomCard className="space-y-4 dark:bg-slate-800">{children}</CustomCard>
       </li>
     </ul>
   );

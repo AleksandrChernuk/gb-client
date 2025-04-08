@@ -22,9 +22,9 @@ export default function Seat({ seat_number, className, isSelected, isFree, avail
         }
       }}
       className={cn(
-        `relative cursor-pointer flex flex-col items-center dap-0.5 [&_svg]:fill-gray_2_for_body dark:[&_svg]:fill-grayy   w-[45px] h-[55px] tablet:w-[55px] tablet:h-[65px]
-        ${!isFree && '[&_svg]:fill-gray_1 dark:[&_svg]:fill-black_2_for_text'}
-        ${isSelected && '[&_svg]:fill-primary_2 dark:[&_svg]:fill-primary_2'}
+        `relative cursor-pointer flex flex-col items-center dap-0.5 [&_svg]:fill-[#6f8b90] dark:[&_svg]:fill-slate-50   w-[45px] h-[55px] tablet:w-[55px] tablet:h-[65px]
+        ${!isFree && '[&_svg]:fill-slate-200 dark:[&_svg]:fill-slate-700'}
+        ${isSelected && '[&_svg]:fill-green-100 dark:[&_svg]:fill-green-100'}
         ${!available && 'cursor-default'}`,
         className,
       )}
@@ -32,10 +32,10 @@ export default function Seat({ seat_number, className, isSelected, isFree, avail
       <IconSeat />
       <div
         className={`${
-          isSelected && 'text-primary_2 dark:text-primary_2'
-        } -mt-10 addional_medium_text text-gray_2_for_body dark:text-grayy`}
+          isSelected && 'text-green-100 dark:text-green-100'
+        } -mt-10 text-base font-medium leading-4 tracking-normal text-[#6f8b90] dark:text-slate-50`}
       >
-        {isFree ? seat_number : <X className={`stroke-gray_1 dark:stroke-black_2_for_text`} />}
+        {isFree ? seat_number : <X className={`stroke-slate-200 dark:stroke-slate-700`} />}
       </div>
     </div>
   );

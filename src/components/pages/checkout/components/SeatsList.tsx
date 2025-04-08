@@ -33,18 +33,20 @@ export default function SeatsList({ floorText, helm, seatRows }: Props) {
   };
 
   return (
-    <div className="mb-10 last:mb-0 w-fit mx-auto">
-      <div className="text-center h5 text-text_prymery mb-1">{floorText && <div>{floorText}</div>}</div>
-      <ul className="flex flex-col gap-4 px-2 xs:px-4  md:px-8 py-8 tablet:p-8 border-2 w-full border-gray_1 dark:border-black_2_for_text rounded-[50px]">
+    <div className="mx-auto mb-10 last:mb-0 w-fit">
+      <div className="mb-1 text-base font-bold leading-6 tracking-normal text-center text-slate-700 dark:text-slate-50">
+        {floorText && <div>{floorText}</div>}
+      </div>
+      <ul className="flex flex-col gap-4 px-2 xs:px-4  md:px-8 py-8 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-[50px]">
         {helm && (
-          <li className="pb-4 border border-b-gray_1 dark:border-b-black_2_for_text w-fit">
-            <div className={`w-[72px] h-[72px] [&_svg]:fill-gray_1 dark:[&_svg]:fill-black_2_for_text mb-2`}>
+          <li className="pb-4 border border-b-slate-200 dark:border-b-slate-700 w-fit">
+            <div className={`w-[72px] h-[72px] [&_svg]:fill-slate-200 dark:[&_svg]:fill-slate-700 mb-2`}>
               <IconHelm />
             </div>
           </li>
         )}
         {seatRows.map((row, rowIndex) => (
-          <li key={rowIndex} className="flex gap-2 justify-between tablet:gap-1">
+          <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-1">
             {row.map((seat, seatIndex) =>
               seat.type ? (
                 <Seat

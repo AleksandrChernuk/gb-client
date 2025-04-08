@@ -49,7 +49,7 @@ const SignupForm = () => {
             render={({ field, fieldState }) => {
               return (
                 <FormItem>
-                  <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                  <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
                     {t('authName')}
                   </FormLabel>
                   <FormControl>
@@ -61,17 +61,17 @@ const SignupForm = () => {
                         placeholder={t('placeholderName')}
                         className={`${
                           Boolean(fieldState?.error) &&
-                          'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg'
+                          'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'
                         }`}
                       />
                       {Boolean(fieldState?.invalid) && (
                         <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                          <CircleAlert className="stroke-red " />
+                          <CircleAlert className="stroke-red-50 " />
                         </div>
                       )}
                     </div>
                   </FormControl>
-                  <FormMessage className="text-red" />
+                  <FormMessage className="text-red-50" />
                 </FormItem>
               );
             }}
@@ -81,7 +81,7 @@ const SignupForm = () => {
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
                   {t('authEmail')}
                 </FormLabel>
                 <FormControl>
@@ -95,16 +95,16 @@ const SignupForm = () => {
                       type="email"
                       placeholder="user@example.com"
                       autoComplete="off"
-                      className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg'}`}
+                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
                     />
                     {Boolean(fieldState?.error) && (
                       <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                        <CircleAlert className="stroke-red" />
+                        <CircleAlert className="stroke-red-50" />
                       </div>
                     )}
                   </div>
                 </FormControl>
-                <FormMessage className="text-red" />
+                <FormMessage className="text-rred-50" />
               </FormItem>
             )}
           />
@@ -113,7 +113,7 @@ const SignupForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="mb-2 secondary_text text-black_2_for_text dark:text-white">
+                <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
                   {t('authPassword')}
                 </FormLabel>
                 <FormControl>
@@ -123,7 +123,7 @@ const SignupForm = () => {
                       disabled={isPending}
                       type={!isViewPassword ? 'password' : 'text'}
                       placeholder="******"
-                      className={`${Boolean(fieldState?.error) && 'border-red focus:border-red bg-red_input placeholder:text-red  dark:bg-dark_bg'}`}
+                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
                     />
                     <ViewPassword
                       error={Boolean(fieldState?.error)}
@@ -132,7 +132,7 @@ const SignupForm = () => {
                     />
                   </div>
                 </FormControl>
-                <FormMessage className="text-red" />
+                <FormMessage className="text-red-50" />
               </FormItem>
             )}
           />
@@ -141,7 +141,7 @@ const SignupForm = () => {
 
         <Button
           type="submit"
-          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full h5 max-h-[48px] tablet:max-h-[52px] "
+          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
           disabled={isPending}
         >
           {t('signinTitle')}

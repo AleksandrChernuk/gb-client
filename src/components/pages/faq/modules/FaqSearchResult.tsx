@@ -32,12 +32,16 @@ export default function FaqSearchResult() {
   if (matchedQuestions.length === 0) {
     return (
       <Container size="s" className="space-y-5 ">
-        <CustomCard className="flex flex-col w-full gap-2 dark:bg-dark_main">
-          <h3 className="h5 text-text_prymery">
+        <CustomCard className="flex flex-col w-full gap-2 dark:bg-slate-800">
+          <h3 className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
             {t('no_results_found')} <span>{`"${searchQuery}"`}</span>
           </h3>
-          <Link prefetch={false} className=" h5 text-text_secondary" href={'/faq'}>
-            {t('go_to_section')} <span className="underline text-primary_1 dark:text-primary_2">«{t('title')}»</span>
+          <Link
+            prefetch={false}
+            className="text-base font-bold leading-6 tracking-normal  text-text_secondary"
+            href={'/faq'}
+          >
+            {t('go_to_section')} <span className="text-green-300 underline dark:text-green-100">«{t('title')}»</span>
           </Link>
         </CustomCard>
       </Container>
@@ -46,7 +50,7 @@ export default function FaqSearchResult() {
 
   return (
     <Container size="s" className="space-y-5 ">
-      <h3 className="h5 text-text_prymery">
+      <h3 className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
         {t('results_found')}: {matchedQuestions.length}
       </h3>
       {matchedQuestions.map(({ slug, id, title, text, textSlug }) => (

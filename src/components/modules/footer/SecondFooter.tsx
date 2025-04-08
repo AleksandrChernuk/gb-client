@@ -8,7 +8,7 @@ type Props = {
 
 export default async function SecondFooter({ className }: Props) {
   return (
-    <footer role="footer" className={cn('w-full h-auto bg-grayy dark:bg-dark_main', className)}>
+    <footer role="footer" className={cn('w-full h-auto bg-slate-50 dark:bg-slate-800', className)}>
       <Image
         src={secondFooter}
         priority

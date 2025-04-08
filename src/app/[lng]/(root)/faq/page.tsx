@@ -1,6 +1,8 @@
 import FaqPage from '@/components/pages/faq';
 import { seoFaq } from '@/lib/seo';
 import { Params } from '@/types/common.types';
+import { Locale } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
@@ -16,6 +18,13 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function Faq() {
+export default async function Faq({
+  params,
+}: Readonly<{
+  params: Params;
+}>) {
+  const { lng } = await params;
+
+  setRequestLocale(lng as Locale);
   return <FaqPage />;
 }

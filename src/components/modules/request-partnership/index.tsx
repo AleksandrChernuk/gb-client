@@ -95,7 +95,11 @@ export default function RequestPartnershipForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" variant={'default'} className="h5 px-4 py-4 w-full rounded-full mt-6">
+          <Button
+            type="submit"
+            variant={'default'}
+            className="w-full px-4 py-4 mt-6 text-base font-bold leading-6 tracking-normal rounded-full"
+          >
             {t('request_btn')}
           </Button>
         </form>

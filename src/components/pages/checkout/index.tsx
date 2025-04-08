@@ -58,7 +58,7 @@ export default function CheckoutPage({ adult, child }: { adult: string; child: s
                 <CheckoutCard title={t('seat_reservation')} cardCount={2}>
                   <BookingSheet />
                   {methods.formState.errors.selected_seats && (
-                    <span className="text-sm font-medium text-red">
+                    <span className="text-sm font-medium text-red-50">
                       {methods.formState.errors.selected_seats?.message}
                     </span>
                   )}

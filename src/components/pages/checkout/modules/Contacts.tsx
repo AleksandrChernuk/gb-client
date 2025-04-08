@@ -19,7 +19,7 @@ export default function Contacts() {
           name={`email`}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="secondary_text mb-2">Email</FormLabel>
+              <FormLabel className="text-sm font-normal tracking-normal leading-[21px] mb-2">Email</FormLabel>
               <FormControl>
                 <Input {...field} type="email" placeholder="Email" />
               </FormControl>

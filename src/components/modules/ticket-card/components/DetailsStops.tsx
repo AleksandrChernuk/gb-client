@@ -24,7 +24,7 @@ export default function DetailsStops({ id }: Props) {
     <div className="space-y-2">
       {!open && (
         <div className={`relative flex flex-col items-start gap-2 overflow-visible`}>
-          <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-gray_2_for_body dark:border-blackmode border-dashed translate-x-[56.5px]"></span>
+          <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-[#6f8b90] dark:border-slate-600 border-dashed translate-x-[56.5px]"></span>
           <DetailsStopsItem
             route={{
               station_address: ticketDetails?.departure.station_address,
@@ -67,7 +67,7 @@ export default function DetailsStops({ id }: Props) {
           {open && (
             <div>
               <div className={`relative flex flex-col items-start gap-2 mt-4`}>
-                <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-gray_2_for_body dark:border-blackmode border-dashed translate-x-[56.5px]"></span>
+                <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-[#6f8b90] dark:border-slate-600 border-dashed translate-x-[56.5px]"></span>
                 {stops?.map((element, idx, array) => (
                   <DetailsStopsItem
                     route={{
@@ -93,7 +93,7 @@ export default function DetailsStops({ id }: Props) {
         <Button
           onClick={() => setOpen((p) => !p)}
           variant={'link'}
-          className="flex items-center self-end gap-px p-2 underline cursor-pointer text-primary_1 samll_button text-nowrap"
+          className="flex items-center self-end gap-px p-2 text-green-300 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap"
         >{`${open ? t('collapse_route') : t('show_route')}`}</Button>
       )}
     </div>

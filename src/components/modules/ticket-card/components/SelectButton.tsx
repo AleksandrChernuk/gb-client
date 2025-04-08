@@ -40,7 +40,7 @@ export default function SelectButton({
         <Button
           variant={'default'}
           {...props}
-          className="w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] samll_button tablet:h5 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full"
+          className="w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] text-[12px] font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full"
         >
           {loading ? <LoaderCircle className="animate-spin" /> : buttonText}
         </Button>

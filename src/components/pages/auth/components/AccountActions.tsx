@@ -7,9 +7,11 @@ export default function AccountActions() {
   const t = useTranslations('common');
   return (
     <div>
-      <h5 className="mb-4 h5 text-gray_2_for_body dark:text-gray_0">{t('authYouCan')}</h5>
+      <h5 className="mb-4 text-base font-bold leading-6 tracking-normal text-[#6f8b90] dark:text-[#e6e6e6]">
+        {t('authYouCan')}
+      </h5>
 
-      <ul className="flex flex-col gap-2 mb-6 tablet:gap-4 text-black_2_for_text dark:text-gray_1 secondary_text tablet:main_text_body">
+      <ul className="flex flex-col gap-2 mb-6 tablet:gap-4 text-slate-700 dark:text-slate-200 text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6">
         {AccountActionsList.map((el) => (
           <li key={el.id} className="flex flex-row items-center gap-2 ">
             <CircleCheck className="w-4 h-4 tablet:w-6 tablet:h-6 stroke-primary" />
@@ -19,9 +21,9 @@ export default function AccountActions() {
       </ul>
 
       <div className="flex flex-row items-center gap-2">
-        <CircleAlert className="w-4 h-4 stroke-gray_2_for_body" />
+        <CircleAlert className="w-4 h-4 stroke-[#6f8b90]" />
 
-        <p className="small_text text-text_secondary">
+        <p className="text-xs font-normal tracking-normal leading-[18px] text-text_secondary">
           {t('auth_terms_of_the')}{' '}
           <Link href={'/'} prefetch={false} replace aria-label="go home page" className="text-primary">
             {t('auth_public_offer')}

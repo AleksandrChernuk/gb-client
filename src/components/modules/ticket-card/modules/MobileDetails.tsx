@@ -46,24 +46,27 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
           <SheetDescription className="sr-only">
             Make changes to your profile here. Click save when youre done.
           </SheetDescription>
-          <h3 className="font-medium h5 text-primary_1">{t('details')}</h3>
+          <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{t('details')}</h3>
 
           <SheetClose asChild>
-            <Button variant={'default'} className="flex items-center gap-1 p-1 rounded-md h5 bg-primary_1">
+            <Button
+              variant={'default'}
+              className="flex items-center gap-1 p-1 text-base font-bold leading-6 tracking-normal bg-green-300 rounded-md"
+            >
               <X color="#ffffff" />
             </Button>
           </SheetClose>
         </SheetHeader>
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs">
           {children}
         </ScrollArea>
-        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-dark_main ">
+        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">
           <div className="mx-auto text-center">
-            <div className="small_text text-gray_2_for_body dark:text-grayy">
+            <div className="text-xs font-normal tracking-normal leading-[18px] text-[#6f8b90] dark:text-slate-50">
               {passengerCount} {t('placeholderPassenger')}
             </div>
-            <div className="main_text_body text-black.2.for.text dark:text-gray_1">
+            <div className="text-base font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-200">
               {price} <span className="text-xs ml-[2px]">UAH</span>
             </div>
           </div>

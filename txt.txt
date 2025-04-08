@@ -1,0 +1,153 @@
+ black_2_for_text: #334155;slate-700
+background_black_mode - slate-900
+dark_mode_main1 - slate-800 #1e293b
+gray_3: #8e8e8e;
+gray_1: #e2e8f0 - slate-200
+grayy: #f8fafc slate-50;
+--b4ffd0  
+light_primary  color-green-50 
+primary_2 - green-100 
+hover: #05b446  - green-200 
+primary_1: #088537; - green-300
+focused #0d6e32 - green-400
+background_card #0d5a2b - green-500
+blackmode: #475569 slate-600;
+gray-dark: #334155  slate-700;
+additional-red: #de2a1a - red-50 
+red_input #ffe7e5 - red-100 
+additional-pink: #ef958d / light_red: #ef958d - red-200 
+
+
+
+
+@utility h1 {
+  @apply text-[32px] font-bold tracking-normal leading-[38.4px];
+}
+
+@utility h2 {
+  @apply text-[32px] font-medium tracking-normal leading-[38.4px];
+}
+
+@utility h3 {
+  @apply text-2xl font-bold tracking-normal leading-[28.8px];
+}
+        
+@utility h4 {
+  @apply text-2xl font-medium tracking-normal leading-[28.8px];
+}
+
+@utility h5 {
+  @apply text-base font-bold leading-6 tracking-normal;
+}
+
+@utility h6 {
+  @apply text-sm font-bold tracking-normal leading-[18px];
+}
+
+@utility main_text_body {
+  @apply text-base font-normal leading-6 tracking-normal;
+}
+
+@utility navigation_text_body {
+  @apply text-base font-medium tracking-tighter leading-[19.2px];
+}
+
+@utility button_underline_bolt_text {
+  @apply text-sm font-medium underline tracking-normal leading-[19.2px];
+}
+
+@utility body_medium {
+  @apply text-base font-medium tracking-normal leading-[24px];
+}
+
+@utility logo_small {
+  @apply text-[26.838px] font-extrabold tracking-normal leading-normal;
+}
+
+@utility logo_large {
+  @apply text-[31.88px] font-extrabold tracking-normal leading-[33.68px];
+}
+
+@utility large_button {
+  @apply text-lg font-bold tracking-normal leading-[21.6px];
+}
+
+@utility button_mobile {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility samll_button {
+  @apply text-[12px] font-bold tracking-normal leading-[18px];
+}
+
+@utility button_underline_text {
+  @apply text-sm font-normal underline tracking-normal leading-[19.2px];
+}
+
+@utility button_large_text {
+  @apply text-lg font-bold tracking-tighter leading-[21.6px];
+}
+
+@utility filter_input_medium_text {
+  @apply text-lg font-medium tracking-tighter leading-[21.6px];
+}
+
+@utility filter_input_normal_text {
+  @apply text-lg font-normal tracking-normal leading-[27px];
+}
+
+@utility addional_regular_text {
+  @apply text-sm font-normal leading-4 tracking-normal;
+}
+
+@utility addional {
+  @apply text-lg font-normal tracking-normal leading-[27px];
+}
+
+@utility addional_medium_text {
+  @apply text-base font-medium leading-4 tracking-normal;
+}
+
+@utility button_mobile_bolt_text {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility secondary_2_bolt_text {
+  @apply text-sm font-bold tracking-normal leading-[16.8px];
+}
+
+@utility small_2_bolt_text {
+  @apply text-xs font-bold tracking-normal leading-[18px];
+}
+
+@utility small_text {
+  @apply text-xs font-normal tracking-normal leading-[18px];
+}
+
+@utility secondary_text {
+  @apply text-sm font-normal tracking-normal leading-[21px];
+}
+
+@utility flex_center {
+  @apply flex items-center;
+}
+
+@utility flex_col {
+  @apply flex flex-col;
+}
+
+@utility p_drawer_content {
+  @apply px-5 py-6;
+}
+
+@utility select_input_error {
+  @apply border-[2px] border-additional_red;
+}
+
+@utility jorney_search_submit_btn {
+  @apply h5 grow-0 text-black text-wrap inline-flex items-center justify-center min-h-full py-4 px-6 w-full rounded-none rounded-br-[16px] tablet:min-w-[108px] tablet:max-w-[108px] laptop:min-w-[187px] laptop:max-w-[187px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none;
+}
+
+@utility details_stops_item {
+  @apply relative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20;
+}

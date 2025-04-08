@@ -29,7 +29,7 @@ export const Information = () => {
     <CustomCard className="p-5 space-y-4 shadow">
       <div className="flex items-center justify-between">
         {isHydrated ? (
-          <h3 className="h3 laptop:h1 text-text_prymery first-letter:uppercase">
+          <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
             {format(toDate(date), 'eee ,d MMM', { locale })}
           </h3>
         ) : (
@@ -41,17 +41,17 @@ export const Information = () => {
         </div>
       </div>
       <div className="flex items-center justify-between gap-1">
-        <div className="flex items-center gap-2 main_text_body text-text_secondary text-[12px] leading-4 tetx-black_2_for_text tablet:text-sm  dark:text-gray_1 text-nowrap truncate">
+        <div className="flex items-center gap-2 text-base font-normal leading-6 tracking-normal text-text_secondary text-[12px] tablet:leading-4 tetx-slate-700 tablet:text-sm  dark:text-slate-200 text-nowrap truncate">
           {from ? (
             <div>
               {from && extractLocationDetails(from, currentLanguage).locationName},{' '}
               {from && extractLocationDetails(from, currentLanguage).countryName}
             </div>
           ) : (
-            <Skeleton className="h-3 bg-light_primary dark:bg-black_2_for_text min-w-20" />
+            <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />
           )}
           <div className="w-3 h-3 grow">
-            <ArrowRight size={12} className="stroke-black_2_for_text dark:stroke-gray_1" />
+            <ArrowRight size={12} className="stroke-slate-700 dark:stroke-slate-200" />
           </div>
           {to ? (
             <div className="flex items-center">
@@ -59,10 +59,10 @@ export const Information = () => {
               {to && extractLocationDetails(to, currentLanguage).countryName}
             </div>
           ) : (
-            <Skeleton className="h-3 bg-light_primary dark:bg-black_2_for_text min-w-20" />
+            <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />
           )}
         </div>
-        <div className="text-[12px]  tablet:text-sm leading-6  text-primary_1 text-nowrap truncate">
+        <div className="text-[12px]  tablet:text-sm leading-6  text-green-300 text-nowrap truncate">
           {`${isFetching ? 0 : filteredTickets?.length} ${t('resul_count')}`}
         </div>
       </div>

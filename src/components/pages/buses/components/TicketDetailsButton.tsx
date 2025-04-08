@@ -17,7 +17,7 @@ export default function TicketDetailsButton({ isOpen, onClick, text }: Props) {
             onClick();
           }
         }}
-        className="flex items-center self-end gap-px p-2 underline cursor-pointer text-primary_1 samll_button text-nowrap"
+        className="flex items-center self-end gap-px p-2 underline cursor-pointer text-green-300 text-[12px] font-bold tracking-normal leading-[18px] text-nowrap"
       >
         <span>{text}</span>
         <ChevronDown

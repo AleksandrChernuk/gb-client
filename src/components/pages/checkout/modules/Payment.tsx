@@ -37,19 +37,21 @@ export default function Payment() {
       control={control}
       name="payment"
       render={({ field }) => (
-        <FormItem className="border border-gray_1 rounded-lg dark:bg-dark_bg dark:border-black_2_for_text">
+        <FormItem className="border rounded-lg border-slate-200 dark:bg-slate-900 dark:border-slate-700">
           <FormControl>
             <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col ">
               {PAYMENT_TYPES.map(({ ICON, VALUE, ID, INTL_KEY }) => (
                 <FormItem
                   key={ID}
-                  className="flex items-center space-x-3 space-y-0 p-4 border-solid border-b border-gray_1 last:border-b-0 dark:border-b-black_2_for_text"
+                  className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700"
                 >
                   <FormControl>
                     <RadioGroupItem value={VALUE} />
                   </FormControl>
-                  <FormLabel className="font-normal w-full cursor-pointer flex items-center space-x-3">
-                    <span className="addional_medium_text laptop:h5 text-text_prymery">{t(INTL_KEY)}</span>
+                  <FormLabel className="flex items-center w-full space-x-3 font-normal cursor-pointer">
+                    <span className="text-base font-medium leading-4 tracking-normal laptop:text-base laptop:font-bold laptop:leading-6 text-slate-700 dark:text-slate-50">
+                      {t(INTL_KEY)}
+                    </span>
                     <div className="size-6">{ICON}</div>
                   </FormLabel>
                 </FormItem>

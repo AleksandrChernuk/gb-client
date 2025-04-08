@@ -1,6 +1,6 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ReactNode } from "react";
-import { ScrollArea } from "../ui/scroll-area";
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { ReactNode } from 'react';
+import { ScrollArea } from '../ui/scroll-area';
 
 type Props = {
   open: boolean;
@@ -19,8 +19,8 @@ export default function CustomSheet({ open, toggleOpen, trigger, children, heade
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent>
         {header}
-        <ScrollArea className='relative px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs '>
-          <div className=' sticky top-0 left-0 right-0 h-12'>{children}</div>
+        <ScrollArea className="relative px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs ">
+          <div className=" sticky top-0 left-0 right-0 h-12">{children}</div>
         </ScrollArea>
 
         {footer}

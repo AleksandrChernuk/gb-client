@@ -3,7 +3,7 @@ import thirdFooter from '@/public/images/third-footer.avif';
 
 export default async function ThirdFooter() {
   return (
-    <footer role="footer" className="w-full h-auto bg-grayy dark:bg-dark_bg">
+    <footer role="footer" className="w-full h-auto bg-slate-50 dark:bg-slate-900">
       <Image
         src={thirdFooter}
         priority

@@ -48,7 +48,7 @@ export default function FaqSeach() {
           <Button
             type="submit"
             variant={'secondary'}
-            className="p-4 rounded-tl-none rounded-bl-none laptop:p-6 laptop:large_button tablet:h5 tablet:min-h-[71px] tablet::min-w-[102px] laptop:min-w-[201px] laptop:min-h-[75px]"
+            className="p-4 rounded-tl-none rounded-bl-none laptop:p-6 laptop:text-lg font-bold tracking-normal laptop:leading-[21.6px] tablet:text-base tablet:leading-6 tablet:min-h-[71px] tablet::min-w-[102px] laptop:min-w-[201px] laptop:min-h-[75px]"
           >
             {t('search')}
           </Button>

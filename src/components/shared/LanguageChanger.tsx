@@ -28,20 +28,20 @@ export default function SelectLocale({ type }: Props) {
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="py-0 ">
-            <div className="flex items-center gap-2 text-text_prymery body_medium">
+            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]">
               <div className="w-7 h-7">{supportLocalesList.find((item) => item.value === locale)?.icon}</div>
               {supportLocalesList.find((item) => item.value === locale)?.name}
             </div>
           </AccordionTrigger>
-          <AccordionContent className="pb-0 pt-4 pl-1">
-            <ul className=" space-y-2">
+          <AccordionContent className="pt-4 pb-0 pl-1">
+            <ul className="space-y-2 ">
               {supportLocalesList.map((el) => (
                 <li key={el.value}>
                   <Button
                     key={el.value}
                     variant={'link'}
                     asChild
-                    className="justify-start text-text_prymery body_medium"
+                    className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
                   >
                     <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
                       <div className="w-6 h-6"> {el.icon} </div>
@@ -65,7 +65,7 @@ export default function SelectLocale({ type }: Props) {
             <div className="w-7 h-7">{supportLocalesList.find((item) => item.value === locale)?.icon}</div>
             <ChevronUp
               size={24}
-              className={`stroke-black group-data-[state=open]:stroke-gray_2_for_body group-data-[state=open]:dark:stroke-dark_grayy  group-hover:stroke-gray_3 dark:stroke-gray_1 dark:group-hover:stroke-gray_1 group-data-[state=open]:rotate-180`}
+              className={`stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-dark_grayy  group-hover:stroke-[#8e8e8e] dark:stroke-slate-200 dark:group-hover:stroke-slate-200 group-data-[state=open]:rotate-180`}
             />
           </Button>
         </PopoverTrigger>
@@ -73,7 +73,12 @@ export default function SelectLocale({ type }: Props) {
           <ul className="space-y-2 ">
             {supportLocalesList.map((el) => (
               <li key={el.value}>
-                <Button key={el.value} variant={'link'} asChild className="justify-start text-text_prymery body_medium">
+                <Button
+                  key={el.value}
+                  variant={'link'}
+                  asChild
+                  className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
+                >
                   <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
                     <div className="w-6 h-6"> {el.icon} </div>
                     {el.shortName}

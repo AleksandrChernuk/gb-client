@@ -2,28 +2,37 @@ import MainFooter from '@/components/modules/footer/MainFooter';
 import FaqSeach from '@/components/pages/faq/modules/FaqSeach';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
-import { getTranslations } from 'next-intl/server';
+import { Params } from '@/types/common.types';
+import { Locale } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export default async function FaqLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Params;
 }>) {
+  const { lng } = await params;
+
+  setRequestLocale(lng as Locale);
   const t = await getTranslations('questions_answers');
   return (
     <>
-      <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-grayy dark:bg-dark_bg ">
+      <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-slate-50 dark:bg-slate-900 ">
         <Container size="l">
           <div className="mb-4 ">
             <BackRouteButton />
           </div>
-          <h1 className="text-center h5 tablet:h3 laptop:h1 text-text_prymery">{t('title')}</h1>
+          <h1 className="text-center text-base font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+            {t('title')}
+          </h1>
           <FaqSeach />
         </Container>
 
         {children}
       </main>
-      <MainFooter className="bg-white dark:bg-dark_main" />
+      <MainFooter className="bg-white dark:bg-slate-800" />
     </>
   );
 }

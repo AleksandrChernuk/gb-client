@@ -8,7 +8,7 @@ import Carriers from './modules/Carriers';
 
 export default async function MainPage() {
   return (
-    <main role="main" className="bg-grayy dark:bg-dark_bg ">
+    <main role="main" className="bg-slate-50 dark:bg-slate-900">
       <Herow />
       <Benefits />
       <Buses />

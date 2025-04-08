@@ -25,7 +25,9 @@ export default function Passengers() {
     <ul className="space-y-4">
       <li className="flex items-center gap-2">
         <StepNumber step={1} />
-        <h3 className="h5 tablet:h4 text-text_prymery">{t_new_order('passengers')}</h3>
+        <h3 className="text-base font-bold leading-6 tracking-normal tablet:text-2xl tablet:font-medium tablet:leading-[28.8px] text-slate-700 dark:text-slate-50">
+          {t_new_order('passengers')}
+        </h3>
 
         <div className="ml-auto">
           <Timer />
@@ -37,7 +39,7 @@ export default function Passengers() {
             const passenger = field as unknown as TPassenger;
             return (
               <li key={passenger.id}>
-                <CustomCard className="space-y-4 dark:bg-dark_main">
+                <CustomCard className="space-y-4 dark:bg-slate-800">
                   <div className="flex flex-col gap-4 tablet:flex-row">
                     <div className="w-full tablet:w-1/2">
                       <FormField
@@ -45,11 +47,13 @@ export default function Passengers() {
                         name={`passengers.${i}.name`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="secondary_text mb-2">{t_forms('name')}</FormLabel>
+                            <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
+                              {t_forms('name')}
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} type="text" placeholder={t_forms('name_placeholder')} />
                             </FormControl>
-                            <FormMessage className="text-red" />
+                            <FormMessage className="text-red-50" />
                           </FormItem>
                         )}
                       />
@@ -61,11 +65,13 @@ export default function Passengers() {
                         name={`passengers.${i}.surname`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="secondary_text  mb-2">{t_forms('surname')}</FormLabel>
+                            <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
+                              {t_forms('surname')}
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} type="text" placeholder={t_forms('surname_placeholder')} />
                             </FormControl>
-                            <FormMessage className="text-red" />
+                            <FormMessage className="text-red-50" />
                           </FormItem>
                         )}
                       />
@@ -79,7 +85,9 @@ export default function Passengers() {
                         name={`passengers.${i}.notes`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="secondary_text mb-2">{t_forms('notes')}</FormLabel>
+                            <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
+                              {t_forms('notes')}
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} type="text" />
                             </FormControl>
@@ -96,7 +104,9 @@ export default function Passengers() {
                         render={({ field, fieldState }) => {
                           return (
                             <FormItem>
-                              <FormLabel className="secondary_text mb-2">{t_forms('dob')}</FormLabel>
+                              <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
+                                {t_forms('dob')}
+                              </FormLabel>
                               <FormControl>
                                 <div className="relative">
                                   <Input
@@ -112,12 +122,12 @@ export default function Passengers() {
                                     placeholder={t_forms('dob_placeholder')}
                                   />
 
-                                  <Calendar className="stroke-gray-dark dark:stroke-grayy absolute -translate-y-1/2 right-5 top-1/2" />
+                                  <Calendar className="absolute -translate-y-1/2 stroke-slate-700 dark:stroke-slate-50 right-5 top-1/2" />
                                 </div>
                               </FormControl>
 
                               {fieldState.invalid && (
-                                <span className="text-sm font-medium text-red">
+                                <span className="text-sm font-medium text-red-50">
                                   {t_forms(fieldState.error?.message || '')}
                                 </span>
                               )}

@@ -9,9 +9,11 @@ export default async function PopularRoutes() {
   const initialRouters = popularRoutersFakeData.slice(0, 3);
 
   return (
-    <section className="py-6 bg-background_card dark:bg-dark_main">
+    <section className="py-6 bg-green-500 dark:bg-slate-800">
       <Container size="m" className="tablet:px-8">
-        <h3 className="mb-4 text-white button_large_text tablet:h3 laptop:mb-8 laptop:h1">{t('popular_title')}</h3>
+        <h3 className="mb-4 text-white text-lg font-bold tracking-tighter leading-[21.6px] tablet:text-2xl ftablet:leading-[28.8px] laptop:mb-8 laptop:text-[32px] laptop:leading-[38.4px]">
+          {t('popular_title')}
+        </h3>
         <div className="grid grid-cols-1 gap-4 mb-4 laptop:grid-cols-3 laptop:gap-8 laptop:mb-8">
           {initialRouters.map((router) => (
             <div className="w-full" key={router.id}>

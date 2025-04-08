@@ -16,7 +16,7 @@ export default function ForAgentsPage() {
             <BackRouteButton />
           </div>
 
-          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24   tablet:items-center">
+          <ul className="flex flex-col gap-12 tablet:flex-row tablet:gap-24 tablet:items-center">
             <li>
               <Image
                 src={busDirectly}
@@ -26,10 +26,10 @@ export default function ForAgentsPage() {
               />
             </li>
             <li className="tablet:w-1/2">
-              <h1 className="mb-4 h3 laptop:h1 text-text_prymery">
+              <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 GreenBus – автоматизуй продаж квитків та керуй перевезеннями!
               </h1>
-              <p className="secondary_text laptop:main_text_body text-text_muted">
+              <p className="text-sm leading-[21px] laptop:text-base font-normal laptop:leading-6 tracking-normal text-text_muted">
                 На этой странице вы найдете всю необходимую информацию, инструменты и ресурсы для успешной работы. Мы
                 приглашаем к сотрудничеству агентства, занимающиеся продажей билетов на международные пассажирские
                 перевозки, а также компании, работающие в сфере трудоустройства в Европе.
@@ -41,7 +41,9 @@ export default function ForAgentsPage() {
 
       <section className="bg-bg_green">
         <Container size="l" className="py-8">
-          <h2 className="h4 laptop:h3 text-grayy mb-4 laptop:mb-8">Чому варто приєднатися до нас?</h2>
+          <h2 className="mb-4 text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50 laptop:mb-8">
+            Чому варто приєднатися до нас?
+          </h2>
           <ul className="grid justify-between grid-cols-1 gap-4 tablet:gap-6 laptop:grid-cols-3 laptop:gap-20">
             {joinUsAgents.map(({ title, text, icon }) => (
               <li key={title} className="flex flex-col items-start gap-2">
@@ -52,20 +54,22 @@ export default function ForAgentsPage() {
                   alt={icon.alt}
                   className="size-14 tablet:size-16 laptop:size-[72px]"
                 />
-                <h3 className="h5 text-primary_2">{title}</h3>
-                <p className="secondary_text text-gray_1">{text}</p>
+                <h3 className="text-base font-bold leading-6 tracking-normal text-green-100">{title}</h3>
+                <p className="text-sm font-normal tracking-normal leading-[21px] text-slate-200">{text}</p>
               </li>
             ))}
           </ul>
         </Container>
       </section>
 
-      <section className="bg-bg_main pt-16">
+      <section className="pt-16 bg-bg_main">
         <Container size="l">
-          <ul className="flex flex-col tablet:flex-row gap-12 tablet:gap-24 tablet:items-start">
+          <ul className="flex flex-col gap-12 tablet:flex-row tablet:gap-24 tablet:items-start">
             <li className="tablet:w-1/2">
-              <h2 className="mb-4 h3 laptop:h1 text-text_prymery">Можливості GreenBus</h2>
-              <p className="secondary_text laptop:main_text_body text-text_muted">
+              <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+                Можливості GreenBus
+              </h2>
+              <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base  laptop:leading-6 text-text_muted">
                 GreenBus пропонує широкі можливості для партнерів: ефективна система продажу квитків, доступ до мережі
                 перевізників та стабільний дохід. Ми підтримуємо наших партнерів на кожному етапі, надаючи всі необхідні
                 інструменти для успіху в бізнесі.
@@ -77,7 +81,7 @@ export default function ForAgentsPage() {
                 src={directionWith}
                 width={766}
                 height={318}
-                className="overflow-hidden rounded-3xl mx-auto"
+                className="mx-auto overflow-hidden rounded-3xl"
               />
             </li>
           </ul>
@@ -86,8 +90,10 @@ export default function ForAgentsPage() {
 
       <section className="py-16">
         <Container size="xs" className="my-auto">
-          <CustomCard className="bg-card shadow">
-            <h3 className="h3 laptop:h1 text-text_prymery text-center mb-6">Залишити запит</h3>
+          <CustomCard className="shadow bg-card">
+            <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              Залишити запит
+            </h3>
             <RequestPartnershipForm />
           </CustomCard>
         </Container>

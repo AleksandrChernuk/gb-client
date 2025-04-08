@@ -16,25 +16,27 @@ export default function ToPay() {
     <div>
       {isHydrated ? (
         <div className="flex items-start justify-between gap-4">
-          <div className="small_text tablet:main_text_body text-text_prymery">
+          <div className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 text-slate-700 dark:text-slate-50">
             <div>{t('to_be_paid')}</div>
             <div>
               {adult && `${t('adult')}: ${adult}`}
               {children >= 1 && `, ${t('children')}: ${children}`}
             </div>
           </div>
-          <div className="addional_medium_text tablet:h5 text-text_prymery">
+          <div className="text-base font-medium leading-4 tracking-normal tablet:text-base tablet:font-bold tablet:leading-6 text-slate-700 dark:text-slate-50">
             {countPricing({ price: selectedTicket?.ticket_pricing.base_price, passengers: adult + children })} UAH
           </div>
         </div>
       ) : (
         <Skeleton className="w-full h-5" />
       )}
-      <div className="w-full h-px my-8 bg-text_prymery"></div>
+      <div className="w-full h-px my-8 bg-slate-700 dark:bg-slate-50"></div>
       {isHydrated ? (
         <div className="flex items-center justify-between gap-4">
-          <div className="addional_medium_text text-text_prymery tablet:h4 laptop:h3">{t('total_price')}</div>
-          <div className="addional_medium_text text-text_prymery tablet:h4 laptop:h3">
+          <div className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
+            {t('total_price')}
+          </div>
+          <div className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
             {countPricing({ price: selectedTicket?.ticket_pricing.base_price, passengers: adult + children })} UAH
           </div>
         </div>

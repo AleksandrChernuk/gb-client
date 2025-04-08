@@ -19,17 +19,19 @@ export function DialogNewOrder({ open }: { open: boolean }) {
     <Dialog open={open}>
       <DialogContent className="sm:max-w-[425px] rounded-2xl">
         <DialogHeader className="text-center">
-          <DialogTitle className="h5 text-text_prymery">Ви ще онлайн?</DialogTitle>
+          <DialogTitle className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
+            Ви ще онлайн?
+          </DialogTitle>
           <DialogDescription className="sr-only">Ви ще онлайн?</DialogDescription>
         </DialogHeader>
-        <p className="mb-2 text-center text-text_prymery text-main_text_body">
+        <p className="mb-2 text-base font-normal leading-6 tracking-normal text-center text-slate-700 dark:text-slate-50">
           Оскільки ви не оформили замовлення у відведений час, ми очистили вміст вашого кошика. Але ви завжди можете
           спробувати знову забронювати ті ж квитки!
         </p>
         <DialogFooter className="flex-wrap gap-2">
           <Button
             variant={'default'}
-            className="px-3 py-2 text-white border border-primary button_mobile target:h5"
+            className="px-3 py-2 text-white border border-primary text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6"
             onClick={() => {
               router.back();
             }}
@@ -104,7 +106,7 @@ export default function Timer() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="lucide lucide-circle stroke-gray_1 dark:stroke-black_2_for_text"
+          className="lucide lucide-circle stroke-slate-200 dark:stroke-slate-700"
         >
           <circle cx="12" cy="12" r="10" />
         </svg>
@@ -123,7 +125,7 @@ export default function Timer() {
         </svg>
       </div>
 
-      <div className="button_mobile text-primary">{formatTime(timer)}</div>
+      <div className="text-sm font-bold tracking-normal leading-[16.8px] text-primary">{formatTime(timer)}</div>
       <DialogNewOrder open={open} />
     </div>
   );

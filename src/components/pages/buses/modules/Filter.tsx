@@ -34,9 +34,12 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
       <SheetDescription className="sr-only">
         Make changes to your profile here. Click save when youre done.
       </SheetDescription>
-      <h3 className="font-medium h5 text-primary_1">{title}</h3>
+      <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{title}</h3>
       <SheetClose asChild>
-        <Button variant={'default'} className="flex items-center gap-1 p-1 rounded-md h5 bg-primary_1">
+        <Button
+          variant={'default'}
+          className="flex items-center gap-1 p-1 text-base font-bold leading-6 tracking-normal bg-green-300 rounded-md"
+        >
           <X color="#ffffff" />
         </Button>
       </SheetClose>
@@ -61,34 +64,38 @@ export const MobileFilter = () => {
       <SheetContent>
         <MobileFilterHeader title={t('filter')} />
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs">
           <div className="my-4">
             <ul>
               <li>
-                <h5 className="mb-4 h5 text-text_prymery">{t('sort_by')}:</h5>
+                <h5 className="mb-4 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
+                  {t('sort_by')}:
+                </h5>
                 <FilterSortByList />
               </li>
-              <Separator className="h-1 my-6 rounded-lg bg-gray_0 dark:bg-black_2_for_text" />
+              <Separator className="h-1 my-6 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
               <li>
-                <h5 className="mb-4 h5 text-text_prymery">{t('bus_companies')}:</h5>
+                <h5 className="mb-4 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
+                  {t('bus_companies')}:
+                </h5>
                 <FilterCheckBoxList />
               </li>
             </ul>
           </div>
         </ScrollArea>
 
-        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-dark_main ">
+        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">
           <SheetClose asChild>
             <Button
               variant={'outline'}
-              className="w-full px-5 py-3 button_mobile text-primary bg-inherit"
+              className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px] text-primary bg-inherit"
               onClick={() => resetFilters()}
             >
               {t('clear_all')}
             </Button>
           </SheetClose>
           <SheetClose asChild>
-            <Button variant={'default'} className="w-full px-5 py-3 button_mobile">
+            <Button variant={'default'} className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]">
               {t('view_trips')}
             </Button>
           </SheetClose>

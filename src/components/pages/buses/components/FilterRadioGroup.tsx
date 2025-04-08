@@ -23,7 +23,10 @@ export default function FilterSortByList() {
       {sortBuyItems.map((el) => (
         <div className="flex items-center space-x-2" key={el.value}>
           <RadioGroupItem value={el.type} id={el.type} />
-          <Label htmlFor={el.type} className="w-full main_text_body text-text_secondary">
+          <Label
+            htmlFor={el.type}
+            className="w-full font-normal leading-6 main_tetext-base tracking-normalxt_body text-text_secondary"
+          >
             <ul className="flex items-center justify-between">
               <li>{t(`${el.type}`)}</li>
               <li className="w-6 h-6">{el.icon}</li>

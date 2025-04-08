@@ -51,7 +51,7 @@ export default function DatePicker({ type }: Props) {
               <input
                 type="button"
                 value={format(currentDate || new Date(), 'dd MMMM', { locale })}
-                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-black dark:placeholder-gray_0 body_medium laptop:filter_input_medium_text text-black dark:text-grayy text-left text-nowrap truncate border-[1px] border-transparent"
+                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
                 onFocus={() => {
                   handleToggleOpen();
                 }}
@@ -67,16 +67,21 @@ export default function DatePicker({ type }: Props) {
               </SheetDescription>
 
               <SheetClose asChild>
-                <Button variant={'link'} className="flex items-center gap-1 h5 text-text_prymery">
-                  <ChevronLeft size={24} className="stroke-black_2_for_text dark:stroke-grayy" />
+                <Button
+                  variant={'link'}
+                  className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50"
+                >
+                  <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
                   {t('backBtn')}
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-grayy dark:bg-dark_bg">
+            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
               <div className="sticky top-0 left-0 right-0 z-50">
-                <div className="flex items-center justify-between w-full py-6 bg-grayy dark:bg-dark_bg">
-                  <h3 className="grow h5 text-text_prymery">{t('date_picker_title')}</h3>
+                <div className="flex items-center justify-between w-full py-6 bg-slate-50 dark:bg-slate-900">
+                  <h3 className="text-base font-bold leading-6 tracking-normal grow text-slate-700 dark:text-slate-50">
+                    {t('date_picker_title')}
+                  </h3>
                   <div className="flex items-center justify-end gap-2">
                     <Button
                       className="w-8 h-8"
@@ -85,10 +90,10 @@ export default function DatePicker({ type }: Props) {
                       onClick={decrementMonth}
                       disabled={month < new Date()}
                     >
-                      <ChevronLeft className={'h-5 w-5 stroke-gray_5 dark:stroke-gray_1'} />
+                      <ChevronLeft className={'h-5 w-5 stroke-[#212529] dark:stroke-slate-200'} />
                     </Button>
                     <Button className="w-8 h-8" size={'icon'} variant={'ghost'} onClick={incrementMonth}>
-                      <ChevronRight className={'h-5 w-5 stroke-gray_5 dark:stroke-gray_1'} />
+                      <ChevronRight className={'h-5 w-5 stroke-[#212529] dark:stroke-slate-200'} />
                     </Button>
                   </div>
                 </div>
@@ -120,7 +125,7 @@ export default function DatePicker({ type }: Props) {
       return (
         <div role="dropdown-warapp" className="relative" onBlur={handleBlur}>
           <div
-            className={`relative border-r border-gray_1 dark:border-black_2_for_text ${
+            className={`relative border-r border-slate-200 dark:border-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
             }`}
           >
@@ -129,7 +134,7 @@ export default function DatePicker({ type }: Props) {
               ref={inputRef}
               type="button"
               value={format(currentDate || new Date(), 'dd MMMM ', { locale })}
-              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-black dark:placeholder-gray_0 body_medium laptop:filter_input_medium_text text-black dark:text-grayy text-left text-nowrap truncate border-[1px] border-transparent"
+              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:tracking-tighter laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
               onClick={() => {
                 handleToggleOpen();
               }}
@@ -143,7 +148,7 @@ export default function DatePicker({ type }: Props) {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-dark_main dark:border dark:border-dark_bg"
+                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
                 key="box"
                 onMouseDown={(event) => {
                   event.preventDefault();

@@ -16,7 +16,11 @@ export default function BackRouteButton() {
   };
 
   return (
-    <Button variant={'link'} onClick={handleGoBack} className="gap-0.2   text-text_prymery h5">
+    <Button
+      variant={'link'}
+      onClick={handleGoBack}
+      className="gap-0.2 text-slate-700 dark:text-slate-50 text-base font-bold leading-6 tracking-normal"
+    >
       <ChevronLeft size={24} />
       {t('backBtn')}
     </Button>

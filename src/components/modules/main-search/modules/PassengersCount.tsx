@@ -51,7 +51,7 @@ export default function PassengersCount({ type }: Props) {
               <input
                 type="button"
                 value={value}
-                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-black dark:placeholder-gray_0 body_medium laptop:filter_input_medium_text text-black dark:text-grayy text-left text-nowrap truncate border-[1px] border-transparent"
+                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base tracking-normal leading-[24px] laptop:text-lg laptop:font-medium laptop:tracking-tighter laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
               />
             </div>
           </SheetTrigger>
@@ -63,25 +63,33 @@ export default function PassengersCount({ type }: Props) {
               </SheetDescription>
 
               <SheetClose asChild>
-                <Button variant={'link'} className="flex items-center gap-1 h5 text-text_prymery">
-                  <ChevronLeft size={24} className="stroke-black_2_for_text dark:stroke-grayy" />
+                <Button
+                  variant={'link'}
+                  className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50"
+                >
+                  <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
                   {t('backBtn')}
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-grayy dark:bg-dark_bg">
+            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
               <div className="my-5">
-                <h3 className="mb-6 h5 text-text_prymery"> {t('placeholderPassengers')}</h3>
+                <h3 className="mb-6 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
+                  {t('placeholderPassengers')}
+                </h3>
                 <div>
                   <PassengersButton type="adult" value={adult} />
-                  <Separator className="h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text" />
+                  <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
                   <PassengersButton type="children" value={children} />
                 </div>
               </div>
             </ScrollArea>
             <SheetFooter>
               <SheetClose asChild>
-                <Button variant={'default'} className="w-full py-2  rounded-full h5">
+                <Button
+                  variant={'default'}
+                  className="w-full py-2 text-base font-bold leading-6 tracking-normal rounded-full"
+                >
                   {t('continue')}
                 </Button>
               </SheetClose>
@@ -104,7 +112,7 @@ export default function PassengersCount({ type }: Props) {
                     ? `${passCount} ${t('placeholderPassengersGenitive')}`
                     : `${passCount} ${t('placeholderPassengers')}`
               }
-              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-black dark:placeholder-gray_0 body_medium laptop:filter_input_medium_text text-black dark:text-grayy text-left text-nowrap truncate border-[1px] border-transparent"
+              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg  laptop:font-medium  laptop:tracking-tighter  laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
               onClick={() => {
                 handleToggleOpen();
               }}
@@ -117,7 +125,7 @@ export default function PassengersCount({ type }: Props) {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                className="absolute right-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-dark_main dark:border dark:border-dark_bg"
+                className="absolute right-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
                 key="box"
                 onMouseDown={(event) => {
                   event.preventDefault();
@@ -125,7 +133,7 @@ export default function PassengersCount({ type }: Props) {
                 }}
               >
                 <PassengersButton type="adult" value={adult} />
-                <Separator className="h-[1px] my-4 rounded-lg bg-gray_0 dark:bg-black_2_for_text" />
+                <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
                 <PassengersButton type="children" value={children} />
               </motion.div>
             ) : null}

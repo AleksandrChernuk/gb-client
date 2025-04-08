@@ -3,7 +3,7 @@ import { Mulish, Noto_Sans } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
 const notoSans = Noto_Sans({
-  variable: '--font-geist-sans',
+  variable: '--nato-sans',
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
 });

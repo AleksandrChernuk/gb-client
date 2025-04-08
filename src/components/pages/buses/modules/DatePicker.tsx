@@ -26,24 +26,24 @@ export default function DateTabs() {
                 aria-label={format(date, 'dd MMM')}
                 aria-selected={isEqual(date, toDate(tabDate))}
                 className={`${
-                  isEqual(date, toDate(tabDate)) && 'bg-grayy dark:bg-dark_main'
-                } hover:no-underline p-4 laptop:px-6 h-auto w-auto tablet:w-24 laptop:w-32 rounded-none rounded-t-lg text-black  dark:text-grayy ${
+                  isEqual(date, toDate(tabDate)) && 'bg-slate-50 dark:bg-slate-800'
+                } hover:no-underline p-4 laptop:px-6 h-auto w-auto tablet:w-24 laptop:w-32 rounded-none rounded-t-lg text-black  dark:text-slate-50 ${
                   !isEqual(date, toDate(tabDate)) && 'text-white'
                 }`}
               >
                 <ul className="flex flex-col items-center gap-1">
-                  <li className="small_text tablet:main_text_body first-letter:uppercase">
+                  <li className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 first-letter:uppercase">
                     {isHydrated ? (
                       format(date, 'EEE', { locale })
                     ) : (
-                      <Skeleton className=" inline-block w-[27.8px] h-[24px] bg-light_primary dark:bg-black_2_for_text" />
+                      <Skeleton className=" inline-block w-[27.8px] h-[24px] bg-green-50 dark:bg-slate-700" />
                     )}
                   </li>
-                  <li className="small_2_bolt_text tablet:h5">
+                  <li className="text-xs font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6">
                     {isHydrated ? (
                       format(date, 'dd MMM', { locale })
                     ) : (
-                      <Skeleton className=" inline-block w-[59px] h-[24px] bg-light_primary dark:bg-black_2_for_text" />
+                      <Skeleton className=" inline-block w-[59px] h-[24px] bg-green-50 dark:bg-slate-700" />
                     )}
                   </li>
                 </ul>

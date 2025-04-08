@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const IconLoader = () => {
   return (
@@ -11,7 +11,7 @@ export const IconLoader = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="lucide lucide-loader animate-spin stroke-primary_1"
+      className="lucide lucide-loader animate-spin stroke-green-300"
     >
       <path d="M12 2v4" />
       <path d="m16.2 7.8 2.9-2.9" />

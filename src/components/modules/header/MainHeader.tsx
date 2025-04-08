@@ -8,7 +8,7 @@ import { MobileMenu } from '../mobile-menu/MobileMenu';
 
 export default async function MainHeader() {
   return (
-    <header className="bg-white border-b-2 dark:bg-dark_main border-b-gray_0 dark:border-b-black_2_for_text">
+    <header className="bg-white border-b-2 dark:bg-slate-800 border-b-[#e6e6e6] dark:border-b-slate-700 ">
       <Container size="l" className="flex items-center justify-between py-4">
         <Logo />
 

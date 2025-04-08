@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import * as React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { DayPicker } from 'react-day-picker';
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
   return (
@@ -22,7 +22,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
-          'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-transparent'
+          'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-transparent',
         ),
         nav_button_previous: 'absolute left-1 ',
         nav_button_next: 'absolute right-1',
@@ -30,15 +30,14 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         head_row: 'flex gap-2',
         head_cell: 'text-muted-foreground rounded-md w-9 font-medium text-base',
         row: 'flex w-full mt-2 gap-2',
-        cell: 'h-9 w-9 rounded-full text-center text-base p-0 relative flex justify-center items-center [&:has([aria-selected])]:bg-transporante hover:bg-primary_1  focus-within:relative focus-within:z-20',
+        cell: 'h-9 w-9 rounded-full text-center text-base p-0 relative flex justify-center items-center [&:has([aria-selected])]:bg-transporante hover:bg-green-300  focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'rounded-full h-9 w-9 p-0 font-medium text-sm	aria-selected:opacity-100 hover:bg-primary_1'
+          'rounded-full h-9 w-9 p-0 font-medium text-sm	aria-selected:opacity-100 hover:bg-green-300',
         ),
         day_range_end: 'day-range-end',
-        day_selected:
-          'bg-primary_1 text-white hover:bg-primary_1 hover:text-white focus:bg-primary_1 focus:text-white',
-        day_today: 'bg-transporante border-[2px] border-primary_1 text-accent-foreground',
+        day_selected: 'bg-green-300 text-white hover:bg-green-300 hover:text-white focus:bg-green-300 focus:text-white',
+        day_today: 'bg-transporante border-[2px] border-green-300 text-accent-foreground',
         day_outside:
           'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
         day_disabled: 'text-muted-foreground opacity-50',
@@ -48,16 +47,10 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
       }}
       components={{
         IconLeft: ({ className, ...props }) => (
-          <ChevronLeft
-            className={cn('h-5 w-5 stroke-gray_5 dark:stroke-gray_1', className)}
-            {...props}
-          />
+          <ChevronLeft className={cn('h-5 w-5 stroke-[#212529] dark:stroke-slate-200', className)} {...props} />
         ),
         IconRight: ({ className, ...props }) => (
-          <ChevronRight
-            className={cn('h-5 w-5 stroke-gray_5 dark:stroke-gray_1', className)}
-            {...props}
-          />
+          <ChevronRight className={cn('h-5 w-5 stroke-[#212529] dark:stroke-slate-200', className)} {...props} />
         ),
       }}
       {...props}
@@ -67,4 +60,3 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 Calendar.displayName = 'Calendar';
 
 export { Calendar };
- 

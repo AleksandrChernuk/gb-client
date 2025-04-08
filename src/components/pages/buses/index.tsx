@@ -6,10 +6,10 @@ import { Information } from './modules/Information';
 
 export default async function BusesPage() {
   return (
-    <main role="main" className="pb-16 grow bg-grayy dark:bg-dark_main">
+    <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-800">
       <section>
         <h1 className="sr-only">SearchPage</h1>
-        <search className="bg-background_card dark:bg-dark_bg">
+        <search className="bg-green-500 dark:bg-slate-900">
           <Container size="l" className="py-5 tablet:pt-8 ">
             <MainSearch />
           </Container>
@@ -17,7 +17,7 @@ export default async function BusesPage() {
       </section>
 
       <section>
-        <search className="bg-background_card dark:bg-dark_bg">
+        <search className="bg-green-500 dark:bg-slate-900">
           <Container size="sm">
             <DateTabs />
           </Container>

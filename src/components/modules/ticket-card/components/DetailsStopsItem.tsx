@@ -19,10 +19,10 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
 
   return (
     <div
-      className={`relative flex items-start justify-start ${isLast && 'overflow-hidden z-10 bg-grayy tablet:bg-white dark:bg-dark_bg'}`}
+      className={`relative flex items-start justify-start ${isLast && 'overflow-hidden z-10 bg-slate-50 tablet:bg-white dark:bg-slate-900'}`}
     >
       <div
-        className={`${isFirst || isLast ? 'button_mobile' : 'small_2_bolt_text'} text-text_prymery mr-9 min-w-[40px] max-w-[40px]`}
+        className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px]' : 'text-xs font-bold tracking-normal leading-[18px]'} text-slate-700 dark:text-slate-50 mr-9 min-w-[40px] max-w-[40px]`}
       >
         {isFirst
           ? (departure_date_time && departure_date_time?.split(' ')[1].replace(':00', '')) ||
@@ -32,16 +32,18 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
       </div>
 
       <div
-        className={`details_stops_item ${isLast ? 'before:border-primary_1' : 'before:border-blackmode before:bg-grayy dark:before:bg-dark_bg'} `}
+        className={`elative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20 ${isLast ? 'before:border-green-300' : 'before:border-slate-600 before:bg-slate-50 dark:before:bg-slate-900'} `}
       >
         {isLast && (
-          <span className="absolute w-[8px] h-[8px] rounded-full bg-primary_1 top-[4px] -left-[19px] -translate-x-1/2" />
+          <span className="absolute w-[8px] h-[8px] rounded-full bg-green-300 top-[4px] -left-[19px] -translate-x-1/2" />
         )}
-        <div className={`${isFirst || isLast ? 'button_mobile' : 'small_2_bolt_text'}  text-text_prymery`}>
+        <div
+          className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px]' : 'text-xs font-bold tracking-normal leading-[18px]'}  text-slate-700 dark:text-slate-50`}
+        >
           {location_name}
         </div>
 
-        <div className="text-text_secondary  text-[10px] mobile:small_text">
+        <div className="text-text_secondary  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
           {station_name && `${station_name}, `}
           {station_address}
         </div>

@@ -32,19 +32,19 @@ export default function BookingSheet() {
           disabled={!selectedTicket?.details?.seats_map}
           variant={'outline'}
           type="button"
-          className="flex items-center justify-between w-full h-auto p-3 border rounded-lg bg-inherit border-gray_1 hover:bg-grayy dark:hover:bg-dark_bg dark:border-black_2_for_text dark:hover:border-black_2_for_text active:border-black_2_for_text dark:active:border-dark_bg"
+          className="flex items-center justify-between w-full h-auto p-3 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900"
         >
           <div className="flex items-center gap-2 tablet:gap-4">
-            <div className="[&_svg]:fill-gray_2_for_body w-[45px] h-[56px]">
+            <div className="[&_svg]:fill-[#6f8b90] w-[45px] h-[56px]">
               <IconSeat />
             </div>
 
             {isHydrated ? (
-              <div className="h5 text-text_prymery ">
+              <div className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
                 {!selectedTicket?.details?.seats_map ? (
                   <div className="flex flex-col items-start gap-1">
                     <span>{t('free_seating')}</span>
-                    <span className="addional_medium_text">{t('seat_guaranteed')}</span>
+                    <span className="text-base font-medium leading-4 tracking-normal">{t('seat_guaranteed')}</span>
                   </div>
                 ) : (
                   t('choose_place')
@@ -54,7 +54,7 @@ export default function BookingSheet() {
               <Skeleton className="min-w-18 h-[24px]" />
             )}
           </div>
-          <ChevronRight size={32} className="stroke-gray_2_for_body" />
+          <ChevronRight size={32} className="stroke-[#6f8b90]" />
         </Button>
       </SheetTrigger>
       <SheetContent>
@@ -64,13 +64,17 @@ export default function BookingSheet() {
             Make changes to your profile here. Click save when youre done.
           </SheetDescription>
           <SheetClose asChild>
-            <Button type="button" variant={'link'} className="gap-0.2 text-text_prymery h5">
+            <Button
+              type="button"
+              variant={'link'}
+              className="gap-0.2 text-slate-700 dark:text-slate-50 text-base font-bold leading-6 tracking-normal"
+            >
               <ChevronLeft size={24} />
               Back
             </Button>
           </SheetClose>
         </SheetHeader>
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-grayy dark:bg-dark_bg shadow-2xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-2xs">
           <div className="my-10">
             {selectedTicket &&
               selectedTicket?.details?.seats_map &&
@@ -91,10 +95,12 @@ export default function BookingSheet() {
           </div>
         </ScrollArea>
 
-        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-dark_main ">
+        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">
           <div className="flex flex-col items-start justify-center w-1/2">
-            <div className="addional_regular_text text-text_prymery">No seats are booked</div>
-            <div className="h5 text-text_prymery">0</div>
+            <div className="text-sm font-normal leading-4 tracking-normal text-slate-700 dark:text-slate-50">
+              No seats are booked
+            </div>
+            <div className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">0</div>
           </div>
           <div className="w-1/2">
             <SheetClose asChild>

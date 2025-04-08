@@ -9,10 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-white button_mobile hover:bg-primary/90',
+        default: 'bg-primary text-white text-sm font-bold tracking-normal leading-[16.8px] hover:bg-primary/90',
         destructive: 'bg-destructive hover:bg-destructive/90',
         outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-black button_mobile hover:bg-secondary/80',
+        secondary: 'bg-secondary text-black text-sm font-bold tracking-normal leading-[16.8px] hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         main: 'bg-secondary hover:bg-secondary/80 h5 text-black rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
@@ -20,7 +20,7 @@ const buttonVariants = cva(
       size: {
         default: '',
         secondary:
-          'py-2 px-6 tablet:py-4 rounded-full tablet:h5 min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px]',
+          'py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px]',
         sm: ' ',
         lg: ' ',
         icon: ' ',

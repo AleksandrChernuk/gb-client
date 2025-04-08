@@ -25,10 +25,10 @@ type TDateDuration = {
 
 const DateDuration = ({ departure, duration, arrival }: TDateDuration) => {
   return (
-    <div className="flex flex-col justify-between text-text_prymery">
-      <div className="button_mobile">{departure}</div>
-      <div className="small_text text-text_secondary">{duration}</div>
-      <div className="button_mobile">{arrival}</div>
+    <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
+      <div className="text-sm font-bold tracking-normal leading-[16.8px]">{departure}</div>
+      <div className="text-xs font-normal tracking-normal leading-[18px] text-text_secondary">{duration}</div>
+      <div className="text-sm font-bold tracking-normal leading-[16.8px]">{arrival}</div>
     </div>
   );
 };
@@ -36,8 +36,12 @@ const DateDuration = ({ departure, duration, arrival }: TDateDuration) => {
 const Location = ({ location, address, className }: TLocation) => {
   return (
     <div className={cn(`pl-8 space-y-0.5 relative`, className)}>
-      <div className="flex items-center text-black_2_for_text dark:text-grayy button_mobile tablet:h5">{location}</div>
-      <div className="small_text text-black_2_for_text dark:text-gray_1 tablet:addional_regular_text">{address}</div>
+      <div className="flex items-center text-slate-700 dark:text-slate-50 text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6">
+        {location}
+      </div>
+      <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-200 tablet:text-sm tablet:leading-4">
+        {address}
+      </div>
     </div>
   );
 };

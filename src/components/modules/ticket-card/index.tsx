@@ -40,7 +40,7 @@ export const TicketCard = ({ element }: Props) => {
           <TicketRoute route={element} />
 
           <div className="flex-col items-center hidden gap-2 tablet:flex tablet:gap-4">
-            <div className="h4 laptop:h2 text-text_prymery">
+            <div className="text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
               {`${Math.floor(element.ticket_pricing.base_price || 0)}`}
               <span className="text-xs ml-[2px]">UAH</span>
             </div>
@@ -60,21 +60,21 @@ export const TicketCard = ({ element }: Props) => {
           </div>
         </div>
 
-        <div className="w-full h-[1px] bg-gray_0 dark:bg-black_2_for_text rounded-2xl relative my-4" />
+        <div className="w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-700 rounded-2xl relative my-4" />
 
         <div className="relative grid grid-cols-2 tablet:grid-cols-[1fr_1fr_1fr] items-center gap-2">
-          <div className="flex items-center gap-2 small_text text-text_prymery shrink grow-0 text-nowrap truncate ...">
+          <div className="flex items-center gap-2 text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50 shrink grow-0 text-nowrap truncate ...">
             <div className="w-[45px] h-[16px] tablet:w-[70px] tablet:h-[24px] grow-0">
               <IconCarriersBus />
             </div>
 
-            <span className="block text-[10px] tablet:small_text break-all text-text_prymery">
+            <span className="block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50">
               {element.carrier.name || ''}
             </span>
           </div>
 
           <div className="hidden justify-self-center tablet:flex items-start gap-0.5 tablet:order-3 tablet:justify-self-end">
-            <span className="break-all small_text text-text_prymery">
+            <span className="break-all text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
               <span className="text-text_secondary">{t('places')}:</span>
               {element.seats.free_seats || 0}
             </span>
@@ -89,7 +89,7 @@ export const TicketCard = ({ element }: Props) => {
                   handleGetDetails(element);
                 }
               }}
-              className="flex items-center self-end gap-px p-2 underline cursor-pointer text-primary_1 samll_button text-nowrap"
+              className="flex items-center self-end gap-px p-2 text-green-300 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap"
             >
               <span>{!isOpen ? t('details') : t('collapse_details')}</span>
               <ChevronDown

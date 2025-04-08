@@ -18,9 +18,11 @@ export const NoTravel = () => {
         sizes="100vw"
         placeholder="blur"
         alt="peaple wait buses"
-        className="overflow-hidden rounded-3xl mx-auto"
+        className="mx-auto overflow-hidden rounded-3xl"
       />
-      <h3 className="h3 text-text_prymery ">{t('no_travel_dates')}!</h3>
+      <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50 ">
+        {t('no_travel_dates')}!
+      </h3>
     </CustomCard>
   );
 };

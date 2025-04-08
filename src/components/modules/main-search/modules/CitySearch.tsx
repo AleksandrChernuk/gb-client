@@ -65,7 +65,7 @@ export default function CitySearch({ name, type }: Props) {
       return (
         <div role="dropdown-warapp" className="relative" onKeyDown={onKeyDown}>
           <div
-            className={`relative border-r border-gray_1 dark:border-black_2_for_text ${
+            className={`relative border-r border-slate-200 dark:border-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
             }`}
             role="input-wrapp"
@@ -83,8 +83,8 @@ export default function CitySearch({ name, type }: Props) {
               autoComplete="off"
               autoCapitalize="off"
               className={`${
-                errors && 'border-red!'
-              } z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-black dark:placeholder-gray_0 body_medium laptop:filter_input_medium_text text-black dark:text-grayy text-left text-nowrap truncate border-[1px] border-transparent`}
+                errors && 'border-red-50!'
+              } z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base laptop:leading-[24px] laptop:text-lg font-medium tracking-tighter leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent`}
               spellCheck="false"
               onBlur={handleBlur}
               onFocus={() => {
@@ -104,7 +104,7 @@ export default function CitySearch({ name, type }: Props) {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-dark_main dark:border dark:border-dark_bg"
+                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
                 key="box"
                 onMouseDown={(event) => {
                   event.preventDefault();
@@ -144,8 +144,8 @@ export default function CitySearch({ name, type }: Props) {
                 type="button"
                 value={placeholder}
                 className={`${
-                  errors && 'border-red!'
-                } text-text_prymery z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-gray_1 active:bg-gray_1 dark:focus:bg-black_2_for_text dark:active:bg-black_2_for_text placeholder-text_prymery  body_medium laptop:filter_input_medium_text  text-left text-nowrap truncate border-[1px] border-transparent `}
+                  errors && 'border-red-50!'
+                } text-slate-700 dark:text-slate-50 z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:font-medium  laptop:leading-[21.6px]  text-left text-nowrap truncate border-[1px] border-transparent `}
                 onFocus={() => {
                   if (errors) {
                     setErrors(name, null);
@@ -164,15 +164,18 @@ export default function CitySearch({ name, type }: Props) {
               </SheetDescription>
 
               <SheetClose asChild>
-                <Button variant={'link'} className="flex items-center gap-1 h5 text-text_prymery">
-                  <ChevronLeft size={24} className="stroke-black_2_for_text dark:stroke-grayy" />
+                <Button
+                  variant={'link'}
+                  className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50"
+                >
+                  <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
                   {t('backBtn')}
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-grayy dark:bg-dark_bg">
+            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
               <div className="sticky top-0 left-0 right-0 h-12 ">
-                <div className="relative py-4 bg-grayy dark:bg-dark_bg">
+                <div className="relative py-4 bg-slate-50 dark:bg-slate-900">
                   <input
                     id={name}
                     type="text"
@@ -183,12 +186,12 @@ export default function CitySearch({ name, type }: Props) {
                     autoComplete="off"
                     autoCapitalize="off"
                     spellCheck="false"
-                    className="text-text_prymery placeholder-text_prymery p-4 pr-10 h-full w-full bg-white dark:bg-dark_main rounded-lg border-[1px] border-black_2_for_text focus:border-primary_1 outline-primary_1 placeholder:italic"
+                    className="text-slate-700 dark:text-slate-50 placeholder:text-slate-700 dark:placeholder:text-slate-50 p-4 pr-10 h-full w-full bg-white dark:bg-slate-800 rounded-lg border-[1px] border-slate-700 focus:border-green-300 outline-green-300 placeholder:italic"
                   />
                   <ClearInputButton handleClear={handleClearMobileInput} />
                 </div>
               </div>
-              <div id="list-container" className="mt-11 space-y-2">
+              <div id="list-container" className="space-y-2 mt-11">
                 {!loading &&
                   cities &&
                   cities.map((el, index) => {
@@ -196,7 +199,7 @@ export default function CitySearch({ name, type }: Props) {
                     return (
                       <div
                         key={el.id}
-                        className="border border-b-gray_0 dark:border-b-black_2_for_text  last:border-b-none pb-1"
+                        className="border border-b-[#e6e6e6] dark:border-b-slate-700  last:border-b-none pb-1"
                       >
                         <CityItem
                           key={el.id}
