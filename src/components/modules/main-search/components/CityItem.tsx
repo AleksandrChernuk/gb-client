@@ -15,13 +15,13 @@ type Props = {
 export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted }: Props) => {
   return (
     <div
-      className={`p-2 rounded-lg ${isSelected && 'bg-slate-200 dark:bg-slate-700 '} ${
-        isHighlighted && 'bg-slate-200 dark:bg-slate-700 '
+      className={`p-2 rounded-lg ${isSelected && 'dark:bg-slate-700 bg-slate-200'} ${
+        isHighlighted && 'dark:bg-slate-700 bg-slate-200'
       }  min-w-[320px] cursor-pointer`}
       onClick={handleSelectCity}
     >
       <div className={`flex items-center justify-between gap-4`}>
-        <div className="flex flex-col items-start gap-1 justify-center text-slate-50 dark:text-black min-h-[54px] text-nowrap truncate ...">
+        <div className="flex flex-col  items-start gap-1 justify-center dark:text-slate-50 text-black min-h-[54px] text-nowrap truncate ...">
           <div className="text-base font-medium leading-4 tracking-normal">{el.locationName}</div>
           <div className="">
             {el.countryName}.{' '}

@@ -3,8 +3,6 @@
 import { IconCalendar } from '@/components/icons/IconCalendar';
 import { addMonths, format, isBefore, toDate } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import { AnimatePresence } from 'motion/react';
-import { motion } from 'motion/react';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import useDateLocale from '@/hooks/useDateLocale';
@@ -142,46 +140,40 @@ export default function DatePicker({ type }: Props) {
             <InputError inputError={null} />
           </div>
 
-          <AnimatePresence initial={false}>
-            {open ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
-                key="box"
-                onMouseDown={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
+          {open ? (
+            <div
+              className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+              }}
+            >
+              <Calendar
+                mode="single"
+                month={month}
+                onMonthChange={(e) => {
+                  if (isBefore(addMonths(e, 1), new Date())) return;
+                  if (isBefore(month, e)) {
+                    return incrementMonth();
+                  }
+                  decrementMonth();
                 }}
-              >
-                <Calendar
-                  mode="single"
-                  month={month}
-                  onMonthChange={(e) => {
-                    if (isBefore(addMonths(e, 1), new Date())) return;
-                    if (isBefore(month, e)) {
-                      return incrementMonth();
-                    }
-                    decrementMonth();
-                  }}
-                  selected={toDate(currentDate) || new Date()}
-                  today={toDate(currentDate) || new Date()}
-                  onSelect={(value) => {
-                    if (value) {
-                      setMonth(toDate(value));
-                    }
-                    inputRef.current?.blur();
-                    handleSelectDate(value || new Date());
-                  }}
-                  disabled={{ before: new Date() }}
-                  className="rounded-none"
-                  classNames={calendarStyles.desktop}
-                  locale={locale}
-                />
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+                selected={toDate(currentDate) || new Date()}
+                today={toDate(currentDate) || new Date()}
+                onSelect={(value) => {
+                  if (value) {
+                    setMonth(toDate(value));
+                  }
+                  inputRef.current?.blur();
+                  handleSelectDate(value || new Date());
+                }}
+                disabled={{ before: new Date() }}
+                className="rounded-none"
+                classNames={calendarStyles.desktop}
+                locale={locale}
+              />
+            </div>
+          ) : null}
         </div>
       );
 

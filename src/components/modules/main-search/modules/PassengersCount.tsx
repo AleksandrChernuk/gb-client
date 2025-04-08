@@ -3,8 +3,6 @@ import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence } from 'motion/react';
-import { motion } from 'motion/react';
 import {
   Sheet,
   SheetClose,
@@ -119,25 +117,19 @@ export default function PassengersCount({ type }: Props) {
             />
           </div>
 
-          <AnimatePresence initial={false}>
-            {open ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                className="absolute right-0 z-50 p-4 mt-5 space-y-2 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
-                key="box"
-                onMouseDown={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }}
-              >
-                <PassengersButton type="adult" value={adult} />
-                <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
-                <PassengersButton type="children" value={children} />
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+          {open ? (
+            <div
+              className="absolute right-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px]"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+              }}
+            >
+              <PassengersButton type="adult" value={adult} />
+              <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
+              <PassengersButton type="children" value={children} />
+            </div>
+          ) : null}
         </div>
       );
 

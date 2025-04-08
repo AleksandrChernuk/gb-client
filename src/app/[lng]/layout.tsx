@@ -1,5 +1,4 @@
 import '@/styles/globals.css';
-
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
@@ -36,7 +35,7 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider messages={messages} locale={lng as Locale}>
       <html lang={lng} suppressHydrationWarning>
-        <body className={`${notoSans.className}  antialiased`}>
+        <body className={`${notoSans.className} antialiased`}>
           <ReactQueryContext>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
               {children}

@@ -9,10 +9,8 @@ import { IconTo } from '@/components/icons/IconTo';
 import { IconSwap } from '@/components/icons/IconSwap';
 import { EndIcon } from '../components/EndIcon';
 import { InputError } from '../components/InputError';
-import { AnimatePresence } from 'motion/react';
 import { CityItem } from '../components/CityItem';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { motion } from 'motion/react';
 import { LoaderCity } from '../components/LoaderCity';
 import { NotFoundCity } from '../components/NotFoundCity';
 import {
@@ -98,39 +96,33 @@ export default function CitySearch({ name, type }: Props) {
             <InputError inputError={errors && t(`${errors}`)} />
           </div>
 
-          <AnimatePresence initial={false}>
-            {open ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                className="absolute left-0 z-50 p-4 mt-5 space-y-2 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900"
-                key="box"
-                onMouseDown={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }}
-              >
-                {!loading &&
-                  cities &&
-                  cities.map((el, index) => {
-                    const element = extractLocationDetails(el, locale);
-                    return (
-                      <div key={el.id}>
-                        <CityItem
-                          el={element}
-                          isSelected={city?.id === el.id}
-                          isHighlighted={highlightedIndex === index}
-                          handleSelectCity={() => onSelectCity(el)}
-                        />
-                      </div>
-                    );
-                  })}
-                {!loading && !cities.length && <NotFoundCity />}
-                {loading && <LoaderCity />}
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+          {open ? (
+            <div
+              className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px]"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+              }}
+            >
+              {!loading &&
+                cities &&
+                cities.map((el, index) => {
+                  const element = extractLocationDetails(el, locale);
+                  return (
+                    <div key={el.id}>
+                      <CityItem
+                        el={element}
+                        isSelected={city?.id === el.id}
+                        isHighlighted={highlightedIndex === index}
+                        handleSelectCity={() => onSelectCity(el)}
+                      />
+                    </div>
+                  );
+                })}
+              {!loading && !cities.length && <NotFoundCity />}
+              {loading && <LoaderCity />}
+            </div>
+          ) : null}
         </div>
       );
 
@@ -145,7 +137,7 @@ export default function CitySearch({ name, type }: Props) {
                 value={placeholder}
                 className={`${
                   errors && 'border-red-50!'
-                } text-slate-700 dark:text-slate-50 z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:font-medium  laptop:leading-[21.6px]  text-left text-nowrap truncate border-[1px] border-transparent `}
+                } text-slate-700 dark:text-slate-50 z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:font-medium laptop:leading-[21.6px] text-left text-nowrap truncate border-[1px] border-transparent `}
                 onFocus={() => {
                   if (errors) {
                     setErrors(name, null);

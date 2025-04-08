@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { IRouteResponse } from '@/types/route.types';
 import { useTranslations } from 'next-intl';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
-import { motion } from 'motion/react';
 import useTicketCard from './hooks/useTicketCard';
 import MobileDetails from './modules/MobileDetails';
 import { Button } from '@/components/ui/button';
@@ -129,15 +128,13 @@ export const TicketCard = ({ element }: Props) => {
             </MobileDetails>
           </div>
         </div>
-        <motion.div
-          initial={{ height: 0 }}
-          animate={{ height: isOpen ? 'auto' : 0 }}
-          transition={{ duration: 0.1 }}
-          style={{ overflow: 'hidden' }}
-          className={'hidden tablet:block'}
+        <div
+          className={`hidden tablet:block overflow-hidden transition-all duration-100 ${
+            isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
         >
           {isOpen && <Details id={element.ticket_id} />}
-        </motion.div>
+        </div>
       </div>
 
       <div className="tablet:hidden">
