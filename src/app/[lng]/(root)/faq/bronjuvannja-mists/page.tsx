@@ -1,8 +1,8 @@
-import FaqPage from '@/components/pages/faq';
 import { seoFaqBooking } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import FaqTabs from '../_modules/FaqTabs';
 
 type Props = {
   params: Params;
@@ -26,5 +26,5 @@ export default async function BronjuvannjaMists({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  return <FaqPage />;
+  return <FaqTabs />;
 }

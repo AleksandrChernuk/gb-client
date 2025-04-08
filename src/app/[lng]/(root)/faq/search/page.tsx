@@ -1,8 +1,8 @@
-import SlugPage from '@/components/pages/faq/modules/FaqSearchResult';
 import { seoFaqSearch } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import FaqSeach from '../_modules/FaqSeach';
 
 type Props = {
   params: Params;
@@ -26,5 +26,5 @@ export default async function FaqSlug({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  return <SlugPage />;
+  return <FaqSeach />;
 }
