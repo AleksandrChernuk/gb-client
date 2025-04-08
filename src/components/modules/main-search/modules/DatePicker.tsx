@@ -31,6 +31,7 @@ type Props = {
 
 export default function DatePicker({ type }: Props) {
   const { open, handleToggleOpen, handleSelectDate, inputRef, handleBlur } = useDate();
+
   const { locale } = useDateLocale();
   const currentDate = useSearchStore(useShallow((state) => state.date));
   const month = useSearchStore((state) => state.month);

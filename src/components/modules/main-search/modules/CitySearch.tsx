@@ -36,6 +36,7 @@ export default function CitySearch({ name, type }: Props) {
   const t = useTranslations('common');
   const city = useSearchStore((state) => state[name]);
   const swap = useSearchStore((state) => state.swap);
+
   const errors = useSearchStore((state) => state.errors[name]);
   const setErrors = useSearchStore((state) => state.setErrors);
   const locale = useLocale();

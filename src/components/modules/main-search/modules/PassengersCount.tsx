@@ -29,6 +29,7 @@ export default function PassengersCount({ type }: Props) {
   const { open, handleToggleOpen, handleBlur } = usePassengers();
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
+
   const t = useTranslations('common');
 
   const passCount = adult + children;
