@@ -1,9 +1,11 @@
 import MainSearch from '@/components/modules/main-search';
 import { Container } from '@/components/shared/Container';
+import Image from 'next/image';
+import imgDeac from '@/public/images/desc_full_2x.avif';
 
 export default function Herow() {
   return (
-    <section>
+    <section className="relative">
       <picture>
         <source
           media="(max-width: 767px)"
@@ -15,13 +17,15 @@ export default function Herow() {
           srcSet="/images/desc_full.avif 1x, /images/desc_full_2x.avif 2x"
           type="image/avif"
         />
-        <img
-          src="/images/desc_full.avif"
+        <Image
+          src={imgDeac}
           alt="People waiting for the bus"
           width={1440}
           height={233}
-          className="w-full"
-          loading="eager"
+          priority
+          sizes="100vw"
+          placeholder="blur"
+          className="w-full h-auto"
         />
       </picture>
 
