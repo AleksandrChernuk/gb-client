@@ -18,7 +18,6 @@ export default async function Buses() {
               placeholder="blur"
               width={350}
               height={353}
-              style={{ width: 'auto', height: 'auto' }}
               className="overflow-hidden rounded-3xl"
             />
           </li>
