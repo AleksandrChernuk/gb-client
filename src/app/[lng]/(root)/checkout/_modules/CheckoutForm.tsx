@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
-import { useRouter } from '@/i18n/routing';
 import Passengers from './Passengers';
 import CheckoutCard from './components/CheckoutCard';
 import BookingSheet from './Booking';
@@ -15,6 +14,7 @@ import ToPay from './ToPay';
 import Legal from './Legal';
 import { useCheckoutForm } from './hooks/useCheckoutForm';
 import Payment from './Payment';
+import { useRouter } from '@/i18n/routing';
 
 export default function CheckoutForm({ adult, child }: { adult: string; child: string }) {
   const { handleSubmit, onSubmit, methods } = useCheckoutForm({ adult, child });

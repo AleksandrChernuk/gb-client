@@ -1,17 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useSearchStore } from '@/store/useSearch';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import CitySearch from './CitySearch';
 import DatePicker from './DatePicker';
 import PassengersCount from './PassengersCount';
+import { useRouter } from '@/i18n/routing';
 
 export const formSchema = z.object({
   from: z.object({}, { message: 'required' }),
@@ -21,7 +21,6 @@ export const formSchema = z.object({
 const Search = () => {
   const matches = useMediaQuery('(max-width: 767px)');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const currentLocale = useLocale();
   const route = useRouter();
   const t = useTranslations('common');
 
@@ -40,14 +39,12 @@ const Search = () => {
 
       return;
     }
-    route.push(
-      `/${currentLocale}/buses?from=${from?.id}&to=${to?.id}&date=${date}&adult=${adult}&children=${children}`,
-    );
+    route.push(`/buses?from=${from?.id}&to=${to?.id}&date=${date}&adult=${adult}&children=${children}`);
     setIsSubmitting(false);
   };
 
   return (
-    <div className="relative rounded-2xl bg-white dark:bg-slate-800 shadow-xs">
+    <div className="relative bg-white shadow-xs rounded-2xl dark:bg-slate-800">
       <div className="flex flex-col h-full tablet:flex-row">
         <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
           {matches ? (

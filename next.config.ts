@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif'],
     deviceSizes: [750, 1200],
+    minimumCacheTTL: 2678400,
   },
   reactStrictMode: false,
 };
