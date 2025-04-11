@@ -39,7 +39,7 @@ export const PassengersButton = ({ value, type }: Props) => {
           <Minus size={16} className="stroke-slate-700 dark:stroke-slate-200" />
         </button>
 
-        <p className="text-base font-bold leading-6 tracking-normal text-center text-slate-50 dark:text-black grow">
+        <p className="text-base font-bold leading-6 tracking-normal text-center text-black dark:text-slate-50 grow">
           {value}
         </p>
 

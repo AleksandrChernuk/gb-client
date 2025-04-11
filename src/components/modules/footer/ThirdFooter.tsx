@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import thirdFooter from '@/public/images/third-footer.avif';
+import thirdFooter from '@/assets/images/third-footer.avif';
 
 export default async function ThirdFooter() {
   return (

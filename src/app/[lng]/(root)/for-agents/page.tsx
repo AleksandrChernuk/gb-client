@@ -5,12 +5,12 @@ import { CustomCard } from '@/components/shared/CustomCard';
 import { joinUsAgents } from '@/constans/join.us.agents.constans';
 import Image from 'next/image';
 import { Container } from '@/components/shared/Container';
-import busDirectly from '@/public/images/bus-directly-to-the-bus-stop.avif';
-import directionWith from '@/public/images/direction-with-a-road-in-the-city.avif';
+import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
+import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
 import { seoForAgents } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
@@ -32,34 +32,36 @@ export default async function ForAgents({
   params: Params;
 }>) {
   const { lng } = await params;
+  const t_common = await getTranslations('common');
+  const t_for_agents = await getTranslations('for_agents');
 
   setRequestLocale(lng as Locale);
+
   return (
     <>
-      <main className="bg-">
+      <main>
         <section className="pt-8 pb-16">
-          <Container size="l">
+          <Container size="m">
             <div className="mb-8">
               <BackRouteButton />
             </div>
 
-            <ul className="flex flex-col gap-12 tablet:flex-row tablet:gap-24 tablet:items-center">
-              <li>
+            <ul className="flex flex-col gap-12 tablet:flex-row tablet:items-center">
+              <li className="tablet:w-1/2">
                 <Image
                   src={busDirectly}
                   width={766}
                   height={318}
+                  priority
                   alt="people-with-suitcases-looking-straight-ahead-goin"
                 />
               </li>
               <li className="tablet:w-1/2">
                 <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-                  GreenBus – автоматизуй продаж квитків та керуй перевезеннями!
+                  {t_for_agents('automate_ticket_title')}
                 </h1>
                 <p className="text-sm leading-[21px] laptop:text-base font-normal laptop:leading-6 tracking-normal text-slate-400 dark:text-slate-200">
-                  На этой странице вы найдете всю необходимую информацию, инструменты и ресурсы для успешной работы. Мы
-                  приглашаем к сотрудничеству агентства, занимающиеся продажей билетов на международные пассажирские
-                  перевозки, а также компании, работающие в сфере трудоустройства в Европе.
+                  {t_for_agents('automate_ticket_text')}
                 </p>
               </li>
             </ul>
@@ -67,9 +69,9 @@ export default async function ForAgents({
         </section>
 
         <section className="bg-green-500">
-          <Container size="l" className="py-8">
+          <Container size="m" className="py-8">
             <h2 className="mb-4 text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50 laptop:mb-8">
-              Чому варто приєднатися до нас?
+              {t_for_agents('why_join_us_title')}
             </h2>
             <ul className="grid justify-between grid-cols-1 gap-4 tablet:gap-6 laptop:grid-cols-3 laptop:gap-20">
               {joinUsAgents.map(({ title, text, icon }) => (
@@ -81,8 +83,12 @@ export default async function ForAgents({
                     alt={icon.alt}
                     className="size-14 tablet:size-16 laptop:size-[72px]"
                   />
-                  <h3 className="text-base font-bold leading-6 tracking-normal text-green-100">{title}</h3>
-                  <p className="text-sm font-normal tracking-normal leading-[21px] text-slate-200">{text}</p>
+                  <h3 className="text-base font-bold leading-6 tracking-normal text-green-100">
+                    {t_for_agents(`why_join_us_text.${title}`)}
+                  </h3>
+                  <p className="text-sm font-normal tracking-normal leading-[21px] text-slate-200">
+                    {t_for_agents(`why_join_us_text.${text}`)}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -90,24 +96,22 @@ export default async function ForAgents({
         </section>
 
         <section className="pt-16 bg-slate-50 dark:bg-slate-900">
-          <Container size="l">
-            <ul className="flex flex-col gap-12 tablet:flex-row tablet:gap-24 tablet:items-start">
+          <Container size="m">
+            <ul className="flex flex-col gap-12 tablet:flex-row ">
               <li className="tablet:w-1/2">
                 <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-                  Можливості GreenBus
+                  {t_for_agents('features_title')}
                 </h2>
                 <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
-                  GreenBus пропонує широкі можливості для партнерів: ефективна система продажу квитків, доступ до мережі
-                  перевізників та стабільний дохід. Ми підтримуємо наших партнерів на кожному етапі, надаючи всі
-                  необхідні інструменти для успіху в бізнесі.
+                  {t_for_agents('features_text')}
                 </p>
               </li>
-              <li>
+              <li className="mx-auto">
                 <Image
                   alt="direction-with-a-road-in-the-city"
                   src={directionWith}
-                  width={766}
-                  height={318}
+                  width={350}
+                  height={353}
                   className="mx-auto overflow-hidden rounded-3xl"
                 />
               </li>
@@ -115,11 +119,11 @@ export default async function ForAgents({
           </Container>
         </section>
 
-        <section className="py-16">
+        <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <Container size="xs" className="my-auto">
-            <CustomCard className="shadow-xs">
+            <CustomCard className="dark:bg-slate-800">
               <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-                Залишити запит
+                {t_common('leave_a_request')}
               </h3>
               <RequestPartnershipForm />
             </CustomCard>

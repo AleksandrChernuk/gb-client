@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import loader from '@/public/images/loader.gif';
-import loaderdark from '@/public/images/loaderdark.gif';
+import loader from '@/assets/images/loader.gif';
+import loaderdark from '@/assets/images/loaderdark.gif';
 
 export const Loader = () => {
   return (

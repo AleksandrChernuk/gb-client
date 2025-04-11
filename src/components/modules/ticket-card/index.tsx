@@ -8,12 +8,12 @@ import useTicketCard from './hooks/useTicketCard';
 import MobileDetails from './modules/MobileDetails';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
-import { IconCarriersBus } from '@/public/icons/IconCarriersBus';
 import Details from './modules/Details';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import SelectButton from './components/SelectButton';
 import TicketRoute from './components/TicketRoute';
+import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 
 type Props = {
   element: IRouteResponse;
@@ -22,6 +22,7 @@ type Props = {
 
 export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const t = useTranslations('search');
   const { handleGetDetails, handleSetTicket, loading } = useTicketCard();
   const [tickets, isButtonDisabled] = useCurrentTicketStore(
@@ -34,7 +35,7 @@ export const TicketCard = ({ element }: Props) => {
 
   return (
     <div className="relative shadow-xs tablet:shadow-none rounded-t-2xl tablet:rounded-none">
-      <div className="p-4 shadow-none tablet:p-6 bg-slate-900 dark:bg-white rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
+      <div className="p-4 bg-white shadow-none tablet:p-6 dark:bg-slate-900 rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
         <div className="flex flex-row items-center justify-between gap-1 tablet:gap-2">
           <TicketRoute route={element} />
 

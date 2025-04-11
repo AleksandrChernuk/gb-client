@@ -1,7 +1,7 @@
 import MainSearch from '@/components/modules/main-search';
 import { Container } from '@/components/shared/Container';
 import Image from 'next/image';
-import imgDeac from '@/public/images/desc_full_2x.avif';
+import imgDeac from '@/assets/images/desc_full_2x.avif';
 
 export default function Herow() {
   return (

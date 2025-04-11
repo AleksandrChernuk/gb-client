@@ -58,10 +58,10 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
           </SheetClose>
         </SheetHeader>
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
+        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
           {children}
         </ScrollArea>
-        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">
+        <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">
           <div className="mx-auto text-center">
             <div className="text-xs font-normal tracking-normal leading-[18px] text-[#6f8b90] dark:text-slate-50">
               {passengerCount} {t('placeholderPassenger')}

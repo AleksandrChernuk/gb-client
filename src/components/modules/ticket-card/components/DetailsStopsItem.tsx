@@ -32,7 +32,7 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
       </div>
 
       <div
-        className={`elative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20 ${isLast ? 'before:border-green-300' : 'before:border-slate-600 before:bg-slate-50 dark:before:bg-slate-900'} `}
+        className={`relative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20 ${isLast ? 'before:border-green-300' : 'before:border-slate-600 before:bg-slate-50 dark:before:bg-slate-900'} `}
       >
         {isLast && (
           <span className="absolute w-[8px] h-[8px] rounded-full bg-green-300 top-[4px] -left-[19px] -translate-x-1/2" />

@@ -20,7 +20,7 @@ export const ProfileLink = ({ variant }: Props) => {
           variant={'link'}
           className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
         >
-          <Link prefetch={false} href={isAuth ? '/profile' : '/signin'} replace>
+          <Link prefetch={false} href={isAuth ? '/profile' : '/signin'}>
             <User size={24} className="stroke-green-300" />
             {t('mainNavProfileLink')}
           </Link>
@@ -36,9 +36,12 @@ export const ProfileLink = ({ variant }: Props) => {
             className="group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
           >
             <div
-              className={`flex items-center justify-center group-hover:fill-gray_medium bg-gray-1 p-1 dark:bg-gray rounded-full`}
+              className={`flex items-center justify-center group-hover:fill-gray_medium p-1 rounded-full bg-slate-200 dark:bg-slate-50`}
             >
-              <User size={20} className={` stroke-slate-700 dark:stroke-slate-50`} />
+              <User
+                size={20}
+                className={`stroke-slate-50 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all`}
+              />
             </div>
             <div className={`hidden laptop:block`}>{t('mainNavProfileLink')}</div>
           </Link>

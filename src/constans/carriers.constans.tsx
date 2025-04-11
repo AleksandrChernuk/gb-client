@@ -1,13 +1,13 @@
-import euroclub from '@/public/images/euroclub.avif';
-import ewe from '@/public/images/ewe.avif';
-import eastExpress from '@/public/images/east-express.avif';
-import grandesTour from '@/public/images/grandes-tour.avif';
-import klr from '@/public/images/klr.avif';
-import musilTour from '@/public/images/musil-tour.avif';
-import orionbus from '@/public/images/orionbus.avif';
-import rBus from '@/public/images/r-bus.avif';
-import transTempo from '@/public/images/trans-tempo.avif';
-import wayGrand from '@/public/images/way-grand.avif';
+import euroclub from '@/assets/images/euroclub.avif';
+import ewe from '@/assets/images/ewe.avif';
+import eastExpress from '@/assets/images/east-express.avif';
+import grandesTour from '@/assets/images/grandes-tour.avif';
+import klr from '@/assets/images/klr.avif';
+import musilTour from '@/assets/images/musil-tour.avif';
+import orionbus from '@/assets/images/orionbus.avif';
+import rBus from '@/assets/images/r-bus.avif';
+import transTempo from '@/assets/images/trans-tempo.avif';
+import wayGrand from '@/assets/images/way-grand.avif';
 
 export const carriers = [
   {

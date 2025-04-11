@@ -1,7 +1,7 @@
 import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import errorImg from '@/public/images/something-happened-on-the-site.avif';
+import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
 export const ErrorTravel = () => {
   const t = useTranslations('common');

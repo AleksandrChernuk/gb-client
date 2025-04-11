@@ -3,12 +3,12 @@ import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
-import irectionWith from '@/public/images/direction-with-a-road-in-the-city.avif';
-import world from '@/public/images/world.avif';
-import business from '@/public/images/business.avif';
-import group from '@/public/images/group.avif';
+import irectionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
+import world from '@/assets/images/world.avif';
+import business from '@/assets/images/business.avif';
+import group from '@/assets/images/group.avif';
 import { aboutUsStatistics } from '@/constans/about.us.statistics';
 import { CustomCard } from '@/components/shared/CustomCard';
 import RequestPartnershipForm from '@/components/modules/request-partnership';
@@ -22,76 +22,50 @@ export default async function About({
 
   setRequestLocale(lng as Locale);
 
+  const t_common = await getTranslations('common');
+  const t_about = await getTranslations('about');
+
   return (
     <>
       <main className="bg-slate-50 dark:bg-slate-900">
         <section className="pt-8">
-          <Container size="l">
+          <Container size="m">
             <div className="mb-8">
               <BackRouteButton />
             </div>
-            <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
-              <li className="mx-auto">
+            <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-4">
+              <li className="tablet:w-1/2 tablet:order-2">
+                <h1 className="mb-2 laptop:mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
+                  {t_about('route_to_europe_title')}
+                </h1>
+                <p className="mb-4 body_text text-slate-400 dark:text-slate-200">{t_about('route_to_europe_text')}</p>
+              </li>
+              <li className="overflow-hidden tablet:w-1/2 tablet:mr-auto">
                 <Image
                   alt="direction-with-a-road-in-the-city"
                   src={irectionWith}
-                  width={540}
-                  height={466}
-                  className="mx-auto overflow-hidden rounded-3xl"
-                />
-              </li>
-              <li className="tablet:w-1/2">
-                <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
-                  GreenBus in Ukraine
-                </h1>
-                <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                  tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                  exerci tation ullamcorper
-                </p>
-              </li>
-            </ul>
-          </Container>
-        </section>
-
-        <section className="py-16">
-          <Container size="l">
-            <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
-              <li className="tablet:w-1/2">
-                <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
-                  Professional solutions for your business growth
-                </h2>
-                <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                  tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                  exerci tation ullamcorper
-                </p>
-              </li>
-              <li className="mx-auto">
-                <Image
-                  alt="group"
-                  src={group}
-                  width={540}
-                  height={466}
-                  className="mx-auto overflow-hidden rounded-3xl"
+                  width={400}
+                  height={400}
+                  priority
+                  placeholder="blur"
+                  quality={80}
+                  className="mx-auto tablet:mx-0 rounded-3xl "
                 />
               </li>
             </ul>
           </Container>
         </section>
 
-        <section className="pb-16 ">
-          <Container size="l">
-            <ul className="flex items-start justify-between gap-1 tablet:gap-8">
+        <section className="py-16 ">
+          <Container size="m">
+            <ul className="flex items-start justify-between gap-1 tablet:gap-4">
               {aboutUsStatistics.map(({ id, title, text }) => (
-                <li key={id} className="space-y-2 laptop:space-y-4">
-                  <h3 className="text-base font-bold leading-6 tracking-normal text-green-300 laptop:h1">{title}</h3>
-                  <p className="text-xs font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-[27px] text-slate-400 dark:text-slate-200">
-                    {text}
+                <li key={id} className="text-center">
+                  <h3 className="mb-2 laptop:mb-4 text-base font-bold leading-6 tracking-normal text-green-300 tablet:text-2xl laptop:text-[32px] laptop:leading-[38.4px]">
+                    {t_about(`statistics.${title}`)}
+                  </h3>
+                  <p className="text-base font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-[27px] text-slate-400 dark:text-slate-200">
+                    {t_about(`statistics.${text}`)}
                   </p>
                 </li>
               ))}
@@ -99,47 +73,64 @@ export default async function About({
           </Container>
         </section>
 
+        <section className="pb-16">
+          <Container size="m">
+            <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-4">
+              <li className="mb-4 tablet:mb-0 tablet:w-1/2">
+                <h2 className="mb-2 laptop:mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
+                  {t_about('professional_solutions_title')}
+                </h2>
+                <p className="text-base font-normal tracking-normal leading-[21px] laptop:text-lg laptop:leading-6 text-slate-400 dark:text-slate-200">
+                  {t_about('professional_solutions_text')}
+                </p>
+              </li>
+              <li className="overflow-hidden tablet:w-1/2 tablet:ml-auto">
+                <Image
+                  alt="group"
+                  src={group}
+                  width={400}
+                  height={400}
+                  placeholder="blur"
+                  quality={80}
+                  className="mx-auto tablet:mx-0 rounded-3xl"
+                />
+              </li>
+            </ul>
+          </Container>
+        </section>
+
         <section className="bg-green-500">
-          <Container size="l" className="py-6 tablet:py-12 ">
-            <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-50 tablet:mb-8">
-              About Us
+          <Container size="m" className="py-6 tablet:py-12 ">
+            <h2 className="mb-2 laptop:mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
+              {t_about('about_us_title')}
             </h2>
 
-            <p className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 text-slate-200">
-              In 2019, we launched bus ticket sales on our platforms, and in 2020, we united the strongest market
-              players - solution providers for bus stations and bus carriers - under the GreenBus to support and
-              strengthen each of them By joining forces, we have assembled a unique product suite of online ticketing
-              services that can be deservedly called the industry standard in the field of passenger transportation
-              automation. Passenger transportation automation is a new business for GreenBus in Ukraine based on
-              market-proven solutions. We believe that the principles of our work, based on the ideas of transparency
-              and equal access, along with the development of a high-quality software product, will be the key to strong
-              partnerships.
+            <p className="text-base font-normal tracking-normal leading-[21px] laptop:text-lg laptop:leading-6 text-slate-400 dark:text-slate-200">
+              {t_about('about_us_text')}
             </p>
           </Container>
         </section>
 
         <section className="py-16">
-          <Container size="l">
-            <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
+          <Container size="m">
+            <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5">
               <li className="tablet:w-1/2">
-                <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 laptop:mb-8 text-slate-700 dark:text-slate-50">
-                  GreenBus in Ukraine
+                <h2 className="mb-2 laptop:mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
+                  {t_about('main_product_title')}
                 </h2>
-                <p className="mb-4 body_text text-slate-400 dark:text-slate-200">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                  tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                  exerci tation ullamcorper
+                <p className="text-base font-normal tracking-normal leading-[21px] laptop:text-lg laptop:leading-6 text-slate-400 dark:text-slate-200">
+                  {t_about('main_product_text')}
                 </p>
               </li>
-              <li className="mx-auto">
+              <li className="overflow-hidden tablet:w-1/2 tablet:ml-auto">
                 <Image
                   alt="world"
                   src={world}
-                  width={540}
-                  height={466}
-                  className="mx-auto overflow-hidden rounded-3xl"
+                  width={400}
+                  height={400}
+                  placeholder="blur"
+                  quality={80}
+                  className="mx-auto tablet:mx-0 rounded-3xl"
                 />
               </li>
             </ul>
@@ -147,38 +138,34 @@ export default async function About({
         </section>
 
         <section className="bg-green-500">
-          <Container size="l" className="py-6 tablet:py-12 ">
-            <ul className="items-start justify-between space-y-8 tablet:flex tablet:gap-5 laptop:gap-40">
-              <li className="mx-auto">
+          <Container size="m" className="py-6 tablet:py-12 ">
+            <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-5">
+              <li className="mr-auto">
                 <Image
                   alt="group"
                   src={business}
-                  width={540}
-                  height={466}
-                  className="mx-auto overflow-hidden rounded-3xl"
+                  width={400}
+                  height={400}
+                  className="mx-auto overflow-hidden tablet:mx-0 rounded-3xl"
                 />
               </li>
               <li className="tablet:w-1/2">
-                <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-50 tablet:mb-8">
-                  GreenBus in the Ukrainian bus market
+                <h2 className="mb-2 laptop:mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
+                  {t_about('individual_approach_title')}
                 </h2>
 
-                <p className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 text-slate-200">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                  ullamcorper Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                  tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                  exerci tation ullamcorper
+                <p className="text-base font-normal tracking-normal leading-[21px] laptop:text-lg laptop:leading-6 text-slate-400 dark:text-slate-200">
+                  {t_about('individual_approach_text')}
                 </p>
               </li>
             </ul>
           </Container>
         </section>
-        <section className="py-16">
+        <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <Container size="xs" className="my-auto">
-            <CustomCard className="shadow-xs bg-slate-900 dark:bg-white">
+            <CustomCard className="dark:bg-slate-800">
               <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
-                Залишити запит
+                {t_common('leave_a_request')}
               </h3>
               <RequestPartnershipForm />
             </CustomCard>

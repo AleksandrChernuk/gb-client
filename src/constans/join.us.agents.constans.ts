@@ -1,17 +1,17 @@
 export const joinUsAgents = [
   {
     icon: { src: '/icons/bus-accent.svg', alt: 'bus-accent.svg', w: 75, h: 75 },
-    title: 'Особистий кабінет',
-    text: 'Кожен партнер може створити свою агентську мережу та збільшити дохід.',
+    title: 'personal_account_title',
+    text: 'personal_account_text',
   },
   {
     icon: { src: '/icons/cooperation-accent.svg', alt: 'cooperation-accent', w: 75, h: 75 },
-    title: 'Пряме співробітництво',
-    text: 'Заробляйте на продажу квитків безпосередньо від перевізників.',
+    title: 'direct_collaboration_title',
+    text: 'direct_collaboration_text',
   },
   {
     icon: { src: '/icons/sales-accent.svg', alt: 'sales-accent', w: 75, h: 75 },
-    title: 'Без лімітів і квот',
-    text: 'Заробляйте від 10% з кожного проданого квитка та отримуйте стабільний дохід.',
+    title: 'no_limits_or_quotas_title',
+    text: 'no_limits_or_quotas_text',
   },
 ];

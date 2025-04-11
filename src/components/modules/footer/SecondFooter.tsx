@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import secondFooter from '@/public/images/second-footer.avif';
+import secondFooter from '@/assets/images/second-footer.avif';
 import { cn } from '@/lib/utils';
 
 type Props = {

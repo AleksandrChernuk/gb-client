@@ -1,17 +1,17 @@
 export const aboutUsStatistics = [
   {
     id: '1',
-    title: '> 50,000',
-    text: 'Bus tickets are sold daily through GreenBus.',
+    title: '50_000',
+    text: '50_000_text',
   },
   {
     id: '2',
-    title: '> 2,000',
-    text: 'Routes operated by GreenBus across various destinations.',
+    title: '2_000',
+    text: '2_000_text',
   },
   {
     id: '3',
-    title: '> 5 million',
-    text: 'Passengers travel with GreenBus every year.',
+    title: '5_million',
+    text: '5_million_text',
   },
 ];

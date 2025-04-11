@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import noTravelImg from '@/public/images/an-empty-bus-stop.avif';
+import noTravelImg from '@/assets/images/an-empty-bus-stop.avif';
 
 import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
@@ -10,7 +10,7 @@ export const NoTravel = () => {
   const t = useTranslations('common');
 
   return (
-    <CustomCard className="mx-auto flex flex-col items-center self-center gap-8 p-5 text-center w-fit shadow-xs">
+    <CustomCard className="flex flex-col items-center self-center gap-8 p-5 mx-auto text-center shadow-xs w-fit">
       <Image
         src={noTravelImg}
         width={313}

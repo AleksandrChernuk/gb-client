@@ -30,7 +30,8 @@ export const Support = ({ variant }: Props) => {
               <div className="p-1 rounded-full bg-slate-200 dark:bg-slate-50">
                 <Phone
                   size={20}
-                  className="stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-slate-800 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200"
+                  className="stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-slate-800 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all
+"
                 />
               </div>
               <div>{t('mainNavSupportLink')}</div>

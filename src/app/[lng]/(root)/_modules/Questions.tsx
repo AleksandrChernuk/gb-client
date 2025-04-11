@@ -17,7 +17,7 @@ export default async function Questions() {
         <ul className="grid grid-cols-1 gap-6 mb-4 tablet:grid-cols-3 last:border-b-0">
           {faqConstans['/faq/routes-and-buses'].questions.slice(0, 3).map(({ id, title, text, slug }) => (
             <li className="flex flex-col items-start" key={id}>
-              <h4 className="mb-2 text-white text-sm font-bold tracking-normal leading-[16.8px] tablet:text-sm laptop:h3">
+              <h4 className="mb-2 text-white text-sm font-bold tracking-normal leading-[16.8px] tablet:text-sm laptop:text-xl laptop:leading-[28.8px]">
                 {t(`${`${title}.title`}`)}
               </h4>
               <p className="mb-4 text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-[#e6e6e6] ">
@@ -26,7 +26,7 @@ export default async function Questions() {
               <Button asChild variant={'link'} className="mt-auto">
                 <Link
                   prefetch={false}
-                  className="block mb-6 text-base font-bold text-green-100 underline laptop:text-base"
+                  className="block mb-6 text-base font-bold text-green-600! underline laptop:text-base"
                   href={`${'/faq/routes-and-buses'}?q=${slug}`}
                 >
                   {`${t_main('learn_more')} >`}
