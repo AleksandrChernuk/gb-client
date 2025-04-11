@@ -4,6 +4,7 @@ import Logo from '@/components/shared/Logo';
 import { Support } from '@/components/shared/Support';
 import { SwitchTheme } from '@/components/shared/SwitchTheme';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
+import { Suspense } from 'react';
 
 export default async function AuthHeader() {
   return (
@@ -17,7 +18,9 @@ export default async function AuthHeader() {
               <Support variant="desktop" />
             </li>
             <li>
-              <SelectLocale variant="desktop" />
+              <Suspense>
+                <SelectLocale variant="desktop" />
+              </Suspense>
             </li>
             <li>
               <SwitchTheme />
