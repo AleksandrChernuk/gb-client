@@ -16,6 +16,10 @@ const notoSans = Noto_Sans({
   display: 'swap',
 });
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function MainLayout({
   children,
   params,
@@ -28,10 +32,10 @@ export default async function MainLayout({
   if (!routing.locales.includes(lng as Locale)) {
     return notFound();
   }
+
   setRequestLocale(lng as Locale);
 
   const messages = await getMessages();
-
   return (
     <NextIntlClientProvider messages={messages} locale={lng as Locale}>
       <html lang={lng} suppressHydrationWarning>
