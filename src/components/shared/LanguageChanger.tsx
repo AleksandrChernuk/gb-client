@@ -5,10 +5,10 @@ import { Button } from '../ui/button';
 import { supportLocalesList } from '@/constans/support-locales.constans';
 import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
-import { useSearchParams } from 'next/navigation';
 import { Locale } from '@/i18n/locales';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import { useSearchParams } from 'next/navigation';
 
 type Props = {
   variant: 'mobile' | 'desktop';
