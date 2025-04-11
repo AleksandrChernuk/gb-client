@@ -16,7 +16,7 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
   const t = await getTranslations('common');
 
   return (
-    <Card className="flex flex-col w-full p-4 bg-white laptop:gap-16 shadow-xs tablet:flex-row tablet:justify-between tablet:p-6 laptop:py-10 laptop:px-8 dark:bg-slate-800">
+    <Card className="flex flex-col w-full p-4 bg-white shadow-xs laptop:gap-16 tablet:flex-row tablet:justify-between tablet:p-6 laptop:py-10 laptop:px-8 dark:bg-slate-800">
       <div>
         <CardHeader className="p-0 mb-6 space-y-0 text-base font-bold leading-6 tracking-normal text-left tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px]laptop:mb-8 text-slate-700 dark:text-slate-50">
           {t(`${headerLabel}`)}
@@ -44,6 +44,8 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
           <Button asChild variant={'link'}>
             <Link
               prefetch={false}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              //@ts-ignore
               href={backButtonHref}
               className="underline text-xs font-normal tracking-normal leading-[16.8px]"
               aria-label="go home page"

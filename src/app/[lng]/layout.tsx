@@ -2,7 +2,7 @@ import '@/styles/globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import { Params } from '@/types/common.types';
 import ReactQueryContext from '@/providers/ReactQueryProvider';
@@ -35,9 +35,8 @@ export default async function MainLayout({
 
   setRequestLocale(lng as Locale);
 
-  const messages = await getMessages();
   return (
-    <NextIntlClientProvider messages={messages} locale={lng as Locale}>
+    <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
         <body className={`${notoSans.className} antialiased`}>
           <ReactQueryContext>
