@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import secondFooter from '@/assets/images/second-footer.avif';
+import secondFooter from '@/assets/images/max.avif';
 import { cn } from '@/lib/utils';
 
 type Props = {
@@ -12,7 +12,7 @@ export default async function SecondFooter({ className }: Props) {
       <Image
         src={secondFooter}
         priority
-        alt="peaple wait bus"
+        alt="footer_2"
         width={1440}
         height={232}
         placeholder="empty"

@@ -40,7 +40,7 @@ export const ProfileLink = ({ variant }: Props) => {
             >
               <User
                 size={20}
-                className={`stroke-slate-50 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all`}
+                className={`stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-slate-800 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all`}
               />
             </div>
             <div className={`hidden laptop:block`}>{t('mainNavProfileLink')}</div>

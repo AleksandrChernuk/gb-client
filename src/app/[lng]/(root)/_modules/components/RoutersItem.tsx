@@ -1,3 +1,4 @@
+import { IconPath } from '@/assets/icons/icon-path';
 import { IconRouteArrow } from '@/components/icons/IconRouteArrow';
 import { Link } from '@/i18n/routing';
 // import Image from 'next/image';
@@ -20,16 +21,17 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
       dark:focus:bg-slate-700 dark:focus:border-slate-200 px-4 py-3 tablet:py-[18px] laptop:p-6 rounded-lg laptop:rounded-2xl transition-colors duration-300"
     >
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-1 tablet:gap-2">
-          <span className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 aptop:leading-6 text-slate-700 dark:text-slate-50">
+        <div className="flex items-center gap-1 tablet:gap-2">
+          <div className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 aptop:leading-6 text-slate-700 dark:text-slate-50">
             {from}
-          </span>
+          </div>
 
-          {/* <Image src={'/icons/path.svg'} alt="route" width={62} height={20} /> */}
-
-          <span className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 laptop:leading-6 text-slate-700 dark:text-slate-50">
+          <div className="w-[62px] h-[20px] inline-flex items-center">
+            <IconPath />
+          </div>
+          <div className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 laptop:leading-6 text-slate-700 dark:text-slate-50">
             {to}
-          </span>
+          </div>
         </div>
         <div className="w-6 h-6">
           <IconRouteArrow />

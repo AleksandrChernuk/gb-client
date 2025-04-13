@@ -57,7 +57,7 @@ export default async function ForAgents({
                 />
               </li>
               <li className="tablet:w-1/2">
-                <h1 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+                <h1 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                   {t_for_agents('automate_ticket_title')}
                 </h1>
                 <p className="text-sm leading-[21px] laptop:text-base font-normal laptop:leading-6 tracking-normal text-slate-400 dark:text-slate-200">
@@ -70,7 +70,7 @@ export default async function ForAgents({
 
         <section className="bg-green-500">
           <Container size="m" className="py-8">
-            <h2 className="mb-4 text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50 laptop:mb-8">
+            <h2 className="mb-4text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-50 laptop:mb-8">
               {t_for_agents('why_join_us_title')}
             </h2>
             <ul className="grid justify-between grid-cols-1 gap-4 tablet:gap-6 laptop:grid-cols-3 laptop:gap-20">
@@ -99,7 +99,7 @@ export default async function ForAgents({
           <Container size="m">
             <ul className="flex flex-col gap-12 tablet:flex-row ">
               <li className="tablet:w-1/2">
-                <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+                <h2 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                   {t_for_agents('features_title')}
                 </h2>
                 <p className="text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-slate-400 dark:text-slate-200">
@@ -122,7 +122,7 @@ export default async function ForAgents({
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <Container size="xs" className="my-auto">
             <CustomCard className="dark:bg-slate-800">
-              <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              <h3 className="mb-6 text-center text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 {t_common('leave_a_request')}
               </h3>
               <RequestPartnershipForm />

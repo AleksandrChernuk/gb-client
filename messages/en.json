@@ -149,7 +149,6 @@
     "discounts": "Discounts"
   },
   "buses": { "shortHours": "h", "shortMinutes": "m" },
-
   "new_order": {
     "passengers": "Passengers",
     "choose_place": "Choose a place",
