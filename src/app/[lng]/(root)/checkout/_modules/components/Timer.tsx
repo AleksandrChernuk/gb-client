@@ -1,54 +1,16 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-
 import { useRouter } from '@/i18n/routing';
-
-export function DialogNewOrder({ open }: { open: boolean }) {
-  const router = useRouter();
-  return (
-    <Dialog open={open}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
-        <DialogHeader className="text-center">
-          <DialogTitle className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
-            Ви ще онлайн?
-          </DialogTitle>
-          <DialogDescription className="sr-only">Ви ще онлайн?</DialogDescription>
-        </DialogHeader>
-        <p className="mb-2 text-base font-normal leading-6 tracking-normal text-center text-slate-700 dark:text-slate-50">
-          Оскільки ви не оформили замовлення у відведений час, ми очистили вміст вашого кошика. Але ви завжди можете
-          спробувати знову забронювати ті ж квитки!
-        </p>
-        <DialogFooter className="flex-wrap gap-2">
-          <Button
-            variant={'default'}
-            className="px-3 py-2 text-white border border-primary text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6"
-            onClick={() => {
-              router.back();
-            }}
-          >
-            Повернутися до пошуку
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
+import CustomDialog from '@/components/shared/CustomDialog';
 
 export default function Timer() {
   const [timer, setTimer] = useState<number>(600);
   const [isClient, setIsClient] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const intervalId = useRef<number | null>(null);
+  const router = useRouter();
 
   const radius = 10;
   const circumference = 2 * Math.PI * radius;
@@ -126,7 +88,27 @@ export default function Timer() {
       </div>
 
       <div className="text-sm font-bold tracking-normal leading-[16.8px] text-primary">{formatTime(timer)}</div>
-      <DialogNewOrder open={open} />
+      <CustomDialog
+        isOpen={open}
+        title="Ви ще онлайн?"
+        description="Ви ще онлайн?"
+        footer={
+          <Button
+            variant={'default'}
+            className="px-3 py-2 text-white border border-primary text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            Повернутися до пошуку
+          </Button>
+        }
+      >
+        <p className="mb-2 text-base font-normal leading-6 tracking-normal text-center text-slate-700 dark:text-slate-50">
+          Оскільки ви не оформили замовлення у відведений час, ми очистили вміст вашого кошика. Але ви завжди можете
+          спробувати знову забронювати ті ж квитки!
+        </p>
+      </CustomDialog>
     </div>
   );
 }

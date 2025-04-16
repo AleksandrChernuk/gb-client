@@ -4,38 +4,35 @@ import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import { createSigninSchema } from '@/schemas/auth-schemas';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
 import { Button } from '@/components/ui/button';
 import { CircleAlert } from 'lucide-react';
-import { createSignupSchema } from '@/schemas/auth-schemas';
 import { useTranslations } from 'next-intl';
-import ViewPassword from './components/ViewPassword';
-import FormError from './components/FormError';
+import ViewPassword from '@/components/shared/ViewPassword';
+import FormError from '@/components/shared/FormError';
 
-const SignupForm = () => {
+const SigninForm = () => {
   const t = useTranslations('common');
-  const SignupSchema = createSignupSchema(t);
+
+  const SigninSchema = createSigninSchema(t);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
   const [isViewPassword, setIsViewPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof SignupSchema>>({
-    resolver: zodResolver(SignupSchema),
+  const form = useForm<z.infer<typeof SigninSchema>>({
+    resolver: zodResolver(SigninSchema),
     defaultValues: {
-      userName: '',
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof SignupSchema>) => {
+  const onSubmit = (values: z.infer<typeof SigninSchema>) => {
     console.log(values);
     setError('');
-
     startTransition(() => {});
   };
 
@@ -43,39 +40,6 @@ const SignupForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
         <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="userName"
-            render={({ field, fieldState }) => {
-              return (
-                <FormItem>
-                  <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
-                    {t('authName')}
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        type="text"
-                        placeholder={t('placeholderName')}
-                        className={`${
-                          Boolean(fieldState?.error) &&
-                          'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'
-                        }`}
-                      />
-                      {Boolean(fieldState?.invalid) && (
-                        <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                          <CircleAlert className="stroke-red-50 " />
-                        </div>
-                      )}
-                    </div>
-                  </FormControl>
-                  <FormMessage className="text-red-50" />
-                </FormItem>
-              );
-            }}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -88,23 +52,22 @@ const SignupForm = () => {
                   <div className="relative">
                     <Input
                       {...field}
-                      onChange={(e) => {
-                        field.onChange(e.target.value.trim());
-                      }}
                       disabled={isPending}
                       type="email"
                       placeholder="user@example.com"
-                      autoComplete="off"
-                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
+                      className={`${
+                        Boolean(fieldState?.error) &&
+                        'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50  dark:bg-slate-900'
+                      }`}
                     />
-                    {Boolean(fieldState?.error) && (
+                    {Boolean(fieldState?.invalid) && (
                       <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
                         <CircleAlert className="stroke-red-50" />
                       </div>
                     )}
                   </div>
                 </FormControl>
-                <FormMessage className="text-rred-50" />
+                <FormMessage className="text-red-50" />
               </FormItem>
             )}
           />
@@ -123,7 +86,10 @@ const SignupForm = () => {
                       disabled={isPending}
                       type={!isViewPassword ? 'password' : 'text'}
                       placeholder="******"
-                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
+                      className={`${
+                        Boolean(fieldState?.error) &&
+                        'border-red-50 focus:border-red-50  bg-red-100 placeholder:text-red-50 dark:bg-slate-900'
+                      }`}
                     />
                     <ViewPassword
                       error={Boolean(fieldState?.error)}
@@ -137,6 +103,7 @@ const SignupForm = () => {
             )}
           />
         </div>
+
         <FormError message={error} />
 
         <Button
@@ -151,4 +118,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SigninForm;

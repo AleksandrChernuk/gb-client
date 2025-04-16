@@ -1,9 +1,9 @@
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import AccountActions from './AccountActions';
-import AuthSocial from './AuthSocial';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
+import AccountActions from './AccountActions';
+import AuthSocial from './AuthSocial';
 
 interface Props {
   children: React.ReactNode;

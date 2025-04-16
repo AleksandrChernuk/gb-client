@@ -17,7 +17,10 @@ export default async function AuthLayout({
   return (
     <div className="flex flex-col h-screen">
       <AuthHeader />
-      {children}
+      <main role="main" className="grow bg-slate-50 dark:bg-slate-900">
+        {children}
+      </main>
+
       <ThirdFooter />
     </div>
   );

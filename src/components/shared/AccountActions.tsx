@@ -1,7 +1,7 @@
 import { AccountActionsList } from '@/constans/account-actions-list.constans';
+import { Link } from '@/i18n/routing';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 export default function AccountActions() {
   const t = useTranslations('common');
