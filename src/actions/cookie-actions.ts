@@ -1,8 +1,6 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-
- 
+import { cookies } from 'next/headers';
 
 export async function setCookie({ name, value }: { name: string; value: string }) {
   const cookieStore = await cookies();
@@ -11,14 +9,13 @@ export async function setCookie({ name, value }: { name: string; value: string }
     name,
     value,
     maxAge: 3600,
-    // httpOnly: true,
-    // path: "/",
+    secure: true,
+    sameSite: 'lax',
   });
 }
 
-
 export async function DeleteCookie(name: string) {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
 
-  cookieStore.delete(name)
+  cookieStore.delete(name);
 }
