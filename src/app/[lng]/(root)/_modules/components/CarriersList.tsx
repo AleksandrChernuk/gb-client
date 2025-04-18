@@ -25,7 +25,7 @@ export const CarriersList = () => {
         <ul key={idx} className="flex items-center justify-center gap-2">
           {level.map(({ alt, src, w, h }) => (
             <li key={alt} className={`w-[${w}px] h-[${h}px]`}>
-              <Image src={src} alt={alt} width={w} height={h} />
+              <Image draggable={false} src={src} alt={alt} width={w} height={h} />
             </li>
           ))}
         </ul>

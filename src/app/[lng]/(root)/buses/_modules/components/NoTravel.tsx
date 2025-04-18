@@ -16,6 +16,7 @@ export const NoTravel = () => {
         width={313}
         height={313}
         sizes="100vw"
+        draggable={false}
         placeholder="blur"
         alt="peaple wait buses"
         className="mx-auto overflow-hidden rounded-3xl"

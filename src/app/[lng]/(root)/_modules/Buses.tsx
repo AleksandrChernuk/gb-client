@@ -18,6 +18,7 @@ export default async function Buses() {
               placeholder="blur"
               width={350}
               height={353}
+              draggable={false}
               className="overflow-hidden rounded-3xl"
             />
           </li>

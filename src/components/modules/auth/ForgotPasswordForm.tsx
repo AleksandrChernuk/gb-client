@@ -9,9 +9,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { ResetPasswordShema } from '@/schemas/reset.password.shema';
+import { useRouter } from '@/i18n/routing';
 
 export default function ForgotPasswordForm() {
   //   const t = useTranslations('common');
+  const route = useRouter();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
@@ -27,11 +29,13 @@ export default function ForgotPasswordForm() {
     try {
       console.log(values);
       startTransition(() => {});
+      route.push('/otp-verify');
     } catch (error) {
       console.error('Error sending password reset email', error);
       setError(error as string);
     }
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

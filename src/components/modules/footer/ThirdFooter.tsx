@@ -12,6 +12,7 @@ export default async function ThirdFooter() {
         width={1440}
         height={232}
         sizes="100vw"
+        draggable={false}
         className="w-full"
       />
     </footer>

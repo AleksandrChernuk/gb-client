@@ -62,6 +62,7 @@ export default async function ForCarriers({
                   width={766}
                   height={318}
                   priority
+                  draggable={false}
                   sizes="100vw"
                   quality={75}
                   alt="people-with-suitcases-looking-straight-ahead-goin"

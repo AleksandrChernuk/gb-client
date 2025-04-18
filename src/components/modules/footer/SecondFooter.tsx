@@ -15,6 +15,7 @@ export default async function SecondFooter({ className }: Props) {
         alt="footer_2"
         width={1440}
         height={232}
+        draggable={false}
         placeholder="empty"
         sizes="100vw"
         className="w-full"

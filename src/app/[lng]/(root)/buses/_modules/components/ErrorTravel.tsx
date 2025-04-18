@@ -9,7 +9,7 @@ export const ErrorTravel = () => {
   return (
     <CustomCard className="flex flex-col items-center self-center gap-8 p-5 mx-auto text-center shadow-xs w-fit">
       <div className="relative w-[313px] h-[313px] mx-auto overflow-hidden rounded-3xl">
-        <Image src={errorImg} sizes="100vw" placeholder="blur" alt="peaple wait buses" />
+        <Image src={errorImg} draggable={false} sizes="100vw" placeholder="blur" alt="peaple wait buses" />
       </div>
 
       <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50">

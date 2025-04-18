@@ -148,7 +148,7 @@ export default function Details({ id }: Props) {
 
             <div>
               {ticketDetails?.details?.bus_pictures?.map(
-                (el) => el && <Image key={el} src={el} alt="bus" width={100} height={100} />,
+                (el) => el && <Image draggable={false} key={el} src={el} alt="bus" width={100} height={100} />,
               )}
             </div>
           </div>

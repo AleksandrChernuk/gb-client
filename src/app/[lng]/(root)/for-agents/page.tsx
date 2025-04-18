@@ -53,6 +53,7 @@ export default async function ForAgents({
                   width={766}
                   height={318}
                   priority
+                  draggable={false}
                   alt="people-with-suitcases-looking-straight-ahead-goin"
                 />
               </li>

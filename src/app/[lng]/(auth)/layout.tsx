@@ -15,9 +15,9 @@ export default async function AuthLayout({
 
   setRequestLocale(lng as Locale);
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
       <AuthHeader />
-      <main role="main" className="grow bg-slate-50 dark:bg-slate-900">
+      <main role="main" className="flex items-center justify-center  grow bg-slate-50 dark:bg-slate-900">
         {children}
       </main>
 

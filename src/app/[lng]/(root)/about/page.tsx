@@ -47,6 +47,7 @@ export default async function About({
                   width={400}
                   height={400}
                   priority
+                  draggable={false}
                   placeholder="blur"
                   quality={80}
                   className="mx-auto tablet:mx-0 rounded-3xl "
@@ -90,6 +91,7 @@ export default async function About({
                   src={group}
                   width={400}
                   height={400}
+                  draggable={false}
                   placeholder="blur"
                   quality={80}
                   className="mx-auto tablet:mx-0 rounded-3xl"
@@ -128,6 +130,7 @@ export default async function About({
                   src={world}
                   width={400}
                   height={400}
+                  draggable={false}
                   placeholder="blur"
                   quality={80}
                   className="mx-auto tablet:mx-0 rounded-3xl"
@@ -146,6 +149,7 @@ export default async function About({
                   src={business}
                   width={400}
                   height={400}
+                  draggable={false}
                   className="mx-auto tablet:mx-0 rounded-3xl"
                 />
               </li>

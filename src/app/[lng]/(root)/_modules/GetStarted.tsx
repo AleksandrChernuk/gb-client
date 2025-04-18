@@ -18,6 +18,7 @@ export default async function GetStarted() {
               placeholder="blur"
               width={350}
               height={353}
+              draggable={false}
               style={{ width: 'auto', height: 'auto' }}
               className="overflow-hidden rounded-3xl"
             />

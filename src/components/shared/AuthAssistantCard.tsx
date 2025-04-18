@@ -15,7 +15,7 @@ export default async function AuthAssistantCard({ children, headerLabel, buttonH
   const t = await getTranslations('common');
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card>
       <CardHeader>
         <CardTitle>{headerLabel}</CardTitle>
       </CardHeader>

@@ -25,6 +25,7 @@ export default function Herow() {
           priority
           sizes="100vw"
           placeholder="blur"
+          draggable={false}
           className="w-full h-auto"
         />
       </picture>
