@@ -38,6 +38,9 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        </head>
         <body className={`${notoSans.className} antialiased`}>
           <ReactQueryContext>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
