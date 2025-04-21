@@ -8,7 +8,6 @@ export default function Herow() {
   return (
     <section className="relative">
       <Suspense>
-        {' '}
         <HerowImage />
       </Suspense>
 

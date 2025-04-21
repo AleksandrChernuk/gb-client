@@ -29,7 +29,7 @@ export const HerowImage = () => {
     <picture>
       <source media="(min-width: 768px)" srcSet={desktop} />
       <source media="(max-width: 767px)" srcSet={mobile} />
-      <img {...rest} className="w-full max-h-[250px]" loading="eager" rel="preload" />
+      <img {...rest} className="w-full h-auto" loading="eager" rel="preload" decoding="sync" />
     </picture>
   );
 };
