@@ -3,12 +3,9 @@
 import { useSearchStore } from '@/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCitySearch } from '../hooks/useCitySearch';
-import { StartIcon } from '../components/StartIcon';
 import { IconFrom } from '@/components/icons/IconFrom';
 import { IconTo } from '@/components/icons/IconTo';
 import { IconSwap } from '@/components/icons/IconSwap';
-import { EndIcon } from '../components/EndIcon';
-import { InputError } from '../components/InputError';
 import { CityItem } from '../components/CityItem';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { LoaderCity } from '../components/LoaderCity';
@@ -26,13 +23,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { ClearInputButton } from '../components/ClearInputButton';
+import { MainSearchInput } from '../components/MainSearchInput';
 
 type Props = {
   name: 'from' | 'to';
-  type: 'mobile' | 'desktop';
+  variant: 'mobile' | 'desktop';
 };
 
-export default function CitySearch({ name, type }: Props) {
+export default function CitySearch({ name, variant }: Props) {
   const t = useTranslations('common');
   const city = useSearchStore((state) => state[name]);
   const swap = useSearchStore((state) => state.swap);
@@ -59,44 +57,35 @@ export default function CitySearch({ name, type }: Props) {
     name,
   });
 
-  switch (type) {
+  switch (variant) {
     case 'desktop':
       return (
         <div role="dropdown-warapp" className="relative" onKeyDown={onKeyDown}>
-          <div
-            className={`relative border-r border-slate-200 dark:border-slate-700 ${
+          <MainSearchInput
+            classNames={`border-r border-r-slate-200 dark:border-r-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
             }`}
-            role="input-wrapp"
-          >
-            <StartIcon icon={name === 'from' ? <IconFrom /> : <IconTo />} />
-            <input
-              ref={inputRef}
-              type="text"
-              value={value}
-              name={name}
-              placeholder={placeholder}
-              onChange={(e) => {
-                onInputChange(e.target.value);
-              }}
-              autoComplete="off"
-              autoCapitalize="off"
-              className={`${
-                errors && 'border-red-50!'
-              } z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base laptop:leading-[24px] laptop:text-lg font-medium tracking-tighter leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent`}
-              spellCheck="false"
-              onBlur={handleBlur}
-              onFocus={() => {
-                if (errors) {
-                  setErrors(name, null);
-                }
-                handleToggleOpen();
-              }}
-            />
-            <EndIcon icon={name === 'from' && <IconSwap />} onClick={swap} />
-            <InputError inputError={errors && t(`${errors}`)} />
-          </div>
-
+            startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
+            ref={inputRef}
+            type="text"
+            value={value}
+            name={name}
+            open={open}
+            placeholder={placeholder}
+            onChange={(e) => {
+              onInputChange(e.target.value);
+            }}
+            onFocus={() => {
+              if (errors) {
+                setErrors(name, null);
+              }
+              handleToggleOpen();
+            }}
+            onBlur={handleBlur}
+            spellCheck="false"
+            endIcon={name === 'from' && <IconSwap />}
+            swap={swap}
+          />
           {open ? (
             <div
               className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px]"
@@ -131,23 +120,20 @@ export default function CitySearch({ name, type }: Props) {
       return (
         <Sheet open={open} onOpenChange={handleToggleOpen}>
           <SheetTrigger asChild>
-            <div className="relative">
-              <StartIcon icon={name === 'from' ? <IconFrom /> : <IconTo />} />
-              <input
-                type="button"
-                value={placeholder}
-                className={`${
-                  errors && 'border-red-50!'
-                } text-slate-700 dark:text-slate-50 z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder:text-slate-700 dark:placeholder:text-slate-50 text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:font-medium laptop:leading-[21.6px] text-left text-nowrap truncate border-[1px] border-transparent `}
-                onFocus={() => {
-                  if (errors) {
-                    setErrors(name, null);
-                  }
-                }}
-              />
-              <InputError inputError={errors && t(`${errors}`)} />
-              <EndIcon icon={name === 'from' && <IconSwap />} onClick={swap} />
-            </div>
+            <MainSearchInput
+              startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
+              type="button"
+              value={placeholder}
+              name={name}
+              open={open}
+              onFocus={() => {
+                if (errors) {
+                  setErrors(name, null);
+                }
+              }}
+              endIcon={name === 'from' && <IconSwap />}
+              swap={swap}
+            />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
@@ -190,18 +176,13 @@ export default function CitySearch({ name, type }: Props) {
                   cities.map((el, index) => {
                     const element = extractLocationDetails(el, locale);
                     return (
-                      <div
+                      <CityItem
                         key={el.id}
-                        className="border border-b-[#e6e6e6] dark:border-b-slate-700  last:border-b-none pb-1"
-                      >
-                        <CityItem
-                          key={el.id}
-                          el={element}
-                          isSelected={city?.id === el.id}
-                          isHighlighted={highlightedIndex === index}
-                          handleSelectCity={() => onSelectCity(el)}
-                        />
-                      </div>
+                        el={element}
+                        isSelected={city?.id === el.id}
+                        isHighlighted={highlightedIndex === index}
+                        handleSelectCity={() => onSelectCity(el)}
+                      />
                     );
                   })}
                 {!loading && !cities.length && <NotFoundCity />}

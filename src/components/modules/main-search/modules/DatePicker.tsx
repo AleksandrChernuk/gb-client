@@ -6,7 +6,6 @@ import { Calendar } from '@/components/ui/calendar';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import useDateLocale from '@/hooks/useDateLocale';
-
 import { useTranslations } from 'next-intl';
 import { calendarStyles } from '../styles/style';
 import {
@@ -19,17 +18,16 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useDate } from '../hooks/useDate';
-import { StartIcon } from '../components/StartIcon';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { InputError } from '../components/InputError';
+import { MainSearchInput } from '../components/MainSearchInput';
 
 type Props = {
-  type: 'mobile' | 'desktop';
+  variant: 'mobile' | 'desktop';
 };
 
-export default function DatePicker({ type }: Props) {
+export default function DatePicker({ variant }: Props) {
   const { open, handleToggleOpen, handleSelectDate, inputRef, handleBlur } = useDate();
 
   const { locale } = useDateLocale();
@@ -40,23 +38,20 @@ export default function DatePicker({ type }: Props) {
   const setMonth = useSearchStore((state) => state.setMonth);
   const t = useTranslations('common');
 
-  switch (type) {
+  switch (variant) {
     case 'mobile':
       return (
         <Sheet open={open} onOpenChange={handleToggleOpen}>
           <SheetTrigger asChild>
-            <div className="relative">
-              <StartIcon icon={<IconCalendar />} />
-              <input
-                type="button"
-                value={format(currentDate || new Date(), 'dd MMMM', { locale })}
-                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
-                onFocus={() => {
-                  handleToggleOpen();
-                }}
-              />
-              <InputError inputError={null} />
-            </div>
+            <MainSearchInput
+              name="date"
+              startIcon={<IconCalendar />}
+              type="button"
+              value={format(currentDate || new Date(), 'dd MMMM', { locale })}
+              onFocus={() => {
+                handleToggleOpen();
+              }}
+            />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
@@ -123,23 +118,19 @@ export default function DatePicker({ type }: Props) {
     case 'desktop':
       return (
         <div role="dropdown-warapp" className="relative" onBlur={handleBlur}>
-          <div
-            className={`relative border-r border-slate-200 dark:border-slate-700 ${
+          <MainSearchInput
+            classNames={`relative border-r border-slate-200 dark:border-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
             }`}
-          >
-            <StartIcon icon={<IconCalendar />} />
-            <input
-              ref={inputRef}
-              type="button"
-              value={format(currentDate || new Date(), 'dd MMMM ', { locale })}
-              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg laptop:tracking-tighter laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
-              onClick={() => {
-                handleToggleOpen();
-              }}
-            />
-            <InputError inputError={null} />
-          </div>
+            ref={inputRef}
+            name="date"
+            startIcon={<IconCalendar />}
+            type="button"
+            value={format(currentDate || new Date(), 'dd MMMM ', { locale })}
+            onClick={() => {
+              handleToggleOpen();
+            }}
+          />
 
           {open ? (
             <div

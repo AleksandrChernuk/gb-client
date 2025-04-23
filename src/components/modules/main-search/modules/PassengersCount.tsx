@@ -13,19 +13,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
 import { IconPass } from '@/components/icons/IconPass';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { Button } from '@/components/ui/button';
-import { StartIcon } from '../components/StartIcon';
 import { PassengersButton } from '../components/PassengersButton';
 import { ChevronLeft } from 'lucide-react';
+import { MainSearchInput } from '../components/MainSearchInput';
 
 type Props = {
-  type: 'mobile' | 'desktop';
+  variant: 'mobile' | 'desktop';
 };
 
-export default function PassengersCount({ type }: Props) {
+export default function PassengersCount({ variant }: Props) {
   const { open, handleToggleOpen, handleBlur } = usePassengers();
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
@@ -40,19 +39,20 @@ export default function PassengersCount({ type }: Props) {
         ? `${passCount} ${t('placeholderPassengersGenitive')}`
         : `${passCount} ${t('placeholderPassengers')}`;
 
-  switch (type) {
+  switch (variant) {
     case 'mobile':
       return (
         <Sheet open={open} onOpenChange={handleToggleOpen}>
           <SheetTrigger asChild>
-            <div className="relative">
-              <StartIcon icon={<IconPass />} />
-              <input
-                type="button"
-                value={value}
-                className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base tracking-normal leading-[24px] laptop:text-lg laptop:font-medium laptop:tracking-tighter laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
-              />
-            </div>
+            <MainSearchInput
+              name="date"
+              startIcon={<IconPass />}
+              type="button"
+              value={value}
+              onFocus={() => {
+                handleToggleOpen();
+              }}
+            />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
@@ -100,23 +100,21 @@ export default function PassengersCount({ type }: Props) {
     case 'desktop':
       return (
         <div role="dropdown-warapp" className="relative" onBlur={handleBlur}>
-          <div className="relative">
-            <StartIcon icon={<IconPass />} />
-            <input
-              type="button"
-              value={
-                passCount === 1
-                  ? `${passCount} ${t('placeholderPassenger')}`
-                  : passCount > 4
-                    ? `${passCount} ${t('placeholderPassengersGenitive')}`
-                    : `${passCount} ${t('placeholderPassengers')}`
-              }
-              className="z-0 min-h-10 rounded-md size-full h-auto px-4 py-2 pl-8 tablet:px-9 laptop:px-12 tablet:py-4 outline-hidden bg-transparent focus:bg-slate-200 active:bg-slate-200 dark:focus:bg-slate-700 dark:active:bg-slate-700 placeholder-black dark:placeholder-[#e6e6e6] text-base font-medium tracking-normal leading-[24px] laptop:text-lg  laptop:font-medium  laptop:tracking-tighter  laptop:leading-[21.6px] text-black dark:text-slate-50 text-left text-nowrap truncate border-[1px] border-transparent"
-              onClick={() => {
-                handleToggleOpen();
-              }}
-            />
-          </div>
+          <MainSearchInput
+            name="date"
+            startIcon={<IconPass />}
+            type="button"
+            value={
+              passCount === 1
+                ? `${passCount} ${t('placeholderPassenger')}`
+                : passCount > 4
+                  ? `${passCount} ${t('placeholderPassengersGenitive')}`
+                  : `${passCount} ${t('placeholderPassengers')}`
+            }
+            onClick={() => {
+              handleToggleOpen();
+            }}
+          />
 
           {open ? (
             <div
