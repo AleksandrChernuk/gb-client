@@ -6,6 +6,7 @@ import { getTranslations } from 'next-intl/server';
 
 export default async function Buses() {
   const t = await getTranslations('main');
+  const t_img_alts = await getTranslations('img_alts');
 
   return (
     <section className="pb-8 tablet:pb-16">
@@ -13,13 +14,14 @@ export default async function Buses() {
         <ul className="justify-between min-h-full gap-5 tablet:flex laptop:gap-40">
           <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0 ">
             <Image
-              alt="peaple wait buses"
+              alt={t_img_alts('buses')}
               src={travellerOnTheStreet}
               placeholder="blur"
               width={350}
               height={353}
+              sizes="100vw"
               draggable={false}
-              className="overflow-hidden rounded-3xl"
+              className="overflow-hidden rounded-3xl w-auto h-auto"
             />
           </li>
           <li className="flex flex-col tablet:w-1/2">

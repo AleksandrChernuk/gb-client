@@ -1,8 +1,7 @@
 import MainFooter from '@/components/modules/footer/MainFooter';
-import { seoMain } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Herow from './_modules/Herow';
 import Benefits from './_modules/Benefits';
 import Buses from './_modules/Buses';
@@ -17,11 +16,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
+  const t = await getTranslations({ locale: lng, namespace: 'metadata' });
 
   return {
-    title: seoMain.title[lng],
-    description: seoMain.description[lng],
-    keywords: seoMain.keywords[lng],
+    title: t('main.title'),
+    description: t('main.description'),
+
     robots: {
       index: true,
       follow: true,
@@ -34,6 +34,19 @@ export async function generateMetadata({ params }: Props) {
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+
+    metadataBase: new URL('https://greenbus.com.ua'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        uk: '/uk',
+        en: '/en',
+        ru: '/ru',
+      },
+    },
+    openGraph: {
+      images: '/logo.png',
     },
   };
 }

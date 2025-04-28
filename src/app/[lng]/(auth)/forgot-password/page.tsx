@@ -4,6 +4,7 @@ import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+
 export async function generateMetadata() {
   return {
     robots: {

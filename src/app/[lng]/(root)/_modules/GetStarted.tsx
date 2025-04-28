@@ -6,21 +6,22 @@ import pointOnCurtfrom from '@/assets/images/point-on-curt.avif';
 
 export default async function GetStarted() {
   const t = await getTranslations('main');
+  const t_img_alts = await getTranslations('img_alts');
 
   return (
     <section className="py-8 tablet:py-16">
       <Container size="m">
         <ul className="justify-between min-h-full tablet:flex tablet:gap-5 laptop:gap-40">
-          <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0 ">
+          <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0">
             <Image
-              alt="people and bus"
+              alt={t_img_alts('map')}
               src={pointOnCurtfrom}
               placeholder="blur"
               width={350}
               height={353}
               draggable={false}
-              style={{ width: 'auto', height: 'auto' }}
-              className="overflow-hidden rounded-3xl"
+              sizes="100vw"
+              className="overflow-hidden rounded-3xl w-auto h-auto"
             />
           </li>
           <li className="flex flex-col tablet:order-2 tablet:w-1/2">

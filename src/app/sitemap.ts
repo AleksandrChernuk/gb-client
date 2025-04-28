@@ -1,24 +1,17 @@
-import { MetadataRoute } from 'next';
-import { Locale } from 'next-intl';
-import { host } from '@/config';
-import { routing, getPathname } from '@/i18n/routing';
+import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...getEntries('/'), ...getEntries('/pathnames')];
-}
-
-type Href = Parameters<typeof getPathname>[0]['href'];
-
-function getEntries(href: Href) {
-  return routing.locales.map((locale) => ({
-    url: getUrl(href, locale),
-    alternates: {
-      languages: Object.fromEntries(routing.locales.map((cur) => [cur, getUrl(href, cur)])),
+  return [
+    {
+      url: 'https://greenbus.com.ua',
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          en: 'https://greenbus.com.ua/en',
+          uk: 'https://greenbus.com.ua/uk',
+          ru: 'https://greenbus.com.ua/ru',
+        },
+      },
     },
-  }));
-}
-
-function getUrl(href: Href, locale: Locale) {
-  const pathname = getPathname({ locale, href });
-  return host + pathname;
+  ];
 }

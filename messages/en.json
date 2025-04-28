@@ -7,6 +7,10 @@
     "agents": {
       "title": "GreenBus Agents — Partnership in Bus Transportation",
       "description": "Learn more about our agents and partners. GreenBus cooperates with professionals in bus transportation across Ukraine and Europe. Join us!"
+    },
+    "main": {
+      "title": "Bus tickets from Ukraine to Europe — comfy trips | GreenBus",
+      "description": "Buy bus tickets from Ukraine to Europe online. Comfortable trips, reliable carriers, convenient schedules, and affordable prices."
     }
   },
 
@@ -109,6 +113,7 @@
     "processing_data": "Consent for processing personal data."
   },
   "main": {
+    "herow_title": "Affordable Bus Tickets and Trips Across Ukraine | GreenBus",
     "buses_title": "Buses to European destinations",
     "buses_description": "Travel by bus to the most beautiful destinations in Europe! Convenient routes, comfortable conditions, and affordable prices make your journey easy and enjoyable.",
     "buses_button": "Available countries",
@@ -421,5 +426,10 @@
       "5_million": "> 5 million",
       "5_million_text": "Passengers travel with GreenBus every year."
     }
+  },
+  "img_alts": {
+    "herow": "Passengers waiting for an international bus | GreenBus",
+    "buses": "Passenger with a suitcase boarding an international bus | GreenBus",
+    "map": "Create your perfect route with an interactive map | GreenBus"
   }
 }

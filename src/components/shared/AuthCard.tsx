@@ -53,6 +53,11 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
               {backButtonHref === '/signup' ? t('signinTitle') : t('signupTitle')}
             </Link>
           </Button>
+          <Button asChild variant={'link'}>
+            <Link prefetch={false} href="/forgot-password">
+              Forgot password
+            </Link>
+          </Button>
         </CardFooter>
       </div>
     </Card>

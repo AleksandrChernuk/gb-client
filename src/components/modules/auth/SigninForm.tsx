@@ -12,7 +12,6 @@ import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
-import { Link } from '@/i18n/routing';
 
 const SigninForm = () => {
   const t = useTranslations('common');
@@ -77,16 +76,9 @@ const SigninForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <div className="flex items-center justify-between mb-2">
-                  <FormLabel className="text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
-                    {t('authPassword')}
-                  </FormLabel>
-                  <Button asChild variant={'link'}>
-                    <Link prefetch={false} href="/forgot-password">
-                      Forgot password
-                    </Link>
-                  </Button>
-                </div>
+                <FormLabel className="text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
+                  {t('authPassword')}
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
