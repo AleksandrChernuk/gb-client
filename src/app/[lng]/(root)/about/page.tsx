@@ -13,6 +13,33 @@ import { aboutUsStatistics } from '@/constans/about.us.statistics';
 import { CustomCard } from '@/components/shared/CustomCard';
 import RequestPartnershipForm from '@/components/modules/request-partnership';
 
+type Props = {
+  params: Params;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
+  const t = await getTranslations({ locale: lng, namespace: 'metadata' });
+
+  return {
+    title: t('about.title'),
+    description: t('about.description'),
+    robots: {
+      index: false,
+      follow: false,
+      nocache: false,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  };
+}
+
 export default async function About({
   params,
 }: Readonly<{

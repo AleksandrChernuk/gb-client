@@ -3,6 +3,23 @@ import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import { setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Params } from '@/types/common.types';
+export async function generateMetadata() {
+  return {
+    robots: {
+      index: false,
+      follow: false,
+      nocache: false,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  };
+}
 
 export default async function AuthLayout({
   children,

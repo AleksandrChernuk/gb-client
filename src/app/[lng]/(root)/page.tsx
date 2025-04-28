@@ -22,6 +22,19 @@ export async function generateMetadata({ params }: Props) {
     title: seoMain.title[lng],
     description: seoMain.description[lng],
     keywords: seoMain.keywords[lng],
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 
