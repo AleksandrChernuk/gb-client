@@ -44,15 +44,7 @@ export default function PassengersCount({ variant }: Props) {
       return (
         <Sheet open={open} onOpenChange={handleToggleOpen}>
           <SheetTrigger asChild>
-            <MainSearchInput
-              name="date"
-              startIcon={<IconPass />}
-              type="button"
-              value={value}
-              onFocus={() => {
-                handleToggleOpen();
-              }}
-            />
+            <MainSearchInput name="date" startIcon={<IconPass />} type="button" value={value} />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>

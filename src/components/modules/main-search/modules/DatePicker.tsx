@@ -48,9 +48,6 @@ export default function DatePicker({ variant }: Props) {
               startIcon={<IconCalendar />}
               type="button"
               value={format(currentDate || new Date(), 'dd MMMM', { locale })}
-              onFocus={() => {
-                handleToggleOpen();
-              }}
             />
           </SheetTrigger>
           <SheetContent>
