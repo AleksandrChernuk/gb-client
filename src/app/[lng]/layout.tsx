@@ -39,6 +39,7 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
+        <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
         <GoogleTagManager gtmId="G-H1T333J6GL" />
         <body className={`${notoSans.className} antialiased`}>
           <ReactQueryContext>
