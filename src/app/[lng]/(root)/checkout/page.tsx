@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
