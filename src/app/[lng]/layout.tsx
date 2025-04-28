@@ -9,6 +9,7 @@ import ReactQueryContext from '@/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -38,6 +39,7 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
+        <GoogleTagManager gtmId="G-H1T333J6GL" />
         <body className={`${notoSans.className} antialiased`}>
           <ReactQueryContext>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
