@@ -12,7 +12,6 @@ import { ResetPasswordShema } from '@/schemas/reset.password.shema';
 import { useRouter } from '@/i18n/routing';
 
 export default function ForgotPasswordForm() {
-  //   const t = useTranslations('common');
   const route = useRouter();
 
   const [error, setError] = useState<string | undefined>('');

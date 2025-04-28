@@ -1,39 +1,49 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { getImageProps } from 'next/image';
-
+// import { getImageProps } from 'next/image';
 export const HerowImage = () => {
-  const common = { alt: 'Art Direction Example', sizes: '100vw' };
-  const {
-    props: { srcSet: desktop },
-  } = getImageProps({
-    ...common,
-    width: 1440,
-    height: 233,
-    quality: 80,
-    priority: true,
-    src: '/images/desc_full_2x.avif',
-  });
-
-  const {
-    props: { srcSet: mobile, ...rest },
-  } = getImageProps({
-    ...common,
-    width: 768,
-    height: 233,
-    quality: 70,
-    priority: true,
-    src: '/images/mob_full_2x.avif',
-  });
-
   return (
     <picture>
-      <source media="(min-width: 768px)" srcSet={desktop} />
-      <source media="(max-width: 767px)" srcSet={mobile} />
-      <img {...rest} className="w-full h-auto" loading="eager" rel="preload" decoding="sync" />
+      <source
+        media="(min-width: 768px)"
+        srcSet={`
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=640&q=80 640w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=750&q=80 750w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=828&q=80 828w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=1080&q=80 1080w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=1200&q=80 1200w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=1920&q=80 1920w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=2048&q=80 2048w,
+          /_next/image?url=%2Fimages%2Fdesc_full_2x.avif&w=3840&q=80 3840w
+        `}
+        type="image/avif"
+      />
+      <source
+        media="(max-width: 767px)"
+        srcSet={`
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=640&q=70 640w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=750&q=70 750w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=828&q=70 828w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=1080&q=70 1080w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=1200&q=70 1200w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=1920&q=70 1920w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=2048&q=70 2048w,
+          /_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=3840&q=70 3840w
+        `}
+        type="image/avif"
+      />
+      <img
+        alt="Art Direction Example"
+        width={768}
+        height={233}
+        decoding="sync"
+        sizes="100vw"
+        src="/_next/image?url=%2Fimages%2Fmob_full_2x.avif&w=3840&q=70"
+        className="w-full h-auto"
+        loading="eager"
+      />
     </picture>
   );
 };
-
 {
   /* <picture>
         <source
