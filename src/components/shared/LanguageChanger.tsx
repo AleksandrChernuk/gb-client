@@ -9,12 +9,14 @@ import { Locale } from '@/i18n/locales';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 type Props = {
   variant: 'mobile' | 'desktop';
 };
 
 export default function SelectLocale({ variant }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const searchParams = useSearchParams().toString();
@@ -26,7 +28,7 @@ export default function SelectLocale({ variant }: Props) {
   switch (variant) {
     case 'desktop':
       return (
-        <Popover>
+        <Popover open={isOpen} onOpenChange={setIsOpen}>
           <PopoverTrigger asChild className="group">
             <Button className={`flex items-center justify-center  gap-0.5`} variant={'link'}>
               <div className="w-7 h-7">{supportLocalesList.find((item) => item.value === locale)?.icon}</div>
@@ -46,7 +48,16 @@ export default function SelectLocale({ variant }: Props) {
                     asChild
                     className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
                   >
-                    <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
+                    <Link
+                      prefetch={false}
+                      href={`${pathname}?${searchParams}`}
+                      locale={el.value as Locale}
+                      onClick={() => {
+                        if (locale === el.value) {
+                          setIsOpen(false);
+                        }
+                      }}
+                    >
                       <div className="w-6 h-6"> {el.icon} </div>
                       {el.shortName}
                     </Link>
@@ -60,7 +71,7 @@ export default function SelectLocale({ variant }: Props) {
 
     case 'mobile':
       return (
-        <Accordion type="single" collapsible className="">
+        <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="py-0 ">
               <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]">

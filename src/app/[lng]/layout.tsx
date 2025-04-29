@@ -39,9 +39,13 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning>
+        <head>
+          <link rel="preconnect" href="https://media.nedigital.sg" />
+          <link rel="dns-prefetch" href="https://media.nedigital.sg" />
+        </head>
         <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
         <GoogleTagManager gtmId="G-H1T333J6GL" />
-        <body className={`${notoSans.className} antialiased`}>
+        <body className={`${notoSans.className} antialiased`} suppressHydrationWarning>
           <ReactQueryContext>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
               {children}

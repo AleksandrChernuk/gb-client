@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import { Switch } from '../ui/switch-theme';
 
@@ -10,7 +10,7 @@ export const SwitchTheme = () => {
   const [loading, setLoading] = useState(true);
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const localtheme = localStorage.getItem('theme');
 
     if (localtheme && theme) {
