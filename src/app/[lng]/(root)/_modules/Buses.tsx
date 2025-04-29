@@ -1,7 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import travellerOnTheStreet from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Buses() {
@@ -13,15 +12,12 @@ export default async function Buses() {
       <Container size="m">
         <ul className="justify-between min-h-full gap-5 tablet:flex laptop:gap-40">
           <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0 ">
-            <Image
+            <img
               alt={t_img_alts('buses')}
-              src={travellerOnTheStreet}
-              placeholder="blur"
+              src="/images/a-traveller-on-the-street-with-a-suitcase-looking.avif"
               width={350}
               height={353}
-              sizes="100vw"
-              draggable={false}
-              className="overflow-hidden rounded-3xl w-auto h-auto"
+              className="overflow-hidden rounded-3xl"
             />
           </li>
           <li className="flex flex-col tablet:w-1/2">
