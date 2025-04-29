@@ -32,8 +32,8 @@ export default async function ResetPage({
 
   setRequestLocale(lng as Locale);
   return (
-    <section className="py-8 laptop:py-16">
-      <Container size="s">
+    <section className="py-8 laptop:py-16 w-full">
+      <Container size="xs">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
