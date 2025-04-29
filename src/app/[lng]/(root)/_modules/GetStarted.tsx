@@ -1,7 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import pointOnCurt from '@/assets/images/point-on-curt.avif';
 
 export default async function GetStarted() {
   const t = await getTranslations('main');
@@ -11,15 +12,16 @@ export default async function GetStarted() {
     <section className="py-8 tablet:py-16">
       <Container size="m">
         <ul className="justify-between min-h-full tablet:flex tablet:gap-5 laptop:gap-40">
-          <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0">
-            <img
+          <li className="relative overflow-hidden rounded-3xl w-[350px] h-[353px]  mb-8 tablet:order-2 tablet:mb-0 mx-auto">
+            <Image
               alt={t_img_alts('map')}
-              src="/images/point-on-curt.avif"
-              width={350}
-              height={353}
-              draggable={false}
+              src={pointOnCurt}
+              fill
+              placeholder="blur"
               sizes="100vw"
-              className="overflow-hidden rounded-3xl"
+              style={{
+                objectFit: 'contain',
+              }}
             />
           </li>
           <li className="flex flex-col tablet:order-2 tablet:w-1/2">

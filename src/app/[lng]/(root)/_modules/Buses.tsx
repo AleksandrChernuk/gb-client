@@ -2,6 +2,9 @@
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+
+import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
 
 export default async function Buses() {
   const t = await getTranslations('main');
@@ -11,13 +14,16 @@ export default async function Buses() {
     <section className="pb-8 tablet:pb-16">
       <Container size="m">
         <ul className="justify-between min-h-full gap-5 tablet:flex laptop:gap-40">
-          <li className="flex items-center justify-center mb-8 tablet:order-2 tablet:mb-0 ">
-            <img
+          <li className="relative overflow-hidden rounded-3xl w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
+            <Image
               alt={t_img_alts('buses')}
-              src="/images/a-traveller-on-the-street-with-a-suitcase-looking.avif"
-              width={350}
-              height={353}
-              className="overflow-hidden rounded-3xl"
+              src={aTravellerImage}
+              fill
+              placeholder="blur"
+              sizes="100vw"
+              style={{
+                objectFit: 'contain',
+              }}
             />
           </li>
           <li className="flex flex-col tablet:w-1/2">
