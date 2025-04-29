@@ -2,6 +2,8 @@
 import MainSearch from '@/components/modules/main-search';
 import { Container } from '@/components/shared/Container';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import desc from '@/assets/images/desc_full_2x.avif';
 
 export default async function Herow() {
   const t_img_alts = await getTranslations('img_alts');
@@ -9,7 +11,7 @@ export default async function Herow() {
 
   return (
     <section className="relative">
-      <picture>
+      {/* <picture>
         <source media="(max-width:767px)" srcSet="/images/mob_full.avif 1x, /images/mob_full_2x.avif 2x" />
         <source media="(min-width:768px)" srcSet="/images/desc_full.avif 1x, /images/desc_full_2x.avif 2x" />
         <img
@@ -19,7 +21,21 @@ export default async function Herow() {
           className="w-full"
           sizes="100vw"
         />
-      </picture>
+      </picture> */}
+      <figure>
+        <Image
+          src={desc}
+          alt={t_img_alts('herow')}
+          placeholder="blur"
+          width={1240}
+          height={233}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
+      </figure>
 
       <Container size="l" className="-mt-10">
         <div>
