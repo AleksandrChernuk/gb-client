@@ -12,7 +12,13 @@ export default async function Herow() {
       <picture>
         <source media="(max-width:767px)" srcSet="/images/mob_full.avif 1x, /images/mob_full_2x.avif 2x" />
         <source media="(min-width:768px)" srcSet="/images/desc_full.avif 1x, /images/desc_full_2x.avif 2x" />
-        <img src={`/images/desc_full_2x.avif?q=100`} className="w-full h-auto" alt={t_img_alts('herow')} />
+        <img
+          src={`/images/desc_full_2x.avif?q=100`}
+          alt={t_img_alts('herow')}
+          decoding="sync"
+          className="w-full"
+          sizes="100vw"
+        />
       </picture>
 
       <Container size="l" className="-mt-10">
