@@ -43,6 +43,7 @@ export default async function Herow() {
       <Container size="l" className="-mt-10">
         <div>
           <h1 className="sr-only">{t_main('herow_title')}</h1>
+
           <MainSearch />
         </div>
       </Container>

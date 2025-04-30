@@ -1,6 +1,6 @@
 'use client';
 
-import { useCheckoutSchema } from '@/schemas/checkout-form.shema';
+import { useCheckoutSchema } from '@/schemas/checkout.form.schema';
 import { FormValues } from '@/types/checkout-from.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

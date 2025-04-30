@@ -11,9 +11,9 @@ import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { updatePpasswordSchema } from '@/schemas/update.password.schema';
 import { useRouter } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
+import { updatePpasswordSchema } from '@/schemas/auth.schema';
 
 const UpdatePasswordForm = () => {
   const route = useRouter();

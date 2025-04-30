@@ -4,7 +4,6 @@ import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
@@ -13,7 +12,7 @@ import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
-import { signupSchema } from '@/schemas/auth.schemas';
+import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 
 const SignupForm = () => {

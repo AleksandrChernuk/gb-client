@@ -100,7 +100,7 @@
     "authAlreadyHaveAccount": "Already have an account?",
     "authCreateAccount": "Create an account",
     "authLogin": "Login",
-    "required": "Required field.",
+    "required": "Required field",
     "emailRequired": "Email is required.",
     "emailNotValid": "This is not a valid email.",
     "passwordLength": "Password must be at least 6 characters long.",

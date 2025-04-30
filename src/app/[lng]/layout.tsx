@@ -10,6 +10,7 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { Toaster } from 'sonner';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -51,6 +52,7 @@ export default async function MainLayout({
               {children}
             </ThemeProvider>
           </ReactQueryContext>
+          <Toaster />
         </body>
       </html>
     </NextIntlClientProvider>

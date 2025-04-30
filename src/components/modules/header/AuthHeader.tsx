@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 
 export default async function AuthHeader() {
   return (
-    <header className="bg-white border-b-[1px] border-b-[#e6e6e6] dark:border-b-slate-800 dark:bg-slate-800">
+    <header className="bg-white border-b-2 dark:bg-slate-800 border-b-[#e6e6e6] dark:border-b-slate-700 ">
       <Container size="l" className="flex items-center justify-between py-4">
         <Logo />
 

@@ -8,11 +8,11 @@ import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
-import { ResetPasswordShema } from '@/schemas/reset.password.shema';
 import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { LoaderCircle } from 'lucide-react';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { ResetPasswordShema } from '@/schemas/auth.schema';
 
 export default function ForgotPasswordForm() {
   const route = useRouter();

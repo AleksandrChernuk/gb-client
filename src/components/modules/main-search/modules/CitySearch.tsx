@@ -64,7 +64,7 @@ export default function CitySearch({ name, variant }: Props) {
           <MainSearchInput
             classNames={`border-r border-r-slate-200 dark:border-r-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
-            }`}
+            } ${Boolean(errors) && 'dark:border-r-transparent border-r-transparent'}`}
             startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
             ref={inputRef}
             type="text"
@@ -81,7 +81,9 @@ export default function CitySearch({ name, variant }: Props) {
               }
               handleToggleOpen();
             }}
+            error={errors}
             onBlur={handleBlur}
+            aria-invalid={Boolean(city)}
             spellCheck="false"
             endIcon={name === 'from' && <IconSwap />}
             swap={swap}

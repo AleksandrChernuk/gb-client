@@ -41,7 +41,6 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
     ref,
   ) => {
     const translatedError = t?.(error || '') || error;
-
     return (
       <div className={cn('relative', classNames)} role="input-wrapp">
         <div className="absolute transform -translate-y-1/2 pointer-events-none left-1 tablet:left-2 laptop:left-5 top-1/2">
@@ -79,10 +78,11 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
             placeholder:text-slate-700 dark:placeholder:text-slate-50 
             text-base laptop:text-lg font-medium tracking-tighter 
             laptop:leading-[24px] leading-[21.6px] text-left text-nowrap truncate 
-            text-black dark:text-slate-50 border-[1px] border-transparent`,
-            error ? 'border-red-500' : 'border-transparent',
+            text-black dark:text-slate-50 border-[1px] border-transparent 
+         aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]`,
           )}
           {...props}
+          aria-invalid={Boolean(error)}
         />
 
         {endIcon && (
@@ -100,7 +100,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
 
         {translatedError && (
           <div
-            className="absolute top-0 right-0 z-50 p-1 text-xs text-white transform rounded-tr-lg rounded-bl-lg cursor-pointer w-fit h-fit bg-red-50"
+            className="absolute top-0 right-0 z-50 p-1 text-xs text-white transform rounded-tr-lg rounded-bl-lg cursor-pointer w-fit h-fit bg-[#de2a1a]"
             onClick={(e) => e.stopPropagation()}
           >
             {translatedError}

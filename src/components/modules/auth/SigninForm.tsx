@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { CircleAlert } from 'lucide-react';
+import { CircleAlert, LoaderCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
-import { signinSchema } from '@/schemas/auth.schemas';
+import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { toast } from 'sonner';
 
 const SigninForm = () => {
   const t = useTranslations('common');
@@ -31,10 +32,23 @@ const SigninForm = () => {
 
   async function onSubmit(values: z.infer<typeof signinSchema>) {
     try {
-      console.log(values);
-      startTransition(() => {});
+      startTransition(() => {
+        toast('Успешно', {
+          description: JSON.stringify(values),
+          action: {
+            label: 'Закрыть',
+            onClick: () => console.log('Закрыть'),
+          },
+        });
+      });
     } catch (error) {
-      console.error('Error sending password reset email', error);
+      toast('Error sending password reset email', {
+        description: JSON.stringify(error),
+        action: {
+          label: 'Закрыть',
+          onClick: () => console.log('Закрыть'),
+        },
+      });
       setError(error as string);
     }
   }
@@ -109,7 +123,7 @@ const SigninForm = () => {
           className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
           disabled={isPending}
         >
-          {t('signinTitle')}
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
         </Button>
       </form>
     </Form>

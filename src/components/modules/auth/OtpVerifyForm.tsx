@@ -10,9 +10,9 @@ import { useState, useTransition } from 'react';
 import FormError from '@/components/shared/FormError';
 import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { OtpVerifySchema } from '@/schemas/otp.verify.shema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { LoaderCircle } from 'lucide-react';
+import { otpVerifySchema } from '@/schemas/auth.schema';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
@@ -21,14 +21,14 @@ export default function OtpVerifyForm() {
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof OtpVerifySchema>>({
-    resolver: zodResolver(OtpVerifySchema),
+  const form = useForm<z.infer<typeof otpVerifySchema>>({
+    resolver: zodResolver(otpVerifySchema),
     defaultValues: {
       pin: '',
     },
   });
 
-  async function onSubmit(values: z.infer<typeof OtpVerifySchema>) {
+  async function onSubmit(values: z.infer<typeof otpVerifySchema>) {
     try {
       console.log(values);
       startTransition(() => {

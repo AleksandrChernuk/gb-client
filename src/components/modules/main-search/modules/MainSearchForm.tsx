@@ -11,7 +11,7 @@ import CitySearch from './CitySearch';
 import DatePicker from './DatePicker';
 import PassengersCount from './PassengersCount';
 import { useRouter } from '@/i18n/routing';
-import { MainSearchShema } from '@/schemas/main.search.shema';
+import { MainSearchShema } from '@/schemas/main.search.schema';
 
 const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
