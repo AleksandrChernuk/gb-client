@@ -69,6 +69,18 @@
     "continue": "Continue",
     "signupTitle": "Register",
     "signinTitle": "Login",
+    "forgotTitle": "Forgot password?",
+    "forgotPageTitle": "Enter your email — we'll send a password reset link.",
+    "otpVerifyTitle": "Enter verification code",
+    "otpVerifyText": "Please enter the one-time password sent to email",
+    "otpVerifyCode": "Verify Code",
+    "updatePasswordTitle": "Set a new password",
+    "updatePasswordBtn": "Save",
+    "confirmPassword": "Confirm Password",
+
+    "sendResetCode": "Send reset code",
+
+    "resetPasBtn": "Reset",
     "authYouCan": "In personal account you can:",
     "authActionsBuy": "Buy a reserved ticket",
     "authActionsReturn": "Return tickets",
@@ -110,7 +122,34 @@
     "to_be_paid": "To be paid",
     "total_price": "Total (incl. VAT)",
     "accept_rules": "I accept the terms of the public offer, privacy policy, and returns policy.",
-    "processing_data": "Consent for processing personal data."
+    "processing_data": "Consent for processing personal data.",
+
+    "name_validate": {
+      "required": "Name is required",
+      "noSpecialCharacters": "Name must not contain special characters"
+    },
+
+    "email_validate": {
+      "required": "Email is required",
+      "emailNotValid": "Enter a valid email address"
+    },
+
+    "password_validate": {
+      "minLength": "Password is too short (minimum 8 characters)",
+      "maxLength": "Password is too long (maximum 20 characters)",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "lowercase": "Password must contain at least one lowercase letter",
+      "number": "Password must contain at least one number",
+      "special": "Password must contain at least one special character (!@#$%^&*)"
+    },
+    "otp_validate": {
+      "required": "Code is required",
+      "invalid": "The code must be exactly 6 digits"
+    },
+    "updatePassword_validate": {
+      "required": "Please confirm your password",
+      "passwordMismatchErrorMessage": "Passwords do not match"
+    }
   },
   "main": {
     "herow_title": "Affordable Bus Tickets and Trips Across Ukraine | GreenBus",

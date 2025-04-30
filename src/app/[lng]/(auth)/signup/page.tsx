@@ -33,8 +33,8 @@ export default async function SignupPage({
 
   setRequestLocale(lng as Locale);
   return (
-    <section className="py-8 laptop:py-16">
-      <Container size="s" className="flex flex-col items-start justify-center">
+    <section className="w-full">
+      <Container size="s" className="py-4 laptop:py-8">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>

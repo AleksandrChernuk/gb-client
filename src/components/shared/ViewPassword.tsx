@@ -12,9 +12,9 @@ const ViewPassword = ({ isViewPassword, setIsViewPassword, error }: ViewPassword
   return (
     <div className="absolute inset-y-0 flex items-center cursor-pointer right-4" onClick={setIsViewPassword}>
       {isViewPassword ? (
-        <Eye size={24} className={`${error && 'stroke-red-50'}`} />
+        <Eye size={24} className={`${error && 'stroke-[#de2a1a]'}`} />
       ) : (
-        <EyeOff size={24} className={`${error && 'stroke-red-50'}`} />
+        <EyeOff size={24} className={`${error && 'stroke-[#de2a1a]'}`} />
       )}
     </div>
   );

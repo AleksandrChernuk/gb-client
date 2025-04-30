@@ -10,9 +10,18 @@ interface Props {
   headerLabel: string;
   backButtonLabel: string;
   backButtonHref: string;
+  forgotButtonHref?: string;
+  forgotButtonLabel?: string;
 }
 
-export default async function AuthCard({ children, headerLabel, backButtonLabel, backButtonHref }: Props) {
+export default async function AuthCard({
+  children,
+  headerLabel,
+  backButtonLabel,
+  backButtonHref,
+  forgotButtonHref,
+  forgotButtonLabel,
+}: Props) {
   const t = await getTranslations('common');
 
   return (
@@ -38,32 +47,30 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
         </CardFooter>
 
         <CardFooter className="flex flex-col items-center justify-start p-0 mt-4 gap-4 truncate gap-x-2 tetx-text-slate-700 dark:text-slate-50 text-nowrap">
-          {backButtonLabel !== 'authLogin' && (
+          {backButtonLabel !== 'authLogin' && forgotButtonHref && (
             <div className="flex items-center gap-2">
-              <p className="text-xs  font-bold tracking-normal leading-[16.8px]">Забыли пароль?</p>
+              <p className="text-xs  font-bold tracking-normal leading-[16.8px]">{t('forgotTitle')}</p>
               <Button asChild variant={'link'}>
                 <Link
                   prefetch={false}
-                  className="underline text-xs font-normal tracking-normal leading-[16.8px]"
-                  href="/forgot-password"
+                  className="text-xs font-normal tracking-normal leading-[16.8px]"
+                  href={forgotButtonHref}
                   aria-label="go reset password page"
                 >
-                  Сброс пароля
+                  {t(`${forgotButtonLabel}`)}
                 </Link>
               </Button>
             </div>
           )}
           <div className="flex items-center gap-2">
-            <p className="text-xs  font-bold tracking-normal leading-[16.8px]">
+            <p className="text-xs font-bold tracking-normal leading-[16.8px]">
               {backButtonLabel === 'authLogin' ? t('authAlreadyHaveAccount') : t('authDontHaveAccount')}
             </p>
             <Button asChild variant={'link'}>
               <Link
                 prefetch={false}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
                 href={backButtonHref}
-                className="underline text-xs font-normal tracking-normal leading-[16.8px]"
+                className="text-xs font-normal tracking-normal leading-[16.8px]"
                 aria-label="go signup page"
               >
                 {backButtonHref !== '/signup' ? t('signinTitle') : t('signupTitle')}

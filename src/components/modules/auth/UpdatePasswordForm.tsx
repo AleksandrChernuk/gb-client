@@ -7,32 +7,37 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
-import { signinSchema } from '@/schemas/auth.schemas';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { updatePpasswordSchema } from '@/schemas/update.password.schema';
+import { useRouter } from 'next/navigation';
+import { LoaderCircle } from 'lucide-react';
 
-const SigninForm = () => {
+const UpdatePasswordForm = () => {
+  const route = useRouter();
+
   const t = useTranslations('common');
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
   const [isViewPassword, setIsViewPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof signinSchema>>({
-    resolver: zodResolver(signinSchema),
+  const form = useForm<z.infer<typeof updatePpasswordSchema>>({
+    resolver: zodResolver(updatePpasswordSchema),
     defaultValues: {
-      email: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signinSchema>) {
+  async function onSubmit(values: z.infer<typeof updatePpasswordSchema>) {
     try {
       console.log(values);
-      startTransition(() => {});
+      startTransition(() => {
+        route.push('/signin');
+      });
     } catch (error) {
       console.error('Error sending password reset email', error);
       setError(error as string);
@@ -40,37 +45,8 @@ const SigninForm = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>{t('authEmail')}</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      type="email"
-                      placeholder="user@example.com"
-                      aria-invalid={Boolean(fieldState?.invalid)}
-                      autoComplete="off"
-                    />
-                    {Boolean(fieldState?.invalid) && (
-                      <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                        <CircleAlert className="stroke-[#de2a1a]" />
-                      </div>
-                    )}
-                  </div>
-                </FormControl>
-                {Boolean(fieldState?.error) && (
-                  <FormErrorMassege>{t(`email_validate.${fieldState.error?.message}`)}</FormErrorMassege>
-                )}
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="password"
@@ -83,7 +59,6 @@ const SigninForm = () => {
                       {...field}
                       disabled={isPending}
                       type={!isViewPassword ? 'password' : 'text'}
-                      placeholder="******"
                       aria-invalid={Boolean(fieldState?.invalid)}
                       autoComplete="off"
                     />
@@ -100,20 +75,39 @@ const SigninForm = () => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>{t('confirmPassword')}</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      type={!isViewPassword ? 'password' : 'text'}
+                      aria-invalid={Boolean(fieldState?.invalid)}
+                      autoComplete="off"
+                    />
+                  </div>
+                </FormControl>
+                {Boolean(fieldState?.error) && (
+                  <FormErrorMassege>{t(`updatePassword_validate.${fieldState.error?.message}`)}</FormErrorMassege>
+                )}
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormError message={error} />
 
-        <Button
-          type="submit"
-          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
-          disabled={isPending}
-        >
-          {t('signinTitle')}
+        <Button type="submit" size={'primery'} disabled={isPending}>
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('updatePasswordBtn')}
         </Button>
       </form>
     </Form>
   );
 };
 
-export default SigninForm;
+export default UpdatePasswordForm;

@@ -4,36 +4,36 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { useState, useTransition } from 'react';
 import FormError from '@/components/shared/FormError';
 import { useRouter } from '@/i18n/routing';
-
-const FormSchema = z.object({
-  pin: z.string().min(6, {
-    message: 'Your one-time password must be 6 characters.',
-  }),
-});
+import { useTranslations } from 'next-intl';
+import { OtpVerifySchema } from '@/schemas/otp.verify.shema';
+import { FormErrorMassege } from '@/components/ui/form-error';
+import { LoaderCircle } from 'lucide-react';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
+  const t = useTranslations('common');
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof OtpVerifySchema>>({
+    resolver: zodResolver(OtpVerifySchema),
     defaultValues: {
       pin: '',
     },
   });
 
-  async function onSubmit(values: z.infer<typeof FormSchema>) {
+  async function onSubmit(values: z.infer<typeof OtpVerifySchema>) {
     try {
       console.log(values);
-      startTransition(() => {});
-      route.push('/signin');
+      startTransition(() => {
+        route.push('/signin/update-password');
+      });
     } catch (error) {
       console.error('Error sending password reset email', error);
       setError(error as string);
@@ -42,15 +42,14 @@ export default function OtpVerifyForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="pin"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
-              <FormLabel>One-Time Password</FormLabel>
               <FormControl>
-                <InputOTP maxLength={6} {...field}>
+                <InputOTP maxLength={6} {...field} inputMode="numeric">
                   <InputOTPGroup className=" justify-center w-full">
                     <InputOTPSlot index={0} />
                     <InputOTPSlot index={1} />
@@ -61,8 +60,12 @@ export default function OtpVerifyForm() {
                   </InputOTPGroup>
                 </InputOTP>
               </FormControl>
-              <FormDescription>Please enter the one-time password sent to your phone.</FormDescription>
-              <FormMessage />
+              {Boolean(fieldState?.error) && (
+                <FormErrorMassege className="text-center">
+                  {t(`otp_validate.${fieldState.error?.message}`)}
+                </FormErrorMassege>
+              )}
+              <FormDescription className="text-center text-sm">{t('otpVerifyText')}</FormDescription>
             </FormItem>
           )}
         />
@@ -74,7 +77,7 @@ export default function OtpVerifyForm() {
           disabled={isPending}
           className="w-full py-[14px] px-6 tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px]"
         >
-          Submit
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('otpVerifyCode')}
         </Button>
       </form>
     </Form>

@@ -1,5 +1,6 @@
 import * as z from 'zod';
+import { emailShema } from '.';
 
 export const ResetPasswordShema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
+  email: emailShema,
 });

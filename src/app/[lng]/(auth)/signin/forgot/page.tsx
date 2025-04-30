@@ -1,6 +1,7 @@
 import ForgotPasswordForm from '@/components/modules/auth/ForgotPasswordForm';
 import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
 import BackRouteButton from '@/components/shared/BackRouteButton';
+import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
@@ -32,16 +33,16 @@ export default async function ForgotPassword({
 
   setRequestLocale(lng as Locale);
   return (
-    <section className="w-full py-8 laptop:py-16">
-      <div className="w-full max-w-lg mx-auto">
+    <section className="w-full">
+      <Container size="xs" className="py-4 laptop:py-8">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
 
-        <AuthAssistantCard headerLabel="Forgot Password">
+        <AuthAssistantCard headerLabel="forgotPageTitle">
           <ForgotPasswordForm />
         </AuthAssistantCard>
-      </div>
+      </Container>
     </section>
   );
 }

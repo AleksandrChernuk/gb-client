@@ -1,10 +1,11 @@
-import ForgotPasswordForm from '@/components/modules/auth/ForgotPasswordForm';
+import UpdatePasswordForm from '@/components/modules/auth/UpdatePasswordForm';
 import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+
 export async function generateMetadata() {
   return {
     robots: {
@@ -23,7 +24,7 @@ export async function generateMetadata() {
   };
 }
 
-export default async function ResetPage({
+export default async function UpdatePasswordPage({
   params,
 }: Readonly<{
   params: Params;
@@ -33,12 +34,12 @@ export default async function ResetPage({
   setRequestLocale(lng as Locale);
   return (
     <section className="w-full">
-      <Container size="xs" className="flex flex-col items-start justify-center py-4">
+      <Container size="xs" className="py-4 laptop:py-8">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-        <AuthAssistantCard headerLabel="Forgot Password">
-          <ForgotPasswordForm />
+        <AuthAssistantCard headerLabel="updatePasswordTitle">
+          <UpdatePasswordForm />
         </AuthAssistantCard>
       </Container>
     </section>

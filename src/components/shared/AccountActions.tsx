@@ -27,8 +27,8 @@ export default function AccountActions() {
           {t('auth_terms_of_the')}{' '}
           <Link href={'/'} prefetch={false} replace aria-label="go home page" className="text-primary">
             {t('auth_public_offer')}
-          </Link>
-          , {t('auth_and')}{' '}
+          </Link>{' '}
+          {t('auth_and')}{' '}
           <Link href={'/'} prefetch={false} className="text-primary">
             {t('auth_returns_policy')}
           </Link>

@@ -1,7 +1,7 @@
 'use client';
 
 import FormError from '@/components/shared/FormError';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useTransition } from 'react';
@@ -10,9 +10,13 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { ResetPasswordShema } from '@/schemas/reset.password.shema';
 import { useRouter } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
+import { LoaderCircle } from 'lucide-react';
+import { FormErrorMassege } from '@/components/ui/form-error';
 
 export default function ForgotPasswordForm() {
   const route = useRouter();
+  const t = useTranslations('common');
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
@@ -28,7 +32,7 @@ export default function ForgotPasswordForm() {
     try {
       console.log(values);
       startTransition(() => {});
-      route.push('/otp-verify');
+      route.push('/signin/otp-verify');
     } catch (error) {
       console.error('Error sending password reset email', error);
       setError(error as string);
@@ -38,37 +42,32 @@ export default function ForgotPasswordForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid gap-4">
-          {/* Email Field */}
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="grid gap-2">
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <FormControl>
-                  <Input
-                    id="email"
-                    placeholder="johndoe@mail.com"
-                    type="email"
-                    autoComplete="email"
-                    {...field}
-                    disabled={isPending}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormError message={error} />
-          <Button
-            type="submit"
-            className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
-            disabled={isPending}
-          >
-            Send Reset Link
-          </Button>
-        </div>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field, fieldState }) => (
+            <FormItem className="grid gap-2">
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl>
+                <Input
+                  id="email"
+                  placeholder="johndoe@mail.com"
+                  type="email"
+                  autoComplete="off"
+                  {...field}
+                  disabled={isPending}
+                />
+              </FormControl>
+              {Boolean(fieldState?.error) && (
+                <FormErrorMassege>{t(`email_validate.${fieldState.error?.message}`)}</FormErrorMassege>
+              )}
+            </FormItem>
+          )}
+        />
+        <FormError message={error} />
+        <Button type="submit" size={'primery'} disabled={isPending}>
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('sendResetCode')}
+        </Button>
       </form>
     </Form>
   );

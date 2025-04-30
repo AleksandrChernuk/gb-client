@@ -10,21 +10,21 @@ import { Input } from '@/components/ui/input';
 
 import { Button } from '@/components/ui/button';
 import { CircleAlert } from 'lucide-react';
-import { createSignupSchema } from '@/schemas/auth-schemas';
 import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
+import { signupSchema } from '@/schemas/auth.schemas';
+import { FormErrorMassege } from '@/components/ui/form-error';
 
 const SignupForm = () => {
   const t = useTranslations('common');
-  const SignupSchema = createSignupSchema(t);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
   const [isViewPassword, setIsViewPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof SignupSchema>>({
-    resolver: zodResolver(SignupSchema),
+  const form = useForm<z.infer<typeof signupSchema>>({
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       userName: '',
       email: '',
@@ -32,7 +32,7 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof SignupSchema>) => {
+  const onSubmit = (values: z.infer<typeof signupSchema>) => {
     console.log(values);
     setError('');
 
@@ -59,19 +59,19 @@ const SignupForm = () => {
                         disabled={isPending}
                         type="text"
                         placeholder={t('placeholderName')}
-                        className={`${
-                          Boolean(fieldState?.error) &&
-                          'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'
-                        }`}
+                        autoComplete="off"
+                        aria-invalid={Boolean(fieldState?.invalid)}
                       />
                       {Boolean(fieldState?.invalid) && (
                         <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                          <CircleAlert className="stroke-red-50 " />
+                          <CircleAlert className="stroke-[#de2a1a]" />
                         </div>
                       )}
                     </div>
                   </FormControl>
-                  <FormMessage className="text-red-50" />
+                  {Boolean(fieldState?.error) && (
+                    <FormErrorMassege>{t(`name_validate.${fieldState.error?.message}`)}</FormErrorMassege>
+                  )}
                 </FormItem>
               );
             }}
@@ -81,9 +81,7 @@ const SignupForm = () => {
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
-                  {t('authEmail')}
-                </FormLabel>
+                <FormLabel>{t('authEmail')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -95,16 +93,18 @@ const SignupForm = () => {
                       type="email"
                       placeholder="user@example.com"
                       autoComplete="off"
-                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
+                      aria-invalid={Boolean(fieldState?.invalid)}
                     />
                     {Boolean(fieldState?.error) && (
                       <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
-                        <CircleAlert className="stroke-red-50" />
+                        <CircleAlert className="stroke-[#de2a1a]" />
                       </div>
                     )}
                   </div>
                 </FormControl>
-                <FormMessage className="text-rred-50" />
+                {Boolean(fieldState?.error) && (
+                  <FormErrorMassege>{t(`email_validate.${fieldState.error?.message}`)}</FormErrorMassege>
+                )}
               </FormItem>
             )}
           />
@@ -113,9 +113,7 @@ const SignupForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
-                  {t('authPassword')}
-                </FormLabel>
+                <FormLabel>{t('authPassword')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -123,7 +121,7 @@ const SignupForm = () => {
                       disabled={isPending}
                       type={!isViewPassword ? 'password' : 'text'}
                       placeholder="******"
-                      className={`${Boolean(fieldState?.error) && 'border-red-50 focus:border-red-50 bg-red-100 placeholder:text-red-50 dark:bg-slate-900'}`}
+                      aria-invalid={Boolean(fieldState?.invalid)}
                     />
                     <ViewPassword
                       error={Boolean(fieldState?.error)}
@@ -132,7 +130,7 @@ const SignupForm = () => {
                     />
                   </div>
                 </FormControl>
-                <FormMessage className="text-red-50" />
+                <FormMessage />
               </FormItem>
             )}
           />
