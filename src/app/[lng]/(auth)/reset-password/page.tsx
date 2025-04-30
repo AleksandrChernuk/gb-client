@@ -32,12 +32,11 @@ export default async function ResetPage({
 
   setRequestLocale(lng as Locale);
   return (
-    <section className="py-8 laptop:py-16 w-full">
-      <Container size="xs">
+    <section className="w-full">
+      <Container size="xs" className="flex flex-col items-start justify-center py-4">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-
         <AuthAssistantCard headerLabel="Forgot Password">
           <ForgotPasswordForm />
         </AuthAssistantCard>

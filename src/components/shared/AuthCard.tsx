@@ -37,27 +37,39 @@ export default async function AuthCard({ children, headerLabel, backButtonLabel,
           <AuthSocial />
         </CardFooter>
 
-        <CardFooter className="flex items-center justify-center p-0 mt-4 truncate gap-x-2 tetx-text-slate-700 dark:text-slate-50 text-nowrap">
-          <p className="text-xs  font-bold tracking-normal leading-[16.8px]">
-            {backButtonLabel === 'authLogin' ? t('authAlreadyHaveAccount') : t('authDontHaveAccount')}
-          </p>
-          <Button asChild variant={'link'}>
-            <Link
-              prefetch={false}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              //@ts-ignore
-              href={backButtonHref}
-              className="underline text-xs font-normal tracking-normal leading-[16.8px]"
-              aria-label="go home page"
-            >
-              {backButtonHref === '/signup' ? t('signinTitle') : t('signupTitle')}
-            </Link>
-          </Button>
-          <Button asChild variant={'link'}>
-            <Link prefetch={false} href="/forgot-password">
-              Forgot password
-            </Link>
-          </Button>
+        <CardFooter className="flex flex-col items-center justify-start p-0 mt-4 gap-4 truncate gap-x-2 tetx-text-slate-700 dark:text-slate-50 text-nowrap">
+          {backButtonLabel !== 'authLogin' && (
+            <div className="flex items-center gap-2">
+              <p className="text-xs  font-bold tracking-normal leading-[16.8px]">Забыли пароль?</p>
+              <Button asChild variant={'link'}>
+                <Link
+                  prefetch={false}
+                  className="underline text-xs font-normal tracking-normal leading-[16.8px]"
+                  href="/forgot-password"
+                  aria-label="go reset password page"
+                >
+                  Сброс пароля
+                </Link>
+              </Button>
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <p className="text-xs  font-bold tracking-normal leading-[16.8px]">
+              {backButtonLabel === 'authLogin' ? t('authAlreadyHaveAccount') : t('authDontHaveAccount')}
+            </p>
+            <Button asChild variant={'link'}>
+              <Link
+                prefetch={false}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                href={backButtonHref}
+                className="underline text-xs font-normal tracking-normal leading-[16.8px]"
+                aria-label="go signup page"
+              >
+                {backButtonHref !== '/signup' ? t('signinTitle') : t('signupTitle')}
+              </Link>
+            </Button>
+          </div>
         </CardFooter>
       </div>
     </Card>

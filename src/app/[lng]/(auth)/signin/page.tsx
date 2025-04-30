@@ -33,12 +33,11 @@ export default async function SigninPage({
 
   setRequestLocale(lng as Locale);
   return (
-    <section className="py-8 laptop:py-16">
-      <Container size="s" className="flex flex-col items-start justify-center">
+    <section className="w-full">
+      <Container size="s" className="flex flex-col items-start justify-center py-4">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-
         <AuthCard headerLabel={'signinTitle'} backButtonHref="/signup" backButtonLabel="authCreateAccount">
           <SigninForm />
         </AuthCard>
