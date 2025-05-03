@@ -1,0 +1,21 @@
+{
+  "for-carriers": {
+    "joinGreenBus_title": "Why join GreenBus?",
+    "joinGreenBus_text": "GreenBus is an innovative online platform for efficient passenger transportation management that enables automation of passenger service and bus ticket sales processes. With our tools, you can significantly improve the efficiency of your operations.",
+    "powerful_tools_title": "4 powerful tools to optimize your sales",
+    "powerful_tools_text": {
+      "route_management_title": "Route management",
+      "route_management_text": "Intuitive management of routes and fares, enabling flexible configuration of schedules, discounts, baggage policies, and additional services.",
+      "agent_network_title": "Expansion of the agent network",
+      "agent_network_text": "Fast launch and sales control through agents: commission and deposit setup, automatic report generation for efficient monitoring.",
+      "sales_optimization_title": "Sales optimization",
+      "sales_optimization_text": "Full sales control: monitor seat availability, ensure timely updates, and access data easily to adjust sales in real time.",
+      "reporting_automation_title": "Reporting automation",
+      "reporting_automation_text": "Fast and accurate report generation at the end of each period, with flexible filtering options and the ability to save history for further analysis."
+    },
+    "choose_us_title": "Why choose us?",
+    "choose_us_text": "We offer the most advanced online system for managing passenger transportation. Our powerful tools enable ticket sales automation, route and fare management, and ensure data security. All these benefits allow you to focus on growing your business, while we take care of the other aspects of your operations.",
+    "security_data_title": "We guarantee the security of your data",
+    "security_data_text": "We use a modern end-to-end data encryption system, ensuring the highest level of security. All your confidential information — from client data to financial reports — will be fully protected. Our servers comply with all security standards, preventing leaks and external threats."
+  }
+}

@@ -3,10 +3,11 @@ import { getTranslations } from 'next-intl/server';
 import { popularRoutersFakeData } from '@/constans/popular-routers.constans';
 import RoutersDropdownList from './components/RoutersDropdownList';
 import RoutersItem from './components/RoutersItem';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function PopularRoutes() {
-  const t = await getTranslations('main');
   const initialRouters = popularRoutersFakeData.slice(0, 3);
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
     <section className="py-6 bg-green-500 dark:bg-slate-800">

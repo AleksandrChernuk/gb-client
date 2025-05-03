@@ -7,7 +7,7 @@ import { countPricing } from './helpers/countPricing';
 export default function ToPay() {
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);

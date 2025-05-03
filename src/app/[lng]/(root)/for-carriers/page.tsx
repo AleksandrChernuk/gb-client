@@ -49,7 +49,7 @@ export default async function ForCarriers({
 
   setRequestLocale(lng as Locale);
 
-  const t_common = await getTranslations('common');
+  const t_common = await getTranslations();
   const t_for_carriers = await getTranslations('for_carriers');
 
   return (

@@ -18,7 +18,7 @@ import { updatePpasswordSchema } from '@/schemas/auth.schema';
 const UpdatePasswordForm = () => {
   const route = useRouter();
 
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

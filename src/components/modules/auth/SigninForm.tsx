@@ -14,9 +14,10 @@ import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { toast } from 'sonner';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const SigninForm = () => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

@@ -1,0 +1,28 @@
+{
+  "main-page": {
+    "herow_title": "Affordable Bus Tickets and Trips Across Ukraine | GreenBus",
+    "buses_title": "Buses to European destinations",
+    "buses_description": "Travel by bus to the most beautiful destinations in Europe! Convenient routes, comfortable conditions, and affordable prices make your journey easy and enjoyable.",
+    "buses_button": "Available countries",
+    "сarriers_title": "Carriers",
+    "сarriers_description": "Explore carriers that provide comfortable and safe journeys. Choose the best ones for your trip based on reviews, amenities, and prices.",
+    "сarriers_button": "All carriers",
+    "popular_title": "Where do you want to go?",
+    "popular_button": "Popular routes",
+    "get_started_title": "Create your perfect route",
+    "get_started_description": "Use the interactive map to view directions and choose the most convenient routes. Plan your journey effortlessly, considering time, distance, and comfort.",
+    "get_started_button": "Available routes",
+    "questions_title": "Questions and Answers",
+    "questions_description": "Find answers to the most common questions about our services. If you have additional questions, feel free to contact us.",
+    "questions_button": "Support Center",
+    "learn_more": "Learn More",
+    "payment_title": "Without cash or queues",
+    "payment_description": "Buy tickets online anytime directly on the website. Forget about queues and cash — travel comfortably and conveniently.",
+    "destinations_title": "50 000 destinations",
+    "destinations_description": "Choose your destination from 50,000 options, whether you're traveling for business or leisure.",
+    "secure_title": "Secure payment",
+    "secure_description": "PCI DSS security standards for reliable protection of payment data during processing and storage.",
+    "refunds_title": "Ticket refunds",
+    "refunds_description": "Fast refunds in your personal account, with no unnecessary delays."
+  }
+}

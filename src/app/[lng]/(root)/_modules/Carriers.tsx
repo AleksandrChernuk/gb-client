@@ -2,9 +2,10 @@ import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import { CarriersList } from './components/CarriersList';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function Carriers() {
-  const t = await getTranslations('main');
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
     <section className="pt-6 pb-12">

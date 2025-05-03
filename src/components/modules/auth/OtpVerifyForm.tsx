@@ -16,7 +16,7 @@ import { otpVerifySchema } from '@/schemas/auth.schema';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

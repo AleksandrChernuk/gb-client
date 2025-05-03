@@ -1,3 +1,4 @@
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export default async function FooterLinksList({ navLinks, className }: Props) {
-  const t = await getTranslations('common');
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
     <ul className={cn('flex flex-col gap-1 tablet:gap-2', className)}>

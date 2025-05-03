@@ -5,10 +5,11 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import RoutersItem from './RoutersItem';
 import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const RoutersDropdownList = () => {
   const [open, setOpen] = useState(false);
-  const t = useTranslations('main');
+  const t = useTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   const additionalRouters = popularRoutersFakeData.slice(3);
 

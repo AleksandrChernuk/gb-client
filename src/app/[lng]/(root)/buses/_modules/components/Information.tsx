@@ -12,6 +12,7 @@ import { ArrowRight } from 'lucide-react';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import useTicketsSearch from '../hooks/useTicketsSearch';
 import { MobileFilter } from '../Filter';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export const Information = () => {
   const date = useSearchStore(useShallow((state) => state.date));
@@ -21,7 +22,7 @@ export const Information = () => {
   const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets);
 
   const { isFetching } = useTicketsSearch();
-  const t = useTranslations('search');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const currentLanguage = useLocale();
   const { locale } = useDateLocale();
 

@@ -1,0 +1,22 @@
+{
+  "about-page": {
+    "route_to_europe_title": "GreenBus — your route to Europe.",
+    "route_to_europe_text": "GreenBus is a modern bus ticket sales service that connects Ukraine with Europe. We make international travel accessible, convenient, and safe for everyone who is eager to explore new horizons.",
+    "professional_solutions_title": "Professional solutions for business",
+    "professional_solutions_text": "We offer professional solutions for companies looking to automate and simplify the ticket sales process. GreenBus is a platform that connects carriers and passengers, providing an efficient and transparent online booking system.",
+    "about_us_title": "About us",
+    "about_us_text": "In 2019, we started selling bus tickets through our platforms, and in 2020, we brought together the leading market players — solution providers for bus stations and carriers — under the GreenBus brand to support and strengthen them. Through joint efforts, we developed a unique set of online services for ticket sales, which has become the new industry standard in the automation of passenger transportation.",
+    "main_product_title": "The main product of the company",
+    "main_product_text": "Our main product is the innovative GreenBus dispatching and ticket sales system. It is a powerful and versatile platform for ticket sales and efficient management of passenger transportation, meeting the needs of all market participants. Thanks to GreenBus, the ticket purchasing process becomes even simpler, faster, and more accessible for every passenger, enhancing customer satisfaction and loyalty.",
+    "individual_approach_title": "Individual",
+    "individual_approach_text": "At GreenBus, we believe that every business has its unique needs and requirements. That’s why our experts work individually with each client to create an optimal service package tailored to your goals and needs. We offer a wide range of solutions, from simple online booking to comprehensive automation systems, to ensure maximum efficiency in your transportation operations.",
+    "statistics": {
+      "50_000": "> 50,000",
+      "50_000_text": "Bus tickets are sold, exceeding 50,000.",
+      "2_000": "> 2,000",
+      "2_000_text": "Routes operated by GreenBus across various destinations.",
+      "5_million": "> 5 million",
+      "5_million_text": "Passengers travel with GreenBus every year."
+    }
+  }
+}

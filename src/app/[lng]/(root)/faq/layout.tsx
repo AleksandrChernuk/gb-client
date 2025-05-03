@@ -16,7 +16,7 @@ export default async function FaqLayout({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  const t = await getTranslations('questions_answers');
+  const t = await getTranslations();
   return (
     <>
       <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-slate-50 dark:bg-slate-900 ">

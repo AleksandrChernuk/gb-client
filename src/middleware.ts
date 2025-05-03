@@ -15,7 +15,12 @@ export default function middleware(req: NextRequest) {
       },
     });
   }
-  return intlMiddleware(req);
+
+  const response = intlMiddleware(req);
+
+  response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate, stale-while-revalidate=60');
+
+  return response;
 }
 
 export const config = {

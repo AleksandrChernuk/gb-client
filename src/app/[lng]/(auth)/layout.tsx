@@ -3,6 +3,7 @@ import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import { setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Params } from '@/types/common.types';
+
 export async function generateMetadata() {
   return {
     robots: {
@@ -32,7 +33,7 @@ export default async function AuthLayout({
 
   setRequestLocale(lng as Locale);
   return (
-    <div className="flex flex-col h-svh">
+    <div className="flex flex-col h-dvh">
       <AuthHeader />
 
       <main role="main" className="flex items-center justify-center grow bg-slate-50 dark:bg-slate-900">

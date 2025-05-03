@@ -1,0 +1,17 @@
+{
+  "checkout-page": {
+    "passengers": "Пасажири",
+    "choose_place": "Обрати місце",
+    "seat_reservation": "Бронювання місця",
+    "contacts": "Контакти",
+    "payment": "Оплата",
+    "your_booking": "Ваше бронювання",
+    "pay": "Оплатити",
+    "book": "Бронювати",
+    "payment_upon_boarding": "Оплата під час посадки",
+    "bank_card": "Банківська картка",
+    "booking": "Бронювання",
+    "free_seating": "Вільна посадка",
+    "seat_guaranteed": "Місце гарантовано"
+  }
+}

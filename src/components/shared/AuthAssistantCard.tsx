@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { getTranslations } from 'next-intl/server';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 interface Props {
   children: ReactNode;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export default async function AuthAssistantCard({ children, headerLabel }: Props) {
-  const t = await getTranslations('common');
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
     <Card>

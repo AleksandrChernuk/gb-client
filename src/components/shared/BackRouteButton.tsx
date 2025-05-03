@@ -4,9 +4,10 @@ import { Button } from '../ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function BackRouteButton() {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const route = useRouter();
 

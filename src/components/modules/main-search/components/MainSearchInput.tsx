@@ -14,7 +14,7 @@ interface MainSearchInputProps extends React.ComponentProps<'input'> {
   handleBlur?: () => void;
   handleToggleOpen?: () => void;
   setErrors?: (name: string, error: string | null) => void;
-  t?: (key: string) => string;
+  errorMassage?: string;
 }
 
 export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps>(
@@ -35,12 +35,11 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
       handleBlur,
       handleToggleOpen,
       setErrors,
-      t,
+      errorMassage,
       ...props
     },
     ref,
   ) => {
-    const translatedError = t?.(error || '') || error;
     return (
       <div className={cn('relative', classNames)} role="input-wrapp">
         <div className="absolute transform -translate-y-1/2 pointer-events-none left-1 tablet:left-2 laptop:left-5 top-1/2">
@@ -98,12 +97,12 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
           </div>
         )}
 
-        {translatedError && (
+        {errorMassage && (
           <div
             className="absolute top-0 right-0 z-50 p-1 text-xs text-white transform rounded-tr-lg rounded-bl-lg cursor-pointer w-fit h-fit bg-[#de2a1a]"
             onClick={(e) => e.stopPropagation()}
           >
-            {translatedError}
+            {errorMassage}
           </div>
         )}
       </div>

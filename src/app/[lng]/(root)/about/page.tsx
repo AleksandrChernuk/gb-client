@@ -19,7 +19,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
-  const t = await getTranslations({ locale: lng, namespace: 'metadata' });
+  const t = await getTranslations({ locale: lng });
 
   return {
     title: t('about.title'),
@@ -49,8 +49,8 @@ export default async function About({
 
   setRequestLocale(lng as Locale);
 
-  const t_common = await getTranslations('common');
-  const t_about = await getTranslations('about');
+  const t_common = await getTranslations();
+  const t_about = await getTranslations();
 
   return (
     <>

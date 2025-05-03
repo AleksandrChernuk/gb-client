@@ -1,10 +1,11 @@
 import { AccountActionsList } from '@/constans/account-actions-list.constans';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function AccountActions() {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   return (
     <div>
       <h5 className="mb-4 text-base font-bold leading-6 tracking-normal text-[#6f8b90] dark:text-[#e6e6e6]">

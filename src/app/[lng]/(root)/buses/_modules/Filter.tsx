@@ -22,6 +22,7 @@ import { useShallow } from 'zustand/react/shallow';
 import useTicketsSearch from './hooks/useTicketsSearch';
 import FilterSortByList from './components/FilterRadioGroup';
 import FilterCheckBoxList from './components/FilterCheckBoxList';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type TMobileFilterHeader = {
   title: string;
@@ -52,7 +53,7 @@ export const MobileFilter = () => {
   const { isFetching } = useTicketsSearch();
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
 
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <Sheet>

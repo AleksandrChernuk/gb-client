@@ -9,14 +9,15 @@ import PopularRoutes from './_modules/PopularRoutes';
 import GetStarted from './_modules/GetStarted';
 import Questions from './_modules/Questions';
 import Carriers from './_modules/Carriers';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   params: Params;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
-  const t = await getTranslations({ locale: lng, namespace: 'metadata' });
+  const { lng } = (await params) as { lng: Locale };
+  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
 
   return {
     title: t('main.title'),

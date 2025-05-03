@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 
 export default function Legal() {
   const { control } = useFormContext();
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <div className="space-y-4">

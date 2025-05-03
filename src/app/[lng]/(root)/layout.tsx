@@ -16,7 +16,7 @@ export default async function RootLayout({
   setRequestLocale(lng as Locale);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-svh">
       <MainHeader />
       {children}
     </div>

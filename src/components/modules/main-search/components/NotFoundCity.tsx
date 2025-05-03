@@ -1,10 +1,11 @@
 'use client';
 
 import { IconSearchX } from '@/components/icons/IconSearchX';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
 
 export const NotFoundCity = () => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
     <div className="flex flex-col items-center justify-center gap-1 tablet:min-w-[397px] py-4">

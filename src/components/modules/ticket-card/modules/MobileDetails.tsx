@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function MobileDetails({ children, selectButton, onClickTrigger, price, passengerCount }: Props) {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <Sheet>

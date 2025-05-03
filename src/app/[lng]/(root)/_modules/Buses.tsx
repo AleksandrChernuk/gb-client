@@ -1,14 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
 import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function Buses() {
-  const t = await getTranslations('main');
-  const t_img_alts = await getTranslations('img_alts');
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
+  const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
 
   return (
     <section className="pb-8 tablet:pb-16">

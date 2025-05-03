@@ -13,7 +13,7 @@ type Props = {
 
 export default function DetailsStops({ id }: Props) {
   const [open, setOpen] = useState<boolean>(false);
-  const t = useTranslations('common');
+  const t = useTranslations();
   const currentLocale = useLocale();
 
   const ticketDetails = useCurrentTicketStore((state) => state.tickets[id]);

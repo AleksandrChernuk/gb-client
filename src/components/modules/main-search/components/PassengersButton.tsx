@@ -1,5 +1,6 @@
 'use client';
 
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useSearchStore } from '@/store/useSearch';
 import { Minus, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export const PassengersButton = ({ value, type }: Props) => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const decrementPassenger = useSearchStore((state) => state.decrementPassenger);
   const incrementPassenger = useSearchStore((state) => state.incrementPassenger);

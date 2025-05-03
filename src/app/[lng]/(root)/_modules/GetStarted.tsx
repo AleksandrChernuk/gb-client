@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import pointOnCurt from '@/assets/images/point-on-curt.avif';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function GetStarted() {
-  const t = await getTranslations('main');
-  const t_img_alts = await getTranslations('img_alts');
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
+  const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
 
   return (
     <section className="py-8 tablet:py-16">

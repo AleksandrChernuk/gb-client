@@ -1,9 +1,10 @@
 import { Container } from '@/components/shared/Container';
 import { benefits } from '@/constans/benefits.constans';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Benefits() {
-  const t = await getTranslations('main');
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
     <section className="py-8 tablet:py-16 ">

@@ -8,13 +8,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Link } from '@/i18n/routing';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Input } from '../ui/input';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   variant: 'mobile' | 'desktop' | 'footer';
 };
 
 export const Support = ({ variant }: Props) => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   switch (variant) {
     case 'desktop':

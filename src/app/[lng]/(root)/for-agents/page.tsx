@@ -45,7 +45,7 @@ export default async function ForAgents({
   params: Params;
 }>) {
   const { lng } = await params;
-  const t_common = await getTranslations('common');
+  const t_common = await getTranslations();
   const t_for_agents = await getTranslations('for_agents');
 
   setRequestLocale(lng as Locale);

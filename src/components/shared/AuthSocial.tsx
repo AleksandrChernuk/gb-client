@@ -2,10 +2,11 @@
 
 import { IconGoogle } from '@/components/icons/IconGoogle';
 import { Button } from '@/components/ui/button';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
 
 const AuthSocial = () => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   return (
     <form className="flex items-center w-full">
       <div className="flex items-center w-full gap-x-2">

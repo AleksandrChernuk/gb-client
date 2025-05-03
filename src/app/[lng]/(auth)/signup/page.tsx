@@ -32,6 +32,7 @@ export default async function SignupPage({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
+
   return (
     <section className="w-full">
       <Container size="s" className="py-4 laptop:py-8">

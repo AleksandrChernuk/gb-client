@@ -2,6 +2,7 @@
 
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { sortBuyItems } from '@/constans/sortbuylist.constans';
 import { useFilterTicketsStore } from '@/store/useFilterTickets';
 import { TsortBy } from '@/types/sortfilter.types';
@@ -10,7 +11,7 @@ import { useTranslations } from 'next-intl';
 export default function FilterSortByList() {
   const setSortByTickets = useFilterTicketsStore((state) => state.setSortByTickets);
   const sortBy = useFilterTicketsStore((state) => state.sortBy);
-  const t = useTranslations('search');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <RadioGroup

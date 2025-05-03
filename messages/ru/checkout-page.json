@@ -1,0 +1,17 @@
+{
+  "checkout-page": {
+    "passengers": "Пассажиры",
+    "choose_place": "Выбрать место",
+    "seat_reservation": "Бронирование места",
+    "contacts": "Контакты",
+    "payment": "Оплата",
+    "your_booking": "Ваша бронь",
+    "pay": "Оплатить",
+    "book": "Бронировать",
+    "payment_upon_boarding": "Оплата при посадке",
+    "bank_card": "Банковская карта",
+    "booking": "Бронирование",
+    "free_seating": "Свободная посадка",
+    "seat_guaranteed": "Место гарантировано"
+  }
+}

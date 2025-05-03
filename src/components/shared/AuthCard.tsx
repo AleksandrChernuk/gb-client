@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import AccountActions from './AccountActions';
 import AuthSocial from './AuthSocial';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ export default async function AuthCard({
   forgotButtonHref,
   forgotButtonLabel,
 }: Props) {
-  const t = await getTranslations('common');
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
     <Card className="flex flex-col w-full p-4 bg-white shadow-xs laptop:gap-16 tablet:flex-row tablet:justify-between tablet:p-6 laptop:py-10 laptop:px-8 dark:bg-slate-800">

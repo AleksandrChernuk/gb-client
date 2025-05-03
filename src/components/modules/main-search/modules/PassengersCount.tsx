@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { PassengersButton } from '../components/PassengersButton';
 import { ChevronLeft } from 'lucide-react';
 import { MainSearchInput } from '../components/MainSearchInput';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -29,7 +30,7 @@ export default function PassengersCount({ variant }: Props) {
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
 
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const passCount = adult + children;
   const value =

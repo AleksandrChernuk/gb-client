@@ -1,0 +1,17 @@
+{
+  "checkout-page": {
+    "passengers": "Passengers",
+    "choose_place": "Choose a place",
+    "seat_reservation": "Seat reservation",
+    "contacts": "Contacts",
+    "payment": "Payment",
+    "your_booking": "Your booking",
+    "pay": "Pay now",
+    "book": "Book now",
+    "payment_upon_boarding": "Payment upon boarding",
+    "bank_card": "Bank card",
+    "booking": "Booking",
+    "free_seating": "Вільна посадка",
+    "seat_guaranteed": "Seat guaranteed"
+  }
+}

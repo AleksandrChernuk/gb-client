@@ -1,0 +1,14 @@
+export const MESSAGE_FILES = {
+  ABOUT_PAGE: 'about-page',
+  BUSES_PAGE: 'buses-page',
+  CHECKOUT_PAGE: 'checkout-page',
+  COMMON: 'common',
+  FORAGENTS_PAGE: 'for-agents',
+  FORCARRIERS_PAGE: 'for-carriers',
+  FORM: 'forms',
+  IMG_ALTS: 'img-alts',
+  MAIN_PAGE: 'main-page',
+  METADATA: 'metadata',
+  OFERTA_PAGE: 'oferta-page',
+  QUESTIONS_PAGE: 'questions-page',
+} as const;

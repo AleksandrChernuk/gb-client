@@ -2,9 +2,10 @@ import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export const ErrorTravel = () => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <CustomCard className="flex flex-col items-center self-center gap-8 p-5 mx-auto text-center shadow-xs w-fit">

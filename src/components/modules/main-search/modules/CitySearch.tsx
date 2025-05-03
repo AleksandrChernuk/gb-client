@@ -24,6 +24,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { ClearInputButton } from '../components/ClearInputButton';
 import { MainSearchInput } from '../components/MainSearchInput';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   name: 'from' | 'to';
@@ -31,7 +32,7 @@ type Props = {
 };
 
 export default function CitySearch({ name, variant }: Props) {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   const city = useSearchStore((state) => state[name]);
   const swap = useSearchStore((state) => state.swap);
 

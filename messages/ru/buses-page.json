@@ -1,0 +1,26 @@
+{
+  "buses-page": {
+    "sort_buy_price": "Цене",
+    "sort_buy_departure_time": "Временем отправления",
+    "sort_buy_arrival_time": "Временем прибытия",
+    "sort_buy_time_on_road": "Короткий маршрут",
+    "resul_count": "результатов",
+    "collapse_route": "Свернуть весь маршрут",
+    "show_route": "Показать весь маршрут",
+    "amenities": "Удобства",
+    "return_policy": "Политика возврата",
+    "luggage": "Багаж",
+    "organized_transfer": "Организованная пересадка",
+    "places": "Мест",
+    "selectButton": "Обрати",
+    "details": "Детальнее",
+    "route": "Маршрут",
+    "local_time": "Время отправления/прибытия указано по местному времени.",
+    "travel_time": "Время в пути",
+    "collapse_details": "Свернуть подробности",
+    "no_travel_dates": "В эту дату поездок нет",
+    "something_happend": "Что-то произошло",
+    "bus": "Автобус",
+    "discounts": "Скидки"
+  }
+}

@@ -4,6 +4,7 @@ import FooterLinksList from '@/components/shared/FooterLinksList';
 import Logo from '@/components/shared/Logo';
 import { Support } from '@/components/shared/Support';
 import { footerNavLinks } from '@/constans/footer-nav-links.constans';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';
@@ -13,7 +14,8 @@ type TMainFooter = {
 };
 
 export default async function MainFooter({ className }: TMainFooter) {
-  const t = await getTranslations('common');
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
+
   return (
     <footer aria-label="Footer" className={cn('w-full py-6 laptop:py-8', className)}>
       <Container size="m">
@@ -56,7 +58,7 @@ export default async function MainFooter({ className }: TMainFooter) {
                 </ul>
               </li>
               <li className="my-8 laptop:hidden tablet:my-0 tablet:mt-auto">
-                <FooterLinksList navLinks={footerNavLinks['social']} className="flex flex-row gap-4 " />
+                <FooterLinksList navLinks={footerNavLinks['social']} className="flex flex-row gap-4" />
               </li>
             </ul>
           </li>

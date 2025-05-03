@@ -16,7 +16,7 @@ import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 
 const SignupForm = () => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

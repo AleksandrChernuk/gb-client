@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MainSearchInput } from '../components/MainSearchInput';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -36,7 +37,7 @@ export default function DatePicker({ variant }: Props) {
   const incrementMonth = useSearchStore((state) => state.incrementMonth);
   const decrementMonth = useSearchStore((state) => state.decrementMonth);
   const setMonth = useSearchStore((state) => state.setMonth);
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   switch (variant) {
     case 'mobile':

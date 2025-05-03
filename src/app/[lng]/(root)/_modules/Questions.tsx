@@ -1,12 +1,13 @@
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { faqConstans } from '@/constans/faq.constans';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Questions() {
-  const t = await getTranslations('questions');
-  const t_main = await getTranslations('main');
+  const t_main = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
+  const t = await getTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   return (
     <section className="py-4 bg-green-500 tablet:py-6 dark:bg-slate-800">
