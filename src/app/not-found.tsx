@@ -1,11 +1,16 @@
 'use client';
 
-export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+import { Button } from '@/components/ui/button';
+import Error from 'next/error';
+
+export default function GlobalNotFound() {
   return (
-    <html>
+    <html lang="en">
       <body>
-        <h2>Something went wrong!`${error.message}`</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <Error statusCode={404}>
+          <Button>Gohome</Button>
+        </Error>
+        ;
       </body>
     </html>
   );
