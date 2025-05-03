@@ -18,7 +18,6 @@ export default async function Herow() {
         placeholder="blur"
         width={740}
         height={233}
-        sizes="100vw"
         className="tablet:hidden"
         style={{
           width: '100%',
@@ -27,6 +26,7 @@ export default async function Herow() {
         priority
         loading="eager"
         decoding="sync"
+        quality={80}
       />
       <Image
         src={desc}
@@ -48,7 +48,6 @@ export default async function Herow() {
       <Container size="l" className="-mt-10">
         <div>
           <h1 className="sr-only">{t_main('herow_title')}</h1>
-
           <MainSearch />
         </div>
       </Container>
