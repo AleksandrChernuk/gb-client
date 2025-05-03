@@ -1,12 +1,11 @@
 'use client';
 
-import Error from 'next/error';
-
-export default function GlobalNotFound() {
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
-    <html lang="en">
+    <html>
       <body>
-        <Error statusCode={404} />;
+        <h2>Something went wrong!`${error.message}`</h2>
+        <button onClick={() => reset()}>Try again</button>
       </body>
     </html>
   );
