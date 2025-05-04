@@ -24,12 +24,5 @@ export default createMiddleware(routing);
 // }
 
 export const config = {
-  matcher: [
-    // Редирект с корня на дефолтную локаль
-    '/',
-    // Устанавливаем куку при заходе с локального префикса
-    '/(en|ru|uk)/:path*',
-    // Автодополнение недостающего префикса
-    '/((?!_next|_vercel|.*\\..*).*)',
-  ],
+  matcher: ['/', '/(en|ru|uk)/:path*', '/((?!_next|_vercel|.*\\..*).*)'],
 };

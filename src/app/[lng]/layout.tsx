@@ -2,7 +2,7 @@ export const dynamic = 'force-static';
 export const revalidate = 60;
 
 import '@/styles/globals.css';
-import { NextIntlClientProvider } from 'next-intl';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
@@ -34,7 +34,7 @@ export default async function MainLayout({
 }>) {
   const { lng } = await params;
 
-  if (!routing.locales.includes(lng as Locale)) {
+  if (!hasLocale(routing.locales, lng as Locale)) {
     return notFound();
   }
 
