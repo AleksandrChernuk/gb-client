@@ -9,15 +9,18 @@ import { Input } from '@/components/ui/input';
 
 import { Button } from '@/components/ui/button';
 import { CircleAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { signup } from '@/services/authService';
+import { useRouter } from '@/i18n/routing';
 
 const SignupForm = () => {
   const t = useTranslations();
-
+  const locale = useLocale();
+  const router = useRouter();
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
   const [isViewPassword, setIsViewPassword] = useState(false);
@@ -31,11 +34,21 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof signupSchema>) => {
-    console.log(values);
-    setError('');
+  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+    try {
+      const result = await signup(data, locale);
 
-    startTransition(() => {});
+      startTransition(() => {
+        router.push(`/auth/otp-verify/${result.email}`);
+        form.reset();
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(`Signup failed: ${error.message}`);
+      } else {
+        setError(`Signup failed: ${String(error)}`);
+      }
+    }
   };
 
   return (

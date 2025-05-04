@@ -36,7 +36,6 @@ export default async function Herow() {
         decoding="sync"
         quality={80}
       />
-      {/* <HerowImages /> */}
 
       <Container size="l" className="-mt-10">
         <div>

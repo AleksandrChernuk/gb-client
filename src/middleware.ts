@@ -1,27 +1,36 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-// import { NextResponse, NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export default createMiddleware(routing);
 
-// export default function middleware(req: NextRequest) {
-//   if (req.method === 'OPTIONS') {
-//     return new NextResponse(null, {
-//       status: 204,
-//       headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-//         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-//       },
-//     });
-//   }
+const intlMiddleware = createMiddleware(routing);
 
-//   const response = intlMiddleware(req);
+const PROTECTED_PATHS = ['/profile', '/dashboard'];
 
-//   response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate, stale-while-revalidate=60');
+export function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
 
-//   return response;
-// }
+  const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
+
+  if (isProtected) {
+    const accessToken = req.cookies.get('accessToken')?.value;
+    const refreshToken = req.cookies.get('refreshToken')?.value;
+
+    if (!accessToken && !refreshToken) {
+      const locale = pathname.split('/')[1] || routing.defaultLocale;
+      return redirectToSignin(req, locale);
+    }
+  }
+
+  return intlMiddleware(req);
+}
+
+function redirectToSignin(req: NextRequest, locale: string) {
+  const url = req.nextUrl.clone();
+  url.pathname = `/${locale}/auth/signin`;
+  return NextResponse.redirect(url);
+}
 
 export const config = {
   matcher: ['/', '/(en|ru|uk)/:path*', '/((?!_next|_vercel|.*\\..*).*)'],

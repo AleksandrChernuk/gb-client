@@ -13,9 +13,14 @@ import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { LoaderCircle } from 'lucide-react';
 import { otpVerifySchema } from '@/schemas/auth.schema';
+import { useUserStore } from '@/store/useStore';
+import { verifyEmail } from '@/services/authService';
+import { useParams } from 'next/navigation';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
+  const params = useParams<{ tag: string; email: string }>();
+  const email = decodeURIComponent(params?.email || '');
   const t = useTranslations();
 
   const [error, setError] = useState<string | undefined>('');
@@ -28,17 +33,28 @@ export default function OtpVerifyForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof otpVerifySchema>) {
+  const onSubmit = async (value: z.infer<typeof otpVerifySchema>) => {
     try {
-      console.log(values);
+      const result = await verifyEmail({ email, code: value.pin });
+
+      const { message, currentUser } = result;
+
+      if (message !== 'Successfully signin' || !currentUser) {
+        throw new Error('Invalid server response');
+      }
+
+      useUserStore.getState().setUserStore(currentUser);
       startTransition(() => {
-        route.push('/signin/update-password');
+        route.push(`/profile`);
       });
     } catch (error) {
-      console.error('Error sending password reset email', error);
-      setError(error as string);
+      if (error instanceof Error) {
+        setError(`Verification failed: ${error.message}`);
+      } else {
+        setError(`Verification failed: ${String(error)}`);
+      }
     }
-  }
+  };
 
   return (
     <Form {...form}>

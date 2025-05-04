@@ -8,16 +8,20 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CircleAlert, LoaderCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { toast } from 'sonner';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { signin } from '@/services/authService';
+import { useRouter } from '@/i18n/routing';
+import { useUserStore } from '@/store/useStore';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
+  const locale = useLocale();
+  const router = useRouter();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
@@ -31,28 +35,37 @@ const SigninForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof signinSchema>) {
+  const onSubmit = async (values: z.infer<typeof signinSchema>) => {
     try {
-      startTransition(() => {
-        toast('Успешно', {
-          description: JSON.stringify(values),
-          action: {
-            label: 'Закрыть',
-            onClick: () => console.log('Закрыть'),
-          },
+      const result = await signin(values, locale);
+
+      const { message, currentUser } = result;
+
+      if (message === '2FA code sent') {
+        startTransition(() => {
+          router.push(`/auth/otp-verify/${result.email}`);
+          form.reset();
         });
-      });
+        return;
+      }
+
+      if (message === 'Successfully signin') {
+        useUserStore.getState().setUserStore(currentUser);
+
+        startTransition(() => {
+          router.push('/profile');
+          form.reset();
+        });
+      }
     } catch (error) {
-      toast('Error sending password reset email', {
-        description: JSON.stringify(error),
-        action: {
-          label: 'Закрыть',
-          onClick: () => console.log('Закрыть'),
-        },
-      });
-      setError(error as string);
+      if (error instanceof Error) {
+        setError(`Signin failed: ${error.message}`);
+      } else {
+        setError(`Signin failed: ${String(error)}`);
+      }
     }
-  }
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
