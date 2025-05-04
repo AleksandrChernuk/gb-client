@@ -24,5 +24,12 @@ export default createMiddleware(routing);
 // }
 
 export const config = {
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
+  matcher: [
+    // Редирект с корня на дефолтную локаль
+    '/',
+    // Устанавливаем куку при заходе с локального префикса
+    '/(en|ru|uk)/:path*',
+    // Автодополнение недостающего префикса
+    '/((?!_next|_vercel|.*\\..*).*)',
+  ],
 };
