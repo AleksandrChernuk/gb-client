@@ -9,14 +9,6 @@ export const routing = defineRouting({
     secure: true,
     sameSite: 'lax',
   },
-  localePrefix: {
-    mode: 'always',
-    prefixes: {
-      en: '/en',
-      ru: '/ru',
-      uk: '/uk',
-    },
-  },
 });
 
 export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
