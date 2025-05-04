@@ -1,14 +1,14 @@
 import MainSearch from '@/components/modules/main-search';
 import { Container } from '@/components/shared/Container';
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
-import desc from '@/assets/images/desc_full_2x.avif';
-import mob from '@/assets/images/mob_full_2x.avif';
+// import Image from 'next/image';
+// import desc from '@/assets/images/desc_full_2x.avif';
+// import mob from '@/assets/images/mob_full_2x.avif';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import HerowImages from './HerowImages';
 
 export default async function Herow() {
-  const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
+  // const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
   const t_main = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
