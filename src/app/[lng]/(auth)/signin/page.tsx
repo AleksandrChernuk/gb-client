@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import SigninForm from '@/components/modules/auth/SigninForm';
 import AccountActions from '@/components/shared/AccountActions';
 import AuthCard from '@/components/shared/AuthCard';

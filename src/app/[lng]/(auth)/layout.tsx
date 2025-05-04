@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import AuthHeader from '@/components/modules/header/AuthHeader';
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import { setRequestLocale } from 'next-intl/server';

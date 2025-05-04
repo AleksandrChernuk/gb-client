@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import ForgotPasswordForm from '@/components/modules/auth/ForgotPasswordForm';
 import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
 import BackRouteButton from '@/components/shared/BackRouteButton';

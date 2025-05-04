@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 import MainFooter from '@/components/modules/footer/MainFooter';
 import { Params } from '@/types/common.types';
