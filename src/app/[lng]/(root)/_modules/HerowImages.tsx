@@ -33,7 +33,7 @@ export default function HerowImages() {
     <picture>
       <source media="(min-width: 768px)" srcSet={desktop} />
       <source media="(min-width: 768px)" srcSet={mobile} />
-      <img {...rest} style={{ width: '100%', height: 'auto' }} />
+      <img {...rest} className="w-dvw h-auto" />
     </picture>
   );
 }
