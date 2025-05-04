@@ -1,5 +1,6 @@
 'use client';
 
+import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { Link, useRouter } from '@/i18n/routing';
 import { logout } from '@/services/authService';
@@ -12,7 +13,11 @@ const UserProfile = () => {
   const currentUser = useUserStore((state) => state.currentUser);
 
   if (!currentUser) {
-    return <div>No user data found. Please login again.</div>;
+    return (
+      <Container size="m" className="w-full py-10">
+        No user data found. Please login again.
+      </Container>
+    );
   }
 
   const handleLogout = async () => {
@@ -27,27 +32,39 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-2">
-      <p>userID: {currentUser.id}</p>
-      <p>userName: {currentUser.userName}</p>
-      <p>Email: {currentUser.email}</p>
-      <div className="w-8 h-8 flex items-center justify-center rounded-full overflow-hidden">
-        {currentUser.picture ? (
-          <Image src={currentUser.picture} alt="avatar" width={32} height={32} />
-        ) : (
-          <span className="w-8 h-8 flex items-center justify-center text-md text-white bg-gray-500">
-            {currentUser.userName?.split('')[0].toUpperCase()}
-          </span>
-        )}
-      </div>
-      <Link href={'/'} className="max-w-50 mt-5 border-2 bg-gray-600 rounded-md py-2 px-8 text-center">
-        Home Page
-      </Link>
+    <Container size="m" className="w-full">
+      <div className="py-10 space-y-8">
+        <ul className="flex flex-col tablet:flex-row items-center justify-between">
+          <li>
+            <p>userID: {currentUser.id}</p>
+          </li>
+          <li>
+            <p>userName: {currentUser.userName}</p>
+          </li>
+          <li>
+            <p>Email: {currentUser.email}</p>
+          </li>
+        </ul>
 
-      <Button onClick={() => handleLogout()} className="max-w-50 mt-5">
-        Logout
-      </Button>
-    </div>
+        <div className="w-8 h-8 flex items-center justify-center rounded-full overflow-hidden">
+          {currentUser.picture ? (
+            <Image src={currentUser.picture} alt="avatar" width={32} height={32} />
+          ) : (
+            <span className="w-8 h-8 flex items-center justify-center text-md text-white bg-gray-500">
+              {currentUser.userName?.split('')[0].toUpperCase()}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-4">
+          <Button asChild size={'primery'} variant={'default'}>
+            <Link href={'/'}>Home Page</Link>
+          </Button>
+          <Button onClick={() => handleLogout()} size={'primery'} variant={'default'}>
+            Logout
+          </Button>
+        </div>
+      </div>
+    </Container>
   );
 };
 

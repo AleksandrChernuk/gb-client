@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Container } from '@/components/shared/Container';
+import { Loader } from 'lucide-react';
 
 export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
@@ -33,7 +35,18 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
     checkAndRefresh();
   }, [router]);
 
-  if (!ready) return <div>Loading...</div>;
+  if (!ready)
+    return (
+      <div className="flex flex-col h-svh items-center justify-center">
+        <main>
+          <section className="w-full">
+            <Container size="xs" className="w-full">
+              <Loader className="stroke-green-300 animate-spin" size={64} />
+            </Container>
+          </section>
+        </main>
+      </div>
+    );
 
   return <>{children}</>;
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +23,7 @@ const SignupForm = () => {
   const locale = useLocale();
   const router = useRouter();
   const [error, setError] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -35,15 +35,14 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+  const onSubmit = async (value: z.infer<typeof signupSchema>) => {
     try {
-      const result = await signup(data, locale);
-
-      startTransition(() => {
-        router.push(`/auth/otp-verify/${result.email}`);
-        form.reset();
-      });
+      setIsPending(true);
+      const result = await signup(value, locale);
+      router.push(`/signin/verify-email/${result.email}`);
+      form.reset();
     } catch (error) {
+      setIsPending(false);
       if (error instanceof Error) {
         setError(`Signup failed: ${error.message}`);
       } else {

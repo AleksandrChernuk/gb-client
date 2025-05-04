@@ -24,7 +24,7 @@ export async function generateMetadata() {
   };
 }
 
-export default async function OtpVerify({
+export default async function VerifyEmail({
   params,
 }: Readonly<{
   params: Params;

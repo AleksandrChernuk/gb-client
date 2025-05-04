@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import FormError from '@/components/shared/FormError';
 import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
@@ -25,7 +25,7 @@ export default function OtpVerifyForm() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const form = useForm<z.infer<typeof otpVerifySchema>>({
     resolver: zodResolver(otpVerifySchema),
@@ -36,6 +36,7 @@ export default function OtpVerifyForm() {
 
   const onSubmit = async (value: z.infer<typeof otpVerifySchema>) => {
     try {
+      setIsPending(true);
       const result = await verifyEmail({ email, code: value.pin });
 
       const { message, currentUser } = result;
@@ -45,10 +46,10 @@ export default function OtpVerifyForm() {
       }
 
       useUserStore.getState().setUserStore(currentUser);
-      startTransition(() => {
-        route.push(`/profile`);
-      });
+      route.push(`/profile`);
     } catch (error) {
+      setIsPending(false);
+
       if (error instanceof Error) {
         setError(`Verification failed: ${error.message}`);
       } else {

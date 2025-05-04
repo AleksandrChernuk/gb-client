@@ -2,9 +2,12 @@ import { forwardHeaders } from '@/utils/headers.util';
 
 export async function POST(req: Request) {
   const headers = forwardHeaders(req);
+  console.log('function POST(req: Request)');
 
   try {
     const data = await req.json();
+
+    console.log('data', data);
 
     const backendResponse = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/signup`, {
       method: 'POST',

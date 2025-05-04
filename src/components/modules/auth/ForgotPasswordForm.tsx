@@ -4,7 +4,7 @@ import FormError from '@/components/shared/FormError';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
@@ -20,7 +20,7 @@ export default function ForgotPasswordForm() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const form = useForm<z.infer<typeof ResetPasswordShema>>({
     resolver: zodResolver(ResetPasswordShema),
@@ -32,10 +32,10 @@ export default function ForgotPasswordForm() {
   async function onSubmit(values: z.infer<typeof ResetPasswordShema>) {
     try {
       console.log(values);
-      startTransition(() => {});
-      route.push('/signin/otp-verify');
+      setIsPending(true);
+      route.push('/signin/verify-2FA');
     } catch (error) {
-      console.error('Error sending password reset email', error);
+      setIsPending(false);
       setError(error as string);
     }
   }

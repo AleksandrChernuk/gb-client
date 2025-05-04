@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import MainFooter from '@/components/modules/footer/MainFooter';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';

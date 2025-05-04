@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,7 +22,7 @@ const UpdatePasswordForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof updatePpasswordSchema>>({
@@ -35,11 +35,12 @@ const UpdatePasswordForm = () => {
 
   async function onSubmit(values: z.infer<typeof updatePpasswordSchema>) {
     try {
+      setIsPending(true);
       console.log(values);
-      startTransition(() => {
-        route.push('/signin');
-      });
+      route.push('/signin');
     } catch (error) {
+      setIsPending(false);
+
       console.error('Error sending password reset email', error);
       setError(error as string);
     }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,7 +24,7 @@ const SigninForm = () => {
   const router = useRouter();
 
   const [error, setError] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof signinSchema>>({
@@ -37,27 +37,26 @@ const SigninForm = () => {
 
   const onSubmit = async (values: z.infer<typeof signinSchema>) => {
     try {
+      setIsPending(true);
       const result = await signin(values, locale);
 
       const { message, currentUser } = result;
 
       if (message === '2FA code sent') {
-        startTransition(() => {
-          router.push(`/auth/otp-verify/${result.email}`);
-          form.reset();
-        });
+        router.push(`/auth/otp-verify/${result.email}`);
+        form.reset();
         return;
       }
 
       if (message === 'Successfully signin') {
         useUserStore.getState().setUserStore(currentUser);
 
-        startTransition(() => {
-          router.push('/profile');
-          form.reset();
-        });
+        router.push('/profile');
+        form.reset();
       }
     } catch (error) {
+      setIsPending(false);
+
       if (error instanceof Error) {
         setError(`Signin failed: ${error.message}`);
       } else {
