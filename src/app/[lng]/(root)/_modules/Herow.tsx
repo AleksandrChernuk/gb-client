@@ -5,6 +5,7 @@ import Image from 'next/image';
 import desc from '@/assets/images/desc_full_2x.avif';
 import mob from '@/assets/images/mob_full_2x.avif';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import HerowImages from './HerowImages';
 
 export default async function Herow() {
   const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
@@ -12,7 +13,7 @@ export default async function Herow() {
 
   return (
     <section className="relative">
-      <Image
+      {/* <Image
         src={mob}
         alt={t_img_alts('herow')}
         placeholder="blur"
@@ -43,7 +44,8 @@ export default async function Herow() {
         priority
         loading="eager"
         decoding="sync"
-      />
+      /> */}
+      <HerowImages />
 
       <Container size="l" className="-mt-10">
         <div>
