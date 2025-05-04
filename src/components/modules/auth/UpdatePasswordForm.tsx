@@ -14,11 +14,12 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { useRouter } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
 import { updatePpasswordSchema } from '@/schemas/auth.schema';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const UpdatePasswordForm = () => {
   const route = useRouter();
 
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

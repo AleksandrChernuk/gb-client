@@ -16,12 +16,13 @@ import { otpVerifySchema } from '@/schemas/auth.schema';
 import { useUserStore } from '@/store/useStore';
 import { verifyEmail } from '@/services/authService';
 import { useParams } from 'next/navigation';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
   const params = useParams<{ tag: string; email: string }>();
   const email = decodeURIComponent(params?.email || '');
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();

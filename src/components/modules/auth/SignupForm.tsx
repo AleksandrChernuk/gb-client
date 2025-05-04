@@ -16,9 +16,10 @@ import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { signup } from '@/services/authService';
 import { useRouter } from '@/i18n/routing';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const SignupForm = () => {
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   const locale = useLocale();
   const router = useRouter();
   const [error, setError] = useState<string | undefined>('');

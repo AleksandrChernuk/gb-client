@@ -26,7 +26,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       if (refresh.ok) {
         setReady(true);
       } else {
-        router.replace('/auth/signin');
+        router.replace('/signin');
       }
     };
 

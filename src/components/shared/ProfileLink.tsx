@@ -7,8 +7,6 @@ type Props = {
   variant: 'mobile' | 'desktop';
 };
 
-const isAuth = false;
-
 export const ProfileLink = ({ variant }: Props) => {
   const t = useTranslations('common');
 
@@ -20,7 +18,7 @@ export const ProfileLink = ({ variant }: Props) => {
           variant={'link'}
           className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
         >
-          <Link prefetch={false} href={isAuth ? '/profile' : '/signin'}>
+          <Link prefetch={false} href={'/profile'}>
             <User size={24} className="stroke-green-300" />
             {t('mainNavProfileLink')}
           </Link>
@@ -32,7 +30,7 @@ export const ProfileLink = ({ variant }: Props) => {
         <Button asChild variant={'link'}>
           <Link
             prefetch={false}
-            href={isAuth ? '/profile' : '/signin'}
+            href={'/profile'}
             className="group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
           >
             <div

@@ -13,10 +13,11 @@ import { useTranslations } from 'next-intl';
 import { LoaderCircle } from 'lucide-react';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { ResetPasswordShema } from '@/schemas/auth.schema';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function ForgotPasswordForm() {
   const route = useRouter();
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
