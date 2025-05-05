@@ -1,5 +1,7 @@
 'use client';
+
 import { Button } from '@/components/ui/button';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
@@ -8,7 +10,7 @@ type Props = {
 };
 
 export default function FaqNav({ slug }: Props) {
-  const t = useTranslations('questions_answers');
+  const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
   return (
     <div className="flex items-start gap-2 overflow-x-scroll tablet:overflow-hidden tablet:gap-0 tablet:flex-col no-scrollbar">
       <Button

@@ -7,12 +7,12 @@ import { useSearchParams } from 'next/navigation';
 import SearchCard from './components/SearchCard';
 import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function FaqSearchResult() {
   const params = useSearchParams();
   const searchQuery = params.get('q')?.toLowerCase() || '';
-  const t = useTranslations('questions_answers');
-  const t_questions = useTranslations('questions');
+  const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   if (!searchQuery) {
     return null;
@@ -22,7 +22,7 @@ export default function FaqSearchResult() {
 
   Object.entries(faqConstans).forEach(([slug, category]) => {
     category.questions.forEach(({ id, title, text, slug: textSlug }) => {
-      const translatedText = text.map((paragraph) => t_questions(`${title}.text_${text.indexOf(paragraph) + 1}`));
+      const translatedText = text.map((paragraph) => t(`${title}.text_${text.indexOf(paragraph) + 1}`));
       if (translatedText.some((paragraph) => paragraph.toLowerCase().includes(searchQuery))) {
         matchedQuestions.push({ textSlug, slug, id, title, text: translatedText.join(' ') });
       }
@@ -57,7 +57,7 @@ export default function FaqSearchResult() {
         <SearchCard
           key={id}
           id={id.toString()}
-          title={t_questions(`${title}.title`)}
+          title={t(`${title}.title`)}
           text={text}
           href={`/${slug}?q=${textSlug}`}
         />

@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useRouter } from '@/i18n/routing';
 import { FaqSearchShema } from '@/schemas/faq.search.shema';
 import { IFaqSearchValue } from '@/types/faq.types';
@@ -12,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 export default function FaqSeach() {
   const router = useRouter();
-  const t = useTranslations('questions_answers');
+  const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   const form = useForm<IFaqSearchValue>({
     mode: 'onSubmit',

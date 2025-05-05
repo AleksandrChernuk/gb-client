@@ -11,6 +11,7 @@ import { seoForAgents } from '@/lib/seo';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   params: Params;
@@ -45,8 +46,8 @@ export default async function ForAgents({
   params: Params;
 }>) {
   const { lng } = await params;
-  const t_common = await getTranslations();
-  const t_for_agents = await getTranslations('for_agents');
+  const t_common = await getTranslations(MESSAGE_FILES.COMMON);
+  const t_for_agents = await getTranslations(MESSAGE_FILES.FORAGENTS_PAGE);
 
   setRequestLocale(lng as Locale);
 

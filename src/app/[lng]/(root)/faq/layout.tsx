@@ -5,6 +5,7 @@ import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import FaqSeach from './_modules/FaqSeach';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function FaqLayout({
   children,
@@ -16,7 +17,8 @@ export default async function FaqLayout({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  const t = await getTranslations();
+
+  const t = await getTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
   return (
     <>
       <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-slate-50 dark:bg-slate-900 ">

@@ -15,5 +15,5 @@ export const Container: FC<PropsWithChildren<ContainerProps>> = ({ className, si
     l: 'max-w-[1368px]',
   };
 
-  return <div className={cn('mx-auto px-5', sizeClasses[size], className)}>{children}</div>;
+  return <div className={cn('mx-auto px-5 w-full', sizeClasses[size], className)}>{children}</div>;
 };

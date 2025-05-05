@@ -12,6 +12,7 @@ import BackRouteButton from '@/components/shared/BackRouteButton';
 import peopleWithSuitcases from '@/assets/images/people-with-suitcases-looking-straight-ahead-goin.avif';
 import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   params: Params;
@@ -49,8 +50,8 @@ export default async function ForCarriers({
 
   setRequestLocale(lng as Locale);
 
-  const t_common = await getTranslations();
-  const t_for_carriers = await getTranslations('for_carriers');
+  const t_common = await getTranslations(MESSAGE_FILES.COMMON);
+  const t_for_carriers = await getTranslations(MESSAGE_FILES.FORCARRIERS_PAGE);
 
   return (
     <>

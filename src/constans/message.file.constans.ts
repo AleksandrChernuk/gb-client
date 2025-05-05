@@ -11,4 +11,5 @@ export const MESSAGE_FILES = {
   METADATA: 'metadata',
   OFERTA_PAGE: 'oferta-page',
   QUESTIONS_PAGE: 'questions-page',
+  PROFILE: 'profile',
 } as const;

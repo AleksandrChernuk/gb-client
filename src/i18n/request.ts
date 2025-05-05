@@ -22,6 +22,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ...(await import(`../../messages/${locale}/${MESSAGE_FILES.FORAGENTS_PAGE}.json`)),
     ...(await import(`../../messages/${locale}/${MESSAGE_FILES.FORCARRIERS_PAGE}.json`)),
     ...(await import(`../../messages/${locale}/${MESSAGE_FILES.FORM}.json`)),
+    ...(await import(`../../messages/${locale}/${MESSAGE_FILES.PROFILE}.json`)),
   };
 
   return {

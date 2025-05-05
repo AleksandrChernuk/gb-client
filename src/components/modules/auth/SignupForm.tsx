@@ -39,7 +39,7 @@ const SignupForm = () => {
     try {
       setIsPending(true);
       const result = await signup(value, locale);
-      router.push(`/signin/verify-email/${result.email}`);
+      router.push(`/signin/verify-2FA/${result.email}`);
       form.reset();
     } catch (error) {
       setIsPending(false);

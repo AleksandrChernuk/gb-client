@@ -43,7 +43,7 @@ const SigninForm = () => {
       const { message, currentUser } = result;
 
       if (message === '2FA code sent') {
-        router.push(`/auth/otp-verify/${result.email}`);
+        router.push(`/auth/verify-2FA/${result.email}`);
         form.reset();
         return;
       }

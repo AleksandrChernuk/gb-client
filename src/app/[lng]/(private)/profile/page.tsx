@@ -1,6 +1,5 @@
 'use client';
 
-import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import { Link, useRouter } from '@/i18n/routing';
 import { logout } from '@/services/authService';
@@ -13,11 +12,7 @@ const UserProfile = () => {
   const currentUser = useUserStore((state) => state.currentUser);
 
   if (!currentUser) {
-    return (
-      <Container size="m" className="w-full py-10">
-        No user data found. Please login again.
-      </Container>
-    );
+    return <div>No user data found. Please login again.</div>;
   }
 
   const handleLogout = async () => {
@@ -32,9 +27,9 @@ const UserProfile = () => {
   };
 
   return (
-    <Container size="m" className="w-full">
+    <div>
       <div className="py-10 space-y-8">
-        <ul className="flex flex-col tablet:flex-row items-center justify-between">
+        <ul className=" ">
           <li>
             <p>userID: {currentUser.id}</p>
           </li>
@@ -64,7 +59,7 @@ const UserProfile = () => {
           </Button>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
