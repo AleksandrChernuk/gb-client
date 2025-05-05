@@ -16,8 +16,8 @@ export default async function ProfileLayout({ children }: { children: React.Reac
       <div className="flex flex-col h-svh">
         <AuthHeader />
 
-        <Container size="m">
-          <div className="w-full py-10">
+        <Container size="m" className="w-full">
+          <div className="w-full py-2 tablet:py-10">
             <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
               <NavTabs items={items} namespace={MESSAGE_FILES.PROFILE} />
               <div className="flex-1">{children}</div>

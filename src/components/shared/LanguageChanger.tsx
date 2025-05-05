@@ -74,7 +74,7 @@ export default function SelectLocale({ variant }: Props) {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger className="py-0 ">
-              <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]">
+              <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] py-2">
                 <div className="w-7 h-7">{supportLocalesList.find((item) => item.value === locale)?.icon}</div>
                 {supportLocalesList.find((item) => item.value === locale)?.name}
               </div>

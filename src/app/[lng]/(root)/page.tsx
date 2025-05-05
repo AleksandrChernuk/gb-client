@@ -11,7 +11,6 @@ import Buses from './_modules/Buses';
 import PopularRoutes from './_modules/PopularRoutes';
 import GetStarted from './_modules/GetStarted';
 import Questions from './_modules/Questions';
-import Carriers from './_modules/Carriers';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
@@ -71,7 +70,7 @@ export default async function Home({
         <Buses />
         <PopularRoutes />
         <GetStarted />
-        <Carriers />
+        {/* <Carriers /> */}
         <Questions />
       </main>
       <MainFooter />
