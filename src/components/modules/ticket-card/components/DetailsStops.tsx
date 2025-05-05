@@ -6,6 +6,7 @@ import DetailsStopsItem from './DetailsStopsItem';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { Button } from '@/components/ui/button';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   id: string;
@@ -13,7 +14,7 @@ type Props = {
 
 export default function DetailsStops({ id }: Props) {
   const [open, setOpen] = useState<boolean>(false);
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const currentLocale = useLocale();
 
   const ticketDetails = useCurrentTicketStore((state) => state.tickets[id]);

@@ -6,6 +6,7 @@ import { ChevronRight, Clock3, Route } from 'lucide-react';
 import DetailsStops from '../components/DetailsStops';
 import Image from 'next/image';
 import { IconLoader } from '@/components/icons/IconLoader';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   id: string;
@@ -13,9 +14,7 @@ type Props = {
 
 export default function Details({ id }: Props) {
   const currentLocale = useLocale();
-  const t = useTranslations('search');
-
-  console.log(id);
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   const ticketDetails = useCurrentTicketStore((state) => state.tickets[id]);
 

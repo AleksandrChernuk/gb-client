@@ -1,3 +1,4 @@
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }: Props) {
-  const t = useTranslations('search');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { departure_date_time, arrival_date_time, location_name, station_name, station_address } = route;
 
   return (

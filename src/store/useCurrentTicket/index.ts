@@ -18,8 +18,6 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
           selectedTicketId: null,
           selectedTicket: null,
           loadingSelectTicket: false,
-          isButtonDisabled: false,
-
           setSelectedTicketId(id) {
             set({ selectedTicketId: id });
           },
@@ -159,7 +157,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
                 metadata: route.identificators.metadata,
               });
             } catch (error) {
-              console.error('Ошибка при получении данных маршрута:', error);
+              console.log('Ошибка при получении данных маршрута:', error);
             }
 
             const currentDetails: IRouteDetailsResponse = route.details || ({} as IRouteDetailsResponse);
@@ -197,19 +195,10 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
 
             await DeleteCookie('_p');
           },
-
-          SetIsButtonDisabled: () => {
-            set((state) => ({
-              ...state,
-              isButtonDisabled: true,
-            }));
-          },
         }),
         {
           name: 'current-ticket',
-          partialize: (state) => ({
-            selectedTicket: state.selectedTicket,
-          }),
+
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true;

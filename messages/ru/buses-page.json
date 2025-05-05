@@ -21,6 +21,12 @@
     "no_travel_dates": "В эту дату поездок нет",
     "something_happend": "Что-то произошло",
     "bus": "Автобус",
-    "discounts": "Скидки"
+    "discounts": "Скидки",
+    "sort_by": "Сортировать по",
+    "bus_companies": "Автобусные компании",
+    "clear_all": "Очистить все",
+    "view_trips": "Показать маршруты",
+    "filter": "Фильтр",
+    "placeholderPassenger": "Пассажир"
   }
 }

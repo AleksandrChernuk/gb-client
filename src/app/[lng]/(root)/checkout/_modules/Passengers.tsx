@@ -10,11 +10,12 @@ import { withMask } from 'use-mask-input';
 import { Calendar } from 'lucide-react';
 import StepNumber from './components/StepNumber';
 import Timer from './components/Timer';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function Passengers() {
   const { control } = useFormContext();
-  const t_new_order = useTranslations('new_order');
-  const t_forms = useTranslations('forms');
+  const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
   const { fields } = useFieldArray({
     name: 'passengers',

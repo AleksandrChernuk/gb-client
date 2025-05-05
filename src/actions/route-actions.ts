@@ -23,6 +23,8 @@ export const getRoutes = async (body: IGetRoutesBody): Promise<IRouteResponse[]>
 };
 
 export const getRouteDetails = async (body: IGetRouteDetailsBody): Promise<IRouteDetailsResponse> => {
+  console.log(body);
+
   const response = await fetch(`${BASE_URL}/routes/route-details`, {
     method: 'POST',
     headers: {
@@ -30,8 +32,11 @@ export const getRouteDetails = async (body: IGetRouteDetailsBody): Promise<IRout
     },
     body: JSON.stringify(body),
   });
+  console.log(response);
 
   if (!response.ok) {
+    console.log(response);
+
     throw new Error('Error');
   }
 

@@ -23,6 +23,13 @@
     "no_travel_dates": "Подорожі у цю дату немає",
     "something_happend": "Щось сталося",
     "bus": "Автобус",
-    "discounts": "Знижки"
+    "discounts": "Знижки",
+    "sort_by": "Сортувати за",
+    "bus_companies": "Автобусні компанії",
+    "clear_all": "Очистити все",
+    "view_trips": "Показати маршрути",
+    "filter": "Фільтр",
+    "sort_buy_shortest_journeye": "Коротшим маршрутом",
+    "placeholderPassenger": "Пасажир"
   }
 }

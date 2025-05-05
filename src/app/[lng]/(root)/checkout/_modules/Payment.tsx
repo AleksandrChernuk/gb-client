@@ -7,6 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import IconMoney from './icons/IconMoney';
 import IconBankCard from './icons/IconBankCard';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const PAYMENT_TYPES = [
   {
@@ -31,7 +32,7 @@ const PAYMENT_TYPES = [
 
 export default function Payment() {
   const { control } = useFormContext();
-  const t = useTranslations('new_order');
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   return (
     <FormField
       control={control}

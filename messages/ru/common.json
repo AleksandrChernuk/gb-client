@@ -40,13 +40,6 @@
     "forPassengersAccountLink": "Создайть аккаунт",
     "forPassengersAppLink": "Загрузить приложение",
     "forPassengersAffiliateLink": "Партнерская программа",
-    "sort_by": "Сортировать по",
-    "bus_companies": "Автобусные компании",
-    "clear_all": "Очистить все",
-    "view_trips": "Показать маршруты",
-    "filter": "Фильтр",
-    "details": "Детальнее",
-    "date_picker_title": "Когда вы планируете ехать?",
     "site_theme": "Тема сайта",
     "continue": "Продолжить",
     "signupTitle": "Регистрация",
@@ -59,6 +52,7 @@
     "updatePasswordTitle": "Установите новый пароль",
     "updatePasswordBtn": "Сохранить",
     "confirmPassword": "Подтвердите пароль",
+    "date_picker_title": "Когда вы планируете ехать?",
 
     "sendResetCode": "Отправить код сброса",
 

@@ -23,6 +23,13 @@
     "no_travel_dates": "No travel on these dates",
     "something_happend": "Something happend",
     "bus": "Bus",
-    "discounts": "Discounts"
+    "discounts": "Discounts",
+    "sort_by": "Sort by",
+    "bus_companies": "Bus Companies",
+    "clear_all": "Clear all",
+    "view_trips": "View trips",
+    "filter": "Filter",
+    "sort_buy_shortest_journeye": "Коротшим маршрутом",
+    "placeholderPassenger": "Passenger"
   }
 }

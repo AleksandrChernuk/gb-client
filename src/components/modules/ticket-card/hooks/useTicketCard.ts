@@ -12,14 +12,9 @@ import { useState } from 'react';
 export default function useTicketCard() {
   const [loading, setLoading] = useState(false);
 
-  const [getDetailsTicket, setSelectedTicket, setSelectedTicketId, SetIsButtonDisabled] = useCurrentTicketStore(
-    useShallow((state) => [
-      state.getDetailsTicket,
-      state.setSelectedTicket,
-      state.setSelectedTicketId,
-      state.SetIsButtonDisabled,
-    ]),
-  );
+  const getDetailsTicket = useCurrentTicketStore((state) => state.getDetailsTicket);
+  const setSelectedTicket = useCurrentTicketStore(useShallow((state) => state.setSelectedTicket));
+  const setSelectedTicketId = useCurrentTicketStore(useShallow((state) => state.setSelectedTicketId));
 
   const [from, to, adult, children, date] = useSearchStore(
     useShallow((state) => [state.from, state.to, state.adult, state.children, state.date]),
@@ -34,8 +29,8 @@ export default function useTicketCard() {
       value: JSON.stringify({ adult, children }),
     });
     setLoading(true);
-    SetIsButtonDisabled();
     setSelectedTicketId(id);
+
     if (element) {
       await setSelectedTicket({
         route: element,

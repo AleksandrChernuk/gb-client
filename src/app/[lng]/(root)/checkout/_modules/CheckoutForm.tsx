@@ -15,6 +15,7 @@ import Legal from './Legal';
 import { useCheckoutForm } from './hooks/useCheckoutForm';
 import Payment from './Payment';
 import { useRouter } from '@/i18n/routing';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function CheckoutForm({ adult, child }: { adult: string; child: string }) {
   const { handleSubmit, onSubmit, methods } = useCheckoutForm({ adult, child });
@@ -22,7 +23,7 @@ export default function CheckoutForm({ adult, child }: { adult: string; child: s
   const resetCurrentTicket = useCurrentTicketStore((state) => state.resetCurrentTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
   const router = useRouter();
-  const t = useTranslations('new_order');
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   useEffect(() => {
     return () => {

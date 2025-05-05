@@ -6,7 +6,6 @@ export type CurrentTicketState = {
   tickets: Record<string, IRouteResponse>;
   selectedTicket: IRouteResponse | null;
   loadingTickets: Record<string, boolean>;
-  isButtonDisabled: boolean;
 };
 
 export type SetCurrentTicket = Partial<{
@@ -23,7 +22,6 @@ export type CurrentTicketActions = {
   setSelectedTicket: (ticket: SetCurrentTicket) => void;
   setSelectedTicketId: (id: string | null) => void;
   resetCurrentTicket: () => void;
-  SetIsButtonDisabled: () => void;
 };
 
 export type CurrentTicketStore = CurrentTicketState & CurrentTicketActions;

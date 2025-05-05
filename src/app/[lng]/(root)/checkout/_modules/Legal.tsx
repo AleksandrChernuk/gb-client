@@ -1,12 +1,13 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 export default function Legal() {
   const { control } = useFormContext();
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.FORM);
 
   return (
     <div className="space-y-4">

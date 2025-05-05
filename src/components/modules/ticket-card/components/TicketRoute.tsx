@@ -7,13 +7,14 @@ import { useLocale, useTranslations } from 'next-intl';
 import { IconRouteLeft } from '../icons/IconRouteLeft';
 import { IconRouteRigth } from '../icons/IconRouteRigth';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   route: IRouteResponse;
 };
 
 export default function TicketRoute({ route }: Props) {
-  const t = useTranslations('buses');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const matches = useMediaQuery('(max-width: 767px)');
 
   const locale = useLocale();

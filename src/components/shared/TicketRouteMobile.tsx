@@ -1,5 +1,6 @@
 'use client';
 
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { cn } from '@/lib/utils';
 import { IRouteResponse } from '@/types/route.types';
@@ -49,7 +50,7 @@ const Location = ({ location, address, className }: TLocation) => {
 };
 
 export default function TicketRouteMobile({ route, className }: TTicketRouteMobile) {
-  const t = useTranslations('buses');
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const locale = useLocale();
 
   if (!route) {
@@ -63,7 +64,7 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
       <DateDuration
         arrival={format(new Date(route?.arrival?.date_time || new Date()), 'HH:mm')}
         departure={format(new Date(route?.departure?.date_time || new Date()), 'HH:mm')}
-        duration={(duration && `${duration[0]}${t('shortHours')},${duration[1]}${t('shortMinutes')}`) || ''}
+        duration={(duration && `${duration[0]}${t('shortHours')}:${duration[1]}${t('shortMinutes')}`) || ''}
       />
 
       <div className="flex flex-col justify-between gap-4">

@@ -3,11 +3,12 @@ import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
 import { countPricing } from './helpers/countPricing';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function ToPay() {
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);

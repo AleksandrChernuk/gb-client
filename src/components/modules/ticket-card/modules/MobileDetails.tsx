@@ -16,6 +16,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   onClickTrigger: () => void;
@@ -26,7 +27,7 @@ type Props = {
 };
 
 export default function MobileDetails({ children, selectButton, onClickTrigger, price, passengerCount }: Props) {
-  const t = useTranslations();
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <Sheet>

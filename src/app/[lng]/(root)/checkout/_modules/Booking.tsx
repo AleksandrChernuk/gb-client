@@ -18,12 +18,13 @@ import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
 import SeatsList from './components/SeatsList';
 import IconSeat from './icons/IconSeat';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function BookingSheet() {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
 
-  const t = useTranslations('new_order');
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   return (
     <Sheet>

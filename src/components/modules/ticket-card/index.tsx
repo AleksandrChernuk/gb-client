@@ -14,6 +14,7 @@ import { useSearchStore } from '@/store/useSearch';
 import SelectButton from './components/SelectButton';
 import TicketRoute from './components/TicketRoute';
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   element: IRouteResponse;
@@ -22,12 +23,11 @@ type Props = {
 
 export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const t = useTranslations('search');
-  const { handleGetDetails, handleSetTicket, loading } = useTicketCard();
-  const [tickets, isButtonDisabled] = useCurrentTicketStore(
-    useShallow((state) => [state.tickets, state.isButtonDisabled]),
-  );
+  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+  const { handleGetDetails, handleSetTicket } = useTicketCard();
+  const [tickets] = useCurrentTicketStore(useShallow((state) => [state.tickets]));
 
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
@@ -49,7 +49,7 @@ export const TicketCard = ({ element }: Props) => {
               variant="desktop"
               loading={loading}
               buttonText={t('selectButton')}
-              disabled={isButtonDisabled}
+              disabled={!loading}
               onClick={async () => {
                 if (!element.ticket_pricing.base_price) {
                   return;
@@ -116,9 +116,15 @@ export const TicketCard = ({ element }: Props) => {
                   variant="desktop"
                   loading={loading}
                   buttonText={t('selectButton')}
-                  disabled={isButtonDisabled}
+                  disabled={loading}
                   onClick={async () => {
-                    await handleSetTicket(element.ticket_id, element);
+                    try {
+                      setLoading(true);
+                      await handleSetTicket(element.ticket_id, element);
+                    } catch (error) {
+                      setLoading(false);
+                      console.log(error);
+                    }
                   }}
                 />
               }
@@ -144,12 +150,18 @@ export const TicketCard = ({ element }: Props) => {
           variant="mobile"
           loading={loading}
           buttonText={t('selectButton')}
-          disabled={isButtonDisabled}
+          disabled={loading}
           onClick={async () => {
             if (!element.ticket_pricing.base_price) {
               return;
             }
-            await handleSetTicket(element.ticket_id, element);
+            try {
+              setLoading(true);
+              await handleSetTicket(element.ticket_id, element);
+            } catch (error) {
+              console.log(error);
+              setLoading(false);
+            }
           }}
         />
       </div>
