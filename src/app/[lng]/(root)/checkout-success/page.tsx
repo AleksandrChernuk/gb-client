@@ -1,7 +1,3 @@
-import { Container } from '@/components/shared/Container';
-import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/routing';
-
 export async function generateMetadata() {
   return {
     robots: {
@@ -21,15 +17,5 @@ export async function generateMetadata() {
 }
 
 export default function CheckoutSuccess() {
-  return (
-    <section>
-      <Container size="xs">
-        <div>
-          <Button variant={'link'}>
-            <Link href={'/'}>Go Home</Link>
-          </Button>
-        </div>
-      </Container>
-    </section>
-  );
+  return <CheckoutSuccess />;
 }

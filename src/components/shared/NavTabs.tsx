@@ -14,7 +14,6 @@ type Props = {
 export const NavTabs = ({ namespace, items }: Props) => {
   const t = useTranslations(namespace);
   const pasname = usePathname();
-  console.log(pasname);
   return (
     <ul className="flex items-start gap-2 overflow-x-scroll tablet:overflow-hidden tablet:gap-0 tablet:flex-col no-scrollbar">
       {items.map((item) => (

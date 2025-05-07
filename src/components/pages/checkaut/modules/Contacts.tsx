@@ -1,6 +1,7 @@
 'use client';
 
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
@@ -18,13 +19,13 @@ export default function Contacts() {
         <FormField
           control={control}
           name={`email`}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel className="text-sm font-normal tracking-normal leading-[21px] mb-2">Email</FormLabel>
               <FormControl>
                 <Input {...field} type="email" placeholder="Email" />
               </FormControl>
-              <FormMessage />
+              {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
             </FormItem>
           )}
         />
@@ -34,13 +35,13 @@ export default function Contacts() {
         <FormField
           control={control}
           name="phone"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>{t('phone_number')}</FormLabel>
               <FormControl>
                 <PhoneInput {...field} defaultCountry="UA" international limitMaxLength />
               </FormControl>
-              <FormMessage />
+              {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
             </FormItem>
           )}
         />

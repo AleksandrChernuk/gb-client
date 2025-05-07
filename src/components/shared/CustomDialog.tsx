@@ -10,13 +10,12 @@ import { ReactNode } from 'react';
 
 type Props = {
   isOpen: boolean;
-  children: ReactNode;
   title: string;
   description: string;
   footer: ReactNode;
 };
 
-export default function CustomDialog({ isOpen, children, title, description, footer }: Props) {
+export default function CustomDialog({ isOpen, title, description, footer }: Props) {
   return (
     <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[425px] rounded-2xl">
@@ -26,7 +25,6 @@ export default function CustomDialog({ isOpen, children, title, description, foo
           </DialogTitle>
           <DialogDescription className="sr-only">{description}</DialogDescription>
         </DialogHeader>
-        {children}
         <DialogFooter className="flex-wrap gap-2">{footer}</DialogFooter>
       </DialogContent>
     </Dialog>

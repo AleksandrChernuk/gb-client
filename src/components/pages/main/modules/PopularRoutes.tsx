@@ -1,8 +1,8 @@
 import { Container } from '@/components/shared/Container';
 import { getTranslations } from 'next-intl/server';
 import { popularRoutersFakeData } from '@/constans/popular-routers.constans';
-import RoutersDropdownList from './components/RoutersDropdownList';
-import RoutersItem from './components/RoutersItem';
+import RoutersDropdownList from '../components/RoutersDropdownList';
+import RoutersItem from '../components/RoutersItem';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default async function PopularRoutes() {

@@ -6,24 +6,24 @@ import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import Passengers from './Passengers';
-import CheckoutCard from './components/CheckoutCard';
+import CheckoutCard from '../components/CheckoutCard';
 import BookingSheet from './Booking';
 import Contacts from './Contacts';
 import Trip from './Trip';
 import ToPay from './ToPay';
 import Legal from './Legal';
-import { useCheckoutForm } from './hooks/useCheckoutForm';
+import { useCheckoutForm } from '../hooks/useCheckoutForm';
 import Payment from './Payment';
 import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function CheckoutForm({ adult, child }: { adult: string; child: string }) {
   const { handleSubmit, onSubmit, methods } = useCheckoutForm({ adult, child });
+  const router = useRouter();
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const resetCurrentTicket = useCurrentTicketStore((state) => state.resetCurrentTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
-  const router = useRouter();
-  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   useEffect(() => {
     return () => {

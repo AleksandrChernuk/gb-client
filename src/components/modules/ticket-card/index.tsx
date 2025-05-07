@@ -49,7 +49,7 @@ export const TicketCard = ({ element }: Props) => {
               variant="desktop"
               loading={loading}
               buttonText={t('selectButton')}
-              disabled={!loading}
+              disabled={loading}
               onClick={async () => {
                 if (!element.ticket_pricing.base_price) {
                   return;
@@ -114,7 +114,7 @@ export const TicketCard = ({ element }: Props) => {
               selectButton={
                 <SelectButton
                   variant="desktop"
-                  loading={loading}
+                  loading={!loading}
                   buttonText={t('selectButton')}
                   disabled={loading}
                   onClick={async () => {

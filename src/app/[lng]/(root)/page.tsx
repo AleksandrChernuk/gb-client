@@ -1,17 +1,12 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import MainFooter from '@/components/modules/footer/MainFooter';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Herow from './_modules/Herow';
-import Benefits from './_modules/Benefits';
-import Buses from './_modules/Buses';
-import PopularRoutes from './_modules/PopularRoutes';
-import GetStarted from './_modules/GetStarted';
-import Questions from './_modules/Questions';
+
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import Main from '@/components/pages/main';
 
 type Props = {
   params: Params;
@@ -62,18 +57,5 @@ export default async function Home({
   const { lng } = await params;
   setRequestLocale(lng as Locale);
 
-  return (
-    <>
-      <main role="main" className="bg-slate-50 dark:bg-slate-900">
-        <Herow />
-        <Benefits />
-        <Buses />
-        <PopularRoutes />
-        <GetStarted />
-        {/* <Carriers /> */}
-        <Questions />
-      </main>
-      <MainFooter />
-    </>
-  );
+  return <Main />;
 }

@@ -16,15 +16,16 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import SeatsList from './components/SeatsList';
-import IconSeat from './icons/IconSeat';
+import SeatsList from '../components/SeatsList';
+import IconSeat from '../icons/IconSeat';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function BookingSheet() {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
 
-  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  // const t = useTranslations(MESSAGE_FILES.FORM);
+  const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   return (
     <Sheet>
@@ -44,11 +45,11 @@ export default function BookingSheet() {
               <div className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
                 {!selectedTicket?.details?.seats_map ? (
                   <div className="flex flex-col items-start gap-1">
-                    <span>{t('free_seating')}</span>
-                    <span className="text-base font-medium leading-4 tracking-normal">{t('seat_guaranteed')}</span>
+                    <span>{t_page('free_seating')}</span>
+                    <span className="text-base font-medium leading-4 tracking-normal">{t_page('seat_guaranteed')}</span>
                   </div>
                 ) : (
-                  t('choose_place')
+                  t_page('choose_place')
                 )}
               </div>
             ) : (

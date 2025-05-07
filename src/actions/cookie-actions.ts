@@ -19,3 +19,19 @@ export async function DeleteCookie(name: string) {
 
   cookieStore.delete(name);
 }
+
+export async function getCookies(data: string) {
+  try {
+    const cookieStore = await cookies();
+    const cookieData = cookieStore.get(data);
+
+    if (!cookieData) {
+      throw new Error('cookie data not found');
+    }
+    const parsed = JSON.parse(cookieData.value);
+ 
+    return parsed;
+  } catch (error) {
+    console.log(error);
+  }
+}

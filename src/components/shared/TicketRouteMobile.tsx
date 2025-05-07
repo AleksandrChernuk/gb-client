@@ -50,7 +50,7 @@ const Location = ({ location, address, className }: TLocation) => {
 };
 
 export default function TicketRouteMobile({ route, className }: TTicketRouteMobile) {
-  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   const locale = useLocale();
 
   if (!route) {

@@ -5,8 +5,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useFormContext } from 'react-hook-form';
 
 import { useTranslations } from 'next-intl';
-import IconMoney from './icons/IconMoney';
-import IconBankCard from './icons/IconBankCard';
+import IconMoney from '../icons/IconMoney';
+import IconBankCard from '../icons/IconBankCard';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const PAYMENT_TYPES = [
