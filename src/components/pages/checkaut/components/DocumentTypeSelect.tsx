@@ -50,7 +50,7 @@ export const DocumentInput = ({ name, control }: Props) => {
       <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">dob</FormLabel>
       <div className="flex items-center">
         <Select onValueChange={(value) => typeField.onChange(value)}>
-          <SelectTrigger className="rounded-none rounded-s-md" size="full" />
+          <SelectTrigger className="rounded-none rounded-s-md min-w-10" size="full" />
           <SelectContent>
             <SelectGroup>
               {docType.map((element) => (
