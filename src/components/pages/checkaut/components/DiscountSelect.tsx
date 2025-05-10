@@ -3,16 +3,16 @@ import { FormItem, FormLabel } from '@/components/ui/form';
 import { SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { Select, SelectContent } from '@radix-ui/react-select';
-import { Control, FieldValues, useController } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 
-type TDocumentTypeSelect = {
+type Props = {
   name: string;
-  control: Control<FieldValues, any, FieldValues>;
 };
 
-const DiscountSelect = ({ name, control }: TDocumentTypeSelect) => {
+const DiscountSelect = ({ name }: Props) => {
   const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
   const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const { control } = useFormContext();
 
   const {
     field,

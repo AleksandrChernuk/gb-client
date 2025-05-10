@@ -72,7 +72,7 @@ const CountrySelect = ({
         <Button
           type="button"
           variant="outline"
-          className={`${error && 'border-red-400'} flex gap-1 rounded-none rounded-s-lg border-r-0 px-3 focus:z-10   border border-slate-200 dark:border-slate-700 dark:hover:bg-black  dark:hover:border-slate-700 dark:focus:bg-slate-600 dark:focus:border-slate-900  bg-background text-sm font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-50 disabled:cursor-not-allowed disabled:opacity-50 outline-hidden hover:bg-slate-50 hover:border-slate-200 focus:border-slate-700`}
+          className={`${error && 'border-red-400'} w-20 flex gap-1 rounded-none rounded-s-lg border-r-0 px-3 focus:z-10   border border-slate-200 dark:border-slate-700 dark:hover:bg-black  dark:hover:border-slate-700 dark:focus:bg-slate-600 dark:focus:border-slate-900  bg-background text-sm font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-50 disabled:cursor-not-allowed disabled:opacity-50 outline-hidden hover:bg-slate-50 hover:border-slate-200 focus:border-slate-700`}
           disabled={disabled}
         >
           <FlagComponent country={selectedCountry} countryName={selectedCountry} />

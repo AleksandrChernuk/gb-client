@@ -3,13 +3,14 @@ import CheckoutForm from './modules/CheckoutForm';
 import { Container } from '@/components/shared/Container';
 import { getCookies } from '@/actions/cookie-actions';
 import Timer from './components/Timer';
-import { notFound } from 'next/navigation';
+import { redirect } from '@/i18n/routing';
+import { Locale } from 'next-intl';
 
-const Checkaut = async () => {
+const Checkaut = async ({ locale }: { locale: Locale }) => {
   const cookieRes = await getCookies('_p');
 
   if (!cookieRes) {
-    notFound();
+    redirect({ href: '/', locale });
   }
 
   return (

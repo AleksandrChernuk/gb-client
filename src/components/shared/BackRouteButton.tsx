@@ -13,6 +13,7 @@ export default function BackRouteButton() {
 
   const handleGoBack = () => {
     route.back();
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   return (

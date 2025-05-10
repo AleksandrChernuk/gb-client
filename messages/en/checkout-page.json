@@ -12,6 +12,15 @@
     "bank_card": "Bank card",
     "booking": "Booking",
     "free_seating": "Вільна посадка",
-    "seat_guaranteed": "Seat guaranteed"
+    "seat_guaranteed": "Seat guaranteed",
+    "floor_1": "First floor",
+    "floor_2": "Second floor",
+    "no_seats": "No seats are booked",
+    "seats_selected": "Seats selected",
+    "confirm": "Confirm",
+    "seat_selection_instruction": "Click on available seats on floor {floor}.",
+    "still_online_title": "Are you still online?",
+    "still_online_description": "Since you didn't complete the order in the allotted time, we cleared your cart.",
+    "still_online_back": "Return to search"
   }
 }

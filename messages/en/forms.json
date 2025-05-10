@@ -25,6 +25,28 @@
     "type_placeholder": "Enter type",
     "e_mail_placeholder": " Enter e-mail",
     "phone_placeholder": "Enter phone",
-    "request_btn": "Leave a request"
+    "request_btn": "Leave a request",
+    "document": "Document",
+    "docType": {
+      "unknown": "Unknown Document",
+      "passport": "Passport",
+      "military_id": "Military ID",
+      "foreign_document": "Foreign Document",
+      "travel_passport": "Travel Passport",
+      "sailors_passport": "Seaman's Passport",
+      "birth_certificate": "Birth Certificate",
+      "diplomatic_passport": "Diplomatic Passport",
+      "student_id": "Student ID"
+    },
+    "gender_label": "Gender",
+    "seats_for_all_passengers": "Select all seats",
+
+    "genderList": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "citizenship_label": "Citizenship",
+    "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp> and agree to the <bt>Booking Terms and Conditions</bt> and the <tt>Transportation Terms and Conditions</tt>."
   }
 }

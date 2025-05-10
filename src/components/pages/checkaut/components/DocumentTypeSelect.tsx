@@ -1,39 +1,31 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import * as React from 'react';
-import { Control, FieldValues, useController } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { SelectGroup } from '@radix-ui/react-select';
-
-const docType = [
-  'UNKNOWN',
-  'PASSPORT',
-  'MILITARY_ID',
-  'FOREIGN_DOCUMENT',
-  'TRAVEL_PASSPORT',
-  'SAILORS_PASSPORT',
-  'BIRTH_CERTIFICATE',
-  'DIPLOMATIC_PASSPORT',
-];
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { docTypes } from '@/constans/doc.types.constans';
 
 type Props = {
   name: {
     type: string;
     number: string;
   };
-  control: Control<FieldValues, any, FieldValues>;
 };
 
-export const DocumentInput = ({ name, control }: Props) => {
+export const DocumentInput = ({ name }: Props) => {
+  const { control } = useFormContext();
+  const t_forms = useTranslations(MESSAGE_FILES.FORM);
+
   const { field: typeField } = useController({
     name: name.type,
     control,
-    rules: { required: true },
   });
 
   const {
@@ -42,20 +34,19 @@ export const DocumentInput = ({ name, control }: Props) => {
   } = useController({
     name: name.number,
     control,
-    rules: { required: true },
   });
 
   return (
     <div className="space-y-2">
-      <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">dob</FormLabel>
+      <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">{t_forms('document')}</FormLabel>
       <div className="flex items-center">
         <Select onValueChange={(value) => typeField.onChange(value)}>
           <SelectTrigger className="rounded-none rounded-s-md min-w-10" size="full" />
           <SelectContent>
             <SelectGroup>
-              {docType.map((element) => (
+              {docTypes.map((element) => (
                 <SelectItem key={element} value={element}>
-                  {element}
+                  {t_forms(`docType.${element.toLowerCase()}`)}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -68,7 +59,7 @@ export const DocumentInput = ({ name, control }: Props) => {
           className={cn('rounded-none rounded-r-md rounded-l-0', numberError && 'border-red-400')}
         />
       </div>
-      {!!numberError && <FormErrorMassege>{numberError.message}</FormErrorMassege>}
+      {!!numberError && <FormErrorMassege>{t_forms(`${numberError.message}`)}</FormErrorMassege>}
     </div>
   );
 };

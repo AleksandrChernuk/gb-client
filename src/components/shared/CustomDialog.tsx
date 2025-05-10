@@ -18,12 +18,12 @@ type Props = {
 export default function CustomDialog({ isOpen, title, description, footer }: Props) {
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-[425px] mx-auto px-5 rounded-2xl">
         <DialogHeader className="text-center">
-          <DialogTitle className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
+          <DialogTitle className="text-2xl font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
             {title}
           </DialogTitle>
-          <DialogDescription className="sr-only">{description}</DialogDescription>
+          <DialogDescription className="text-lg  text-slate-700 dark:text-slate-50">{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex-wrap gap-2">{footer}</DialogFooter>
       </DialogContent>

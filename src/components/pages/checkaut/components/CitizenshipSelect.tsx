@@ -3,6 +3,8 @@ import { useFormContext, useController } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { citizenship } from '@/constans/citizenship.constans';
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   name: string;
@@ -10,6 +12,7 @@ type Props = {
 
 function CitizenshipSelect({ name }: Props) {
   const { control } = useFormContext();
+  const t = useTranslations(MESSAGE_FILES.FORM);
 
   const {
     field: { value, onChange },
@@ -21,11 +24,11 @@ function CitizenshipSelect({ name }: Props) {
 
   return (
     <FormItem>
-      <FormLabel className="mb-2 text-sm font-normal leading-[21px]">Гражданство</FormLabel>
+      <FormLabel className="mb-2 text-sm font-normal leading-[21px]">{t('citizenship_label')}</FormLabel>
       <FormControl>
         <Select value={value ?? ''} onValueChange={onChange}>
           <SelectTrigger className="w-full" size="full">
-            <SelectValue placeholder="Выберите гражданство" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

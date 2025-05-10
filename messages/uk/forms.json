@@ -25,6 +25,28 @@
     "type_placeholder": "Введіть тип",
     "e_mail_placeholder": "Введіть e-mail",
     "phone_placeholder": "Введіть телефон",
-    "request_btn": "Залишити заявку"
+    "request_btn": "Залишити заявку",
+    "document": "Документ",
+    "seats_for_all_passengers": "Оберіть всі місця",
+
+    "docType": {
+      "unknown": "Невідомий документ",
+      "passport": "Паспорт",
+      "military_id": "Військовий квиток",
+      "foreign_document": "Іноземний документ",
+      "travel_passport": "Закордонний паспорт",
+      "sailors_passport": "Паспорт моряка",
+      "birth_certificate": "Свідоцтво про народження",
+      "diplomatic_passport": "Дипломатичний паспорт",
+      "student_id": "Студентський квиток"
+    },
+    "gender_label": "Стать",
+    "genderList": {
+      "male": "Чоловіча",
+      "female": "Жіноча",
+      "other": "Інше"
+    },
+    "citizenship_label": "Громадянство",
+    "consent_text": "Я підтверджую, що ознайомився(-лася) з <pp>Політикою конфіденційності</pp> та погоджуюся з <bt>Умовами та правилами бронювання</bt> та <tt>Умовами та правилами перевезення</tt>."
   }
 }

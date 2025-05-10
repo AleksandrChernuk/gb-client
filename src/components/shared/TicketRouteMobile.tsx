@@ -1,16 +1,16 @@
 'use client';
 
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { cn } from '@/lib/utils';
 import { IRouteResponse } from '@/types/route.types';
 import { format } from 'date-fns';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 type TLocation = {
   className?: string;
   location: string;
   address: string;
+  last?: boolean;
 };
 
 type TTicketRouteMobile = {
@@ -36,9 +36,14 @@ const DateDuration = ({ departure, duration, arrival }: TDateDuration) => {
   );
 };
 
-const Location = ({ location, address, className }: TLocation) => {
+const Location = ({ location, address, className, last }: TLocation) => {
   return (
-    <div className={cn(`pl-8 space-y-0.5 relative`, className)}>
+    <div
+      className={cn(
+        `pl-8 space-y-0.5 relative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:left-4 before:-translate-x-1/2 before:rounded-full before:z-20 ${last ? 'before:border-green-300' : 'before:border-slate-600 before:bg-slate-50 dark:before:bg-slate-900'}`,
+        className,
+      )}
+    >
       <div className="flex items-center text-slate-700 dark:text-slate-50 text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6">
         {location}
       </div>
@@ -50,7 +55,6 @@ const Location = ({ location, address, className }: TLocation) => {
 };
 
 export default function TicketRouteMobile({ route, className }: TTicketRouteMobile) {
-  const t = useTranslations(MESSAGE_FILES.COMMON);
   const locale = useLocale();
 
   if (!route) {
@@ -64,7 +68,7 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
       <DateDuration
         arrival={format(new Date(route?.arrival?.date_time || new Date()), 'HH:mm')}
         departure={format(new Date(route?.departure?.date_time || new Date()), 'HH:mm')}
-        duration={(duration && `${duration[0]}${t('shortHours')}:${duration[1]}${t('shortMinutes')}`) || ''}
+        duration={(duration && `${duration[0]}:${duration[1]}`) || ''}
       />
 
       <div className="flex flex-col justify-between gap-4">
@@ -79,6 +83,7 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
         />
 
         <Location
+          last
           className="poit_to_wrapp poit_to"
           location={
             (route?.arrival?.toLocation && extractLocationDetails(route?.arrival?.toLocation, locale).locationName) ||

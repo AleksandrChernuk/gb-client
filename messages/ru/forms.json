@@ -25,6 +25,27 @@
     "type_placeholder": "Введите тип",
     "e_mail_placeholder": "Введите e-mail",
     "phone_placeholder": "Введите телефон",
-    "request_btn": "Оставить заявку"
+    "request_btn": "Оставить заявку",
+    "document": "Документ",
+    "docType": {
+      "unknown": "Неизвестный документ",
+      "passport": "Паспорт",
+      "military_id": "Военный билет",
+      "foreign_document": "Иностранный документ",
+      "travel_passport": "Загранпаспорт",
+      "sailors_passport": "Паспорт моряка",
+      "birth_certificate": "Свидетельство о рождении",
+      "diplomatic_passport": "Дипломатический паспорт",
+      "student_id": "Студенческий билет"
+    },
+    "gender_label": "Пол",
+    "seats_for_all_passengers": "Выберите все места",
+    "genderList": {
+      "male": "Мужской",
+      "female": "Женский",
+      "other": "Другое"
+    },
+    "citizenship_label": "Гражданство",
+    "consent_text": "Я подтверждаю, что ознакомился(-лась) с <pp>Политикой конфиденциальности</pp> и соглашаюсь с <bt>Условиями и правилами бронирования</bt> и <tt>Условиями и правилами перевозки</tt>."
   }
 }

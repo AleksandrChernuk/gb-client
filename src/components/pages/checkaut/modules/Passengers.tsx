@@ -3,10 +3,13 @@
 import { useTranslations } from 'next-intl';
 import StepNumber from '../components/StepNumber';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { PassengersList } from '../components/PassengersList';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { PassengetItem } from '../components/PassengetItem';
 
 export default function Passengers() {
   const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  const { control } = useFormContext();
+  const { fields } = useFieldArray({ control, name: 'passengers' });
 
   return (
     <ul className="space-y-4">
@@ -17,7 +20,11 @@ export default function Passengers() {
         </h3>
       </li>
       <li>
-        <PassengersList />
+        <ul className="space-y-6">
+          {fields.map((field, i) => (
+            <PassengetItem key={i} i={i} />
+          ))}
+        </ul>
       </li>
     </ul>
   );

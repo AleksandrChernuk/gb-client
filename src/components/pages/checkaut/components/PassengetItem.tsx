@@ -10,6 +10,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { DocumentInput } from './DocumentTypeSelect';
 import DiscountSelect from './DiscountSelect';
 import CitizenshipSelect from './CitizenshipSelect';
+import GenderSelect from './GenderSelect';
 
 export const PassengetItem = ({ i }: { i: number }) => {
   const { control } = useFormContext();
@@ -17,87 +18,79 @@ export const PassengetItem = ({ i }: { i: number }) => {
 
   return (
     <li>
-      <CustomCard className="dark:bg-slate-800 grid rid-cols-1 lg:grid-cols-2 tablet:grid-rows- gap-4">
-        <FormField
-          control={control}
-          name={`passengers.${i}.name`}
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
-                {t_forms('name')}
-              </FormLabel>
-              <FormControl>
-                <Input {...field} type="text" placeholder={t_forms('name_placeholder')} />
-              </FormControl>
-              {Boolean(fieldState?.error) && (
-                <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
-              )}
-            </FormItem>
-          )}
-        />
+      <CustomCard className="dark:bg-slate-800 space-y-2">
+        <h3 className="text-sm  tablet:text-xl text-green-300">{`Пасажир №${i + 1}`}</h3>
 
-        <FormField
-          control={control}
-          name={`passengers.${i}.surname`}
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel>{t_forms('surname')}</FormLabel>
-              <FormControl>
-                <Input {...field} type="text" placeholder={t_forms('surname_placeholder')} />
-              </FormControl>
-              {Boolean(fieldState?.error) && (
-                <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
-              )}
-            </FormItem>
-          )}
-        />
-
-        <DocumentInput
-          name={{
-            type: `passengers.${i}.document.type`,
-            number: `passengers.${i}.document.number`,
-          }}
-          control={control}
-        />
-
-        <FormField
-          control={control}
-          name={`passengers.${i}.dob`}
-          render={({ field, fieldState }) => {
-            return (
+        <div className="grid rid-cols-1 lg:grid-cols-2 gap-4">
+          <FormField
+            control={control}
+            name={`passengers.${i}.name`}
+            render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
-                  {t_forms('dob')}
-                </FormLabel>
+                <FormLabel>{t_forms('name')}</FormLabel>
                 <FormControl>
-                  <BirthdayInput handleSet={field.onChange} error={Boolean(fieldState?.error)} />
+                  <Input {...field} type="text" placeholder={t_forms('name_placeholder')} />
                 </FormControl>
                 {Boolean(fieldState?.error) && (
                   <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
                 )}
               </FormItem>
-            );
-          }}
-        />
-
-        <FormField
-          control={control}
-          name={`passengers.${i}.notes`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">
-                {t_forms('notes')}
-              </FormLabel>
-              <FormControl>
-                <Input {...field} type="text" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <CitizenshipSelect name={`passengers.${i}.citizenship`} />
-
-        <DiscountSelect name={`passengers.${i}.discount`} control={control} />
+            )}
+          />
+          <FormField
+            control={control}
+            name={`passengers.${i}.surname`}
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>{t_forms('surname')}</FormLabel>
+                <FormControl>
+                  <Input {...field} type="text" placeholder={t_forms('surname_placeholder')} />
+                </FormControl>
+                {Boolean(fieldState?.error) && (
+                  <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
+                )}
+              </FormItem>
+            )}
+          />
+          <DocumentInput
+            name={{
+              type: `passengers.${i}.document.type`,
+              number: `passengers.${i}.document.number`,
+            }}
+          />
+          <FormField
+            control={control}
+            name={`passengers.${i}.dob`}
+            render={({ field, fieldState }) => {
+              return (
+                <FormItem>
+                  <FormLabel>{t_forms('dob')}</FormLabel>
+                  <FormControl>
+                    <BirthdayInput handleSet={field.onChange} error={Boolean(fieldState?.error)} />
+                  </FormControl>
+                  {Boolean(fieldState?.error) && (
+                    <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
+                  )}
+                </FormItem>
+              );
+            }}
+          />
+          <CitizenshipSelect name={`passengers.${i}.citizenship`} />
+          <DiscountSelect name={`passengers.${i}.discount`} />
+          <GenderSelect name={`passengers.${i}.gender`} />
+          <FormField
+            control={control}
+            name={`passengers.${i}.notes`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t_forms('notes')}</FormLabel>
+                <FormControl>
+                  <Input {...field} type="text" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
       </CustomCard>
     </li>
   );

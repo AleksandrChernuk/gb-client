@@ -8,6 +8,7 @@ export type TPassenger = {
   document: { type: string; number: string };
   notes: string;
   discount: string;
+  gender: string;
   citizenship: string;
   isChildren: boolean;
   seat: string;

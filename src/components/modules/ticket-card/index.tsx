@@ -120,7 +120,7 @@ export const TicketCard = ({ element }: Props) => {
               selectButton={
                 <SelectButton
                   variant="desktop"
-                  loading={!loading}
+                  loading={loading}
                   buttonText={t('selectButton')}
                   disabled={loading}
                   onClick={async () => {
