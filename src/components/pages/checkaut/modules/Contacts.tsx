@@ -39,7 +39,7 @@ export default function Contacts() {
             <FormItem>
               <FormLabel>{t('phone_number')}</FormLabel>
               <FormControl>
-                <PhoneInput {...field} defaultCountry="UA" international limitMaxLength />
+                <PhoneInput {...field} error={!!fieldState.error} defaultCountry="UA" international limitMaxLength />
               </FormControl>
               {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
             </FormItem>

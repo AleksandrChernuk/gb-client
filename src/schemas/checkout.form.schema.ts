@@ -12,10 +12,20 @@ export const CheckoutSchema = z.object({
       surname: z.string().min(1, { message: 'required' }),
       notes: z.string().optional(),
       discount: z.string().optional(),
-      document: z.object({
-        type: z.string().optional(),
-        number: z.string().min(1, { message: 'required' }),
-      }),
+      citizenship: z.string().optional(),
+      document: z
+        .object({
+          type: z.string().optional(),
+          number: z.string().min(1, { message: 'required' }),
+        })
+        .refine(
+          ({ number }) => {
+            if (!number.trim()) return true;
+          },
+          {
+            path: ['type'],
+          },
+        ),
       dob: z
         .string()
         .min(1, { message: 'required' })

@@ -9,6 +9,7 @@ export const createPassengers = (adultCount: number, childCount: number) =>
       document: { type: 'UNKNOWN', number: '' },
       notes: '',
       discount: '',
+      citizenship: '',
       isChildren: i >= adultCount,
       seat: '',
     }));

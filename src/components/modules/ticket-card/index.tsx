@@ -54,7 +54,13 @@ export const TicketCard = ({ element }: Props) => {
                 if (!element.ticket_pricing.base_price) {
                   return;
                 }
-                await handleSetTicket(element.ticket_id, element);
+                try {
+                  setLoading(true);
+                  await handleSetTicket(element.ticket_id, element);
+                } catch (error) {
+                  setLoading(false);
+                  console.log(error);
+                }
               }}
             />
           </div>

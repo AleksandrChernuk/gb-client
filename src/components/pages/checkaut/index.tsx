@@ -15,7 +15,7 @@ const Checkaut = async () => {
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">
       <section>
-        <Timer />
+        {/* <Timer /> */}
         <h1 className="sr-only">
           Бронюйте автобусні квитки до Європи з України швидко та зручно на GreenBus. Широкий вибір маршрутів, вигідні
           ціни, сучасні комфортабельні рейси та цілодобова підтримка.
