@@ -1,4 +1,3 @@
-import { usePassengers } from '../hooks/usePassengers';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import { Separator } from '@radix-ui/react-dropdown-menu';
@@ -20,19 +19,70 @@ import { PassengersButton } from '../components/PassengersButton';
 import { ChevronLeft } from 'lucide-react';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { useCallback, useState } from 'react';
 
 type Props = {
   variant: 'mobile' | 'desktop';
 };
 
 export default function PassengersCount({ variant }: Props) {
-  const { open, handleToggleOpen, handleBlur } = usePassengers();
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
+  const setPassenger = useSearchStore((state) => state.setPassenger);
+
+  const [a, setA] = useState(() => adult);
+  const [c, setC] = useState(() => children);
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      setPassenger('adult', a);
+      setPassenger('children', c);
+    }
+  };
+
+  const handleIncrement = ({ type }: { type: 'adult' | 'children' }) => {
+    switch (type) {
+      case 'adult':
+        return setA((p) => p + 1);
+
+      case 'children':
+        return setC((p) => p + 1);
+
+      default:
+        return;
+    }
+  };
+
+  const handleDecrement = ({ type }: { type: 'adult' | 'children' }) => {
+    switch (type) {
+      case 'adult':
+        return setA((p) => p - 1);
+
+      case 'children':
+        return setC((p) => p - 1);
+
+      default:
+        return;
+    }
+  };
+
+  const handleBlur = useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        setOpen(false);
+        setPassenger('adult', a);
+        setPassenger('children', c);
+      }
+    },
+    [a, c, setPassenger],
+  );
 
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const passCount = adult + children;
+  const passCount = a + c;
   const value =
     passCount === 1
       ? `${passCount} ${t('placeholderPassenger')}`
@@ -43,16 +93,14 @@ export default function PassengersCount({ variant }: Props) {
   switch (variant) {
     case 'mobile':
       return (
-        <Sheet open={open} onOpenChange={handleToggleOpen}>
+        <Sheet open={open} onOpenChange={handleOpenChange}>
           <SheetTrigger asChild>
             <MainSearchInput name="date" startIcon={<IconPass />} type="button" value={value} />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className="sr-only">Edit profile</SheetTitle>
-              <SheetDescription className="sr-only">
-                Make changes to your profile here. Click save when youre done.
-              </SheetDescription>
+              <SheetTitle className="sr-only"></SheetTitle>
+              <SheetDescription className="sr-only"></SheetDescription>
 
               <SheetClose asChild>
                 <Button
@@ -70,9 +118,19 @@ export default function PassengersCount({ variant }: Props) {
                   {t('placeholderPassengers')}
                 </h3>
                 <div>
-                  <PassengersButton type="adult" value={adult} />
+                  <PassengersButton
+                    handleIcrement={() => handleIncrement({ type: 'adult' })}
+                    handleDecrement={() => handleDecrement({ type: 'adult' })}
+                    type="adult"
+                    value={a}
+                  />
                   <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
-                  <PassengersButton type="children" value={children} />
+                  <PassengersButton
+                    handleIcrement={() => handleIncrement({ type: 'children' })}
+                    handleDecrement={() => handleDecrement({ type: 'children' })}
+                    type="children"
+                    value={c}
+                  />
                 </div>
               </div>
             </ScrollArea>
@@ -105,7 +163,7 @@ export default function PassengersCount({ variant }: Props) {
                   : `${passCount} ${t('placeholderPassengers')}`
             }
             onClick={() => {
-              handleToggleOpen();
+              setOpen((p) => !p);
             }}
           />
 
@@ -117,9 +175,19 @@ export default function PassengersCount({ variant }: Props) {
                 event.stopPropagation();
               }}
             >
-              <PassengersButton type="adult" value={adult} />
+              <PassengersButton
+                type="adult"
+                value={a}
+                handleIcrement={() => handleIncrement({ type: 'adult' })}
+                handleDecrement={() => handleDecrement({ type: 'adult' })}
+              />
               <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
-              <PassengersButton type="children" value={children} />
+              <PassengersButton
+                type="children"
+                value={c}
+                handleIcrement={() => handleIncrement({ type: 'children' })}
+                handleDecrement={() => handleDecrement({ type: 'children' })}
+              />
             </div>
           ) : null}
         </div>

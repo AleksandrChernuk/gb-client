@@ -1,20 +1,18 @@
 'use client';
 
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { useSearchStore } from '@/store/useSearch';
 import { Minus, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type Props = {
   type: 'adult' | 'children';
   value: number;
+  handleIcrement: () => void;
+  handleDecrement: () => void;
 };
 
-export const PassengersButton = ({ value, type }: Props) => {
+export const PassengersButton = ({ value, type, handleIcrement, handleDecrement }: Props) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
-
-  const decrementPassenger = useSearchStore((state) => state.decrementPassenger);
-  const incrementPassenger = useSearchStore((state) => state.incrementPassenger);
 
   const isAdult = type === 'adult';
   const maxValue = 10;
@@ -33,7 +31,7 @@ export const PassengersButton = ({ value, type }: Props) => {
             if (value === minValue) {
               return;
             }
-            decrementPassenger(type);
+            handleDecrement();
           }}
           aria-label={`Decrement ${isAdult ? 'adult' : 'children'}`}
         >
@@ -50,7 +48,7 @@ export const PassengersButton = ({ value, type }: Props) => {
             if (value === maxValue) {
               return;
             }
-            incrementPassenger(type);
+            handleIcrement();
           }}
           aria-label={`Increment ${isAdult ? 'adult' : 'children'}`}
         >

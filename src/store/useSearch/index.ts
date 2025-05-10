@@ -34,22 +34,11 @@ export const useSearchStore = create<SearchStore>()(
               [cityKey]: newCity,
             })),
 
-          incrementPassenger: (passengerType) => {
+          setPassenger: (passengerType, value) => {
             set((state) => {
-              const newValue = state[passengerType] + 1;
               return {
                 ...state,
-                [passengerType]: newValue,
-              };
-            });
-          },
-
-          decrementPassenger: (passengerType) => {
-            set((state) => {
-              const newValue = Math.max(0, state[passengerType] - 1);
-              return {
-                ...state,
-                [passengerType]: newValue,
+                [passengerType]: value,
               };
             });
           },

@@ -34,19 +34,8 @@ export default function Legal() {
                         {chunks}
                       </Link>
                     ),
-                    bt: (chunks) => (
-                      <Link href="/booking-terms" className="underline text-green-300 hover:text-green-100">
-                        {chunks}
-                      </Link>
-                    ),
-                    tt: (chunks) => (
-                      <Link href="/transport-terms" className="underline text-green-300 hover:text-green-100">
-                        {chunks}
-                      </Link>
-                    ),
                   })}
                 </FormLabel>
-                {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
               </div>
             </FormItem>
           );
