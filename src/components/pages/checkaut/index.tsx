@@ -3,19 +3,19 @@ import CheckoutForm from './modules/CheckoutForm';
 import { Container } from '@/components/shared/Container';
 import { getCookies } from '@/actions/cookie-actions';
 import Timer from './components/Timer';
-// import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 const Checkaut = async () => {
   const cookieRes = await getCookies('_p');
 
-  // if (!cookieRes) {
-  //   notFound();
-  // }
+  if (!cookieRes) {
+    notFound();
+  }
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">
       <section>
-        {/* <Timer /> */}
+        <Timer />
         <h1 className="sr-only">
           Бронюйте автобусні квитки до Європи з України швидко та зручно на GreenBus. Широкий вибір маршрутів, вигідні
           ціни, сучасні комфортабельні рейси та цілодобова підтримка.
