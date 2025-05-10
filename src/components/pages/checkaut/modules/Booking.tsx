@@ -43,6 +43,7 @@ export default function BookingSheet() {
 
   const array: TypeSeatsMap[] = useMemo(() => {
     const seats = selectedTicket?.details?.seats_map;
+
     return Array.isArray(seats) ? seats : [];
   }, [selectedTicket]);
 
@@ -103,13 +104,13 @@ export default function BookingSheet() {
           </SheetHeader>
           <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
             <div className="my-10 flex flex-col gap-2">
-              {array?.length > 0 ? (
+              {array.length === 1 && <SeatsList helm={true} seatRows={array[0].seats} />}
+
+              {array.length >= 2 && (
                 <FloorSheet
                   floor_first={<SeatsList helm={true} seatRows={array[0].seats} />}
                   floor_second={<SeatsList seatRows={array[1].seats} />}
                 />
-              ) : (
-                <SeatsList helm={true} seatRows={array[0].seats} />
               )}
             </div>
           </ScrollArea>
