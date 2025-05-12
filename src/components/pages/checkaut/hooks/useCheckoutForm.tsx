@@ -105,7 +105,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
       return;
     }
 
-    alert(JSON.stringify(formData));
+    console.log(JSON.stringify(formData));
   };
 
   return { methods, onSubmit, handleSubmit, error };
