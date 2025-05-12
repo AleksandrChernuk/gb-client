@@ -66,6 +66,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
 
   const onSubmit = async (formData: FormValues) => {
     if (!ticket || !from || !to) {
+      console.log('no data');
       setError('no data');
       return;
     }
