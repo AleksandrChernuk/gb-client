@@ -1,3 +1,5 @@
+'use server';
+
 import { IOrder } from '@/types/order-interface';
 
 export type IOrderBody = {
@@ -16,6 +18,7 @@ export async function checkout(body: IOrderBody) {
     });
 
     if (!response.ok) {
+      console.error('Checkout error');
       throw new Error('Checkout failed');
     }
     const data = await response.json();

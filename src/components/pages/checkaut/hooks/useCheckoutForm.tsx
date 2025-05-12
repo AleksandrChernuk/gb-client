@@ -79,6 +79,9 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
           result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
         });
 
+        console.log('data', data);
+        console.log('signature', signature);
+
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = 'https://www.liqpay.ua/api/3/checkout';
