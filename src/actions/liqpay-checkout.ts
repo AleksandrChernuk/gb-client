@@ -1,10 +1,9 @@
-'use server';
-
 import { IOrder } from '@/types/order-interface';
 
 export type IOrderBody = {
   order: IOrder;
   result_url: string;
+  locale: string;
 };
 
 export async function checkout(body: IOrderBody) {

@@ -19,9 +19,9 @@ export async function POST(req: Request) {
       description: 'Оплата за квитки',
       order_id: randomUUID(),
       version: '3',
-      rresult_url: `${order.result_url}`,
+      result_url: `${order.result_url}`,
     });
-    
+
     const liqpaydata = Buffer.from(JSON.stringify(params)).toString('base64');
     const signature = liqpay.str_to_sign(process.env.LIQPAY_PRIVATE_KEY + liqpaydata + process.env.LIQPAY_PRIVATE_KEY);
     return NextResponse.json({ data: liqpaydata, signature });

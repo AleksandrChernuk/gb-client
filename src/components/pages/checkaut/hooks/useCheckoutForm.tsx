@@ -77,6 +77,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
         const { data, signature } = await checkout({
           order: normalizeData({ from_city_id: from, to_city_id: to, locale, formData, route: ticket, user }),
           result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
+          locale,
         });
 
         console.log('data', data);
@@ -86,7 +87,6 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
         form.method = 'POST';
         form.action = 'https://www.liqpay.ua/api/3/checkout';
         form.style.display = 'none';
-        form.target = '_blank';
 
         const addInput = (name: string, value: string) => {
           const input = document.createElement('input');
