@@ -26,10 +26,14 @@ export default function Legal() {
                     aria-invalid={Boolean(fieldState?.invalid)}
                   />
                 </FormControl>
-                <FormLabel className="text-md">
+                <FormLabel className="text-xs">
                   {t.rich('consent_text', {
                     pp: (chunks) => (
-                      <Link href="/privacy-policy" className="underline text-green-300 hover:text-green-100">
+                      <Link
+                        href="/privacy-policy"
+                        prefetch={false}
+                        className="underline text-green-300 hover:text-green-100"
+                      >
                         {chunks}
                       </Link>
                     ),

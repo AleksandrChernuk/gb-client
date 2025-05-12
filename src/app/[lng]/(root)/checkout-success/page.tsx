@@ -1,4 +1,6 @@
 import { Container } from '@/components/shared/Container';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 
 export async function generateMetadata() {
   return {
@@ -21,7 +23,13 @@ export async function generateMetadata() {
 export default function CheckoutSuccessPage() {
   return (
     <section>
-      <Container size="l">Blog page</Container>
+      <Container size="l" className="py-20">
+        <Button asChild variant={'default'} size={'default'}>
+          <Link href={'/'} prefetch={false}>
+            Home
+          </Link>
+        </Button>
+      </Container>
     </section>
   );
 }
