@@ -13,6 +13,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useLocale } from 'next-intl';
 import { useCurrentTicketStore } from '@/store/useCurrentTicket';
 import { useUserStore } from '@/store/useStore';
+import { toast } from 'sonner';
 
 export function useCheckoutForm({ adult, child }: { adult: string; child: string }) {
   const adultCount = Number(adult);
@@ -64,10 +65,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
   const { handleSubmit } = methods;
 
   const onSubmit = async (formData: FormValues) => {
-    console.log(formData);
     if (!ticket || !from || !to) {
-      console.log('no data');
-
       setError('no data');
       return;
     }
@@ -79,9 +77,6 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
           result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
           locale,
         });
-
-        console.log('data', data);
-        console.log('signature', signature);
 
         const form = document.createElement('form');
         form.method = 'POST';
@@ -107,8 +102,13 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
       }
       return;
     }
-
-    console.log(JSON.stringify(formData));
+    toast.info('ok', {
+      description: JSON.stringify(formData),
+      action: {
+        label: 'Close',
+        onClick: () => console.log('Close'),
+      },
+    });
   };
 
   return { methods, onSubmit, handleSubmit, error };

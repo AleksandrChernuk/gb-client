@@ -10,7 +10,6 @@ const liqpay = new Liqpay(process.env.LIQPAY_PUBLIC_KEY, process.env.LIQPAY_PRIV
 export async function POST(req: Request) {
   try {
     const order = (await req.json()) as IOrderBody;
-    console.log('order.result_url', order.result_url);
 
     const params = liqpay.cnb_params({
       action: 'pay',

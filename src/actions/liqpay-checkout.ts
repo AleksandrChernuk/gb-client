@@ -17,13 +17,11 @@ export async function checkout(body: IOrderBody) {
     });
 
     if (!response.ok) {
-      console.error('Checkout error');
       throw new Error('Checkout failed');
     }
     const data = await response.json();
     return data as { data: string; signature: string };
   } catch (error) {
-    console.error('Checkout error:', error);
     throw error;
   }
 }
