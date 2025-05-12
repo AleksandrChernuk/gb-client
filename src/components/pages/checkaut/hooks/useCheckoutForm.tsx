@@ -64,7 +64,10 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
   const { handleSubmit } = methods;
 
   const onSubmit = async (formData: FormValues) => {
+    console.log(formData);
     if (!ticket || !from || !to || !user) {
+      console.log('no data');
+
       setError('no data');
       return;
     }
@@ -80,6 +83,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
         form.method = 'POST';
         form.action = 'https://www.liqpay.ua/api/3/checkout';
         form.style.display = 'none';
+        form.target = '_blank';
 
         const addInput = (name: string, value: string) => {
           const input = document.createElement('input');
