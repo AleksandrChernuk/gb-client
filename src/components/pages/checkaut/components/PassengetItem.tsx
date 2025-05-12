@@ -4,13 +4,13 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import BirthdayInput from './BdayInput';
+// import BirthdayInput from './BdayInput';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { DocumentInput } from './DocumentTypeSelect';
-import DiscountSelect from './DiscountSelect';
-import CitizenshipSelect from './CitizenshipSelect';
-import GenderSelect from './GenderSelect';
+// import { DocumentInput } from './DocumentTypeSelect';
+// import DiscountSelect from './DiscountSelect';
+// import CitizenshipSelect from './CitizenshipSelect';
+// import GenderSelect from './GenderSelect';
 
 export const PassengetItem = ({ i }: { i: number }) => {
   const { control } = useFormContext();
@@ -52,13 +52,13 @@ export const PassengetItem = ({ i }: { i: number }) => {
               </FormItem>
             )}
           />
-          <DocumentInput
+          {/* <DocumentInput
             name={{
               type: `passengers.${i}.document.type`,
               number: `passengers.${i}.document.number`,
             }}
-          />
-          <FormField
+          /> */}
+          {/* <FormField
             control={control}
             name={`passengers.${i}.dob`}
             render={({ field, fieldState }) => {
@@ -74,10 +74,10 @@ export const PassengetItem = ({ i }: { i: number }) => {
                 </FormItem>
               );
             }}
-          />
-          <CitizenshipSelect name={`passengers.${i}.citizenship`} />
+          /> */}
+          {/* <CitizenshipSelect name={`passengers.${i}.citizenship`} />
           <DiscountSelect name={`passengers.${i}.discount`} />
-          <GenderSelect name={`passengers.${i}.gender`} />
+          <GenderSelect name={`passengers.${i}.gender`} /> */}
           <FormField
             control={control}
             name={`passengers.${i}.notes`}

@@ -32,5 +32,5 @@ export default async function Checkout({
 
   setRequestLocale(lng as Locale);
 
-  return <Checkaut locale={lng as Locale} />;
+  return <Checkaut />;
 }

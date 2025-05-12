@@ -3,15 +3,9 @@ import CheckoutForm from './modules/CheckoutForm';
 import { Container } from '@/components/shared/Container';
 import { getCookies } from '@/actions/cookie-actions';
 import Timer from './components/Timer';
-import { redirect } from '@/i18n/routing';
-import { Locale } from 'next-intl';
 
-const Checkaut = async ({ locale }: { locale: Locale }) => {
+const Checkaut = async () => {
   const cookieRes = await getCookies('_p');
-
-  if (!cookieRes) {
-    redirect({ href: '/', locale });
-  }
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">

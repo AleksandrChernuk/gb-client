@@ -4,14 +4,9 @@ export type TPassenger = {
   id: string;
   name: string;
   surname: string;
-  dob: string;
-  document: { type: string; number: string };
   notes: string;
-  discount: string;
-  gender: string;
-  citizenship: string;
   isChildren: boolean;
-  seat: string;
+  price: string;
 };
 
 export type FormValues = {
@@ -20,6 +15,5 @@ export type FormValues = {
   phone: string;
   payment: 'card' | 'on_boarding' | 'booking';
   accept_rules: boolean;
-  processing_data: boolean;
   selected_seats: ISeat[] | [];
 };

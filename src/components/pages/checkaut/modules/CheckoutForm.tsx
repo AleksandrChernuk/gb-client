@@ -68,9 +68,8 @@ export default function CheckoutForm({ adult, child }: { adult: string; child: s
             <ToPay />
 
             <Legal />
-
-            <Button variant={'default'} className="w-full p-4" type="submit">
-              {methods.watch('payment') !== 'card' ? t('book') : t('pay')}
+            <Button variant="default" className="w-full p-4" type="submit">
+              {methods.watch('payment') === 'card' ? t('pay') : t('book')}
             </Button>
           </div>
         </div>

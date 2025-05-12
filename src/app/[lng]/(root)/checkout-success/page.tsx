@@ -1,3 +1,5 @@
+import { Container } from '@/components/shared/Container';
+
 export async function generateMetadata() {
   return {
     robots: {
@@ -16,6 +18,10 @@ export async function generateMetadata() {
   };
 }
 
-export default function CheckoutSuccess() {
-  return <CheckoutSuccess />;
+export default function CheckoutSuccessPage() {
+  return (
+    <section>
+      <Container size="l">Blog page</Container>
+    </section>
+  );
 }

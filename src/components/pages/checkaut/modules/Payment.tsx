@@ -32,6 +32,7 @@ const PAYMENT_TYPES = [
 
 export default function Payment() {
   const { control } = useFormContext();
+
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   return (
     <FormField

@@ -4,13 +4,28 @@ import { CheckoutSchema } from '@/schemas/checkout.form.schema';
 import { FormValues } from '@/types/checkout-from.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createPassengers } from '../helpers/createPassList';
-import { toast } from 'sonner';
+import { checkout } from '@/actions/liqpay-checkout';
+import normalizeData from '../helpers/normalizeData';
+import { useSearchStore } from '@/store/useSearch';
+import { useShallow } from 'zustand/react/shallow';
+import { useLocale } from 'next-intl';
+import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useUserStore } from '@/store/useStore';
 
 export function useCheckoutForm({ adult, child }: { adult: string; child: string }) {
   const adultCount = Number(adult);
   const childCount = Number(child);
+
+  const [error, setError] = useState<string | null>(null);
+
+  const from = useSearchStore(useShallow((state) => state.from?.id));
+  const to = useSearchStore(useShallow((state) => state.to?.id));
+  const ticket = useCurrentTicketStore(useShallow((state) => state.selectedTicket));
+  const user = useUserStore(useShallow((state) => state.currentUser));
+
+  const locale = useLocale();
 
   const defaultPassengers = useMemo(() => createPassengers(adultCount, childCount), [adultCount, childCount]);
 
@@ -22,7 +37,6 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
       email: '',
       payment: 'booking',
       accept_rules: false,
-      processing_data: false,
       phone: '',
       selected_seats: [],
     },
@@ -49,17 +63,46 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
 
   const { handleSubmit } = methods;
 
-  const onSubmit = async (data: FormValues) => {
-    console.log(data);
-    console.log('Form Submitted:', data);
-    toast('Form Submitted:', {
-      description: JSON.stringify(data),
-      action: {
-        label: 'Undo',
-        onClick: () => console.log('Close'),
-      },
-    });
+  const onSubmit = async (formData: FormValues) => {
+    if (!ticket || !from || !to || !user) {
+      setError('no data');
+      return;
+    }
+
+    if (formData.payment === 'card') {
+      try {
+        const { data, signature } = await checkout({
+          order: normalizeData({ from_city_id: from, to_city_id: to, locale, formData, route: ticket, user }),
+          result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
+        });
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://www.liqpay.ua/api/3/checkout';
+        form.style.display = 'none';
+
+        const addInput = (name: string, value: string) => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = value;
+          form.appendChild(input);
+        };
+
+        addInput('data', data);
+        addInput('signature', signature);
+
+        document.body.appendChild(form);
+        form.submit();
+      } catch (error) {
+        console.log(error);
+        setError('error paymant');
+      }
+      return;
+    }
+
+    alert(JSON.stringify(formData));
   };
 
-  return { methods, onSubmit, handleSubmit };
+  return { methods, onSubmit, handleSubmit, error };
 }
