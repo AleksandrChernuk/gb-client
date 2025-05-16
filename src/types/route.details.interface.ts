@@ -1,23 +1,9 @@
-import { IStops } from './stops-interface';
+import { IStops } from './stops.interface';
 import { IDiscount } from './discount-interface';
-import { IReturnRules } from './return_rules-interface';
-import { TypeSeatsMap } from './seat-interface';
-import { IInsurer } from './insurer-interface';
-import { IFreeSeats } from './free_seats-interface';
-
-export interface IGetRouteDetailsBody {
-  routeId: string;
-  intervalId: string;
-  fromCityId: number | string;
-  toCityId: number | string;
-  fromStationId: number | string;
-  toStationId: number | string;
-  providerId: string;
-  travelDate: string;
-  locale: string;
-  passengersCount: number;
-  metadata: unknown | null;
-}
+import { IReturnRules } from './return.rules.interface';
+import { TypeSeatsMap } from './seat.interface';
+import { IInsurer } from './insurer.interface';
+import { IFreeSeats } from './free.seats.interface';
 
 export interface IRouteDetailsResponse {
   providerLocationFrom: string | null;
@@ -33,9 +19,14 @@ export interface IRouteDetailsResponse {
   seats_count: number | null;
   seats_map: TypeSeatsMap[] | string | null;
   free_seats_map: IFreeSeats[] | null;
+  max_tickets?: number | string;
+  need_doc_expire_date?: boolean | string;
+  need_citizenship?: boolean | string;
+  need_gender?: boolean | string;
+  need_middlename?: boolean | string;
   luggage_fee: number | null;
   luggage_max_count: number | null;
-  luggage_rules: string[] | null;
+  luggage_rules: string[] | string | null;
   amenities: string[] | null;
   insurer: IInsurer | null;
 }

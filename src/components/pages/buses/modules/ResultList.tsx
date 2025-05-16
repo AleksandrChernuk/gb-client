@@ -1,15 +1,15 @@
 'use client';
 
-import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { useFilterTickets } from '@/store/useFilterTickets';
 import { TicketCard } from '@/components/modules/ticket-card';
-import useTicketsSearch from './hooks/useTicketsSearch';
-import { Loader } from './components/Loader';
-import { ErrorTravel } from './components/ErrorTravel';
-import { NoTravel } from './components/NoTravel';
+import { Loader } from '../components/Loader';
+import { ErrorTravel } from '../components/ErrorTravel';
+import { NoTravel } from '../components/NoTravel';
+import useTicketsSearch from '../hooks/useTicketsSearch';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();
-  const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets);
+  const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   if (isFetching) {
     return <Loader />;

@@ -1,4 +1,4 @@
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
@@ -16,9 +16,9 @@ export default function Details({ id }: Props) {
   const currentLocale = useLocale();
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
-  const ticketDetails = useCurrentTicketStore((state) => state.tickets[id]);
+  const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
 
-  const loadingDetails = useCurrentTicketStore((state) => state.loadingTickets);
+  const loadingDetails = useCurrentTicket((state) => state.loadingTickets);
 
   const isLoading = loadingDetails[id];
 
@@ -66,14 +66,15 @@ export default function Details({ id }: Props) {
               {t('luggage')}:
             </h5>
             <ul className="flex flex-col gap-1">
-              {ticketDetails?.details?.luggage_rules.map((el) => (
-                <li
-                  key={el}
-                  className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
-                >
-                  {el}
-                </li>
-              ))}
+              {Array.isArray(ticketDetails?.details?.luggage_rules) &&
+                ticketDetails?.details?.luggage_rules.map((el) => (
+                  <li
+                    key={el}
+                    className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
+                  >
+                    {el}
+                  </li>
+                ))}
             </ul>
           </div>
         )}

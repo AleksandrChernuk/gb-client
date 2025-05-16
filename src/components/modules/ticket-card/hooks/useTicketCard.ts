@@ -3,18 +3,18 @@
 import { useSearchStore } from '@/store/useSearch';
 import { IRouteResponse } from '@/types/route.types';
 import { useLocale } from 'next-intl';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useShallow } from 'zustand/react/shallow';
 import { useRouter } from '@/i18n/routing';
-import { setCookie } from '@/actions/cookie-actions';
+import { setCookie } from '@/actions/cookie.actions';
 import { useState } from 'react';
 
 export default function useTicketCard() {
   const [loading, setLoading] = useState(false);
 
-  const getDetailsTicket = useCurrentTicketStore((state) => state.getDetailsTicket);
-  const setSelectedTicket = useCurrentTicketStore(useShallow((state) => state.setSelectedTicket));
-  const setSelectedTicketId = useCurrentTicketStore(useShallow((state) => state.setSelectedTicketId));
+  const getDetailsTicket = useCurrentTicket((state) => state.getDetailsTicket);
+  const setSelectedTicket = useCurrentTicket(useShallow((state) => state.setSelectedTicket));
+  const setSelectedTicketId = useCurrentTicket(useShallow((state) => state.setSelectedTicketId));
 
   const [from, to, adult, children, date] = useSearchStore(
     useShallow((state) => [state.from, state.to, state.adult, state.children, state.date]),

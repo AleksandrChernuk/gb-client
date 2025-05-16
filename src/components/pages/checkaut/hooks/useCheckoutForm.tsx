@@ -1,17 +1,17 @@
 'use client';
 
 import { CheckoutSchema } from '@/schemas/checkout.form.schema';
-import { FormValues } from '@/types/checkout-from.types';
+import { FormValues } from '@/types/checkout.from.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useEffect, useMemo, useState } from 'react';
 import { createPassengers } from '../helpers/createPassList';
-import { checkout } from '@/actions/liqpay-checkout';
+import { checkout } from '@/actions/liqpay.checkout.actions';
 import normalizeData from '../helpers/normalizeData';
 import { useSearchStore } from '@/store/useSearch';
 import { useShallow } from 'zustand/react/shallow';
 import { useLocale } from 'next-intl';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useUserStore } from '@/store/useStore';
 import { toast } from 'sonner';
 
@@ -23,7 +23,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
 
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
-  const ticket = useCurrentTicketStore(useShallow((state) => state.selectedTicket));
+  const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const locale = useLocale();

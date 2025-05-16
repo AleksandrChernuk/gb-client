@@ -1,7 +1,7 @@
 'use client';
 
-import { getRoutes } from '@/actions/route-actions';
-import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { getRoutes } from '@/actions/route.actions';
+import { useFilterTickets } from '@/store/useFilterTickets';
 import { useSearchStore } from '@/store/useSearch';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
@@ -14,7 +14,7 @@ export default function useTicketsSearch() {
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
   const date = useSearchStore(useShallow((state) => state.date));
-  const setTickets = useFilterTicketsStore((state) => state.setTickets);
+  const setTickets = useFilterTickets((state) => state.setTickets);
 
   const currentLanguage = useLocale();
 

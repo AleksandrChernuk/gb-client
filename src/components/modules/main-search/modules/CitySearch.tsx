@@ -25,6 +25,7 @@ import { ChevronLeft } from 'lucide-react';
 import { ClearInputButton } from '../components/ClearInputButton';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { useIsFetching } from '@tanstack/react-query';
 
 type Props = {
   name: 'from' | 'to';
@@ -35,6 +36,7 @@ export default function CitySearch({ name, variant }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const city = useSearchStore((state) => state[name]);
   const swap = useSearchStore((state) => state.swap);
+  const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
 
   const errors = useSearchStore((state) => state.errors[name]);
   const setErrors = useSearchStore((state) => state.setErrors);
@@ -45,7 +47,6 @@ export default function CitySearch({ name, variant }: Props) {
     value,
     onInputChange,
     cities,
-    loading,
     placeholder,
     onSelectCity,
     highlightedIndex,
@@ -91,29 +92,31 @@ export default function CitySearch({ name, variant }: Props) {
           />
           {open ? (
             <div
-              className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px]"
+              className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden"
               onMouseDown={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
               }}
             >
-              {!loading &&
-                cities &&
-                cities.map((el, index) => {
-                  const element = extractLocationDetails(el, locale);
-                  return (
-                    <div key={el.id}>
-                      <CityItem
-                        el={element}
-                        isSelected={city?.id === el.id}
-                        isHighlighted={highlightedIndex === index}
-                        handleSelectCity={() => onSelectCity(el)}
-                      />
-                    </div>
-                  );
-                })}
-              {!loading && !cities.length && <NotFoundCity />}
-              {loading && <LoaderCity />}
+              <ScrollArea className="overflow-y-scroll max-h-80">
+                {!isFetchingLocations &&
+                  cities &&
+                  cities.map((el, index) => {
+                    const element = extractLocationDetails(el, locale);
+                    return (
+                      <div key={el.id}>
+                        <CityItem
+                          el={element}
+                          isSelected={city?.id === el.id}
+                          isHighlighted={highlightedIndex === index}
+                          handleSelectCity={() => onSelectCity(el)}
+                        />
+                      </div>
+                    );
+                  })}
+                {!isFetchingLocations && !cities.length && <NotFoundCity />}
+                {!!isFetchingLocations && <LoaderCity />}
+              </ScrollArea>
             </div>
           ) : null}
         </div>
@@ -174,7 +177,7 @@ export default function CitySearch({ name, variant }: Props) {
                 </div>
               </div>
               <div id="list-container" className="space-y-2 mt-11">
-                {!loading &&
+                {!isFetchingLocations &&
                   cities &&
                   cities.map((el, index) => {
                     const element = extractLocationDetails(el, locale);
@@ -188,8 +191,8 @@ export default function CitySearch({ name, variant }: Props) {
                       />
                     );
                   })}
-                {!loading && !cities.length && <NotFoundCity />}
-                {loading && <LoaderCity />}
+                {!isFetchingLocations && !cities.length && <NotFoundCity />}
+                {!!isFetchingLocations && <LoaderCity />}
               </div>
             </ScrollArea>
           </SheetContent>

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
-import { useRequestPartnershipSchema } from '@/schemas/request.partnership.shema';
+import { useRequestPartnershipSchema } from '@/schemas/request.partnership.schema';
 import { IRequestPartnershipForm } from '@/types/request.partnership';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';

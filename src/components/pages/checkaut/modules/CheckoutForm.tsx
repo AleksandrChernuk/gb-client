@@ -4,7 +4,7 @@ import { FormProvider } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import Passengers from './Passengers';
 import CheckoutCard from '../components/CheckoutCard';
 import BookingSheet from './Booking';
@@ -21,9 +21,9 @@ export default function CheckoutForm({ adult, child }: { adult: string; child: s
   const { handleSubmit, onSubmit, methods } = useCheckoutForm({ adult, child });
   const router = useRouter();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  const resetCurrentTicket = useCurrentTicketStore((state) => state.resetCurrentTicket);
-  const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
+  const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   useEffect(() => {
     return () => {

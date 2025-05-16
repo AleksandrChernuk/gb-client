@@ -9,17 +9,17 @@ import { useSearchStore } from '@/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ArrowRight } from 'lucide-react';
-import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { useFilterTickets } from '@/store/useFilterTickets';
 import useTicketsSearch from '../hooks/useTicketsSearch';
-import { MobileFilter } from '../Filter';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MobileFilter } from '../modules/Filter';
 
 export const Information = () => {
   const date = useSearchStore(useShallow((state) => state.date));
   const from = useSearchStore(useShallow((state) => state.from));
   const to = useSearchStore(useShallow((state) => state.to));
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
-  const filteredTickets = useFilterTicketsStore((state) => state.filteredTickets);
+  const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   const { isFetching } = useTicketsSearch();
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);

@@ -15,14 +15,13 @@ import { SlidersHorizontal, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useTranslations } from 'next-intl';
-
-import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { useFilterTickets } from '@/store/useFilterTickets';
 import { useSearchStore } from '@/store/useSearch';
 import { useShallow } from 'zustand/react/shallow';
-import useTicketsSearch from './hooks/useTicketsSearch';
-import FilterSortByList from './components/FilterRadioGroup';
-import FilterCheckBoxList from './components/FilterCheckBoxList';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import useTicketsSearch from '../hooks/useTicketsSearch';
+import FilterSortByList from '../components/FilterRadioGroup';
+import FilterCheckBoxList from '../components/FilterCheckBoxList';
 
 type TMobileFilterHeader = {
   title: string;
@@ -49,7 +48,7 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
 };
 
 export const MobileFilter = () => {
-  const resetFilters = useFilterTicketsStore((state) => state.resetFilters);
+  const resetFilters = useFilterTickets((state) => state.resetFilters);
   const { isFetching } = useTicketsSearch();
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
 

@@ -29,7 +29,7 @@ export async function getCookies(data: string) {
       throw new Error('cookie data not found');
     }
     const parsed = JSON.parse(cookieData.value);
- 
+
     return parsed;
   } catch (error) {
     console.log(error);

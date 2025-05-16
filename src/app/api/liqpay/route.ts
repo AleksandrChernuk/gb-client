@@ -3,7 +3,7 @@
 import * as Liqpay from 'liqpay-sdk-nodejs';
 import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
-import { IOrderBody } from '@/actions/liqpay-checkout';
+import { IOrderBody } from '@/actions/liqpay.checkout.actions';
 
 const liqpay = new Liqpay(process.env.LIQPAY_PUBLIC_KEY, process.env.LIQPAY_PRIVATE_KEY);
 

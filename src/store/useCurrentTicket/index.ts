@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { IRouteDetailsResponse } from '@/types/routeDetails-interface';
-import { getRouteDetails } from '@/actions/route-actions';
+import { IRouteDetailsResponse } from '@/types/route.details.interface';
+import { getRouteDetails } from '@/actions/route.actions';
 import { IRouteResponse } from '@/types/route.types';
 import { CurrentTicketStore } from './types';
-import { DeleteCookie } from '@/actions/cookie-actions';
+import { DeleteCookie } from '@/actions/cookie.actions';
 
-export const useCurrentTicketStore = create<CurrentTicketStore>()(
+export const useCurrentTicket = create<CurrentTicketStore>()(
   devtools(
     immer(
       persist(
@@ -51,7 +51,7 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
             if (blockedDetailsGet.includes(route?.provider_name)) {
               set((state) => {
                 state.tickets[route?.ticket_id] = route;
-                state.selectedTicketId = route.identificators.route_id;
+                state.selectedTicketId = route.identificators.route_id || null;
               });
 
               return;
@@ -68,13 +68,20 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
                 intervalId: route.identificators.intervalId || '',
                 fromCityId,
                 toCityId,
-                fromStationId: route.departure.station_id || 1,
-                toStationId: route.arrival.station_id || 1,
+                fromStationId: `${route.departure.station_id}`,
+                toStationId: `${route.arrival.station_id}`,
                 providerId: route.identificators.provider_id,
                 travelDate,
+                currency: 'UAH',
                 locale,
                 passengersCount: passCount,
                 metadata: route.identificators.metadata,
+                timetable_id: route.identificators.timetable_id,
+                bustype_id: route.identificators.bus_id,
+                has_plan: route.identificators.has_plan,
+                request_get_free_seats: route.identificators.request_get_free_seats,
+                request_get_discount: route.identificators.request_get_discount,
+                request_get_baggage: route.identificators.request_get_baggage,
               });
             } catch (error) {
               console.error('Ошибка при получении данных маршрута:', error);
@@ -105,6 +112,8 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
               ...route,
               details: updatedDetails,
             };
+
+            console.log(updatedRoute);
 
             set((state) => ({
               ...state,
@@ -148,13 +157,20 @@ export const useCurrentTicketStore = create<CurrentTicketStore>()(
                 intervalId: route.identificators.intervalId || '',
                 fromCityId,
                 toCityId,
-                fromStationId: route.departure.station_id || 1,
-                toStationId: route.arrival.station_id || 1,
+                fromStationId: `${route.departure.station_id}`,
+                toStationId: `${route.arrival.station_id}`,
                 providerId: route.identificators.provider_id,
                 travelDate,
+                currency: 'UAH',
                 locale,
                 passengersCount: passCount,
                 metadata: route.identificators.metadata,
+                timetable_id: route.identificators.timetable_id,
+                bustype_id: route.identificators.bus_id,
+                has_plan: route.identificators.has_plan,
+                request_get_free_seats: route.identificators.request_get_free_seats,
+                request_get_discount: route.identificators.request_get_discount,
+                request_get_baggage: route.identificators.request_get_baggage,
               });
             } catch (error) {
               console.log('Ошибка при получении данных маршрута:', error);

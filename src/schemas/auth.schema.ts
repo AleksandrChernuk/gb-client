@@ -1,5 +1,5 @@
+import { emailShema, nameShema, passwordShema } from '@/constans/schemas.constans';
 import * as z from 'zod';
-import { emailShema, nameShema, passwordShema } from '.';
 
 export const signupSchema = z.object({
   userName: nameShema,

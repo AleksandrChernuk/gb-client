@@ -14,9 +14,9 @@ import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { signin } from '@/services/authService';
 import { useRouter } from '@/i18n/routing';
 import { useUserStore } from '@/store/useStore';
+import { signin } from '@/actions/auth.service';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);

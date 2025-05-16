@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { filterRoutesByCarriers, sortedCarriers, sortedRoutes } from './helpers';
 import { FilterTicketsStore } from './types';
 
-export const useFilterTicketsStore = create<FilterTicketsStore>()(
+export const useFilterTickets = create<FilterTicketsStore>()(
   devtools(
     immer((set) => ({
       tickets: [],

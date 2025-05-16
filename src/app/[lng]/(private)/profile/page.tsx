@@ -1,8 +1,8 @@
 'use client';
 
+import { logout } from '@/actions/auth.service';
 import { Button } from '@/components/ui/button';
 import { Link, useRouter } from '@/i18n/routing';
-import { logout } from '@/services/authService';
 import { useUserStore } from '@/store/useStore';
 import Image from 'next/image';
 

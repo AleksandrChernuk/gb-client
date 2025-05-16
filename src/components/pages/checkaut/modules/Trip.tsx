@@ -1,12 +1,12 @@
 'use client';
 
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import TicketRouteMobile from '@/components/shared/TicketRouteMobile';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Trip() {
-  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { ISeat, ISeatRow } from '@/types/seat-interface';
+import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
 import Seat from './Seat';
 import { toast } from 'sonner';

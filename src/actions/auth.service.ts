@@ -1,7 +1,6 @@
-import { signinResponseSchema } from '@/schemas/authResponse.schema';
-import { TypeSignin, TypeSignup, TypeVerifyCode } from '../types/authRequest.type';
-
+import { TypeSignin, TypeSignup, TypeVerifyCode } from '@/types/auth.request.type';
 import { deleteDeviceId, getDeviceId } from './deviceId.service';
+import { signinResponseSchema } from '@/schemas/auth.response.schema';
 
 export async function signup(data: TypeSignup, locale: string) {
   try {

@@ -2,13 +2,14 @@ import { Link } from '@/i18n/routing';
 import { Button } from '../ui/button';
 import { User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   variant: 'mobile' | 'desktop';
 };
 
 export const ProfileLink = ({ variant }: Props) => {
-  const t = useTranslations('common');
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   switch (variant) {
     case 'mobile':

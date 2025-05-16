@@ -1,4 +1,4 @@
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -10,8 +10,8 @@ export default function ToPay() {
   const children = useSearchStore((state) => state.children);
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   return (
     <div>

@@ -1,13 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ILocation } from '@/types/location.types';
-import useDebounce from './useDebounce';
-import { useLocationsQuery } from './useLocationsQuery';
 import { useSearchStore } from '@/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { useLocations } from './useLocations';
 
 type Tname = 'from' | 'to';
 
@@ -19,29 +18,43 @@ export const useCitySearch = ({ name }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const { debouncedValue } = useDebounce(value);
-  const { cities, loading } = useLocationsQuery(debouncedValue);
-  const city = useSearchStore((state) => state[name]);
   const setCity = useSearchStore((state) => state.setCity);
   const language = useLocale();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const t = useTranslations(MESSAGE_FILES.COMMON);
+  const { data } = useLocations();
+
+  const city = useSearchStore((state) => state[name]);
+
+  const cities = useMemo(() => {
+    if (!data) return [];
+
+    const q = value.trim().toLowerCase();
+
+    if (q) {
+      return data.filter((loc) => {
+        const nm = extractLocationDetails(loc, language).locationName.toLowerCase();
+        return nm.includes(q);
+      });
+    }
+
+    return data;
+  }, [data, value, language]);
 
   const onSelectCity = useCallback(
     (newCity: ILocation) => {
       setCity(name, newCity);
       const cityIndex = cities?.findIndex((el) => el.id === newCity.id) || 0;
       setHighlightedIndex(cityIndex);
-      setValue('');
+      setValue(extractLocationDetails(newCity, language).locationName);
       setOpen(false);
       inputRef.current?.blur();
     },
-    [setCity, name, cities],
+    [setCity, name, cities, language],
   );
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
-      setValue('');
       setOpen(false);
     }
   }, []);
@@ -83,18 +96,13 @@ export const useCitySearch = ({ name }: Props) => {
 
   const handleToggleOpen = useCallback(() => {
     setOpen((p) => !p);
-    if (!open) {
-      setValue('');
-    }
-  }, [open]);
+  }, []);
 
   return {
     open,
     handleToggleOpen,
     cities,
-    loading,
     highlightedIndex,
-    debouncedValue,
     onSelectCity,
     inputRef,
     onKeyDown,

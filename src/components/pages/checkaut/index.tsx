@@ -1,14 +1,14 @@
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import CheckoutForm from './modules/CheckoutForm';
 import { Container } from '@/components/shared/Container';
-import { getCookies } from '@/actions/cookie-actions';
+import { getCookies } from '@/actions/cookie.actions';
 import Timer from './components/Timer';
 
 const Checkaut = async () => {
   const cookieRes = await getCookies('_p');
 
   return (
-    <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">
+    <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">
       <section>
         <Timer />
         <h1 className="sr-only">

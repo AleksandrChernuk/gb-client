@@ -1,13 +1,13 @@
-import { ISeat } from './seat-interface';
+import { ISeat } from './seat.interface';
 
 export interface IOrder {
   provider_id: string;
-  route_id: string | null;
-  trip_id: string | null;
-  interval_id: string | null;
-  bus_id: string | null;
+  route_id?: string | null;
+  trip_id?: string | null;
+  interval_id?: string | null;
+  bus_id?: string | null;
   ticket_type_id: string | null;
-  route_name: string | null;
+  route_name?: string | null;
   from_city_id: number;
   from_city_name: string;
   to_city_id: number;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import DetailsStopsItem from './DetailsStopsItem';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
@@ -17,7 +17,7 @@ export default function DetailsStops({ id }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const currentLocale = useLocale();
 
-  const ticketDetails = useCurrentTicketStore((state) => state.tickets[id]);
+  const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
   const stops = ticketDetails?.details?.stops;
 
   return (

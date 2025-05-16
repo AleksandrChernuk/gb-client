@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormItem, FormLabel } from '@/components/ui/form';
 import { SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { Select, SelectContent } from '@radix-ui/react-select';
 import { useController, useFormContext } from 'react-hook-form';
 
@@ -10,8 +10,8 @@ type Props = {
 };
 
 const DiscountSelect = ({ name }: Props) => {
-  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  const isHydrated = useCurrentTicket((state) => state.isHydrated);
   const { control } = useFormContext();
 
   const {

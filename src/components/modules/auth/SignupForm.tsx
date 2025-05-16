@@ -14,9 +14,9 @@ import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { signup } from '@/services/authService';
 import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { signup } from '@/actions/auth.service';
 
 const SignupForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);

@@ -17,7 +17,7 @@ export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted 
     <div
       className={`p-2 rounded-lg ${isSelected && 'dark:bg-slate-700 bg-slate-200'} ${
         isHighlighted && 'dark:bg-slate-700 bg-slate-200'
-      }  min-w-[320px] cursor-pointer`}
+      } max-w-[380px] w-full cursor-pointer`}
       onClick={handleSelectCity}
     >
       <div className={`flex items-center justify-between gap-4`}>

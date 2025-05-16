@@ -3,5 +3,6 @@ export interface IDiscount {
   name: string | null;
   description: string | null;
   percent: number | null;
+  priceWithDiscount?: number | null;
   category: string | null;
 }

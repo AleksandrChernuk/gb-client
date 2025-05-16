@@ -1,7 +1,7 @@
 'use server';
 
-import { IGetRoutesBody, IRouteResponse } from '@/types/route.types';
-import { IGetRouteDetailsBody, IRouteDetailsResponse } from '@/types/routeDetails-interface';
+import { IGetRouteDetailsBody, IGetRoutesBody, IRouteResponse } from '@/types/route.types';
+import { IRouteDetailsResponse } from '@/types/route.details.interface';
 
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 

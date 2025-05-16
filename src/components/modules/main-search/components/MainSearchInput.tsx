@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 
 interface MainSearchInputProps extends React.ComponentProps<'input'> {
   name: string;
+  value: string;
   classNames?: string;
   open?: boolean;
   error?: string | null;
@@ -48,7 +49,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
         <input
           ref={ref}
           type={readOnly ? 'button' : 'text'}
-          value={value ?? ''}
+          value={value}
           placeholder={placeholder}
           readOnly={readOnly}
           autoComplete="off"

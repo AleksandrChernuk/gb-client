@@ -24,8 +24,8 @@ const buttonVariants = cva(
           'py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px]',
         primery:
           'w-full py-[14px] px-6 tablet:py-4 text-white rounded-full text-sm font-bold leading-6 tracking-normal tablet:max-h-[48px] tablet:max-h-[52px] laptop:max-h-[48px] laptop:max-h-[52px] ',
-        lg: ' ',
-        icon: ' ',
+        lg: '',
+        icon: '',
         mainSearch: 'h-auto px-6 py-4 tablet:min-w-[120px] laptop:min-w-[187px] laptop:max-w-[187px] grow-0',
       },
     },

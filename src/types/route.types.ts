@@ -1,5 +1,5 @@
 import { ILocation } from './location.types';
-import { IRouteDetailsResponse } from './routeDetails-interface';
+import { IRouteDetailsResponse } from './route.details.interface';
 
 export interface IGetRoutesBody {
   fromCityId: number;
@@ -10,31 +10,45 @@ export interface IGetRoutesBody {
 }
 
 export interface IGetRouteDetailsBody {
-  routeId: string;
-  intervalId: string;
-  fromCityId: number;
-  toCityId: number;
-  fromStationId: number | string;
-  toStationId: number | string;
+  routeId?: string;
+  intervalId?: string;
+  fromCityId?: number;
+  toCityId?: number;
+  fromStationId?: string;
+  toStationId?: string;
   providerId: string;
-  travelDate: string;
+  travelDate?: string;
   locale: string;
-  passengersCount: number;
-  metadata: unknown | null; // new
+  currency: string;
+  passengersCount?: number;
+  metadata?: unknown | null;
+  timetable_id?: string;
+  bustype_id?: string;
+  has_plan?: string | boolean;
+  request_get_free_seats?: string | boolean;
+  request_get_discount?: string | boolean;
+  request_get_baggage?: string | boolean;
 }
 
 export interface IRouteResponse {
   ticket_id: string;
   identificators: {
-    tripId: string | null;
-    intervalId: string | null;
-    distance: number | null;
-    bus_id: string | null;
-    route_id: string;
-    route_number: string | null;
-    route_name: string | null;
-    metadata: unknown | null;
+    tripId?: string;
+    intervalId?: string;
+    distance?: number;
+    bus_id?: string;
+    route_id?: string;
+    route_number?: string;
+    route_name?: string;
+    metadata?: unknown;
+    timetable_id?: string;
+    bustype_id?: string | null;
+    search_id?: string;
     provider_id: string;
+    has_plan?: boolean | string;
+    request_get_free_seats?: boolean | string;
+    request_get_discount?: boolean | string;
+    request_get_baggage?: boolean | string;
   };
   provider_name: string;
   allowed_operations: {

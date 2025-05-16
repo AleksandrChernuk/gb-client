@@ -1,12 +1,12 @@
 'use client';
 
 import FilterCheckBoxItem from './FilterCheckBoxItem';
-import { useFilterTicketsStore } from '@/store/useFilterTickets';
+import { useFilterTickets } from '@/store/useFilterTickets';
 
 export default function FilterCheckBoxList() {
-  const carriers = useFilterTicketsStore((state) => state.carriers);
-  const setFilterCarriers = useFilterTicketsStore((state) => state.setFilterCarriers);
-  const filterCarriers = useFilterTicketsStore((state) => state.filterCarriers);
+  const carriers = useFilterTickets((state) => state.carriers);
+  const setFilterCarriers = useFilterTickets((state) => state.setFilterCarriers);
+  const filterCarriers = useFilterTickets((state) => state.filterCarriers);
 
   const handleChange = (value: string) => {
     setFilterCarriers(value);

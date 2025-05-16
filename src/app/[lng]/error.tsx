@@ -18,14 +18,10 @@ export default function Error({ error, reset }: Props) {
 
   return (
     <div>
-      {t.rich('error', {
-        p: (chunks) => <p className="mt-4">{chunks}</p>,
-        retry: (chunks) => (
-          <button className="text-white underline underline-offset-2" onClick={reset} type="button">
-            {chunks}
-          </button>
-        ),
-      })}
+      <h1 className="mt-4">{t('errorTitle')}</h1>,
+      <button className="text-white underline underline-offset-2" onClick={reset} type="button">
+        {t('mainPageBtn')}
+      </button>
     </div>
   );
 }

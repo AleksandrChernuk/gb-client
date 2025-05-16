@@ -1,4 +1,4 @@
-import { ISeat } from './seat-interface';
+import { ISeat } from './seat.interface';
 
 export type TPassenger = {
   id: string;

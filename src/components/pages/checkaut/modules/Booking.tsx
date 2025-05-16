@@ -13,7 +13,7 @@ import {
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useCurrentTicketStore } from '@/store/useCurrentTicket';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
 import SeatsList from '../components/SeatsList';
@@ -22,11 +22,11 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import FloorSheet from '../components/FloorSwitch';
 import { useController, useFormContext, useWatch } from 'react-hook-form';
 import { useMemo } from 'react';
-import { TypeSeatsMap } from '@/types/seat-interface';
+import { TypeSeatsMap } from '@/types/seat.interface';
 
 export default function BookingSheet() {
-  const selectedTicket = useCurrentTicketStore((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicketStore((state) => state.isHydrated);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  const isHydrated = useCurrentTicket((state) => state.isHydrated);
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);

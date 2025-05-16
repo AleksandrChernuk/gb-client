@@ -1,6 +1,6 @@
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useStore/types';
-import { FormValues } from '@/types/checkout-from.types';
+import { FormValues } from '@/types/checkout.from.types';
 import { IOrder } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
 
