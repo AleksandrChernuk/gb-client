@@ -1,11 +1,29 @@
+'use client';
+
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import CheckoutForm from './modules/CheckoutForm';
 import { Container } from '@/components/shared/Container';
-import { getCookies } from '@/actions/cookie.actions';
 import Timer from './components/Timer';
+import { useSearchStore } from '@/store/useSearch';
+import { useShallow } from 'zustand/react/shallow';
+import { IconLoader } from '@/components/icons/IconLoader';
 
-const Checkaut = async () => {
-  const cookieRes = await getCookies('_p');
+const Checkaut = () => {
+  const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
+
+  if (!isHydrated) {
+    return (
+      <main role="main" className="grow bg-slate-50 dark:bg-slate-900 flex-1 flex items-center justify-center">
+        <section>
+          <Container size="xs">
+            <div className="py-5 size-12 tablet:size-20">
+              <IconLoader />
+            </div>
+          </Container>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">
@@ -19,7 +37,7 @@ const Checkaut = async () => {
           <div className="my-4 laptop:my-8">
             <BackRouteButton />
           </div>
-          <CheckoutForm adult={cookieRes?.adult} child={cookieRes?.children} />
+          <CheckoutForm />
         </Container>
       </section>
     </main>

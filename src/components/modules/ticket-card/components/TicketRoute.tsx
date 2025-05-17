@@ -1,5 +1,5 @@
 'use client';
-
+import arrow from '@/assets/icons/arrow-mobile.svg';
 import { IRouteResponse } from '@/types/route.types';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
@@ -8,6 +8,7 @@ import { IconRouteLeft } from '../icons/IconRouteLeft';
 import { IconRouteRigth } from '../icons/IconRouteRigth';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import Image from 'next/image';
 
 type Props = {
   route: IRouteResponse;
@@ -32,7 +33,7 @@ export default function TicketRoute({ route }: Props) {
   return (
     <>
       {matches ? (
-        <div className="flex">
+        <div className="flex gap-2">
           <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_from}</div>
             <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
@@ -41,8 +42,12 @@ export default function TicketRoute({ route }: Props) {
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_to}</div>
           </div>
 
+          <div className="w-[26px] h-[80px] shrink-0">
+            <Image src={arrow} alt="arrow" className="size-full" unoptimized />
+          </div>
+
           <div className="flex flex-col justify-between gap-4">
-            <div className="pl-8 space-y-0.5 relative poit_from poit_divider">
+            <div className="space-y-0.5">
               <div className="flex items-center text-slate-700 dark:text-slate-50 text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6">
                 {location_from}
               </div>
@@ -51,7 +56,7 @@ export default function TicketRoute({ route }: Props) {
               </div>
             </div>
 
-            <div className="pl-8 space-y-0.5 relative poit_to_wrapp poit_to">
+            <div className="space-y-0.5">
               <div className="flex items-center text-slate-700 dark:text-slate-50 text-sm font-bold tracking-normal leading-[16.8px] tablet:text-base tablet:leading-6">
                 {location_to}
               </div>

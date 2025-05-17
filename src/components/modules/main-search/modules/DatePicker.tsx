@@ -20,7 +20,6 @@ import {
 import { useDate } from '../hooks/useDate';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
@@ -68,7 +67,7 @@ export default function DatePicker({ variant }: Props) {
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
+            <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
               <div className="sticky top-0 left-0 right-0 z-50">
                 <div className="flex items-center justify-between w-full py-6 bg-slate-50 dark:bg-slate-900">
                   <h3 className="text-base font-bold leading-6 tracking-normal grow text-slate-700 dark:text-slate-50">
@@ -108,7 +107,7 @@ export default function DatePicker({ variant }: Props) {
                 numberOfMonths={3}
                 locale={locale}
               />
-            </ScrollArea>
+            </div>
           </SheetContent>
         </Sheet>
       );

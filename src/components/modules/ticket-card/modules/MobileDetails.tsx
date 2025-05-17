@@ -41,14 +41,10 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
         </Button>
       </SheetTrigger>
       <SheetContent>
-        {/*   */}
         <SheetHeader className="justify-between">
-          <SheetTitle className="sr-only">Edit profile</SheetTitle>
-          <SheetDescription className="sr-only">
-            Make changes to your profile here. Click save when youre done.
-          </SheetDescription>
+          <SheetTitle className="sr-only"></SheetTitle>
+          <SheetDescription className="sr-only"></SheetDescription>
           <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{t('details')}</h3>
-
           <SheetClose asChild>
             <Button
               variant={'default'}

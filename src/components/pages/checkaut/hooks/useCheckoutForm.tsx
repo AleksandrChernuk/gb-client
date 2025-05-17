@@ -15,9 +15,9 @@ import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useUserStore } from '@/store/useStore';
 import { toast } from 'sonner';
 
-export function useCheckoutForm({ adult, child }: { adult: string; child: string }) {
-  const adultCount = Number(adult);
-  const childCount = Number(child);
+export function useCheckoutForm() {
+  const adult = useSearchStore(useShallow((state) => state.adult));
+  const children = useSearchStore(useShallow((state) => state.children));
 
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,7 @@ export function useCheckoutForm({ adult, child }: { adult: string; child: string
 
   const locale = useLocale();
 
-  const defaultPassengers = useMemo(() => createPassengers(adultCount, childCount), [adultCount, childCount]);
+  const defaultPassengers = useMemo(() => createPassengers(adult, children), [adult, children]);
 
   const methods = useForm<FormValues>({
     mode: 'onSubmit',

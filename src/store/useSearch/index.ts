@@ -10,6 +10,8 @@ export const useSearchStore = create<SearchStore>()(
     immer(
       persist(
         (set, get) => ({
+          fromId: null,
+          toId: null,
           from: null,
           to: null,
           isHydrated: false,
@@ -82,6 +84,7 @@ export const useSearchStore = create<SearchStore>()(
         }),
         {
           name: 'main-search',
+
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true;

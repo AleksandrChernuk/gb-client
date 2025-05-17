@@ -13,7 +13,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { IconPass } from '@/components/icons/IconPass';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { Button } from '@/components/ui/button';
 import { PassengersButton } from '../components/PassengersButton';
 import { ChevronLeft } from 'lucide-react';
@@ -112,7 +111,7 @@ export default function PassengersCount({ variant }: Props) {
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
+            <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
               <div className="my-5">
                 <h3 className="mb-6 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
                   {t('placeholderPassengers')}
@@ -133,7 +132,7 @@ export default function PassengersCount({ variant }: Props) {
                   />
                 </div>
               </div>
-            </ScrollArea>
+            </div>
             <SheetFooter>
               <SheetClose asChild>
                 <Button

@@ -15,6 +15,7 @@ import SelectButton from './components/SelectButton';
 import TicketRoute from './components/TicketRoute';
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import TickedCard from './components/TickedCard';
 
 type Props = {
   element: IRouteResponse;
@@ -34,8 +35,30 @@ export const TicketCard = ({ element }: Props) => {
   const hasDetails = tickets[element.ticket_id]?.details != null;
 
   return (
-    <div className="relative shadow-xs tablet:shadow-none rounded-t-2xl tablet:rounded-none">
-      <div className="p-2   bg-white shadow-none tablet:p-4 dark:bg-slate-900 rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
+    <TickedCard
+      selectButton={
+        <SelectButton
+          price={element.ticket_pricing.base_price || 0}
+          variant="mobile"
+          loading={loading}
+          buttonText={t('selectButton')}
+          disabled={loading}
+          onClick={async () => {
+            if (!element.ticket_pricing.base_price) {
+              return;
+            }
+            try {
+              setLoading(true);
+              await handleSetTicket(element.ticket_id, element);
+            } catch (error) {
+              console.log(error);
+              setLoading(false);
+            }
+          }}
+        />
+      }
+    >
+      <div className="p-4 bg-white shadow-none tablet:p-4 dark:bg-slate-900 rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
         <div>
           <div className="text-center mb-4 text-black dark:text-white">{element.provider_name}</div>
           <div>
@@ -145,7 +168,7 @@ export const TicketCard = ({ element }: Props) => {
             </div>
             <div
               className={`hidden tablet:block overflow-hidden transition-all duration-100 ${
-                isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
               }`}
             >
               {isOpen && <Details id={element.ticket_id} />}
@@ -153,28 +176,6 @@ export const TicketCard = ({ element }: Props) => {
           </div>
         </div>
       </div>
-
-      <div className="tablet:hidden">
-        <SelectButton
-          price={element.ticket_pricing.base_price || 0}
-          variant="mobile"
-          loading={loading}
-          buttonText={t('selectButton')}
-          disabled={loading}
-          onClick={async () => {
-            if (!element.ticket_pricing.base_price) {
-              return;
-            }
-            try {
-              setLoading(true);
-              await handleSetTicket(element.ticket_id, element);
-            } catch (error) {
-              console.log(error);
-              setLoading(false);
-            }
-          }}
-        />
-      </div>
-    </div>
+    </TickedCard>
   );
 };

@@ -43,7 +43,6 @@ export default function BookingSheet() {
 
   const array: TypeSeatsMap[] = useMemo(() => {
     const seats = selectedTicket?.details?.seats_map;
-
     return Array.isArray(seats) ? seats : [];
   }, [selectedTicket]);
 
@@ -65,7 +64,7 @@ export default function BookingSheet() {
 
               {isHydrated ? (
                 <div className="text-xs tablet:text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink-1">
-                  {selectedTicket?.details?.seats_map ? (
+                  {!selectedTicket?.details?.seats_map ? (
                     Boolean(error) ? (
                       <span className="text-[#de2a1a]">{t_form(`${error?.message}`)}</span>
                     ) : (

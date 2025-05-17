@@ -19,7 +19,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { ClearInputButton } from '../components/ClearInputButton';
@@ -92,13 +91,13 @@ export default function CitySearch({ name, variant }: Props) {
           />
           {open ? (
             <div
-              className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden"
+              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full  rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden overflow-y-scroll box-border px-4 py-4  max-h-80"
               onMouseDown={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
               }}
             >
-              <ScrollArea className="overflow-y-scroll max-h-80">
+              <div className="space-y-2">
                 {!isFetchingLocations &&
                   cities &&
                   cities.map((el, index) => {
@@ -116,7 +115,7 @@ export default function CitySearch({ name, variant }: Props) {
                   })}
                 {!isFetchingLocations && !cities.length && <NotFoundCity />}
                 {!!isFetchingLocations && <LoaderCity />}
-              </ScrollArea>
+              </div>
             </div>
           ) : null}
         </div>
@@ -143,10 +142,8 @@ export default function CitySearch({ name, variant }: Props) {
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className="sr-only">Edit profile</SheetTitle>
-              <SheetDescription className="sr-only">
-                Make changes to your profile here. Click save when youre done.
-              </SheetDescription>
+              <SheetTitle className="sr-only"></SheetTitle>
+              <SheetDescription className="sr-only"></SheetDescription>
 
               <SheetClose asChild>
                 <Button
@@ -158,8 +155,8 @@ export default function CitySearch({ name, variant }: Props) {
                 </Button>
               </SheetClose>
             </SheetHeader>
-            <ScrollArea className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
-              <div className="sticky top-0 left-0 right-0 h-12 ">
+            <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
+              <div className="sticky top-0 left-0 right-0 h-12">
                 <div className="relative py-4 bg-slate-50 dark:bg-slate-900">
                   <input
                     id={name}
@@ -176,7 +173,7 @@ export default function CitySearch({ name, variant }: Props) {
                   <ClearInputButton handleClear={handleClearMobileInput} />
                 </div>
               </div>
-              <div id="list-container" className="space-y-2 mt-11">
+              <div id="list-container" className=" flex flex-col gap-2 mt-11">
                 {!isFetchingLocations &&
                   cities &&
                   cities.map((el, index) => {
@@ -194,7 +191,7 @@ export default function CitySearch({ name, variant }: Props) {
                 {!isFetchingLocations && !cities.length && <NotFoundCity />}
                 {!!isFetchingLocations && <LoaderCity />}
               </div>
-            </ScrollArea>
+            </div>
           </SheetContent>
         </Sheet>
       );

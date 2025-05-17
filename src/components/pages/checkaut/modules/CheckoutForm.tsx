@@ -14,16 +14,16 @@ import ToPay from './ToPay';
 import Legal from './Legal';
 import { useCheckoutForm } from '../hooks/useCheckoutForm';
 import Payment from './Payment';
-import { useRouter } from '@/i18n/routing';
+// import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
-export default function CheckoutForm({ adult, child }: { adult: string; child: string }) {
-  const { handleSubmit, onSubmit, methods } = useCheckoutForm({ adult, child });
-  const router = useRouter();
+export default function CheckoutForm() {
+  const { handleSubmit, onSubmit, methods } = useCheckoutForm();
+  // const router = useRouter();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  // const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
   const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
-  const isHydrated = useCurrentTicket((state) => state.isHydrated);
+  // const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   useEffect(() => {
     return () => {
@@ -34,12 +34,12 @@ export default function CheckoutForm({ adult, child }: { adult: string; child: s
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (isHydrated && !selectedTicket) {
-      router.replace('/');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTicket]);
+  // useEffect(() => {
+  //   if (isHydrated && !selectedTicket) {
+  //     router.replace('/');
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedTicket]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
