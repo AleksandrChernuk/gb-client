@@ -1,11 +1,8 @@
 'use client';
 
-import { CheckoutSchema } from '@/schemas/checkout.form.schema';
-import { FormValues } from '@/types/checkout.from.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useEffect, useMemo, useState } from 'react';
-import { createPassengers } from '../helpers/createPassList';
 import { checkout } from '@/actions/liqpay.checkout.actions';
 import normalizeData from '../helpers/normalizeData';
 import { useSearchStore } from '@/store/useSearch';
@@ -14,29 +11,35 @@ import { useLocale } from 'next-intl';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useUserStore } from '@/store/useStore';
 import { toast } from 'sonner';
+import { createPassengers } from '../helpers/createPassList';
+import { getProviderConfigByName } from '../helpers/providerFieldsConfig';
+import { getCheckoutSchemaForProvider } from '../helpers/schema';
+import { z } from 'zod';
 
 export function useCheckoutForm() {
+  const locale = useLocale();
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
-
   const [error, setError] = useState<string | null>(null);
-
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
 
-  const locale = useLocale();
+  const providerConfig = getProviderConfigByName(ticket);
+  const CheckoutSchema = getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map);
 
-  const defaultPassengers = useMemo(() => createPassengers(adult, children), [adult, children]);
+  const defaultPassengers = useMemo(
+    () => createPassengers(adult, children, providerConfig),
+    [adult, children, providerConfig],
+  );
 
-  const methods = useForm<FormValues>({
-    mode: 'onSubmit',
+  const methods = useForm<z.infer<typeof CheckoutSchema>>({
     resolver: zodResolver(CheckoutSchema),
     defaultValues: {
       passengers: defaultPassengers,
       email: '',
-      payment: 'booking',
+      payment: null,
       accept_rules: false,
       phone: '',
       selected_seats: [],
@@ -64,7 +67,7 @@ export function useCheckoutForm() {
 
   const { handleSubmit } = methods;
 
-  const onSubmit = async (formData: FormValues) => {
+  const onSubmit = async (formData: z.infer<typeof CheckoutSchema>) => {
     if (!ticket || !from || !to) {
       console.log('no data');
       setError('no data');
@@ -74,7 +77,14 @@ export function useCheckoutForm() {
     if (formData.payment === 'card') {
       try {
         const { data, signature } = await checkout({
-          order: normalizeData({ from_city_id: from, to_city_id: to, locale, formData, route: ticket, user }),
+          order: normalizeData({
+            from_city_id: from,
+            to_city_id: to,
+            locale,
+            formData,
+            route: ticket,
+            user,
+          }),
           result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
           locale,
         });

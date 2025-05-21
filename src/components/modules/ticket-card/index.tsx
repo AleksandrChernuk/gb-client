@@ -24,8 +24,7 @@ type Props = {
 
 export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
+  const [loading, setLoading] = useState(false);
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { handleGetDetails, handleSetTicket } = useTicketCard();
   const [tickets] = useCurrentTicket(useShallow((state) => [state.tickets]));
@@ -33,6 +32,19 @@ export const TicketCard = ({ element }: Props) => {
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
   const hasDetails = tickets[element.ticket_id]?.details != null;
+
+  const handleSelect = async () => {
+    if (!element.ticket_pricing.base_price) return;
+    setLoading(true);
+    try {
+      await handleSetTicket(element.ticket_id, element);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <TickedCard
@@ -43,18 +55,7 @@ export const TicketCard = ({ element }: Props) => {
           loading={loading}
           buttonText={t('selectButton')}
           disabled={loading}
-          onClick={async () => {
-            if (!element.ticket_pricing.base_price) {
-              return;
-            }
-            try {
-              setLoading(true);
-              await handleSetTicket(element.ticket_id, element);
-            } catch (error) {
-              console.log(error);
-              setLoading(false);
-            }
-          }}
+          onClick={handleSelect}
         />
       }
     >
@@ -76,18 +77,7 @@ export const TicketCard = ({ element }: Props) => {
                   loading={loading}
                   buttonText={t('selectButton')}
                   disabled={loading}
-                  onClick={async () => {
-                    if (!element.ticket_pricing.base_price) {
-                      return;
-                    }
-                    try {
-                      setLoading(true);
-                      await handleSetTicket(element.ticket_id, element);
-                    } catch (error) {
-                      setLoading(false);
-                      console.log(error);
-                    }
-                  }}
+                  onClick={handleSelect}
                 />
               </div>
             </div>
@@ -148,15 +138,7 @@ export const TicketCard = ({ element }: Props) => {
                       loading={loading}
                       buttonText={t('selectButton')}
                       disabled={loading}
-                      onClick={async () => {
-                        try {
-                          setLoading(true);
-                          await handleSetTicket(element.ticket_id, element);
-                        } catch (error) {
-                          setLoading(false);
-                          console.log(error);
-                        }
-                      }}
+                      onClick={handleSelect}
                     />
                   }
                 >

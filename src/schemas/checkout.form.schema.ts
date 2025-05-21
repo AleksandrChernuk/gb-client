@@ -41,37 +41,3 @@ export const CheckoutSchema = z.object({
     )
     .min(1, { message: 'seats_for_all_passengers' }),
 });
-
-// .refine((data) => data.passengers.length === data.selected_seats.length, {
-//   path: ['selected_seats'],
-//   message: 'seats_for_all_passengers',
-// });
-
-// discount: z.string().optional(),
-// citizenship: z.string().optional(),
-// gender: z.string().optional(),
-// document: z
-//   .object({
-//     type: z.string().optional(),
-//     number: z.string().min(1, { message: 'required' }),
-//   })
-//   .refine(
-//     ({ number }) => {
-//       if (!number.trim()) return true;
-//     },
-//     {
-//       path: ['type'],
-//     },
-//   ),
-// dob: z
-//   .string()
-//   .min(1, { message: 'required' })
-//   .refine(
-//     (val) => {
-//       const date = toDate(val);
-//       const today = new Date();
-//       const yearsDiff = differenceInYears(today, date);
-//       return yearsDiff >= 0 && yearsDiff <= 90;
-//     },
-//     { message: 'invalid_date' },
-//   ),

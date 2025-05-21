@@ -13,7 +13,7 @@ export type FormValues = {
   passengers: TPassenger[];
   email: string;
   phone: string;
-  payment: 'card' | 'on_boarding' | 'booking';
+  payment: 'card' | 'on_boarding' | '';
   accept_rules: boolean;
   selected_seats: ISeat[] | [];
 };

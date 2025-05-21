@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useStore/types';
-import { FormValues } from '@/types/checkout.from.types';
 import { IOrder } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
 
@@ -8,13 +8,13 @@ type NormalizeDataParams = {
   from_city_id: number;
   to_city_id: number;
   locale: string;
-  formData: FormValues;
+  formData: any;
   user: ICurrentUser | null;
   route: IRouteResponse;
 };
 
 const normalizeData = ({ from_city_id, to_city_id, locale, formData, user, route }: NormalizeDataParams): IOrder => {
-  const tickets = formData.passengers.map((p, idx) => ({
+  const tickets = formData.passengers.map((p: { name: any; surname: any }, idx: string | number) => ({
     first_name: p.name,
     last_name: p.surname,
     seat: formData.selected_seats[idx],

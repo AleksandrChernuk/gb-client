@@ -11,12 +11,14 @@ import { SelectGroup } from '@radix-ui/react-select';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { docTypes } from '@/constans/doc.types.constans';
+import { FieldConfig } from '../helpers/providerFieldsConfig';
 
 type Props = {
   name: {
     type: string;
     number: string;
   };
+  config: FieldConfig;
 };
 
 export const DocumentInput = ({ name }: Props) => {

@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormItem, FormLabel } from '@/components/ui/form';
 import { SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { Select, SelectContent } from '@radix-ui/react-select';
 import { useController, useFormContext } from 'react-hook-form';
+import { FieldConfig } from '../helpers/providerFieldsConfig';
 
 type Props = {
   name: string;
+  config: Extract<FieldConfig, { type: 'select' }>;
 };
 
-const DiscountSelect = ({ name }: Props) => {
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicket((state) => state.isHydrated);
+const DiscountSelect = ({ name, config }: Props) => {
   const { control } = useFormContext();
 
   const {
@@ -23,26 +21,18 @@ const DiscountSelect = ({ name }: Props) => {
     rules: { required: true },
   });
 
-  if (isHydrated || !selectedTicket?.details?.discounts || selectedTicket?.details?.discounts?.length === 0) {
-    console.log(selectedTicket?.details?.discounts);
-    return null;
-  }
-
   return (
     <FormItem>
-      <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">Скидки</FormLabel>
-      <Select onValueChange={(value) => field.onChange(value || '')}>
+      <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">{config.label}</FormLabel>
+      <Select onValueChange={(value) => field.onChange(value || '')} value={field.value}>
         <SelectTrigger className="rounded-none rounded-s-md" size="full" aria-invalid={!!error}>
-          Discount
+          {config.options.find((opt) => opt.value === field.value)?.label || config.placeholder || config.label}
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {selectedTicket?.details?.discounts.map((element) => (
-              <SelectItem
-                key={element.name || element.percent || element.category || element.description || element.id || ''}
-                value={`${element.name || element.percent || element.category || element.description || element.id || ''}`}
-              >
-                {element.name || element.percent || element.category || element.description || element.id || ''}
+            {config.options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
               </SelectItem>
             ))}
           </SelectGroup>

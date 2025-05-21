@@ -6,9 +6,6 @@ import { useCitySearch } from '../hooks/useCitySearch';
 import { IconFrom } from '@/components/icons/IconFrom';
 import { IconTo } from '@/components/icons/IconTo';
 import { IconSwap } from '@/components/icons/IconSwap';
-import { CityItem } from '../components/CityItem';
-import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { LoaderCity } from '../components/LoaderCity';
 import { NotFoundCity } from '../components/NotFoundCity';
 import {
   Sheet,
@@ -25,6 +22,8 @@ import { ClearInputButton } from '../components/ClearInputButton';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useIsFetching } from '@tanstack/react-query';
+import CityList from '../components/CityList';
+import { MainLoader } from '@/components/shared/MainLoader';
 
 type Props = {
   name: 'from' | 'to';
@@ -91,31 +90,22 @@ export default function CitySearch({ name, variant }: Props) {
           />
           {open ? (
             <div
-              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full  rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden overflow-y-scroll box-border px-4 py-4  max-h-80"
+              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden overflow-y-scroll box-border px-4 py-4 max-h-86"
               onMouseDown={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
               }}
             >
-              <div className="space-y-2">
-                {!isFetchingLocations &&
-                  cities &&
-                  cities.map((el, index) => {
-                    const element = extractLocationDetails(el, locale);
-                    return (
-                      <div key={el.id}>
-                        <CityItem
-                          el={element}
-                          isSelected={city?.id === el.id}
-                          isHighlighted={highlightedIndex === index}
-                          handleSelectCity={() => onSelectCity(el)}
-                        />
-                      </div>
-                    );
-                  })}
-                {!isFetchingLocations && !cities.length && <NotFoundCity />}
-                {!!isFetchingLocations && <LoaderCity />}
-              </div>
+              <CityList
+                cities={cities}
+                city={city}
+                highlightedIndex={highlightedIndex}
+                onSelectCity={onSelectCity}
+                isFetchingLocations={!!isFetchingLocations}
+                NotFoundCity={NotFoundCity}
+                LoaderCity={() => <MainLoader size={24} />}
+                locale={locale}
+              />
             </div>
           ) : null}
         </div>
@@ -156,7 +146,7 @@ export default function CitySearch({ name, variant }: Props) {
               </SheetClose>
             </SheetHeader>
             <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
-              <div className="sticky top-0 left-0 right-0 h-12">
+              <div className="sticky top-0 left-0 right-0 h-12 bg-slate-50 dark:bg-slate-900 z-50">
                 <div className="relative py-4 bg-slate-50 dark:bg-slate-900">
                   <input
                     id={name}
@@ -173,23 +163,18 @@ export default function CitySearch({ name, variant }: Props) {
                   <ClearInputButton handleClear={handleClearMobileInput} />
                 </div>
               </div>
-              <div id="list-container" className=" flex flex-col gap-2 mt-11">
-                {!isFetchingLocations &&
-                  cities &&
-                  cities.map((el, index) => {
-                    const element = extractLocationDetails(el, locale);
-                    return (
-                      <CityItem
-                        key={el.id}
-                        el={element}
-                        isSelected={city?.id === el.id}
-                        isHighlighted={highlightedIndex === index}
-                        handleSelectCity={() => onSelectCity(el)}
-                      />
-                    );
-                  })}
-                {!isFetchingLocations && !cities.length && <NotFoundCity />}
-                {!!isFetchingLocations && <LoaderCity />}
+              <div id="list-container" className="flex flex-col gap-2 mt-11">
+                <CityList
+                  cities={cities}
+                  city={city}
+                  highlightedIndex={highlightedIndex}
+                  onSelectCity={onSelectCity}
+                  isFetchingLocations={!!isFetchingLocations}
+                  hasBorder
+                  NotFoundCity={NotFoundCity}
+                  LoaderCity={() => <MainLoader size={24} />}
+                  locale={locale}
+                />
               </div>
             </div>
           </SheetContent>

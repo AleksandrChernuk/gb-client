@@ -52,29 +52,16 @@ export const PassengetItem = ({ i }: { i: number }) => {
               </FormItem>
             )}
           />
+
+          {/* <BirthdayInput /> */}
           {/* <DocumentInput
             name={{
               type: `passengers.${i}.document.type`,
               number: `passengers.${i}.document.number`,
             }}
           /> */}
-          {/* <FormField
-            control={control}
-            name={`passengers.${i}.dob`}
-            render={({ field, fieldState }) => {
-              return (
-                <FormItem>
-                  <FormLabel>{t_forms('dob')}</FormLabel>
-                  <FormControl>
-                    <BirthdayInput handleSet={field.onChange} error={Boolean(fieldState?.error)} />
-                  </FormControl>
-                  {Boolean(fieldState?.error) && (
-                    <FormErrorMassege>{t_forms(`${fieldState.error?.message}`)}</FormErrorMassege>
-                  )}
-                </FormItem>
-              );
-            }}
-          /> */}
+          {/* <BirthdayInput handleSet={field.onChange} error={Boolean(fieldState?.error)} /> */}
+
           {/* <CitizenshipSelect name={`passengers.${i}.citizenship`} />
           <DiscountSelect name={`passengers.${i}.discount`} />
           <GenderSelect name={`passengers.${i}.gender`} /> */}

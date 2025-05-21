@@ -1,80 +1,90 @@
 'use client';
 
 import { Input } from '@/components/ui/input';
-import { useLocale } from 'next-intl';
-import { ChangeEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
+import { IconCalendar } from '@/assets/icons/IconCalendar';
+import { useController, useFormContext } from 'react-hook-form';
+import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { FieldConfig } from '../helpers/providerFieldsConfig';
 
 type Props = {
-  handleSet: (data: string) => void;
-  error?: boolean;
+  name: string;
+  config: FieldConfig;
 };
 
-const plasholderList = [
-  { en: 'DD', ru: 'ДД', uk: 'ДД' },
-  { en: 'MM', ru: 'ММ', uk: 'ММ' },
-  { en: 'YYYY', ru: 'ГГГГ', uk: 'РРРР' },
-];
+const placeholders = {
+  en: 'DD/MM/YYYY',
+  ru: 'ДД/ММ/ГГГГ',
+  uk: 'ДД/ММ/РРРР',
+};
 
-const BirthdayInput = ({ handleSet, error }: Props) => {
-  const [bd, setBDay] = useState(['', '', '']);
+export default function BirthdayInput({ name, config }: Props) {
   const locale = useLocale();
+  const { control } = useFormContext();
+  const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
-  const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(3).fill(null));
+  const {
+    field: { value = '', onChange, onBlur },
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+    rules: { required: true },
+  });
 
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>, idx: number) => {
-    const { value, maxLength } = e.target;
+  // Форматируем ввод
+  const formatInput = (val: string) => {
+    const digits = val.replace(/\D/g, '').slice(0, 8);
+    const day = digits.slice(0, 2);
+    const month = digits.slice(2, 4);
+    const year = digits.slice(4, 8);
 
-    if (value && idx < length - 1) {
-      inputRefs.current[idx + 1]?.focus();
-    } else if (!value && idx > 0) {
-      inputRefs.current[idx - 1]?.focus();
-    }
+    let res = day;
+    if (month) res += '/' + month;
+    if (year) res += '/' + year;
+    return res;
+  };
 
-    setBDay((prev) => ({ ...prev, [idx]: value }));
+  // Отдаём RHF строку в формате YYYY-MM-DD
+  const handleFormattedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatInput(e.target.value);
 
-    if (value.length === maxLength && idx < inputRefs.current.length - 1) {
-      inputRefs.current[idx + 1]?.focus();
-    }
-  }, []);
-
-  const handleKeyUp = useCallback((e: KeyboardEvent<HTMLInputElement>, idx: number) => {
-    if (e.key === 'Backspace' && e.currentTarget.value === '' && idx > 0) {
-      inputRefs.current[idx - 1]?.focus();
-    }
-  }, []);
-
-  const handleBlur = () => {
-    if (bd[0].length === 2 && bd[1].length === 2 && bd[2].length === 4) {
-      handleSet(`${bd[0]}-${bd[1]}-${bd[2]}`);
-      console.log(`${bd[0]}-${bd[1]}-${bd[2]}`);
-    }
+    onChange(formatted);
   };
 
   return (
-    <div className="w-fit flex items-center justify-between">
-      {Array.from({ length: 3 }).map((_, idx) => (
-        <div key={idx} className="flex items-center">
+    <FormItem>
+      <FormLabel>{t_forms(config.label)}</FormLabel>
+      <FormControl>
+        <div className="relative">
           <Input
             type="text"
-            id={`otp-${idx}`}
-            value={bd[idx]}
-            aria-invalid={error}
-            placeholder={plasholderList[idx][locale]}
-            onChange={(e) => handleInputChange(e, idx)}
-            ref={(el) => {
-              inputRefs.current[idx] = el;
-            }}
-            maxLength={idx !== 2 ? 2 : 4}
-            className={`text-center px-2 ${idx !== 2 && 'w-18'}`}
-            aria-label={`birthday input digit ${idx + 1}`}
-            onBlur={handleBlur}
-            onKeyUp={(e) => handleKeyUp(e, idx)}
+            value={value}
+            onChange={handleFormattedChange}
+            onBlur={onBlur}
+            aria-invalid={!!error}
+            inputMode="numeric"
+            placeholder={placeholders[locale] || 'DD/MM/YYYY'}
+            className={cn(
+              `flex h-auto w-full rounded-md border border-slate-200 dark:border-slate-700 dark:hover:bg-black
+            dark:hover:border-slate-700 dark:focus:bg-slate-600 dark:focus:border-slate-900 bg-background
+            py-3 text-sm font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-50
+            disabled:cursor-not-allowed disabled:opacity-50 outline-hidden hover:bg-slate-50
+            hover:border-slate-200 focus:border-slate-700 focus:bg-white pl-10
+            aria-invalid:ring-[#de2a1a] dark:aria-invalid:ring-[#de2a1a]
+            aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]`,
+            )}
+            autoComplete="off"
+            maxLength={10}
           />
-          {idx !== 2 && <span className="mx-2 text-2xl text-slate-400 dark:text-slate-200">/</span>}
+          <div className="absolute transform -translate-y-1/2 pointer-events-none left-1 tablet:left-2 laptop:left-5 top-1/2">
+            <IconCalendar />
+          </div>
         </div>
-      ))}
-    </div>
+      </FormControl>
+      {!!error && <div className="mt-1 text-xs text-red-500">{t_forms(`${error.message}`)}</div>}
+    </FormItem>
   );
-};
-
-export default BirthdayInput;
+}

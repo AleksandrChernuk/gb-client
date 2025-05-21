@@ -77,7 +77,6 @@ export default async function ForCarriers({
                   height={318}
                   priority
                   draggable={false}
-                  sizes="100vw"
                   quality={75}
                   alt="people-with-suitcases-looking-straight-ahead-goin"
                 />
@@ -131,7 +130,6 @@ export default async function ForCarriers({
                   src={peopleWithSuitcases}
                   width={766}
                   height={318}
-                  sizes="100vw"
                   quality={75}
                   alt="people-with-suitcases-looking-straight-ahead-goin"
                 />
@@ -149,7 +147,6 @@ export default async function ForCarriers({
                   src={directionWith}
                   width={350}
                   height={353}
-                  sizes="100vw"
                   quality={75}
                   className="mx-auto overflow-hidden rounded-3xl"
                 />{' '}

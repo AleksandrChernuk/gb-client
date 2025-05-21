@@ -18,7 +18,7 @@ export default function DetailsStops({ id }: Props) {
   const currentLocale = useLocale();
 
   const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
-  const stops = ticketDetails?.details?.stops;
+  const stops = ticketDetails?.details?.stops || [];
 
   return (
     <div className="space-y-2">

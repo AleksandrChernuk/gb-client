@@ -14,7 +14,6 @@ export const Loader = () => {
         unoptimized
         draggable={false}
         className="dark:hidden"
-        sizes="100vw"
       />
       <Image
         src={loaderdark}
@@ -25,7 +24,6 @@ export const Loader = () => {
         draggable={false}
         width={200}
         className="hidden dark:block"
-        sizes="100vw"
       />
     </div>
   );

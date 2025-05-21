@@ -1,9 +1,10 @@
 {
   "forms": {
     "name": "Имя",
+
     "surname": "Фамилия",
     "required": "Обязательное поле",
-    "surname_placeholder": "Введите Фамилию",
+    "surname_placeholder": "Ваша Фамилию",
     "notes": "Заметки",
     "dob": "Дата рождения",
     "phone_umber": "Номер телефона",
@@ -21,10 +22,10 @@
     "type_of_business": "Тип бизнеса",
     "e_mail": "E-mail",
     "phone": "Телефон",
-    "name_placeholder": "Введите Имя",
-    "type_placeholder": "Введите тип",
-    "e_mail_placeholder": "Введите e-mail",
-    "phone_placeholder": "Введите телефон",
+    "name_placeholder": "Ваше Имя",
+    "type_placeholder": "Ваше тип",
+    "e_mail_placeholder": "Ваш e-mail",
+    "phone_placeholder": "Ваш номер",
     "request_btn": "Оставить заявку",
     "document": "Документ",
     "docType": {

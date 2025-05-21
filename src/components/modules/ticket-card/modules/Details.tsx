@@ -5,8 +5,11 @@ import { format } from 'date-fns';
 import { ChevronRight, Clock3, Route } from 'lucide-react';
 import DetailsStops from '../components/DetailsStops';
 import Image from 'next/image';
-import { IconLoader } from '@/components/icons/IconLoader';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import DetailsList from '../components/DetailsList';
+import DetailsItem from '../components/DetailsItem';
+import { toArray } from '@/utils/toArray';
+import { MainLoader } from '@/components/shared/MainLoader';
 
 type Props = {
   id: string;
@@ -17,16 +20,17 @@ export default function Details({ id }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
-
   const loadingDetails = useCurrentTicket((state) => state.loadingTickets);
-
   const isLoading = loadingDetails[id];
 
-  return isLoading ? (
-    <div className="flex items-center justify-center gap-1 text-base font-medium tracking-normal leading-[24px] text-slate-700 dark:text-slate-50 tablet:min-w-[397px] mt-8">
-      <IconLoader />
-    </div>
-  ) : (
+  if (isLoading)
+    return (
+      <div className="mt-4">
+        <MainLoader />
+      </div>
+    );
+
+  return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
       <div className="space-y-4">
         <div className="space-y-2">
@@ -60,99 +64,50 @@ export default function Details({ id }: Props) {
       </div>
 
       <div className="space-y-4">
-        {ticketDetails?.details?.luggage_rules && !!ticketDetails?.details?.luggage_rules.length && (
-          <div className={`space-y-1`}>
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-              {t('luggage')}:
-            </h5>
-            <ul className="flex flex-col gap-1">
-              {Array.isArray(ticketDetails?.details?.luggage_rules) &&
-                ticketDetails?.details?.luggage_rules.map((el) => (
-                  <li
-                    key={el}
-                    className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
-                  >
-                    {el}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        )}
+        <DetailsList label={t('luggage')} listClassName="flex-row">
+          {toArray(ticketDetails?.details?.luggage_rules).map((el, idx) => (
+            <DetailsItem key={el + idx}>{el}</DetailsItem>
+          ))}
+        </DetailsList>
 
-        {ticketDetails?.details?.return_rules_description &&
-          !!ticketDetails?.details?.return_rules_description.length && (
-            <div className={`space-y-1`}>
-              <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-                {t('return_policy')}:
-              </h5>
-              <ul>
-                {ticketDetails?.details?.return_rules_description.map((el) => (
-                  <li
-                    className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
-                    key={el}
-                  >
-                    {el}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        <DetailsList label={t('return_policy')} listClassName="">
+          {toArray(ticketDetails?.details?.return_rules_description).map((el, idx) => (
+            <DetailsItem key={el + idx}>{el}</DetailsItem>
+          ))}
+        </DetailsList>
 
-        {ticketDetails?.details?.amenities && !!ticketDetails?.details?.amenities.length && (
-          <div className={`space-y-1`}>
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-              {t('amenities')}:
-            </h5>
-            <ul className="flex flex-row flex-wrap gap-2">
-              {ticketDetails?.details?.amenities.map((el) => (
-                <li
-                  key={el}
-                  className="text-wrap text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
-                >
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <DetailsList label={t('amenities')} listClassName="flex-row">
+          {toArray(ticketDetails?.details?.amenities).map((el) => (
+            <DetailsItem key={el}>{el}</DetailsItem>
+          ))}
+        </DetailsList>
 
-        {ticketDetails?.details?.discounts && !!ticketDetails?.details?.discounts.length && (
-          <div className={`space-y-1`}>
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-              {t('discounts')}:
-            </h5>
-            <ul className="flex flex-row flex-wrap gap-0.5">
-              {ticketDetails?.details?.discounts.map((el) => (
-                <li
-                  key={el.id}
-                  className="text-wrap text-slate-400 dark:text-slate-200  text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]"
-                >
-                  {el.description || el.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <DetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
+          {toArray(ticketDetails?.details?.discounts).map((el) => (
+            <DetailsItem key={el.id}>{el.description || el.name}</DetailsItem>
+          ))}
+        </DetailsList>
 
-        {ticketDetails?.details && Boolean(ticketDetails?.details?.bus_name) && (
-          <div className={`space-y-1`}>
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-              {t('bus')}:
-            </h5>
-            <div className="flex flex-row flex-wrap gap-0.5">
-              <p className="text-wrap text-slate-400 dark:text-slate-200 text-[10px] mobile:text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
-                {ticketDetails?.details?.bus_name}
-                {ticketDetails?.details?.bus_number}
-              </p>
-            </div>
+        <DetailsList label={t('bus')} listClassName="flex-row flex-wrap">
+          {!!ticketDetails?.details?.bus_name && (
+            <>
+              <div className="flex flex-row flex-wrap gap-0.5">
+                <DetailsItem>
+                  {ticketDetails?.details?.bus_name}
+                  {ticketDetails?.details?.bus_number}
+                </DetailsItem>
+              </div>
 
-            <div>
-              {ticketDetails?.details?.bus_pictures?.map(
-                (el) => el && <Image draggable={false} key={el} src={el} alt="bus" width={100} height={100} />,
+              {ticketDetails?.details?.bus_pictures && (
+                <div>
+                  {toArray(ticketDetails?.details?.bus_pictures)?.map(
+                    (el) => el && <Image draggable={false} key={el} src={el} alt="bus" width={100} height={100} />,
+                  )}
+                </div>
               )}
-            </div>
-          </div>
-        )}
+            </>
+          )}
+        </DetailsList>
       </div>
     </div>
   );

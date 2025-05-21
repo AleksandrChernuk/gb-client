@@ -38,8 +38,9 @@ export default function BookingSheet() {
   } = useController({
     name: 'selected_seats',
     control,
-    rules: { required: true },
   });
+
+  console.log(error);
 
   const array: TypeSeatsMap[] = useMemo(() => {
     const seats = selectedTicket?.details?.seats_map;

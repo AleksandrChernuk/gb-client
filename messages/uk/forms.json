@@ -2,7 +2,7 @@
   "forms": {
     "name": "Ім'я",
     "surname": "Прізвище",
-    "surname_placeholder": "Введіть Прізвище",
+    "surname_placeholder": "Ваше Прізвище",
     "notes": "Примітки",
     "dob": "Дата народження",
     "phone_umber": "Номер телефону",

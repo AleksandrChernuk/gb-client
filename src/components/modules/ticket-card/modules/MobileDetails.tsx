@@ -64,7 +64,7 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
               {passengerCount} {t('placeholderPassenger')}
             </div>
             <div className="text-base font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-200">
-              {price} <span className="text-xs ml-[2px]">UAH</span>
+              {price ?? 0} <span className="text-xs ml-[2px]">UAH</span>
             </div>
           </div>
           <div className="w-1/2">{selectButton}</div>

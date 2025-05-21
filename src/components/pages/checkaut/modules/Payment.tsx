@@ -3,36 +3,12 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useFormContext } from 'react-hook-form';
-
 import { useTranslations } from 'next-intl';
-import IconMoney from '../icons/IconMoney';
-import IconBankCard from '../icons/IconBankCard';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-
-const PAYMENT_TYPES = [
-  {
-    ID: '1',
-    VALUE: 'booking',
-    ICON: <IconMoney />,
-    INTL_KEY: 'booking',
-  },
-  {
-    ID: '2',
-    VALUE: 'card',
-    ICON: <IconBankCard />,
-    INTL_KEY: 'bank_card',
-  },
-  {
-    ID: '3',
-    VALUE: 'on_boarding',
-    ICON: <IconMoney />,
-    INTL_KEY: 'payment_upon_boarding',
-  },
-];
+import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
 
 export default function Payment() {
   const { control } = useFormContext();
-
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   return (
     <FormField
