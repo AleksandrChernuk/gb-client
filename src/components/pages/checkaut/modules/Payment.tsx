@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
 
-export default function Payment() {
+const Payment = () => {
   const { control } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   return (
@@ -41,4 +41,6 @@ export default function Payment() {
       )}
     />
   );
-}
+};
+
+export default Payment;

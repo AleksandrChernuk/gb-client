@@ -5,7 +5,6 @@ import { IRouteDetailsResponse } from '@/types/route.details.interface';
 import { getRouteDetails } from '@/actions/route.actions';
 import { IRouteResponse } from '@/types/route.types';
 import { CurrentTicketStore } from './types';
-import { DeleteCookie } from '@/actions/cookie.actions';
 
 export const useCurrentTicket = create<CurrentTicketStore>()(
   devtools(
@@ -208,8 +207,6 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               selectedTicket: null,
               isButtonDisabled: false,
             }));
-
-            await DeleteCookie('_p');
           },
         }),
         {

@@ -8,13 +8,14 @@ import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { FieldConfig } from '../helpers/providerFieldsConfig';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { memo } from 'react';
 
 type Props = {
   name: string;
   config: FieldConfig;
 };
 
-export default function TextInput({ name, config }: Props) {
+const TextInput = memo(function TextInput({ name, config }: Props) {
   const { control } = useFormContext();
   const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
@@ -36,7 +37,7 @@ export default function TextInput({ name, config }: Props) {
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          placeholder={t_forms(config.placeholder || '')}
+          placeholder={config.placeholder && t_forms(config.placeholder)}
           aria-invalid={!!error}
           inputMode="text"
           className={cn(
@@ -54,4 +55,6 @@ export default function TextInput({ name, config }: Props) {
       {!!error && <FormErrorMassege>{t_forms(`${error.message}`)}</FormErrorMassege>}
     </FormItem>
   );
-}
+});
+
+export default TextInput;

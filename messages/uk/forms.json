@@ -21,13 +21,14 @@
     "type_of_business": "Тип бізнесу",
     "e_mail": "E-mail",
     "phone": "Телефон",
-    "name_placeholder": "Введіть Ім'я",
+    "name_placeholder": "Ваше Ім'я",
     "type_placeholder": "Введіть тип",
-    "e_mail_placeholder": "Введіть e-mail",
-    "phone_placeholder": "Введіть телефон",
+    "e_mail_placeholder": "Ваш e-mail",
+    "phone_placeholder": "Ваш телефон",
     "request_btn": "Залишити заявку",
     "document": "Документ",
     "seats_for_all_passengers": "Оберіть всі місця",
+    "discounts": "Знижка",
 
     "docType": {
       "unknown": "Невідомий документ",

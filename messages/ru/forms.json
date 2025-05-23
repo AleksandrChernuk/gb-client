@@ -4,7 +4,7 @@
 
     "surname": "Фамилия",
     "required": "Обязательное поле",
-    "surname_placeholder": "Ваша Фамилию",
+    "surname_placeholder": "Ваша Фамилия",
     "notes": "Заметки",
     "dob": "Дата рождения",
     "phone_umber": "Номер телефона",
@@ -27,6 +27,8 @@
     "e_mail_placeholder": "Ваш e-mail",
     "phone_placeholder": "Ваш номер",
     "request_btn": "Оставить заявку",
+    "discounts": "Скидка",
+
     "document": "Документ",
     "docType": {
       "unknown": "Неизвестный документ",

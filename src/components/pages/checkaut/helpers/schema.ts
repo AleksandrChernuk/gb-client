@@ -1,29 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { z, ZodRawShape } from 'zod';
+import { z, ZodTypeAny } from 'zod';
 import { FieldConfig, ProviderConfig } from './providerFieldsConfig';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 
-function getFieldSchema(field: FieldConfig) {
-  switch (field.type) {
-    case 'text':
-      return z.string().min(1, { message: 'required' });
-    case 'select':
-      return z.string().min(1, { message: 'required' });
-    case 'dob':
-      return z.string().min(10, { message: 'required' });
-    case 'group':
-      const groupShape: any = {};
-      for (const [subField, subConfig] of Object.entries(field.fields)) {
-        groupShape[subField] = getFieldSchema(subConfig);
-      }
-      return z.object(groupShape);
-    default:
-      return z.any();
+function getFieldSchema(field: FieldConfig): ZodTypeAny {
+  if (field.type === 'group') {
+    const shape: Record<string, ZodTypeAny> = {};
+    for (const [key, subField] of Object.entries(field.fields)) {
+      shape[key] = getFieldSchema(subField);
+    }
+    return field.schema ?? z.object(shape);
   }
+  if (!field.schema) {
+    console.error('NO SCHEMA FOR FIELD:', field);
+    throw new Error('Field schema is undefined');
+  }
+  return field.schema;
 }
 
 export function getPassengerSchemaByConfig(config: ProviderConfig) {
-  const shape: ZodRawShape = {};
+  const shape: Record<string, ZodTypeAny> = {};
   for (const fieldName of config.required) {
     shape[fieldName] = getFieldSchema(config.fields[fieldName]);
   }

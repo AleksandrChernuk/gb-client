@@ -3,16 +3,20 @@ import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
 import Seat from './Seat';
 import { toast } from 'sonner';
+import { memo } from 'react';
 
 type Props = {
   helm?: boolean;
   seatRows: ISeatRow[];
 };
 
-export default function SeatsList({ helm, seatRows }: Props) {
+const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
   const { control } = useFormContext();
-  const selectedSeats = useWatch({ control, name: 'selected_seats' });
-  const passengersCount = useWatch({ control, name: 'passengers' }).length;
+  const [selectedSeats, passengers] = useWatch({
+    control,
+    name: ['selected_seats', 'passengers'],
+  });
+  const passengersCount = passengers.length;
 
   const { append, remove } = useFieldArray({
     name: 'selected_seats',
@@ -76,4 +80,6 @@ export default function SeatsList({ helm, seatRows }: Props) {
       </ul>
     </div>
   );
-}
+});
+
+export default SeatsList;

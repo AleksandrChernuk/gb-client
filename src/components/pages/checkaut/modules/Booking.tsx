@@ -20,32 +20,31 @@ import SeatsList from '../components/SeatsList';
 import IconSeat from '../icons/IconSeat';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import FloorSheet from '../components/FloorSwitch';
-import { useController, useFormContext, useWatch } from 'react-hook-form';
-import { useMemo } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
+import { memo, useMemo } from 'react';
 import { TypeSeatsMap } from '@/types/seat.interface';
 
-export default function BookingSheet() {
+const Booking = memo(function Booking() {
   const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
   const isHydrated = useCurrentTicket((state) => state.isHydrated);
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
-  const selectedSeats = useWatch({ control, name: 'selected_seats' }).length;
 
   const {
+    field: { value: selectedSeats },
     fieldState: { error },
   } = useController({
-    name: 'selected_seats',
     control,
+    name: 'selected_seats',
   });
-
-  console.log(error);
 
   const array: TypeSeatsMap[] = useMemo(() => {
     const seats = selectedTicket?.details?.seats_map;
     return Array.isArray(seats) ? seats : [];
   }, [selectedTicket]);
+  console.log('first');
 
   return (
     <>
@@ -121,7 +120,7 @@ export default function BookingSheet() {
                 {!!selectedSeats ? t_page('seats_selected') : t_page('no_seats')}
               </div>
               <div className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
-                {selectedSeats}
+                {Array.isArray(selectedSeats) ? selectedSeats.length : 0}
               </div>
             </div>
             <div className="w-1/2">
@@ -141,4 +140,6 @@ export default function BookingSheet() {
       </Sheet>
     </>
   );
-}
+});
+
+export default Booking;

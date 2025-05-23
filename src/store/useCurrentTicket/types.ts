@@ -18,8 +18,8 @@ export type SetCurrentTicket = Partial<{
 }>;
 
 export type CurrentTicketActions = {
-  getDetailsTicket: (ticket: SetCurrentTicket) => void;
-  setSelectedTicket: (ticket: SetCurrentTicket) => void;
+  getDetailsTicket: (ticket: SetCurrentTicket) => Promise<void>;
+  setSelectedTicket: (ticket: SetCurrentTicket) => Promise<void>;
   setSelectedTicketId: (id: string | null) => void;
   resetCurrentTicket: () => void;
 };

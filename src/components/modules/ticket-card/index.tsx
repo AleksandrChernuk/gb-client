@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { IRouteResponse } from '@/types/route.types';
 import { useTranslations } from 'next-intl';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
@@ -24,7 +24,6 @@ type Props = {
 
 export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [loading, setLoading] = useState(false);
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { handleGetDetails, handleSetTicket } = useTicketCard();
   const [tickets] = useCurrentTicket(useShallow((state) => [state.tickets]));
@@ -33,17 +32,17 @@ export const TicketCard = ({ element }: Props) => {
 
   const hasDetails = tickets[element.ticket_id]?.details != null;
 
-  const handleSelect = async () => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleSelect = () => {
     if (!element.ticket_pricing.base_price) return;
-    setLoading(true);
-    try {
-      await handleSetTicket(element.ticket_id, element);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    startTransition(async () => {
+      try {
+        await handleSetTicket(element.ticket_id, element);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 
   return (
@@ -52,9 +51,9 @@ export const TicketCard = ({ element }: Props) => {
         <SelectButton
           price={element.ticket_pricing.base_price || 0}
           variant="mobile"
-          loading={loading}
+          loading={isPending}
           buttonText={t('selectButton')}
-          disabled={loading}
+          disabled={isPending}
           onClick={handleSelect}
         />
       }
@@ -74,9 +73,9 @@ export const TicketCard = ({ element }: Props) => {
 
                 <SelectButton
                   variant="desktop"
-                  loading={loading}
+                  loading={isPending}
                   buttonText={t('selectButton')}
-                  disabled={loading}
+                  disabled={isPending}
                   onClick={handleSelect}
                 />
               </div>
@@ -135,9 +134,9 @@ export const TicketCard = ({ element }: Props) => {
                   selectButton={
                     <SelectButton
                       variant="desktop"
-                      loading={loading}
+                      loading={isPending}
                       buttonText={t('selectButton')}
-                      disabled={loading}
+                      disabled={isPending}
                       onClick={handleSelect}
                     />
                   }

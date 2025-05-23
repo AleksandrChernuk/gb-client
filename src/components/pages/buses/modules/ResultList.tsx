@@ -2,7 +2,7 @@
 
 import { useFilterTickets } from '@/store/useFilterTickets';
 import { TicketCard } from '@/components/modules/ticket-card';
-import { Loader } from '../components/Loader';
+import { BusLoader } from '../../../shared/BusLoader';
 import { ErrorTravel } from '../components/ErrorTravel';
 import { NoTravel } from '../components/NoTravel';
 import useTicketsSearch from '../hooks/useTicketsSearch';
@@ -12,7 +12,7 @@ export default function ResultList() {
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   if (isFetching) {
-    return <Loader />;
+    return <BusLoader className={'flex items-center justify-center my-2'} />;
   }
 
   if (error) return <ErrorTravel />;

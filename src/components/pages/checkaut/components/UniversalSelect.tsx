@@ -1,15 +1,15 @@
 import { FormItem, FormLabel } from '@/components/ui/form';
-import { SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
-import { Select, SelectContent } from '@radix-ui/react-select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectGroup } from '@/components/ui/select';
 import { useController, useFormContext } from 'react-hook-form';
 import { FieldConfig } from '../helpers/providerFieldsConfig';
+import { memo } from 'react';
 
 type Props = {
   name: string;
   config: Extract<FieldConfig, { type: 'select' }>;
 };
 
-const DiscountSelect = ({ name, config }: Props) => {
+const UniversalSelect = memo(function UniversalSelect({ name, config }: Props) {
   const { control } = useFormContext();
 
   const {
@@ -18,17 +18,16 @@ const DiscountSelect = ({ name, config }: Props) => {
   } = useController({
     name,
     control,
-    rules: { required: true },
   });
 
   return (
     <FormItem>
       <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">{config.label}</FormLabel>
-      <Select onValueChange={(value) => field.onChange(value || '')} value={field.value}>
-        <SelectTrigger className="rounded-none rounded-s-md" size="full" aria-invalid={!!error}>
+      <Select onValueChange={field.onChange} value={field.value}>
+        <SelectTrigger className="w-full " size="full" aria-invalid={!!error}>
           {config.options.find((opt) => opt.value === field.value)?.label || config.placeholder || config.label}
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="w-full">
           <SelectGroup>
             {config.options.map((option) => (
               <SelectItem key={option.value} value={option.value}>
@@ -40,6 +39,6 @@ const DiscountSelect = ({ name, config }: Props) => {
       </Select>
     </FormItem>
   );
-};
+});
 
-export default DiscountSelect;
+export default UniversalSelect;

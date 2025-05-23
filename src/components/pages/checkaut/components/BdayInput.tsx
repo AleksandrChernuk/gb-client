@@ -79,7 +79,7 @@ export default function BirthdayInput({ name, config }: Props) {
             autoComplete="off"
             maxLength={10}
           />
-          <div className="absolute transform -translate-y-1/2 pointer-events-none left-1 tablet:left-2 laptop:left-5 top-1/2">
+          <div className="absolute transform -translate-y-1/2 pointer-events-none left-2    top-1/2">
             <IconCalendar />
           </div>
         </div>
