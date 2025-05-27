@@ -24,6 +24,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useIsFetching } from '@tanstack/react-query';
 import CityList from '../components/CityList';
 import { MainLoader } from '@/components/shared/MainLoader';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 type Props = {
   name: 'from' | 'to';
@@ -90,22 +91,24 @@ export default function CitySearch({ name, variant }: Props) {
           />
           {open ? (
             <div
-              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] tablet:max-w-[420px] overflow-hidden overflow-y-scroll box-border px-4 py-4 max-h-86"
+              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 overflow-y-scroll animate-in fade-in zoom-in p-4 max-h-86 w-[400px]"
               onMouseDown={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
               }}
             >
-              <CityList
-                cities={cities}
-                city={city}
-                highlightedIndex={highlightedIndex}
-                onSelectCity={onSelectCity}
-                isFetchingLocations={!!isFetchingLocations}
-                NotFoundCity={NotFoundCity}
-                LoaderCity={() => <MainLoader size={24} />}
-                locale={locale}
-              />
+              <ScrollArea>
+                <CityList
+                  cities={cities}
+                  city={city}
+                  highlightedIndex={highlightedIndex}
+                  onSelectCity={onSelectCity}
+                  isFetchingLocations={!!isFetchingLocations}
+                  NotFoundCity={NotFoundCity}
+                  LoaderCity={() => <MainLoader size={24} />}
+                  locale={locale}
+                />
+              </ScrollArea>
             </div>
           ) : null}
         </div>

@@ -45,6 +45,7 @@ export default function CheckoutForm() {
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
+
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(

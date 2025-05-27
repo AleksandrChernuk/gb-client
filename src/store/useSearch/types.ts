@@ -13,7 +13,9 @@ export type SearchState = {
   isHydrated: boolean;
   from: ILocation | null;
   to: ILocation | null;
+
   date: string;
+
   month: Date;
   adult: number;
   children: number;

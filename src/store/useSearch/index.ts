@@ -10,8 +10,6 @@ export const useSearchStore = create<SearchStore>()(
     immer(
       persist(
         (set, get) => ({
-          fromId: null,
-          toId: null,
           from: null,
           to: null,
           isHydrated: false,
@@ -34,20 +32,18 @@ export const useSearchStore = create<SearchStore>()(
             set((state) => ({
               ...state,
               [cityKey]: newCity,
+              [`${cityKey}Id`]: newCity?.id ?? null,
             })),
 
           setPassenger: (passengerType, value) => {
-            set((state) => {
-              return {
-                ...state,
-                [passengerType]: value,
-              };
-            });
+            set((state) => ({
+              ...state,
+              [passengerType]: value,
+            }));
           },
 
           incrementMonth: () => {
             const { month } = get();
-
             set((state) => ({
               ...state,
               month: addMonths(month, 1),
@@ -56,7 +52,6 @@ export const useSearchStore = create<SearchStore>()(
 
           decrementMonth: () => {
             const { month } = get();
-
             set((state) => ({
               ...state,
               month: addMonths(month, -1),
@@ -83,7 +78,7 @@ export const useSearchStore = create<SearchStore>()(
             })),
         }),
         {
-          name: 'main-search',
+          name: 'search',
 
           onRehydrateStorage: () => (state) => {
             if (state) {

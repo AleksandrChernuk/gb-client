@@ -4,9 +4,10 @@ export interface IOrder {
   provider_id: string;
   route_id?: string | null;
   trip_id?: string | null;
-  interval_id?: string | null;
+  tripId?: string;
+  intervalId?: string | null;
   bus_id?: string | null;
-  ticket_type_id: string | null;
+  ticket_type_id?: number | null;
   route_name?: string | null;
   from_city_id: number;
   from_city_name: string;
@@ -26,19 +27,25 @@ export interface IOrder {
   arrival_time: string | null;
   carrier_id: string | null;
   carrier_name: string | null;
-  trip_type: 'oneway' | 'twoway';
-  payment_type: 'card' | 'on_boarding' | 'booking';
+  trip_type: 'oneway';
+  payment_type: 'PURCHASE' | 'BOOK' | 'PAYMENT_AT_BOARDING';
   currency: string;
   locale: string;
   userId?: string;
-  email: string;
-  phone: string;
+  customer_email: string;
+  customer_phone: string;
   tickets: Iticket[];
 }
 
 export interface Iticket {
+  seat_id?: number;
+  seat_number?: number;
+  discount_id: string;
+  discount_description?: string;
+  discount_percent?: number;
   first_name: string;
   last_name: string;
+  middlename?: string;
   birthdate?: string;
   document_type?: string | null;
   document_number?: string | null;

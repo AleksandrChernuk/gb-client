@@ -36,7 +36,9 @@ export interface IRouteResponse {
     tripId?: string;
     intervalId?: string;
     distance?: number;
+    interval_id?: string;
     bus_id?: string;
+    ticket_type_id?: number | null;
     route_id?: string;
     route_number?: string;
     route_name?: string;
@@ -82,6 +84,7 @@ export interface IRouteResponse {
   e_ticket: boolean | null;
   ticket_pricing: {
     base_price: number | null;
+    ticket_code?: string | null;
     price_with_discount: number | null;
     discount_percentage: number | null;
     currency: string;

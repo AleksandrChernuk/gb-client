@@ -4,12 +4,12 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
 import { ChevronRight, Clock3, Route } from 'lucide-react';
 import DetailsStops from '../components/DetailsStops';
-import Image from 'next/image';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import DetailsList from '../components/DetailsList';
 import DetailsItem from '../components/DetailsItem';
 import { toArray } from '@/utils/toArray';
 import { MainLoader } from '@/components/shared/MainLoader';
+import SwiperImages from '@/components/shared/SwiperImages';
 
 type Props = {
   id: string;
@@ -64,7 +64,7 @@ export default function Details({ id }: Props) {
       </div>
 
       <div className="space-y-4">
-        <DetailsList label={t('luggage')} listClassName="flex-row">
+        <DetailsList label={t('luggage')} listClassName="">
           {toArray(ticketDetails?.details?.luggage_rules).map((el, idx) => (
             <DetailsItem key={el + idx}>{el}</DetailsItem>
           ))}
@@ -76,7 +76,7 @@ export default function Details({ id }: Props) {
           ))}
         </DetailsList>
 
-        <DetailsList label={t('amenities')} listClassName="flex-row">
+        <DetailsList label={t('amenities')} listClassName="">
           {toArray(ticketDetails?.details?.amenities).map((el) => (
             <DetailsItem key={el}>{el}</DetailsItem>
           ))}
@@ -88,7 +88,7 @@ export default function Details({ id }: Props) {
           ))}
         </DetailsList>
 
-        <DetailsList label={t('bus')} listClassName="flex-row flex-wrap">
+        <DetailsList label={t('bus')} listClassName=" flex-wrap">
           {!!ticketDetails?.details?.bus_name && (
             <>
               <div className="flex flex-row flex-wrap gap-0.5">
@@ -98,12 +98,17 @@ export default function Details({ id }: Props) {
                 </DetailsItem>
               </div>
 
-              {ticketDetails?.details?.bus_pictures && (
-                <div>
-                  {toArray(ticketDetails?.details?.bus_pictures)?.map(
-                    (el) => el && <Image draggable={false} key={el} src={el} alt="bus" width={100} height={100} />,
-                  )}
-                </div>
+              {!!ticketDetails?.details?.bus_pictures?.length && (
+                <SwiperImages
+                  items={toArray(ticketDetails?.details?.bus_pictures)?.map((el, i) => ({
+                    src: el,
+                    alt: `bus img ${i + 1}`,
+                    width: 200,
+                    height: 200,
+                  }))}
+                  slidesPerView={3}
+                  spaceBetween={20}
+                />
               )}
             </>
           )}

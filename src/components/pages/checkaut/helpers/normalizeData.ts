@@ -26,9 +26,9 @@ const normalizeData = ({ from_city_id, to_city_id, locale, formData, user, route
     provider_id: route.identificators.provider_id,
     route_id: route.identificators.route_id,
     trip_id: route.identificators.tripId,
-    interval_id: route.identificators.intervalId,
+    intervalId: route.identificators.intervalId,
     bus_id: route.identificators.bus_id,
-    ticket_type_id: route.ticket_id,
+    ticket_type_id: Number(route.ticket_id),
     route_name: route.identificators.route_name,
     from_city_id,
     from_city_name: extractLocationDetails(route.departure.fromLocation, locale).locationName,
@@ -52,10 +52,9 @@ const normalizeData = ({ from_city_id, to_city_id, locale, formData, user, route
     payment_type: formData.payment,
     currency: 'UAH',
     locale,
-
     userId: user?.id ?? undefined,
-    email: formData.email,
-    phone: formData.phone,
+    customer_email: formData.email,
+    customer_phone: formData.phone,
 
     tickets,
   };

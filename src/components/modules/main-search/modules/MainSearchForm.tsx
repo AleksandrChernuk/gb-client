@@ -22,7 +22,7 @@ const MainSearchForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const handleSubmit = () => {
-    const { to, from, adult, children, date, setErrors } = useSearchStore.getState();
+    const { to, from, setErrors } = useSearchStore.getState();
 
     const validate = () => {
       const result = MainSearchShema.safeParse({ from, to });
@@ -38,7 +38,7 @@ const MainSearchForm = () => {
     if (!validate()) return;
 
     startTransition(() => {
-      route.push(`/buses?from=${from?.id}&to=${to?.id}&date=${date}&adult=${adult}&children=${children}`);
+      route.push(`/buses`);
     });
   };
 
