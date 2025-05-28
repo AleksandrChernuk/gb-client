@@ -6,6 +6,7 @@
     "notes": "Примітки",
     "dob": "Дата народження",
     "phone_umber": "Номер телефону",
+    "bday": "bday",
     "dob_placeholder": "дд.мм.рррр",
     "required": "Обов'язкове поле",
     "Invalid date": "Недійсна дата",

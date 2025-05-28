@@ -12,12 +12,14 @@ export interface IGetRoutesBody {
 export interface IGetRouteDetailsBody {
   routeId?: string;
   intervalId?: string;
+  bus_id?: string;
   fromCityId?: number;
   toCityId?: number;
   fromStationId?: string;
   toStationId?: string;
   providerId: string;
   travelDate?: string;
+  search_id?: string;
   locale: string;
   currency: string;
   passengersCount?: number;
@@ -36,7 +38,6 @@ export interface IRouteResponse {
     tripId?: string;
     intervalId?: string;
     distance?: number;
-    interval_id?: string;
     bus_id?: string;
     ticket_type_id?: number | null;
     route_id?: string;

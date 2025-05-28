@@ -3,6 +3,7 @@ import { providersList } from '@/constans/providers';
 
 import { IRouteResponse } from '@/types/route.types';
 import { z, ZodType } from 'zod';
+import { parse, isValid, isBefore, subWeeks } from 'date-fns';
 
 export type SelectOption = { value: string; label: string };
 export const OCTOBUS_DOC_TYPES = ['PASSPORT', 'TRAVEL_PASSPORT', 'BIRTH_CERTIFICATE'];
@@ -25,238 +26,230 @@ export type FieldConfig =
     }
   | {
       label: string;
-      type: 'group';
-      fields: Record<string, FieldConfig>;
-      placeholder?: string;
-      schema: ZodType;
-    }
-  | {
-      label: string;
-      type: 'dob';
+      type: 'bday';
       placeholder: string;
       schema?: ZodType;
     };
 
 export type ProviderConfig = {
   required: string[];
-  optional: string[];
   fields: Record<string, FieldConfig>;
 };
 
 export function getProviderConfigByName(currentTicket: IRouteResponse | null): ProviderConfig {
+  const hasDiscounts = !!currentTicket?.details?.discounts?.length;
+
   switch (currentTicket?.provider_name) {
     case providersList.OCTOBUS:
       return {
-        required: ['name', 'surname', 'dob', 'gender', 'document'],
-        optional: ['notes'],
+        required: ['first_name', 'last_name', ...(hasDiscounts ? ['discount', 'bday'] : [])],
         fields: {
-          name: {
+          first_name: {
             label: 'name',
             type: 'text',
             placeholder: 'name_placeholder',
             schema: z.string().min(1, { message: 'required' }),
           },
-          surname: {
+          last_name: {
             label: 'surname',
             type: 'text',
             placeholder: 'surname_placeholder',
             schema: z.string().min(1, { message: 'required' }),
           },
-          dob: { label: 'dob', type: 'dob', placeholder: 'ДД/ММ/ГГГГ', schema: z.string().optional() },
-          gender: {
-            label: 'gender',
-            type: 'select',
-            options: [
-              { value: 'MALE', label: 'MALE' },
-              { value: 'FEMALE', label: 'FEMALE' },
-            ],
-            schema: z.string().optional(),
-          },
-          discount: {
-            label: 'discounts',
-            type: 'select',
-            options:
-              (currentTicket?.details?.discounts || []).map((d: any) => ({
-                value: d.id,
-                label: d.description || d.name,
-              })) || [],
-            schema: z.string().optional(),
-          },
-          document: {
-            label: 'document',
-            type: 'group',
-            fields: {
-              type: {
-                label: 'document',
-                type: 'select',
-                options: [
-                  { value: 'UNKNOWN', label: 'unknown' },
-                  { value: 'PASSPORT', label: 'passport' },
-                  { value: 'MILITARY_ID', label: 'military_id' },
-                  { value: 'FOREIGN_DOCUMENT', label: 'foreign_document' },
-                  { value: 'TRAVEL_PASSPORT', label: 'Загранпаспорт' },
-                  { value: 'SAILORS_PASSPORT', label: 'sailors_passport' },
-                  { value: 'BIRTH_CERTIFICATE', label: 'birth_certificate' },
-                  { value: 'DIPLOMATIC_PASSPORT', label: 'diplomatic_passport' },
-                ],
-                schema: z.string().optional(),
-              },
-              number: {
-                label: 'document',
-                type: 'text',
-                placeholder: 'document',
-                schema: z.string().optional(),
-              },
-            },
-            schema: z.object({
-              type: z.string().optional(),
-              number: z.string().optional(),
-            }),
-          },
-
-          notes: {
-            label: 'notes',
-            type: 'text',
-            schema: z.string().optional(),
-          },
+          ...(hasDiscounts
+            ? {
+                discount: {
+                  label: 'discounts',
+                  type: 'select',
+                  options: (currentTicket?.details?.discounts || []).map((d) => ({
+                    value: String(d.id ?? ''),
+                    label: `${d.percent} ${d.description || d.name}`,
+                  })),
+                  schema: z.string().optional(),
+                },
+                bday: {
+                  label: 'bday',
+                  type: 'bday',
+                  placeholder: 'bday_placeholder',
+                  schema: bdaySchema.optional(),
+                },
+              }
+            : {}),
         },
       };
 
     case providersList.INFOBUS:
       return {
-        required: ['name', 'surname', 'citizenship', 'document'],
-        optional: ['notes'],
+        required: [
+          'first_name',
+          'last_name',
+          ...(hasDiscounts ? ['discount', 'bday'] : []),
+          ...(currentTicket?.details?.need_citizenship ? ['citizenship'] : []),
+          'document_type',
+          'document_number',
+          ...(currentTicket?.details?.need_doc_expire_date ? ['expiryDate'] : []),
+
+          ...(currentTicket?.details?.need_gender ? ['gender'] : []),
+          ...(currentTicket?.details?.need_middlename ? ['middlename'] : []),
+        ],
         fields: {
-          name: {
+          first_name: {
             label: 'name',
             type: 'text',
             placeholder: 'name_placeholder',
             schema: z.string().min(1, { message: 'required' }),
           },
-          surname: {
+          last_name: {
             label: 'surname',
             type: 'text',
             placeholder: 'surname_placeholder',
             schema: z.string().min(1, { message: 'required' }),
           },
-          citizenship: {
-            label: 'citizenship_label',
+          ...(currentTicket?.details?.need_middlename
+            ? {
+                middlename: {
+                  label: 'middlename',
+                  type: 'text',
+                  placeholder: 'middlename_placeholder',
+                  schema: z.string().optional(),
+                },
+              }
+            : {}),
+          ...(currentTicket?.details?.need_citizenship
+            ? {
+                citizenship: {
+                  label: 'citizenship_label',
+                  type: 'select',
+                  options: [
+                    { value: 'UA', label: 'UA' },
+                    { value: 'PL', label: 'PL' },
+                    { value: 'DE', label: 'DE' },
+                  ],
+                  schema: z.string().optional(),
+                },
+              }
+            : {}),
+          documentType: {
+            label: 'document_type',
             type: 'select',
             options: [
-              { value: 'UA', label: 'UA' },
-              { value: 'PL', label: 'PL' },
-              { value: 'DE', label: 'DE' },
+              { value: 'UNKNOWN', label: 'unknown' },
+              { value: 'PASSPORT', label: 'passport' },
+              { value: 'MILITARY_ID', label: 'military_id' },
+              { value: 'FOREIGN_DOCUMENT', label: 'foreign_document' },
+              { value: 'TRAVEL_PASSPORT', label: 'Загранпаспорт' },
+              { value: 'SAILORS_PASSPORT', label: 'sailors_passport' },
+              { value: 'BIRTH_CERTIFICATE', label: 'birth_certificate' },
+              { value: 'DIPLOMATIC_PASSPORT', label: 'diplomatic_passport' },
             ],
             schema: z.string().optional(),
           },
-          document: { label: 'document', type: 'text', placeholder: 'document', schema: z.string().optional() },
-          gender: {
-            label: 'gender_label',
-            type: 'select',
-            options: [
-              { value: 'MALE', label: 'MALE' },
-              { value: 'FEMALE', label: 'FEMALE' },
-            ],
-            schema: z.string().optional(),
-          },
-          discount: {
-            label: 'discounts',
-            type: 'select',
-            options:
-              (currentTicket?.details?.discounts || []).map((d: any) => ({
-                value: d.id,
-                label: d.description || d.name,
-              })) || [],
-            schema: z.string().optional(),
-          },
-          notes: {
-            label: 'notes',
+          documentNumber: {
+            label: 'document_number',
             type: 'text',
+            placeholder: 'document',
             schema: z.string().optional(),
           },
-        },
-      };
+          ...(currentTicket?.details?.need_doc_expire_date
+            ? {
+                expiryDate: {
+                  label: 'expiry_date',
+                  type: 'text',
+                  placeholder: 'expiry_date_placeholder',
+                  schema: z.string().optional(),
+                },
+              }
+            : {}),
 
-    case providersList.KLR:
-      return {
-        required: ['name', 'surname'],
-        optional: ['notes'],
-        fields: {
-          name: {
-            label: 'name',
-            type: 'text',
-            placeholder: 'name_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          surname: {
-            label: 'surname',
-            type: 'text',
-            placeholder: 'surname_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          notes: {
-            label: 'notes',
-            type: 'text',
-            schema: z.string().optional(),
-          },
-        },
-      };
-
-    case providersList.EWE:
-      return {
-        required: ['name', 'surname'],
-        optional: ['notes'],
-        fields: {
-          name: {
-            label: 'name',
-            type: 'text',
-            placeholder: 'name_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          surname: {
-            label: 'surname',
-            type: 'text',
-            placeholder: 'surname_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          notes: {
-            label: 'notes',
-            type: 'text',
-            schema: z.string().optional(),
-          },
-        },
-      };
-
-    case providersList.TRANS_TEMPO:
-      return {
-        required: ['name', 'surname'],
-        optional: ['notes'],
-        fields: {
-          name: {
-            label: 'name',
-            type: 'text',
-            placeholder: 'name_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          surname: {
-            label: 'surname',
-            type: 'text',
-            placeholder: 'surname_placeholder',
-            schema: z.string().min(1, { message: 'required' }),
-          },
-          notes: {
-            label: 'notes',
-            type: 'text',
-            schema: z.string().optional(),
-          },
+          ...(currentTicket?.details?.need_gender
+            ? {
+                gender: {
+                  label: 'gender_label',
+                  type: 'select',
+                  options: [
+                    { value: 'MALE', label: 'MALE' },
+                    { value: 'FEMALE', label: 'FEMALE' },
+                  ],
+                  schema: z.string().optional(),
+                },
+              }
+            : {}),
+          ...(currentTicket?.details?.discounts?.length
+            ? {
+                bday: {
+                  label: 'bday',
+                  type: 'bday',
+                  placeholder: 'bday_placeholder',
+                  schema: bdaySchema.optional(),
+                },
+                discount: {
+                  label: 'discounts',
+                  type: 'select',
+                  options: currentTicket?.details?.discounts.map((d: any) => ({
+                    value: String(d.id ?? ''),
+                    label: d.description || d.name,
+                  })),
+                  schema: z.string().optional(),
+                },
+              }
+            : {}),
         },
       };
 
     default:
       return {
-        required: [],
-        optional: [],
-        fields: {},
+        required: ['first_name', 'last_name', ...(hasDiscounts ? ['discount', 'bday'] : [])],
+        fields: {
+          first_name: {
+            label: 'name',
+            type: 'text',
+            placeholder: 'name_placeholder',
+            schema: z.string().min(1, { message: 'required' }),
+          },
+          last_name: {
+            label: 'surname',
+            type: 'text',
+            placeholder: 'surname_placeholder',
+            schema: z.string().min(1, { message: 'required' }),
+          },
+          ...(hasDiscounts
+            ? {
+                discount: {
+                  label: 'discounts',
+                  type: 'select',
+                  options: (currentTicket?.details?.discounts || []).map((d: any) => ({
+                    value: String(d.id ?? ''),
+                    label: d.description || d.name,
+                  })),
+                  schema: z.string().optional(),
+                },
+                bday: {
+                  label: 'bday',
+                  type: 'bday',
+                  placeholder: 'bday_placeholder',
+                  schema: bdaySchema.optional(),
+                },
+              }
+            : {}),
+        },
       };
   }
 }
+
+const bdaySchema = z.string().refine(
+  (value) => {
+    if (!value) return true;
+    const [day, month, year] = value.split('/');
+    if (!day || !month || !year) return false;
+    const date = parse(`${day}.${month}.${year}`, 'dd.MM.yyyy', new Date());
+    if (!isValid(date)) return false;
+
+    const now = new Date();
+    const minDate = subWeeks(now, 52 * 80);
+    const maxDate = subWeeks(now, 1);
+    return isBefore(minDate, date) && isBefore(date, maxDate);
+  },
+  {
+    message: 'invalid_date',
+  },
+);

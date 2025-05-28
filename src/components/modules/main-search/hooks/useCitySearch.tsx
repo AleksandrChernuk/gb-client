@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useLocations } from './useLocations';
+import { useShallow } from 'zustand/react/shallow';
 
 type Tname = 'from' | 'to';
 
@@ -17,14 +18,17 @@ type Props = {
 export const useCitySearch = ({ name }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState('');
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
   const setCity = useSearchStore((state) => state.setCity);
+  const city = useSearchStore(useShallow((state) => state[name]));
+
   const language = useLocale();
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const t = useTranslations(MESSAGE_FILES.COMMON);
+
   const { data } = useLocations();
 
-  const city = useSearchStore((state) => state[name]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const cities = useMemo(() => {
     if (!data) return [];
@@ -44,14 +48,24 @@ export const useCitySearch = ({ name }: Props) => {
   const onSelectCity = useCallback(
     (newCity: ILocation) => {
       setCity(name, newCity);
+
       const cityIndex = cities?.findIndex((el) => el.id === newCity.id) || 0;
       setHighlightedIndex(cityIndex);
+
       setValue(extractLocationDetails(newCity, language).locationName);
+
       setOpen(false);
       inputRef.current?.blur();
     },
     [setCity, name, cities, language],
   );
+  useEffect(() => {
+    if (city) {
+      setValue(extractLocationDetails(city, language).locationName);
+    } else {
+      setValue('');
+    }
+  }, [city, language]);
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -61,13 +75,19 @@ export const useCitySearch = ({ name }: Props) => {
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (cities) {
-        if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
-          const step = event.key === 'ArrowDown' ? 1 : -1;
-          setHighlightedIndex((prevIndex) => Math.min(Math.max(prevIndex + step, 0), cities.length - 1));
-        }
+      if (!cities || cities.length === 0) return;
 
-        if (event.key === 'Enter' && cities[highlightedIndex]) {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setHighlightedIndex((prevIndex) => Math.min(prevIndex + 1, cities.length - 1));
+      }
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setHighlightedIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      }
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
           onSelectCity(cities[highlightedIndex]);
         }
       }
@@ -96,7 +116,10 @@ export const useCitySearch = ({ name }: Props) => {
 
   const handleToggleOpen = useCallback(() => {
     setOpen((p) => !p);
-  }, []);
+    if (value.trim().length === 0 && city) {
+      setValue(extractLocationDetails(city, language).locationName);
+    }
+  }, [city, language, value]);
 
   return {
     open,

@@ -21,13 +21,6 @@ const PassengerCard = memo(function PassengerCard({ i, providerConfig }: Props) 
               config={providerConfig.fields[fieldName]}
             />
           ))}
-          {providerConfig.optional.map((fieldName) => (
-            <UniversalField
-              key={fieldName}
-              name={`passengers.${i}.${fieldName}`}
-              config={providerConfig.fields[fieldName]}
-            />
-          ))}
         </div>
       </CustomCard>
     </li>

@@ -44,7 +44,6 @@ const Booking = memo(function Booking() {
     const seats = selectedTicket?.details?.seats_map;
     return Array.isArray(seats) ? seats : [];
   }, [selectedTicket]);
-  console.log('first');
 
   return (
     <>
@@ -63,7 +62,7 @@ const Booking = memo(function Booking() {
               </div>
 
               {isHydrated ? (
-                <div className="text-xs tablet:text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink-1">
+                <div className="text-xs tablet:text-base font-medium leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink-1">
                   {!selectedTicket?.details?.seats_map ? (
                     Boolean(error) ? (
                       <span className="text-[#de2a1a]">{t_form(`${error?.message}`)}</span>
@@ -75,6 +74,8 @@ const Booking = memo(function Booking() {
                         </span>
                       </div>
                     )
+                  ) : Boolean(error) ? (
+                    <span className="text-[#de2a1a]">{t_form(`${error?.message}`)}</span>
                   ) : (
                     t_page('choose_place')
                   )}

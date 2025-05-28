@@ -3,7 +3,7 @@ import { CityItem } from './CityItem';
 import { ILocation } from '@/types/location.types';
 
 interface CityListProps {
-  cities: ILocation[];
+  cities: ILocation[] | undefined;
   city: ILocation | null;
   highlightedIndex: number | null;
   onSelectCity: (city: ILocation) => void;
@@ -24,7 +24,9 @@ export default function CityList({
   locale,
 }: CityListProps) {
   if (isFetchingLocations) return <LoaderCity />;
-  if (!cities.length) return <NotFoundCity />;
+  if (!cities) return <NotFoundCity />;
+  if (cities.length === 0) return <NotFoundCity />;
+
   return cities.map((el, index) => {
     const element = extractLocationDetails(el, locale);
     return (

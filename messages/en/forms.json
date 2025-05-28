@@ -26,6 +26,8 @@
     "e_mail_placeholder": " Enter e-mail",
     "phone_placeholder": "Enter phone",
     "request_btn": "Leave a request",
+    "bday": "bday",
+
     "document": "Document",
     "docType": {
       "unknown": "Unknown Document",

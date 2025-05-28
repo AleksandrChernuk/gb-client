@@ -76,7 +76,7 @@ export default function Details({ id }: Props) {
           ))}
         </DetailsList>
 
-        <DetailsList label={t('amenities')} listClassName="">
+        <DetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
           {toArray(ticketDetails?.details?.amenities).map((el) => (
             <DetailsItem key={el}>{el}</DetailsItem>
           ))}
@@ -97,8 +97,7 @@ export default function Details({ id }: Props) {
                   {ticketDetails?.details?.bus_number}
                 </DetailsItem>
               </div>
-
-              {!!ticketDetails?.details?.bus_pictures?.length && (
+              {ticketDetails?.details?.bus_pictures?.length && ticketDetails?.details?.bus_pictures[0] !== null && (
                 <SwiperImages
                   items={toArray(ticketDetails?.details?.bus_pictures)?.map((el, i) => ({
                     src: el,

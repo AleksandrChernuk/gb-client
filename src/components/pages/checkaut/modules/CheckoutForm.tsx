@@ -19,13 +19,13 @@ import { useSearchStore } from '@/store/useSearch';
 import { useShallow } from 'zustand/react/shallow';
 import { getProviderConfigByName } from '../helpers/providerFieldsConfig';
 import { useUserStore } from '@/store/useStore';
-import { getCheckoutSchemaForProvider } from '../helpers/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createPassengers } from '../helpers/createPassList';
 import { toast } from 'sonner';
 import { checkout } from '@/actions/liqpay.checkout.actions';
 import normalizeData from '../helpers/normalizeData';
 import { z } from 'zod';
+import { getCheckoutSchemaForProvider } from '../helpers/schema';
+import { createPassengers } from '../helpers/createPassList';
 
 export default function CheckoutForm() {
   // const router = useRouter();
@@ -44,6 +44,7 @@ export default function CheckoutForm() {
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
+  console.log(ticket?.details);
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
@@ -54,7 +55,7 @@ export default function CheckoutForm() {
   );
 
   const schema = useMemo(
-    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map),
+    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map?.length),
     [providerConfig, ticket],
   );
 

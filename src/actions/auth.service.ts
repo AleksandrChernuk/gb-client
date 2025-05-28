@@ -22,7 +22,6 @@ export async function signup(data: TypeSignup, locale: string) {
 
     return result;
   } catch (error) {
-    console.log('Signup error:', error);
     throw error;
   }
 }

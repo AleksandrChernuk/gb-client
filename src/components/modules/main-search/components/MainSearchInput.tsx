@@ -82,6 +82,9 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
          aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]`,
           )}
           {...props}
+          onKeyDown={(e) => {
+            if (props.onKeyDown) props.onKeyDown(e);
+          }}
           aria-invalid={Boolean(error)}
         />
 
@@ -98,7 +101,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
           </div>
         )}
 
-        {errorMassage && (
+        {!!error && (
           <div
             className="absolute top-0 right-0 z-50 p-1 text-xs text-white transform rounded-tr-lg rounded-bl-lg cursor-pointer w-fit h-fit bg-[#de2a1a]"
             onClick={(e) => e.stopPropagation()}

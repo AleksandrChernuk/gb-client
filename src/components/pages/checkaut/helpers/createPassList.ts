@@ -1,22 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ProviderConfig } from './providerFieldsConfig';
 
 export function createEmptyPassenger(config: ProviderConfig, isChildren = false) {
   const passenger: Record<string, any> = {};
-  for (const field of [...config.required, ...config.optional]) {
-    const fieldCfg = config.fields[field];
-    if (!fieldCfg) continue;
-    if (fieldCfg.type === 'group') {
-      passenger[field] = {};
-      for (const sub in fieldCfg.fields) {
-        passenger[field][sub] = '';
-      }
-    } else {
-      passenger[field] = '';
-    }
+  for (const field of config.required) {
+    if (!config.fields[field]) continue;
+    passenger[field] = '';
   }
-
   passenger.isChildren = isChildren;
   return passenger;
 }

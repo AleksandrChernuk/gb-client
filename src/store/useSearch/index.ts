@@ -4,12 +4,11 @@ import { persist } from 'zustand/middleware';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { SearchStore } from './types';
-
 export const useSearchStore = create<SearchStore>()(
   devtools(
     immer(
       persist(
-        (set, get) => ({
+        (set) => ({
           from: null,
           to: null,
           isHydrated: false,
@@ -23,63 +22,52 @@ export const useSearchStore = create<SearchStore>()(
           },
 
           setDate: (newDate) =>
-            set((state) => ({
-              ...state,
-              date: newDate,
-            })),
+            set((state) => {
+              state.date = newDate;
+            }),
 
           setCity: (cityKey, newCity) =>
-            set((state) => ({
-              ...state,
-              [cityKey]: newCity,
-              [`${cityKey}Id`]: newCity?.id ?? null,
-            })),
+            set((state) => {
+              state[cityKey] = newCity;
+            }),
 
-          setPassenger: (passengerType, value) => {
-            set((state) => ({
-              ...state,
-              [passengerType]: value,
-            }));
-          },
+          setPassenger: (passengerType, value) =>
+            set((state) => {
+              state[passengerType] = value;
+            }),
 
-          incrementMonth: () => {
-            const { month } = get();
-            set((state) => ({
-              ...state,
-              month: addMonths(month, 1),
-            }));
-          },
+          incrementMonth: () =>
+            set((state) => {
+              state.month = addMonths(state.month, 1);
+            }),
 
-          decrementMonth: () => {
-            const { month } = get();
-            set((state) => ({
-              ...state,
-              month: addMonths(month, -1),
-            }));
-          },
+          decrementMonth: () =>
+            set((state) => {
+              state.month = addMonths(state.month, -1);
+            }),
 
           setMonth: (newMonth) =>
-            set((state) => ({
-              ...state,
-              month: newMonth,
-            })),
+            set((state) => {
+              state.month = newMonth;
+            }),
 
           swap: () =>
-            set((state) => ({
-              ...state,
-              to: state.from,
-              from: state.to,
-            })),
+            set((state) => {
+              const temp = state.from;
+              state.from = state.to;
+              state.to = temp;
+            }),
 
           setErrors: (cityKey, error) =>
-            set((state) => ({
-              ...state,
-              errors: { ...state.errors, [cityKey]: error },
-            })),
+            set((state) => {
+              state.errors = {
+                ...state.errors,
+                [cityKey]: error,
+              };
+            }),
         }),
         {
-          name: 'search',
-
+          name: 'main-search',
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true;

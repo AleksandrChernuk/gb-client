@@ -36,14 +36,14 @@ export default function DateTabs() {
                     {isHydrated ? (
                       format(date, 'EEE', { locale })
                     ) : (
-                      <Skeleton className=" inline-block w-[27.8px] h-[24px] bg-green-50 dark:bg-slate-700" />
+                      <Skeleton className="w-[29px] h-[20px] bg-green-50 dark:bg-slate-700" />
                     )}
                   </li>
                   <li className="text-xs font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6">
                     {isHydrated ? (
                       format(date, 'dd MMM', { locale })
                     ) : (
-                      <Skeleton className=" inline-block w-[59px] h-[24px] bg-green-50 dark:bg-slate-700" />
+                      <Skeleton className="w-[55px] h-[20px] bg-green-50 dark:bg-slate-700" />
                     )}
                   </li>
                 </ul>

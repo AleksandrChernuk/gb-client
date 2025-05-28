@@ -3,8 +3,9 @@ import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { IRouteDetailsResponse } from '@/types/route.details.interface';
 import { getRouteDetails } from '@/actions/route.actions';
-import { IRouteResponse } from '@/types/route.types';
+import { IGetRouteDetailsBody, IRouteResponse } from '@/types/route.types';
 import { CurrentTicketStore } from './types';
+import { cleanObject } from './helpers';
 
 export const useCurrentTicket = create<CurrentTicketStore>()(
   devtools(
@@ -38,6 +39,9 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               }
               return;
             }
+
+            console.log(travelDate);
+
             const ticket_id = route.ticket_id;
             const tickets = get().tickets;
             if (tickets[ticket_id]?.details) {
@@ -60,15 +64,15 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               ...state,
               loadingTickets: { ...state.loadingTickets, [ticket_id]: true },
             }));
-
             try {
-              res = await getRouteDetails({
+              const rawData = {
                 routeId: route.identificators.route_id,
                 intervalId: route.identificators.intervalId || '',
+                bus_id: route.provider_name === 'Infobus' ? undefined : route.identificators.bus_id,
                 fromCityId,
                 toCityId,
-                fromStationId: `${route.departure.station_id}`,
-                toStationId: `${route.arrival.station_id}`,
+                fromStationId: route.departure.station_id,
+                toStationId: route.arrival.station_id,
                 providerId: route.identificators.provider_id,
                 travelDate,
                 currency: 'UAH',
@@ -76,12 +80,14 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
                 passengersCount: passCount,
                 metadata: route.identificators.metadata,
                 timetable_id: route.identificators.timetable_id,
-                bustype_id: route.identificators.bus_id,
+                bustype_id: route.identificators.bustype_id!,
                 has_plan: route.identificators.has_plan,
                 request_get_free_seats: route.identificators.request_get_free_seats,
                 request_get_discount: route.identificators.request_get_discount,
                 request_get_baggage: route.identificators.request_get_baggage,
-              });
+              };
+
+              res = await getRouteDetails(cleanObject(rawData) as IGetRouteDetailsBody);
             } catch (error) {
               console.error('Ошибка при получении данных маршрута:', error);
               set((state) => ({
@@ -111,8 +117,6 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               ...route,
               details: updatedDetails,
             };
-
-            console.log(updatedRoute);
 
             set((state) => ({
               ...state,
@@ -151,13 +155,14 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
             }
 
             try {
-              res = await getRouteDetails({
+              const rawData = {
                 routeId: route.identificators.route_id,
                 intervalId: route.identificators.intervalId || '',
+                bus_id: route.provider_name === 'Infobus' ? undefined : route.identificators.bus_id,
                 fromCityId,
                 toCityId,
-                fromStationId: `${route.departure.station_id}`,
-                toStationId: `${route.arrival.station_id}`,
+                fromStationId: route.departure.station_id,
+                toStationId: route.arrival.station_id,
                 providerId: route.identificators.provider_id,
                 travelDate,
                 currency: 'UAH',
@@ -165,12 +170,14 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
                 passengersCount: passCount,
                 metadata: route.identificators.metadata,
                 timetable_id: route.identificators.timetable_id,
-                bustype_id: route.identificators.bus_id,
+                bustype_id: route.identificators.bustype_id!,
                 has_plan: route.identificators.has_plan,
                 request_get_free_seats: route.identificators.request_get_free_seats,
                 request_get_discount: route.identificators.request_get_discount,
                 request_get_baggage: route.identificators.request_get_baggage,
-              });
+              };
+
+              res = await getRouteDetails(cleanObject(rawData) as IGetRouteDetailsBody);
             } catch (error) {
               console.log('Ошибка при получении данных маршрута:', error);
             }

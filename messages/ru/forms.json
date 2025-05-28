@@ -9,6 +9,8 @@
     "dob": "Дата рождения",
     "phone_umber": "Номер телефона",
     "dob_placeholder": "дд.мм.гггг",
+    "bday": "bday",
+
     "Invalid date": "Недопустимая дата",
     "invalid_date": "Недопустимая дата",
     "invalid_number": "Неверный номер",

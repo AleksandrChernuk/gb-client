@@ -55,7 +55,6 @@ const normalizeData = ({ from_city_id, to_city_id, locale, formData, user, route
     userId: user?.id ?? undefined,
     customer_email: formData.email,
     customer_phone: formData.phone,
-
     tickets,
   };
 };

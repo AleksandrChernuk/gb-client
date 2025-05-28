@@ -25,6 +25,7 @@ import { useIsFetching } from '@tanstack/react-query';
 import CityList from '../components/CityList';
 import { MainLoader } from '@/components/shared/MainLoader';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
+import { extractLocationDetails } from '@/lib/extractLocationDetails';
 
 type Props = {
   name: 'from' | 'to';
@@ -33,9 +34,9 @@ type Props = {
 
 export default function CitySearch({ name, variant }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
-  const city = useSearchStore((state) => state[name]);
   const swap = useSearchStore((state) => state.swap);
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
+  const city = useSearchStore((state) => state[name]);
 
   const errors = useSearchStore((state) => state.errors[name]);
   const setErrors = useSearchStore((state) => state.setErrors);
@@ -46,7 +47,6 @@ export default function CitySearch({ name, variant }: Props) {
     value,
     onInputChange,
     cities,
-    placeholder,
     onSelectCity,
     highlightedIndex,
     handleToggleOpen,
@@ -54,6 +54,7 @@ export default function CitySearch({ name, variant }: Props) {
     handleBlur,
     inputRef,
     handleClearMobileInput,
+    placeholder,
   } = useCitySearch({
     name,
   });
@@ -61,7 +62,7 @@ export default function CitySearch({ name, variant }: Props) {
   switch (variant) {
     case 'desktop':
       return (
-        <div role="dropdown-warapp" className="relative" onKeyDown={onKeyDown}>
+        <div role="dropdown-warapp" className="relative">
           <MainSearchInput
             classNames={`border-r border-r-slate-200 dark:border-r-slate-700 ${
               open && 'dark:border-r-transparent border-r-transparent'
@@ -73,6 +74,7 @@ export default function CitySearch({ name, variant }: Props) {
             name={name}
             open={open}
             placeholder={placeholder}
+            onKeyDown={onKeyDown}
             onChange={(e) => {
               onInputChange(e.target.value);
             }}
@@ -83,6 +85,7 @@ export default function CitySearch({ name, variant }: Props) {
               handleToggleOpen();
             }}
             error={errors}
+            errorMassage="required"
             onBlur={handleBlur}
             aria-invalid={Boolean(city)}
             spellCheck="false"
@@ -121,7 +124,13 @@ export default function CitySearch({ name, variant }: Props) {
             <MainSearchInput
               startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
               type="button"
-              value={placeholder}
+              value={
+                !!city
+                  ? extractLocationDetails(city, locale).locationName
+                  : name === 'from'
+                    ? t('placeholderFrom')
+                    : t('placeholderTo')
+              }
               name={name}
               open={open}
               onFocus={() => {
@@ -131,6 +140,8 @@ export default function CitySearch({ name, variant }: Props) {
               }}
               endIcon={name === 'from' && <IconSwap />}
               swap={swap}
+              error={errors}
+              errorMassage="required"
             />
           </SheetTrigger>
           <SheetContent>
@@ -167,17 +178,19 @@ export default function CitySearch({ name, variant }: Props) {
                 </div>
               </div>
               <div id="list-container" className="flex flex-col gap-2 mt-11">
-                <CityList
-                  cities={cities}
-                  city={city}
-                  highlightedIndex={highlightedIndex}
-                  onSelectCity={onSelectCity}
-                  isFetchingLocations={!!isFetchingLocations}
-                  hasBorder
-                  NotFoundCity={NotFoundCity}
-                  LoaderCity={() => <MainLoader size={24} />}
-                  locale={locale}
-                />
+                <ScrollArea>
+                  <CityList
+                    cities={cities}
+                    city={city}
+                    highlightedIndex={highlightedIndex}
+                    onSelectCity={onSelectCity}
+                    isFetchingLocations={!!isFetchingLocations}
+                    hasBorder
+                    NotFoundCity={NotFoundCity}
+                    LoaderCity={() => <MainLoader size={24} />}
+                    locale={locale}
+                  />
+                </ScrollArea>
               </div>
             </div>
           </SheetContent>

@@ -3,29 +3,31 @@ import { FieldConfig, ProviderConfig } from './providerFieldsConfig';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 
 function getFieldSchema(field: FieldConfig): ZodTypeAny {
-  if (field.type === 'group') {
-    const shape: Record<string, ZodTypeAny> = {};
-    for (const [key, subField] of Object.entries(field.fields)) {
-      shape[key] = getFieldSchema(subField);
-    }
-    return field.schema ?? z.object(shape);
-  }
-  if (!field.schema) {
-    console.error('NO SCHEMA FOR FIELD:', field);
-    throw new Error('Field schema is undefined');
-  }
+  if (!field.schema) throw new Error(`Schema not defined for field "${field.label}"`);
   return field.schema;
 }
 
 export function getPassengerSchemaByConfig(config: ProviderConfig) {
   const shape: Record<string, ZodTypeAny> = {};
+
   for (const fieldName of config.required) {
+    if (!config.fields[fieldName]) continue;
     shape[fieldName] = getFieldSchema(config.fields[fieldName]);
   }
-  for (const fieldName of config.optional || []) {
-    shape[fieldName] = getFieldSchema(config.fields[fieldName]).optional();
-  }
-  return z.object(shape);
+
+  const baseSchema = z.object(shape);
+
+  return baseSchema.superRefine((data, ctx) => {
+    if ('discount' in data) {
+      if (data.discount && !data.bday) {
+        ctx.addIssue({
+          path: ['bday'],
+          code: z.ZodIssueCode.custom,
+          message: 'required',
+        });
+      }
+    }
+  });
 }
 
 export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSeats: boolean) {
@@ -54,10 +56,11 @@ export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, has
         ),
       payment: z.enum(['card', 'on_boarding', 'booking']).nullable(),
       accept_rules: z.boolean().refine((v) => v === true, { message: 'required' }),
-      selected_seats: z.array(seatSchema),
+      selected_seats: z.array(seatSchema).optional(),
     })
     .superRefine((data, ctx) => {
-      if (hasFreeSeats && (!data.selected_seats || data.selected_seats.length < 1)) {
+      if (!hasFreeSeats) return;
+      if (!Array.isArray(data.selected_seats) || data.selected_seats.length < data.passengers.length) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ['selected_seats'],

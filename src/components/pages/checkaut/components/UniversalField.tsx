@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { FieldConfig } from '../helpers/providerFieldsConfig';
 import BirthdayInput from './BdayInput';
-import DocumentInput from './DocumentTypeSelect';
 import TextInput from './TextInput';
 import UniversalSelect from './UniversalSelect';
 
@@ -19,19 +18,8 @@ const UniversalField = memo(function UniversalField({ name, config }: Props) {
     case 'select':
       return <UniversalSelect name={name} config={config} />;
 
-    case 'dob':
+    case 'bday':
       return <BirthdayInput name={name} config={config} />;
-
-    case 'group':
-      return (
-        <DocumentInput
-          name={{
-            type: `${name}.type`,
-            number: `${name}.number`,
-          }}
-          config={config}
-        />
-      );
 
     default:
       return null;

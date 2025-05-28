@@ -10,6 +10,9 @@ export interface IRouteDetailsResponse {
   providerLocationTo: string | null;
   stops: IStops[] | null;
   discounts: IDiscount[] | null;
+  automatic_discount_id?: string | null; //!! New
+  need_birth?: boolean | string; //! New
+  need_doc?: boolean | string; //! New
   return_rules_description: string[] | null;
   return_rules: IReturnRules[] | null;
   bus_id: string | null;

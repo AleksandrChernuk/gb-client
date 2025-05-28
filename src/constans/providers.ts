@@ -4,4 +4,5 @@ export const providersList = {
   KLR: 'KLR',
   EWE: 'EWE',
   TRANS_TEMPO: 'TransTempo',
+  EURO_CLUB: 'EuroClub',
 };
