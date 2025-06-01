@@ -83,12 +83,11 @@ export function getProviderConfigByName(currentTicket: IRouteResponse | null): P
         required: [
           'first_name',
           'last_name',
-          ...(hasDiscounts ? ['discount', 'bday'] : []),
-          ...(currentTicket?.details?.need_citizenship ? ['citizenship'] : []),
           'document_type',
           'document_number',
+          ...(hasDiscounts ? ['discount', 'bday'] : []),
+          ...(currentTicket?.details?.need_citizenship ? ['citizenship'] : []),
           ...(currentTicket?.details?.need_doc_expire_date ? ['expiryDate'] : []),
-
           ...(currentTicket?.details?.need_gender ? ['gender'] : []),
           ...(currentTicket?.details?.need_middlename ? ['middlename'] : []),
         ],
@@ -104,6 +103,27 @@ export function getProviderConfigByName(currentTicket: IRouteResponse | null): P
             type: 'text',
             placeholder: 'surname_placeholder',
             schema: z.string().min(1, { message: 'required' }),
+          },
+          documentType: {
+            label: 'document_type',
+            type: 'select',
+            options: [
+              { value: 'UNKNOWN', label: 'unknown' },
+              { value: 'PASSPORT', label: 'passport' },
+              { value: 'MILITARY_ID', label: 'military_id' },
+              { value: 'FOREIGN_DOCUMENT', label: 'foreign_document' },
+              { value: 'TRAVEL_PASSPORT', label: 'Загранпаспорт' },
+              { value: 'SAILORS_PASSPORT', label: 'sailors_passport' },
+              { value: 'BIRTH_CERTIFICATE', label: 'birth_certificate' },
+              { value: 'DIPLOMATIC_PASSPORT', label: 'diplomatic_passport' },
+            ],
+            schema: z.string().optional(),
+          },
+          documentNumber: {
+            label: 'document_number',
+            type: 'text',
+            placeholder: 'document',
+            schema: z.string().optional(),
           },
           ...(currentTicket?.details?.need_middlename
             ? {
@@ -129,27 +149,7 @@ export function getProviderConfigByName(currentTicket: IRouteResponse | null): P
                 },
               }
             : {}),
-          documentType: {
-            label: 'document_type',
-            type: 'select',
-            options: [
-              { value: 'UNKNOWN', label: 'unknown' },
-              { value: 'PASSPORT', label: 'passport' },
-              { value: 'MILITARY_ID', label: 'military_id' },
-              { value: 'FOREIGN_DOCUMENT', label: 'foreign_document' },
-              { value: 'TRAVEL_PASSPORT', label: 'Загранпаспорт' },
-              { value: 'SAILORS_PASSPORT', label: 'sailors_passport' },
-              { value: 'BIRTH_CERTIFICATE', label: 'birth_certificate' },
-              { value: 'DIPLOMATIC_PASSPORT', label: 'diplomatic_passport' },
-            ],
-            schema: z.string().optional(),
-          },
-          documentNumber: {
-            label: 'document_number',
-            type: 'text',
-            placeholder: 'document',
-            schema: z.string().optional(),
-          },
+
           ...(currentTicket?.details?.need_doc_expire_date
             ? {
                 expiryDate: {

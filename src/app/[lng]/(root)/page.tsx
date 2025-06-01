@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: t('main.title'),
     description: t('main.description'),
+    keywords: '',
 
     robots: {
       index: true,

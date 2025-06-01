@@ -1,0 +1,38 @@
+@layer base {
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-tight;
+  }
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight leading-snug;
+  }
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl font-semibold leading-snug;
+  }
+  h4 {
+    @apply text-base sm:text-lg font-semibold leading-snug;
+  }
+  h5 {
+    @apply text-sm sm:text-base font-medium;
+  }
+  h6 {
+    @apply text-xs sm:text-sm font-medium;
+  }
+  p {
+    @apply text-sm sm:text-base md:text-lg leading-relaxed;
+  }
+  ul {
+    @apply list-none;
+  }
+  ol {
+    @apply list-none;
+  }
+  blockquote {
+    @apply border-l-4 border-primary pl-4 italic text-muted-foreground my-5 text-sm sm:text-base;
+  }
+  strong {
+    @apply font-semibold text-primary;
+  }
+  b {
+    @apply font-semibold;
+  }
+}

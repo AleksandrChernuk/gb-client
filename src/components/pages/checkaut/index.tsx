@@ -27,7 +27,7 @@ const Checkaut = () => {
           Бронюйте автобусні квитки до Європи з України швидко та зручно на GreenBus. Широкий вибір маршрутів, вигідні
           ціни, сучасні комфортабельні рейси та цілодобова підтримка.
         </h1>
-        <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px]">
+        <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px] relative">
           <div className="my-4 laptop:my-8">
             <BackRouteButton />
           </div>

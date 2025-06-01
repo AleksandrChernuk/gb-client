@@ -12,4 +12,5 @@ export const MESSAGE_FILES = {
   OFERTA_PAGE: 'oferta-page',
   QUESTIONS_PAGE: 'questions-page',
   PROFILE: 'profile',
+  PRIVACY_POLICY: 'privacy-policy',
 } as const;

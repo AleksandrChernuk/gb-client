@@ -1,16 +1,29 @@
 {
   "metadata": {
     "about": {
-      "title": "GreenBus — Bus Transportation Across Ukraine and Europe",
-      "description": "GreenBus offers comfortable bus transportation services across Ukraine and Europe. Safety, convenience, and affordable prices. Organization of group and individual trips."
+      "title": "GreenBus — Bus Transportation Across Ukraine and Europe 🚍",
+      "description": "GreenBus offers comfortable bus transportation services across Ukraine and Europe. Safety, convenience, and affordable prices. Organization of group and individual trips.",
+      "keywords": "GreenBus, bus transportation, passenger transportation, bus, transport, group trips, individual trips, Ukraine, Europe, buy ticket, bus tickets"
     },
     "agents": {
-      "title": "GreenBus Agents — Partnership in Bus Transportation",
-      "description": "Learn more about our agents and partners. GreenBus cooperates with professionals in bus transportation across Ukraine and Europe. Join us!"
+      "title": "GreenBus Agents — Partnership in Bus Transportation 🚍",
+      "description": "Learn more about our agents and partners. GreenBus cooperates with professionals in bus transportation across Ukraine and Europe. Join us!",
+      "keywords": "GreenBus, agents, partnership, bus transportation, cooperation, transport, Ukraine, Europe, bus, tickets, become a partner"
     },
     "main": {
-      "title": "Bus tickets from Ukraine to Europe — comfy trips | GreenBus",
-      "description": "Buy bus tickets from Ukraine to Europe online. Comfortable trips, reliable carriers, convenient schedules, and affordable prices."
+      "title": "Bus tickets from Ukraine to Europe — comfy trips | GreenBus 🚍",
+      "description": "Buy bus tickets from Ukraine to Europe online. Comfortable trips, reliable carriers, convenient schedules, and affordable prices.",
+      "keywords": "GreenBus, bus tickets, buy ticket, Ukraine, Europe, bus transportation, bus schedule, cheap tickets, international routes, transport"
+    },
+    "oferta": {
+      "title": "Public Offer Agreement | GreenBus 🚍",
+      "description": "Official public offer agreement of GreenBus. Learn about booking, ticket purchase terms, carriage and refund rules for bus routes in Ukraine and Europe.",
+      "keywords": "GreenBus, offer agreement, bus transportation, buy ticket, carriage rules, ticket refund, international bus routes, Ukraine, Europe, bus, GreenBus offer, terms of use"
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy | GreenBus 🚍",
+      "description": "Read the GreenBus Privacy Policy. Learn how we collect, store, and use your personal data during booking and purchasing bus tickets in Ukraine and Europe.",
+      "keywords": "GreenBus, privacy policy, personal data, data protection, privacy, bus transportation, bus tickets, Europe, Ukraine"
     }
   }
 }

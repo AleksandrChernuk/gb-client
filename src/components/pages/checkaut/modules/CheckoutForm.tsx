@@ -44,7 +44,6 @@ export default function CheckoutForm() {
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
-  console.log(ticket?.details);
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
@@ -150,10 +149,10 @@ export default function CheckoutForm() {
             onClick: () => console.log('Close'),
           },
         })}
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(onSubmit)} className="">
         <FormProvider {...methods}>
-          <div className="grid grid-cols-1 laptop:grid-cols-[minmax(0,766px)_1fr] w-full relative gap-4">
-            <div className="space-y-8 laptop:col-span-1">
+          <div className="relative grid grid-cols-1 laptop:grid-cols-[minmax(0,766px)_1fr] w-full gap-4">
+            <div className="space-y-8 laptop:col-span-1  ">
               <Passengers />
 
               <CheckoutCard title={t('seat_reservation')} cardCount={2}>
@@ -168,7 +167,7 @@ export default function CheckoutForm() {
                 <Payment />
               </CheckoutCard>
             </div>
-            <div className="laptop:col-span-1 laptop:justify-self-end laptop:w-[542px] space-y-10">
+            <div className="laptop:sticky laptop:top-0 laptop:h-screen laptop:w-[544px] space-y-10">
               <CheckoutCard title={t('your_booking')}>
                 <Trip />
               </CheckoutCard>
