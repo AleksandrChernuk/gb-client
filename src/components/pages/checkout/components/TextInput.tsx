@@ -6,9 +6,9 @@ import { cn } from '@/lib/utils';
 import { useController, useFormContext } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { FieldConfig } from '../helpers/providerFieldsConfig';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { memo } from 'react';
+import { FieldConfig } from '../helpers/providerConfig/types';
 
 type Props = {
   name: string;

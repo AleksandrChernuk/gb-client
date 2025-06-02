@@ -1,18 +1,23 @@
-import { memo } from 'react';
+'use client';
+
+import { memo, useMemo } from 'react';
 import { useFormContext, useController } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { citizenship } from '@/constans/citizenship.constans';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import countryList from 'react-select-country-list';
+import { FieldConfig } from '../helpers/providerConfig/types';
 
 type Props = {
   name: string;
+  config: FieldConfig;
 };
 
-function CitizenshipSelect({ name }: Props) {
+function CountrySelector({ name ,config}: Props) {
   const { control } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.FORM);
+  const options = useMemo(() => countryList().getData(), []);
 
   const {
     field: { value, onChange },
@@ -24,17 +29,17 @@ function CitizenshipSelect({ name }: Props) {
 
   return (
     <FormItem>
-      <FormLabel className="mb-2 text-sm font-normal leading-[21px]">{t('citizenship_label')}</FormLabel>
+      <FormLabel className="mb-2 text-sm font-normal leading-[21px]">{t(config.label)}</FormLabel>
       <FormControl>
-        <Select value={value ?? ''} onValueChange={onChange}>
+        <Select value={value} onValueChange={onChange}>
           <SelectTrigger className="w-full" size="full">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {citizenship.map((el) => (
-                <SelectItem key={el.num_code} value={el.alpha_2_code ?? ''}>
-                  {el.nationality}
+              {options.map((el) => (
+                <SelectItem key={el.value} value={el.value}>
+                  {el.value}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -45,4 +50,4 @@ function CitizenshipSelect({ name }: Props) {
   );
 }
 
-export default memo(CitizenshipSelect);
+export default memo(CountrySelector);

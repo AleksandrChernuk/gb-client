@@ -1,12 +1,41 @@
 {
   "forms": {
-    "name": "Ім'я",
-    "surname": "Прізвище",
-    "surname_placeholder": "Ваше Прізвище",
+    "first_name": "Ім'я",
+    "first_name_placeholder": "Ваше Ім'я",
+    "last_name": "Прізвище",
+    "last_name_placeholder": "Ваше Прізвище",
+    "discounts": "Знижка",
+    "discounts_placeholder": "Оберіть знижку",
+    "document_type": "Тип документа",
+    "document_type_placeholder": "Оберіть тип документа",
+    "document_type_infobus": {
+      "unknown": "Невідомо",
+      "passport": "Паспорт",
+      "military_id": "Військовий квиток",
+      "foreign_document": "Іноземний документ",
+      "travel_passport": "Закордонний паспорт",
+      "sailors_passport": "Матроський паспорт",
+      "birth_certificate": "Свідоцтво про народження",
+      "diplomatic_passport": "Дипломатичний паспорт"
+    },
+    "document_number": "Номер документа",
+    "document_number_placeholder": "Введіть номер документа",
+    "citizenship_label": "Громадянство",
+    "citizenship_placeholder": "Оберіть громадянство",
+    "middlename": "По батькові",
+    "middlename_placeholder": "Введіть по батькові",
+    "expiry_date": "Термін дії документа",
+    "expiry_date_placeholder": "Введіть термін дії документа",
+    "gender_label": "Стать",
+    "MALE": "Чоловіча",
+    "FEMALE": "Жіноча",
+    "bday": "Дата народження",
+    "bday_placeholder": "Введіть дату народження",
+
     "notes": "Примітки",
     "dob": "Дата народження",
     "phone_umber": "Номер телефону",
-    "bday": "bday",
+
     "dob_placeholder": "дд.мм.рррр",
     "required": "Обов'язкове поле",
     "Invalid date": "Недійсна дата",
@@ -22,14 +51,12 @@
     "type_of_business": "Тип бізнесу",
     "e_mail": "E-mail",
     "phone": "Телефон",
-    "name_placeholder": "Ваше Ім'я",
     "type_placeholder": "Введіть тип",
     "e_mail_placeholder": "Ваш e-mail",
     "phone_placeholder": "Ваш телефон",
     "request_btn": "Залишити заявку",
     "document": "Документ",
     "seats_for_all_passengers": "Оберіть всі місця",
-    "discounts": "Знижка",
 
     "docType": {
       "unknown": "Невідомий документ",
@@ -42,13 +69,12 @@
       "diplomatic_passport": "Дипломатичний паспорт",
       "student_id": "Студентський квиток"
     },
-    "gender_label": "Стать",
+
     "genderList": {
       "male": "Чоловіча",
       "female": "Жіноча",
       "other": "Інше"
     },
-    "citizenship_label": "Громадянство",
     "consent_text": "Я підтверджую, що ознайомився(-лася) з <pp>Політикою конфіденційності</pp>"
   }
 }

@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import Checkaut from '@/components/pages/checkaut';
+import Checkaut from '@/components/pages/checkout';
 
 export async function generateMetadata() {
   return {

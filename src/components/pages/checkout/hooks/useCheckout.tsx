@@ -1,39 +1,22 @@
 'use client';
 
-import { FormProvider, useForm } from 'react-hook-form';
-import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
-import Passengers from './Passengers';
-import CheckoutCard from '../components/CheckoutCard';
-import BookingSheet from './Booking';
-import Contacts from './Contacts';
-import Trip from './Trip';
-import ToPay from './ToPay';
-import Legal from './Legal';
-import Payment from './Payment';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import SubmitButton from '../components/SubmitButton';
-import { useLocale } from 'next-intl';
 import { useSearchStore } from '@/store/useSearch';
-import { useShallow } from 'zustand/react/shallow';
-import { getProviderConfigByName } from '../helpers/providerFieldsConfig';
 import { useUserStore } from '@/store/useStore';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
-import { checkout } from '@/actions/liqpay.checkout.actions';
-import normalizeData from '../helpers/normalizeData';
-import { z } from 'zod';
-import { getCheckoutSchemaForProvider } from '../helpers/schema';
+import { useMemo, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { createPassengers } from '../helpers/createPassList';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useLocale } from 'next-intl';
+import { toast } from 'sonner';
+import normalizeData from '../helpers/normalizeData';
+import { checkout } from '@/actions/liqpay.checkout.actions';
+import { z } from 'zod';
+import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas';
+import { getProviderConfigByName } from '../helpers/providerConfig';
 
-export default function CheckoutForm() {
-  // const router = useRouter();
-  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  // const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  // const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
-  // const isHydrated = useCurrentTicket((state) => state.isHydrated);
-
+function useCheckout() {
   const locale = useLocale();
 
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +28,9 @@ export default function CheckoutForm() {
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
+  // const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+  // const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
+  // const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
@@ -70,13 +56,6 @@ export default function CheckoutForm() {
     },
     mode: 'onSubmit',
   });
-
-  // useEffect(() => {
-  //   if (isHydrated && !selectedTicket) {
-  //     router.replace('/');
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedTicket]);
 
   const onSubmit = async (formData: z.infer<typeof schema>) => {
     localStorage.setItem('form', JSON.stringify(formData));
@@ -139,47 +118,14 @@ export default function CheckoutForm() {
     });
   };
 
-  return (
-    <div>
-      {Boolean(error) &&
-        toast.error('error', {
-          description: JSON.stringify(error),
-          action: {
-            label: 'Close',
-            onClick: () => console.log('Close'),
-          },
-        })}
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="">
-        <FormProvider {...methods}>
-          <div className="relative grid grid-cols-1 laptop:grid-cols-[minmax(0,766px)_1fr] w-full gap-4">
-            <div className="space-y-8 laptop:col-span-1  ">
-              <Passengers />
+  // useEffect(() => {
+  //   if (isHydrated && !selectedTicket) {
+  //     router.replace('/');
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedTicket]);
 
-              <CheckoutCard title={t('seat_reservation')} cardCount={2}>
-                <BookingSheet />
-              </CheckoutCard>
-
-              <CheckoutCard title={t('contacts')} cardCount={3}>
-                <Contacts />
-              </CheckoutCard>
-
-              <CheckoutCard title={t('payment')} cardCount={4}>
-                <Payment />
-              </CheckoutCard>
-            </div>
-            <div className="laptop:sticky laptop:top-0 laptop:h-screen laptop:w-[544px] space-y-10">
-              <CheckoutCard title={t('your_booking')}>
-                <Trip />
-              </CheckoutCard>
-
-              <ToPay />
-
-              <Legal />
-              <SubmitButton loading={loading} />
-            </div>
-          </div>
-        </FormProvider>
-      </form>
-    </div>
-  );
+  return { methods, onSubmit, error, loading };
 }
+
+export default useCheckout;

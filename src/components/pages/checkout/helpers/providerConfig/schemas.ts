@@ -1,6 +1,26 @@
 import { z, ZodTypeAny } from 'zod';
-import { FieldConfig, ProviderConfig } from './providerFieldsConfig';
+
 import parsePhoneNumberFromString from 'libphonenumber-js';
+import { FieldConfig, ProviderConfig } from './types';
+import { parse, isValid, isBefore, subWeeks } from 'date-fns';
+
+export const bdaySchema = z.string().refine(
+  (value) => {
+    if (!value) return true;
+    const [day, month, year] = value.split('/');
+    if (!day || !month || !year) return false;
+    const date = parse(`${day}.${month}.${year}`, 'dd.MM.yyyy', new Date());
+    if (!isValid(date)) return false;
+
+    const now = new Date();
+    const minDate = subWeeks(now, 52 * 80);
+    const maxDate = subWeeks(now, 1);
+    return isBefore(minDate, date) && isBefore(date, maxDate);
+  },
+  {
+    message: 'invalid_date',
+  },
+);
 
 function getFieldSchema(field: FieldConfig): ZodTypeAny {
   if (!field.schema) throw new Error(`Schema not defined for field "${field.label}"`);

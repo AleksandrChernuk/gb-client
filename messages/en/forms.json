@@ -1,9 +1,39 @@
 {
   "forms": {
-    "name": "Name",
+    "first_name": "Name",
+    "first_name_placeholder": "Enter name",
+    "last_name": "Surname",
+    "last_name_placeholder": "Enter Surname",
+    "discounts": "Discount",
+    "discounts_placeholder": "Select a discount",
+    "document_type": "Document Type",
+    "document_type_placeholder": "Select document type",
+    "document_type_infobus": {
+      "unknown": "Unknown",
+      "passport": "Passport",
+      "military_id": "Military ID",
+      "foreign_document": "Foreign Document",
+      "travel_passport": "Travel Passport",
+      "sailors_passport": "Sailor’s Passport",
+      "birth_certificate": "Birth Certificate",
+      "diplomatic_passport": "Diplomatic Passport"
+    },
+    "document_number": "Document Number",
+    "document_number_placeholder": "Enter document number",
+    "citizenship_label": "Citizenship",
+    "citizenship_placeholder": "Select citizenship",
+    "middlename": "Middle Name",
+    "middlename_placeholder": "Enter middle name",
+    "expiry_date": "Expiry Date",
+    "expiry_date_placeholder": "Enter expiry date",
+    "gender_label": "Gender",
+    "MALE": "Male",
+    "FEMALE": "Female",
+    "bday": "Birthday",
+    "bday_placeholder": "Enter date of birth",
+
     "required": "Required field",
-    "surname": "Surname",
-    "surname_placeholder": "Enter Surname",
+
     "notes": "Notes",
     "dob": "Date of birth",
     "phone_umber": "Phone Number",
@@ -21,12 +51,10 @@
     "type_of_business": "Type of business",
     "e_mail": "E-mail",
     "phone": "Phone",
-    "name_placeholder": "Enter name",
     "type_placeholder": "Enter type",
     "e_mail_placeholder": " Enter e-mail",
     "phone_placeholder": "Enter phone",
     "request_btn": "Leave a request",
-    "bday": "bday",
 
     "document": "Document",
     "docType": {
@@ -40,7 +68,6 @@
       "diplomatic_passport": "Diplomatic Passport",
       "student_id": "Student ID"
     },
-    "gender_label": "Gender",
     "seats_for_all_passengers": "Select all seats",
 
     "genderList": {
@@ -48,8 +75,6 @@
       "female": "Female",
       "other": "Other"
     },
-    "citizenship_label": "Citizenship",
-    "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp>.",
-    "discounts": "Discount"
+    "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp>."
   }
 }

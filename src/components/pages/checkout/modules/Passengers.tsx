@@ -5,9 +5,9 @@ import StepNumber from '../components/StepNumber';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
-import { getProviderConfigByName } from '../helpers/providerFieldsConfig';
 import PassengerCard from '../components/PassengerCard';
 import { useMemo } from 'react';
+import { getProviderConfigByName } from '../helpers/providerConfig';
 
 export default function Passengers() {
   const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);

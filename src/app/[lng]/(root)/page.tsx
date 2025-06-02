@@ -14,12 +14,23 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
+  const t = await getTranslations({
+    locale: lng,
+    namespace: MESSAGE_FILES.METADATA,
+  });
 
   return {
     title: t('main.title'),
     description: t('main.description'),
     keywords: '',
+
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
 
     robots: {
       index: true,
@@ -36,14 +47,17 @@ export async function generateMetadata({ params }: Props) {
     },
 
     metadataBase: new URL('https://greenbus.com.ua'),
+
     alternates: {
-      canonical: '/',
+      canonical: `/${lng}`,
       languages: {
+        'x-default': '/uk',
         uk: '/uk',
         en: '/en',
         ru: '/ru',
       },
     },
+
     openGraph: {
       images: '/logo.png',
     },

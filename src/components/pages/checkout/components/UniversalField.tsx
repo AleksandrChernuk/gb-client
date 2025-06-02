@@ -1,8 +1,9 @@
 import { memo } from 'react';
-import { FieldConfig } from '../helpers/providerFieldsConfig';
 import BirthdayInput from './BdayInput';
 import TextInput from './TextInput';
 import UniversalSelect from './UniversalSelect';
+import { FieldConfig } from '../helpers/providerConfig/types';
+import CountrySelector from './CountrySelector';
 
 type Props = {
   name: string;
@@ -20,6 +21,9 @@ const UniversalField = memo(function UniversalField({ name, config }: Props) {
 
     case 'bday':
       return <BirthdayInput name={name} config={config} />;
+
+    case 'citizenship':
+      return <CountrySelector name={name} config={config} />;
 
     default:
       return null;

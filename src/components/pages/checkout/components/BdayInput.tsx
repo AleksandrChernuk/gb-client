@@ -7,7 +7,7 @@ import { IconCalendar } from '@/assets/icons/IconCalendar';
 import { useController, useFormContext } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { FieldConfig } from '../helpers/providerFieldsConfig';
+import { FieldConfig } from '../helpers/providerConfig/types';
 
 type Props = {
   name: string;

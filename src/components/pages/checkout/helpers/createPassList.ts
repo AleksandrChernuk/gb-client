@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ProviderConfig } from './providerFieldsConfig';
+
+import { ProviderConfig } from './providerConfig/types';
 
 export function createEmptyPassenger(config: ProviderConfig, isChildren = false) {
   const passenger: Record<string, any> = {};

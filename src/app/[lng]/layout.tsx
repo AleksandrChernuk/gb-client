@@ -14,7 +14,7 @@ import { ThemeProvider } from '@/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
-import { ScrollToTopOnRouteChange } from '@/components/shared/ScrollToTopOnRouteChange';
+import { GTMNoScript } from '@/components/shared/GTMAnalytics';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -44,16 +44,15 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning className="scroll-smooth">
-        <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
-        <GoogleTagManager gtmId="G-H1T333J6GL" />
         <body className={`${notoSans.className} antialiased`} suppressHydrationWarning>
+          <GTMNoScript />
+          <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
           <ReactQueryContext>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
               {children}
             </ThemeProvider>
           </ReactQueryContext>
           <Toaster />
-          <ScrollToTopOnRouteChange />
         </body>
       </html>
     </NextIntlClientProvider>

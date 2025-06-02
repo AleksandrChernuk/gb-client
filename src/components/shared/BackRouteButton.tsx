@@ -5,15 +5,22 @@ import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { useEffect } from 'react';
 
 export default function BackRouteButton() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const route = useRouter();
+  const router = useRouter();
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   const handleGoBack = () => {
-    route.back();
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo(0, 0);
+    router.back();
   };
 
   return (

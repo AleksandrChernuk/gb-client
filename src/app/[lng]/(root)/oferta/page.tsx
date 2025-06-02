@@ -40,9 +40,6 @@ export async function generateMetadata({ params }: Props) {
         ru: '/ru',
       },
     },
-    openGraph: {
-      images: '/logo.png',
-    },
   };
 }
 

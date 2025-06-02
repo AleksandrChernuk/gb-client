@@ -1,7 +1,7 @@
 import { CustomCard } from '@/components/shared/CustomCard';
 import { memo } from 'react';
-import { ProviderConfig } from '../helpers/providerFieldsConfig';
 import UniversalField from './UniversalField';
+import { ProviderConfig } from '../helpers/providerConfig/types';
 
 type Props = {
   i: number;

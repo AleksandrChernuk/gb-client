@@ -10,7 +10,7 @@ import { BusLoader } from '../../shared/BusLoader';
 const CheckoutForm = dynamic(() => import('./modules/CheckoutForm'), {
   loading: () => (
     <main>
-      <section className="flex items-center justify-center min-h-full">
+      <section className="flex items-center justify-center min-h-dvh">
         <BusLoader />
       </section>
     </main>

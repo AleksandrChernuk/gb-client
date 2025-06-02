@@ -4,7 +4,23 @@ import { host } from '@/config';
 import { getPathname, routing } from '@/i18n/routing';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...getEntries('/'), ...getEntries('/pathnames')];
+  return [
+    ...getEntries('/'),
+    ...getEntries('/about'),
+    ...getEntries('/privacy-policy'),
+    ...getEntries('/oll-countries'),
+    ...getEntries('/oferta'),
+    ...getEntries('/for-carriers'),
+    ...getEntries('/for-agents'),
+    ...getEntries('/faq'),
+    ...getEntries('/buses'),
+    ...getEntries('/carriers'),
+    ...getEntries('/checkout'),
+    ...getEntries('/checkout-success'),
+    ...getEntries('/faq'),
+    ...getEntries('/blog'),
+    ...getEntries('/agents'),
+  ];
 }
 
 type Href = Parameters<typeof getPathname>[0]['href'];

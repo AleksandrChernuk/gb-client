@@ -1,16 +1,43 @@
 {
   "forms": {
-    "name": "Имя",
+    "first_name": "Имя",
+    "first_name_placeholder": "Ваше Имя",
+    "last_name`": "Фамилия",
+    "last_name_placeholder": "Ваша Фамилия",
+    "discounts": "Скидка",
+    "discounts_placeholder": "Выберите скидку",
+    "document_type": "Тип документа",
+    "document_type_placeholder": "Выберите тип документа",
+    "document_type_infobus": {
+      "unknown": "Неизвестно",
+      "passport": "Паспорт",
+      "military_id": "Военный билет",
+      "foreign_document": "Иностранный документ",
+      "travel_passport": "Загранпаспорт",
+      "sailors_passport": "Матросский паспорт",
+      "birth_certificate": "Свидетельство о рождении",
+      "diplomatic_passport": "Дипломатический паспорт"
+    },
+    "document_number": "Номер документа",
+    "document_number_placeholder": "Введите номер документа",
+    "citizenship_label": "Гражданство",
+    "citizenship_placeholder": "Выберите гражданство",
+    "middlename": "Отчество",
+    "middlename_placeholder": "Введите отчество",
+    "expiry_date": "Срок действия документа",
+    "expiry_date_placeholder": "Введите срок действия документа",
+    "gender_label": "Пол",
+    "MALE": "Мужской",
+    "FEMALE": "Женский",
+    "bday": "Дата рождения",
+    "bday_placeholder": "Введите дату рождения",
 
-    "surname": "Фамилия",
     "required": "Обязательное поле",
-    "surname_placeholder": "Ваша Фамилия",
+
     "notes": "Заметки",
     "dob": "Дата рождения",
     "phone_umber": "Номер телефона",
     "dob_placeholder": "дд.мм.гггг",
-    "bday": "bday",
-
     "Invalid date": "Недопустимая дата",
     "invalid_date": "Недопустимая дата",
     "invalid_number": "Неверный номер",
@@ -24,12 +51,10 @@
     "type_of_business": "Тип бизнеса",
     "e_mail": "E-mail",
     "phone": "Телефон",
-    "name_placeholder": "Ваше Имя",
     "type_placeholder": "Ваше тип",
     "e_mail_placeholder": "Ваш e-mail",
     "phone_placeholder": "Ваш номер",
     "request_btn": "Оставить заявку",
-    "discounts": "Скидка",
 
     "document": "Документ",
     "docType": {
@@ -43,14 +68,13 @@
       "diplomatic_passport": "Дипломатический паспорт",
       "student_id": "Студенческий билет"
     },
-    "gender_label": "Пол",
+
     "seats_for_all_passengers": "Выберите все места",
     "genderList": {
       "male": "Мужской",
       "female": "Женский",
       "other": "Другое"
     },
-    "citizenship_label": "Гражданство",
     "consent_text": "Я подтверждаю, что ознакомился(-лась) с <pp>Политикой конфиденциальности</pp>"
   }
 }
