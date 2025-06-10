@@ -9,9 +9,7 @@ import useTicketsSearch from '../hooks/useTicketsSearch';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();
-  console.log(data);
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
-  console.log(filteredTickets);
 
   if (isFetching) {
     return <BusLoader className={'flex items-center justify-center my-2'} />;

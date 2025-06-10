@@ -1,57 +1,69 @@
-import { ISeat } from './seat.interface';
+export interface ISeatOrder {
+  seat_id?: number;
+  seat_number?: number;
+}
 
-export interface IOrder {
+export interface IDiscountOrder {
+  discount_id?: string;
+  discount_description?: string;
+  discount_percent?: number;
+}
+
+export interface TicketInterface {
+  first_name: string;
+  last_name: string;
+  middlename?: string;
+  birthdate: string;
+  document_type: number;
+  document_number: string;
+  document_expire_at?: string; // example: '2030-12-31',
+  gender?: 'M' | 'F';
+  citizenship?: string; // example: 'UA'
+  phone: string;
+  email: string;
+  seat?: ISeatOrder;
+  discount?: IDiscountOrder;
+  with_fees?: boolean;
+  buggage_count?: number;
+}
+
+export interface OrderInterface {
   provider_id: string;
-  route_id?: string | null;
-  trip_id?: string | null;
+  route_id?: string;
+  ride_id?: string;
   tripId?: string;
-  intervalId?: string | null;
-  bus_id?: string | null;
-  ticket_type_id?: number | null;
-  route_name?: string | null;
+  intervalId?: string;
+  bus_id?: string;
+  route_name?: string;
+  can_payment_to_driver: boolean; //! false
+  metadata?: unknown; //! New
   from_city_id: number;
   from_city_name: string;
   to_city_id: number;
   to_city_name: string;
-  from_station_id: number | null;
-  from_station_name: string | null;
-  from_station_lat: number | null;
-  from_station_lon: number | null;
-  to_station_id: number | null;
-  to_station_name: string | null;
-  to_station_lat: number | null;
-  to_station_lon: number | null;
-  departure_date: string | null;
-  arrival_date: string | null;
-  departure_time: string | null;
-  arrival_time: string | null;
-  carrier_id: string | null;
-  carrier_name: string | null;
-  trip_type: 'oneway';
-  payment_type: 'PURCHASE' | 'BOOK' | 'PAYMENT_AT_BOARDING';
-  currency: string;
+  from_station_id: number;
+  from_station_name: string;
+  from_station_lat?: number;
+  from_station_lon?: number;
+  to_station_id: number;
+  to_station_name: string;
+  to_station_lat?: number;
+  to_station_lon?: number;
+  departure_date: string;
+  arrival_date: string; //example: '2025-06-15'
+  departure_time: string;
+  arrival_time: string;
+  carrier_id?: string;
+  carrier_name?: string;
+  trip_type?: 'ONEWAY';
+  payment_type: 'RESERVE' | 'BOOK' | 'PAYMENT_AT_BOARDING'; //RESERVE
+  currency: 'UAH'; //example: 'UAH'
   locale: string;
   userId?: string;
+  customer_first_name: string; // userId.first_name ?? customer_first_name
+  customer_last_name: string; // userId.last_name ?? customer_last_name
   customer_email: string;
   customer_phone: string;
-  tickets: Iticket[];
-}
-
-export interface Iticket {
-  seat_id?: number;
-  seat_number?: number;
-  discount_id: string;
-  discount_description?: string;
-  discount_percent?: number;
-  first_name: string;
-  last_name: string;
-  middlename?: string;
-  birthdate?: string;
-  document_type?: string | null;
-  document_number?: string | null;
-  seat: ISeat;
-  discount?: string | null;
-  ticket_price: number | null;
-  with_fees?: number;
-  luggage_count?: string | null;
+  automatic_discount_id?: string; //! New
+  tickets: TicketInterface[];
 }

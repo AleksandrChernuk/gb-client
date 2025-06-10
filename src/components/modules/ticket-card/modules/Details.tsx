@@ -10,6 +10,7 @@ import DetailsItem from '../components/DetailsItem';
 import { toArray } from '@/utils/toArray';
 import { MainLoader } from '@/components/shared/MainLoader';
 import SwiperImages from '@/components/shared/SwiperImages';
+import useDateLocale from '@/hooks/useDateLocale';
 
 type Props = {
   id: string;
@@ -18,6 +19,7 @@ type Props = {
 export default function Details({ id }: Props) {
   const currentLocale = useLocale();
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+  const { locale: dateLocale } = useDateLocale();
 
   const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
   const loadingDetails = useCurrentTicket((state) => state.loadingTickets);
@@ -25,7 +27,7 @@ export default function Details({ id }: Props) {
 
   if (isLoading)
     return (
-      <div className="mt-4">
+      <div className="pt-10 flex items-center justify-center ">
         <MainLoader />
       </div>
     );
@@ -39,17 +41,24 @@ export default function Details({ id }: Props) {
               {t('route')}:
             </h5>
             <div className="flex items-center gap-2  text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
-              {` ${format(ticketDetails?.departure.date_time || new Date(), 'EEE dd')}, 
+              {` ${format(ticketDetails?.departure.date_time || new Date(), 'EEE dd', { locale: dateLocale })}, 
                     ${ticketDetails && extractLocationDetails(ticketDetails?.departure.fromLocation, currentLocale).locationName}`}
               <ChevronRight size={16} className="stroke-green-300" />
-              {` ${format(ticketDetails?.arrival.date_time || new Date(), 'EEE dd')}, 
+              {` ${format(ticketDetails?.arrival.date_time || new Date(), 'EEE dd', { locale: dateLocale })}, 
                    ${ticketDetails && extractLocationDetails(ticketDetails?.arrival.toLocation, currentLocale).locationName}`}
             </div>
           </div>
 
           <div className="gap-2 flex items-center text-slate-400 dark:text-slate-200 text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
             <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
-            <span>{t('travel_time')}:</span>
+            <span>
+              {t('travel_time')}:{' '}
+              <span className="text-slate-400 dark:text-slate-200 ">
+                {ticketDetails.duration?.split(':')[0]}
+                {t('shortHours')}:{ticketDetails.duration?.split(':')[1]}
+                {t('shortMinutes')}
+              </span>
+            </span>
           </div>
 
           <div className="flex items-center gap-2 ">
@@ -97,18 +106,20 @@ export default function Details({ id }: Props) {
                   {ticketDetails?.details?.bus_number}
                 </DetailsItem>
               </div>
-              {ticketDetails?.details?.bus_pictures?.length && ticketDetails?.details?.bus_pictures[0] !== null && (
-                <SwiperImages
-                  items={toArray(ticketDetails?.details?.bus_pictures)?.map((el, i) => ({
-                    src: el,
-                    alt: `bus img ${i + 1}`,
-                    width: 200,
-                    height: 200,
-                  }))}
-                  slidesPerView={3}
-                  spaceBetween={20}
-                />
-              )}
+              {ticketDetails?.details?.bus_pictures?.length &&
+                ticketDetails?.details?.bus_pictures?.length > 1 &&
+                ticketDetails?.details?.bus_pictures[0] !== null && (
+                  <SwiperImages
+                    items={toArray(ticketDetails?.details?.bus_pictures)?.map((el, i) => ({
+                      src: el,
+                      alt: `bus img ${i + 1}`,
+                      width: 200,
+                      height: 200,
+                    }))}
+                    slidesPerView={3}
+                    spaceBetween={20}
+                  />
+                )}
             </>
           )}
         </DetailsList>

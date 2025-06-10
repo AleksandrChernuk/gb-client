@@ -1,7 +1,7 @@
-import { IOrder } from '@/types/order-interface';
+import { OrderInterface } from '@/types/order-interface';
 
 export type IOrderBody = {
-  order: IOrder;
+  order: OrderInterface;
   result_url: string;
   locale: string;
 };

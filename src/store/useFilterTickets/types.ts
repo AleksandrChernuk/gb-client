@@ -1,27 +1,21 @@
 import { IRouteResponse } from '@/types/route.types';
 import { ICarriers } from '@/types/carriers.types';
-
-export type TsortBy =
-  | 'sort_buy_price'
-  | 'sort_buy_popularity'
-  | 'sort_buy_arrival_time'
-  | 'sort_buy_time_on_road'
-  | 'sort_buy_departure_time';
+import { TSortBuy } from '@/constans/sortbuylist.constans';
 
 export type FilterTicketsState = {
-  tickets: IRouteResponse[]
-  filteredTickets: IRouteResponse[]
-  sortBy: TsortBy
-  carriers: ICarriers[]
-  filterCarriers: string[]
-}
+  tickets: IRouteResponse[];
+  filteredTickets: IRouteResponse[];
+  sortBy: TSortBuy;
+  carriers: ICarriers[];
+  filterCarriers: string[];
+};
 
 export type FilterTicketsActions = {
-  setTickets: (tickets: IRouteResponse[]) => void
-  setSortByTickets: (sortBy: TsortBy) => void
-  resetSortByTickets: () => void
-  resetFilters: () => void
-  setFilterCarriers: (carrier: string) => void
-}
+  setTickets: (tickets: IRouteResponse[]) => void;
+  setSortByTickets: (sortBy: TSortBuy) => void;
+  resetSortByTickets: () => void;
+  resetFilters: () => void;
+  setFilterCarriers: (carrier: string) => void;
+};
 
-export type FilterTicketsStore = FilterTicketsState & FilterTicketsActions
+export type FilterTicketsStore = FilterTicketsState & FilterTicketsActions;

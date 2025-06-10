@@ -1,7 +1,11 @@
 {
   "checkout-page": {
+    "h1": "Book bus tickets to Europe from Ukraine quickly and easily with GreenBus. A wide selection of routes, great prices, modern comfortable trips, and 24/7 support.",
     "passengers": "Passengers",
-    "choose_place": "Choose a place",
+    "choose_place": "Choose seats",
+    "selected_place": "Selected",
+    "selected_seats_status": "of",
+    "place": "seats",
     "seat_reservation": "Seat reservation",
     "contacts": "Contacts",
     "payment": "Payment",
@@ -21,6 +25,11 @@
     "seat_selection_instruction": "Click on available seats on floor {floor}.",
     "still_online_title": "Are you still online?",
     "still_online_description": "Since you didn't complete the order in the allotted time, we cleared your cart.",
-    "still_online_back": "Return to search"
+    "still_online_back": "Return to search",
+
+    "price_may_increase": "Prices may increase",
+    "book_within_1": "Book your trip within the next ",
+    "book__min": "minutes",
+    "book_within_2": " to secure your spot and avoid potential price hikes later."
   }
 }

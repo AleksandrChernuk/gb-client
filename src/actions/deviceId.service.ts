@@ -29,7 +29,6 @@ export const deleteDeviceId = async () => {
   const deviceId = cookieStore.get('deviceId')?.value;
 
   if (!deviceId) {
-    console.log('Device ID not found');
     return null;
   }
 

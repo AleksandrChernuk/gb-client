@@ -1,6 +1,8 @@
 {
   "buses-page": {
-    "sort_buy_price": "Ціною",
+    "sort_buy_default": "За замовчуванням",
+    "sort_buy_price_asc": "За зростанням ціни",
+    "sort_buy_price_desc": "За спаданням ціни",
     "sort_buy_departure_time": "Часом відправлення",
     "sort_buy_arrival_time": "Часом прибуття",
     "sort_buy_time_on_road": "Коротшим маршрутом",
@@ -30,6 +32,8 @@
     "view_trips": "Показати маршрути",
     "filter": "Фільтр",
     "sort_buy_shortest_journeye": "Коротшим маршрутом",
-    "placeholderPassenger": "Пасажир"
+    "placeholderPassenger": "Пасажир",
+    "price_may_increase": "price_may_increase",
+    "book_within_time_to_avoid_price_increase": "book_within_time_to_avoid_price_increase"
   }
 }

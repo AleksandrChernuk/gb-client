@@ -5,7 +5,7 @@ import StepNumber from '../components/StepNumber';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
-import PassengerCard from '../components/PassengerCard';
+import PassengerCard from '../shared/PassengerCard';
 import { useMemo } from 'react';
 import { getProviderConfigByName } from '../helpers/providerConfig';
 

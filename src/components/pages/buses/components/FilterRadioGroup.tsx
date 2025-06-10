@@ -26,7 +26,7 @@ export default function FilterSortByList() {
           <RadioGroupItem value={el.type} id={el.type} />
           <Label
             htmlFor={el.type}
-            className="w-full font-normal leading-6 main_tetext-base tracking-normalxt_body text-slate-400 dark:text-slate-200"
+            className="w-full font-normal leading-6 main_tetext-base tracking-normalxt_body text-slate-700 dark:text-slate-200"
           >
             <ul className="flex items-center justify-between">
               <li>{t(`${el.type}`)}</li>

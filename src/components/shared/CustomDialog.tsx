@@ -6,12 +6,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 type Props = {
   isOpen: boolean;
   title: string;
-  description: string;
+  description: ReactElement;
   footer: ReactNode;
 };
 
@@ -23,7 +23,9 @@ export default function CustomDialog({ isOpen, title, description, footer }: Pro
           <DialogTitle className="text-2xl font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-lg  text-slate-700 dark:text-slate-50">{description}</DialogDescription>
+          <DialogDescription asChild className="text-lg  text-slate-700 dark:text-slate-50">
+            {description}
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex-wrap gap-2">{footer}</DialogFooter>
       </DialogContent>

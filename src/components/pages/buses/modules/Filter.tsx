@@ -31,9 +31,7 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
   return (
     <SheetHeader className="justify-between">
       <SheetTitle className="sr-only">Edit profile</SheetTitle>
-      <SheetDescription className="sr-only">
-        Make changes to your profile here. Click save when youre done.
-      </SheetDescription>
+      <SheetDescription className="sr-only"></SheetDescription>
       <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{title}</h3>
       <SheetClose asChild>
         <Button

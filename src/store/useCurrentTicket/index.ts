@@ -40,8 +40,6 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               return;
             }
 
-            console.log(travelDate);
-
             const ticket_id = route.ticket_id;
             const tickets = get().tickets;
             if (tickets[ticket_id]?.details) {

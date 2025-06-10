@@ -1,6 +1,10 @@
 {
   "buses-page": {
-    "sort_buy_price": "Цене",
+    "shortHours": "г",
+    "shortMinutes": "хв",
+    "sort_buy_default": "Цене",
+    "sort_buy_price_asc": "По возрастанию цены",
+    "sort_buy_price_desc": "По убыванию цены",
     "sort_buy_departure_time": "Временем отправления",
     "sort_buy_arrival_time": "Временем прибытия",
     "sort_buy_time_on_road": "Короткий маршрут",
@@ -15,8 +19,7 @@
     "selectButton": "Обрати",
     "details": "Детальнее",
     "route": "Маршрут",
-    "shortHours": "ч",
-    "shortMinutes": "мин",
+
     "local_time": "Время отправления/прибытия указано по местному времени.",
     "travel_time": "Время в пути",
     "collapse_details": "Свернуть подробности",
@@ -29,6 +32,8 @@
     "clear_all": "Очистить все",
     "view_trips": "Показать маршруты",
     "filter": "Фильтр",
-    "placeholderPassenger": "Пассажир"
+    "placeholderPassenger": "Пассажир",
+    "price_may_increase": "price_may_increase",
+    "book_within_time_to_avoid_price_increase": "book_within_time_to_avoid_price_increase"
   }
 }

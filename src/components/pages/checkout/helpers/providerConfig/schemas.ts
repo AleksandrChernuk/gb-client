@@ -2,7 +2,7 @@ import { z, ZodTypeAny } from 'zod';
 
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { FieldConfig, ProviderConfig } from './types';
-import { parse, isValid, isBefore, subWeeks } from 'date-fns';
+import { parse, isValid, isBefore, subWeeks, subDays, isAfter } from 'date-fns';
 
 export const bdaySchema = z.string().refine(
   (value) => {
@@ -21,6 +21,26 @@ export const bdaySchema = z.string().refine(
     message: 'invalid_date',
   },
 );
+
+export const passportExpirySchema = (departureDate: Date) =>
+  z
+    .string()
+    .min(1, { message: 'required' })
+    .refine(
+      (value) => {
+        const [day, month, year] = value.split('/');
+        if (!day || !month || !year) return false;
+
+        const parsed = parse(`${day}.${month}.${year}`, 'dd.MM.yyyy', new Date());
+        if (!isValid(parsed)) return false;
+
+        const limitDate = subDays(departureDate, 7);
+        return isAfter(parsed, limitDate);
+      },
+      {
+        message: 'invalid_date',
+      },
+    );
 
 function getFieldSchema(field: FieldConfig): ZodTypeAny {
   if (!field.schema) throw new Error(`Schema not defined for field "${field.label}"`);
@@ -74,7 +94,7 @@ export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, has
           },
           { message: 'invalid_number' },
         ),
-      payment: z.enum(['card', 'on_boarding', 'booking']).nullable(),
+      payment: z.enum(['PURCHASE', 'BOOK', 'PAYMENT_AT_BOARDING']).nullable(),
       accept_rules: z.boolean().refine((v) => v === true, { message: 'required' }),
       selected_seats: z.array(seatSchema).optional(),
     })

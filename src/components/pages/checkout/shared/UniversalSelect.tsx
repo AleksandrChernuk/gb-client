@@ -28,15 +28,19 @@ const UniversalSelect = memo(function UniversalSelect({ name, config }: Props) {
       <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">{t_forms(config.label)}</FormLabel>
       <Select onValueChange={field.onChange} value={field.value}>
         <SelectTrigger className="w-full " size="full" aria-invalid={!!error}>
-          {t_forms(
-            config.options.find((opt) => opt.value === field.value)?.label || config.placeholder || config.label,
-          )}
+          {config.translateOptions
+            ? t_forms(
+                config.options.find((opt) => opt.value === field.value)?.label || config.placeholder || config.label,
+              )
+            : config.options.find((opt) => opt.value === field.value)?.label ||
+              t_forms(config.placeholder!) ||
+              config.label}
         </SelectTrigger>
         <SelectContent className="w-full">
           <SelectGroup>
             {config.options.map((option) => (
               <SelectItem key={option.value} value={option.value}>
-                {t_forms(option.label)}
+                {config.translateOptions ? t_forms(option.label) : option.label}
               </SelectItem>
             ))}
           </SelectGroup>

@@ -3,6 +3,7 @@ import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { filterRoutesByCarriers, sortedCarriers, sortedRoutes } from './helpers';
 import { FilterTicketsStore } from './types';
+import { sortBuy } from '@/constans/sortbuylist.constans';
 
 export const useFilterTickets = create<FilterTicketsStore>()(
   devtools(
@@ -11,7 +12,7 @@ export const useFilterTickets = create<FilterTicketsStore>()(
       filteredTickets: [],
       carriers: [],
       filterCarriers: [],
-      sortBy: 'sort_buy_popularity',
+      sortBy: sortBuy.SORT_BUY_PRICE_ASC,
 
       setTickets: (tickets) => {
         set((state) => {

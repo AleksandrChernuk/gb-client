@@ -9,13 +9,11 @@ export interface IRouteDetailsResponse {
   providerLocationFrom: string | null;
   providerLocationTo: string | null;
   stops: IStops[] | null;
-  discounts: IDiscount[] | null;
   automatic_discount_id?: string | null; //!! New
-  need_birth?: boolean | string; //! New
-  need_doc?: boolean | string; //! New
+  discounts: IDiscount[] | null;
   return_rules_description: string[] | null;
   return_rules: IReturnRules[] | null;
-  bus_id: string | null;
+  transport_id?: string | null;
   bus_name: string | null;
   bus_number: string | null;
   bus_pictures: string[] | null;
@@ -23,6 +21,8 @@ export interface IRouteDetailsResponse {
   seats_map: TypeSeatsMap[] | string | null;
   free_seats_map: IFreeSeats[] | null;
   max_tickets?: number | string;
+  need_birth?: boolean | string;
+  need_doc?: boolean | string;
   need_doc_expire_date?: boolean | string;
   need_citizenship?: boolean | string;
   need_gender?: boolean | string;

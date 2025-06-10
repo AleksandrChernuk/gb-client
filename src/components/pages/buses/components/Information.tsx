@@ -31,7 +31,7 @@ export const Information = () => {
       <div className="flex items-center justify-between">
         {isHydrated ? (
           <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
-            {format(toDate(date), 'eee ,d MMM', { locale })}
+            {format(toDate(date), 'eee, d MMM', { locale })}
           </h3>
         ) : (
           <Skeleton className="h-[28px] min-w-20" />

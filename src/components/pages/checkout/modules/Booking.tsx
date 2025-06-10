@@ -16,19 +16,18 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import SeatsList from '../components/SeatsList';
 import IconSeat from '../icons/IconSeat';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import FloorSheet from '../components/FloorSwitch';
-import { useController, useFormContext } from 'react-hook-form';
+import { useController, useFormContext, useWatch } from 'react-hook-form';
 import { memo, useMemo } from 'react';
 import { TypeSeatsMap } from '@/types/seat.interface';
+import SeatsList from '../shared/SeatsList';
 
 const Booking = memo(function Booking() {
   const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
   const isHydrated = useCurrentTicket((state) => state.isHydrated);
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const t_form = useTranslations(MESSAGE_FILES.FORM);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
 
@@ -39,6 +38,8 @@ const Booking = memo(function Booking() {
     control,
     name: 'selected_seats',
   });
+
+  const passengers = useWatch({ control, name: 'passengers' });
 
   const array: TypeSeatsMap[] = useMemo(() => {
     const seats = selectedTicket?.details?.seats_map;
@@ -54,7 +55,7 @@ const Booking = memo(function Booking() {
             variant={'outline'}
             type="button"
             aria-invalid={Boolean(error)}
-            className="aria-invalid:border-red-200 flex items-center justify-between w-full h-auto p-3 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 text-ellipsis"
+            className=" flex items-center justify-between w-full h-auto p-3 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 text-ellipsis"
           >
             <div className="flex items-center gap-2 tablet:gap-4">
               <div className="[&_svg]:fill-[#6f8b90] w-[45px] h-[56px]">
@@ -64,20 +65,19 @@ const Booking = memo(function Booking() {
               {isHydrated ? (
                 <div className="text-xs tablet:text-base font-medium leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink-1">
                   {!selectedTicket?.details?.seats_map ? (
-                    Boolean(error) ? (
-                      <span className="text-[#de2a1a]">{t_form(`${error?.message}`)}</span>
-                    ) : (
-                      <div className="flex flex-col items-start gap-1">
-                        <span>{t_page('free_seating')}</span>
-                        <span className="text-base font-medium leading-4 tracking-normal">
-                          {t_page('seat_guaranteed')}
-                        </span>
-                      </div>
-                    )
-                  ) : Boolean(error) ? (
-                    <span className="text-[#de2a1a]">{t_form(`${error?.message}`)}</span>
+                    <div className="flex flex-col items-start gap-1">
+                      <span>{t_page('free_seating')}</span>
+                      <span className="text-base font-medium leading-4 tracking-normal">
+                        {t_page('seat_guaranteed')}
+                      </span>
+                    </div>
                   ) : (
-                    t_page('choose_place')
+                    <div className={`flex flex-col items-start gap-1 `}>
+                      <span>{t_page('choose_place')}</span>
+                      <span
+                        className={`text-sm ${!!error && 'text-[#de2a1a]'}`}
+                      >{`${t_page('selected_place')} ${selectedSeats.length} ${t_page('selected_seats_status')} ${passengers.length} ${t_page('place')}`}</span>
+                    </div>
                   )}
                 </div>
               ) : (

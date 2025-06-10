@@ -39,6 +39,8 @@ function useCheckout() {
     [adult, children, providerConfig],
   );
 
+  console.log('defaultPassengers', defaultPassengers);
+
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map?.length),
     [providerConfig, ticket],
@@ -58,15 +60,12 @@ function useCheckout() {
   });
 
   const onSubmit = async (formData: z.infer<typeof schema>) => {
-    localStorage.setItem('form', JSON.stringify(formData));
-
     if (!ticket || !from || !to) {
-      console.log('no data');
       setError('no data');
       return;
     }
 
-    if (formData.payment === 'card') {
+    if (formData.payment === 'PURCHASE') {
       try {
         setLoading(true);
         const { data, signature } = await checkout({
@@ -109,12 +108,9 @@ function useCheckout() {
       }
       return;
     }
+
     toast.info('ok', {
       description: JSON.stringify(formData),
-      action: {
-        label: 'Close',
-        onClick: () => console.log('Close'),
-      },
     });
   };
 

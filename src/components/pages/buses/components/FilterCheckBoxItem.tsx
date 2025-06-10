@@ -18,7 +18,7 @@ export default function FilterCheckBoxItem({ name, count, checked, handleChange 
       <Checkbox id={name} checked={checked} onCheckedChange={handleChange} />
       <Label
         htmlFor={name}
-        className="flex items-center justify-between w-full text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200"
+        className="flex items-center justify-between w-full text-base font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-200"
       >
         <div>{name}</div>
         <div>{count}</div>

@@ -1,33 +1,26 @@
 'use client';
-
+import dynamic from 'next/dynamic';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import Timer from './components/Timer';
-
-import dynamic from 'next/dynamic';
-import { BusLoader } from '../../shared/BusLoader';
+import LoaderPage from './components/LoaderPage';
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 const CheckoutForm = dynamic(() => import('./modules/CheckoutForm'), {
-  loading: () => (
-    <main>
-      <section className="flex items-center justify-center min-h-dvh">
-        <BusLoader />
-      </section>
-    </main>
-  ),
+  loading: () => <LoaderPage />,
   ssr: false,
 });
 
 const Checkaut = () => {
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">
-      <section>
+      <section className="h-full">
         <Timer />
-        <h1 className="sr-only">
-          Бронюйте автобусні квитки до Європи з України швидко та зручно на GreenBus. Широкий вибір маршрутів, вигідні
-          ціни, сучасні комфортабельні рейси та цілодобова підтримка.
-        </h1>
-        <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px] relative">
+        <h1 className="sr-only">{t('h1')}</h1>
+        <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px] h-full">
           <div className="my-4 laptop:my-8">
             <BackRouteButton />
           </div>

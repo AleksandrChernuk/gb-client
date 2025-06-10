@@ -1,6 +1,10 @@
 {
   "buses-page": {
-    "sort_buy_price": "Price",
+    "shortHours": "г",
+    "shortMinutes": "хв",
+    "sort_buy_default": "Default",
+    "sort_buy_price_asc": "Price: Low to High",
+    "sort_buy_price_desc": "Price: High to Low",
     "sort_buy_departure_time": "Departure time",
     "sort_buy_arrival_time": "Arrival time",
     "sort_buy_time_on_road": "Shortest journey",
@@ -12,8 +16,6 @@
     "places": "Places",
     "selectButton": "Обрати",
     "details": "Details",
-    "shortHours": "h",
-    "shortMinutes": "m",
     "route": "Route",
     "local_time": "Departure/arrival time is indicated in local time.",
     "travel_time": "Travel time",

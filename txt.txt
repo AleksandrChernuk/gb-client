@@ -158,3 +158,5 @@ card_bg_primery - #0f172a/ #ffffff -  text-slate-900 dark:text-white
 @utility details_stops_item {
   @apply relative after:content-[''] before:absolute after:rounded-full before:border-[2px] before:w-4 before:h-4 before:top-0 before:-left-[19px] before:-translate-x-1/2 before:rounded-full before:z-20;
 }
+
+sad

@@ -5,6 +5,7 @@ export type providerConfig = {
   fields: Record<string, FieldConfig>;
 };
 export type SelectOption = { value: string; label: string };
+export type DiscountOption = { value: string; label: string; discount_description?: string; discount_percent?: string };
 
 export type FieldConfig =
   | {
@@ -19,16 +20,24 @@ export type FieldConfig =
       options: SelectOption[];
       placeholder?: string;
       schema: ZodType;
+      translateOptions?: boolean;
     }
   | {
       label: string;
-      type: 'bday';
+      type: 'date';
       placeholder: string;
       schema?: ZodType;
     }
   | {
       label: string;
       type: 'citizenship';
+      placeholder: string;
+      schema?: ZodType;
+    }
+  | {
+      label: string;
+      type: 'discount';
+      options: DiscountOption[];
       placeholder: string;
       schema?: ZodType;
     };

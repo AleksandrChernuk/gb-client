@@ -1,9 +1,9 @@
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
-import Seat from './Seat';
 import { toast } from 'sonner';
 import { memo } from 'react';
+import Seat from '../components/Seat';
 
 type Props = {
   helm?: boolean;
@@ -12,6 +12,7 @@ type Props = {
 
 const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
   const { control } = useFormContext();
+
   const [selectedSeats, passengers] = useWatch({
     control,
     name: ['selected_seats', 'passengers'],
@@ -37,16 +38,12 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
     }
     toast.error('Form Submitted:', {
       description: 'Max lengs',
-      action: {
-        label: 'Undo',
-        onClick: () => console.log('Close'),
-      },
     });
   };
 
   return (
     <div className="mx-auto mb-10 last:mb-0 w-fit">
-      <ul className="flex flex-col gap-4 px-2 xs:px-4  md:px-8 py-8 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-[50px]">
+      <ul className="flex flex-col gap-4 px-2 tablet:px-4 py-4 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-[50px]">
         {helm && (
           <li className="pb-4 border border-b-slate-200 dark:border-b-slate-700 w-fit">
             <div className={`w-[72px] h-[72px] [&_svg]:fill-slate-200 dark:[&_svg]:fill-slate-700 mb-2`}>
