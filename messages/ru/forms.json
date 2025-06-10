@@ -2,7 +2,7 @@
   "forms": {
     "first_name": "Имя",
     "first_name_placeholder": "Ваше Имя",
-    "last_name`": "Фамилия",
+    "last_name": "Фамилия",
     "last_name_placeholder": "Ваша Фамилия",
     "discounts": "Скидка",
     "discounts_placeholder": "Выберите скидку",
