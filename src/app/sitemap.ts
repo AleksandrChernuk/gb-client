@@ -15,8 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getEntries('/faq'),
     ...getEntries('/buses'),
     ...getEntries('/carriers'),
-    ...getEntries('/checkout'),
-    ...getEntries('/checkout-success'),
     ...getEntries('/faq'),
     ...getEntries('/blog'),
     ...getEntries('/agents'),
