@@ -24,6 +24,76 @@
       "title": "Privacy Policy | GreenBus 🚍",
       "description": "Read the GreenBus Privacy Policy. Learn how we collect, store, and use your personal data during booking and purchasing bus tickets in Ukraine and Europe.",
       "keywords": "GreenBus, privacy policy, personal data, data protection, privacy, bus transportation, bus tickets, Europe, Ukraine"
+    },
+    "for-cariers": {
+      "title": "Ticket Sales and Transportation Automation | GreenBus 🚍",
+      "description": "Automate ticket sales and manage routes with GreenBus. A platform for carriers that streamlines operations, provides analytics, and helps grow your business efficiently.",
+      "keywords": "GreenBus, ticket sales, automation, passenger transportation, route management, reporting, carriers, transport, Ukraine, Europe"
+    },
+    "for-agents": {
+      "title": "Ticket Sales Automation for Agencies | GreenBus 🚍",
+      "description": "Become a GreenBus agent! We offer agencies a modern ticket sales automation system, transportation management, and 24/7 support.",
+      "keywords": "GreenBus, ticket sales, transportation, agencies, automation, support, partnership, Ukraine, Europe"
+    },
+    "blog": {
+      "title": "GreenBus Blog — News, Tips & Innovations in Transportation 🚍",
+      "description": "Read the GreenBus blog for the latest news, helpful tips, reviews, and innovations in bus transportation across Ukraine and Europe. Be the first to know about service updates and exclusive offers.",
+      "keywords": "GreenBus, blog, news, bus transportation, transport, tips, innovations, Ukraine, Europe, service, deals, reviews"
+    },
+    "buses": {
+      "title": "Buy Bus Tickets Online | GreenBus 🚍",
+      "description": "Purchase bus tickets online in just a few minutes. GreenBus offers affordable prices, convenient schedules, and reliable carriers across Ukraine and Europe.",
+      "keywords": "GreenBus, buy ticket, bus ticket, online, passenger transportation, Ukraine, Europe, bus schedule, book ticket"
+    },
+    "carriers": {
+      "title": "GreenBus Carriers — Reliable Bus Companies | GreenBus 🚍",
+      "description": "Explore all GreenBus carriers. Choose reliable partners for your trips across Ukraine and Europe — only trusted bus companies and convenient service.",
+      "keywords": "GreenBus, carriers, bus companies, passenger transportation, transport, Ukraine, Europe, partners, bus"
+    },
+    "checkout": {
+      "title": "Checkout | GreenBus 🚍",
+      "description": "Complete your ticket purchase. Your data is secure. Please do not close this page until your payment is complete.",
+      "keywords": "GreenBus, checkout, buy ticket, bus, payment, data protection, Ukraine, Europe"
+    },
+    "success": {
+      "title": "Operation Status | GreenBus",
+      "description": "The operation has been completed. Thank you for choosing GreenBus! You can check your order status in your account or contact customer support.",
+      "keywords": "GreenBus, operation status, ticket, bus, order, payment, Ukraine, Europe"
+    },
+    "all-countries": {
+      "title": "All GreenBus Destinations — List of Countries and Routes 🚍",
+      "description": "Browse the full list of countries served by GreenBus. Choose a country, see all available routes and schedules for convenient travel across Ukraine and Europe.",
+      "keywords": "GreenBus, destinations, list of countries, routes, directions, bus transportation, Ukraine, Europe, international routes, travel"
+    },
+    "route-planner": {
+      "title": "GreenBus Route Planner — Build Your Journey on the Map 🚍",
+      "description": "Use the interactive GreenBus route planner to create your own journey. Choose cities and plan trips across Ukraine and Europe easily and quickly online.",
+      "keywords": "GreenBus, route planner, route builder, map, bus transportation, Ukraine, Europe, travel, journey, build route"
+    },
+    "signup": {
+      "title": "Sign Up | GreenBus",
+      "description": "Create your GreenBus account for quick ticket booking and convenient trip management.",
+      "keywords": "GreenBus, sign up, account, register, buy ticket, bus, travel"
+    },
+    "signin": {
+      "title": "Sign In | GreenBus",
+      "description": "Log in to your GreenBus account to manage bookings and view your trip history.",
+      "keywords": "GreenBus, sign in, login, account, tickets, bus, travel"
+    },
+    "confirmPassword": {
+      "title": "Password Confirmation | GreenBus",
+      "description": "Confirm your password to complete sign in or a sensitive action.",
+      "keywords": "GreenBus, password confirmation, password, account, security"
+    },
+    "forgotPassword": {
+      "title": "Password Recovery | GreenBus",
+      "description": "Recover your password to regain access to your GreenBus account and continue using the service.",
+      "keywords": "GreenBus, password recovery, forgot password, account, access"
+    },
+    "updatePassword": {
+      "title": "Update Password | GreenBus",
+      "description": "Change your password to enhance the security of your GreenBus account.",
+      "keywords": "GreenBus, update password, change password, account, security"
     }
   }
 }

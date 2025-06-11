@@ -26,16 +26,15 @@ export default function MainHeader() {
             <li>
               <SwitchTheme />
             </li>
-
             <li className="hidden laptop:block">
               <Support variant="desktop" />
             </li>
-
             <li>
               <ProfileLink variant="desktop" />
             </li>
           </ul>
         </nav>
+
         <MobileMenu />
       </Container>
     </header>

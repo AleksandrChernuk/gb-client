@@ -9,6 +9,7 @@ import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+
 export async function generateMetadata() {
   return {
     robots: {

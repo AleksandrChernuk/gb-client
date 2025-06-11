@@ -1,6 +1,3 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -22,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: t('main.title'),
     description: t('main.description'),
-    keywords: '',
+    keywords: t('main.keywords'),
 
     appleWebApp: {
       title: 'GreenBus',

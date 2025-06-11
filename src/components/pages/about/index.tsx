@@ -33,17 +33,15 @@ export default async function AboutPage() {
                 </h1>
                 <p className="mb-4 body_text text-slate-400 dark:text-slate-200">{t_about('route_to_europe_text')}</p>
               </li>
-              <li className="overflow-hidden tablet:w-1/2 tablet:mr-auto">
+              <li className="overflow-hidden tablet:w-1/2 tablet:mr-auto max-w-[400px]">
                 <Image
                   alt="direction-with-a-road-in-the-city"
                   src={irectionWith}
-                  width={400}
-                  height={400}
                   priority
                   draggable={false}
                   placeholder="blur"
                   quality={80}
-                  className="mx-auto tablet:mx-0 rounded-3xl "
+                  className="mx-auto tablet:mx-0 rounded-3xl h-auto"
                 />
               </li>
             </ul>
@@ -78,16 +76,14 @@ export default async function AboutPage() {
                   {t_about('professional_solutions_text')}
                 </p>
               </li>
-              <li className="ml-auto">
+              <li className="ml-auto max-w-[400px]">
                 <Image
                   alt="group"
                   src={group}
-                  width={400}
-                  height={400}
                   draggable={false}
                   placeholder="blur"
                   quality={80}
-                  className="mx-auto tablet:mx-0 rounded-3xl"
+                  className="mx-auto tablet:mx-0 rounded-3xl h-auto"
                 />
               </li>
             </ul>
@@ -117,16 +113,14 @@ export default async function AboutPage() {
                   {t_about('main_product_text')}
                 </p>
               </li>
-              <li className="ml-auto">
+              <li className="ml-auto max-w-[400px]">
                 <Image
                   alt="world"
                   src={world}
-                  width={400}
-                  height={400}
                   draggable={false}
                   placeholder="blur"
                   quality={80}
-                  className="mx-auto tablet:mx-0 rounded-3xl"
+                  className="mx-auto tablet:mx-0 rounded-3xl h-auto"
                 />
               </li>
             </ul>
@@ -135,15 +129,13 @@ export default async function AboutPage() {
 
         <section className="bg-green-500">
           <Container size="m" className="py-6 tablet:py-12 ">
-            <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-5">
-              <li className="mr-auto">
+            <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-5 ">
+              <li className="mr-auto max-w-[400px]">
                 <Image
                   alt="group"
                   src={business}
-                  width={400}
-                  height={400}
                   draggable={false}
-                  className="mx-auto tablet:mx-0 rounded-3xl"
+                  className="mx-auto tablet:mx-0 rounded-3xl max-w-[400px]"
                 />
               </li>
               <li className="tablet:w-1/2">

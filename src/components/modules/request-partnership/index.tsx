@@ -36,7 +36,7 @@ export default function RequestPartnershipForm() {
               <FormItem className="w-full">
                 <FormLabel>{t('contact_person')}</FormLabel>
                 <FormControl>
-                  <Input {...field} type="text" placeholder={t('name_placeholder')} />
+                  <Input {...field} type="text" placeholder={t('first_name_placeholder')} />
                 </FormControl>
               </FormItem>
             )}
@@ -48,7 +48,7 @@ export default function RequestPartnershipForm() {
               <FormItem className="w-full">
                 <FormLabel>{t('name_of_the_company')}</FormLabel>
                 <FormControl>
-                  <Input {...field} type="text" placeholder={t('name_placeholder')} />
+                  <Input {...field} type="text" placeholder={t('last_name_placeholder')} />
                 </FormControl>
               </FormItem>
             )}

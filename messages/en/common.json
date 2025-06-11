@@ -1,5 +1,8 @@
 {
   "common": {
+    "page_in_progress": "We are working on this page to make it as helpful and convenient for you as possible. Very soon you’ll find new information and features here!",
+    "errorDescription": "An unexpected error has occurred. Please try again or return to the homepage.",
+    "notFoundTitle": "Page Not Found",
     "leave_a_request": "Leave a request",
     "backBtn": "Back",
     "searchBtn": "Search",

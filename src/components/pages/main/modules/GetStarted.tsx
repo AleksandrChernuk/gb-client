@@ -13,13 +13,13 @@ export default async function GetStarted() {
     <section className="py-8 tablet:py-16">
       <Container size="m">
         <ul className="justify-between min-h-full tablet:flex tablet:gap-5 laptop:gap-40">
-          <li className="relative overflow-hidden rounded-3xl w-[350px] h-[353px]  mb-8 tablet:order-2 tablet:mb-0 mx-auto">
+          <li className="relative overflow-hidden max-w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
             <Image
               alt={t_img_alts('map')}
               src={pointOnCurt}
-              fill
               placeholder="blur"
               sizes="100vw"
+              className="rounded-3xl"
               style={{
                 objectFit: 'contain',
               }}

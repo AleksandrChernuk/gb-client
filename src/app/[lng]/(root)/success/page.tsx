@@ -1,4 +1,4 @@
-import OfertaPage from '@/components/pages/oferta';
+import SuccessPage from '@/components/pages/success';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: Props) {
   });
 
   return {
-    title: t('oferta.title'),
-    description: t('oferta.description'),
-    keywords: t('oferta.keywords'),
+    title: t('success.title'),
+    description: t('success.description'),
+    keywords: t('success.keywords'),
 
     appleWebApp: {
       title: 'GreenBus',
@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: Props) {
     manifest: '/manifest.json',
 
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
       nocache: false,
       googleBot: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
         noimageindex: false,
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -45,12 +45,12 @@ export async function generateMetadata({ params }: Props) {
     metadataBase: new URL('https://greenbus.com.ua'),
 
     alternates: {
-      canonical: `/${lng}/oferta`,
+      canonical: `/${lng}/success`,
       languages: {
-        'x-default': '/uk/oferta',
-        uk: '/uk/oferta',
-        en: '/en/oferta',
-        ru: '/ru/oferta',
+        'x-default': '/uk/success',
+        uk: '/uk/success',
+        en: '/en/success',
+        ru: '/ru/success',
       },
     },
 
@@ -60,14 +60,13 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function Oferta({
+export default async function Success({
   params,
 }: Readonly<{
   params: Params;
 }>) {
   const { lng } = await params;
-
   setRequestLocale(lng as Locale);
 
-  return <OfertaPage />;
+  return <SuccessPage />;
 }

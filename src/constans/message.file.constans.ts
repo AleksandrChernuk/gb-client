@@ -13,4 +13,5 @@ export const MESSAGE_FILES = {
   QUESTIONS_PAGE: 'questions-page',
   PROFILE: 'profile',
   PRIVACY_POLICY: 'privacy-policy',
+  AGENTS_PAGE: 'agents',
 } as const;

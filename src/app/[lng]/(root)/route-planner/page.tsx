@@ -1,4 +1,4 @@
-import OfertaPage from '@/components/pages/oferta';
+import RoutePlannerPage from '@/components/pages/route-planner';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -10,15 +10,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
-    namespace: MESSAGE_FILES.METADATA,
-  });
+  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
 
   return {
-    title: t('oferta.title'),
-    description: t('oferta.description'),
-    keywords: t('oferta.keywords'),
+    title: t('route-planner.title'),
+    description: t('route-planner.description'),
+    keywords: t('route-planner.keywords'),
 
     appleWebApp: {
       title: 'GreenBus',
@@ -45,12 +42,12 @@ export async function generateMetadata({ params }: Props) {
     metadataBase: new URL('https://greenbus.com.ua'),
 
     alternates: {
-      canonical: `/${lng}/oferta`,
+      canonical: `/${lng}/route-planner`,
       languages: {
-        'x-default': '/uk/oferta',
-        uk: '/uk/oferta',
-        en: '/en/oferta',
-        ru: '/ru/oferta',
+        'x-default': '/uk/route-planner',
+        uk: '/uk/route-planner',
+        en: '/en/route-planner',
+        ru: '/ru/route-planner',
       },
     },
 
@@ -60,7 +57,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function Oferta({
+export default async function RoutePlanner({
   params,
 }: Readonly<{
   params: Params;
@@ -69,5 +66,5 @@ export default async function Oferta({
 
   setRequestLocale(lng as Locale);
 
-  return <OfertaPage />;
+  return <RoutePlannerPage />;
 }

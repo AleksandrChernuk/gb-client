@@ -39,11 +39,11 @@ export const footerNavLinks = {
     },
     {
       title: 'bus_routes',
-      href: '/bus-routes',
+      href: '/route-planner',
     },
     {
       title: 'oll_countries',
-      href: '/oll-countries',
+      href: '/all-countries',
     },
     {
       title: 'carriers',

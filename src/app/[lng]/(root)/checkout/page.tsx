@@ -2,11 +2,34 @@ export const dynamic = 'force-dynamic';
 
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Checkaut from '@/components/pages/checkout';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
-export async function generateMetadata() {
+type Props = {
+  params: Params;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  const t = await getTranslations({
+    locale: lng,
+    namespace: MESSAGE_FILES.METADATA,
+  });
+
   return {
+    title: t('checkout.title'),
+    description: t('checkout.description'),
+    keywords: t('checkout.keywords'),
+
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
+
     robots: {
       index: false,
       follow: false,
@@ -19,6 +42,22 @@ export async function generateMetadata() {
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+
+    metadataBase: new URL('https://greenbus.com.ua'),
+
+    alternates: {
+      canonical: `/${lng}/checkout`,
+      languages: {
+        'x-default': '/uk/checkout',
+        uk: '/uk/checkout',
+        en: '/en/checkout',
+        ru: '/ru/checkout',
+      },
+    },
+
+    openGraph: {
+      images: '/logo.png',
     },
   };
 }

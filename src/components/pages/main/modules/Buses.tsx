@@ -14,13 +14,13 @@ export default async function Buses() {
     <section className="pb-8 tablet:pb-16">
       <Container size="m">
         <ul className="justify-between min-h-full gap-5 tablet:flex laptop:gap-40">
-          <li className="relative overflow-hidden rounded-3xl w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
+          <li className="relative overflow-hidden  max-w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
             <Image
               alt={t_img_alts('buses')}
               src={aTravellerImage}
-              fill
               placeholder="blur"
               sizes="100vw"
+              className="rounded-3xl"
               style={{
                 objectFit: 'contain',
               }}

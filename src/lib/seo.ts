@@ -1,23 +1,5 @@
 export const PUBLIC_URL = 'https://gb-client-psi.vercel.app';
 
-export const seoMain = {
-  title: {
-    uk: 'GreenBus - Квитки з України в Європу | Автобусні перевезення',
-    ru: 'GreenBus - Билеты из Украины в Европу | Автобусные перевозки',
-    en: 'GreenBus - Tickets from Ukraine to Europe | Bus Transportation',
-  },
-  description: {
-    uk: 'Купуйте автобусні квитки з України в країни Європи онлайн. Комфортні рейси, надійні перевізники, зручний розклад та вигідні ціни.',
-    ru: 'Покупайте автобусные билеты из Украины в Европу онлайн. Комфортные рейсы, надежные перевозчики, удобное расписание и выгодные цены.',
-    en: 'Buy bus tickets from Ukraine to Europe online. Comfortable trips, reliable carriers, convenient schedules, and affordable prices.',
-  },
-  keywords: {
-    uk: 'автобусні квитки, Україна Європа, автобусні перевезення, квитки онлайн, міжнародні рейси, GreenBus',
-    ru: 'автобусные билеты, Украина Европа, автобусные перевозки, билеты онлайн, международные рейсы, GreenBus',
-    en: 'bus tickets, Ukraine Europe, bus transportation, tickets online, international routes, GreenBus',
-  },
-};
-
 export const seoFaq = {
   title: {
     uk: 'GreenBus - Квитки з України в Європу | Автобусні перевезення',
@@ -105,41 +87,5 @@ export const seoFaqSearch = {
     uk: 'пошук FAQ, питання та відповіді, GreenBus, часті питання, підтримка клієнтів',
     ru: 'поиск FAQ, вопросы и ответы, GreenBus, часто задаваемые вопросы, поддержка клиентов',
     en: 'FAQ search, questions and answers, GreenBus, frequently asked questions, customer support',
-  },
-};
-
-export const seoForCarriers = {
-  title: {
-    uk: 'GreenBus – автоматизація продажу квитків і перевезень',
-    ru: 'GreenBus – автоматизация продажи билетов и перевозок',
-    en: 'GreenBus – Ticket Sales and Transportation Automation',
-  },
-  description: {
-    uk: 'Оптимізуйте продаж квитків, керуйте рейсами та використовуйте аналітику для зростання бізнесу. GreenBus – безпечно, швидко, ефективно.',
-    ru: 'Оптимизируйте продажу билетов, управляйте рейсами и используйте аналитику для роста бизнеса. GreenBus – безопасно, быстро, эффективно.',
-    en: 'Optimize ticket sales, manage routes, and use analytics to grow your business. GreenBus – safe, fast, and efficient.',
-  },
-  keywords: {
-    uk: 'GreenBus, продаж квитків, автоматизація, пасажирські перевезення, управління рейсами, звітність, безпека даних',
-    ru: 'GreenBus, продажа билетов, автоматизация, пассажирские перевозки, управление рейсами, отчетность, безопасность данных',
-    en: 'GreenBus, ticket sales, automation, passenger transportation, route management, reporting, data security',
-  },
-};
-
-export const seoForAgents = {
-  title: {
-    uk: 'GreenBus – продаж квитків та управління перевезеннями',
-    ru: 'GreenBus – продажа билетов и управление перевозками',
-    en: 'GreenBus – Ticket Sales & Transport Management',
-  },
-  description: {
-    uk: 'Приєднуйтесь до GreenBus! Ми пропонуємо агентствам систему автоматизованого продажу квитків, управління перевезеннями та підтримку 24/7.',
-    ru: 'Присоединяйтесь к GreenBus! Мы предлагаем агентствам систему автоматизированной продажи билетов, управление перевозками и поддержку 24/7.',
-    en: 'Join GreenBus! We offer agencies an automated ticket sales system, transportation management, and 24/7 support.',
-  },
-  keywords: {
-    uk: 'продаж квитків, перевезення, підтримка, агентства, управління',
-    ru: 'продажа билетов, перевозки, поддержка, агентства, управление',
-    en: 'ticket sales, transportation, support, agencies, management',
   },
 };

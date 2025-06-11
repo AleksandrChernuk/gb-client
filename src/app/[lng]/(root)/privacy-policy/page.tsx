@@ -17,6 +17,14 @@ export async function generateMetadata({ params }: Props) {
     description: t('privacy-policy.description'),
     keywords: t('privacy-policy.keywords'),
 
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
+
     robots: {
       index: true,
       follow: true,
@@ -32,14 +40,17 @@ export async function generateMetadata({ params }: Props) {
     },
 
     metadataBase: new URL('https://greenbus.com.ua'),
+
     alternates: {
-      canonical: '/',
+      canonical: `/${lng}/privacy-policy`,
       languages: {
-        uk: '/uk',
-        en: '/en',
-        ru: '/ru',
+        'x-default': '/uk/privacy-policy',
+        uk: '/uk/privacy-policy',
+        en: '/en/privacy-policy',
+        ru: '/ru/privacy-policy',
       },
     },
+
     openGraph: {
       images: '/logo.png',
     },
