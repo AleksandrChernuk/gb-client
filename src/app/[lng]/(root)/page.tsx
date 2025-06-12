@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props) {
     },
 
     openGraph: {
-      images: '/logo.png',
+      images: `/images/logo.png`,
     },
   };
 }

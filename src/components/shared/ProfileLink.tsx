@@ -1,8 +1,8 @@
-import { Link } from '@/i18n/routing';
 import { Button } from '../ui/button';
 import { User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { Link } from '@/i18n/routing';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -28,24 +28,23 @@ export const ProfileLink = ({ variant }: Props) => {
 
     case 'desktop':
       return (
-        <Button asChild variant={'link'}>
-          <Link
-            prefetch={false}
-            href={'/profile'}
-            className="group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
+        <Link
+          prefetch={false}
+          href={'/profile'}
+          className="hover:underline flex items-center group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
+        >
+          <div
+            className={`flex items-center justify-center group-hover:fill-gray_medium p-1 rounded-full bg-slate-200 dark:bg-slate-50`}
           >
-            <div
-              className={`flex items-center justify-center group-hover:fill-gray_medium p-1 rounded-full bg-slate-200 dark:bg-slate-50`}
-            >
-              <User
-                size={20}
-                className={`stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-slate-800 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all`}
-              />
-            </div>
-            <div className={`hidden laptop:block`}>{t('mainNavProfileLink')}</div>
-          </Link>
-        </Button>
+            <User
+              size={20}
+              className={`stroke-black group-data-[state=open]:stroke-[#6f8b90] group-data-[state=open]:dark:stroke-slate-800 group-hover:stroke-[#8e8e8e] dark:stroke-black dark:group-hover:stroke-slate-200 transition-all`}
+            />
+          </div>
+          <div className={`hidden laptop:block`}>{t('mainNavProfileLink')}</div>
+        </Link>
       );
+
     default:
       return null;
   }
