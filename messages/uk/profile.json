@@ -1,7 +1,14 @@
 {
   "profile": {
-    "settingsTitle": "Налаштування",
-    "ordersTitle": "Замовлення",
-    "historiTitle": "Історія"
+    "trips_hystori": "Історія поїздок",
+    "reviews": "Відгуки",
+    "contact_information": "Контактна інформація",
+    "personal_data": "Особисті дані",
+    "phone": "Телефон",
+    "password_update": "Змінити пароль",
+    "logout": "Вийти",
+    "no_trips": "Ще немає жодної поїздки",
+    "go_to_search": "Перейти до пошуку",
+    "no_reviews": "Ви ще не залишали жодного відгуку"
   }
 }

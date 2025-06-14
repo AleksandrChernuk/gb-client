@@ -75,6 +75,29 @@
       "female": "Female",
       "other": "Other"
     },
+    "email_validate": {
+      "required": "Email is required",
+      "emailNotValid": "Enter a valid email address"
+    },
+    "password_validate": {
+      "minLength": "Password is too short (minimum 8 characters)",
+      "maxLength": "Password is too long (maximum 20 characters)",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "lowercase": "Password must contain at least one lowercase letter",
+      "number": "Password must contain at least one number",
+      "special": "Password must contain at least one special character (!@#$%^&*)"
+    },
+    "passwordsDoNotMatch": "Passwords do not match",
+    "password": "Password",
+    "password_placeholder": "Password",
+    "new_password": "New password",
+    "new_password_placeholder": "Enter new password",
+    "confirm_new_password": "Confirm password",
+    "confirm_new_password_placeholder": "Repeat new password",
+    "edit": "Edit",
+    "change": "Change",
+    "close": "Close",
+
     "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp>."
   }
 }

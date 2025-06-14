@@ -1,4 +1,7 @@
-import BlogPage from '@/components/pages/blog';
+// import BlogPage from '@/components/pages/blog';
+import ProfilePage from '@/components/pages/profile/settings';
+import { Container } from '@/components/shared/Container';
+import { NavTabs } from '@/components/shared/NavTabs';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -59,6 +62,11 @@ export async function generateMetadata({ params }: Props) {
     },
   };
 }
+const items = [
+  { slug: '/profile/orders', title: 'ordersTitle' },
+  { slug: '/profile/histori', title: 'historiTitle' },
+  { slug: '/profile', title: 'settingsTitle' },
+];
 
 export default async function Blog({
   params,
@@ -68,5 +76,16 @@ export default async function Blog({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  return <BlogPage />;
+  return (
+    <Container size="m" className="w-full">
+      <div className="w-full py-2 tablet:py-10">
+        <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
+          <NavTabs items={items} namespace={MESSAGE_FILES.PROFILE} />
+          <div className="flex-1">
+            <ProfilePage />;
+          </div>
+        </div>
+      </div>
+    </Container>
+  );
 }

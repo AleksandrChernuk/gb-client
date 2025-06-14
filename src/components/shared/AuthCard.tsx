@@ -1,10 +1,11 @@
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Link } from '@/i18n/routing';
+// import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import AccountActions from './AccountActions';
 import AuthSocial from './AuthSocial';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import Link from 'next/link';
 
 interface Props {
   children: React.ReactNode;

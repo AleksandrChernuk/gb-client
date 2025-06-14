@@ -1,3 +1,5 @@
+import ReviewsPage from '@/components/pages/profile/reviews';
+
 export async function generateMetadata() {
   return {
     robots: {
@@ -16,8 +18,8 @@ export async function generateMetadata() {
   };
 }
 
-const UeserOrders = async () => {
-  return <div>Ueser Orders</div>;
+const Reviews = async () => {
+  return <ReviewsPage />;
 };
 
-export default UeserOrders;
+export default Reviews;

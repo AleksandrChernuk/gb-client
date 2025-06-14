@@ -1,7 +1,14 @@
 {
   "profile": {
-    "settingsTitle": "Settings",
-    "ordersTitle": "Orders",
-    "historiTitle": "History"
+    "trips_hystori": "Trip history",
+    "reviews": "Reviews",
+    "contact_information": "Contact information",
+    "personal_data": "Personal data",
+    "phone": "Phone",
+    "password_update": "Change password",
+    "logout": "Logout",
+    "no_trips": "No trips yet",
+    "go_to_search": "Go to search",
+    "no_reviews": "You haven’t left any reviews yet"
   }
 }

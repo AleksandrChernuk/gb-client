@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Container } from '@/components/shared/Container';
-import { Loader } from 'lucide-react';
 import AuthHeader from '@/components/modules/header/AuthHeader';
+import { useUserStore } from '@/store/useStore';
+import { BusLoader } from '@/components/shared/BusLoader';
 
 export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const router = useRouter();
+  const currentUser = useUserStore((state) => state.currentUser);
 
   useEffect(() => {
     const checkAndRefresh = async () => {
@@ -36,13 +38,13 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
     checkAndRefresh();
   }, [router]);
 
-  if (!ready)
+  if (!ready || !currentUser)
     return (
       <div className="flex flex-col h-screen">
         <AuthHeader />
         <main className="flex flex-1 items-center justify-center">
           <Container size="xs" className="py-4">
-            <Loader className="stroke-green-300 animate-spin" size={64} />
+            <BusLoader />
           </Container>
         </main>
       </div>

@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
-@import 'tw-animate-css';
-
 @import './typography.css';
+
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -257,3 +257,90 @@
     @apply bg-background text-foreground;
   }
 }
+/* 
+@layer utilities {
+  .h_1 {
+    @apply text-[32px] font-bold tracking-normal leading-[38.4px];
+  }
+  .h_2 {
+    @apply text-[32px] font-medium tracking-normal leading-[38.4px];
+  }
+  .h_3 {
+    @apply text-2xl font-bold tracking-normal leading-[28.8px];
+  }
+  .h_4 {
+    @apply text-2xl font-medium tracking-normal leading-[28.8px];
+  }
+  .h_5 {
+    @apply text-base font-bold leading-6 tracking-normal;
+  }
+  .h_6 {
+    @apply text-sm font-bold tracking-normal leading-[18px];
+  }
+  .main_text_body {
+    @apply text-base font-normal leading-6 tracking-normal;
+  }
+  .navigation_text_body {
+    @apply text-base font-medium tracking-tighter leading-[19.2px];
+  }
+  .button_underline_bolt_text {
+    @apply text-sm font-medium underline tracking-normal leading-[19.2px];
+  }
+  .body_medium {
+    @apply text-base font-medium tracking-normal leading-[24px];
+  }
+  .logo_small {
+    @apply text-[26.838px] font-extrabold tracking-normal leading-normal;
+  }
+  .logo_large {
+    @apply text-[31.88px] font-extrabold tracking-normal leading-[33.68px];
+  }
+  .large_button {
+    @apply text-lg font-bold tracking-normal leading-[21.6px];
+  }
+  .button_mobile {
+    @apply text-sm font-bold tracking-normal leading-[16.8px];
+  }
+  .small_button {
+    @apply text-[12px] font-bold tracking-normal leading-[18px];
+  }
+  .button_underline_text {
+    @apply text-sm font-normal underline tracking-normal leading-[19.2px];
+  }
+  .button_large_text {
+    @apply text-lg font-bold tracking-tighter leading-[21.6px];
+  }
+  .filter_input_medium_text {
+    @apply text-lg font-medium tracking-tighter leading-[21.6px];
+  }
+  .filter_input_normal_text {
+    @apply text-lg font-normal tracking-normal leading-[27px];
+  }
+  .addional_regular_text {
+    @apply text-sm font-normal leading-4 tracking-normal;
+  }
+  .addional {
+    @apply text-lg font-normal tracking-normal leading-[27px];
+  }
+  .addional_medium_text {
+    @apply text-base font-medium leading-4 tracking-normal;
+  }
+  .button_mobile_bolt_text {
+    @apply text-sm font-bold tracking-normal leading-[16.8px];
+  }
+  .secondary_2_bolt_text {
+    @apply text-sm font-bold tracking-normal leading-[16.8px];
+  }
+  .small_2_bolt_text {
+    @apply text-xs font-bold tracking-normal leading-[18px];
+  }
+  .small_text {
+    @apply text-xs font-normal tracking-normal leading-[18px];
+  }
+  .secondary_text {
+    @apply text-sm font-normal tracking-normal leading-[21px];
+  }
+  .select_input_error {
+    @apply border-[2px] border-additional_red;
+  }
+} */

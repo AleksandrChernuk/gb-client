@@ -1,4 +1,4 @@
-import ProfilePage from '@/components/pages/profile';
+import ProfilePage from '@/components/pages/profile/settings';
 
 export async function generateMetadata() {
   return {

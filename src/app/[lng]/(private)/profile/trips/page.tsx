@@ -1,3 +1,5 @@
+import TripsPage from '@/components/pages/profile/trips';
+
 export async function generateMetadata() {
   return {
     robots: {
@@ -16,8 +18,8 @@ export async function generateMetadata() {
   };
 }
 
-const HistoriPage = async () => {
-  return <div>page</div>;
+const Trips = async () => {
+  return <TripsPage />;
 };
 
-export default HistoriPage;
+export default Trips;

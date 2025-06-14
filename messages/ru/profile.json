@@ -1,7 +1,14 @@
 {
   "profile": {
-    "settingsTitle": "Настройки",
-    "ordersTitle": "Заказы",
-    "historiTitle": "История"
+    "trips_hystori": "История поездок",
+    "reviews": "Отзывы",
+    "contact_information": "Контактная информация",
+    "personal_data": "Персональные данные",
+    "phone": "Телефон",
+    "password_update": "Изменить пароль",
+    "logout": "Выйти",
+    "no_trips": "Поездок пока нет",
+    "go_to_search": "Перейти к поиску",
+    "no_reviews": "Вы ещё не оставили ни одного отзыва"
   }
 }
