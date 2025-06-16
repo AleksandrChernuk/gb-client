@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Container } from '@/components/shared/Container';
 import AuthHeader from '@/components/modules/header/AuthHeader';
-import { useUserStore } from '@/store/useStore';
+import { useUserStore } from '@/store/useUser';
 import { BusLoader } from '@/components/shared/BusLoader';
 
 export function AuthGuardProvider({ children }: { children: React.ReactNode }) {

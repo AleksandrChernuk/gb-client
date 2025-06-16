@@ -6,8 +6,8 @@ import { useSearchStore } from '@/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { useLocations } from './useLocations';
 import { useShallow } from 'zustand/react/shallow';
+import { useLocations } from '@/hooks/useLocations';
 
 type Tname = 'from' | 'to';
 
@@ -95,13 +95,20 @@ export const useCitySearch = ({ name }: Props) => {
     [cities, highlightedIndex, onSelectCity],
   );
 
-  const onInputChange = useCallback((newValue: string) => {
-    setValue(newValue);
-  }, []);
+  const onInputChange = useCallback(
+    (newValue: string) => {
+      setValue(newValue);
+      if (newValue.trim().length < 2) {
+        setCity(name, null);
+      }
+    },
+    [name, setCity],
+  );
 
   const handleClearMobileInput = useCallback(() => {
     setValue('');
-  }, []);
+    setCity(name, null);
+  }, [name, setCity]);
 
   useEffect(() => {
     const cityIndex = cities?.findIndex((el) => el.id === city?.id) || 0;

@@ -2,7 +2,7 @@
 
 import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
-import { useUserStore } from '@/store/useStore';
+import { useUserStore } from '@/store/useUser';
 import { useMemo, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { createPassengers } from '../helpers/createPassList';

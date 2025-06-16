@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { ICurrentUser } from '@/store/useStore/types';
+import { ICurrentUser } from '@/store/useUser/types';
 import { IDiscountOrder, ISeatOrder, OrderInterface } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
 

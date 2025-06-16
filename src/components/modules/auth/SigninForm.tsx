@@ -15,7 +15,7 @@ import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useRouter } from '@/i18n/routing';
-import { useUserStore } from '@/store/useStore';
+import { useUserStore } from '@/store/useUser';
 import { signin } from '@/actions/auth.service';
 
 const SigninForm = () => {

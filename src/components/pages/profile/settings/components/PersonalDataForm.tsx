@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { personalDataSchema } from '@/schemas/profile.schemas';
-import { useUserStore } from '@/store/useStore';
+import { useUserStore } from '@/store/useUser';
 import FormActions from './FormActions';
 
 export default function PersonalDataForm() {

@@ -48,9 +48,7 @@ export default async function MainLayout({
           <GTMNoScript />
           <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
           <ReactQueryContext>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-              {children}
-            </ThemeProvider>
+            <ThemeProvider attribute="class">{children}</ThemeProvider>
           </ReactQueryContext>
           <Toaster />
         </body>

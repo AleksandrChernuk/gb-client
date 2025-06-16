@@ -24,7 +24,7 @@ export default async function ProfilePage() {
           </ProfileFormCurd>
         </div>
         <div className="tablet:w-1/2">
-          <ProfileFormCurd title="contact_information">
+          <ProfileFormCurd title="password_update">
             <PasswordUpdateForm />
           </ProfileFormCurd>
         </div>

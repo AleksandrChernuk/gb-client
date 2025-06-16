@@ -13,7 +13,7 @@ import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { LoaderCircle } from 'lucide-react';
 import { otpVerifySchema } from '@/schemas/auth.schema';
-import { useUserStore } from '@/store/useStore';
+import { useUserStore } from '@/store/useUser';
 import { useParams } from 'next/navigation';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { verifyEmail } from '@/actions/auth.service';

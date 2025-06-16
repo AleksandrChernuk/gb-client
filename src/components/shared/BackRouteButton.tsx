@@ -6,8 +6,9 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
-export default function BackRouteButton() {
+export default function BackRouteButton({ className }: { className?: string }) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const router = useRouter();
@@ -27,7 +28,10 @@ export default function BackRouteButton() {
     <Button
       variant={'link'}
       onClick={handleGoBack}
-      className="gap-0.2 text-slate-700 dark:text-slate-50 text-base font-bold leading-6 tracking-normal"
+      className={cn(
+        'gap-0.2 text-slate-700 dark:text-slate-50 text-base font-bold leading-6 tracking-normal',
+        className,
+      )}
     >
       <ChevronLeft size={24} />
       {t('backBtn')}
