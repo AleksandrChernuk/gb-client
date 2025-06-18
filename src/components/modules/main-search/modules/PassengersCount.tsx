@@ -19,6 +19,7 @@ import { ChevronLeft } from 'lucide-react';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useCallback, useState } from 'react';
+import { useUpdateSearchParams } from '@/lib/useUpdateSearchParams';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -28,6 +29,7 @@ export default function PassengersCount({ variant }: Props) {
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
   const setPassenger = useSearchStore((state) => state.setPassenger);
+  const { setManyParams } = useUpdateSearchParams();
 
   const [a, setA] = useState(() => adult);
   const [c, setC] = useState(() => children);
@@ -39,6 +41,7 @@ export default function PassengersCount({ variant }: Props) {
     if (!isOpen) {
       setPassenger('adult', a);
       setPassenger('children', c);
+      setManyParams({ adult: `${a}`, children: `${c}` });
     }
   };
 
@@ -74,9 +77,10 @@ export default function PassengersCount({ variant }: Props) {
         setOpen(false);
         setPassenger('adult', a);
         setPassenger('children', c);
+        setManyParams({ adult: `${a}`, children: `${c}` });
       }
     },
-    [a, c, setPassenger],
+    [a, c, setManyParams, setPassenger],
   );
 
   const t = useTranslations(MESSAGE_FILES.COMMON);

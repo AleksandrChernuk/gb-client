@@ -1,25 +1,27 @@
 'use client';
 
-import { popularRoutersFakeData } from '@/constans/popular-routers.constans';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import RoutersItem from './RoutersItem';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { ILocation } from '@/types/location.types';
 
-const RoutersDropdownList = () => {
+type Props = {
+  list: { from: ILocation; to: ILocation }[];
+};
+
+const RoutersDropdownList = ({ list }: Props) => {
   const [open, setOpen] = useState(false);
   const t = useTranslations(MESSAGE_FILES.MAIN_PAGE);
-
-  const additionalRouters = popularRoutersFakeData.slice(3);
 
   return (
     <div>
       {open && (
-        <div className="grid grid-cols-1 gap-4 mb-0 duration-300 animate-in fade-in slide-in-from-top-1 laptop:grid-cols-3 laptop:gap-8">
-          {additionalRouters.map((router) => (
-            <div className="w-full" key={router.id}>
-              <RoutersItem from={router?.from} to={router?.to} />
+        <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 mb-0 duration-300 animate-in fade-in slide-in-from-top-1 laptop:grid-cols-3 laptop:gap-8">
+          {list.map((router, i) => (
+            <div className="w-full" key={i + 10}>
+              <RoutersItem from={router.from} to={router.to} />
             </div>
           ))}
         </div>

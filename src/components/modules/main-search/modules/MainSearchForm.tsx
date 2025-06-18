@@ -22,7 +22,7 @@ const MainSearchForm = () => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const handleSubmit = () => {
-    const { to, from, setErrors } = useSearchStore.getState();
+    const { to, from, date, adult, children, setErrors } = useSearchStore.getState();
 
     const validate = () => {
       const result = MainSearchShema.safeParse({ from, to });
@@ -37,11 +37,19 @@ const MainSearchForm = () => {
 
     if (!validate()) return;
 
+    const query = new URLSearchParams();
+
+    if (from?.id) query.set('from', String(from.id));
+    if (to?.id) query.set('to', String(to.id));
+    if (date) query.set('date', date);
+    if (adult) query.set('adult', String(adult));
+    if (children) query.set('children', String(children));
+    const queryString = query.toString();
+
     startTransition(() => {
-      route.push(`/buses`);
+      route.push(`/buses?${queryString}`);
     });
   };
-
   const renderFields = (variant: 'mobile' | 'desktop') => (
     <>
       <CitySearch name="from" variant={variant} />

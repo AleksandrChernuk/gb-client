@@ -15,7 +15,7 @@ export default function DateTabs() {
 
   return (
     <div>
-      <div className="  items-center justify-around gap-4 overflow-x-scroll tablet:gap-8 [&::-webkit-scrollbar]:hidden hidden tablet:flex">
+      <div className="items-center justify-around gap-4 overflow-x-scroll tablet:gap-8 [&::-webkit-scrollbar]:hidden hidden tablet:flex">
         {datesArray.map((date) => {
           return (
             <div key={format(date, 'dd MMM')}>

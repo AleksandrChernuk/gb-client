@@ -1,25 +1,30 @@
-'use client';
+// hooks/useLocations.ts
 
 import { useQuery } from '@tanstack/react-query';
-import { getLocationById, getLocations } from '@/actions/location.actions';
-import { ILocation } from '@/types/location.types';
+import { getLocationById, getLocations, getFavoriteLocations } from '@/actions/location.actions';
 
-export function useLocations() {
+export function useLocations(query: string, options?: { enabled?: boolean }) {
   return useQuery({
-    queryKey: ['locations'],
-    queryFn: async (): Promise<Array<ILocation>> => {
-      const response = await getLocations({ query: '', perPage: 99 });
+    queryKey: ['locations', query],
+    queryFn: async () => {
+      const response = await getLocations({ query, perPage: 99 });
       return response.data;
     },
+    ...options,
   });
 }
 
-export function useLocationsById(id: number) {
+export function useLocationById(id: number, options?: { enabled?: boolean }) {
   return useQuery({
-    queryKey: ['locations', id],
-    queryFn: async (): Promise<ILocation> => {
-      const response = await getLocationById(id);
-      return response;
-    },
+    queryKey: ['location', id],
+    queryFn: () => getLocationById(id),
+    ...options,
+  });
+}
+
+export function useFavoriteLocations() {
+  return useQuery({
+    queryKey: ['locations', 'favorites'],
+    queryFn: getFavoriteLocations,
   });
 }
