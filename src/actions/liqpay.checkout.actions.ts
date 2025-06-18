@@ -8,7 +8,7 @@ export type IOrderBody = {
 
 export async function checkout(body: IOrderBody) {
   try {
-    const response = await fetch(`/api/liqpay`, {
+    const response = await fetch(`/api/mono`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
