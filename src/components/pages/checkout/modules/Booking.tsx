@@ -40,10 +40,30 @@ const Booking = memo(function Booking() {
   });
 
   const passengers = useWatch({ control, name: 'passengers' });
+  console.log('selectedTicket?.details?.free_seats_map', selectedTicket?.details?.seats_map);
+  console.log('selectedTicket?.details?.free_seats_map', selectedTicket?.details?.free_seats_map);
 
-  const array: TypeSeatsMap[] = useMemo(() => {
-    const seats = selectedTicket?.details?.seats_map;
-    return Array.isArray(seats) ? seats : [];
+  const seatMapWithStatus: TypeSeatsMap[] = useMemo(() => {
+    const seatsMap = selectedTicket?.details?.seats_map;
+    const freeSeats = selectedTicket?.details?.free_seats_map;
+
+    if (!Array.isArray(seatsMap) || !Array.isArray(freeSeats)) return [];
+
+    return seatsMap.map((floor) => ({
+      ...floor,
+      seats: floor.seats.map((row) =>
+        row.map((seat) => {
+          const isFree = freeSeats.some(
+            (free) => (seat.id && seat.id === free.seat_id) || (seat.number && seat.number === free.seat_number),
+          );
+
+          return {
+            ...seat,
+            status: isFree ? 'FREE' : 'BUSY',
+          };
+        }),
+      ),
+    }));
   }, [selectedTicket]);
 
   return (
@@ -104,12 +124,12 @@ const Booking = memo(function Booking() {
           </SheetHeader>
           <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
             <div className="my-10 flex flex-col gap-2">
-              {array.length === 1 && <SeatsList helm={true} seatRows={array[0].seats} />}
+              {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
 
-              {array.length >= 2 && (
+              {seatMapWithStatus.length >= 2 && (
                 <FloorSheet
-                  floor_first={<SeatsList helm={true} seatRows={array[0].seats} />}
-                  floor_second={<SeatsList seatRows={array[1].seats} />}
+                  floor_first={<SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
+                  floor_second={<SeatsList seatRows={seatMapWithStatus[1].seats} />}
                 />
               )}
             </div>

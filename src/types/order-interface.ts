@@ -9,61 +9,88 @@ export interface IDiscountOrder {
   discount_percent?: number;
 }
 
-export interface TicketInterface {
-  first_name: string;
-  last_name: string;
+export type RequestTicket = {
+  firstName: string;
+  lastName: string;
   middlename?: string;
-  birthdate: string;
-  document_type: number;
-  document_number: string;
-  document_expire_at?: string; // example: '2030-12-31',
+  birthdate?: string;
+  documentType?: number;
+  documentNumber?: string;
+  documentExpirationDate?: string;
   gender?: 'M' | 'F';
-  citizenship?: string; // example: 'UA'
+  citizenship?: string;
   phone: string;
   email: string;
-  seat?: ISeatOrder;
-  discount?: IDiscountOrder;
-  with_fees?: boolean;
-  buggage_count?: number;
-}
+  seatId?: string;
+  seatNumber?: string;
+  discountId?: string;
+  discountDescription?: string;
+  discountPercent?: number;
+  withFees?: boolean;
+  buggageCount?: number;
+};
 
-export interface OrderInterface {
-  provider_id: string;
-  route_id?: string;
-  ride_id?: string;
+export interface IRequestOrder {
+  providerId: string;
+  routeId?: string;
+  rideId?: string;
   tripId?: string;
   intervalId?: string;
-  bus_id?: string;
-  route_name?: string;
-  can_payment_to_driver: boolean; //! false
-  metadata?: unknown; //! New
-  from_city_id: number;
-  from_city_name: string;
-  to_city_id: number;
-  to_city_name: string;
-  from_station_id: number;
-  from_station_name: string;
-  from_station_lat?: number;
-  from_station_lon?: number;
-  to_station_id: number;
-  to_station_name: string;
-  to_station_lat?: number;
-  to_station_lon?: number;
-  departure_date: string;
-  arrival_date: string; //example: '2025-06-15'
-  departure_time: string;
-  arrival_time: string;
-  carrier_id?: string;
-  carrier_name?: string;
-  trip_type?: 'ONEWAY';
-  payment_type: 'RESERVE' | 'BOOK' | 'PAYMENT_AT_BOARDING'; //RESERVE
-  currency: 'UAH'; //example: 'UAH'
+  busId?: string;
+  metadata?: unknown;
+  routeName?: string;
+  canPaymentToDriver: boolean;
+
+  fromCityId: number;
+  fromCityName: string;
+
+  toCityId: number;
+  toCityName: string;
+
+  fromStationId: string;
+  fromStationName: string;
+  fromStationLat?: number;
+  fromStationLon?: number;
+
+  toStationId: string;
+  toStationName: string;
+  toStationLat?: number;
+  toStationLon?: number;
+
+  departureDateTime: string;
+  arrivalDateTime: string;
+
+  platform?: string;
+  busModel?: string;
+  busNumber?: string;
+
+  transferCity?: string;
+  transferStation?: string;
+  transferDeparture?: string;
+  transferArrival?: string;
+
+  carrierId?: string;
+  carrierName?: string;
+  carrierPhone?: string;
+
+  insurerId?: string;
+  insurerName?: string;
+  insurerAddress?: string;
+  insurerPhone?: string;
+
+  tripType: 'ONEWAY';
+  paymentType: 'BOOK' | 'PAYMENT_AT_BOARDING';
+  currency: string;
   locale: string;
+
   userId?: string;
-  customer_first_name: string; // userId.first_name ?? customer_first_name
-  customer_last_name: string; // userId.last_name ?? customer_last_name
-  customer_email: string;
-  customer_phone: string;
-  automatic_discount_id?: string; //! New
-  tickets: TicketInterface[];
+  customerFirstName: string;
+  customerLastName: string;
+  customerEmail: string;
+  customerPhone: string;
+
+  automaticDiscountId?: string;
+  refundRules?: string[];
+  baggageRules?: string[];
+  tickets?: RequestTicket[];
 }

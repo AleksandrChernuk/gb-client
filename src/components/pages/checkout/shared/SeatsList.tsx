@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
@@ -25,7 +26,12 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
   });
 
   const handleSetSeats = (seat: ISeat | null) => {
-    const isSelectedIndex = selectedSeats.findIndex((el: ISeat) => el.id === seat?.id);
+    if (!seat) {
+      return;
+    }
+    const isSelectedIndex = selectedSeats.findIndex(
+      (el: ISeat) => (seat.id && el.id === seat.id) || (seat.number && el.number === seat.number),
+    );
 
     if (isSelectedIndex !== -1) {
       remove(isSelectedIndex);
@@ -61,9 +67,12 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
                   seat_number={seat.number}
                   available={seat.type === 'SEAT' && seat.status === 'FREE'}
                   isFree={seat.status === 'FREE'}
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   //@ts-ignore
-                  isSelected={selectedSeats.some((e) => e.id === seat.id)}
+                  isSelected={selectedSeats.some(
+                    //@ts-ignore
+
+                    (e) => (seat.id && e.id === seat.id) || (seat.number && e.number === seat.number),
+                  )}
                 />
               ) : (
                 <div
