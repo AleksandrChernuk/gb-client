@@ -3,6 +3,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useUser/types';
 import { IRequestOrder, RequestTicket } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
+import { format } from 'date-fns';
 
 type NormalizeDataParams = {
   from_city_id: number;
@@ -21,6 +22,7 @@ const normalizeData = ({
   user,
   route,
 }: NormalizeDataParams): IRequestOrder => {
+  console.log(route.arrival.date_time && format(route.arrival.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'"));
   const tickets = formData.passengers.map((p: any, idx: string | number) => ({
     firstName: p.first_name,
     lastName: p.last_name,
@@ -65,8 +67,8 @@ const normalizeData = ({
     toStationName: `${route.arrival.station_name}`,
     ...(route.arrival.station_coords_lat && { toStationLat: route.arrival.station_coords_lat }),
     ...(route.arrival.station_coords_lon && { toStationLon: route.arrival.station_coords_lon }),
-    departureDateTime: `${route.departure.date_time}`,
-    arrivalDateTime: `${route.arrival.date_time}`,
+    departureDateTime: `${route.departure.date_time && format(route.departure.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`,
+    arrivalDateTime: `${route.arrival.date_time && format(route.arrival.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`,
     ...(route.carrier.id && { carrierId: route.carrier.id }),
     ...(route.carrier.name && { carrierName: route.carrier.name }),
     tripType: 'oneway',
