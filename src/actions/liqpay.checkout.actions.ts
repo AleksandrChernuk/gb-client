@@ -1,7 +1,7 @@
-import { OrderInterface } from '@/types/order-interface';
+import { IRequestOrder } from '@/types/order-interface';
 
 export type IOrderBody = {
-  order: OrderInterface;
+  order: IRequestOrder;
   result_url: string;
   locale: string;
 };
