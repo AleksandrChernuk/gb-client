@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useUser/types';
-import { IDiscountOrder, ISeatOrder, OrderInterface } from '@/types/order-interface';
+import { IRequestOrder, RequestTicket } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
 
 type NormalizeDataParams = {
@@ -13,24 +13,6 @@ type NormalizeDataParams = {
   route: IRouteResponse;
 };
 
-export interface TicketInterface {
-  first_name: string;
-  last_name: string;
-  middlename?: string;
-  birthdate?: string;
-  document_type?: number;
-  document_number?: string;
-  document_expire_at?: string; // example: '2030-12-31',
-  gender?: 'M' | 'F';
-  citizenship?: string; // example: 'UA'
-  phone: string;
-  email: string;
-  seat?: ISeatOrder;
-  discount?: IDiscountOrder;
-  with_fees?: boolean;
-  buggage_count?: number;
-}
-
 const normalizeData = ({
   from_city_id,
   to_city_id,
@@ -38,68 +20,64 @@ const normalizeData = ({
   formData,
   user,
   route,
-}: NormalizeDataParams): OrderInterface => {
-  console.log(formData);
+}: NormalizeDataParams): IRequestOrder => {
   const tickets = formData.passengers.map((p: any, idx: string | number) => ({
-    // ticket_type_id?: number; //! Mew
-    first_name: p.first_name,
-    last_name: p.last_name,
-    ticket_price: route.ticket_pricing.base_price,
-    middlename: p.middlename,
-    birthdate: p.bday,
-    document_type: p.document_type,
-    document_number: p.document_number,
-    document_expire_at: p.document_expire_at,
-    gender: p.gender,
-    citizenship: p.citizenship,
+    firstName: p.first_name,
+    lastName: p.last_name,
+    ...(p.middlename && { middlename: p.middlename }),
+    ...(p.bday && { birthdate: p.bday }),
+    ...(p.document_type && { documentType: p.document_type }),
+    ...(p.document_number && { documentNumber: p.document_number }),
+    ...(p.gender && { gender: p.gender }),
+    ...(p.citizenship && { citizenship: p.citizenship }),
     phone: formData.phone,
     email: formData.email,
-    seat: { seat_id: formData.selected_seats[idx]?.seat_id, seat_number: formData.selected_seats[idx]?.seat_number },
-    discount_id: p.discount,
-    discount_description: p.discount_description,
-    discount_percent: p.discount_percent,
-    with_fees: true,
-    buggage_count: 1,
-  }));
+    ...(formData.selected_seats[idx]?.id && { seatId: formData.selected_seats[idx]?.id }),
+    ...(formData.selected_seats[idx]?.number && { seatNumber: formData.selected_seats[idx]?.number }),
+    ...(p.discount && { discountId: p.discount }),
+    ...(p.discount_description && { discountDescription: p.discount_description }),
+    ...(p.discount_percent && { discountPercent: p.discount_percent }),
+    withFees: true,
+    buggageCount: 1,
+  })) as RequestTicket[];
 
   return {
-    provider_id: route.identificators.provider_id,
-    route_id: route.identificators.route_id,
-    ride_id: route.identificators.ride_id ? route.identificators.ride_id : undefined,
-    tripId: route.identificators.tripId ? route.identificators.tripId : undefined,
-    intervalId: route.identificators.intervalId,
-    bus_id: route.identificators.bus_id,
-    route_name: route.identificators.route_name,
-    can_payment_to_driver: false,
-    metadata: route.identificators.metadata,
-    from_city_id,
-    from_city_name: extractLocationDetails(route.departure.fromLocation, locale).locationName,
-    to_city_name: extractLocationDetails(route.arrival.toLocation, locale).locationName,
-    from_station_id: Number(route.departure.station_id),
-    from_station_name: route.departure.station_name ?? '',
-    from_station_lat: route.departure.station_coords_lat ? Number(route.departure.station_coords_lat) : undefined,
-    from_station_lon: route.departure.station_coords_lon ? Number(route.departure.station_coords_lon) : undefined,
-    to_city_id,
-    to_station_id: Number(route.arrival.station_id),
-    to_station_name: route.arrival.station_name ?? '',
-    to_station_lat: route.arrival.station_coords_lat ? Number(route.arrival.station_coords_lat) : undefined,
-    to_station_lon: route.arrival.station_coords_lon ? Number(route.arrival.station_coords_lon) : undefined,
-    departure_date: route.departure.date_time ?? '',
-    arrival_date: route.arrival.date_time ?? '',
-    departure_time: route.departure.date_time ?? '',
-    arrival_time: route.arrival.date_time ?? '',
-    carrier_id: route.carrier.id ?? '',
-    carrier_name: route.carrier.name ?? '',
-    trip_type: 'ONEWAY',
-    payment_type: formData.payment,
+    providerId: route.identificators.provider_id,
+    ...(route.identificators.route_id && { routeId: route.identificators.route_id }),
+    ...(route.identificators.ride_id && { rideId: route.identificators.ride_id }),
+    ...(route.identificators.tripId && { tripId: route.identificators.tripId }),
+    ...(route.identificators.intervalId && { intervalId: route.identificators.intervalId }),
+    ...(route.identificators.bus_id && { busId: route.identificators.bus_id }),
+    ...(route.identificators.route_name && { routeName: route.identificators.route_name }),
+    canPaymentToDriver: !!route.allowed_operations.can_payment_to_driver,
+    ...(typeof route.identificators.metadata === 'object' && route.identificators.metadata !== null
+      ? { metadata: route.identificators.metadata }
+      : {}),
+    fromCityId: from_city_id,
+    fromCityName: extractLocationDetails(route.departure.fromLocation, locale).locationName,
+    toCityId: to_city_id,
+    toCityName: extractLocationDetails(route.arrival.toLocation, locale).locationName,
+    fromStationId: `${route.departure.station_id}`,
+    fromStationName: `${route.departure.station_name}`,
+    ...(route.departure.station_coords_lat && { fromStationLat: route.departure.station_coords_lat }),
+    ...(route.departure.station_coords_lon && { fromStationLon: route.departure.station_coords_lon }),
+    toStationId: `${route.arrival.station_id}`,
+    toStationName: `${route.arrival.station_name}`,
+    ...(route.arrival.station_coords_lat && { toStationLat: route.arrival.station_coords_lat }),
+    ...(route.arrival.station_coords_lon && { toStationLon: route.arrival.station_coords_lon }),
+    departureDateTime: `${route.departure.date_time}`,
+    arrivalDateTime: `${route.arrival.date_time}`,
+    ...(route.carrier.id && { carrierId: route.carrier.id }),
+    ...(route.carrier.name && { carrierName: route.carrier.name }),
+    tripType: 'oneway',
+    paymentType: 'BOOK',
     currency: 'UAH',
     locale,
-    userId: user?.id ?? undefined,
-    customer_first_name: tickets[0].first_name,
-    customer_last_name: tickets[0].last_name,
-    customer_email: formData.email,
-    customer_phone: formData.phone,
-    automatic_discount_id: route.details?.automatic_discount_id ? route.details?.automatic_discount_id : undefined,
+    ...(user?.id && { userId: user.id }),
+    customerFirstName: tickets[0].firstName,
+    customerLastName: tickets[0].lastName,
+    customerEmail: formData.email,
+    customerPhone: formData.phone,
     tickets,
   };
 };

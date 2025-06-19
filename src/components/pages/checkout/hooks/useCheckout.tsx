@@ -9,18 +9,17 @@ import { createPassengers } from '../helpers/createPassList';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale } from 'next-intl';
-import { toast } from 'sonner';
 import normalizeData from '../helpers/normalizeData';
-import { checkout } from '@/actions/liqpay.checkout.actions';
 import { z } from 'zod';
 import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas';
 import { getProviderConfigByName } from '../helpers/providerConfig';
+import { createOrder } from '@/actions/orders.actions';
 
 function useCheckout() {
   const locale = useLocale();
 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading] = useState<boolean>(false);
 
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
@@ -38,8 +37,6 @@ function useCheckout() {
     () => createPassengers(adult, children, providerConfig),
     [adult, children, providerConfig],
   );
-
-  console.log('defaultPassengers', defaultPassengers);
 
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map?.length),
@@ -64,62 +61,32 @@ function useCheckout() {
       setError('no data');
       return;
     }
-
-    if (formData.payment === 'PURCHASE') {
-      try {
-        setLoading(true);
-        const { data, signature } = await checkout({
-          order: normalizeData({
-            from_city_id: from,
-            to_city_id: to,
-            locale,
-            formData,
-            route: ticket,
-            user,
-          }),
-          result_url: `${process.env.NEXT_PUBLIC_API_URL}/${locale}/checkout-success`,
+    console.log(
+      normalizeData({
+        from_city_id: from,
+        to_city_id: to,
+        locale,
+        formData,
+        route: ticket,
+        user,
+      }),
+    );
+    try {
+      const res = await createOrder(
+        normalizeData({
+          from_city_id: from,
+          to_city_id: to,
           locale,
-        });
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'https://www.liqpay.ua/api/3/checkout';
-        form.style.display = 'none';
-
-        const addInput = (name: string, value: string) => {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = name;
-          input.value = value;
-          form.appendChild(input);
-        };
-
-        addInput('data', data);
-        addInput('signature', signature);
-
-        document.body.appendChild(form);
-        form.submit();
-      } catch (error) {
-        setLoading(false);
-
-        setError(error as string);
-      } finally {
-        setLoading(false);
-      }
-      return;
+          formData,
+          route: ticket,
+          user,
+        }),
+      );
+      console.log('res', res);
+    } catch (error) {
+      console.log('error', error);
     }
-
-    toast.info('ok', {
-      description: JSON.stringify(formData),
-    });
   };
-
-  // useEffect(() => {
-  //   if (isHydrated && !selectedTicket) {
-  //     router.replace('/');
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedTicket]);
 
   return { methods, onSubmit, error, loading };
 }

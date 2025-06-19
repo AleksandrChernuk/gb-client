@@ -40,8 +40,6 @@ const Booking = memo(function Booking() {
   });
 
   const passengers = useWatch({ control, name: 'passengers' });
-  console.log('selectedTicket?.details?.free_seats_map', selectedTicket?.details?.seats_map);
-  console.log('selectedTicket?.details?.free_seats_map', selectedTicket?.details?.free_seats_map);
 
   const seatMapWithStatus: TypeSeatsMap[] = useMemo(() => {
     const seatsMap = selectedTicket?.details?.seats_map;

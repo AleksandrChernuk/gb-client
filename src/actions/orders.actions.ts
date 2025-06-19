@@ -1,11 +1,11 @@
 'use server';
 
-import { OrderInterface } from '@/types/order-interface';
 import { ConfirmPaymentInterface } from '@/types/payment.types';
+import { IRequestOrder } from '@/types/order-interface';
 
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
-export const createOrder = async (body: OrderInterface) => {
+export const createOrder = async (body: IRequestOrder) => {
   const response = await fetch(`${BASE_URL}/orders`, {
     method: 'POST',
     headers: {
@@ -15,6 +15,8 @@ export const createOrder = async (body: OrderInterface) => {
   });
 
   if (!response.ok) {
+    const errorData = await response.json();
+    console.log(errorData);
     throw new Error('Error');
   }
 

@@ -40,55 +40,43 @@ export interface IRequestOrder {
   metadata?: unknown;
   routeName?: string;
   canPaymentToDriver: boolean;
-
   fromCityId: number;
   fromCityName: string;
-
   toCityId: number;
   toCityName: string;
-
   fromStationId: string;
   fromStationName: string;
   fromStationLat?: number;
   fromStationLon?: number;
-
   toStationId: string;
   toStationName: string;
   toStationLat?: number;
   toStationLon?: number;
-
   departureDateTime: string;
   arrivalDateTime: string;
-
   platform?: string;
   busModel?: string;
   busNumber?: string;
-
   transferCity?: string;
   transferStation?: string;
   transferDeparture?: string;
   transferArrival?: string;
-
   carrierId?: string;
   carrierName?: string;
   carrierPhone?: string;
-
   insurerId?: string;
   insurerName?: string;
   insurerAddress?: string;
   insurerPhone?: string;
-
-  tripType: 'ONEWAY';
+  tripType: 'oneway';
   paymentType: 'BOOK' | 'PAYMENT_AT_BOARDING';
   currency: string;
   locale: string;
-
   userId?: string;
   customerFirstName: string;
   customerLastName: string;
   customerEmail: string;
   customerPhone: string;
-
   automaticDiscountId?: string;
   refundRules?: string[];
   baggageRules?: string[];
