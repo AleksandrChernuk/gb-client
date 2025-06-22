@@ -1,4 +1,4 @@
-import { passwordShema } from '@/constans/schemas.constans';
+import { passwordShema } from '@/schemas/schemas.constans';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { z } from 'zod';
 

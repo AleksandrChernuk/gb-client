@@ -4,7 +4,7 @@ import { isEqual, toDate, format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { createDateArr } from '../helpers';
 import { useSearchStore } from '@/store/useSearch';
-import { useUpdateSearchParams } from '@/lib/useUpdateSearchParams';
+import { useUpdateSearchParams } from '@/hooks/useUpdateSearchParams';
 
 export const useDateTabs = () => {
   const currentDate = useSearchStore((state) => state.date);

@@ -189,7 +189,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchParams } from 'next/navigation';
-import { useUpdateSearchParams } from '@/lib/useUpdateSearchParams';
+import { useUpdateSearchParams } from '@/hooks/useUpdateSearchParams';
 import { useLocations, useFavoriteLocations } from '@/hooks/useLocations';
 import useDebounce from '@/hooks/useDebounce';
 import { getLocationById } from '@/actions/location.actions';

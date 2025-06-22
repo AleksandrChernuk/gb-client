@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { useSearchStore } from '@/store/useSearch';
-import { useUpdateSearchParams } from '@/lib/useUpdateSearchParams';
+import { useUpdateSearchParams } from '@/hooks/useUpdateSearchParams';
 
 export const useDate = () => {
   const [open, setOpen] = useState<boolean>(false);

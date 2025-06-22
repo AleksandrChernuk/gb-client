@@ -19,7 +19,7 @@ import { ChevronLeft } from 'lucide-react';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useCallback, useState } from 'react';
-import { useUpdateSearchParams } from '@/lib/useUpdateSearchParams';
+import { useUpdateSearchParams } from '@/hooks/useUpdateSearchParams';
 
 type Props = {
   variant: 'mobile' | 'desktop';

@@ -1,6 +1,5 @@
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { grnderList } from '@/constans/gender.list.constans';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { useController, useFormContext } from 'react-hook-form';
@@ -28,7 +27,7 @@ function GenderSelect({ name }: Props) {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {grnderList.map((el) => (
+              {['M', 'L'].map((el) => (
                 <SelectItem key={el} value={el}>
                   {t_forms(`genderList.${el}`)}
                 </SelectItem>

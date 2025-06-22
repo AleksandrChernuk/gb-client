@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       description: 'Оплата за квитки',
       order_id: randomUUID(),
       version: '3',
-      result_url: `${order.result_url}`,
+      result_url: `${order.result_url}?=id:90343`,
     });
 
     const liqpaydata = Buffer.from(JSON.stringify(params)).toString('base64');

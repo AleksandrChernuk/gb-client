@@ -54,23 +54,23 @@ export const document_type: FieldConfig = {
   schema: z.string().min(1, { message: 'required' }),
 };
 
-// export const document_type_octobus: FieldConfig = {
-//   label: 'document_type',
-//   type: 'select',
-//   placeholder: 'document_type_placeholder',
-//   translateOptions: true,
-//   options: [
-//     { value: 'UNKNOWN', label: 'document_type_infobus.unknown' },
-//     { value: 'PASSPORT', label: 'document_type_infobus.passport' },
-//     { value: 'MILITARY_ID', label: 'document_type_infobus.military_id' },
-//     { value: 'FOREIGN_DOCUMENT', label: 'document_type_infobus.foreign_document' },
-//     { value: 'TRAVEL_PASSPORT', label: 'document_type_infobus.travel_passport' },
-//     { value: 'SAILORS_PASSPORT', label: 'document_type_infobus.sailors_passport' },
-//     { value: 'BIRTH_CERTIFICATE', label: 'document_type_infobus.birth_certificate' },
-//     { value: 'DIPLOMATIC_PASSPORT', label: 'document_type_infobus.diplomatic_passport' },
-//   ],
-//   schema: z.string().min(1, { message: 'required' }),
-// };
+export const document_type_octobus: FieldConfig = {
+  label: 'document_type',
+  type: 'select',
+  placeholder: 'document_type_placeholder',
+  translateOptions: true,
+  options: [
+    { value: 'UNKNOWN', label: 'document_type_infobus.unknown' },
+    { value: 'PASSPORT', label: 'document_type_infobus.passport' },
+    { value: 'MILITARY_ID', label: 'document_type_infobus.military_id' },
+    { value: 'FOREIGN_DOCUMENT', label: 'document_type_infobus.foreign_document' },
+    { value: 'TRAVEL_PASSPORT', label: 'document_type_infobus.travel_passport' },
+    { value: 'SAILORS_PASSPORT', label: 'document_type_infobus.sailors_passport' },
+    { value: 'BIRTH_CERTIFICATE', label: 'document_type_infobus.birth_certificate' },
+    { value: 'DIPLOMATIC_PASSPORT', label: 'document_type_infobus.diplomatic_passport' },
+  ],
+  schema: z.string().min(1, { message: 'required' }),
+};
 
 export const document_number: FieldConfig = {
   label: 'document_number',

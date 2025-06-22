@@ -61,16 +61,7 @@ function useCheckout() {
       setError('no data');
       return;
     }
-    console.log(
-      normalizeData({
-        from_city_id: from,
-        to_city_id: to,
-        locale,
-        formData,
-        route: ticket,
-        user,
-      }),
-    );
+
     try {
       const res = await createOrder(
         normalizeData({

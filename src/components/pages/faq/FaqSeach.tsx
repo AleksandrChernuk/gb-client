@@ -40,7 +40,7 @@ export default function FaqSeach() {
                     {...field}
                     type="text"
                     placeholder={t('search_for_topic_or_question')}
-                    className="h-full p-4 rounded-tr-none rounded-br-none laptop:p-6"
+                    className="h-full p-4 rounded-tl-2xl rounded-bl-2xl  rounded-tr-none rounded-br-none laptop:p-6"
                   />
                 </FormControl>
               </FormItem>

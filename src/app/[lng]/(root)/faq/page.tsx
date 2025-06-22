@@ -1,32 +1,61 @@
-import { seoFaq } from '@/lib/seo';
+import FaqTabs from '@/components/pages/faq/FaqTabs';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
-import FaqTabs from './_modules/FaqTabs';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
+  const { lng } = (await params) as { lng: Locale };
+  const t = await getTranslations({
+    locale: lng,
+    namespace: MESSAGE_FILES.METADATA,
+  });
 
   return {
-    title: seoFaq.title[lng],
-    description: seoFaq.description[lng],
-    keywords: seoFaq.keywords[lng],
+    title: t('faq.title'),
+    description: t('faq.description'),
+    keywords: t('faq.keywords'),
+
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
+
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       nocache: false,
       googleBot: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
         noimageindex: false,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+
+    metadataBase: new URL('https://greenbus.com.ua'),
+
+    alternates: {
+      canonical: `/${lng}/faq`,
+      languages: {
+        'x-default': '/uk/faq',
+        uk: '/uk/faq',
+        en: '/en/faq',
+        ru: '/ru/faq',
+      },
+    },
+
+    openGraph: {
+      images: '/logo.png',
     },
   };
 }

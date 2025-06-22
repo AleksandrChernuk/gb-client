@@ -72,7 +72,7 @@ const normalizeData = ({
     ...(route.carrier.id && { carrierId: route.carrier.id }),
     ...(route.carrier.name && { carrierName: route.carrier.name }),
     tripType: 'oneway',
-    paymentType: 'BOOK',
+    orderType: 'BOOK',
     currency: 'UAH',
     locale,
     ...(user?.id && { userId: user.id }),

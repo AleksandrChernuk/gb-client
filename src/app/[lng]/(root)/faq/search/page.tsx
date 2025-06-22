@@ -1,32 +1,61 @@
-import { seoFaqSearch } from '@/lib/seo';
+import FaqSearchResult from '@/components/pages/faq/FaqSearchResult';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
-import FaqSeach from '../_modules/FaqSeach';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: 'uk' | 'ru' | 'en' };
+  const { lng } = (await params) as { lng: Locale };
+  const t = await getTranslations({
+    locale: lng,
+    namespace: MESSAGE_FILES.METADATA,
+  });
 
   return {
-    title: seoFaqSearch.title[lng],
-    description: seoFaqSearch.description[lng],
-    keywords: seoFaqSearch.keywords[lng],
+    title: t('faq_booking.title'),
+    description: t('faq_booking.description'),
+    keywords: t('faq_booking.keywords'),
+
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
+
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       nocache: false,
       googleBot: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
         noimageindex: false,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+
+    metadataBase: new URL('https://greenbus.com.ua'),
+
+    alternates: {
+      canonical: `/${lng}/faq/search`,
+      languages: {
+        'x-default': '/uk/faq/search',
+        uk: '/uk/faq/search',
+        en: '/en/faq/search',
+        ru: '/ru/faq/search',
+      },
+    },
+
+    openGraph: {
+      images: '/logo.png',
     },
   };
 }
@@ -39,5 +68,6 @@ export default async function FaqSlug({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  return <FaqSeach />;
+
+  return <FaqSearchResult />;
 }

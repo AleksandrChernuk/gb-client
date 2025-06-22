@@ -21,7 +21,7 @@ export default async function FooterLinksList({ navLinks, className }: Props) {
       {navLinks.map(({ title, href, icon }) =>
         icon ? (
           <li key={href}>
-            <Link prefetch={false} href={href} className="inline-block p-1 bg-green-100 rounded-full">
+            <Link prefetch={false} href={href} className="inline-block p-1 bg-green-100 rounded-full hover:underline">
               {icon}
             </Link>
           </li>
@@ -30,7 +30,7 @@ export default async function FooterLinksList({ navLinks, className }: Props) {
             <Link
               prefetch={false}
               href={href}
-              className="inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200"
+              className="inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200 hover:underline"
             >
               {t(`${title}`)}
             </Link>

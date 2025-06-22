@@ -9,12 +9,6 @@ export const PAYMENT_TYPES = [
     INTL_KEY: 'booking',
   },
   {
-    ID: '2',
-    VALUE: 'PURCHASE',
-    ICON: <IconBankCard />,
-    INTL_KEY: 'bank_card',
-  },
-  {
     ID: '3',
     VALUE: 'PAYMENT_AT_BOARDING',
     ICON: <IconMoney />,

@@ -4,8 +4,8 @@ import { Container } from '@/components/shared/Container';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import FaqSeach from './_modules/FaqSeach';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import FaqSeach from '@/components/pages/faq/FaqSeach';
 
 export default async function FaqLayout({
   children,

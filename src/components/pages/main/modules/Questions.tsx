@@ -1,5 +1,4 @@
 import { Container } from '@/components/shared/Container';
-import { Button } from '@/components/ui/button';
 import { faqConstans } from '@/constans/faq.constans';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Link } from '@/i18n/routing';
@@ -17,31 +16,31 @@ export default async function Questions() {
         </h3>
         <ul className="grid grid-cols-1 gap-6 mb-4 tablet:grid-cols-3 last:border-b-0">
           {faqConstans['/faq/routes-and-buses'].questions.slice(0, 3).map(({ id, title, text, slug }) => (
-            <li className="flex flex-col items-start" key={id}>
+            <li className="flex flex-col items-start justify-between" key={id}>
               <h4 className="mb-2 text-white text-sm font-bold tracking-normal leading-[16.8px] tablet:text-sm laptop:text-xl laptop:leading-[28.8px]">
                 {t(`${`${title}.title`}`)}
               </h4>
               <p className="mb-4 text-sm font-normal tracking-normal leading-[21px] laptop:text-base laptop:leading-6 text-[#e6e6e6] ">
                 {t(`${title}.${text[0]}`)}
               </p>
-              <Button asChild variant={'link'} className="mt-auto">
-                <Link
-                  prefetch={false}
-                  className="block mb-6 text-base font-bold text-green-600! underline laptop:text-base"
-                  href={`${'/faq/routes-and-buses'}?q=${slug}`}
-                >
-                  {`${t_main('learn_more')} >`}
-                </Link>
-              </Button>
+              <Link
+                prefetch={false}
+                className="block mb-6 text-base font-bold text-green-600! underline laptop:text-base"
+                href={`${'/faq/routes-and-buses'}?q=${slug}`}
+              >
+                {`${t_main('learn_more')} >`}
+              </Link>
             </li>
           ))}
         </ul>
         <div className="text-right">
-          <Button asChild variant={'secondary'} size={'secondary'}>
-            <Link prefetch={false} href={'/faq'}>
-              {t_main('questions_button')}
-            </Link>
-          </Button>
+          <Link
+            prefetch={false}
+            href={'/faq'}
+            className="text-primary underline-offset-4 hover:underline py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px]"
+          >
+            {t_main('questions_button')}
+          </Link>
         </div>
       </Container>
     </section>

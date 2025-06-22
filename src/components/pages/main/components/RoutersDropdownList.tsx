@@ -33,7 +33,7 @@ const RoutersDropdownList = ({ list }: Props) => {
           onClick={() => setOpen(!open)}
           className="h-auto p-0 mt-4 text-base font-normal text-white"
         >
-          {t('popular_button')}{' '}
+          {t('popular_button')}
         </Button>
       </div>
     </div>

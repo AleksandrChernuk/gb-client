@@ -69,7 +69,7 @@ export interface IRequestOrder {
   insurerAddress?: string;
   insurerPhone?: string;
   tripType: 'oneway';
-  paymentType: 'BOOK' | 'PAYMENT_AT_BOARDING';
+  orderType: 'BOOK' | 'PAYMENT_AT_BOARDING';
   currency: string;
   locale: string;
   userId?: string;
