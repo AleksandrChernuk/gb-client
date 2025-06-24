@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
 
-export default function SuccessPage() {
+export default function ResultPage() {
   return (
     <main role="main" className="bg-slate-50 dark:bg-slate-900 flex-1">
       <section>

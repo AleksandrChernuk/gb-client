@@ -4,14 +4,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useAllCountriesContext } from '../context';
 import { ILocation } from '@/types/location.types';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import CardWrapper from '@/components/shared/CardWrapper';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 export default function CityList() {
   const { locations, selectedCountry } = useAllCountriesContext();
   const locale = useLocale();
   const [activeLetter, setActiveLetter] = useState<string>('All');
+  const t = useTranslations(MESSAGE_FILES.ALL_COUNTRIES);
 
   const filteredLocations = useMemo(() => {
     if (!selectedCountry) return locations;
@@ -60,13 +62,13 @@ export default function CityList() {
             <Button
               onClick={() => setActiveLetter(letter)}
               variant={'outline'}
-              className={`px-4 ${
+              className={`px-2 py-1 rounded-md ${
                 activeLetter === letter
                   ? 'bg-green-500 text-white'
                   : 'bg-white dark:bg-slate-800 text-black dark:text-white'
               }`}
             >
-              {letter}
+              {letter === 'All' ? t('all') : letter}
             </Button>
           </li>
         ))}
@@ -74,9 +76,9 @@ export default function CityList() {
 
       <div className="flex flex-col gap-6">
         {visibleGroups.map(({ letter, items }) => (
-          <CardWrapper key={letter} className="dark:bg-slate-900">
+          <CardWrapper key={letter} className="dark:bg-slate-900 tablet:p-4">
             <div className="px-2 rounded-md bg-green-500 flex items-center justify-center w-fit mb-4">
-              <h3 className="text-white text-lg font-semibold">{letter}</h3>
+              <h3 className="text-white text-lg font-medium">{letter}</h3>
             </div>
 
             <ul className="flex gap-4 flex-wrap">
@@ -84,7 +86,7 @@ export default function CityList() {
                 const { locationName } = extractLocationDetails(loc, locale);
                 return (
                   <li key={loc.id}>
-                    <Button variant={'outline'} className="px-4">
+                    <Button variant={'outline'} className="px-2 py-1 rounded-md">
                       {locationName}
                     </Button>
                   </li>

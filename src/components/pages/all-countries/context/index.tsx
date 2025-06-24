@@ -13,7 +13,7 @@ export type AllCountriesContent = {
   searchCountry: (query: string) => void;
   searchByQuery: (query: string) => void;
   getCitiesByCountry: (country: string) => string[];
-  selectCountry: (loc: ILocation) => void;
+  selectCountry: (loc: ILocation | null) => void;
 };
 
 export const AllCountriesContext = createContext<AllCountriesContent>({
@@ -124,13 +124,15 @@ export const AllCountriesProvider = ({ children, locations, locale }: Props) => 
     return countryToCitiesMap.get(country) || [];
   };
 
-  const selectCountry = (countryLoc: ILocation) => {
+  const selectCountry = (countryLoc: ILocation | null) => {
     setSelectedCountry(countryLoc);
-    const { countryName } = extractLocationDetails(countryLoc, locale);
-    const cities = countryToCitiesMap.get(countryName) || [];
-    setFilteredCities(cities);
+    if (countryLoc) {
+      const { countryName } = extractLocationDetails(countryLoc, locale);
+      setFilteredCities(countryToCitiesMap.get(countryName) || []);
+    } else {
+      setFilteredCities(allCities); // Сброс на все города при loc === null
+    }
   };
-
   return (
     <AllCountriesContext.Provider
       value={{

@@ -1,4 +1,4 @@
-import SuccessPage from '@/components/pages/success';
+import SuccessPage from '@/components/pages/payment-result';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -45,12 +45,12 @@ export async function generateMetadata({ params }: Props) {
     metadataBase: new URL('https://greenbus.com.ua'),
 
     alternates: {
-      canonical: `/${lng}/success`,
+      canonical: `/${lng}/result`,
       languages: {
-        'x-default': '/uk/success',
-        uk: '/uk/success',
-        en: '/en/success',
-        ru: '/ru/success',
+        'x-default': '/uk/result',
+        uk: '/uk/result',
+        en: '/en/result',
+        ru: '/ru/result',
       },
     },
 

@@ -18,7 +18,7 @@ const RoutersDropdownList = ({ list }: Props) => {
   return (
     <div>
       {open && (
-        <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 mb-0 duration-300 animate-in fade-in slide-in-from-top-1 laptop:grid-cols-3 laptop:gap-8">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 laptop:grid-cols-2 mb-0 duration-300 animate-in fade-in slide-in-from-top-1">
           {list.map((router, i) => (
             <div className="w-full" key={i + 10}>
               <RoutersItem from={router.from} to={router.to} />

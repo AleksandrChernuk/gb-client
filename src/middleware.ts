@@ -22,6 +22,9 @@ export function middleware(req: NextRequest) {
       return redirectToSignin(req, locale);
     }
   }
+  if (pathname.startsWith('/payment-result/') && req.method === 'POST') {
+    return NextResponse.redirect(req.nextUrl, 302);
+  }
 
   return intlMiddleware(req);
 }

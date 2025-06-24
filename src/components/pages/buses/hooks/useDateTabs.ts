@@ -4,7 +4,6 @@ import { isEqual, toDate, format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { createDateArr } from '../helpers';
 import { useSearchStore } from '@/store/useSearch';
-import { useUpdateSearchParams } from '@/hooks/useUpdateSearchParams';
 
 export const useDateTabs = () => {
   const currentDate = useSearchStore((state) => state.date);
@@ -13,7 +12,6 @@ export const useDateTabs = () => {
   const [tabDate, setTabDate] = useState<Date>(toDate(currentDate || new Date()));
   const [datesArray, setDatesArray] = useState<Date[]>(createDateArr(toDate(tabDate), 5, Math.floor(5 / 2)));
 
-  const { setParam } = useUpdateSearchParams();
   useEffect(() => {
     setTabDate(toDate(currentDate || new Date()));
     setDatesArray(createDateArr(toDate(currentDate), 5, Math.floor(5 / 2)));
@@ -25,7 +23,6 @@ export const useDateTabs = () => {
     const formatted = format(newDate, 'yyyy-MM-dd');
     if (setDate) {
       setDate(formatted);
-      setParam('date', formatted);
     }
 
     const firstDate = datesArray[0];

@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import Link from 'next/link';
 
 export default async function Buses() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
@@ -35,8 +36,10 @@ export default async function Buses() {
             </p>
 
             <div className="mt-auto ml-auto tablet:ml-0">
-              <Button variant={'default'} size={'secondary'}>
-                {t('buses_button')}
+              <Button asChild variant={'default'} size={'secondary'}>
+                <Link href={'/all-countries'} scroll={true}>
+                  {t('buses_button')}
+                </Link>
               </Button>
             </div>
           </li>

@@ -3,14 +3,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLocationById, getLocations, getFavoriteLocations } from '@/actions/location.actions';
 
-export function useLocations(query: string, options?: { enabled?: boolean }) {
+export function useLocations() {
   return useQuery({
-    queryKey: ['locations', query],
+    queryKey: ['locations'],
     queryFn: async () => {
-      const response = await getLocations({ query, perPage: 99 });
+      const response = await getLocations({ query: '', perPage: 99 });
       return response.data;
     },
-    ...options,
   });
 }
 

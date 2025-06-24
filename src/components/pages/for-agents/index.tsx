@@ -48,7 +48,7 @@ export default async function ForAgentsPage() {
 
         <section className="bg-green-500">
           <Container size="m" className="py-8">
-            <h2 className="mb-4text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-50 laptop:mb-8">
+            <h2 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-50 laptop:mb-8">
               {t_for_agents('why_join_us_title')}
             </h2>
             <ul className="grid justify-between grid-cols-1 gap-4 tablet:gap-6 laptop:grid-cols-3 laptop:gap-20">

@@ -34,25 +34,31 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
         pathname: '/buses',
         query: { from: from.id, to: to.id, date: formatted },
       }}
+      scroll={true}
       onClick={handleSetCity}
-      className="block h-auto bg-white hover:bg-slate-50 focus:bg-slate-50 border-[1px] 
+      className="truncate block h-auto bg-white hover:bg-slate-50 focus:bg-slate-50 border-[1px] 
       border-transparent focus:border-black dark:bg-slate-900 dark:hover:bg-black 
-      dark:focus:bg-slate-700 dark:focus:border-slate-200 px-4 py-3 tablet:py-[18px] laptop:p-6 rounded-lg laptop:rounded-2xl transition-colors duration-300"
+      dark:focus:bg-slate-700 dark:focus:border-slate-200 px-3 py-2 tablet:py-[18px] laptop:p-5 rounded-lg laptop:rounded-2xl transition-colors duration-300"
     >
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex items-center gap-1 tablet:gap-2">
-          <div className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 aptop:leading-6 text-slate-700 dark:text-slate-50">
+      <div className="grid grid-cols-7">
+        <div className="flex items-center gap-1 tablet:gap-2 flex-1 col-span-6">
+          <p className="truncate text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 aptop:leading-6 text-slate-700 dark:text-slate-50  ">
             {extractLocationDetails(from, locale).locationName}
-          </div>
+          </p>
 
-          <div className="w-[62px] h-[20px] inline-flex items-center">
+          <div className="w-[62px] h-[20px] flex items-center ">
             <IconPath />
           </div>
-          <div className="text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 laptop:leading-6 text-slate-700 dark:text-slate-50">
+
+          <p className="truncate text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 laptop:leading-6 text-slate-700 dark:text-slate-50  ">
             {extractLocationDetails(to, locale).locationName}
-          </div>
+          </p>
         </div>
-        <div className="w-6 h-6">
+        <div
+          className="size-6 [&_svg]:shrink-0 justify-self-end
+
+"
+        >
           <IconRouteArrow />
         </div>
       </div>

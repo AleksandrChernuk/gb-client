@@ -13,7 +13,7 @@ export default async function OfertaPage() {
       <Container size="l">
         <div className="py-10 text-slate-700 dark:text-slate-50">
           <h1 className="mb-4">{t('title')}</h1>
-          <div className="space-y-2" dangerouslySetInnerHTML={{ __html: html }} />
+          <div className="space-y-2 text-xs" dangerouslySetInnerHTML={{ __html: html }} />
         </div>
       </Container>
     </section>

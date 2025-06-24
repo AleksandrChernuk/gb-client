@@ -1,9 +1,9 @@
 @layer base {
   h1 {
-    @apply font-bold text-base tablet:text-[24px] tablet:leading-[120%] laptop:text-[32px] laptop:leading-[120%] tracking-normal text-slate-700 dark:text-slate-50;
+    @apply text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50;
   }
   h2 {
-    @apply text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight leading-snug;
+    @apply text-xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50;
   }
   h3 {
     @apply text-lg sm:text-xl md:text-2xl font-semibold leading-snug;
@@ -18,7 +18,7 @@
     @apply text-xs sm:text-sm font-medium;
   }
   p {
-    @apply text-sm sm:text-base md:text-lg leading-relaxed;
+    @apply text-sm tablet:text-base leading-relaxed;
   }
   ul {
     @apply list-none;
