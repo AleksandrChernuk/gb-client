@@ -18,6 +18,7 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
           selectedTicketId: null,
           selectedTicket: null,
           loadingSelectTicket: false,
+
           setSelectedTicketId(id) {
             set({ selectedTicketId: id });
           },
@@ -153,6 +154,10 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
             }
 
             try {
+              set((state) => ({
+                ...state,
+                loadingSelectTicket: true,
+              }));
               const rawData = {
                 routeId: route.identificators.route_id,
                 intervalId: route.identificators.intervalId || '',
@@ -177,7 +182,16 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
 
               res = await getRouteDetails(cleanObject(rawData) as IGetRouteDetailsBody);
             } catch (error) {
-              console.log('Ошибка при получении данных маршрута:', error);
+              console.error('Ошибка при получении данных маршрута:', error);
+              set((state) => ({
+                ...state,
+                loadingSelectTicket: false,
+              }));
+            } finally {
+              set((state) => ({
+                ...state,
+                loadingSelectTicket: false,
+              }));
             }
 
             const currentDetails: IRouteDetailsResponse = route.details || ({} as IRouteDetailsResponse);
@@ -208,9 +222,10 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
             set((state) => ({
               ...state,
               tickets: {},
+              loadingTickets: {},
               selectedTicketId: null,
               selectedTicket: null,
-              isButtonDisabled: false,
+              loadingSelectTicket: false,
             }));
           },
         }),

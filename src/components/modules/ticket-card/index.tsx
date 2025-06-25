@@ -27,6 +27,7 @@ export const TicketCard = ({ element }: Props) => {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { handleGetDetails, handleSetTicket } = useTicketCard();
   const [tickets] = useCurrentTicket(useShallow((state) => [state.tickets]));
+  const loadingSelectTicket = useCurrentTicket(useShallow((state) => state.loadingSelectTicket));
 
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
@@ -35,6 +36,8 @@ export const TicketCard = ({ element }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const handleSelect = () => {
+    if (isPending || loadingSelectTicket) return;
+
     if (!element.ticket_pricing.base_price) return;
     startTransition(async () => {
       try {

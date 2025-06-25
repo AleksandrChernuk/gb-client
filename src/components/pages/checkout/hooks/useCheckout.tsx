@@ -27,9 +27,6 @@ function useCheckout() {
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
-  // const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  // const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
-  // const isHydrated = useCurrentTicket((state) => state.isHydrated);
 
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 

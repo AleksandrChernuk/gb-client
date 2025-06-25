@@ -5,6 +5,7 @@ export type CurrentTicketState = {
   selectedTicketId: string | null;
   tickets: Record<string, IRouteResponse>;
   selectedTicket: IRouteResponse | null;
+  loadingSelectTicket: boolean;
   loadingTickets: Record<string, boolean>;
 };
 
