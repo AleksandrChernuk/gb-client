@@ -50,12 +50,21 @@ export const MobileFilter = () => {
   const { isFetching } = useTicketsSearch();
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
 
+  const from = useSearchStore(useShallow((state) => state.from));
+  const to = useSearchStore(useShallow((state) => state.to));
+
+  const enabled = !!from?.id && !!to?.id;
+
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button disabled={!isHydrated || isFetching} variant={'outline'} className="p-2 rounded-lg border-primary">
+        <Button
+          disabled={!isHydrated && isFetching && enabled}
+          variant={'outline'}
+          className="p-2 rounded-lg border-primary"
+        >
           <SlidersHorizontal color="#098537" size={24} />
         </Button>
       </SheetTrigger>

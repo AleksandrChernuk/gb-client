@@ -4,10 +4,16 @@ import { isEqual, toDate, format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { createDateArr } from '../helpers';
 import { useSearchStore } from '@/store/useSearch';
+import { useShallow } from 'zustand/react/shallow';
 
 export const useDateTabs = () => {
   const currentDate = useSearchStore((state) => state.date);
   const setDate = useSearchStore((state) => state.setDate);
+
+  const from = useSearchStore(useShallow((state) => state.from));
+  const to = useSearchStore(useShallow((state) => state.to));
+
+  const enabled = !!from?.id && !!to?.id;
 
   const [tabDate, setTabDate] = useState<Date>(toDate(currentDate || new Date()));
   const [datesArray, setDatesArray] = useState<Date[]>(createDateArr(toDate(tabDate), 5, Math.floor(5 / 2)));
@@ -43,5 +49,6 @@ export const useDateTabs = () => {
     tabDate,
     setTabDate,
     datesArray,
+    enabled,
   };
 };

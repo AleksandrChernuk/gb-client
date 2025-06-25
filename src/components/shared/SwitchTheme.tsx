@@ -6,26 +6,20 @@ import { Skeleton } from '../ui/skeleton';
 import { Switch } from '../ui/switch-theme';
 
 export const SwitchTheme = () => {
+  const { setTheme, resolvedTheme } = useTheme();
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { theme, setTheme } = useTheme();
 
   useLayoutEffect(() => {
-    const localtheme = localStorage.getItem('theme');
-
-    if (localtheme && theme) {
-      setTheme(localtheme);
-      setChecked(localtheme === 'dark');
-    } else if (theme) {
-      setChecked(theme === 'dark');
+    if (resolvedTheme) {
+      setChecked(resolvedTheme === 'dark');
     }
     setLoading(false);
-  }, [theme, setTheme]);
+  }, [resolvedTheme]);
 
   const handleChecked = () => {
-    const newTheme = checked ? 'light' : 'dark';
-    setTheme(newTheme);
-    setChecked(!checked);
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+    setChecked(resolvedTheme !== 'dark');
   };
 
   return loading ? (

@@ -50,7 +50,9 @@ export default async function MainLayout({
           <GTMNoScript />
           <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
           <ReactQueryContext>
-            <ThemeProvider attribute="class">{children}</ThemeProvider>
+            <ThemeProvider attribute="class" enableSystem>
+              {children}
+            </ThemeProvider>
             <LocationsInitializer />
             <SearchParamsSyncer />
           </ReactQueryContext>
