@@ -1,12 +1,14 @@
 import { ILocation } from '@/types/location.types';
 
 export type LocationsState = {
-  locations?: ILocation[];
+  locations: ILocation[];
+  favoriteLocations: ILocation[];
   hasHydrated: boolean;
 };
 
 export type LocationsActions = {
-  setLocations: (locations?: ILocation[]) => void;
+  setLocations: (locations: ILocation[]) => void;
+  setFavoriteLocations: (locations: ILocation[]) => void;
   setHasHydrated: (val: boolean) => void;
 };
 

@@ -24,7 +24,6 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useIsFetching } from '@tanstack/react-query';
 import CityList from '../components/CityList';
 import { MainLoader } from '@/components/shared/MainLoader';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 
 type Props = {
@@ -94,24 +93,22 @@ export default function CitySearch({ name, variant }: Props) {
           />
           {open ? (
             <div
-              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 overflow-y-scroll animate-in fade-in zoom-in p-4 max-h-86 w-[400px]"
+              className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in p-4 w-[400px]"
               onMouseDown={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
               }}
             >
-              <ScrollArea>
-                <CityList
-                  cities={cities}
-                  city={city}
-                  highlightedIndex={highlightedIndex}
-                  onSelectCity={onSelectCity}
-                  isFetchingLocations={!!isFetchingLocations}
-                  NotFoundCity={NotFoundCity}
-                  LoaderCity={() => <MainLoader size={24} />}
-                  locale={locale}
-                />
-              </ScrollArea>
+              <CityList
+                cities={cities}
+                city={city}
+                highlightedIndex={highlightedIndex}
+                onSelectCity={onSelectCity}
+                isFetchingLocations={!!isFetchingLocations}
+                NotFoundCity={NotFoundCity}
+                LoaderCity={() => <MainLoader size={24} />}
+                locale={locale}
+              />
             </div>
           ) : null}
         </div>
@@ -178,19 +175,18 @@ export default function CitySearch({ name, variant }: Props) {
                 </div>
               </div>
               <div id="list-container" className="flex flex-col gap-2 mt-11">
-                <ScrollArea>
-                  <CityList
-                    cities={cities}
-                    city={city}
-                    highlightedIndex={highlightedIndex}
-                    onSelectCity={onSelectCity}
-                    isFetchingLocations={!!isFetchingLocations}
-                    hasBorder
-                    NotFoundCity={NotFoundCity}
-                    LoaderCity={() => <MainLoader size={24} />}
-                    locale={locale}
-                  />
-                </ScrollArea>
+                <CityList
+                  cities={cities}
+                  city={city}
+                  highlightedIndex={highlightedIndex}
+                  onSelectCity={onSelectCity}
+                  isFetchingLocations={!!isFetchingLocations}
+                  hasBorder
+                  NotFoundCity={NotFoundCity}
+                  LoaderCity={() => <MainLoader size={24} />}
+                  locale={locale}
+                  className="max-h-full"
+                />
               </div>
             </div>
           </SheetContent>

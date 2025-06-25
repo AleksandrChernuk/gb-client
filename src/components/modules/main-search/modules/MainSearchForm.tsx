@@ -63,16 +63,18 @@ const MainSearchForm = () => {
   );
 
   return (
-    <div className="relative bg-white shadow-xs rounded-2xl dark:bg-slate-800">
-      <div className="flex flex-col h-full tablet:flex-row">
-        <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
-          {renderFields(isMobile ? 'mobile' : 'desktop')}
+    <>
+      <div className="relative bg-white shadow-xs rounded-2xl dark:bg-slate-800">
+        <div className="flex flex-col h-full tablet:flex-row">
+          <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
+            {renderFields(isMobile ? 'mobile' : 'desktop')}
+          </div>
+          <Button variant={'main'} size={'mainSearch'} disabled={isPending} onClick={handleSubmit}>
+            {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('searchBtn')}
+          </Button>
         </div>
-        <Button variant={'main'} size={'mainSearch'} disabled={isPending} onClick={handleSubmit}>
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('searchBtn')}
-        </Button>
       </div>
-    </div>
+    </>
   );
 };
 

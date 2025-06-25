@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useShallow } from 'zustand/react/shallow';
-import { useLocations, useFavoriteLocations } from '@/hooks/useLocations';
+import { useLocationsStore } from '@/store/useLocations';
 
 type Tname = 'from' | 'to';
 
@@ -19,6 +19,8 @@ export const useCitySearch = ({ name }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const locations = useLocationsStore((state) => state.locations);
+  const favoriteLocations = useLocationsStore(useShallow((state) => state.favoriteLocations));
 
   const setCity = useSearchStore(useShallow((state) => state.setCity));
   const city = useSearchStore(useShallow((state) => state[name]));
@@ -26,24 +28,18 @@ export const useCitySearch = ({ name }: Props) => {
   const language = useLocale();
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const { data } = useLocations();
-  const { data: favoriteLocations } = useFavoriteLocations();
-
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const cities = useMemo(() => {
-    if (city) return;
-
     if (value.trim().length === 0) {
       return favoriteLocations || [];
     }
-
     const query = value.trim().toLowerCase();
-    return (data || []).filter((loc) => {
+    return (locations || []).filter((loc) => {
       const { locationName } = extractLocationDetails(loc, language);
       return locationName.toLowerCase().startsWith(query);
     });
-  }, [city, value, data, favoriteLocations, language]);
+  }, [value, locations, favoriteLocations, language]);
 
   const onSelectCity = useCallback(
     (newCity: ILocation) => {
@@ -60,9 +56,6 @@ export const useCitySearch = ({ name }: Props) => {
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setOpen(false);
-      if (!city) {
-        setValue('');
-      }
     }
   }, []);
 
@@ -92,15 +85,11 @@ export const useCitySearch = ({ name }: Props) => {
     (newValue: string) => {
       setValue(newValue);
 
-      if (newValue.trim().length > 1 && city) {
-        setCity(name, null);
-      }
-
-      if (newValue.trim().length === 0) {
+      if (value.trim().length === 1) {
         setCity(name, null);
       }
     },
-    [city, name, setCity],
+    [name, setCity, value],
   );
 
   const handleClearMobileInput = useCallback(() => {
