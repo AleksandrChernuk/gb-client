@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { FormProvider } from 'react-hook-form';
@@ -15,43 +14,10 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import SubmitButton from '../components/SubmitButton';
 import { toast } from 'sonner';
 import useCheckoutForm from '../hooks/useCheckout';
-import { useTimerStore } from '@/store/useTimer';
-import { useEffect } from 'react';
-import { useCurrentTicket } from '@/store/useCurrentTicket';
-import { useRouter } from 'next/navigation';
 
 export default function CheckoutForm() {
   const { methods, onSubmit, error, loading } = useCheckoutForm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const { reset } = useTimerStore();
-  const router = useRouter();
-  const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      useTimerStore.persist.clearStorage();
-      useCurrentTicket.persist.clearStorage();
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      reset();
-      resetCurrentTicket();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!selectedTicket) {
-      router.push('/');
-    }
-  }, [selectedTicket]);
 
   return (
     <div>

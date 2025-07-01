@@ -45,3 +45,18 @@ export const confirmBooking = async (body: ConfirmPaymentInterface) => {
     return null;
   }
 };
+
+export async function getOrderStatusAndPdf(orderId: string) {
+  const response = await fetch(`${BASE_URL}/orders/pdf/${orderId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (!response.ok) {
+    throw new Error('Не удалось получить билет');
+  }
+
+  const data = await response.json();
+  // { status: 'success', pdf: '...', orderNumber: '...' }
+  return data;
+}

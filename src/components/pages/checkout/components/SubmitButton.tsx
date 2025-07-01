@@ -13,7 +13,7 @@ const SubmitButton = memo(function SubmitButton({ loading }: { loading: boolean 
 
   return (
     <Button variant="default" className="w-full p-4" type="submit">
-      {loading ? loading : paymentType === 'card' ? t('pay') : t('book')}
+      {loading ? loading : paymentType === 'BOOK' ? t('pay') : t('book')}
     </Button>
   );
 });

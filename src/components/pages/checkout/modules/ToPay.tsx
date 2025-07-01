@@ -2,17 +2,20 @@ import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import { countPricing } from '../helpers/countPricing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { memo } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { Passenger } from '../types';
+import { getTotalPriceFromPassengers } from '../helpers/getTotalPriceFromPassengers';
 
 const ToPay = memo(function ToPay() {
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
   const isHydrated = useCurrentTicket((state) => state.isHydrated);
   const t = useTranslations(MESSAGE_FILES.COMMON);
+  const { control } = useFormContext();
 
+  const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
   return (
     <div>
       {isHydrated ? (
@@ -25,7 +28,8 @@ const ToPay = memo(function ToPay() {
             </div>
           </div>
           <div className="text-base font-medium leading-4 tracking-normal tablet:text-base tablet:font-bold tablet:leading-6 text-slate-700 dark:text-slate-50">
-            {countPricing({ price: selectedTicket?.ticket_pricing.base_price, passengers: adult + children })} UAH
+            {getTotalPriceFromPassengers(passengers)}
+            UAH
           </div>
         </div>
       ) : (
@@ -38,7 +42,7 @@ const ToPay = memo(function ToPay() {
             {t('total_price')}
           </div>
           <div className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
-            {countPricing({ price: selectedTicket?.ticket_pricing.base_price, passengers: adult + children })} UAH
+            {getTotalPriceFromPassengers(passengers)} UAH
           </div>
         </div>
       ) : (

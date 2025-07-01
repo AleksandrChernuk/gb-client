@@ -6,34 +6,59 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
+import { useCurrentTicket } from '@/store/useCurrentTicket';
 
 const Payment = () => {
-  const { control } = useFormContext();
+  const { control, trigger } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
+
   return (
     <FormField
       control={control}
       name="payment"
-      render={({ field }) => (
-        <FormItem className="border rounded-lg border-slate-200 dark:bg-slate-900 dark:border-slate-700">
+      render={({ field, fieldState }) => (
+        <FormItem
+          className="border rounded-lg border-slate-200 dark:bg-slate-900 dark:border-slate-700"
+          aria-invalid={!!fieldState.error}
+        >
           <FormControl>
-            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col ">
-              {PAYMENT_TYPES.map(({ ICON, VALUE, ID, INTL_KEY }) => (
-                <FormItem
-                  key={ID}
-                  className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700"
-                >
+            <RadioGroup
+              value={field.value}
+              onValueChange={async (value) => {
+                const isValid = await trigger();
+                if (!isValid) return;
+
+                field.onChange(value);
+              }}
+              defaultValue={field.value}
+              className="flex flex-col "
+            >
+              <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
+                <FormControl>
+                  <RadioGroupItem value={PAYMENT_TYPES[0].VALUE} />
+                </FormControl>
+                <FormLabel className="flex items-center w-full space-x-3 font-normal cursor-pointer">
+                  <span className="text-base font-medium leading-4 tracking-normal laptop:text-base laptop:font-bold laptop:leading-6 text-slate-700 dark:text-slate-50">
+                    {t(PAYMENT_TYPES[0].INTL_KEY)}
+                  </span>
+                  <div className="size-6">{PAYMENT_TYPES[0].ICON}</div>
+                </FormLabel>
+              </FormItem>
+
+              {selectedTicket?.allowed_operations.can_payment_to_driver && (
+                <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
                   <FormControl>
-                    <RadioGroupItem value={VALUE} />
+                    <RadioGroupItem value={PAYMENT_TYPES[1].VALUE} />
                   </FormControl>
                   <FormLabel className="flex items-center w-full space-x-3 font-normal cursor-pointer">
                     <span className="text-base font-medium leading-4 tracking-normal laptop:text-base laptop:font-bold laptop:leading-6 text-slate-700 dark:text-slate-50">
-                      {t(INTL_KEY)}
+                      {t(PAYMENT_TYPES[1].INTL_KEY)}
                     </span>
-                    <div className="size-6">{ICON}</div>
+                    <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>
                   </FormLabel>
                 </FormItem>
-              ))}
+              )}
             </RadioGroup>
           </FormControl>
           <FormMessage />

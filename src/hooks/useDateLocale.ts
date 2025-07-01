@@ -1,7 +1,7 @@
 'use client';
 import { uk, ru, enUS, Locale } from 'date-fns/locale';
-import { useLocale } from "next-intl";
- 
+import { useLocale } from 'next-intl';
+
 export default function useDateLocale() {
   const locale = useLocale();
 

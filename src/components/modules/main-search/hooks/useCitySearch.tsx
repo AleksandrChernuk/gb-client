@@ -54,9 +54,8 @@ export const useCitySearch = ({ name }: Props) => {
   );
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      setOpen(false);
-    }
+    if (event.currentTarget.contains(event.relatedTarget)) return;
+    setOpen(false);
   }, []);
 
   const onKeyDown = useCallback(
@@ -74,6 +73,8 @@ export const useCitySearch = ({ name }: Props) => {
       if (event.key === 'Enter') {
         event.preventDefault();
         if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
+          const cityIndex = cities?.findIndex((el) => el.id === cities[highlightedIndex].id) || 0;
+          setHighlightedIndex(cityIndex);
           onSelectCity(cities[highlightedIndex]);
         }
       }
@@ -81,21 +82,13 @@ export const useCitySearch = ({ name }: Props) => {
     [cities, highlightedIndex, onSelectCity],
   );
 
-  const onInputChange = useCallback(
-    (newValue: string) => {
-      setValue(newValue);
-
-      if (value.trim().length === 1) {
-        setCity(name, null);
-      }
-    },
-    [name, setCity, value],
-  );
+  const onInputChange = useCallback((newValue: string) => {
+    setValue(newValue);
+  }, []);
 
   const handleClearMobileInput = useCallback(() => {
     setValue('');
-    setCity(name, null);
-  }, [name, setCity]);
+  }, []);
 
   useEffect(() => {
     const cityIndex = cities?.findIndex((el) => el.id === city?.id) || 0;
@@ -103,16 +96,18 @@ export const useCitySearch = ({ name }: Props) => {
   }, [city, cities]);
 
   const getPlaceholder = useCallback(() => {
-    const locationName = city ? extractLocationDetails(city, language).locationName : null;
-    return locationName || (name === 'from' ? t('placeholderFrom') : t('placeholderTo'));
-  }, [city, language, name, t]);
+    return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
+  }, [name, t]);
 
   const handleToggleOpen = useCallback(() => {
     setOpen((p) => !p);
-    if (value.trim().length === 0 && city) {
+  }, []);
+
+  useEffect(() => {
+    if (!open && value.trim().length === 0 && city) {
       setValue(extractLocationDetails(city, language).locationName);
     }
-  }, [city, language, value]);
+  }, [open, value, city, language]);
 
   return {
     open,

@@ -5,3 +5,13 @@ export interface ConfirmPaymentInterface {
   locale: string;
   is_send_ticket?: boolean;
 }
+
+export interface InitiatePaymentInterface {
+  amount: number;
+  currency: string;
+  providerId: string;
+  orderId: string;
+  description: string;
+  locale: string;
+  customerEmail: string;
+}

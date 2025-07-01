@@ -19,6 +19,8 @@ function useCheckout() {
   const locale = useLocale();
 
   const [error, setError] = useState<string | null>(null);
+  // const [apiPrice, setApiPrice] = useState<string | null>(null);
+
   const [loading] = useState<boolean>(false);
 
   const adult = useSearchStore(useShallow((state) => state.adult));
@@ -31,8 +33,8 @@ function useCheckout() {
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(
-    () => createPassengers(adult, children, providerConfig),
-    [adult, children, providerConfig],
+    () => createPassengers(adult, children, providerConfig, ticket?.ticket_pricing.base_price || 0),
+    [adult, children, providerConfig, ticket?.ticket_pricing.base_price],
   );
 
   const schema = useMemo(
@@ -45,7 +47,7 @@ function useCheckout() {
     defaultValues: {
       passengers: defaultPassengers,
       email: '',
-      payment: null,
+      payment: '',
       accept_rules: false,
       phone: '',
       selected_seats: [],
@@ -75,7 +77,6 @@ function useCheckout() {
       console.log('error', error);
     }
   };
-
   return { methods, onSubmit, error, loading };
 }
 

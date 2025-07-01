@@ -79,7 +79,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
             text-base laptop:text-lg font-medium tracking-tighter 
             laptop:leading-[24px] leading-[21.6px] text-left text-nowrap truncate 
             text-black dark:text-slate-50 border-[1px] border-transparent 
-         aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]`,
+         aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a] `,
           )}
           {...props}
           onKeyDown={(e) => {

@@ -2,7 +2,7 @@
 
 import { ProviderConfig } from './providerConfig/types';
 
-export function createEmptyPassenger(config: ProviderConfig, isChildren = false) {
+export function createEmptyPassenger(config: ProviderConfig, isChildren = false, price: number) {
   const passengers: Record<string, any> = {};
   for (const field of config.required) {
     if (!config.fields[field]) continue;
@@ -11,19 +11,25 @@ export function createEmptyPassenger(config: ProviderConfig, isChildren = false)
   }
 
   passengers.isChildren = isChildren;
+  passengers.price = price;
   const discountField = config.fields.discount;
 
   if (discountField) {
     passengers.discount_id = '';
     passengers.discount_description = '';
-    passengers.discount_percent = undefined;
+    passengers.discount_percent = '';
   }
 
   return passengers;
 }
 
-export function createPassengers(adultCount: number, childCount: number, providerConfig: ProviderConfig) {
+export function createPassengers(
+  adultCount: number,
+  childCount: number,
+  providerConfig: ProviderConfig,
+  price: number,
+) {
   return Array.from({ length: adultCount + childCount }).map((_, i) =>
-    createEmptyPassenger(providerConfig, i >= adultCount),
+    createEmptyPassenger(providerConfig, i >= adultCount, price),
   );
 }

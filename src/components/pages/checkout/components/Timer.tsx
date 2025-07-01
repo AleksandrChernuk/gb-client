@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTimerStore } from '@/store/useTimer';
 
-const WARNING_DELAY_MS = 5000;
+const WARNING_DELAY_MS = 10000;
 const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 1000;
 
 function formatTime(ms: number) {
@@ -35,9 +35,8 @@ export default function Timer() {
 
   useEffect(() => {
     if (!hasHydrated) return;
-    let start = startedAt;
-    if (!start) {
-      start = Date.now();
+    const start = startedAt || Date.now();
+    if (!startedAt) {
       setStartedAt(start);
     }
 

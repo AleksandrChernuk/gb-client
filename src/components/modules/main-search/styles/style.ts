@@ -19,21 +19,10 @@ export const calendarStyles = {
     day_selected: 'bg-green-300 text-white hover:bg-green-300 hover:text-white focus:bg-green-300 focus:text-white',
     day_today: 'bg-transporante border-[2px] border-green-300 text-accent-foreground',
     day_outside:
-      ' day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
+      'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
     day_disabled: 'text-muted-foreground opacity-50',
     day_range_middle: 'aria-selected:bg-accent aria-selected:text-accent-foreground',
     day_hidden: 'invisible',
   },
-  mobile: {
-    row: 'flex w-full items-center justify-between mt-2 gap-2',
-    head_row: 'flex w-full items-center justify-between gap-1 mobile:gap-2',
-    months: 'flex flex-col gap-4',
-    nav_button_previous: 'hidden',
-    nav_button_next: 'hidden',
-    cell: 'h-9 w-9 rounded-full text-center text-base p-0 relative flex justify-center items-center [&:has([aria-selected])]:bg-transporante &:has([aria-selected])]:dark:text-slate-200 dark:text-slate-200  hover:bg-green-300 hover:text-white   focus-within:relative focus-within:z-20',
-
-    day: 'rounded-full h-9 w-9 p-0 text-sm font-medium tracking-normal leading-[21.6px]	aria-selected:opacity-100 hover:bg-green-300 hover:text-white ',
-
-    caption: 'flex justify-start relative items-center mb-4 text-sm text-slate-700 dark:text-slate-50 font-medium',
-  },
+  mobile: {},
 };

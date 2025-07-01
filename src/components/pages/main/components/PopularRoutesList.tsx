@@ -27,7 +27,7 @@ export default function PopularRoutesList() {
         <SkeletonRote />
       ) : (
         <>
-          <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 mb-4 laptop:grid-cols-2  ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4 laptop:grid-cols-2  ">
             {initialRouters.map((router, i) => (
               <div className="w-full" key={i + 1}>
                 <RoutersItem from={router?.from} to={router?.to} />
