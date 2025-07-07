@@ -17,10 +17,11 @@ export const ProfileLink = ({ variant }: Props) => {
         <Button
           asChild
           variant={'link'}
-          className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] py-2"
+          size={'icon'}
+          className="outline-1 justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] p-0 py-2 "
         >
           <Link prefetch={false} href={'/profile'}>
-            <User size={24} className="stroke-green-300" />
+            <User size={24} className="stroke-green-300 " />
             {t('mainNavProfileLink')}
           </Link>
         </Button>

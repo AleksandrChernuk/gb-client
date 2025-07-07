@@ -37,7 +37,7 @@ const UpdatePasswordForm = () => {
     try {
       setIsPending(true);
       console.log(values);
-      route.push('/signin');
+      route.push('/signin', { scroll: true });
     } catch (error) {
       setIsPending(false);
 

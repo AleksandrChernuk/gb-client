@@ -4,7 +4,7 @@ import UniversalSelect from './UniversalSelect';
 import { FieldConfig } from '../helpers/providerConfig/types';
 import CountrySelector from './CountrySelector';
 import DiscountSelect from './DiscountSelect';
-import { DateBirthPicker } from '../components/DateBirthPicker';
+import { DateBirthPicker } from './DateBirthPicker';
 
 type Props = {
   name: string;

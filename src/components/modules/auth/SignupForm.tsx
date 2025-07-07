@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { signup } from '@/actions/auth.service';
 
 const SignupForm = () => {
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t = useTranslations(MESSAGE_FILES.FORM);
   const locale = useLocale();
   const router = useRouter();
   const [error, setError] = useState<string | undefined>('');
@@ -62,7 +62,7 @@ const SignupForm = () => {
               return (
                 <FormItem>
                   <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px] text-slate-700 dark:text-white">
-                    {t('authName')}
+                    {t('first_name')}
                   </FormLabel>
                   <FormControl>
                     <div className="relative">
@@ -70,7 +70,7 @@ const SignupForm = () => {
                         {...field}
                         disabled={isPending}
                         type="text"
-                        placeholder={t('placeholderName')}
+                        placeholder={t('first_name_placeholder')}
                         autoComplete="off"
                         aria-invalid={Boolean(fieldState?.invalid)}
                       />
@@ -82,7 +82,7 @@ const SignupForm = () => {
                     </div>
                   </FormControl>
                   {Boolean(fieldState?.error) && (
-                    <FormErrorMassege>{t(`name_validate.${fieldState.error?.message}`)}</FormErrorMassege>
+                    <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>
                   )}
                 </FormItem>
               );
@@ -93,7 +93,7 @@ const SignupForm = () => {
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('authEmail')}</FormLabel>
+                <FormLabel>{t('e_mail')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -103,7 +103,7 @@ const SignupForm = () => {
                       }}
                       disabled={isPending}
                       type="email"
-                      placeholder="user@example.com"
+                      placeholder={t('e_mail_placeholder')}
                       autoComplete="off"
                       aria-invalid={Boolean(fieldState?.invalid)}
                     />
@@ -114,9 +114,7 @@ const SignupForm = () => {
                     )}
                   </div>
                 </FormControl>
-                {Boolean(fieldState?.error) && (
-                  <FormErrorMassege>{t(`email_validate.${fieldState.error?.message}`)}</FormErrorMassege>
-                )}
+                {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
@@ -142,7 +140,7 @@ const SignupForm = () => {
                     />
                   </div>
                 </FormControl>
-                <FormMessage />
+                {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
@@ -151,10 +149,11 @@ const SignupForm = () => {
 
         <Button
           type="submit"
-          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
+          size={'primery'}
+          className="text-white text-base font-bold leading-6 tracking-normal"
           disabled={isPending}
         >
-          {t('signinTitle')}
+          {t('signupTitle')}
         </Button>
       </form>
     </Form>

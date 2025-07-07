@@ -47,9 +47,9 @@ export default async function AuthCard({
           <AuthSocial />
         </CardFooter>
 
-        <CardFooter className="flex flex-col items-center justify-start p-0 mt-4 gap-4 truncate gap-x-2 tetx-text-slate-700 dark:text-slate-50 text-nowrap">
+        <CardFooter className="flex flex-col items-center justify-start p-0 mt-4 gap-1 truncate tetx-text-slate-700 dark:text-slate-50 text-nowrap">
           {backButtonLabel !== 'authLogin' && forgotButtonHref && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <p className="text-xs  font-bold tracking-normal leading-[16.8px]">{t('forgotTitle')}</p>
               <Button asChild variant={'link'}>
                 <Link
@@ -63,7 +63,7 @@ export default async function AuthCard({
               </Button>
             </div>
           )}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <p className="text-xs font-bold tracking-normal leading-[16.8px]">
               {backButtonLabel === 'authLogin' ? t('authAlreadyHaveAccount') : t('authDontHaveAccount')}
             </p>

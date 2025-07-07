@@ -24,7 +24,7 @@ export async function generateMetadata() {
   };
 }
 
-export default async function VerifyEmail({
+export default async function Verify2FA({
   params,
 }: Readonly<{
   params: Params;

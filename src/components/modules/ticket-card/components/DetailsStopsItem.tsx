@@ -1,4 +1,5 @@
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 
 type Props = {
@@ -17,6 +18,8 @@ type Props = {
 export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { departure_date_time, arrival_date_time, location_name, station_name, station_address } = route;
+  const departureTime = format(departure_date_time || new Date(), 'HH:mm');
+  const arrivalTime = format(arrival_date_time || new Date(), 'HH:mm');
 
   return (
     <div
@@ -25,11 +28,7 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
       <div
         className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px]' : 'text-xs font-bold tracking-normal leading-[18px]'} text-slate-700 dark:text-slate-50 mr-9 min-w-[40px] max-w-[40px]`}
       >
-        {isFirst
-          ? (departure_date_time && departure_date_time?.split(' ')[1].replace(':00', '')) ||
-            (arrival_date_time && arrival_date_time?.split(' ')[1].replace(':00', ''))
-          : (departure_date_time && departure_date_time?.split(' ')[1].replace(':00', '')) ||
-            (arrival_date_time && arrival_date_time?.split(' ')[1].replace(':00', ''))}
+        {isFirst ? departureTime : arrivalTime}
       </div>
 
       <div

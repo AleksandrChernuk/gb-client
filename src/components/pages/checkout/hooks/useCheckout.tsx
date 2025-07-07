@@ -14,12 +14,12 @@ import { z } from 'zod';
 import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas';
 import { getProviderConfigByName } from '../helpers/providerConfig';
 import { createOrder } from '@/actions/orders.actions';
+import { toast } from 'sonner';
 
 function useCheckout() {
   const locale = useLocale();
 
   const [error, setError] = useState<string | null>(null);
-  // const [apiPrice, setApiPrice] = useState<string | null>(null);
 
   const [loading] = useState<boolean>(false);
 
@@ -29,7 +29,6 @@ function useCheckout() {
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
-
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(
@@ -58,6 +57,7 @@ function useCheckout() {
   const onSubmit = async (formData: z.infer<typeof schema>) => {
     if (!ticket || !from || !to) {
       setError('no data');
+      toast.error('no data');
       return;
     }
 
@@ -77,6 +77,55 @@ function useCheckout() {
       console.log('error', error);
     }
   };
+
+  // useEffect(() => {
+  //   const subscription = methods.watch(async (value, { name }) => {
+  //     if (name !== 'payment') return;
+
+  //     const paymentType = value;
+
+  //     if (paymentType === 'PAYMENT_AT_BOARDING') {
+  //       const formData = methods.getValues();
+
+  //       const isValid = await methods.trigger(); // если нужно
+  //       if (!isValid) return;
+
+  //       const { currentOrderId } = useBookingStore.getState();
+
+  //       // Отменяем предыдущий заказ
+  //       if (currentOrderId) {
+  //         try {
+  //           // await cancelOrder(currentOrderId);
+  //           useBookingStore.getState().clearOrder();
+  //         } catch (err) {
+  //           console.error('Ошибка отмены предыдущего заказа', err);
+  //         }
+  //       }
+
+  //       // Создаем новый заказ
+  //       try {
+  //         const newOrder = await createOrder(
+  //           normalizeData({
+  //             from_city_id: from,
+  //             to_city_id: to,
+  //             locale,
+  //             formData,
+  //             route: ticket,
+  //             user,
+  //           }),
+  //         );
+
+  //         useBookingStore.getState().setOrder(newOrder);
+  //         console.log('✅ Новый заказ создан:', newOrder);
+  //       } catch (err) {
+  //         console.error('Ошибка создания нового заказа', err);
+  //       }
+  //     }
+  //   });
+
+  //   return () => subscription.unsubscribe?.();
+  // }, [ticket, from, to, locale, user, methods]);
+
   return { methods, onSubmit, error, loading };
 }
 

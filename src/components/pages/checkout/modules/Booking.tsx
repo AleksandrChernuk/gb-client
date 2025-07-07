@@ -64,6 +64,9 @@ const Booking = memo(function Booking() {
     }));
   }, [selectedTicket]);
 
+  console.log('seatMapWithStatus[1]', seatMapWithStatus[1]);
+  console.log('seatMapWithStatus[0]', seatMapWithStatus[0]);
+
   return (
     <>
       <Sheet>
@@ -121,7 +124,7 @@ const Booking = memo(function Booking() {
             </SheetClose>
           </SheetHeader>
           <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
-            <div className="my-10 flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
 
               {seatMapWithStatus.length >= 2 && (

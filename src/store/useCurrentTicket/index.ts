@@ -49,7 +49,7 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
 
             let res: IRouteDetailsResponse | null = null;
 
-            const blockedDetailsGet = ['EuroClub'];
+            const blockedDetailsGet = ['EUROCLUB'];
             if (blockedDetailsGet.includes(route?.provider_name)) {
               set((state) => {
                 state.tickets[route?.ticket_id] = route;
@@ -67,7 +67,10 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               const rawData = {
                 routeId: route.identificators.route_id,
                 intervalId: route.identificators.intervalId || '',
-                bus_id: route.provider_name === 'Infobus' ? undefined : route.identificators.bus_id,
+                // bus_id: route.provider_name === 'INFOBUS' ? undefined : route.identificators.bus_id,
+                ...(route.provider_name !== 'INFOBUS' && route.identificators.bus_id
+                  ? { bus_id: route.identificators.bus_id }
+                  : {}),
                 fromCityId,
                 toCityId,
                 fromStationId: route.departure.station_id,
@@ -143,7 +146,7 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
 
             let res: IRouteDetailsResponse | null = null;
 
-            const blockedDetailsGet = ['EuroClub'];
+            const blockedDetailsGet = ['EUROCLUB'];
             if (blockedDetailsGet.includes(route?.provider_name)) {
               set((state) => {
                 state.selectedTicket = route;
@@ -161,7 +164,10 @@ export const useCurrentTicket = create<CurrentTicketStore>()(
               const rawData = {
                 routeId: route.identificators.route_id,
                 intervalId: route.identificators.intervalId || '',
-                bus_id: route.provider_name === 'Infobus' ? undefined : route.identificators.bus_id,
+                ...(route.provider_name !== 'INFOBUS' && route.identificators.bus_id
+                  ? { bus_id: route.identificators.bus_id }
+                  : {}),
+                // bus_id: route.provider_name === 'INFOBUS' ? undefined : route.identificators.bus_id,
                 fromCityId,
                 toCityId,
                 fromStationId: route.departure.station_id,

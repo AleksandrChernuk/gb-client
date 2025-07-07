@@ -15,11 +15,12 @@ function FloorSwitch({ floor_first, floor_second }: Props) {
   const [floor, setFloor] = useState<'first' | 'second'>('first');
 
   return (
-    <div className="space-y-4 relative ">
-      <div className="flex items-center justify-between gap-2 sticky top-0 py-2 tablet:py-4 bg-slate-50 dark:bg-slate-900 z-50">
+    <div className="relative ">
+      <div className="grid grid-cols-2 gap-2 sticky top-0 py-2 tablet:py-4 bg-slate-50 dark:bg-slate-900 z-50">
         <Button aria-selected={floor === 'first'} variant={'outline'} onClick={() => setFloor('first')}>
           {t('floor_1')}
         </Button>
+
         <Button aria-selected={floor === 'second'} variant={'outline'} onClick={() => setFloor('second')}>
           {t('floor_2')}
         </Button>

@@ -45,3 +45,66 @@ export interface INewOrder {
   psp_id: string | null;
   return_url: string | null;
 }
+
+// export interface RequestOrderDto {
+//   providerId: string;
+//   routeId?: string;
+//   rideId?: string;
+//   tripId?: string;
+//   intervalId?: string;
+//   busId?: string;
+//   metadata?: unknown;
+//   routeName?: string;
+//   canPaymentToDriver: boolean;
+//   fromCityId: number;
+//   fromCityName: string;
+//   fromCountry: string;
+//   fromStationId: string;
+//   fromStationName: string;
+//   fromStationAddress?: string;
+//   fromStationLat?: number;
+//   fromStationLon?: number;
+//   fromTimezone: string;
+//   toCityId: number;
+//   toCityName: string;
+//   toCountry: string;
+//   toStationId: string;
+//   toStationName: string;
+//   toStationAddress?: string;
+//   toStationLat?: number;
+//   toStationLon?: number;
+//   toTimezone: string;
+//   departureDateTime: string;
+//   arrivalDateTime: string;
+//   platform?: string;
+//   busModel?: string;
+//   busNumber?: string;
+//   transfers?: TransferOrderDto[];
+//   carrierId?: string;
+//   carrierName?: string;
+//   carrierPhone?: string;
+//   insurerId?: string;
+//   insurerName?: string;
+//   insurerAddress?: string;
+//   insurerPhone?: string;
+//   tripType: 'ONEWAY';
+//   eTicket: boolean;
+//   orderType: 'BOOK';
+//   currency: string;
+//   locale: string;
+//   userId?: string;
+//   customerFirstName?: string;
+//   customerLastName?: string;
+//   customerEmail: string;
+//   customerPhone: string;
+//   customerTimezone: string;
+//   automaticDiscountId?: string;
+//   refundRules?: string[];
+//   baggageRules?: string[];
+//   tickets?: RequestTicketDto[];
+// }
+// export interface TransferOrderDto {
+//   transferCity: string;
+//   transferStation?: string;
+//   stopDuration?: string;
+// }

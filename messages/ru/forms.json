@@ -91,6 +91,9 @@
       "number": "Пароль должен содержать хотя бы одну цифру",
       "special": "Пароль должен содержать хотя бы один специальный символ (!@#$%^&*)"
     },
+    "signupTitle": "Регистрация",
+    "signinTitle": "Вход",
+    "forgotTitle": "Забыли пароль?",
     "passwordsDoNotMatch": "Пароли не совпадают",
     "password": "Пароль",
     "password_placeholder": "Пароль",
@@ -103,5 +106,23 @@
     "close": "Закрыть",
 
     "consent_text": "Я подтверждаю, что ознакомился(-лась) с <pp>Политикой конфиденциальности</pp>"
-  }
+  },
+  "authYouCan": "В личном кабинете вы можете:",
+  "authActionsBuy": "Купить забронированный билет",
+  "authActionsReturn": "Вернуть билеты",
+  "authActionsDownload": "Скачать купленный билет",
+  "authActionsReview": "Оставить отзыв о поездке",
+  "auth_terms_of_the": "Условия",
+  "auth_public_offer": "публичной оферты",
+  "auth_and": "и",
+  "auth_returns_policy": "политика возврата.",
+  "auth_google_btn": "Войти через Google",
+  "authName": "Имя",
+  "authEmail": "Электронная почта",
+  "authPassword": "Пароль",
+  "authOr": "Или",
+  "authDontHaveAccount": "Нет аккаунта?",
+  "authAlreadyHaveAccount": "Уже есть аккаунт?",
+  "authCreateAccount": "Создать аккаунт",
+  "authLogin": "Войти"
 }

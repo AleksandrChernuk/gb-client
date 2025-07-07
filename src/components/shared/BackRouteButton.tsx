@@ -5,7 +5,6 @@ import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 export default function BackRouteButton({ className }: { className?: string }) {
@@ -13,14 +12,7 @@ export default function BackRouteButton({ className }: { className?: string }) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-  }, []);
-
   const handleGoBack = () => {
-    window.scrollTo(0, 0);
     router.back();
   };
 

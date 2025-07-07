@@ -17,6 +17,7 @@ import { useUserStore } from '@/store/useUser';
 import { useParams } from 'next/navigation';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { verifyEmail } from '@/actions/auth.service';
+import { toast } from 'sonner';
 
 export default function OtpVerifyForm() {
   const route = useRouter();
@@ -42,11 +43,14 @@ export default function OtpVerifyForm() {
       const { message, currentUser } = result;
 
       if (message !== 'Successfully signin' || !currentUser) {
-        throw new Error('Invalid server response');
+        toast.error('Invalid server response');
+        setIsPending(false);
+        form.reset();
+        return;
       }
 
       useUserStore.getState().setUserStore(currentUser);
-      route.push(`/profile`);
+      route.push(`/profile`, { scroll: true });
     } catch (error) {
       setIsPending(false);
 
@@ -55,6 +59,8 @@ export default function OtpVerifyForm() {
       } else {
         setError(`Verification failed: ${String(error)}`);
       }
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -92,8 +98,10 @@ export default function OtpVerifyForm() {
 
         <Button
           type="submit"
+          variant={'default'}
+          size={'primery'}
           disabled={isPending}
-          className="w-full py-[14px] px-6 tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px]"
+          className="w-full text-white rounded-full text-base font-bold leading-6 tracking-normal"
         >
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('otpVerifyCode')}
         </Button>

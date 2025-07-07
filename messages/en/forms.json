@@ -87,6 +87,9 @@
       "number": "Password must contain at least one number",
       "special": "Password must contain at least one special character (!@#$%^&*)"
     },
+    "signupTitle": "Register",
+    "signinTitle": "Login",
+    "forgotTitle": "Forgot password?",
     "passwordsDoNotMatch": "Passwords do not match",
     "password": "Password",
     "password_placeholder": "Password",
@@ -98,6 +101,24 @@
     "change": "Change",
     "close": "Close",
 
-    "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp>."
+    "consent_text": "I confirm that I have read the <pp>Privacy Policy</pp>.",
+    "authYouCan": "In personal account you can:",
+    "authActionsBuy": "Buy a reserved ticket",
+    "authActionsReturn": "Return tickets",
+    "authActionsDownload": "Download the purchased ticket",
+    "authActionsReview": "Leave a review about the trip",
+    "auth_terms_of_the": "Terms of the",
+    "auth_public_offer": "public offer",
+    "auth_and": "and",
+    "auth_returns_policy": "returns policy.",
+    "auth_google_btn": "Login in with Google",
+    "authName": "Name",
+    "authEmail": "Email",
+    "authPassword": "Password",
+    "authOr": "Or",
+    "authDontHaveAccount": "No account?",
+    "authAlreadyHaveAccount": "Already have an account?",
+    "authCreateAccount": "Create an account",
+    "authLogin": "Login"
   }
 }

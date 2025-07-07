@@ -47,7 +47,7 @@ const MainSearchForm = () => {
     const queryString = query.toString();
 
     startTransition(() => {
-      route.push(`/buses?${queryString}`);
+      route.push(`/buses?${queryString}`, { scroll: true });
     });
   };
   const renderFields = (variant: 'mobile' | 'desktop') => (

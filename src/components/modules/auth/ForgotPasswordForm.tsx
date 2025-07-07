@@ -33,7 +33,7 @@ export default function ForgotPasswordForm() {
     try {
       console.log(values);
       setIsPending(true);
-      route.push('/signin/verify-2FA');
+      route.push(`/signin/verify-2FA/${values.email}`, { scroll: true });
     } catch (error) {
       setIsPending(false);
       setError(error as string);
@@ -66,7 +66,7 @@ export default function ForgotPasswordForm() {
           )}
         />
         <FormError message={error} />
-        <Button type="submit" size={'primery'} disabled={isPending}>
+        <Button type="submit" variant={'default'} size={'secondary'} disabled={isPending} className="w-full">
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('sendResetCode')}
         </Button>
       </form>

@@ -1,7 +1,7 @@
 export interface IStops {
   departure_date_time: string | null;
   arrival_date_time: string | null;
-  stopping_time: string | null;
+  stopping_time: string | null; // h:m
   location: {
     id: string | null;
     name: string | undefined | null;
@@ -18,5 +18,4 @@ export interface IStops {
     lon: number | null;
   };
   bus_changes: boolean | null;
-  bus_changes_duration: string | null;
 }

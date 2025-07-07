@@ -11,12 +11,12 @@ export const passwordShema = z
   .refine((password) => /[a-z]/.test(password), {
     message: 'password_validate.lowercase',
   })
-  .refine((password) => /[0-9]/.test(password), { message: 'number' })
+  .refine((password) => /[0-9]/.test(password), { message: 'password_validate.number' })
   .refine((password) => /[!@#$%^&*]/.test(password), {
     message: 'password_validate.special',
   });
 
-export const emailShema = z.string().trim().min(1, { message: 'required' }).email('password_validate.emailNotValid');
+export const emailShema = z.string().trim().min(1, { message: 'required' }).email('emailNotValid');
 
 export const nameShema = z
   .string()

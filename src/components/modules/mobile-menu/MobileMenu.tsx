@@ -35,11 +35,8 @@ export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader className="justify-between px-4 py-3">
-            <SheetTitle className="sr-only">Edit profile</SheetTitle>
-            <SheetDescription className="sr-only">
-              Make changes to your profile here. Click save when youre done.
-            </SheetDescription>
-
+            <SheetTitle className="sr-only"></SheetTitle>
+            <SheetDescription className="sr-only"></SheetDescription>
             <SheetClose>
               <Logo />
             </SheetClose>
@@ -50,12 +47,12 @@ export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
             </SheetClose>
           </SheetHeader>
           <ScrollArea className="relative w-full mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900 ">
-            <div className="flex flex-col gap-4 p-5">
+            <div className="flex flex-col gap-2 p-5">
               {!isAuthHeader && <ProfileLink variant="mobile" />}
               <Support variant="mobile" />
             </div>
-            <Separator className="h-[1px] bg-[#e6e6e6] dark:bg-slate-700 my-4" />
-            <div className="flex flex-col gap-4 p-5">
+            <Separator className="h-[1px] bg-[#e6e6e6] dark:bg-slate-700 my-2" />
+            <div className="flex flex-col gap-2 p-5">
               <Suspense>
                 <SelectLocale variant="mobile" />
               </Suspense>

@@ -64,8 +64,8 @@ export const Support = ({ variant }: Props) => {
       return (
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger className="py-0 " aria-label={t('mainNavSupportLink')}>
-              <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] py-2">
+            <AccordionTrigger className="py-2" aria-label={t('mainNavSupportLink')}>
+              <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] ">
                 <Phone size={24} className="stroke-primary" />
                 {t('mainNavSupportLink')}
               </div>

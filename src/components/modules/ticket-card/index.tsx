@@ -150,7 +150,7 @@ export const TicketCard = ({ element }: Props) => {
           </div>
           <div
             className={`hidden tablet:block overflow-hidden transition-all duration-100 ${
-              isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+              isOpen ? 'max-h-[4000px] opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
             {isOpen && <Details id={element.ticket_id} />}

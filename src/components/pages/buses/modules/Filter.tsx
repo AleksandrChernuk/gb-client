@@ -91,7 +91,7 @@ export const MobileFilter = () => {
           </div>
         </ScrollArea>
 
-        <SheetFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 ">
+        <SheetFooter className="grid grid-cols-2 gap-2 bg-white dark:bg-slate-800 ">
           <SheetClose asChild>
             <Button
               variant={'outline'}
@@ -101,6 +101,7 @@ export const MobileFilter = () => {
               {t('clear_all')}
             </Button>
           </SheetClose>
+
           <SheetClose asChild>
             <Button variant={'default'} className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]">
               {t('view_trips')}

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDownIcon } from 'lucide-react';
+import { ChevronDownIcon, CircleX } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import { Calendar } from '@/components/ui/calendar';
 import { IconCalendar } from '@/assets/icons/IconCalendar';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
+import { format } from 'date-fns';
 
 type Props = {
   name: string;
@@ -48,11 +49,30 @@ export function DateBirthPicker({ name, config }: Props) {
          aria-invalid:ring-[#de2a1a] dark:aria-invalid:ring-[#de2a1a]
          aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]"
             >
-              <div className="flex gap-2 items-center">
-                <IconCalendar />
-                {value ? value.toLocaleDateString() : config.placeholder ? t_forms(config.placeholder) : ''}
+              <div className="relative flex w-full justify-between">
+                <div className="flex gap-2 items-center">
+                  <IconCalendar />
+                  {value ? value : config.placeholder ? t_forms(config.placeholder) : ''}
+                </div>
+
+                <div>
+                  {value && (
+                    <div
+                      className="absolute right-7 top-0 bottom-0 z-50"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        onChange('');
+                      }}
+                    >
+                      <CircleX className="stroke-red-400" />
+                    </div>
+                  )}
+
+                  <ChevronDownIcon className="stroke-green-300" />
+                </div>
               </div>
-              <ChevronDownIcon />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto overflow-hidden" align="start">
@@ -61,7 +81,9 @@ export function DateBirthPicker({ name, config }: Props) {
               selected={value}
               captionLayout="dropdown"
               onSelect={(date) => {
-                onChange(date);
+                if (date) {
+                  onChange(format(date, 'dd.MM.yyyy'));
+                }
                 setOpen(false);
               }}
               locale={locale}

@@ -24,7 +24,7 @@ export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
     placeholder: 'discounts_placeholder',
     options: (currentTicket?.details?.discounts || []).map((d) => ({
       value: d.id ?? '',
-      label: `${d.description || d.name}`,
+      label: d.name && d.description ? `${d.name}, ${d.description}` : d.name || d.description || '',
       discount_description: d.description ? d.description : undefined,
       discount_percent: d.percent ? `${d.percent}` : undefined,
     })),

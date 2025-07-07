@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
 import { toast } from 'sonner';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Seat from '../components/Seat';
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
 
 const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
   const { control } = useFormContext();
+  const [loadingSeatId, setLoadingSeatId] = useState<string | null>(null);
 
   const [selectedSeats, passengers] = useWatch({
     control,
@@ -26,29 +27,36 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
   });
 
   const handleSetSeats = (seat: ISeat | null) => {
-    if (!seat) {
-      return;
-    }
+    if (!seat) return;
+
     const isSelectedIndex = selectedSeats.findIndex(
       (el: ISeat) => (seat.id && el.id === seat.id) || (seat.number && el.number === seat.number),
     );
 
+    setLoadingSeatId(seat.id ?? null);
+
     if (isSelectedIndex !== -1) {
       remove(isSelectedIndex);
+      setTimeout(() => {
+        setLoadingSeatId(null);
+      }, 1000);
       return;
     }
 
     if (selectedSeats.length < passengersCount) {
       append(seat);
+      setTimeout(() => {
+        setLoadingSeatId(null);
+      }, 1000);
       return;
     }
-    toast.error('Form Submitted:', {
-      description: 'Max lengs',
-    });
+
+    setLoadingSeatId(null);
+    toast.error('Место выбрано');
   };
 
   return (
-    <div className="mx-auto mb-10 last:mb-0 w-fit">
+    <div className="mx-auto mt-5 mb-10 w-fit">
       <ul className="flex flex-col gap-4 px-2 tablet:px-4 py-4 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-[50px]">
         {helm && (
           <li className="pb-4 border border-b-slate-200 dark:border-b-slate-700 w-fit">
@@ -66,6 +74,7 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
                   key={`${rowIndex}-${seatIndex}`}
                   seat_number={seat.number}
                   available={seat.type === 'SEAT' && seat.status === 'FREE'}
+                  loading={loadingSeatId === seat.id}
                   isFree={seat.status === 'FREE'}
                   //@ts-ignore
                   isSelected={selectedSeats.some(

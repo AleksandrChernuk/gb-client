@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 outline-none aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 outline-none aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -13,7 +13,7 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
-          'w-full h-auto p-1 border border-slate-200 bg-inherit text-slate-700 dark:text-slate-50 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 aria-selected:bg-green-300 aria-selected:text-white',
+          'w-full h-auto border border-slate-200 bg-inherit text-slate-700 dark:text-slate-50 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 aria-selected:bg-green-300 aria-selected:text-white',
         secondary: 'bg-green-600 text-black text-sm font-bold leading-[16.8px] hover:bg-green-600/80',
         ghost: '',
         link: 'text-primary underline-offset-4 hover:underline',

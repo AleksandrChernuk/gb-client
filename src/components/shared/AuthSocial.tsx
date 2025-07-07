@@ -13,7 +13,8 @@ const AuthSocial = () => {
         <Button
           variant={'outline'}
           type="button"
-          className="w-full py-[14px] px-6 tablet:py-4 gap-4 text-black border-black rounded-full text-base font-bold leading-6 tracking-normal dark:text-slate-50 dark:border-inherit max-h-[48px] tablet:max-h-[52px]"
+          size={'primery'}
+          className="text-black border-black text-base font-bold leading-6 tracking-normal dark:text-slate-50 dark:border-inherit"
         >
           <div className="w-6 h-6">
             <IconGoogle />

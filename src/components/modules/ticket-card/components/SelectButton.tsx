@@ -22,7 +22,7 @@ export default function SelectButton({
         <Button
           {...props}
           variant={'default'}
-          className="w-full text-amber-50  py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl "
+          className="w-full text-amber-50 py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl "
         >
           {loading ? (
             <LoaderCircle className="animate-spin" size={16} />
@@ -39,7 +39,7 @@ export default function SelectButton({
       return (
         <Button
           {...props}
-          variant={'default'}
+          size={'primery'}
           className="w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] text-[12px] font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full [&_svg]:shrink-0"
         >
           {loading ? <LoaderCircle className="animate-spin" /> : buttonText}

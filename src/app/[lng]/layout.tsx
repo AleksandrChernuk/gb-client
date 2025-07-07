@@ -56,7 +56,7 @@ export default async function MainLayout({
             <LocationsInitializer />
             <SearchParamsSyncer />
           </ReactQueryContext>
-          <Toaster position="top-center" />
+          <Toaster richColors position="top-center" />
         </body>
       </html>
     </NextIntlClientProvider>

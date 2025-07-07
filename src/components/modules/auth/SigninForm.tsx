@@ -19,7 +19,7 @@ import { useUserStore } from '@/store/useUser';
 import { signin } from '@/actions/auth.service';
 
 const SigninForm = () => {
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t = useTranslations(MESSAGE_FILES.FORM);
   const locale = useLocale();
   const router = useRouter();
 
@@ -92,9 +92,7 @@ const SigninForm = () => {
                     )}
                   </div>
                 </FormControl>
-                {Boolean(fieldState?.error) && (
-                  <FormErrorMassege>{t(`email_validate.${fieldState.error?.message}`)}</FormErrorMassege>
-                )}
+                {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
@@ -121,9 +119,7 @@ const SigninForm = () => {
                     />
                   </div>
                 </FormControl>
-                {Boolean(fieldState?.error) && (
-                  <FormErrorMassege>{t(`password_validate.${fieldState.error?.message}`)}</FormErrorMassege>
-                )}
+                {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
@@ -133,6 +129,7 @@ const SigninForm = () => {
 
         <Button
           type="submit"
+          size={'primery'}
           className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
           disabled={isPending}
         >

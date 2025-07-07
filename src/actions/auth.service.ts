@@ -41,7 +41,7 @@ export async function verifyEmail(data: TypeVerifyCode) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'Verify failed');
+      return { message: errorData.message || 'Verify failed' };
     }
 
     const result = await response.json();

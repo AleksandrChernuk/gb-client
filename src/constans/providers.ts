@@ -1,8 +1,8 @@
 export const providersList = {
-  OCTOBUS: 'Octobus',
-  INFOBUS: 'Infobus',
+  OCTOBUS: 'OCTOBUS',
+  INFOBUS: 'INFOBUS',
   KLR: 'KLR',
   EWE: 'EWE',
-  TRANS_TEMPO: 'TransTempo',
-  EURO_CLUB: 'EuroClub',
+  TRANS_TEMPO: 'TRANSTEMPO',
+  EURO_CLUB: 'EUROCLUB',
 };
