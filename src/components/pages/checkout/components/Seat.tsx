@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { LoaderIcon, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import IconSeat from '../icons/IconSeat';
 
 type Props = {
@@ -9,10 +9,9 @@ type Props = {
   available?: boolean;
   isSelected?: boolean;
   onClick: () => void;
-  loading?: boolean;
 };
 
-export default function Seat({ seat_number, className, isSelected, isFree, available, onClick, loading }: Props) {
+export default function Seat({ seat_number, className, isSelected, isFree, available, onClick }: Props) {
   return (
     <div
       role="button"
@@ -31,19 +30,11 @@ export default function Seat({ seat_number, className, isSelected, isFree, avail
       <IconSeat />
       <div
         className={cn(
-          '-mt-10 text-base font-medium leading-4 tracking-normal text-[#6f8b90] dark:text-slate-50',
+          '-mt-10 text-sm tablet:text-base font-medium leading-4 tracking-normal text-[#6f8b90] dark:text-slate-50',
           isSelected && 'text-green-100 dark:text-green-100',
         )}
       >
-        {isFree ? (
-          loading ? (
-            <LoaderIcon className=" animate-spin" />
-          ) : (
-            seat_number
-          )
-        ) : (
-          <X className="stroke-slate-200 dark:stroke-slate-700" />
-        )}
+        {isFree ? seat_number : <X className="stroke-slate-200 dark:stroke-slate-700" />}
       </div>
     </div>
   );

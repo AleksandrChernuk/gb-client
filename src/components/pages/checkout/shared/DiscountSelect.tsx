@@ -1,3 +1,5 @@
+'use client';
+
 import { FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectGroup } from '@/components/ui/select';
 import { useController, useFormContext } from 'react-hook-form';
@@ -5,6 +7,7 @@ import { memo } from 'react';
 import { FieldConfig } from '../helpers/providerConfig/types';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { X } from 'lucide-react';
 
 type Props = {
   name: string;
@@ -51,13 +54,30 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
       <FormLabel className="mb-2 text-sm font-normal tracking-normal leading-[21px]">{t_forms(config.label)}</FormLabel>
       <div className="flex items-center gap-2">
         <FormItem className="w-full ">
-          <Select onValueChange={handleDiscountChange} value={field.value || ''} defaultValue="none">
+          <Select onValueChange={handleDiscountChange} value={field.value || ''}>
             <SelectTrigger
-              className=" w-full mb-0 "
+              className="w-full mb-0 "
               size="full"
               aria-invalid={!!error}
-              onReset={() => {}}
               value={field.value}
+              clear={
+                field.value && (
+                  <div
+                    className="absolute right-10 top-0 bottom-0 z-50 cursor-pointer flex items-center"
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+
+                      setValue(`passengers.${i}.discount_id`, '');
+                      setValue(`passengers.${i}.discount_description`, '');
+                      setValue(`passengers.${i}.discount_percent`, undefined);
+                      field.onChange('');
+                    }}
+                  >
+                    <X className="stroke-green-300" size={20} />
+                  </div>
+                )
+              }
             >
               {config.options.find((opt) => opt.value === field.value)?.label ||
                 t_forms(config.placeholder!) ||
@@ -65,9 +85,6 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
             </SelectTrigger>
             <SelectContent className="w-full">
               <SelectGroup>
-                <SelectItem key="none" value="none">
-                  Clear
-                </SelectItem>
                 {config.options.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}

@@ -42,25 +42,28 @@ export interface IRequestOrder {
   canPaymentToDriver: boolean;
   fromCityId: number;
   fromCityName: string;
-  toCityId: number;
-  toCityName: string;
+  fromCountry: string;
   fromStationId: string;
   fromStationName: string;
+  fromStationAddress?: string;
   fromStationLat?: number;
   fromStationLon?: number;
+  fromTimezone: string;
+  toCityId: number;
+  toCityName: string;
+  toCountry: string;
   toStationId: string;
   toStationName: string;
+  toStationAddress?: string;
   toStationLat?: number;
   toStationLon?: number;
+  toTimezone: string;
   departureDateTime: string;
   arrivalDateTime: string;
   platform?: string;
   busModel?: string;
   busNumber?: string;
-  transferCity?: string;
-  transferStation?: string;
-  transferDeparture?: string;
-  transferArrival?: string;
+  transfers?: ITransfer[];
   carrierId?: string;
   carrierName?: string;
   carrierPhone?: string;
@@ -69,16 +72,33 @@ export interface IRequestOrder {
   insurerAddress?: string;
   insurerPhone?: string;
   tripType: 'oneway';
+  eTicket: boolean;
   orderType: 'BOOK' | 'PAYMENT_AT_BOARDING';
   currency: string;
   locale: string;
   userId?: string;
-  customerFirstName: string;
-  customerLastName: string;
+  customerFirstName?: string;
+  customerLastName?: string;
   customerEmail: string;
   customerPhone: string;
+  customerTimezone: string;
   automaticDiscountId?: string;
   refundRules?: string[];
   baggageRules?: string[];
   tickets?: RequestTicket[];
+}
+
+export interface ITransfer {
+  transferCity: string;
+  transferStation?: string;
+  stopDuration?: string;
+}
+
+export interface IOrderResponse {
+  totalAmount: number;
+  currency: string;
+  providerId: string;
+  orderId: string;
+  locale: string;
+  customerEmail: string;
 }

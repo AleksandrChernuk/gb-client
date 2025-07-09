@@ -37,7 +37,7 @@ export default function TicketRoute({ route }: Props) {
           <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_from}</div>
             <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
-              {(duration && `${duration[0]}:${duration[1]}`) || ''}
+              {(duration && route.duration) || ''}
             </div>
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_to}</div>
           </div>

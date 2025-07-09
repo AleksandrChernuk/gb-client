@@ -48,6 +48,7 @@ export default function useCreateOrder() {
           user,
         }),
       );
+
       if (res.status === 'error') {
         toast.error('error');
         setLoadingResult(false);

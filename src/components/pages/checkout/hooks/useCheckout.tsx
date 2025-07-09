@@ -13,12 +13,11 @@ import normalizeData from '../helpers/normalizeData';
 import { z } from 'zod';
 import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas';
 import { getProviderConfigByName } from '../helpers/providerConfig';
-import { createOrder } from '@/actions/orders.actions';
 import { toast } from 'sonner';
+import { createOrder } from '@/actions/orders.actions';
 
 function useCheckout() {
   const locale = useLocale();
-
   const [error, setError] = useState<string | null>(null);
 
   const [loading] = useState<boolean>(false);
@@ -125,7 +124,7 @@ function useCheckout() {
 
   //   return () => subscription.unsubscribe?.();
   // }, [ticket, from, to, locale, user, methods]);
-
+  console.log(methods.getValues());
   return { methods, onSubmit, error, loading };
 }
 

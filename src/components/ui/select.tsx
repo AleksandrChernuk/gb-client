@@ -22,19 +22,19 @@ function SelectTrigger({
   className,
   size = 'default',
   children,
-
+  clear,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default' | 'full';
-  onClear?: () => void;
   value?: string | null;
+  clear?: React.ReactNode;
 }) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "px-2 py-3 w-[20] rounded-md border border-slate-200 dark:border-slate-700 dark:hover:bg-black  dark:hover:border-slate-700 dark:focus:bg-slate-600 dark:focus:border-slate-900  text-sm font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-50 hover:bg-slate-50 hover:border-slate-200 focus:border-slate-700 focus:bg-white data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground aria-invalid:border-red-400 dark:bg-input/30 flex  items-center justify-between gap-2  bg-transparent whitespace-nowrap transition-[color,box-shadow] outline-none  disabled:cursor-not-allowed disabled:opacity-50 data-[size=full]:h-auto data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6",
+        "relative z-10 px-2 py-3 w-[20] rounded-md border border-slate-200 dark:border-slate-700 dark:hover:bg-black  dark:hover:border-slate-700 dark:focus:bg-slate-600 dark:focus:border-slate-900  text-sm font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-50 hover:bg-slate-50 hover:border-slate-200 focus:border-slate-700 focus:bg-white data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground aria-invalid:border-red-400 dark:bg-input/30 flex  items-center justify-between gap-2  bg-transparent whitespace-nowrap transition-[color,box-shadow] outline-none  disabled:cursor-not-allowed disabled:opacity-50 data-[size=full]:h-auto data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6",
         'aria-invalid:ring-[#de2a1a] dark:aria-invalid:ring-[#de2a1a]',
         'aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]',
         className,
@@ -42,6 +42,8 @@ function SelectTrigger({
       {...props}
     >
       {children}
+
+      {clear && clear}
 
       <SelectPrimitive.Icon asChild>
         <ChevronDownIcon className="size-6 opacity-50" />

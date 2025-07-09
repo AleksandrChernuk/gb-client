@@ -9,6 +9,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import countryList from 'react-select-country-list';
 import { FieldConfig } from '../helpers/providerConfig/types';
 import { FormErrorMassege } from '@/components/ui/form-error';
+import { X } from 'lucide-react';
 
 type Props = {
   name: string;
@@ -35,7 +36,26 @@ function CountrySelector({ name, config }: Props) {
       <FormLabel className="mb-2 text-sm font-normal leading-[21px]">{t(config.label)}</FormLabel>
       <FormControl>
         <Select value={value} onValueChange={onChange}>
-          <SelectTrigger className="w-full" size="full" aria-invalid={!!error}>
+          <SelectTrigger
+            className="w-full"
+            size="full"
+            aria-invalid={!!error}
+            clear={
+              value && (
+                <div
+                  className="absolute right-7 top-0 bottom-0 z-50 cursor-pointer flex items-center"
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    value.onChange('');
+                  }}
+                >
+                  <X className="stroke-green-300" size={20} />
+                </div>
+              )
+            }
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

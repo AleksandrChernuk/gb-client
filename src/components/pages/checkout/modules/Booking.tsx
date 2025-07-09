@@ -123,7 +123,7 @@ const Booking = memo(function Booking() {
               </Button>
             </SheetClose>
           </SheetHeader>
-          <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
+          <ScrollArea className="relative w-full px-2 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
             <div className="flex flex-col gap-2">
               {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
 

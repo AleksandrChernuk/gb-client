@@ -7,14 +7,12 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
 import { useCurrentTicket } from '@/store/useCurrentTicket';
-import useCreateOrder from '../hooks/useCreateOrder';
 import { useOrderResult } from '@/store/useOrderResult';
 
 const Payment = () => {
-  const { control, trigger } = useFormContext();
+  const { control } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  const { createNewOrder } = useCreateOrder();
   const loadingResult = useOrderResult((state) => state.loadingResult);
 
   return (
@@ -30,11 +28,8 @@ const Payment = () => {
             <RadioGroup
               disabled={loadingResult}
               value={field.value}
-              onValueChange={async (value) => {
-                const isValid = await trigger(['passengers', 'email', 'phone', 'selected_seats']);
-                if (!isValid) return;
+              onValueChange={(value) => {
                 field.onChange(value);
-                await createNewOrder();
               }}
               defaultValue={field.value}
               className="flex flex-col "

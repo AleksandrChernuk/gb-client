@@ -12,7 +12,7 @@ const SubmitButton = memo(function SubmitButton({ loading }: { loading: boolean 
   const paymentType = useWatch({ control, name: 'payment' });
 
   return (
-    <Button variant="default" className="w-full p-4" type="submit">
+    <Button variant="default" className="w-full" size={'primery'} type="submit">
       {loading ? loading : paymentType === 'BOOK' ? t('pay') : t('book')}
     </Button>
   );

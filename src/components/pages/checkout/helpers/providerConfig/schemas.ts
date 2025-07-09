@@ -2,25 +2,28 @@ import { z, ZodTypeAny } from 'zod';
 
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { FieldConfig, ProviderConfig } from './types';
-import { parse, isValid, isBefore, subWeeks, subDays, isAfter } from 'date-fns';
+import { parse, isValid, isBefore, subYears, subDays, isAfter, endOfDay } from 'date-fns';
 
-export const bdaySchema = z.string().refine(
-  (value) => {
-    if (!value) return true;
-    const [day, month, year] = value.split('/');
-    if (!day || !month || !year) return false;
-    const date = parse(`${day}.${month}.${year}`, 'dd.MM.yyyy', new Date());
-    if (!isValid(date)) return false;
+export const bdaySchema = z
+  .string()
+  .optional()
+  .refine(
+    (value) => {
+      if (!value) return true;
+      const date = parse(value, 'dd.MM.yyyy', new Date());
+      if (!isValid(date)) return false;
+      const now = new Date();
+      const minDate = subYears(now, 100);
+      const maxDate = endOfDay(now);
 
-    const now = new Date();
-    const minDate = subWeeks(now, 52 * 80);
-    const maxDate = subWeeks(now, 1);
-    return isBefore(minDate, date) && isBefore(date, maxDate);
-  },
-  {
-    message: 'invalid_date',
-  },
-);
+      return isAfter(date, minDate) && !isAfter(date, maxDate);
+
+      return isBefore(minDate, date) === false && isBefore(date, maxDate);
+    },
+    {
+      message: 'invalid_date',
+    },
+  );
 
 export const passportExpirySchema = (departureDate: Date) =>
   z
@@ -28,14 +31,12 @@ export const passportExpirySchema = (departureDate: Date) =>
     .min(1, { message: 'required' })
     .refine(
       (value) => {
-        const [day, month, year] = value.split('/');
-        if (!day || !month || !year) return false;
+        const date = parse(value, 'dd.MM.yyyy', new Date());
 
-        const parsed = parse(`${day}.${month}.${year}`, 'dd.MM.yyyy', new Date());
-        if (!isValid(parsed)) return false;
+        if (!isValid(date)) return false;
 
         const limitDate = subDays(departureDate, 7);
-        return isAfter(parsed, limitDate);
+        return isAfter(date, limitDate);
       },
       {
         message: 'invalid_date',

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDownIcon, CircleX } from 'lucide-react';
+import { ChevronDownIcon,   X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -13,13 +13,17 @@ import { useTranslations } from 'next-intl';
 import { Calendar } from '@/components/ui/calendar';
 import { IconCalendar } from '@/assets/icons/IconCalendar';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
-import { format } from 'date-fns';
+import { format, isBefore, isValid, parse, subDays, subYears } from 'date-fns';
 
 type Props = {
   name: string;
   config: FieldConfig;
 };
-
+function parseDate(value: string): Date | undefined {
+  if (!value) return undefined;
+  const date = parse(value, 'dd.MM.yyyy', new Date());
+  return isValid(date) ? date : undefined;
+}
 export function DateBirthPicker({ name, config }: Props) {
   const { locale } = useDateLocale();
   const { control } = useFormContext();
@@ -33,8 +37,20 @@ export function DateBirthPicker({ name, config }: Props) {
     control,
   });
 
-  const [open, setOpen] = React.useState(false);
+  const date = parse(value, 'dd.MM.yyyy', new Date());
 
+  console.log('date', date);
+
+  const now = new Date();
+  console.log('subDays(now, 1)', subDays(now, 1));
+
+  console.log('subYears(now, 80)', subYears(now, 80));
+  console.log(
+    'isBefore(minDate, date) === false && isBefore(date, maxDate)',
+    isBefore(subYears(now, 80), date) === false && isBefore(date, subDays(now, 1)),
+  );
+  const [open, setOpen] = React.useState(false);
+  console.log(value);
   return (
     <FormItem>
       <FormLabel>{t_forms(config.label)}</FormLabel>
@@ -52,21 +68,20 @@ export function DateBirthPicker({ name, config }: Props) {
               <div className="relative flex w-full justify-between">
                 <div className="flex gap-2 items-center">
                   <IconCalendar />
-                  {value ? value : config.placeholder ? t_forms(config.placeholder) : ''}
+                  {value ? value : t_forms(config.placeholder || '')}
                 </div>
 
                 <div>
                   {value && (
                     <div
-                      className="absolute right-7 top-0 bottom-0 z-50"
+                      className="absolute right-10 top-0 bottom-0 z-50 cursor-pointer"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-
                         onChange('');
                       }}
                     >
-                      <CircleX className="stroke-red-400" />
+                      <X className="stroke-green-300" size={24} />
                     </div>
                   )}
 
@@ -78,7 +93,7 @@ export function DateBirthPicker({ name, config }: Props) {
           <PopoverContent className="w-auto overflow-hidden" align="start">
             <Calendar
               mode="single"
-              selected={value}
+              selected={parseDate(value)}
               captionLayout="dropdown"
               onSelect={(date) => {
                 if (date) {
