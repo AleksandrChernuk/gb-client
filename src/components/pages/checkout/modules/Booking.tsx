@@ -13,20 +13,20 @@ import {
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
 import IconSeat from '../icons/IconSeat';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import FloorSheet from '../components/FloorSwitch';
 import { useController, useFormContext, useWatch } from 'react-hook-form';
-import { memo, useMemo } from 'react';
-import { TypeSeatsMap } from '@/types/seat.interface';
+import { memo } from 'react';
 import SeatsList from '../shared/SeatsList';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
+import { seatsMaper } from '../helpers/seatMaper';
 
 const Booking = memo(function Booking() {
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicket((state) => state.isHydrated);
+  const selectedTicket = useSelectedTickets((state) => state.selectedTicket);
+  const isHydrated = useSelectedTickets((state) => state.isHydrated);
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
@@ -41,38 +41,18 @@ const Booking = memo(function Booking() {
 
   const passengers = useWatch({ control, name: 'passengers' });
 
-  const seatMapWithStatus: TypeSeatsMap[] = useMemo(() => {
-    const seatsMap = selectedTicket?.details?.seats_map;
-    const freeSeats = selectedTicket?.details?.free_seats_map;
-
-    if (!Array.isArray(seatsMap) || !Array.isArray(freeSeats)) return [];
-
-    return seatsMap.map((floor) => ({
-      ...floor,
-      seats: floor.seats.map((row) =>
-        row.map((seat) => {
-          const isFree = freeSeats.some(
-            (free) => (seat.id && seat.id === free.seat_id) || (seat.number && seat.number === free.seat_number),
-          );
-
-          return {
-            ...seat,
-            status: isFree ? 'FREE' : 'BUSY',
-          };
-        }),
-      ),
-    }));
-  }, [selectedTicket]);
-
-  console.log('seatMapWithStatus[1]', seatMapWithStatus[1]);
-  console.log('seatMapWithStatus[0]', seatMapWithStatus[0]);
+  const seatMapWithStatus = seatsMaper({
+    seatsMap: selectedTicket?.details?.seats_map,
+    freeSeats: selectedTicket?.details?.free_seats_map,
+    providerName: selectedTicket?.provider_name,
+  });
 
   return (
     <>
       <Sheet>
         <SheetTrigger asChild>
           <Button
-            disabled={!selectedTicket?.details?.seats_map}
+            disabled={!seatMapWithStatus.length}
             variant={'outline'}
             type="button"
             aria-invalid={Boolean(error)}
@@ -85,7 +65,7 @@ const Booking = memo(function Booking() {
 
               {isHydrated ? (
                 <div className="text-xs tablet:text-base font-medium leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink-1">
-                  {!selectedTicket?.details?.seats_map ? (
+                  {!seatMapWithStatus.length ? (
                     <div className="flex flex-col items-start gap-1">
                       <span>{t_page('free_seating')}</span>
                       <span className="text-base font-medium leading-4 tracking-normal">

@@ -95,7 +95,7 @@ export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, has
           },
           { message: 'invalid_number' },
         ),
-      payment: z.enum(['BOOK', 'PAYMENT_AT_BOARDING', '']),
+      payment: z.enum(['BOOK', 'PAYMENT_AT_BOARDING']),
       accept_rules: z.boolean().refine((v) => v === true, { message: 'required' }),
       selected_seats: z.array(seatSchema).optional(),
     })

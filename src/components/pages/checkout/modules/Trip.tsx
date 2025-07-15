@@ -1,16 +1,16 @@
 'use client';
 
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useLocale } from 'next-intl';
 import { format } from 'date-fns';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import Image from 'next/image';
 import arrow from '@/assets/icons/arrow-mobile.svg';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 export default function Trip() {
-  const selectedTicket = useCurrentTicket((state) => state.selectedTicket);
-  const isHydrated = useCurrentTicket((state) => state.isHydrated);
+  const selectedTicket = useSelectedTickets((state) => state.selectedTicket);
+  const isHydrated = useSelectedTickets((state) => state.isHydrated);
 
   const locale = useLocale();
 

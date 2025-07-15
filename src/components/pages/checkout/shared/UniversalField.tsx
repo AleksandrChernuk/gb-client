@@ -2,7 +2,7 @@ import { memo } from 'react';
 import TextInput from './TextInput';
 import UniversalSelect from './UniversalSelect';
 import { FieldConfig } from '../helpers/providerConfig/types';
-import CountrySelector from './CountrySelector';
+import CitizenshipSelect from './CitizenshipSelect';
 import DiscountSelect from './DiscountSelect';
 import { DateBirthPicker } from './DateBirthPicker';
 
@@ -25,7 +25,7 @@ const UniversalField = memo(function UniversalField({ name, config, i }: Props) 
       return <DateBirthPicker name={name} config={config} />;
 
     case 'citizenship':
-      return <CountrySelector name={name} config={config} />;
+      return <CitizenshipSelect name={name} config={config} />;
 
     case 'discount':
       return <DiscountSelect i={i} name={name} config={config} />;

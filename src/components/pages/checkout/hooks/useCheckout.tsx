@@ -1,6 +1,5 @@
 'use client';
 
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useUserStore } from '@/store/useUser';
 import { useMemo, useState } from 'react';
@@ -15,6 +14,7 @@ import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas'
 import { getProviderConfigByName } from '../helpers/providerConfig';
 import { toast } from 'sonner';
 import { createOrder } from '@/actions/orders.actions';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 function useCheckout() {
   const locale = useLocale();
@@ -26,7 +26,7 @@ function useCheckout() {
   const children = useSearchStore(useShallow((state) => state.children));
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
-  const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
+  const ticket = useSelectedTickets(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
@@ -35,6 +35,8 @@ function useCheckout() {
     [adult, children, providerConfig, ticket?.ticket_pricing.base_price],
   );
 
+  console.log(ticket?.details?.free_seats_map);
+  console.log(!!ticket?.details?.free_seats_map?.length);
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map?.length),
     [providerConfig, ticket],
@@ -45,7 +47,7 @@ function useCheckout() {
     defaultValues: {
       passengers: defaultPassengers,
       email: '',
-      payment: '',
+      payment: 'BOOK',
       accept_rules: false,
       phone: '',
       selected_seats: [],

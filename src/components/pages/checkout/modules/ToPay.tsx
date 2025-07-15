@@ -1,4 +1,3 @@
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -7,11 +6,12 @@ import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Passenger } from '../types';
 import { getTotalPriceFromPassengers } from '../helpers/getTotalPriceFromPassengers';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 const ToPay = memo(function ToPay() {
   const adult = useSearchStore((state) => state.adult);
   const children = useSearchStore((state) => state.children);
-  const isHydrated = useCurrentTicket((state) => state.isHydrated);
+  const isHydrated = useSelectedTickets((state) => state.isHydrated);
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
 

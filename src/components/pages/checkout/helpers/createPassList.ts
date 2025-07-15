@@ -30,6 +30,6 @@ export function createPassengers(
   price: number,
 ) {
   return Array.from({ length: adultCount + childCount }).map((_, i) =>
-    createEmptyPassenger(providerConfig, i >= adultCount, price),
+    createEmptyPassenger(providerConfig, i >= adultCount, Math.round(price)),
   );
 }

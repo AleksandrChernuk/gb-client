@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, StorageValue } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface TimerState {
   startedAt: number | null;
@@ -30,29 +30,8 @@ export const useTimerStore = create<TimerState>()(
     }),
     {
       name: 'checkout-timer',
-      storage: {
-        getItem: (name) => {
-          const item = localStorage.getItem(name);
-          if (!item) return null;
-          try {
-            return JSON.parse(item) as StorageValue<TimerState>;
-          } catch (error) {
-            console.log(error);
-            localStorage.removeItem(name);
-            return null;
-          }
-        },
-        setItem: (name, value) => {
-          try {
-            localStorage.setItem(name, JSON.stringify(value));
-          } catch (error) {
-            console.log(error);
-          }
-        },
-        removeItem: (name) => {
-          localStorage.removeItem(name);
-        },
-      },
+      storage: createJSONStorage(() => sessionStorage),
+
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
       },

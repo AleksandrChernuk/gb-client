@@ -1,10 +1,10 @@
 'use client';
 
-import { useCurrentTicket } from '@/store/useCurrentTicket';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useEffect } from 'react';
 
 function CleatLocal() {
-  const resetCurrentTicket = useCurrentTicket((state) => state.resetCurrentTicket);
+  const resetCurrentTicket = useSelectedTickets((state) => state.resetSelectedTicket);
 
   useEffect(() => {
     return () => {

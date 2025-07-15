@@ -18,7 +18,7 @@ const PassengerCard = memo(function PassengerCard({ i, providerConfig }: Props) 
             return (
               <UniversalField
                 i={i}
-                key={fieldName}
+                key={`${fieldName}-${i + 1}`}
                 name={`passengers.${i}.${fieldName}`}
                 config={providerConfig.fields[fieldName]}
               />

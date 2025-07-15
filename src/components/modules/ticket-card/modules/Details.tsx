@@ -1,4 +1,5 @@
-import { useCurrentTicket } from '@/store/useCurrentTicket';
+'use client';
+
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
@@ -11,6 +12,7 @@ import { toArray } from '@/utils/toArray';
 import { MainLoader } from '@/components/shared/MainLoader';
 import SwiperImages from '@/components/shared/SwiperImages';
 import useDateLocale from '@/hooks/useDateLocale';
+import { useTicketsDetails } from '@/store/useTicketsDetails';
 
 type Props = {
   id: string;
@@ -21,11 +23,10 @@ export default function Details({ id }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { locale: dateLocale } = useDateLocale();
 
-  const ticketDetails = useCurrentTicket((state) => state.tickets[id]);
-  const loadingDetails = useCurrentTicket((state) => state.loadingTickets);
-  const isLoading = loadingDetails[id];
+  const ticketDetails = useTicketsDetails((state) => state.ticketDetailsMap[id]);
 
-  if (isLoading)
+  const loadingMap = useTicketsDetails((state) => state.loadingMap);
+  if (loadingMap[id])
     return (
       <div className="pt-10 flex items-center justify-center ">
         <MainLoader />

@@ -1,7 +1,6 @@
 'use client';
 
 import { createOrder } from '@/actions/orders.actions';
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import { useSearchStore } from '@/store/useSearch';
 import { useUserStore } from '@/store/useUser';
 import { useShallow } from 'zustand/react/shallow';
@@ -10,6 +9,7 @@ import { useLocale } from 'next-intl';
 import { toast } from 'sonner';
 import { useFormContext } from 'react-hook-form';
 import { useOrderResult } from '@/store/useOrderResult';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 export default function useCreateOrder() {
   const locale = useLocale();
@@ -17,7 +17,7 @@ export default function useCreateOrder() {
 
   const from = useSearchStore(useShallow((state) => state.from?.id));
   const to = useSearchStore(useShallow((state) => state.to?.id));
-  const ticket = useCurrentTicket(useShallow((state) => state.selectedTicket));
+  const ticket = useSelectedTickets(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
   const setInitiatePayment = useOrderResult((state) => state.setInitiatePayment);
   const initiatePayment = useOrderResult((state) => state.initiatePayment);

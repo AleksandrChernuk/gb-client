@@ -3,7 +3,6 @@
 import { useState, useTransition } from 'react';
 import { IRouteResponse } from '@/types/route.types';
 import { useTranslations } from 'next-intl';
-import { useCurrentTicket } from '@/store/useCurrentTicket';
 import useTicketCard from './hooks/useTicketCard';
 import MobileDetails from './modules/MobileDetails';
 import { Button } from '@/components/ui/button';
@@ -16,6 +15,8 @@ import TicketRoute from './components/TicketRoute';
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import TickedCard from './components/TickedCard';
+import { useTicketsDetails } from '@/store/useTicketsDetails';
+import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 type Props = {
   element: IRouteResponse;
@@ -26,8 +27,8 @@ export const TicketCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { handleGetDetails, handleSetTicket } = useTicketCard();
-  const [tickets] = useCurrentTicket(useShallow((state) => [state.tickets]));
-  const loadingSelectTicket = useCurrentTicket(useShallow((state) => state.loadingSelectTicket));
+  const [tickets] = useTicketsDetails(useShallow((state) => [state.ticketDetailsMap]));
+  const loadingSelectTicket = useSelectedTickets(useShallow((state) => state.loadingSelectTicket));
 
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
@@ -36,8 +37,8 @@ export const TicketCard = ({ element }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const handleSelect = () => {
-    if (isPending || loadingSelectTicket) return;
-
+    if (loadingSelectTicket) return;
+    console.log('loadingSelectTicket');
     if (!element.ticket_pricing.base_price) return;
     startTransition(async () => {
       try {
@@ -93,11 +94,13 @@ export const TicketCard = ({ element }: Props) => {
               </span>
             </div>
 
-            <div className="hidden justify-self-center tablet:flex items-start gap-0.5 tablet:order-3 tablet:justify-self-end">
-              <span className="break-all text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-                <span className="text-slate-400 dark:text-slate-200">{t('places')}:</span>
-                {element.seats.free_seats || 0}
+            <div className="hidden justify-self-center tablet:flex items-center gap-0.5 tablet:order-3 tablet:justify-self-end">
+              <span className="text-slate-400 dark:text-slate-200 text-xs font-normal tracking-normal leading-[18px]">
+                {t('places')}:
               </span>
+              <p className="break-all text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
+                {element.seats.free_seats || 0}
+              </p>
             </div>
 
             <div className="items-center justify-center hidden tablet:flex tablet:order-2 tablet:justify-self-center">
