@@ -14,6 +14,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import SubmitButton from '../components/SubmitButton';
 import { toast } from 'sonner';
 import useCheckoutForm from '../hooks/useCheckout';
+import ConfirmPaymentDialog from './ConfirmPaymentDialog';
 
 export default function CheckoutForm() {
   const { methods, onSubmit, error } = useCheckoutForm();
@@ -27,6 +28,7 @@ export default function CheckoutForm() {
         })}
       <form onSubmit={methods.handleSubmit(onSubmit)} className="">
         <FormProvider {...methods}>
+          <ConfirmPaymentDialog />
           <div className="relative grid grid-cols-1 laptop:grid-cols-[minmax(0,766px)_1fr] w-full gap-4">
             <div className="space-y-8 laptop:col-span-1  ">
               <Passengers />

@@ -31,7 +31,6 @@ function useCheckout() {
   const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
-
   const defaultPassengers = useMemo(
     () => createPassengers(adult, children, providerConfig, ticket?.ticket_pricing.base_price || 0),
     [adult, children, providerConfig, ticket?.ticket_pricing.base_price],
@@ -82,6 +81,9 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
+
+  const p = methods.watch('payment');
+  console.log(p);
 
   return { methods, onSubmit, error, loading };
 }

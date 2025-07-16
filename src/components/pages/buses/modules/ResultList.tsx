@@ -25,7 +25,7 @@ export default function ResultList() {
   if (!isFetching && data && data.length === 0) return <NoTravel />;
 
   if (!from && !to) return <NoLocations />;
-
+  console.log(filteredTickets);
   return (
     <div className="flex flex-col space-y-10">
       {filteredTickets.map((route) => {

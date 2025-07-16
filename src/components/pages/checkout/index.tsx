@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import Timer from './components/Timer';
 import Cleanup from './components/Cleanup';
-import ConfirmPaymentDialog from './modules/ConfirmPaymentDialog';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 const CheckoutForm = dynamic(() => import('./modules/CheckoutForm'), {
@@ -31,7 +30,6 @@ const Checkaut = () => {
           </div>
           <Timer />
           <Cleanup />
-          <ConfirmPaymentDialog />
           <CheckoutForm />
         </Container>
       </section>

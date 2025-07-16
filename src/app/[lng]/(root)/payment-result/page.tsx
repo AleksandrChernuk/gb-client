@@ -1,11 +1,11 @@
 import SuccessPage from '@/components/pages/payment-result';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
-  params: Params;
+  params: Promise<{ lng: string }>;
+  searchParams: Promise<{ payment_id: string }>;
 };
 
 export async function generateMetadata({ params }: Props) {
@@ -60,13 +60,11 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function Success({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
+export default async function Success({ params, searchParams }: Props) {
   const { lng } = await params;
+  const { payment_id } = await searchParams;
+
   setRequestLocale(lng as Locale);
 
-  return <SuccessPage />;
+  return <SuccessPage payment_id={payment_id} />;
 }

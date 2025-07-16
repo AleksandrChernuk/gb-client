@@ -3,7 +3,6 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useUser/types';
 import { IRequestOrder, RequestTicket } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
-import { format } from 'date-fns';
 
 type NormalizeDataParams = {
   from_city_id: number;
@@ -63,6 +62,9 @@ const normalizeData = ({
     toCityName: extractLocationDetails(route.arrival.toLocation, locale).locationName,
     fromStationId: `${route.departure.station_id}`,
     fromStationName: `${route.departure.station_name}`,
+    ...(route.details?.return_rules_description && { refundRules: route.details?.return_rules_description }),
+    ...(route?.departure.station_address && { fromStationAddress: route.departure.station_address }),
+    ...(route?.arrival.station_address && { toStationAddress: route.arrival.station_address }),
     ...(route.departure.station_coords_lat && { fromStationLat: route.departure.station_coords_lat }),
     ...(route.departure.station_coords_lon && { fromStationLon: route.departure.station_coords_lon }),
     toCountry: extractLocationDetails(route.departure.fromLocation, locale).countryName,
@@ -72,12 +74,12 @@ const normalizeData = ({
     customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     ...(route.arrival.station_coords_lat && { toStationLat: route.arrival.station_coords_lat }),
     ...(route.arrival.station_coords_lon && { toStationLon: route.arrival.station_coords_lon }),
-    departureDateTime: `${route.departure.date_time && format(route.departure.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`,
-    arrivalDateTime: `${route.arrival.date_time && format(route.arrival.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'")}`,
+    departureDateTime: `${route.departure.date_time && route.departure.date_time}`,
+    arrivalDateTime: `${route.arrival.date_time && route.arrival.date_time}`,
     ...(route.carrier.id && { carrierId: route.carrier.id }),
     ...(route.carrier.name && { carrierName: route.carrier.name }),
     tripType: 'oneway',
-    orderType: 'BOOK',
+    orderType: formData.payment,
     currency: 'UAH',
     locale,
     ...(user?.id && { userId: user.id }),

@@ -31,6 +31,7 @@ export default function Timer() {
     }
     return TIMEOUT_DIALOG_DELAY_MS;
   });
+
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const router = useRouter();
   const initiateNewOrder = useNewOrderResult((state) => state.initiateNewOrder);
