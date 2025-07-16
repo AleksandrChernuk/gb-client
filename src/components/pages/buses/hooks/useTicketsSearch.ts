@@ -34,8 +34,6 @@ export default function useTicketsSearch() {
     enabled,
   });
 
-  console.log(data);
-
   useEffect(() => {
     if (data) {
       setTickets(data);

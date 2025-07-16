@@ -31,7 +31,6 @@ export const useTimerStore = create<TimerState>()(
     {
       name: 'checkout-timer',
       storage: createJSONStorage(() => sessionStorage),
-
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
       },

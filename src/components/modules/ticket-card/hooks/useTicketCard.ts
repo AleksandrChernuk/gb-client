@@ -21,7 +21,7 @@ export default function useTicketCard() {
 
   const handleSetTicket = async (id: string, element: IRouteResponse) => {
     if (!element) return;
-
+    console.log('setSelectedTicket');
     await setSelectedTicket({
       route: element,
       toCityId: to?.id,
@@ -35,7 +35,6 @@ export default function useTicketCard() {
   };
 
   const handleGetDetails = (element: IRouteResponse) => {
-    console.log(element);
     if (element) {
       setTicketsDetails({
         route: element,

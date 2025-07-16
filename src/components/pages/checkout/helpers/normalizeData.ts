@@ -22,7 +22,6 @@ const normalizeData = ({
   user,
   route,
 }: NormalizeDataParams): IRequestOrder => {
-  console.log(route.arrival.date_time && format(route.arrival.date_time, "yyyy-MM-dd'T'HH:mm:ss'Z'"));
   const tickets = formData.passengers.map((p: any, idx: string | number) => ({
     firstName: p.first_name,
     lastName: p.last_name,

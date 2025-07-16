@@ -25,7 +25,7 @@ export default function SelectButton({
           className="w-full text-amber-50 py-3 px-4 laptop:py-[14px] rounded-none rounded-b-2xl "
         >
           {loading ? (
-            <LoaderCircle className="animate-spin" size={16} />
+            <LoaderCircle className="animate-spin" />
           ) : (
             <>
               {`${Math.floor(price || 0)}`}

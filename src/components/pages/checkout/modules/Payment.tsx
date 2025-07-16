@@ -6,14 +6,14 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
-import { useOrderResult } from '@/store/useOrderResult';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
+import { useNewOrderResult } from '@/store/useOrderResult';
 
 const Payment = () => {
   const { control } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const selectedTicket = useSelectedTickets((state) => state.selectedTicket);
-  const loadingResult = useOrderResult((state) => state.loadingResult);
+  const loadingResult = useNewOrderResult((state) => state.loadingResult);
 
   return (
     <FormField

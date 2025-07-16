@@ -15,11 +15,11 @@ import { getProviderConfigByName } from '../helpers/providerConfig';
 import { toast } from 'sonner';
 import { createOrder } from '@/actions/orders.actions';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
+import { useNewOrderResult } from '@/store/useOrderResult';
 
 function useCheckout() {
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
-
   const [loading] = useState<boolean>(false);
 
   const adult = useSearchStore(useShallow((state) => state.adult));
@@ -28,6 +28,8 @@ function useCheckout() {
   const to = useSearchStore(useShallow((state) => state.to?.id));
   const ticket = useSelectedTickets(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
+  const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
+  const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(
@@ -35,13 +37,10 @@ function useCheckout() {
     [adult, children, providerConfig, ticket?.ticket_pricing.base_price],
   );
 
-  console.log(ticket?.details?.free_seats_map);
-  console.log(!!ticket?.details?.free_seats_map?.length);
   const schema = useMemo(
-    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.free_seats_map?.length),
+    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seats_map?.length),
     [providerConfig, ticket],
   );
-
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -63,6 +62,7 @@ function useCheckout() {
     }
 
     try {
+      setLoadingResult(true);
       const res = await createOrder(
         normalizeData({
           from_city_id: from,
@@ -73,60 +73,16 @@ function useCheckout() {
           user,
         }),
       );
-      console.log('res', res);
+      console.log(res);
+      setInitiatePayment(res);
     } catch (error) {
-      console.log('error', error);
+      console.log(error);
+      toast.error('error');
+    } finally {
+      setLoadingResult(false);
     }
   };
 
-  // useEffect(() => {
-  //   const subscription = methods.watch(async (value, { name }) => {
-  //     if (name !== 'payment') return;
-
-  //     const paymentType = value;
-
-  //     if (paymentType === 'PAYMENT_AT_BOARDING') {
-  //       const formData = methods.getValues();
-
-  //       const isValid = await methods.trigger(); // если нужно
-  //       if (!isValid) return;
-
-  //       const { currentOrderId } = useBookingStore.getState();
-
-  //       // Отменяем предыдущий заказ
-  //       if (currentOrderId) {
-  //         try {
-  //           // await cancelOrder(currentOrderId);
-  //           useBookingStore.getState().clearOrder();
-  //         } catch (err) {
-  //           console.error('Ошибка отмены предыдущего заказа', err);
-  //         }
-  //       }
-
-  //       // Создаем новый заказ
-  //       try {
-  //         const newOrder = await createOrder(
-  //           normalizeData({
-  //             from_city_id: from,
-  //             to_city_id: to,
-  //             locale,
-  //             formData,
-  //             route: ticket,
-  //             user,
-  //           }),
-  //         );
-
-  //         useBookingStore.getState().setOrder(newOrder);
-  //         console.log('✅ Новый заказ создан:', newOrder);
-  //       } catch (err) {
-  //         console.error('Ошибка создания нового заказа', err);
-  //       }
-  //     }
-  //   });
-
-  //   return () => subscription.unsubscribe?.();
-  // }, [ticket, from, to, locale, user, methods]);
-  console.log(methods.getValues());
   return { methods, onSubmit, error, loading };
 }
 

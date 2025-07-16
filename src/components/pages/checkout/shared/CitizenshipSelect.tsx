@@ -31,8 +31,6 @@ function CitizenshipSelect({ name, config }: Props) {
     control,
     rules: { required: true },
   });
-  console.log(config.placeholder);
-  console.log(options.find((opt) => opt.value === value)?.label || t_forms(config.placeholder!));
 
   return (
     <FormItem>

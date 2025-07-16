@@ -16,7 +16,7 @@ import { toast } from 'sonner';
 import useCheckoutForm from '../hooks/useCheckout';
 
 export default function CheckoutForm() {
-  const { methods, onSubmit, error, loading } = useCheckoutForm();
+  const { methods, onSubmit, error } = useCheckoutForm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   return (
@@ -51,7 +51,7 @@ export default function CheckoutForm() {
               <ToPay />
 
               <Legal />
-              <SubmitButton loading={loading} />
+              <SubmitButton />
             </div>
           </div>
         </FormProvider>

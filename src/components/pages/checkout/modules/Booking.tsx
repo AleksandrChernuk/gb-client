@@ -44,7 +44,6 @@ const Booking = memo(function Booking() {
   const seatMapWithStatus = seatsMaper({
     seatsMap: selectedTicket?.details?.seats_map,
     freeSeats: selectedTicket?.details?.free_seats_map,
-    providerName: selectedTicket?.provider_name,
   });
 
   return (

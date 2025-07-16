@@ -1,32 +1,39 @@
-import { InitiatePaymentInterface } from '@/types/payment.types';
+import { INewOrderResponse } from '@/types/payment.types';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 export type OrderResultState = {
   isHydrated: boolean;
   loadingResult: boolean;
-  initiatePayment: InitiatePaymentInterface | null;
+  initiateNewOrder: INewOrderResponse | null;
 };
 
 export type OrderResultActions = {
-  setInitiatePayment: (data: InitiatePaymentInterface | null) => void;
+  setInitiateNewOrder: (data: INewOrderResponse | null) => void;
+  resetInitiateNewOrder: () => void;
   setLoadingResult: (v: boolean) => void;
 };
 
 export type OrderResultStore = OrderResultState & OrderResultActions;
 
-export const useOrderResult = create<OrderResultStore>()(
+export const useNewOrderResult = create<OrderResultStore>()(
   immer(
     persist(
       (set) => ({
         isHydrated: false,
-        initiatePayment: null,
+        initiateNewOrder: null,
         loadingResult: false,
 
-        setInitiatePayment: (data) => {
+        setInitiateNewOrder: (data) => {
           set((state) => {
-            state.initiatePayment = data;
+            state.initiateNewOrder = data;
+          });
+        },
+
+        resetInitiateNewOrder: () => {
+          set((state) => {
+            state.initiateNewOrder = null;
           });
         },
 
@@ -38,6 +45,7 @@ export const useOrderResult = create<OrderResultStore>()(
       }),
       {
         name: 'order-result',
+        storage: createJSONStorage(() => sessionStorage),
         onRehydrateStorage: () => (state) => {
           if (state) {
             state.isHydrated = true;

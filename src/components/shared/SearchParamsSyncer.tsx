@@ -27,13 +27,9 @@ export default function SearchParamsSyncer() {
     };
 
     if (fromId && !from) {
-      console.log('SearchParamsSyncer');
-
       fetchIfEmpty('from', fromId);
     }
     if (toId && !to) {
-      console.log('SearchParamsSyncer');
-
       fetchIfEmpty('to', toId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

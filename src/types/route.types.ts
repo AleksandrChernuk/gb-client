@@ -26,10 +26,10 @@ export interface IGetRouteDetailsBody {
   metadata?: unknown | null;
   timetable_id?: string;
   bustype_id?: string;
-  has_plan?: string | boolean;
-  request_get_free_seats?: string | boolean;
-  request_get_discount?: string | boolean;
-  request_get_baggage?: string | boolean;
+  has_plan?: boolean;
+  request_get_free_seats?: boolean;
+  request_get_discount?: boolean;
+  request_get_baggage?: boolean;
 }
 
 export interface IRouteResponse {

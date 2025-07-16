@@ -11,7 +11,7 @@ import { ReactElement, ReactNode } from 'react';
 type Props = {
   isOpen: boolean;
   title: string;
-  description: ReactElement;
+  description?: ReactElement;
   footer: ReactNode;
 };
 

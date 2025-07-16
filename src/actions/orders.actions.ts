@@ -24,6 +24,30 @@ export const createOrder = async (body: IRequestOrder) => {
   return data;
 };
 
+interface ICancelBody {
+  providerId: string;
+}
+
+export const cancelOrder = async (body: ICancelBody, myOrderId: string) => {
+  const response = await fetch(`${BASE_URL}/orders/cancel/${myOrderId}}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const res = await response.json();
+    console.log(res);
+
+    throw new Error('Error');
+  }
+  const res = await response.json();
+  console.log(res);
+  return null;
+};
+
 export const confirmBooking = async (body: ConfirmPaymentInterface) => {
   try {
     const response = await fetch(`${BASE_URL}/confirm_booking`, {

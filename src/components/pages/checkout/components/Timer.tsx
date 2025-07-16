@@ -8,6 +8,7 @@ import CustomDialog from '@/components/shared/CustomDialog';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTimerStore } from '@/store/useTimer';
+import { useNewOrderResult } from '@/store/useOrderResult';
 
 const WARNING_DELAY_MS = 10000;
 const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 1000;
@@ -32,6 +33,8 @@ export default function Timer() {
   });
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const router = useRouter();
+  const initiateNewOrder = useNewOrderResult((state) => state.initiateNewOrder);
+  const loadingResult = useNewOrderResult((state) => state.loadingResult);
 
   useEffect(() => {
     if (!hasHydrated) return;
@@ -87,7 +90,7 @@ export default function Timer() {
   return (
     <>
       <CustomDialog
-        isOpen={openPriceChange}
+        isOpen={openPriceChange && !!initiateNewOrder && !!loadingResult}
         title={t('price_may_increase')}
         description={
           <p>
@@ -107,7 +110,7 @@ export default function Timer() {
       />
 
       <CustomDialog
-        isOpen={open}
+        isOpen={open && !!initiateNewOrder && !!loadingResult}
         title={t('still_online_title')}
         description={<p>{t('still_online_description')}</p>}
         footer={

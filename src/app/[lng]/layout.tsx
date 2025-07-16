@@ -16,7 +16,6 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
 import { GTMNoScript } from '@/components/shared/GTMAnalytics';
 import LocationsInitializer from '@/components/shared/LocationsInitializer';
-import SearchParamsSyncer from '@/components/shared/SearchParamsSyncer';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -54,7 +53,6 @@ export default async function MainLayout({
               {children}
             </ThemeProvider>
             <LocationsInitializer />
-            <SearchParamsSyncer />
           </ReactQueryContext>
           <Toaster richColors position="top-center" />
         </body>

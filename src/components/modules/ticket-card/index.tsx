@@ -38,7 +38,6 @@ export const TicketCard = ({ element }: Props) => {
 
   const handleSelect = () => {
     if (loadingSelectTicket) return;
-    console.log('loadingSelectTicket');
     if (!element.ticket_pricing.base_price) return;
     startTransition(async () => {
       try {
