@@ -32,12 +32,12 @@ function useCheckout() {
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
   const defaultPassengers = useMemo(
-    () => createPassengers(adult, children, providerConfig, ticket?.ticket_pricing.base_price || 0),
-    [adult, children, providerConfig, ticket?.ticket_pricing.base_price],
+    () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
+    [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
   );
 
   const schema = useMemo(
-    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seats_map?.length),
+    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],
   );
   const methods = useForm<z.infer<typeof schema>>({
@@ -62,17 +62,29 @@ function useCheckout() {
 
     try {
       setLoadingResult(true);
-      const res = await createOrder(
+
+      console.log(
+        'normalizeData',
         normalizeData({
-          from_city_id: from,
-          to_city_id: to,
+          fromCityId: from,
+          toCityId: to,
           locale,
           formData,
           route: ticket,
           user,
         }),
       );
-      console.log(res);
+      const res = await createOrder(
+        normalizeData({
+          fromCityId: from,
+          toCityId: to,
+          locale,
+          formData,
+          route: ticket,
+          user,
+        }),
+      );
+
       setInitiatePayment(res);
     } catch (error) {
       console.log(error);
@@ -81,10 +93,6 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
-
-  const p = methods.watch('payment');
-  console.log(p);
-
   return { methods, onSubmit, error, loading };
 }
 

@@ -27,25 +27,25 @@ export default function DetailsStops({ id }: Props) {
           <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-[#6f8b90] dark:border-slate-600 border-dashed translate-x-[56.5px]"></span>
           <DetailsStopsItem
             route={{
-              station_address: ticketDetails?.departure.station_address,
-              station_name: ticketDetails?.departure.station_name,
+              station_address: ticketDetails?.departure.stationAddress,
+              station_name: ticketDetails?.departure.stationName,
               location_name:
                 ticketDetails &&
                 extractLocationDetails(ticketDetails?.departure?.fromLocation, currentLocale).locationName,
-              departure_date_time: ticketDetails?.departure.date_time,
-              arrival_date_time: ticketDetails?.arrival.date_time,
+              departure_date_time: ticketDetails?.departure.dateTime,
+              arrival_date_time: ticketDetails?.arrival.dateTime,
             }}
             isFirst
           />
 
           <DetailsStopsItem
             route={{
-              station_address: ticketDetails?.arrival.station_address,
-              station_name: ticketDetails?.arrival.station_name,
+              station_address: ticketDetails?.arrival.stationAddress,
+              station_name: ticketDetails?.arrival.stationName,
               location_name:
                 ticketDetails && extractLocationDetails(ticketDetails?.arrival?.toLocation, currentLocale).locationName,
-              departure_date_time: ticketDetails?.arrival.date_time,
-              arrival_date_time: ticketDetails?.arrival.date_time,
+              departure_date_time: ticketDetails?.arrival.dateTime,
+              arrival_date_time: ticketDetails?.arrival.dateTime,
             }}
             isLast
           />
@@ -67,10 +67,10 @@ export default function DetailsStops({ id }: Props) {
                     station_address: element.station.address,
                     station_name: element.station.name,
                     location_name: element.location.name,
-                    departure_date_time: element.departure_date_time,
-                    arrival_date_time: element.arrival_date_time,
+                    departure_date_time: element.departureDateTime,
+                    arrival_date_time: element.arrivalDateTime,
                   }}
-                  bus_changes={!!element.bus_changes}
+                  bus_changes={!!element.busChanges}
                   key={idx}
                   isFirst={idx === 0}
                   isLast={idx === array.length - 1}

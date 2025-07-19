@@ -99,7 +99,7 @@ export const expiryDate = (currentTicket: IRouteResponse | null): FieldConfig =>
       label: 'expiry_date',
       type: 'date',
       placeholder: 'expiry_date_placeholder',
-      schema: passportExpirySchema(new Date(currentTicket?.departure.date_time || new Date())),
+      schema: passportExpirySchema(new Date(currentTicket?.departure.dateTime || new Date())),
     };
   }
 };

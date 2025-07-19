@@ -16,13 +16,13 @@ export default function Trip() {
 
   if (!selectedTicket) return null;
 
-  const date_time_from = format(selectedTicket.departure.date_time || new Date(), 'HH:mm');
+  const date_time_from = format(selectedTicket.departure.dateTime || new Date(), 'HH:mm');
   const location_from = extractLocationDetails(selectedTicket.departure.fromLocation, locale).locationName || '';
-  const address_from = selectedTicket.departure.station_address || '';
+  const address_from = selectedTicket.departure.stationAddress || '';
 
-  const date_time_to = format(selectedTicket.arrival.date_time || new Date(), 'HH:mm');
+  const date_time_to = format(selectedTicket.arrival.dateTime || new Date(), 'HH:mm');
   const location_to = extractLocationDetails(selectedTicket.arrival.toLocation, locale).locationName || '';
-  const address_to = selectedTicket.arrival.station_address || '';
+  const address_to = selectedTicket.arrival.stationAddress || '';
 
   const duration = selectedTicket.duration?.split(':');
 

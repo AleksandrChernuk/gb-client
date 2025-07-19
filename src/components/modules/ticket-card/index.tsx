@@ -32,16 +32,16 @@ export const TicketCard = ({ element }: Props) => {
 
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
-  const hasDetails = tickets[element.ticket_id]?.details != null;
+  const hasDetails = tickets[element.ticketId]?.details != null;
 
   const [isPending, startTransition] = useTransition();
 
   const handleSelect = () => {
     if (loadingSelectTicket) return;
-    if (!element.ticket_pricing.base_price) return;
+    if (!element.ticketPricing.basePrice) return;
     startTransition(async () => {
       try {
-        await handleSetTicket(element.ticket_id, element);
+        await handleSetTicket(element.ticketId, element);
       } catch (error) {
         console.log(error);
       }
@@ -52,7 +52,7 @@ export const TicketCard = ({ element }: Props) => {
     <TickedCard
       selectButton={
         <SelectButton
-          price={Math.floor(element.ticket_pricing.base_price || 0)}
+          price={Math.floor(element.ticketPricing.basePrice || 0)}
           variant="mobile"
           loading={isPending}
           buttonText={t('selectButton')}
@@ -68,7 +68,7 @@ export const TicketCard = ({ element }: Props) => {
 
             <div className="flex-col items-center hidden gap-2 tablet:flex tablet:gap-4">
               <div className="text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-                {`${Math.floor(element.ticket_pricing.base_price || 0)}`}
+                {`${Math.floor(element.ticketPricing.basePrice || 0)}`}
                 <span className="text-xs ml-[2px]">UAH</span>
               </div>
 
@@ -89,7 +89,7 @@ export const TicketCard = ({ element }: Props) => {
               </div>
 
               <span className="block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50">
-                {element.provider_name || ''}
+                {element.providerName || ''}
               </span>
             </div>
 
@@ -98,7 +98,7 @@ export const TicketCard = ({ element }: Props) => {
                 {t('places')}:
               </span>
               <p className="break-all text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
-                {element.seats.free_seats || 0}
+                {element.seats.freeSeats || 0}
               </p>
             </div>
 
@@ -124,8 +124,8 @@ export const TicketCard = ({ element }: Props) => {
             <div className="flex items-center justify-center ml-auto tablet:hidden">
               <MobileDetails
                 price={
-                  (element.ticket_pricing.base_price &&
-                    Math.floor(element.ticket_pricing.base_price || 0) * (adult + children)) ||
+                  (element.ticketPricing.basePrice &&
+                    Math.floor(element.ticketPricing.basePrice || 0) * (adult + children)) ||
                   0
                 }
                 passengerCount={adult + children}
@@ -145,7 +145,7 @@ export const TicketCard = ({ element }: Props) => {
                 }
               >
                 <div className="my-6">
-                  <Details id={element.ticket_id} />
+                  <Details id={element.ticketId} />
                 </div>
               </MobileDetails>
             </div>
@@ -155,7 +155,7 @@ export const TicketCard = ({ element }: Props) => {
               isOpen ? 'max-h-[4000px] opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
-            {isOpen && <Details id={element.ticket_id} />}
+            {isOpen && <Details id={element.ticketId} />}
           </div>
         </div>
       </div>

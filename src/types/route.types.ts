@@ -1,5 +1,39 @@
+import { IDiscount } from './discount-interface';
+import { IFreeSeats } from './free.seats.interface';
+import { IInsurer } from './insurer.interface';
 import { ILocation } from './location.types';
-import { IRouteDetailsResponse } from './route.details.interface';
+import { IReturnRules } from './return.rules.interface';
+import { TypeSeatsMap } from './seat.interface';
+import { IStops } from './stops.interface';
+
+export interface IRouteDetailsResponse {
+  providerLocationFrom: string | null;
+  providerLocationTo: string | null;
+  stops: IStops[] | null;
+  automaticDiscountId?: string | null; //!! New
+  discounts: IDiscount[] | null;
+  returnRulesDescription: string[] | null;
+  returnRules: IReturnRules[] | null;
+  transportId?: string | null;
+  busName: string | null;
+  busNumber: string | null;
+  busPictures: string[] | null;
+  seatsCount: number | null;
+  seatsMap: TypeSeatsMap[] | string | null;
+  freeSeatsMap: IFreeSeats[] | null;
+  maxTickets?: number | string;
+  needBirth?: boolean | string;
+  needDoc?: boolean | string;
+  needDocExpireDate?: boolean | string;
+  needCitizenship?: boolean | string;
+  needGender?: boolean | string;
+  needMiddlename?: boolean | string;
+  luggageFee: number | null;
+  luggageMaxCount: number | null;
+  luggageRules: string[] | string | null;
+  amenities: string[] | null;
+  insurer: IInsurer | null;
+}
 
 export interface IGetRoutesBody {
   fromCityId: number;
@@ -12,88 +46,88 @@ export interface IGetRoutesBody {
 export interface IGetRouteDetailsBody {
   routeId?: string;
   intervalId?: string;
-  bus_id?: string;
+  busId?: string;
   fromCityId?: number;
   toCityId?: number;
   fromStationId?: string;
   toStationId?: string;
   providerId: string;
   travelDate?: string;
-  search_id?: string;
+  searchId?: string;
   locale: string;
   currency: string;
   passengersCount?: number;
   metadata?: unknown | null;
-  timetable_id?: string;
-  bustype_id?: string;
-  has_plan?: boolean;
-  request_get_free_seats?: boolean;
-  request_get_discount?: boolean;
-  request_get_baggage?: boolean;
+  timetableId?: string;
+  bustypeId?: string;
+  hasPlan?: boolean;
+  requestFetFreeSeats?: boolean;
+  requestGetDiscount?: boolean;
+  requestGetBaggage?: boolean;
 }
 
 export interface IRouteResponse {
-  ticket_id: string;
+  ticketId: string;
   identificators: {
     tripId?: string;
     intervalId?: string;
     distance?: number;
-    bus_id?: string;
-    ride_id?: string;
-    route_id?: string;
-    route_number?: string;
-    route_name?: string;
+    busId?: string;
+    rideId?: string;
+    routeId?: string;
+    routeNumber?: string;
+    routeName?: string;
     metadata?: unknown;
-    timetable_id?: string;
-    bustype_id?: string | null;
-    search_id?: string;
-    provider_id: string;
-    has_plan?: boolean | string;
-    request_get_free_seats?: boolean | string;
-    request_get_discount?: boolean | string;
-    request_get_baggage?: boolean | string;
+    timetableId?: string;
+    bustypeId?: string | null;
+    searchId?: string;
+    providerId: string;
+    hasPlan?: boolean | string;
+    requestGetFreeSeats?: boolean | string;
+    requestGetDiscount?: boolean | string;
+    requestGetBaggage?: boolean | string;
   };
-  provider_name: string;
-  allowed_operations: {
-    purchase_allowed: boolean;
-    sale_close_at: string | null;
-    reservation_allowed: boolean | null;
-    reservation_close_at: string | null;
-    reservation_time: number | null;
-    can_payment_to_driver: boolean | null;
+  providerName: string;
+  allowedOperations: {
+    purchaseAllowed: boolean;
+    saleCloseAt: string | null;
+    reservationAllowed: boolean | null;
+    reservationCloseAt: string | null;
+    reservationTime: number | null;
+    canPaymentToDriver: boolean | null;
   };
   departure: {
     fromLocation: ILocation;
-    station_id: number | null;
-    station_name: string | null;
-    station_address: string | null;
-    station_coords_lat: number | null;
-    station_coords_lon: number | null;
-    date_time: string | null;
+    stationId: number | null;
+    stationName: string | null;
+    stationAddress: string | null;
+    stationCoordsLat: number | null;
+    stationCoordsLon: number | null;
+    dateTime: string | null;
   };
   arrival: {
     toLocation: ILocation;
-    station_id: number | null;
-    station_name: string | null;
-    station_address: string | null;
-    station_coords_lat: number | null;
-    station_coords_lon: number | null;
-    date_time: string | null;
+    stationId: number | null;
+    stationName: string | null;
+    stationAddress: string | null;
+    stationCoordsLat: number | null;
+    stationCoordsLon: number | null;
+    dateTime: string | null;
   };
   duration: string | null;
-  bus_change: boolean | null;
-  e_ticket: boolean | null;
-  ticket_pricing: {
-    ticket_code?: string | null; //! New
-    base_price: number | null;
-    price_with_discount: number | null;
-    discount_percentage: number | null;
+  busChange: boolean | null;
+  eTicket: boolean | null;
+  ticketPricing: {
+    ticketCode?: string | null; 
+    basePrice: number | null;
+    priceWithDiscount: number | null;
+    discountPercentage: number | null;
     currency: string;
   };
   seats: {
-    free_seats: number | null;
-    seat_number_selection_allowed: boolean | null;
-    free_choice_of_places: boolean | null;
+    freeSeats: number | null;
+    seatNumberSelectionAllowed: boolean | null;
+    freeChoiceOfPlaces: boolean | null;
   };
   carrier: {
     id: string | null;

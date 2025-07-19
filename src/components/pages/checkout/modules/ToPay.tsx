@@ -17,38 +17,44 @@ const ToPay = memo(function ToPay() {
 
   const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
   return (
-    <div>
+    <ul>
       {isHydrated ? (
-        <div className="flex items-start justify-between gap-4">
-          <div className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 text-slate-700 dark:text-slate-50">
-            <div>{t('to_be_paid')}</div>
-            <div>
-              {adult && `${t('adult')}: ${adult}`}
-              {children >= 1 && `, ${t('children')}: ${children}`}
-            </div>
-          </div>
-          <div className="text-base font-medium leading-4 tracking-normal tablet:text-base tablet:font-bold tablet:leading-6 text-slate-700 dark:text-slate-50">
-            {getTotalPriceFromPassengers(passengers)}
-            UAH
-          </div>
-        </div>
+        <ul className="flex items-center justify-between flex-wrap gap-4 ">
+          <li>
+            <p className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
+              {t('total_price')}
+            </p>
+          </li>
+          <li>
+            <p className="text-lg font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
+              {getTotalPriceFromPassengers(passengers)} UAH
+            </p>
+          </li>
+        </ul>
       ) : (
         <Skeleton className="w-full h-5" />
       )}
-      <div className="w-full h-px my-8 bg-slate-700 dark:bg-slate-50"></div>
+      <li className="w-full h-px my-4 bg-slate-700 dark:bg-slate-50" />
       {isHydrated ? (
-        <div className="flex items-center justify-between gap-4">
-          <div className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
-            {t('total_price')}
-          </div>
-          <div className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
-            {getTotalPriceFromPassengers(passengers)} UAH
-          </div>
-        </div>
+        <li className="flex items-start justify-between gap-4">
+          <ul className="flex items-center gap-1">
+            <li>
+              <p className="text-base font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
+                {adult && `${t('adult')}: ${adult}`}
+              </p>
+            </li>
+            <li>
+              <p className="text-base font-bold tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
+                {' '}
+                {children >= 1 && `, ${t('children')}: ${children}`}
+              </p>
+            </li>
+          </ul>
+        </li>
       ) : (
         <Skeleton className="w-full h-5" />
       )}
-    </div>
+    </ul>
   );
 });
 

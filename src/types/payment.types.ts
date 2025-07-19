@@ -1,11 +1,11 @@
 import { IFreeSeats } from './free.seats.interface';
 
 export interface ConfirmPaymentInterface {
-  provider_id: string;
-  order_id: string;
+  providerId: string;
+  orderId: string;
   hash?: string;
   locale: string;
-  is_send_ticket?: boolean;
+  isSendTicket?: boolean;
 }
 
 interface IAlertMessage {
@@ -19,6 +19,8 @@ export interface INewOrderResponse {
   providerOrderId: string;
   myOrderId: string;
   description: string;
+  error?: string;
+  detal: string;
   locale: string;
   customerEmail: string;
   freeSeats?: IFreeSeats[];

@@ -22,17 +22,17 @@ const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
     required: [
       FIELDS.first_name,
       FIELDS.last_name,
-      ...(currentTicket?.details?.need_middlename ? [FIELDS.middlename] : []),
+      ...(currentTicket?.details?.needMiddlename ? [FIELDS.middlename] : []),
       ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
-      ...(currentTicket?.details?.need_citizenship ? [FIELDS.citizenship] : []),
-      ...(currentTicket?.details?.need_doc ? [FIELDS.document_type, FIELDS.document_number] : []),
-      ...(currentTicket?.details?.need_doc_expire_date ? [FIELDS.expiryDate] : []),
-      ...(currentTicket?.details?.need_gender ? [FIELDS.gender] : []),
+      ...(currentTicket?.details?.needCitizenship ? [FIELDS.citizenship] : []),
+      ...(currentTicket?.details?.needDoc ? [FIELDS.document_type, FIELDS.document_number] : []),
+      ...(currentTicket?.details?.needDocExpireDate ? [FIELDS.expiryDate] : []),
+      ...(currentTicket?.details?.needGender ? [FIELDS.gender] : []),
     ],
     fields: {
       first_name,
       last_name,
-      ...(currentTicket?.details?.need_middlename
+      ...(currentTicket?.details?.needMiddlename
         ? {
             middlename,
           }
@@ -43,23 +43,23 @@ const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
             bday,
           }
         : {}),
-      ...(currentTicket?.details?.need_citizenship
+      ...(currentTicket?.details?.needCitizenship
         ? {
             citizenship,
           }
         : {}),
-      ...(currentTicket?.details?.need_doc
+      ...(currentTicket?.details?.needDoc
         ? {
             document_type,
             document_number,
           }
         : {}),
-      ...(currentTicket?.details?.need_doc_expire_date
+      ...(currentTicket?.details?.needDocExpireDate
         ? {
             expiryDate: expiryDate(currentTicket),
           }
         : {}),
-      ...(currentTicket?.details?.need_gender
+      ...(currentTicket?.details?.needGender
         ? {
             gender,
           }

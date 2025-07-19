@@ -42,10 +42,10 @@ export default function Details({ id }: Props) {
               {t('route')}:
             </h5>
             <div className="flex items-center gap-2  text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
-              {` ${format(ticketDetails?.departure.date_time || new Date(), 'EEE dd', { locale: dateLocale })}, 
+              {` ${format(ticketDetails?.departure.dateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
                     ${ticketDetails && extractLocationDetails(ticketDetails?.departure.fromLocation, currentLocale).locationName}`}
               <ChevronRight size={16} className="stroke-green-300" />
-              {` ${format(ticketDetails?.arrival.date_time || new Date(), 'EEE dd', { locale: dateLocale })}, 
+              {` ${format(ticketDetails?.arrival.dateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
                    ${ticketDetails && extractLocationDetails(ticketDetails?.arrival.toLocation, currentLocale).locationName}`}
             </div>
           </div>
@@ -75,13 +75,13 @@ export default function Details({ id }: Props) {
 
       <div className="space-y-4">
         <DetailsList label={t('luggage')} listClassName="">
-          {toArray(ticketDetails?.details?.luggage_rules).map((el, idx) => (
+          {toArray(ticketDetails?.details?.luggageRules).map((el, idx) => (
             <DetailsItem key={el + idx}>{el}</DetailsItem>
           ))}
         </DetailsList>
 
         <DetailsList label={t('return_policy')} listClassName="">
-          {toArray(ticketDetails?.details?.return_rules_description).map((el, idx) => (
+          {toArray(ticketDetails?.details?.returnRulesDescription).map((el, idx) => (
             <DetailsItem key={el + idx}>{el}</DetailsItem>
           ))}
         </DetailsList>
@@ -99,19 +99,19 @@ export default function Details({ id }: Props) {
         </DetailsList>
 
         <DetailsList label={t('bus')} listClassName=" flex-wrap">
-          {!!ticketDetails?.details?.bus_name && (
+          {!!ticketDetails?.details?.busName && (
             <>
               <div className="flex flex-row flex-wrap gap-0.5">
                 <DetailsItem>
-                  {ticketDetails?.details?.bus_name}
-                  {ticketDetails?.details?.bus_number}
+                  {ticketDetails?.details?.busName}
+                  {ticketDetails?.details?.busNumber}
                 </DetailsItem>
               </div>
-              {ticketDetails?.details?.bus_pictures?.length &&
-                ticketDetails?.details?.bus_pictures?.length > 1 &&
-                ticketDetails?.details?.bus_pictures[0] !== null && (
+              {ticketDetails?.details?.busPictures?.length &&
+                ticketDetails?.details?.busPictures?.length > 1 &&
+                ticketDetails?.details?.busPictures[0] !== null && (
                   <SwiperImages
-                    items={toArray(ticketDetails?.details?.bus_pictures)?.map((el, i) => ({
+                    items={toArray(ticketDetails?.details?.busPictures)?.map((el, i) => ({
                       src: el,
                       alt: `bus img ${i + 1}`,
                       width: 200,

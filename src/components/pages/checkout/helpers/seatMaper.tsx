@@ -15,7 +15,7 @@ export const seatsMaper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
       row.map((seat) => {
         const isFree = freeSeats.some(
           (free) =>
-            (seat.id && seat.id === free.seat_id) || (seat.number && seat.number === free.seat_number?.toString()),
+            (seat.id && seat.id === free.seatId) || (seat.number && seat.number === free.seatNumber?.toString()),
         );
 
         return {

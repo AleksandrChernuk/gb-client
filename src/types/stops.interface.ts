@@ -1,13 +1,13 @@
 export interface IStops {
-  departure_date_time: string | null;
-  arrival_date_time: string | null;
-  stopping_time: string | null; // h:m
+  departureDateTime: string | null;
+  arrivalDateTime: string | null;
+  stoppingTime: string | null;
   location: {
     id: string | null;
     name: string | undefined | null;
     region: string | null;
     country: string | null;
-    country_code: string | null;
+    countryCode: string | null;
     type: string | null;
   };
   station: {
@@ -17,5 +17,5 @@ export interface IStops {
     lat: number | null;
     lon: number | null;
   };
-  bus_changes: boolean | null;
+  busChanges: boolean | null;
 }

@@ -1,8 +1,10 @@
 'use server';
 
 import { IRequestOrder } from '@/types/order-interface';
+
 interface ICancelBody {
   providerId: string;
+  providerOrderId: string;
 }
 
 interface IConfirmOrderBody {
@@ -32,14 +34,13 @@ export const createOrder = async (body: IRequestOrder) => {
     },
     body: JSON.stringify(body),
   });
+  const data = await response.json();
 
   if (!response.ok) {
-    const errorData = await response.json();
-    console.log(errorData);
-    throw new Error('Error');
+    console.log('Ошибка:', data);
+    throw new Error(data?.message || 'Error');
   }
 
-  const data = await response.json();
   return data;
 };
 

@@ -1,12 +1,12 @@
 export interface ISeatOrder {
-  seat_id?: number;
-  seat_number?: number;
+  seatId?: number;
+  seatNumber?: number;
 }
 
 export interface IDiscountOrder {
-  discount_id?: string;
-  discount_description?: string;
-  discount_percent?: number;
+  discountId?: string;
+  discountDescription?: string;
+  discountPercent?: number;
 }
 
 export type RequestTicket = {

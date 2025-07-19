@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import Timer from './components/Timer';
 import Cleanup from './components/Cleanup';
-import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 const CheckoutForm = dynamic(() => import('./modules/CheckoutForm'), {
   loading: () => <LoaderPage />,
@@ -16,9 +15,6 @@ const CheckoutForm = dynamic(() => import('./modules/CheckoutForm'), {
 
 const Checkaut = () => {
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-
-  const selectedTicket = useSelectedTickets((state) => state.selectedTicket);
-  console.log(selectedTicket);
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">

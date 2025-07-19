@@ -6,7 +6,7 @@ import infobusConfig from './configs/infobusConfig';
 import defaultConfig from './configs/defaultConfig';
 
 export function getProviderConfigByName(currentTicket: IRouteResponse | null): ProviderConfig {
-  switch (currentTicket?.provider_name) {
+  switch (currentTicket?.providerName) {
     case providersList.OCTOBUS:
       return octobusConfig(currentTicket);
 

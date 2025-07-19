@@ -20,13 +20,13 @@ export default function TicketRoute({ route }: Props) {
 
   const locale = useLocale();
 
-  const date_time_from = format(route.departure.date_time || new Date(), 'HH:mm');
+  const date_time_from = format(route.departure.dateTime || new Date(), 'HH:mm');
   const location_from = extractLocationDetails(route.departure.fromLocation, locale).locationName || '';
-  const address_from = route.departure.station_address || '';
+  const address_from = route.departure.stationAddress || '';
 
-  const date_time_to = format(route.arrival.date_time || new Date(), 'HH:mm');
+  const date_time_to = format(route.arrival.dateTime || new Date(), 'HH:mm');
   const location_to = extractLocationDetails(route.arrival.toLocation, locale).locationName || '';
-  const address_to = route.arrival.station_address || '';
+  const address_to = route.arrival.stationAddress || '';
 
   const duration = route.duration?.split(':');
 

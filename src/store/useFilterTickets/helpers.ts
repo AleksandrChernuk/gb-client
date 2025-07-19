@@ -6,24 +6,24 @@ import { differenceInMilliseconds, toDate } from 'date-fns';
 export const sortedRoutes = ({ sortBy, data }: { sortBy: string; data: IRouteResponse[] }) => {
   return data.toSorted((a, b) => {
     const getDuration = (route: IRouteResponse) =>
-      differenceInMilliseconds(new Date(route?.arrival?.date_time || 0), new Date(route?.departure?.date_time || 0));
+      differenceInMilliseconds(new Date(route?.arrival?.dateTime || 0), new Date(route?.departure?.dateTime || 0));
 
     switch (sortBy) {
       case sortBuy.SORT_BUY_PRICE_ASC:
-        return Math.floor(a?.ticket_pricing?.base_price || 0) - Math.floor(b?.ticket_pricing?.base_price || 0);
+        return Math.floor(a?.ticketPricing?.basePrice || 0) - Math.floor(b?.ticketPricing?.basePrice || 0);
 
       case sortBuy.SORT_BUY_PRICE_DESC:
-        return Math.floor(b?.ticket_pricing?.base_price || 0) - Math.floor(a?.ticket_pricing?.base_price || 0);
+        return Math.floor(b?.ticketPricing?.basePrice || 0) - Math.floor(a?.ticketPricing?.basePrice || 0);
 
       case sortBuy.SORT_BUY_DEPARTURE_TIME:
         return (
-          toDate(a?.departure?.date_time || new Date()).getTime() -
-          toDate(b?.departure?.date_time || new Date()).getTime()
+          toDate(a?.departure?.dateTime || new Date()).getTime() -
+          toDate(b?.departure?.dateTime || new Date()).getTime()
         );
 
       case sortBuy.SORT_BUY_ARRIVAL_TIME:
         return (
-          toDate(a?.arrival?.date_time || new Date()).getTime() - toDate(b?.arrival?.date_time || new Date()).getTime()
+          toDate(a?.arrival?.dateTime || new Date()).getTime() - toDate(b?.arrival?.dateTime || new Date()).getTime()
         );
 
       case sortBuy.SORT_BUY_TIME_ON_ROAD:

@@ -66,8 +66,8 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
   return (
     <div className={cn('flex tablet:hidden', className)}>
       <DateDuration
-        arrival={format(new Date(route?.arrival?.date_time || new Date()), 'HH:mm')}
-        departure={format(new Date(route?.departure?.date_time || new Date()), 'HH:mm')}
+        arrival={format(new Date(route?.arrival?.dateTime || new Date()), 'HH:mm')}
+        departure={format(new Date(route?.departure?.dateTime || new Date()), 'HH:mm')}
         duration={(duration && `${duration[0]}:${duration[1]}`) || ''}
       />
 
@@ -79,7 +79,7 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
               extractLocationDetails(route?.departure?.fromLocation, locale).locationName) ||
             ''
           }
-          address={route?.departure.station_address || ''}
+          address={route?.departure.stationAddress || ''}
         />
 
         <Location
@@ -89,7 +89,7 @@ export default function TicketRouteMobile({ route, className }: TTicketRouteMobi
             (route?.arrival?.toLocation && extractLocationDetails(route?.arrival?.toLocation, locale).locationName) ||
             ''
           }
-          address={route?.arrival.station_address || ''}
+          address={route?.arrival.stationAddress || ''}
         />
       </div>
     </div>
