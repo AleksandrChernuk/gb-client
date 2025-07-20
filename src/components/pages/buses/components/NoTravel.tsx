@@ -11,7 +11,7 @@ export const NoTravel = () => {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
-    <CustomCard className="flex flex-col items-center self-center gap-8 p-5 mx-auto text-center shadow-xs w-fit">
+    <CustomCard className="flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-xs w-fit">
       <Image
         src={noTravelImg}
         sizes="100vw"
@@ -21,7 +21,7 @@ export const NoTravel = () => {
         className="mx-auto overflow-hidden rounded-3xl w-[313px] h-auto"
       />
       <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50 ">
-        {t('no_travel_dates')}!
+        {t('no_travel')}!
       </h3>
     </CustomCard>
   );

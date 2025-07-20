@@ -1,0 +1,13 @@
+{
+  "payment-result-page": {
+    "order_success": "Order <number>№{orderNumber}</number> has been successfully placed",
+    "order_pending": "Payment is not completed yet. Please check payment status later.",
+    "order_error": "An error occurred while placing the order",
+    "tickets_sent": "Your tickets have been sent to the e-mail provided during checkout.",
+    "download_ticket": "Download ticket",
+    "go_home": "Home",
+    "refresh": "Refresh",
+    "ticket_will_appear": "The ticket will appear here immediately after successful payment.",
+    "ticket_filename": "Ticket"
+  }
+}

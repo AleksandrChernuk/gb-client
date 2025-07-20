@@ -15,4 +15,5 @@ export const MESSAGE_FILES = {
   PRIVACY_POLICY: 'privacy-policy',
   AGENTS_PAGE: 'agents',
   ALL_COUNTRIES: 'all-countries',
+  PAYMENT_RESULT_PAGE: 'payment-result-page',
 } as const;

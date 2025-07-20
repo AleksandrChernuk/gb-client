@@ -30,6 +30,18 @@
     "price_may_increase": "Prices may increase",
     "book_within_1": "Book your trip within ",
     "book__min": "minutes",
-    "book_within_2": " to secure your spot and avoid potential price hikes later."
+    "book_within_2": " to secure your spot and avoid potential price hikes later.",
+    "payment_confirm_title": "Payment confirmation",
+    "payment_confirm_error_title": "An error occurred",
+    "payment_confirm_error_description": "Something went wrong.",
+    "payment_confirm_final_amount": "Final amount",
+    "payment_confirm_cancel": "Cancel",
+    "payment_confirm_pay": "Pay",
+    "payment_confirm_book": "Book",
+    "payment_confirm_to_search": "Back to search",
+    "price_note": "The price may change depending on carrier load. The final amount will be known upon payment confirmation.",
+    "passenger": "Passenger",
+    "child_passenger": "Child",
+    "passenger_number": "№{number}"
   }
 }

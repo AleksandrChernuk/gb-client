@@ -1,5 +1,7 @@
 {
   "common": {
+    "try_again": "Try again",
+
     "page_in_progress": "We are working on this page to make it as helpful and convenient for you as possible. Very soon you’ll find new information and features here!",
     "errorDescription": "An unexpected error has occurred. Please try again or return to the homepage.",
     "follow_us": "Follow us",
@@ -92,8 +94,6 @@
     "collapse_route": "Collapse the entire route",
     "show_route": "Show the entire route",
     "collapse_details": "Collapse details",
-    "no_travel_dates": "No travel on these dates",
-    "something_happend": "Something happend",
     "bus": "Bus",
     "discounts": "Discounts",
     "to_be_paid": "To be paid",

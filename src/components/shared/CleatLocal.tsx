@@ -3,7 +3,7 @@
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useEffect } from 'react';
 
-function CleatLocal() {
+function ClearLocal() {
   const resetCurrentTicket = useSelectedTickets((state) => state.resetSelectedTicket);
 
   useEffect(() => {
@@ -18,4 +18,4 @@ function CleatLocal() {
   return null;
 }
 
-export default CleatLocal;
+export default ClearLocal;

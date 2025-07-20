@@ -7,7 +7,6 @@ import { ErrorTravel } from '../components/ErrorTravel';
 import { NoTravel } from '../components/NoTravel';
 import useTicketsSearch from '../hooks/useTicketsSearch';
 import { useSearchStore } from '@/store/useSearch';
-import NoLocations from '../components/NoLocations';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();
@@ -24,7 +23,8 @@ export default function ResultList() {
 
   if (!isFetching && data && data.length === 0) return <NoTravel />;
 
-  if (!from && !to) return <NoLocations />;
+  if (!from && !to) return <ErrorTravel />;
+
   return (
     <div className="flex flex-col space-y-10">
       {filteredTickets.map((route) => {

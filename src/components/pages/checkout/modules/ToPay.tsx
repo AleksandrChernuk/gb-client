@@ -13,22 +13,30 @@ const ToPay = memo(function ToPay() {
   const children = useSearchStore((state) => state.children);
   const isHydrated = useSelectedTickets((state) => state.isHydrated);
   const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t_CHECKOUT = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+
   const { control } = useFormContext();
 
   const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
   return (
     <ul>
       {isHydrated ? (
-        <ul className="flex items-center justify-between flex-wrap gap-4 ">
+        <ul className="space-y-2">
+          <ul className="flex items-center justify-between flex-wrap gap-4">
+            <li>
+              <p className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
+                {t('total_price')}
+              </p>
+            </li>
+            <li>
+              <p className="text-lg font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
+                {getTotalPriceFromPassengers(passengers)} UAH
+              </p>
+            </li>
+          </ul>
+
           <li>
-            <p className="text-base font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
-              {t('total_price')}
-            </p>
-          </li>
-          <li>
-            <p className="text-lg font-medium leading-4 tracking-normal text-slate-700 dark:text-slate-50 tablet:text-2xl tablet:leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px]">
-              {getTotalPriceFromPassengers(passengers)} UAH
-            </p>
+            <p className="text-xs text-green-300">{t_CHECKOUT('price_note')}</p>
           </li>
         </ul>
       ) : (
@@ -44,8 +52,7 @@ const ToPay = memo(function ToPay() {
               </p>
             </li>
             <li>
-              <p className="text-base font-bold tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
-                {' '}
+              <p className="text-base tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
                 {children >= 1 && `, ${t('children')}: ${children}`}
               </p>
             </li>

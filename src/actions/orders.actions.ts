@@ -29,12 +29,20 @@ const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 export const createOrder = async (body: IRequestOrder) => {
   const response = await fetch(`${BASE_URL}/orders`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
-  const data = await response.json();
+
+  let data;
+  let text;
+
+  try {
+    text = await response.text();
+    data = text ? JSON.parse(text) : { error: 'error' };
+  } catch (error) {
+    console.log('Помилка парсингу JSON:', error);
+    data = text || {};
+  }
 
   if (!response.ok) {
     console.log('Ошибка:', data);

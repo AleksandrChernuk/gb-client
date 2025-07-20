@@ -12,20 +12,15 @@ import Legal from './Legal';
 import Payment from './Payment';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import SubmitButton from '../components/SubmitButton';
-import { toast } from 'sonner';
 import useCheckoutForm from '../hooks/useCheckout';
 import ConfirmPaymentDialog from './ConfirmPaymentDialog';
 
 export default function CheckoutForm() {
-  const { methods, onSubmit, error } = useCheckoutForm();
+  const { methods, onSubmit } = useCheckoutForm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   return (
     <div>
-      {Boolean(error) &&
-        toast.error('error', {
-          description: JSON.stringify(error),
-        })}
       <form onSubmit={methods.handleSubmit(onSubmit)} className="">
         <FormProvider {...methods}>
           <ConfirmPaymentDialog />

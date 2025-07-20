@@ -46,7 +46,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(!!route.identificators.rideId && { rideId: route.identificators.rideId }),
     ...(!!route.identificators.tripId && { tripId: route.identificators.tripId }),
     ...(!!route.identificators.intervalId && { intervalId: route.identificators.intervalId }),
-    ...(!!route.identificators.busId && { busId: route.identificators.busId }),
+    ...(!!route.identificators.busId && { busId: `${route.identificators.busId}` }),
     ...(!!route.identificators.routeName && { routeName: route.identificators.routeName }),
     canPaymentToDriver: !!route.allowedOperations.canPaymentToDriver,
     ...(typeof route.identificators.metadata === 'object' && route.identificators.metadata !== null
@@ -73,10 +73,11 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     ...(!!route.arrival.stationCoordsLat && { toStationLat: Number(route.arrival.stationCoordsLat) }),
     ...(!!route.arrival.stationCoordsLon && { toStationLon: Number(route.arrival.stationCoordsLon) }),
-    departureDateTime: `${route.departure.dateTime && route.departure.dateTime}`,
-    arrivalDateTime: `${route.arrival.dateTime && route.arrival.dateTime}`,
+    departureDateTime: route.departure.dateTime ? `${route.departure.dateTime}` : '',
+    arrivalDateTime: route.arrival.dateTime ? `${route.arrival.dateTime}` : '',
     ...(!!route.carrier.id && { carrierId: `${route.carrier.id}` }),
     ...(!!route.carrier.name && { carrierName: route.carrier.name }),
+
     tripType: 'oneway',
     orderType: formData.payment,
     currency: 'UAH',

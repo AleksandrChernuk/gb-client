@@ -35,7 +35,7 @@ function useCheckout() {
     () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
     [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
   );
-
+  console.log(ticket);
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],

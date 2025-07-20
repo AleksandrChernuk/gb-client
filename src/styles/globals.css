@@ -143,6 +143,7 @@
 
   --breakpoint-xs: 375px;
   --breakpoint-md: 425px;
+  --breakpoint-sm: 500px;
   --breakpoint-lg: 560px;
   --breakpoint-tablet: 768px;
   --breakpoint-laptop: 1280px;

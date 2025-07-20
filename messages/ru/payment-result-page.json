@@ -1,0 +1,13 @@
+{
+  "payment-result-page": {
+    "order_success": "Заказ <number>№{orderNumber}</number> успешно оформлен",
+    "order_pending": "Платёж ещё не завершён. Проверьте статус оплаты позже.",
+    "order_error": "Произошла ошибка при оформлении заказа",
+    "tickets_sent": "Ваши билеты отправлены на e-mail, указанный при оформлении.",
+    "download_ticket": "Скачать билет",
+    "go_home": "На главную",
+    "refresh": "Обновить",
+    "ticket_will_appear": "Билет появится здесь сразу после успешной оплаты.",
+    "ticket_filename": "Билет"
+  }
+}

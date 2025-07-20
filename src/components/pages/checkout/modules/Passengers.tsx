@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -13,7 +14,7 @@ export default function Passengers() {
   const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const { control } = useFormContext();
   const { fields } = useFieldArray({ control, name: 'passengers' });
-
+  console.log(fields);
   const ticket = useSelectedTickets((state) => state.selectedTicket);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
@@ -28,7 +29,8 @@ export default function Passengers() {
       <li>
         <ul className="space-y-6">
           {fields.map((field, i) => (
-            <PassengerCard i={i} key={field.id} providerConfig={providerConfig} />
+            //@ts-ignore
+            <PassengerCard isChild={field.isChildren} i={i} key={field.id} providerConfig={providerConfig} />
           ))}
         </ul>
       </li>

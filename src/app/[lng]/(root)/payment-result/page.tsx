@@ -1,4 +1,4 @@
-import SuccessPage from '@/components/pages/payment-result';
+import PaymentResultPage from '@/components/pages/payment-result';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -66,5 +66,5 @@ export default async function Success({ params, searchParams }: Props) {
 
   setRequestLocale(lng as Locale);
 
-  return <SuccessPage payment_id={payment_id} />;
+  return <PaymentResultPage payment_id={payment_id} />;
 }
