@@ -45,6 +45,9 @@ export default async function MainLayout({
   return (
     <NextIntlClientProvider>
       <html lang={lng} suppressHydrationWarning className="scroll-smooth">
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        </head>
         <body className={`${notoSans.className} antialiased`} suppressHydrationWarning>
           <GTMNoScript />
           <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
