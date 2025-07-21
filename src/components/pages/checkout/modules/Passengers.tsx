@@ -14,7 +14,6 @@ export default function Passengers() {
   const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const { control } = useFormContext();
   const { fields } = useFieldArray({ control, name: 'passengers' });
-  console.log(fields);
   const ticket = useSelectedTickets((state) => state.selectedTicket);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 

@@ -42,11 +42,11 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
 
   return {
     providerId: route.identificators.providerId,
-    ...(!!route.identificators.routeId && { routeId: `${route.identificators.routeId}` }),
+    ...(!!route.identificators.routeId && { routeId: route.identificators.routeId }),
     ...(!!route.identificators.rideId && { rideId: route.identificators.rideId }),
     ...(!!route.identificators.tripId && { tripId: route.identificators.tripId }),
     ...(!!route.identificators.intervalId && { intervalId: route.identificators.intervalId }),
-    ...(!!route.identificators.busId && { busId: `${route.identificators.busId}` }),
+    ...(!!route.identificators.busId && { busId: route.identificators.busId }),
     ...(!!route.identificators.routeName && { routeName: route.identificators.routeName }),
     canPaymentToDriver: !!route.allowedOperations.canPaymentToDriver,
     ...(typeof route.identificators.metadata === 'object' && route.identificators.metadata !== null

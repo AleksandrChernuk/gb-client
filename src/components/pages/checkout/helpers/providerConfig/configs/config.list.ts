@@ -22,12 +22,14 @@ export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
     label: 'discounts',
     type: 'discount',
     placeholder: 'discounts_placeholder',
-    options: (currentTicket?.details?.discounts || []).map((d) => ({
-      value: d.id ?? '',
-      label: d.name && d.description ? `${d.name}, ${d.description}` : d.name || d.description || '',
-      discount_description: d.description ? d.description : undefined,
-      discount_percent: d.percent ? `${d.percent}` : undefined,
-    })),
+    options: (currentTicket?.details?.discounts || [])
+      .filter((d) => d.id !== '1210')
+      .map((d) => ({
+        value: d.id ?? '',
+        label: d.name && d.description ? `${d.name}, ${d.description}` : d.name || d.description || '',
+        discount_description: d.description ? d.description : undefined,
+        discount_percent: d.percent ? `${d.percent}` : undefined,
+      })),
 
     schema: z.string().optional(),
   };

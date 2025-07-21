@@ -27,10 +27,10 @@ export default function ConfirmPaymentDialog() {
   const { handleCancelOrder, handlePayOrder, handleConfirmlOrder, payLoading } = usePaymantConfirm();
   const paymentType = useWatch({ control, name: 'payment' });
 
-  const isError = !!initiateNewOrder?.error;
+  const isError = initiateNewOrder?.status === 'error';
   const title = isError ? t('payment_confirm_error_title') : t('payment_confirm_title');
   const description = isError ? (
-    initiateNewOrder?.error || t('payment_confirm_error_description')
+    <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>
   ) : (
     <div className="text-center">
       <p className="text-base">{t('payment_confirm_final_amount')}</p>
@@ -51,6 +51,7 @@ export default function ConfirmPaymentDialog() {
         size: 'primery' as const,
         onClick: () => router.back(),
         disabled: false,
+        className: 'text-slate-800',
       }
     : paymentType !== 'BOOK'
       ? {
@@ -67,7 +68,6 @@ export default function ConfirmPaymentDialog() {
           onClick: handlePayOrder,
           disabled: payLoading,
         };
-
   return (
     <Dialog open={!!initiateNewOrder}>
       <DialogContent className="sm:max-w-[512px] mx-auto rounded-2xl sm:rounded-2xl gap-6">
@@ -82,7 +82,13 @@ export default function ConfirmPaymentDialog() {
 
         <DialogFooter className={`grid grid-cols-1 gap-4 ${!isError ? 'md:grid-cols-2' : ''}`}>
           {!isError && (
-            <Button variant={'outline'} size={'primery'} onClick={handleCancelOrder} disabled={payLoading}>
+            <Button
+              variant={'outline'}
+              size={'primery'}
+              onClick={handleCancelOrder}
+              disabled={payLoading}
+              className="text-slate-800"
+            >
               Скасувати <TicketX />
             </Button>
           )}

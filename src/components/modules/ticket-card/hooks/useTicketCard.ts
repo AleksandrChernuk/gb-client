@@ -21,7 +21,6 @@ export default function useTicketCard() {
 
   const handleSetTicket = async (id: string, element: IRouteResponse) => {
     if (!element) return;
-    console.log('setSelectedTicket');
     await setSelectedTicket({
       route: element,
       toCityId: to?.id,

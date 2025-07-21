@@ -35,7 +35,6 @@ function useCheckout() {
     () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
     [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
   );
-  console.log(ticket);
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],
@@ -63,17 +62,6 @@ function useCheckout() {
     try {
       setLoadingResult(true);
 
-      console.log(
-        'normalizeData',
-        normalizeData({
-          fromCityId: from,
-          toCityId: to,
-          locale,
-          formData,
-          route: ticket,
-          user,
-        }),
-      );
       const res = await createOrder(
         normalizeData({
           fromCityId: from,

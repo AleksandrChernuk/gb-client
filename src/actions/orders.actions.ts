@@ -33,23 +33,12 @@ export const createOrder = async (body: IRequestOrder) => {
     body: JSON.stringify(body),
   });
 
-  let data;
-  let text;
-
-  try {
-    text = await response.text();
-    data = text ? JSON.parse(text) : { error: 'error' };
-  } catch (error) {
-    console.log('Помилка парсингу JSON:', error);
-    data = text || {};
-  }
-
   if (!response.ok) {
-    console.log('Ошибка:', data);
-    throw new Error(data?.message || 'Error');
+    return { error: 'error' };
   }
 
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 export const cancelOrder = async (body: ICancelBody, myOrderId: string) => {
@@ -67,8 +56,6 @@ export const cancelOrder = async (body: ICancelBody, myOrderId: string) => {
 
     throw new Error('Error');
   }
-  const res = await response.json();
-  console.log(res);
   return null;
 };
 

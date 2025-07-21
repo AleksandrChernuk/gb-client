@@ -11,7 +11,7 @@ export const RefreshButton = () => {
   const t = useTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
 
   return (
-    <Button variant="outline" size="primery" onClick={() => router.refresh()}>
+    <Button variant="outline" size="primery" onClick={() => router.refresh()} className="text-slate-800">
       {t('refresh')} <RefreshCcw />
     </Button>
   );

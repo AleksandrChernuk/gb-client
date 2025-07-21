@@ -59,8 +59,9 @@ export const useTicketsDetails = create<TicketsDetailsStore>()(
         try {
           const rawData = {
             ...(!!route.identificators.routeId ? { routeId: `${route.identificators.routeId}` } : {}),
-            intervalId: route.identificators.intervalId || '',
-            ...(!!route.identificators.busId ? { busId: route.identificators.busId } : {}),
+            ...(!!route.identificators.intervalId ? { intervalId: `${route.identificators.intervalId}` } : {}),
+            ...(!!route.identificators.busId ? { busId: `${route.identificators.busId}` } : {}),
+            ...(!!route.identificators.searchId ? { busId: `${route.identificators.searchId}` } : {}),
             fromCityId,
             toCityId,
             fromStationId: `${route.departure.stationId}`,
@@ -75,13 +76,13 @@ export const useTicketsDetails = create<TicketsDetailsStore>()(
             ...(!!route.identificators.bustypeId ? { bustypeId: route.identificators.bustypeId } : {}),
             ...(!!route.identificators.hasPlan ? { has_plan: route.identificators.hasPlan } : {}),
             ...(!!route.identificators.requestGetFreeSeats
-              ? { request_get_free_seats: route.identificators.requestGetFreeSeats }
+              ? { requestGetFreeSeats: route.identificators.requestGetFreeSeats }
               : {}),
             ...(!!route.identificators.requestGetDiscount
-              ? { request_get_discount: route.identificators.requestGetDiscount }
+              ? { requestGetDiscount: route.identificators.requestGetDiscount }
               : {}),
             ...(!!route.identificators.requestGetBaggage
-              ? { request_get_baggage: route.identificators.requestGetBaggage }
+              ? { requestGetBaggage: route.identificators.requestGetBaggage }
               : {}),
           };
 
