@@ -33,7 +33,12 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       route.providerName === 'INFOBUS'
         ? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber
         : formData.selected_seats[idx]?.number,
-    ...(!!p.discount && { discountId: p.discount }),
+    ...(!!p.discount && {
+      discountId:
+        route?.providerName === 'TRANSTEMPO'
+          ? route?.details?.discounts && route?.details?.discounts[0].id
+          : p.discount,
+    }),
     ...(!!p.discountDescription && { discountDescription: p.discountDescription }),
     ...(!!p.discountPercent && { discountPercent: p.discountPercent }),
     withFees: true,
