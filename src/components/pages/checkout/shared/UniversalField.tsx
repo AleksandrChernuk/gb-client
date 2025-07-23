@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import TextInput from './TextInput';
 import UniversalSelect from './UniversalSelect';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 import CitizenshipSelect from './CitizenshipSelect';
 import DiscountSelect from './DiscountSelect';
 import { DateBirthPicker } from './DateBirthPicker';

@@ -15,26 +15,24 @@ type NormalizeDataParams = {
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const tickets = formData.passengers.map((p: any, idx: string | number) => ({
-    firstName: p.first_name,
-    lastName: p.last_name,
+    firstName: p.firstName,
+    lastName: p.lastName,
     ...(!!p.middlename && { middlename: p.middlename }),
     ...(!!p.bday && { birthdate: p.bday }),
-    ...(!!p.document_type && { documentType: p.document_type }),
-    ...(!!p.document_number && { documentNumber: p.document_number }),
+    ...(!!p.documentType && { documentType: p.documentType }),
+    ...(!!p.documentNumber && { documentNumber: p.documentNumber }),
     ...(!!p.gender && { gender: p.gender }),
     ...(!!p.citizenship && { citizenship: p.citizenship }),
     phone: formData.phone,
     email: formData.email,
-    seatId:
-      route.providerName === 'INFOBUS'
-        ? route.details?.freeSeatsMap?.[Number(idx)]?.seatId
-        : formData.selected_seats[idx]?.id,
-    seatNumber:
-      route.providerName === 'INFOBUS'
-        ? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber
-        : formData.selected_seats[idx]?.number,
-    ...(!!p.discount && {
-      discountId: p.discount,
+    seatId: !route?.details?.seatsMap
+      ? route.details?.freeSeatsMap?.[Number(idx)]?.seatId
+      : formData.selected_seats[idx]?.id,
+    seatNumber: !route?.details?.seatsMap
+      ? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber
+      : formData.selected_seats[idx]?.number,
+    ...(!!p.discountId && {
+      discountId: p.discountId,
     }),
     ...(route?.providerName === 'TRANSTEMPO' &&
       route?.details?.discounts && {
@@ -42,6 +40,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       }),
     ...(!!p.discountDescription && { discountDescription: p.discountDescription }),
     ...(!!p.discountPercent && { discountPercent: p.discountPercent }),
+
     withFees: true,
     buggageCount: 1,
   })) as RequestTicket[];

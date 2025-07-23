@@ -2,7 +2,7 @@ import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectGroup } from '@/components/ui/select';
 import { useController, useFormContext } from 'react-hook-form';
 import { memo } from 'react';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Trash } from 'lucide-react';

@@ -19,19 +19,19 @@ export type SeatBlock = {
 };
 
 export type Passenger = {
-  first_name: '';
+  firstName: '';
   isChildren: boolean;
-  last_name: '';
+  lastName: '';
   price: number;
   bday?: string;
   discount?: string;
-  discount_description?: string;
-  discount_id?: string;
-  discount_percent?: string;
-  document_type?: string;
-  expiry_date?: string;
+  discountDescription?: string;
+  discountId?: string;
+  discountPercent?: string;
+  documentType?: string;
+  expiryDate?: string;
   gender?: 'M' | 'F';
   citizenship?: string;
   middlename?: string;
-  document_number?: string;
+  documentNumber?: string;
 };

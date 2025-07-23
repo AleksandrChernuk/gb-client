@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from '@
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import countryList from 'react-select-country-list';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';

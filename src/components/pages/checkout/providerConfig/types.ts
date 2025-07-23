@@ -5,7 +5,7 @@ export type providerConfig = {
   fields: Record<string, FieldConfig>;
 };
 export type SelectOption = { value: string; label: string };
-export type DiscountOption = { value: string; label: string; discount_description?: string; discount_percent?: string };
+export type DiscountOption = { value: string; label: string; discountDescription?: string; discountPercent?: string };
 
 export type FieldConfig =
   | {

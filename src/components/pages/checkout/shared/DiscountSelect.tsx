@@ -4,7 +4,7 @@ import { FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectGroup } from '@/components/ui/select';
 import { useController, useFormContext } from 'react-hook-form';
 import { memo } from 'react';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { Trash } from 'lucide-react';
@@ -20,14 +20,14 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
   const { control, setValue } = useFormContext();
   const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
-  const { field: fieldDiscountId } = useController({ name: `passengers.${i}.discount_id`, control });
+  const { field: fieldDiscountId } = useController({ name: `passengers.${i}.discountId`, control });
 
   const { field: fieldDiscountDescription } = useController({
-    name: `passengers.${i}.discount_description`,
+    name: `passengers.${i}.discountDescription`,
     control,
   });
 
-  const { field: fieldDiscountPercent } = useController({ name: `passengers.${i}.discount_percent`, control });
+  const { field: fieldDiscountPercent } = useController({ name: `passengers.${i}.discountPercent`, control });
 
   const {
     field: { value, onChange },
@@ -42,7 +42,7 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
     const option = config.options.find((opt) => opt.value === value);
     fieldDiscountId.onChange(value);
     fieldDiscountDescription.onChange(option?.label ?? '');
-    fieldDiscountPercent.onChange(option?.discount_percent ?? undefined);
+    fieldDiscountPercent.onChange(option?.discountPercent ?? undefined);
   };
 
   return (

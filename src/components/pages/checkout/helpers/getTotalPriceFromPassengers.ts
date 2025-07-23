@@ -8,7 +8,7 @@ export function getTotalPriceFromPassengers(passengers: Passenger[]): number {
       return sum;
     }
 
-    const discountRaw = passenger.discount_percent?.trim();
+    const discountRaw = passenger.discountPercent?.trim();
     const discount = discountRaw ? parseFloat(discountRaw) : NaN;
 
     let finalPrice = basePrice;
@@ -30,7 +30,7 @@ export function getPriceFromPassenger(passenger: Passenger): number {
     return 0;
   }
 
-  const discountRaw = passenger.discount_percent?.trim();
+  const discountRaw = passenger.discountPercent?.trim();
   const discount = discountRaw ? parseFloat(discountRaw) : NaN;
 
   let finalPrice = basePrice;

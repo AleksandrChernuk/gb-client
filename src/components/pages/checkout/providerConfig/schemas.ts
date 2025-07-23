@@ -10,7 +10,7 @@ export const bdaySchema = z
   .refine(
     (value) => {
       if (!value) return true;
-      const date = parse(value, 'dd.MM.yyyy', new Date());
+      const date = parse(value, 'yyyy-MM-dd', new Date());
       if (!isValid(date)) return false;
       const now = new Date();
       const minDate = subYears(now, 100);
@@ -31,7 +31,7 @@ export const passportExpirySchema = (departureDate: Date) =>
     .min(1, { message: 'required' })
     .refine(
       (value) => {
-        const date = parse(value, 'dd.MM.yyyy', new Date());
+        const date = parse(value, 'yyyy-MM-dd', new Date());
 
         if (!isValid(date)) return false;
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ProviderConfig } from './providerConfig/types';
+import { ProviderConfig } from '../providerConfig/types';
 
 export function createEmptyPassenger(config: ProviderConfig, isChildren = false, price: number) {
   const passengers: Record<string, any> = {};
@@ -15,9 +15,9 @@ export function createEmptyPassenger(config: ProviderConfig, isChildren = false,
   const discountField = config.fields.discount;
 
   if (discountField) {
-    passengers.discount_id = '';
-    passengers.discount_description = '';
-    passengers.discount_percent = '';
+    passengers.discountId = '';
+    passengers.discountDescription = '';
+    passengers.discountPercent = '';
   }
 
   return passengers;

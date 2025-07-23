@@ -1,7 +1,7 @@
 import { CustomCard } from '@/components/shared/CustomCard';
 import { memo } from 'react';
 import UniversalField from './UniversalField';
-import { ProviderConfig } from '../helpers/providerConfig/types';
+import { ProviderConfig } from '../providerConfig/types';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 

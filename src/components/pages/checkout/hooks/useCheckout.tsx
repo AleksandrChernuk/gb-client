@@ -10,12 +10,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale } from 'next-intl';
 import normalizeData from '../helpers/normalizeData';
 import { z } from 'zod';
-import { getCheckoutSchemaForProvider } from '../helpers/providerConfig/schemas';
-import { getProviderConfigByName } from '../helpers/providerConfig';
+import { getCheckoutSchemaForProvider } from '../providerConfig/schemas';
+import { getProviderConfigByName } from '../providerConfig';
 import { toast } from 'sonner';
-import { createOrder } from '@/actions/orders.actions';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useNewOrderResult } from '@/store/useOrderResult';
+import { createOrder } from '@/actions/orders.actions';
 
 function useCheckout() {
   const locale = useLocale();
@@ -61,7 +61,17 @@ function useCheckout() {
 
     try {
       setLoadingResult(true);
-
+      console.log(
+        'normalizeData',
+        normalizeData({
+          fromCityId: from,
+          toCityId: to,
+          locale,
+          formData,
+          route: ticket,
+          user,
+        }),
+      );
       const res = await createOrder(
         normalizeData({
           fromCityId: from,
@@ -81,6 +91,7 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
+
   return { methods, onSubmit, error, loading };
 }
 

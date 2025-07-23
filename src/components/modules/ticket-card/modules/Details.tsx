@@ -13,6 +13,7 @@ import { MainLoader } from '@/components/shared/MainLoader';
 import SwiperImages from '@/components/shared/SwiperImages';
 import useDateLocale from '@/hooks/useDateLocale';
 import { useTicketsDetails } from '@/store/useTicketsDetails';
+import { isEmptyDiscounts } from '@/utils/isEmptyDiscounts';
 
 type Props = {
   id: string;
@@ -32,7 +33,6 @@ export default function Details({ id }: Props) {
         <MainLoader />
       </div>
     );
-
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
       <div className="space-y-4">
@@ -87,15 +87,20 @@ export default function Details({ id }: Props) {
         </DetailsList>
 
         <DetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
-          {toArray(ticketDetails?.details?.amenities).map((el) => (
-            <DetailsItem key={el}>{el}</DetailsItem>
-          ))}
+          {!!ticketDetails?.details?.amenities?.length && (
+            <DetailsItem>{toArray(ticketDetails?.details?.amenities).join(', ')}</DetailsItem>
+          )}
         </DetailsList>
 
         <DetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
-          {toArray(ticketDetails?.details?.discounts).map((el) => (
-            <DetailsItem key={el.id}>{el.description || el.name}</DetailsItem>
-          ))}
+          {!isEmptyDiscounts(ticketDetails?.details?.discounts) && (
+            <DetailsItem>
+              {toArray(ticketDetails?.details?.discounts)
+                .map((d) => d.description || d.name)
+                .filter(Boolean)
+                .join(', ')}
+            </DetailsItem>
+          )}
         </DetailsList>
 
         <DetailsList label={t('bus')} listClassName=" flex-wrap">

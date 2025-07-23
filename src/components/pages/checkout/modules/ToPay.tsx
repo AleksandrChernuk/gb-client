@@ -4,9 +4,9 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { Passenger } from '../types';
 import { getTotalPriceFromPassengers } from '../helpers/getTotalPriceFromPassengers';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
+import { Passenger } from '../types';
 
 const ToPay = memo(function ToPay() {
   const adult = useSearchStore((state) => state.adult);

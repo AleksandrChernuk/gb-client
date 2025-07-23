@@ -7,7 +7,7 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import PassengerCard from '../shared/PassengerCard';
 import { useMemo } from 'react';
-import { getProviderConfigByName } from '../helpers/providerConfig';
+import { getProviderConfigByName } from '../providerConfig';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 
 export default function Passengers() {

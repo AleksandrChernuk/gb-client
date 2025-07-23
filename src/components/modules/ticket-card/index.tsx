@@ -35,7 +35,6 @@ export const TicketCard = ({ element }: Props) => {
   const hasDetails = tickets[element.ticketId]?.details != null;
 
   const [isPending, startTransition] = useTransition();
-
   const handleSelect = () => {
     if (loadingSelectTicket) return;
     if (!element.ticketPricing.basePrice) return;

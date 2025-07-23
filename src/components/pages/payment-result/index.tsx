@@ -24,7 +24,7 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
         <section className="py-5">
           <Container size="xs" className="w-full">
             <div className="space-y-6">
-              <h1>
+              <h1 className="text-xl tablet:text-2xl text-center">
                 {resOrder?.status === 'success'
                   ? t.rich('order_success', {
                       orderNumber: resOrder?.orderNumber,
@@ -36,7 +36,7 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
               </h1>
 
               {resOrder?.status === 'success' && (
-                <h3 className="text-center text-slate-700 dark:text-slate-50">
+                <h3 className="text-center text-slate-700 dark:text-slate-50 text-lg tablet:text-xl">
                   {resOrder?.message === 'Payment is pending' ? t('ticket_will_appear') : t('tickets_sent')}
                 </h3>
               )}
@@ -49,7 +49,7 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
                 {resOrder?.status === 'success' && (
                   <div>
                     {pdfBase64 && (
-                      <Button asChild variant={'outline'} size={'primery'}>
+                      <Button asChild variant={'outline'} size={'primery'} className="text-black">
                         <a
                           href={`data:application/pdf;base64,${pdfBase64}`}
                           download={`${t('ticket_filename')}_${resOrder.orderNumber}.pdf`}

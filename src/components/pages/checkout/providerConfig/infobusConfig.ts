@@ -1,37 +1,37 @@
-import { ProviderConfig } from '../types';
+import { ProviderConfig } from './types';
 import { IRouteResponse } from '@/types/route.types';
 
 import {
   bday,
   citizenship,
   discount,
-  document_number,
-  document_type,
+  documentNumber,
+  documentType,
   expiryDate,
-  first_name,
+  firstName,
   gender,
-  last_name,
+  lastName,
   middlename,
 } from './config.list';
-import { FIELDS } from '../constans';
+import { FIELDS } from './constans';
 
 const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const hasDiscounts = !!currentTicket?.details?.discounts?.length;
 
   return {
     required: [
-      FIELDS.first_name,
-      FIELDS.last_name,
+      FIELDS.firstName,
+      FIELDS.lastName,
       ...(currentTicket?.details?.needMiddlename ? [FIELDS.middlename] : []),
       ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
       ...(currentTicket?.details?.needCitizenship ? [FIELDS.citizenship] : []),
-      ...(currentTicket?.details?.needDoc ? [FIELDS.document_type, FIELDS.document_number] : []),
+      ...(currentTicket?.details?.needDoc ? [FIELDS.documentType, FIELDS.documentNumber] : []),
       ...(currentTicket?.details?.needDocExpireDate ? [FIELDS.expiryDate] : []),
       ...(currentTicket?.details?.needGender ? [FIELDS.gender] : []),
     ],
     fields: {
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       ...(currentTicket?.details?.needMiddlename
         ? {
             middlename,
@@ -50,8 +50,8 @@ const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
         : {}),
       ...(currentTicket?.details?.needDoc
         ? {
-            document_type,
-            document_number,
+            documentType,
+            documentNumber,
           }
         : {}),
       ...(currentTicket?.details?.needDocExpireDate

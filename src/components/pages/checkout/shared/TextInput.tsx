@@ -8,7 +8,7 @@ import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { memo } from 'react';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 
 type Props = {
   name: string;

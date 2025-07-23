@@ -38,6 +38,7 @@ export const createOrder = async (body: IRequestOrder) => {
   }
 
   const res = await response.json();
+  console.log(res);
   return res;
 };
 

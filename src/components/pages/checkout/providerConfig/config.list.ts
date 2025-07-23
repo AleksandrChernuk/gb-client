@@ -1,16 +1,16 @@
 import { IRouteResponse } from '@/types/route.types';
 import { z } from 'zod';
-import { bdaySchema, passportExpirySchema } from '../schemas';
-import { FieldConfig } from '../types';
+import { FieldConfig } from './types';
+import { bdaySchema, passportExpirySchema } from './schemas';
 
-export const first_name: FieldConfig = {
+export const firstName: FieldConfig = {
   label: 'first_name',
   type: 'text',
   placeholder: 'first_name_placeholder',
   schema: z.string().min(1, { message: 'required' }),
 };
 
-export const last_name: FieldConfig = {
+export const lastName: FieldConfig = {
   label: 'last_name',
   type: 'text',
   placeholder: 'last_name_placeholder',
@@ -27,8 +27,8 @@ export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
       .map((d) => ({
         value: d.id ?? '',
         label: d.name && d.description ? `${d.name}, ${d.description}` : d.name || d.description || '',
-        discount_description: d.description ? d.description : undefined,
-        discount_percent: d.percent ? `${d.percent}` : undefined,
+        discountDescription: d.description ? d.description : undefined,
+        discountPercent: d.percent ? `${d.percent}` : undefined,
       })),
 
     schema: z.string().optional(),
@@ -42,7 +42,7 @@ export const bday: FieldConfig = {
   schema: bdaySchema.optional(),
 };
 
-export const document_type: FieldConfig = {
+export const documentType: FieldConfig = {
   label: 'document_type',
   type: 'select',
   placeholder: 'document_type_placeholder',
@@ -56,7 +56,7 @@ export const document_type: FieldConfig = {
   schema: z.string().min(1, { message: 'required' }),
 };
 
-export const document_type_octobus: FieldConfig = {
+export const documentTypeOctobus: FieldConfig = {
   label: 'document_type',
   type: 'select',
   placeholder: 'document_type_placeholder',
@@ -74,7 +74,7 @@ export const document_type_octobus: FieldConfig = {
   schema: z.string().min(1, { message: 'required' }),
 };
 
-export const document_number: FieldConfig = {
+export const documentNumber: FieldConfig = {
   label: 'document_number',
   type: 'text',
   placeholder: 'document_number_placeholder',

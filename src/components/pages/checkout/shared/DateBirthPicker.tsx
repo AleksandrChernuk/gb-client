@@ -5,7 +5,7 @@ import { ChevronDownIcon, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { FieldConfig } from '../helpers/providerConfig/types';
+import { FieldConfig } from '../providerConfig/types';
 import { useController, useFormContext } from 'react-hook-form';
 import useDateLocale from '@/hooks/useDateLocale';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
@@ -21,7 +21,7 @@ type Props = {
 };
 function parseDate(value: string): Date | undefined {
   if (!value) return undefined;
-  const date = parse(value, 'dd.MM.yyyy', new Date());
+  const date = parse(value, 'yyyy-MM-dd', new Date());
   return isValid(date) ? date : undefined;
 }
 export function DateBirthPicker({ name, config }: Props) {
@@ -70,7 +70,7 @@ export function DateBirthPicker({ name, config }: Props) {
                   captionLayout="dropdown"
                   onSelect={(date) => {
                     if (date) {
-                      onChange(format(date, 'dd.MM.yyyy'));
+                      onChange(format(date, 'yyyy-MM-dd'));
                     }
                     setOpen(false);
                   }}
