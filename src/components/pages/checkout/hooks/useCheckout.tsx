@@ -47,31 +47,18 @@ function useCheckout() {
       payment: 'BOOK',
       accept_rules: false,
       phone: '',
-      selected_seats: [],
+      selectedSeats: [],
     },
     mode: 'onSubmit',
   });
-
   const onSubmit = async (formData: z.infer<typeof schema>) => {
     if (!ticket || !from || !to) {
       setError('no data');
       toast.error('no data');
       return;
     }
-
     try {
       setLoadingResult(true);
-      console.log(
-        'normalizeData',
-        normalizeData({
-          fromCityId: from,
-          toCityId: to,
-          locale,
-          formData,
-          route: ticket,
-          user,
-        }),
-      );
       const res = await createOrder(
         normalizeData({
           fromCityId: from,
@@ -91,7 +78,6 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
-
   return { methods, onSubmit, error, loading };
 }
 

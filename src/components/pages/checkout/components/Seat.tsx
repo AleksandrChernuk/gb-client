@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import IconSeat from '../icons/IconSeat';
 
 type Props = {
-  seat_number: string | null;
+  seatNumber: string | null;
   className?: string;
   isFree?: boolean;
   available?: boolean;
@@ -11,7 +11,7 @@ type Props = {
   onClick: () => void;
 };
 
-export default function Seat({ seat_number, className, isSelected, isFree, available, onClick }: Props) {
+export default function Seat({ seatNumber, className, isSelected, isFree, available, onClick }: Props) {
   return (
     <div
       role="button"
@@ -34,7 +34,7 @@ export default function Seat({ seat_number, className, isSelected, isFree, avail
           isSelected && 'text-green-100 dark:text-green-100',
         )}
       >
-        {isFree ? seat_number : <X className="stroke-slate-200 dark:stroke-slate-700" />}
+        {isFree ? seatNumber : <X className="stroke-slate-200 dark:stroke-slate-700" />}
       </div>
     </div>
   );

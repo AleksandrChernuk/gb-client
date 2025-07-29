@@ -36,7 +36,7 @@ const Booking = memo(function Booking() {
     fieldState: { error },
   } = useController({
     control,
-    name: 'selected_seats',
+    name: 'selectedSeats',
   });
 
   const passengers = useWatch({ control, name: 'passengers' });
@@ -55,7 +55,7 @@ const Booking = memo(function Booking() {
             variant={'outline'}
             type="button"
             aria-invalid={Boolean(error)}
-            className=" flex items-center justify-between w-full h-auto p-2 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 text-ellipsis"
+            className="flex items-center justify-between w-full h-auto p-2 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 text-ellipsis"
           >
             <div className="flex items-center gap-2 tablet:gap-4">
               <div className="[&_svg]:fill-[#6f8b90] w-[45px] h-[56px]">

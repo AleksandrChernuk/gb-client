@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { ISeat, ISeatRow } from '@/types/seat.interface';
 import IconHelm from '../icons/IconHelm';
 import { toast } from 'sonner';
 import { memo } from 'react';
 import Seat from '../components/Seat';
+import { ISeat, SeatRow } from '../types';
 
 type Props = {
   helm?: boolean;
-  seatRows: ISeatRow[];
+  seatRows: SeatRow[];
 };
 
 const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
@@ -16,12 +16,12 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
 
   const [selectedSeats, passengers] = useWatch({
     control,
-    name: ['selected_seats', 'passengers'],
+    name: ['selectedSeats', 'passengers'],
   });
   const passengersCount = passengers.length;
 
   const { append, remove } = useFieldArray({
-    name: 'selected_seats',
+    name: 'selectedSeats',
     control: control,
   });
 
@@ -29,7 +29,8 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
     if (!seat) return;
 
     const isSelectedIndex = selectedSeats.findIndex(
-      (el: ISeat) => (seat.id && el.id === seat.id) || (seat.number && el.number === seat.number),
+      (el: ISeat) =>
+        (seat.seatId && el.seatId === seat.seatId) || (seat.seatNumber && el.seatNumber === seat.seatNumber),
     );
 
     if (isSelectedIndex !== -1) {
@@ -64,14 +65,16 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
                 <Seat
                   onClick={() => handleSetSeats(seat)}
                   key={`${rowIndex}-${seatIndex}`}
-                  seat_number={seat.number}
+                  seatNumber={seat.seatNumber}
                   available={seat.type === 'SEAT' && seat.status === 'FREE'}
                   isFree={seat.status === 'FREE'}
                   //@ts-ignore
                   isSelected={selectedSeats.some(
                     //@ts-ignore
 
-                    (e) => (seat.id && e.id === seat.id) || (seat.number && e.number === seat.number),
+                    (e) =>
+                      (seat.seatId && e.seatId === seat.seatId) ||
+                      (seat.seatNumber && e.seatNumber === seat.seatNumber),
                   )}
                 />
               ) : (

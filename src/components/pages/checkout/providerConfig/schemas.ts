@@ -2,7 +2,7 @@ import { z, ZodTypeAny } from 'zod';
 
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { FieldConfig, ProviderConfig } from './types';
-import { parse, isValid, isBefore, subYears, subDays, isAfter, endOfDay } from 'date-fns';
+import { parse, isValid, subYears, subDays, isAfter, endOfDay } from 'date-fns';
 
 export const bdaySchema = z
   .string()
@@ -17,8 +17,6 @@ export const bdaySchema = z
       const maxDate = endOfDay(now);
 
       return isAfter(date, minDate) && !isAfter(date, maxDate);
-
-      return isBefore(minDate, date) === false && isBefore(date, maxDate);
     },
     {
       message: 'invalid_date',
@@ -55,6 +53,9 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
     if (!config.fields[fieldName]) continue;
     shape[fieldName] = getFieldSchema(config.fields[fieldName]);
   }
+  shape.discountPercent = z.string().optional();
+  shape.discountDescription = z.string().optional();
+  shape.discountId = z.string().optional();
 
   const baseSchema = z.object(shape);
 
@@ -97,14 +98,14 @@ export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, has
         ),
       payment: z.enum(['BOOK', 'PAYMENT_AT_BOARDING']),
       accept_rules: z.boolean().refine((v) => v === true, { message: 'required' }),
-      selected_seats: z.array(seatSchema).optional(),
+      selectedSeats: z.array(seatSchema).optional(),
     })
     .superRefine((data, ctx) => {
       if (!hasFreeSeats) return;
-      if (!Array.isArray(data.selected_seats) || data.selected_seats.length < data.passengers.length) {
+      if (!Array.isArray(data.selectedSeats) || data.selectedSeats.length < data.passengers.length) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          path: ['selected_seats'],
+          path: ['selectedSeats'],
           message: 'seats_for_all_passengers',
         });
       }

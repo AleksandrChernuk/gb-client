@@ -28,13 +28,13 @@ export const CheckoutSchema = z.object({
   accept_rules: z.boolean().refine((val) => val === true, {
     message: 'required',
   }),
-  selected_seats: z
+  selectedSeats: z
     .array(
       z.object({
-        id: z.string().nullable(),
+        seatId: z.string().nullable(),
         type: z.enum(['SEAT', 'NOT SEAT']).nullable(),
-        number: z.string().nullable(),
-        coords: z.string().nullable(),
+        seatNumber: z.string().nullable(),
+        seatCoords: z.string().nullable(),
         status: z.enum(['FREE', 'BUSY']).nullable(),
         isSelected: z.boolean().nullable(),
       }),

@@ -85,7 +85,6 @@ export const useTicketsDetails = create<TicketsDetailsStore>()(
               : {}),
           };
 
-          console.log(rawData);
           res = await getRouteDetails(rawData as IGetRouteDetailsBody);
         } catch (error) {
           console.error('Ошибка при получении данных маршрута:', error);

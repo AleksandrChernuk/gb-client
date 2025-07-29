@@ -39,7 +39,8 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
 
   const handleDiscountChange = (value: string) => {
     onChange(value);
-    const option = config.options.find((opt) => opt.value === value);
+    const option = config?.options && config.options?.find((opt) => opt.value === value);
+
     fieldDiscountId.onChange(value);
     fieldDiscountDescription.onChange(option?.label ?? '');
     fieldDiscountPercent.onChange(option?.discountPercent ?? undefined);

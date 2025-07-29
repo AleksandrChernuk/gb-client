@@ -12,13 +12,10 @@ export function createEmptyPassenger(config: ProviderConfig, isChildren = false,
 
   passengers.isChildren = isChildren;
   passengers.price = price;
-  const discountField = config.fields.discount;
 
-  if (discountField) {
-    passengers.discountId = '';
-    passengers.discountDescription = '';
-    passengers.discountPercent = '';
-  }
+  passengers.discountId = '';
+  passengers.discountDescription = '';
+  passengers.discountPercent = '';
 
   return passengers;
 }

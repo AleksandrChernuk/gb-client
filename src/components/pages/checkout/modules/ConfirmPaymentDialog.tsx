@@ -27,7 +27,7 @@ export default function ConfirmPaymentDialog() {
   const { handleCancelOrder, handlePayOrder, handleConfirmlOrder, payLoading } = usePaymantConfirm();
   const paymentType = useWatch({ control, name: 'payment' });
 
-  const isError = initiateNewOrder?.status === 'error';
+  const isError = initiateNewOrder?.status === 'error' || !!initiateNewOrder?.error;
   const title = isError ? t('payment_confirm_error_title') : t('payment_confirm_title');
   const description = isError ? (
     <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>

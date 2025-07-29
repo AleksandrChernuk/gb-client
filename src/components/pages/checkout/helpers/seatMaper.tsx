@@ -1,4 +1,5 @@
 import { IFreeSeats } from '@/types/free.seats.interface';
+import { SeatBlock } from '../types';
 import { TypeSeatsMap } from '@/types/seat.interface';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   providerName?: string;
 };
 
-export const seatsMaper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
+export const seatsMaper = ({ seatsMap, freeSeats }: Props): SeatBlock[] => {
   if (!Array.isArray(seatsMap) || !Array.isArray(freeSeats)) return [];
 
   return seatsMap.map((floor) => ({
@@ -20,6 +21,9 @@ export const seatsMaper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
 
         return {
           ...seat,
+          seatId: seat.id,
+          seatNumber: seat.number,
+          isSelected: false,
           status: isFree ? 'FREE' : 'BUSY',
         };
       }),

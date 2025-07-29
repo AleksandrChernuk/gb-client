@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ICurrentUser } from '@/store/useUser/types';
-import { IRequestOrder, RequestTicket } from '@/types/order-interface';
+import { IRequestOrder } from '@/types/order-interface';
 import { IRouteResponse } from '@/types/route.types';
 
 type NormalizeDataParams = {
@@ -14,36 +14,44 @@ type NormalizeDataParams = {
 };
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
-  const tickets = formData.passengers.map((p: any, idx: string | number) => ({
-    firstName: p.firstName,
-    lastName: p.lastName,
-    ...(!!p.middlename && { middlename: p.middlename }),
-    ...(!!p.bday && { birthdate: p.bday }),
-    ...(!!p.documentType && { documentType: p.documentType }),
-    ...(!!p.documentNumber && { documentNumber: p.documentNumber }),
-    ...(!!p.gender && { gender: p.gender }),
-    ...(!!p.citizenship && { citizenship: p.citizenship }),
-    phone: formData.phone,
-    email: formData.email,
-    seatId: !route?.details?.seatsMap
-      ? route.details?.freeSeatsMap?.[Number(idx)]?.seatId
-      : formData.selected_seats[idx]?.id,
-    seatNumber: !route?.details?.seatsMap
-      ? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber
-      : formData.selected_seats[idx]?.number,
-    ...(!!p.discountId && {
-      discountId: p.discountId,
-    }),
-    ...(route?.providerName === 'TRANSTEMPO' &&
-      route?.details?.discounts && {
-        discountId: route?.details?.discounts[0].id,
-      }),
-    ...(!!p.discountDescription && { discountDescription: p.discountDescription }),
-    ...(!!p.discountPercent && { discountPercent: p.discountPercent }),
+  const tickets = formData.passengers.map((p: any, idx: string | number) => {
+    console.log('p', p);
 
-    withFees: true,
-    buggageCount: 1,
-  })) as RequestTicket[];
+    const data = {
+      firstName: p.firstName,
+      lastName: p.lastName,
+      ...(!!p.middlename && { middlename: p.middlename }),
+      ...(!!p.bday && { birthdate: p.bday }),
+      ...(!!p.documentType && { documentType: p.documentType }),
+      ...(!!p.documentNumber && { documentNumber: p.documentNumber }),
+      ...(!!p.gender && { gender: p.gender }),
+      ...(!!p.citizenship && { citizenship: p.citizenship }),
+      phone: formData.phone,
+      email: formData.email,
+      seatId:
+        !!formData.selectedSeats.length && !route.details?.freeSeatsMap
+          ? formData.selectedSeats[idx]?.seatId
+          : route.details?.freeSeatsMap && route.details?.freeSeatsMap[Number(idx)].seatId,
+      seatNumber:
+        !!formData.selectedSeats.length && !route.details?.freeSeatsMap
+          ? formData.selectedSeats[idx]?.seatNumber
+          : route.details?.freeSeatsMap && route.details?.freeSeatsMap[Number(idx)].seatNumber,
+      ...(!!p.discount && {
+        discountId: p.discount,
+      }),
+      ...(route?.providerName === 'TRANSTEMPO' &&
+        route?.details?.discounts && {
+          discountId: route?.details?.discounts[0].id,
+        }),
+      ...(!!p.discountDescription && { discountDescription: p.discountDescription }),
+      ...(!!p.discountPercent && { discountPercent: p.discountPercent }),
+
+      withFees: true,
+      buggageCount: 1,
+    };
+
+    return data;
+  });
 
   return {
     providerId: route.identificators.providerId,
