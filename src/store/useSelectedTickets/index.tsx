@@ -50,7 +50,6 @@ export const useSelectedTickets = create<useSelectedTicketsStore>()(
                 ...(!!route.identificators.routeId ? { routeId: `${route.identificators.routeId}` } : {}),
                 ...(!!route.identificators.intervalId ? { intervalId: `${route.identificators.intervalId}` } : {}),
                 ...(!!route.identificators.busId ? { busId: `${route.identificators.busId}` } : {}),
-                ...(!!route.identificators.searchId ? { busId: `${route.identificators.searchId}` } : {}),
                 fromCityId,
                 toCityId,
                 fromStationId: `${route.departure.stationId}`,
@@ -63,15 +62,15 @@ export const useSelectedTickets = create<useSelectedTicketsStore>()(
                 ...(!!route.identificators.metadata ? { metadata: route.identificators.metadata } : {}),
                 ...(!!route.identificators.timetableId ? { timetableId: route.identificators.timetableId } : {}),
                 ...(!!route.identificators.bustypeId ? { bustypeId: route.identificators.bustypeId } : {}),
-                ...(!!route.identificators.hasPlan ? { has_plan: route.identificators.hasPlan } : {}),
+                ...(!!route.identificators.hasPlan ? { hasPlan: !!route.identificators.hasPlan } : {}),
                 ...(!!route.identificators.requestGetFreeSeats
-                  ? { requestGetFreeSeats: route.identificators.requestGetFreeSeats }
+                  ? { requestGetFreeSeats: !!route.identificators.requestGetFreeSeats }
                   : {}),
                 ...(!!route.identificators.requestGetDiscount
-                  ? { requestGetDiscount: route.identificators.requestGetDiscount }
+                  ? { requestGetDiscount: !!route.identificators.requestGetDiscount }
                   : {}),
                 ...(!!route.identificators.requestGetBaggage
-                  ? { requestGetBaggage: route.identificators.requestGetBaggage }
+                  ? { requestGetBaggage: !!route.identificators.requestGetBaggage }
                   : {}),
               };
               res = await getRouteDetails(rawData as IGetRouteDetailsBody);

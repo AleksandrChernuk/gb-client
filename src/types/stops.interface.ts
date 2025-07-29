@@ -1,7 +1,7 @@
 export interface IStops {
   departureDateTime: string | null;
   arrivalDateTime: string | null;
-  stoppingTime: string | null;
+  stoppingTime: string | null; // h:m
   location: {
     id: string | null;
     name: string | undefined | null;

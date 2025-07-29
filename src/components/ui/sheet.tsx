@@ -74,7 +74,7 @@ function SheetHeader({ className, ...props }: ComponentProps<'div'>) {
     <div
       data-slot="sheet-header"
       className={cn(
-        ' flex items-center justify-start gap-1.5 px-5 py-6 border-b-[1px] bg-white  border-b-slate-200 dark:border-b-slate-700 dark:bg-slate-800',
+        ' flex items-center justify-start gap-1.5 px-5 py-4 border-b-[2px] min-h-[79px] bg-white  border-b-slate-200 dark:border-b-slate-700 dark:bg-slate-800',
         className,
       )}
       {...props}
@@ -83,7 +83,7 @@ function SheetHeader({ className, ...props }: ComponentProps<'div'>) {
 }
 
 function SheetFooter({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="sheet-footer" className={cn('mt-auto px-5 py-6', className)} {...props} />;
+  return <div data-slot="sheet-footer" className={cn('mt-auto px-5 py-4', className)} {...props} />;
 }
 
 function SheetTitle({ className, ...props }: ComponentProps<typeof SheetPrimitive.Title>) {

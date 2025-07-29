@@ -10,7 +10,7 @@ export interface IRouteDetailsResponse {
   providerLocationFrom: string | null;
   providerLocationTo: string | null;
   stops: IStops[] | null;
-  automaticDiscountId?: string | null; //!! New
+  automaticDiscountId?: string | null;
   discounts: IDiscount[] | null;
   returnRulesDescription: string[] | null;
   returnRules: IReturnRules[] | null;
@@ -53,15 +53,14 @@ export interface IGetRouteDetailsBody {
   toStationId?: string;
   providerId: string;
   travelDate?: string;
-  searchId?: string;
   locale: string;
   currency: string;
   passengersCount?: number;
-  metadata?: unknown | null;
+  metadata?: unknown;
   timetableId?: string;
   bustypeId?: string;
   hasPlan?: boolean;
-  requestFetFreeSeats?: boolean;
+  requestGetFreeSeats?: boolean;
   requestGetDiscount?: boolean;
   requestGetBaggage?: boolean;
 }
@@ -118,7 +117,7 @@ export interface IRouteResponse {
   busChange: boolean | null;
   eTicket: boolean | null;
   ticketPricing: {
-    ticketCode?: string | null; 
+    ticketCode?: string | null;
     basePrice: number | null;
     priceWithDiscount: number | null;
     discountPercentage: number | null;

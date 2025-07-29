@@ -30,13 +30,14 @@ type TMobileFilterHeader = {
 const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFilterHeader) => {
   return (
     <SheetHeader className="justify-between">
-      <SheetTitle className="sr-only">Edit profile</SheetTitle>
+      <SheetTitle className="sr-only"></SheetTitle>
       <SheetDescription className="sr-only"></SheetDescription>
       <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{title}</h3>
       <SheetClose asChild>
         <Button
+          className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal bg-green-300 p-2 rounded-md"
           variant={'default'}
-          className="flex items-center gap-1 p-1 text-base font-bold leading-6 tracking-normal bg-green-300 rounded-md"
+          size={'icon'}
         >
           <X color="#ffffff" />
         </Button>
@@ -63,7 +64,8 @@ export const MobileFilter = () => {
         <Button
           disabled={!isHydrated && isFetching && enabled}
           variant={'outline'}
-          className="p-2 rounded-lg border-primary"
+          size={'icon'}
+          className="p-2 rounded-md border-primary"
         >
           <SlidersHorizontal color="#098537" size={24} />
         </Button>

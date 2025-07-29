@@ -34,7 +34,7 @@ export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
           </Button>
         </SheetTrigger>
         <SheetContent>
-          <SheetHeader className="justify-between px-4 py-3">
+          <SheetHeader className="justify-between">
             <SheetTitle className="sr-only"></SheetTitle>
             <SheetDescription className="sr-only"></SheetDescription>
             <SheetClose>
