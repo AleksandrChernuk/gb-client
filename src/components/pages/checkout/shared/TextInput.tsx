@@ -20,7 +20,7 @@ const TextInput = memo(function TextInput({ name, config }: Props) {
   const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
   const {
-    field: { value, onChange, onBlur },
+    field: { value, onChange, onBlur, ref },
     fieldState: { error },
   } = useController({
     name,
@@ -33,6 +33,7 @@ const TextInput = memo(function TextInput({ name, config }: Props) {
       <FormLabel>{t_forms(config.label)}</FormLabel>
       <FormControl>
         <Input
+          ref={ref}
           type="text"
           value={value}
           onChange={onChange}

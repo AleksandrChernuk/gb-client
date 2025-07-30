@@ -4,11 +4,11 @@ import IconHelm from '../icons/IconHelm';
 import { toast } from 'sonner';
 import { memo } from 'react';
 import Seat from '../components/Seat';
-import { ISeat, SeatRow } from '../types';
+import { ISeat, TypeSeatsMap } from '@/types/seat.interface';
 
 type Props = {
   helm?: boolean;
-  seatRows: SeatRow[];
+  seatRows: TypeSeatsMap;
 };
 
 const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
@@ -58,7 +58,7 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
             </div>
           </li>
         )}
-        {seatRows.map((row, rowIndex) => (
+        {seatRows.seats.map((row, rowIndex) => (
           <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-1">
             {row.map((seat, seatIndex) =>
               seat.type ? (

@@ -1,8 +1,8 @@
 export interface ISeat {
-  id: string | null;
+  seatId: string | null;
   type: 'SEAT' | 'NOT SEAT' | null;
-  number: string | null;
-  coords: string | null;
+  seatNumber: string | null;
+  seatCoords: string | null;
   status: 'FREE' | 'BUSY' | null;
   isSelected: boolean | null;
 }

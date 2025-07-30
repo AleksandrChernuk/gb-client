@@ -30,7 +30,7 @@ export function DateBirthPicker({ name, config }: Props) {
   const t_forms = useTranslations(MESSAGE_FILES.FORM);
 
   const {
-    field: { value = '', onChange },
+    field: { value = '', onChange, ref },
     fieldState: { error },
   } = useController({
     name,
@@ -47,7 +47,7 @@ export function DateBirthPicker({ name, config }: Props) {
         <div className="flex items-center gap-1 max-w-full  ">
           <div className="flex-1 h-full min-w-0">
             <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
+              <PopoverTrigger asChild ref={ref}>
                 <Button
                   variant="outline"
                   id="date"

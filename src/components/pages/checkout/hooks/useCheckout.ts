@@ -30,7 +30,9 @@ function useCheckout() {
   const user = useUserStore(useShallow((state) => state.currentUser));
   const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
+
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
+
   const defaultPassengers = useMemo(
     () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
     [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
@@ -39,6 +41,7 @@ function useCheckout() {
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],
   );
+
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -50,13 +53,16 @@ function useCheckout() {
       selectedSeats: [],
     },
     mode: 'onSubmit',
+    shouldFocusError: true,
   });
+
   const onSubmit = async (formData: z.infer<typeof schema>) => {
     if (!ticket || !from || !to) {
       setError('no data');
       toast.error('no data');
       return;
     }
+
     try {
       setLoadingResult(true);
       const res = await createOrder(

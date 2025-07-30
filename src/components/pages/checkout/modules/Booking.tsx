@@ -104,12 +104,12 @@ const Booking = memo(function Booking() {
           </SheetHeader>
           <ScrollArea className="relative w-full px-2 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
             <div className="flex flex-col gap-2">
-              {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
+              {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
 
               {seatMapWithStatus.length >= 2 && (
                 <FloorSheet
-                  floor_first={<SeatsList helm={true} seatRows={seatMapWithStatus[0].seats} />}
-                  floor_second={<SeatsList seatRows={seatMapWithStatus[1].seats} />}
+                  floor_first={<SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
+                  floor_second={<SeatsList seatRows={seatMapWithStatus[1]} />}
                 />
               )}
             </div>

@@ -3,21 +3,6 @@ export type TPassengersProps = {
   childrenPass?: string;
 };
 
-export type ISeat = {
-  seatId: string | null;
-  type: string | null;
-  seatNumber: string | null;
-  coords: string | null;
-  status: 'FREE' | 'BUSY';
-  isSelected: boolean;
-};
-
-export type SeatRow = ISeat[];
-
-export type SeatBlock = {
-  seats: SeatRow[];
-};
-
 export type Passenger = {
   firstName: '';
   isChildren: boolean;

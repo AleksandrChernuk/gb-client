@@ -30,7 +30,7 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
   const { field: fieldDiscountPercent } = useController({ name: `passengers.${i}.discountPercent`, control });
 
   const {
-    field: { value, onChange },
+    field: { value, onChange, ref },
     fieldState: { error },
   } = useController({
     name,
@@ -53,7 +53,7 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
         <div className="flex items-center gap-1 max-w-full">
           <div className="flex-1 min-w-0">
             <Select onValueChange={handleDiscountChange} value={value || ''}>
-              <SelectTrigger className="w-full mb-0 " size="full" aria-invalid={!!error} value={value}>
+              <SelectTrigger className="w-full mb-0 " size="full" aria-invalid={!!error} value={value} ref={ref}>
                 {config.options.find((opt) => opt.value === value)?.label ||
                   t_forms(config.placeholder!) ||
                   config.label}

@@ -25,13 +25,18 @@ export default function Legal() {
             checked={value}
             onCheckedChange={onChange}
             aria-invalid={!!error}
-            className="aria-invalid:border-red-300"
+            className="aria-invalid:border-[#de2a1a]"
           />
         </FormControl>
-        <FormLabel className="text-sm">
+        <FormLabel className={`text-xs ${!!error && 'text-[#de2a1a]'}`}>
           {t.rich('consent_text', {
             pp: (chunks) => (
-              <Link href="/privacy-policy" prefetch={false} className="underline text-green-300 hover:text-green-100">
+              <Link
+                href="/privacy-policy"
+                prefetch={false}
+                target="_blanck"
+                className={`underline text-green-300 hover:text-green-100 ${!!error && 'text-[#de2a1a]'}`}
+              >
                 {chunks}
               </Link>
             ),

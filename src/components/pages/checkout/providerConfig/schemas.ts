@@ -74,10 +74,10 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
 
 export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSeats: boolean) {
   const seatSchema = z.object({
-    id: z.string().nullable(),
+    seatId: z.string().nullable(),
     type: z.string().nullable(),
-    number: z.string().nullable(),
-    coords: z.string().nullable(),
+    seatNumber: z.string().nullable(),
+    seatCoords: z.string().nullable(),
     status: z.string().nullable(),
     isSelected: z.boolean().nullable(),
   });

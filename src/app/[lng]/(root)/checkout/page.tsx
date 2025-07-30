@@ -5,6 +5,7 @@ import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Checkaut from '@/components/pages/checkout';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 
 type Props = {
   params: Params;
@@ -71,5 +72,10 @@ export default async function Checkout({
 
   setRequestLocale(lng as Locale);
 
-  return <Checkaut />;
+  return (
+    <>
+      <Checkaut />
+      <ThirdFooter />
+    </>
+  );
 }
