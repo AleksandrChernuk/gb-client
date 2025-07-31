@@ -15,8 +15,6 @@ type NormalizeDataParams = {
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const tickets = formData.passengers.map((p: any, idx: string | number) => {
-    console.log('p', p);
-
     const data = {
       firstName: p.firstName,
       lastName: p.lastName,
@@ -60,7 +58,10 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(!!route.identificators.tripId && { tripId: route.identificators.tripId }),
     ...(!!route.identificators.intervalId && { intervalId: route.identificators.intervalId }),
     ...(!!route.identificators.busId && {
-      busId: route?.providerName === 'KLR' ? `${route?.details?.transportId}` : route.identificators.busId,
+      busId: route.identificators.busId,
+    }),
+    ...(route?.providerName === 'KLR' && {
+      busId: `${route?.details?.transportId}`,
     }),
     ...(!!route.identificators.routeName && { routeName: route.identificators.routeName }),
     canPaymentToDriver: !!route.allowedOperations.canPaymentToDriver,
