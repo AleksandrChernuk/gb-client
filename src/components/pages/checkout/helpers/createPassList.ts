@@ -9,10 +9,8 @@ export function createEmptyPassenger(config: ProviderConfig, isChildren = false,
 
     passengers[field] = '';
   }
-
   passengers.isChildren = isChildren;
   passengers.price = price;
-
   passengers.discountId = '';
   passengers.discountDescription = '';
   passengers.discountPercent = '';

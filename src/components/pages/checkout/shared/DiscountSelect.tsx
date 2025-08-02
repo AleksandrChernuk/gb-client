@@ -74,9 +74,9 @@ const DiscountSelect = memo(function UniversalSelect({ name, config, i }: Props)
               variant="ghost"
               className="flex w-fit py-1 cursor-pointer"
               onClick={() => {
-                setValue(`passengers.${i}.discount_id`, '');
-                setValue(`passengers.${i}.discount_description`, '');
-                setValue(`passengers.${i}.discount_percent`, '');
+                setValue(`passengers.${i}.discountId`, '');
+                setValue(`passengers.${i}.discountDescription`, '');
+                setValue(`passengers.${i}.discountPercent`, '');
                 onChange('');
               }}
             >

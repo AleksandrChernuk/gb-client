@@ -38,7 +38,6 @@ export const createOrder = async (body: IRequestOrder) => {
   }
 
   const res = await response.json();
-  console.log(res);
   return res;
 };
 
@@ -52,9 +51,6 @@ export const cancelOrder = async (body: ICancelBody, myOrderId: string) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log(res);
-
     throw new Error('Error');
   }
   return null;
@@ -89,9 +85,6 @@ export async function getOrderStatusAndPdf(orderId: string): Promise<IPdfRes | n
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log(res);
-
     throw new Error('Не удалось получить билет');
   }
 

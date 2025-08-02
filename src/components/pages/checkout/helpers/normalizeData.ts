@@ -14,35 +14,29 @@ type NormalizeDataParams = {
 };
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
+  const details = route.details;
+
   const tickets = formData.passengers.map((p: any, idx: string | number) => {
+    const discountId =
+      p.discount ?? (route.providerName === 'TRANSTEMPO' ? route.details?.discounts?.[0]?.id : undefined);
+
     const data = {
       firstName: p.firstName,
       lastName: p.lastName,
-      ...(!!p.middlename && { middlename: p.middlename }),
-      ...(!!p.bday && { birthdate: p.bday }),
-      ...(!!p.documentType && { documentType: p.documentType }),
-      ...(!!p.documentNumber && { documentNumber: p.documentNumber }),
-      ...(!!p.gender && { gender: p.gender }),
-      ...(!!p.citizenship && { citizenship: p.citizenship }),
+      ...(p.middlename && { middlename: p.middlename }),
+      ...(details?.needBirth && p.bday ? { birthdate: p.bday } : {}),
+      ...(p.documentType && { documentType: p.documentType }),
+      ...(p.documentNumber && { documentNumber: p.documentNumber }),
+      ...(p.gender && { gender: p.gender }),
+      ...(p.citizenship && { citizenship: p.citizenship }),
       phone: formData.phone,
       email: formData.email,
-      seatId:
-        !!formData.selectedSeats.length && !route.details?.freeSeatsMap
-          ? formData.selectedSeats[idx]?.seatId
-          : route.details?.freeSeatsMap && route.details?.freeSeatsMap[Number(idx)].seatId,
+      seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[Number(idx)]?.seatId ?? '',
       seatNumber:
-        !!formData.selectedSeats.length && !route.details?.freeSeatsMap
-          ? formData.selectedSeats[idx]?.seatNumber
-          : route.details?.freeSeatsMap && route.details?.freeSeatsMap[Number(idx)].seatNumber,
-      ...(!!p.discount && {
-        discountId: p.discount,
-      }),
-      ...(route?.providerName === 'TRANSTEMPO' &&
-        route?.details?.discounts && {
-          discountId: route?.details?.discounts[0].id,
-        }),
-      ...(!!p.discountDescription && { discountDescription: p.discountDescription }),
-      ...(!!p.discountPercent && { discountPercent: p.discountPercent }),
+        formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber ?? '',
+      ...(discountId ? { discountId } : {}),
+      ...(p.discountDescription ? { discountDescription: p.discountDescription } : {}),
+      ...(p.discountPercent ? { discountPercent: Number(p.discountPercent) } : {}),
 
       withFees: true,
       buggageCount: 1,

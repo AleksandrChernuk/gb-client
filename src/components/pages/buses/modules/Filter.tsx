@@ -97,6 +97,7 @@ export const MobileFilter = () => {
           <SheetClose asChild>
             <Button
               variant={'outline'}
+              size={'samll_primery'}
               className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px] text-primary bg-inherit"
               onClick={() => resetFilters()}
             >
@@ -105,7 +106,11 @@ export const MobileFilter = () => {
           </SheetClose>
 
           <SheetClose asChild>
-            <Button variant={'default'} className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]">
+            <Button
+              variant={'default'}
+              size={'samll_primery'}
+              className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]"
+            >
               {t('view_trips')}
             </Button>
           </SheetClose>

@@ -4,28 +4,36 @@ import { bday, discount, documentNumber, documentTypeOctobus, firstName, lastNam
 import { FIELDS } from './constans';
 
 const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
-  const hasDiscounts = !!currentTicket?.details?.discounts?.length;
+  const details = currentTicket?.details;
+  const hasDiscounts = !!details?.discounts?.length;
+
+  const needDoc = details?.needDoc === true || details?.needDoc === 'true' || details?.needDoc === '1';
+  const needBirth = details?.needBirth === true || details?.needBirth === 'true' || details?.needBirth === '1';
 
   return {
     required: [
       FIELDS.firstName,
       FIELDS.lastName,
-      FIELDS.documentType,
-      FIELDS.documentNumber,
-      ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
+      ...(hasDiscounts ? [FIELDS.discount] : []),
+      ...(needBirth ? [FIELDS.bday] : []),
+      ...(needDoc ? [FIELDS.documentType, FIELDS.documentNumber] : []),
     ],
     fields: {
       firstName,
       lastName,
-      ...(hasDiscounts
+
+      ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
+      ...(needBirth ? { bday } : {}),
+      ...(needDoc
         ? {
-            discount: discount(currentTicket),
-            bday,
-            documentTypeOctobus,
+            documentType: documentTypeOctobus,
             documentNumber,
           }
         : {}),
     },
+
+    needBirth: details?.needBirth,
+    needDoc: details?.needDoc,
   };
 };
 

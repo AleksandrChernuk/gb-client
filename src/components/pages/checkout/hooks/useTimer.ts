@@ -4,8 +4,8 @@
 import { useTimerStore } from '@/store/useTimer';
 import { useEffect, useState } from 'react';
 
-const WARNING_DELAY_MS = 1000;
-const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 100;
+const WARNING_DELAY_MS = 10000;
+const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 1000;
 
 export default function useTimer() {
   const [open, setOpen] = useState(false);

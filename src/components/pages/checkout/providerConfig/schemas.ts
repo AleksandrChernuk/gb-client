@@ -53,6 +53,7 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
     if (!config.fields[fieldName]) continue;
     shape[fieldName] = getFieldSchema(config.fields[fieldName]);
   }
+
   shape.discountPercent = z.string().optional();
   shape.discountDescription = z.string().optional();
   shape.discountId = z.string().optional();
@@ -60,14 +61,54 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
   const baseSchema = z.object(shape);
 
   return baseSchema.superRefine((data, ctx) => {
-    if ('discount' in data) {
-      if (data.discount && !data.bday) {
-        ctx.addIssue({
-          path: ['bday'],
-          code: z.ZodIssueCode.custom,
-          message: 'required',
-        });
-      }
+    const flagIsOn = (flag?: boolean | string) => flag === true || flag === 'true' || flag === '1';
+
+    if (flagIsOn(config.needBirth) && !data.bday) {
+      ctx.addIssue({
+        path: ['bday'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
+    }
+
+    if (flagIsOn(config.needDoc) && !data.documentNumber) {
+      ctx.addIssue({
+        path: ['documentNumber'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
+    }
+
+    if (flagIsOn(config.needDocExpireDate) && !data.expiryDate) {
+      ctx.addIssue({
+        path: ['expiryDate'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
+    }
+
+    if (flagIsOn(config.needCitizenship) && !data.citizenship) {
+      ctx.addIssue({
+        path: ['citizenship'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
+    }
+
+    if (flagIsOn(config.needGender) && !data.gender) {
+      ctx.addIssue({
+        path: ['gender'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
+    }
+
+    if (flagIsOn(config.needMiddlename) && !data.middlename) {
+      ctx.addIssue({
+        path: ['middlename'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
     }
   });
 }

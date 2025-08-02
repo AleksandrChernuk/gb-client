@@ -35,7 +35,7 @@ export default function useTicketsSearch() {
   });
   useEffect(() => {
     if (data) {
-      setTickets(data);
+      setTickets(data.filter((element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= adult + children));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

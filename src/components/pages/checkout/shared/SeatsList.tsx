@@ -5,6 +5,8 @@ import { toast } from 'sonner';
 import { memo } from 'react';
 import Seat from '../components/Seat';
 import { ISeat, TypeSeatsMap } from '@/types/seat.interface';
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   helm?: boolean;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const { control } = useFormContext();
 
   const [selectedSeats, passengers] = useWatch({
@@ -45,12 +48,12 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
       return;
     }
 
-    toast.error('Место выбрано');
+    toast.error(t('deselect_seat'));
   };
 
   return (
     <div className="mx-auto mt-5 mb-10 w-fit">
-      <ul className="flex flex-col gap-4 px-4 py-4 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-[50px]">
+      <ul className="flex flex-col gap-4 px-6 py-4 tablet:p-8 border-2 w-full border-slate-200 dark:border-slate-700 rounded-2xl">
         {helm && (
           <li className="pb-4 border border-b-slate-200 dark:border-b-slate-700 w-fit">
             <div className={`w-[72px] h-[72px] [&_svg]:fill-slate-200 dark:[&_svg]:fill-slate-700 mb-2`}>
@@ -59,7 +62,7 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
           </li>
         )}
         {seatRows.seats.map((row, rowIndex) => (
-          <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-1">
+          <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-2">
             {row.map((seat, seatIndex) =>
               seat.type ? (
                 <Seat

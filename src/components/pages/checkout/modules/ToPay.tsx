@@ -18,6 +18,7 @@ const ToPay = memo(function ToPay() {
   const { control } = useFormContext();
 
   const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
+
   return (
     <ul>
       {isHydrated ? (

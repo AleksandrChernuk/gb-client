@@ -42,6 +42,7 @@
     "price_note": "The price may change depending on carrier load. The final amount will be known upon payment confirmation.",
     "passenger": "Passenger",
     "child_passenger": "Child",
-    "passenger_number": "№{number}"
+    "passenger_number": "№{number}",
+    "deselect_seat": "Deselect the selected seat to continue."
   }
 }

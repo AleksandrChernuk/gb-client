@@ -1,9 +1,5 @@
 import { ZodType } from 'zod';
 
-export type providerConfig = {
-  required: string[];
-  fields: Record<string, FieldConfig>;
-};
 export type SelectOption = { value: string; label: string };
 export type DiscountOption = { value: string; label: string; discountDescription?: string; discountPercent?: string };
 
@@ -45,4 +41,10 @@ export type FieldConfig =
 export type ProviderConfig = {
   required: string[];
   fields: Record<string, FieldConfig>;
+  needBirth?: boolean | string;
+  needDoc?: boolean | string;
+  needDocExpireDate?: boolean | string;
+  needCitizenship?: boolean | string;
+  needGender?: boolean | string;
+  needMiddlename?: boolean | string;
 };

@@ -17,7 +17,10 @@ export default async function MainFooter({ className }: TMainFooter) {
   const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <footer aria-label="Footer" className={cn('w-full py-6 laptop:py-8', className)}>
+    <footer
+      aria-label="Footer"
+      className={cn('w-full py-6 laptop:py-8 border-t-2 border-t-[#e6e6e6] dark:border-t-slate-700', className)}
+    >
       <Container size="m">
         <ul className="grid grid-cols-2 gap-x-[17px] gap-y-[32px] gap-4 tablet:grid-cols-3 laptop:grid-cols-4 laptop:gap-[114px] pb-8">
           <li>

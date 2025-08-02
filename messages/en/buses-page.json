@@ -28,8 +28,8 @@
     "discounts": "Discounts",
     "sort_by": "Sort by",
     "bus_companies": "Bus Companies",
-    "clear_all": "Clear all",
-    "view_trips": "View trips",
+    "clear_all": "Clear",
+    "view_trips": "View",
     "filter": "Filter",
     "sort_buy_shortest_journeye": "Коротшим маршрутом",
     "placeholderPassenger": "Passenger"

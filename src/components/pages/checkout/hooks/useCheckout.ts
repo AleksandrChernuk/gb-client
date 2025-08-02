@@ -32,7 +32,6 @@ function useCheckout() {
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
 
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
-
   const defaultPassengers = useMemo(
     () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
     [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
@@ -65,6 +64,17 @@ function useCheckout() {
 
     try {
       setLoadingResult(true);
+      console.log(
+        'normalizeData',
+        normalizeData({
+          fromCityId: from,
+          toCityId: to,
+          locale,
+          formData,
+          route: ticket,
+          user,
+        }),
+      );
       const res = await createOrder(
         normalizeData({
           fromCityId: from,
