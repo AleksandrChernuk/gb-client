@@ -9,18 +9,18 @@ import { FileText } from 'lucide-react';
 import { RefreshButton } from './modules/RefreshButton';
 import { getTranslations } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { cn } from '@/lib/utils';
 
 export default async function PaymentResultPage({ payment_id }: { payment_id: string }) {
   const resOrder = await getOrderStatusAndPdf(payment_id);
   const t = await getTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
 
   const pdfBase64 = resOrder?.pdf;
-
   return (
     <div className="flex flex-col h-svh">
       <CleanOrderData />
 
-      <main role="main" className="grow flex flex-col items-center justify-center">
+      <main role="main" className="grow flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900">
         <section className="py-5">
           <Container size="xs" className="w-full">
             <div className="space-y-6">
@@ -42,24 +42,23 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
               )}
 
               <div
-                className={`grid grid-cols-1 gap-4 ${
-                  resOrder?.status === 'success' || resOrder?.message === 'Payment is pending' ? 'md:grid-cols-2' : ''
-                }`}
+                className={cn(
+                  'grid grid-cols-1 gap-4 justify-center items-center',
+                  (!!pdfBase64 || resOrder?.message === 'Payment is pending') && 'md:grid-cols-2',
+                )}
               >
-                {resOrder?.status === 'success' && (
-                  <div>
-                    {pdfBase64 && (
-                      <Button asChild variant={'outline'} size={'primery'} className="text-black">
-                        <a
-                          href={`data:application/pdf;base64,${pdfBase64}`}
-                          download={`${t('ticket_filename')}_${resOrder.orderNumber}.pdf`}
-                          rel="noopener noreferrer"
-                        >
-                          {t('download_ticket')} <FileText />
-                        </a>
-                      </Button>
-                    )}
-                  </div>
+                {!!pdfBase64 && (
+                  <>
+                    <Button asChild variant={'outline'} size={'primery'} className="text-black">
+                      <a
+                        href={`data:application/pdf;base64,${pdfBase64}`}
+                        download={`${t('ticket_filename')}_${resOrder.orderNumber}.pdf`}
+                        rel="noopener noreferrer"
+                      >
+                        {t('download_ticket')} <FileText />
+                      </a>
+                    </Button>
+                  </>
                 )}
 
                 {resOrder?.message === 'Payment is pending' && (

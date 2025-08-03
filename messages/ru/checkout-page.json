@@ -42,6 +42,7 @@
     "passenger": "Пассажир",
     "child_passenger": "Детский",
     "passenger_number": "№{number}",
-    "deselect_seat": "Снимите выделение с места, чтобы продолжить."
+    "deselect_seat": "Снимите выделение с места, чтобы продолжить.",
+    "enter_confirmation_code": "Введите код подтверждения"
   }
 }

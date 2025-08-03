@@ -8,7 +8,12 @@ interface ICancelBody {
 }
 
 interface IConfirmOrderBody {
+  providerId: string;
+  providerOrderId: string;
   myOrderId: string;
+  customerPhone: string;
+  customerEmail: string;
+  locale: string;
 }
 
 export interface IconfirmBookRes {
@@ -24,6 +29,14 @@ export interface IPdfRes {
   pdf: string;
 }
 
+export interface ISmsValidateOrder {
+  providerId: string;
+  providerOrderId: string;
+  customerPhone: string;
+  validationCode: string;
+  locale: string;
+}
+
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
 export const createOrder = async (body: IRequestOrder) => {
@@ -34,7 +47,25 @@ export const createOrder = async (body: IRequestOrder) => {
   });
 
   if (!response.ok) {
-    return { error: 'error' };
+    return { status: 'error' };
+  }
+
+  const res = await response.json();
+  console.log(res);
+  return res;
+};
+
+export const smsValidateOrder = async (body: ISmsValidateOrder) => {
+  const response = await fetch(`${BASE_URL}/orders/sms-validate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const res = await response.json();
+    console.log(res);
+    return { status: 'error' };
   }
 
   const res = await response.json();

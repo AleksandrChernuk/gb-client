@@ -1,4 +1,4 @@
-import { INewOrderResponse } from '@/types/payment.types';
+import { INewOrderResponse, IOtpVerifySend } from '@/types/payment.types';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
@@ -7,10 +7,13 @@ export type OrderResultState = {
   isHydrated: boolean;
   loadingResult: boolean;
   initiateNewOrder: INewOrderResponse | null;
+  initiateOtpVerify: IOtpVerifySend | null;
 };
 
 export type OrderResultActions = {
   setInitiateNewOrder: (data: INewOrderResponse | null) => void;
+  setInitiateOtpVerify: (data: IOtpVerifySend | null) => void;
+
   resetInitiateNewOrder: () => void;
   setLoadingResult: (v: boolean) => void;
 };
@@ -24,6 +27,7 @@ export const useNewOrderResult = create<OrderResultStore>()(
         isHydrated: false,
         initiateNewOrder: null,
         loadingResult: false,
+        initiateOtpVerify: null,
 
         setInitiateNewOrder: (data) => {
           set((state) => {
@@ -31,9 +35,16 @@ export const useNewOrderResult = create<OrderResultStore>()(
           });
         },
 
+        setInitiateOtpVerify: (data) => {
+          set((state) => {
+            state.initiateOtpVerify = data;
+          });
+        },
+
         resetInitiateNewOrder: () => {
           set((state) => {
             state.initiateNewOrder = null;
+            state.initiateOtpVerify = null;
           });
         },
 

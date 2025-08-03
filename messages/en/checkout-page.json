@@ -43,6 +43,7 @@
     "passenger": "Passenger",
     "child_passenger": "Child",
     "passenger_number": "№{number}",
-    "deselect_seat": "Deselect the selected seat to continue."
+    "deselect_seat": "Deselect the selected seat to continue.",
+    "enter_confirmation_code": "Enter confirmation code"
   }
 }

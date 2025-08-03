@@ -5,27 +5,22 @@ import { bday, discount, firstName, lastName } from './config.list';
 import { isEmptyDiscounts } from '@/utils/isEmptyDiscounts';
 
 const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
-  const details = currentTicket?.details;
-
-  const discounts = details?.discounts ?? [];
+  const discounts = currentTicket?.details?.discounts ?? [];
   const isTranstempoWithSingleDiscount = currentTicket?.providerName === 'TRANSTEMPO' && isEmptyDiscounts(discounts);
-
-  const needBirth = isTranstempoWithSingleDiscount || details?.needBirth;
+  const showBlock = isTranstempoWithSingleDiscount;
 
   return {
-    required: [
-      FIELDS.firstName,
-      FIELDS.lastName,
-      ...(isTranstempoWithSingleDiscount ? [FIELDS.discount] : []),
-      ...(needBirth ? [FIELDS.bday] : []),
-    ],
+    required: [FIELDS.firstName, FIELDS.lastName, ...(showBlock ? ['discount', 'bday'] : [])],
     fields: {
       firstName,
       lastName,
-      ...(isTranstempoWithSingleDiscount ? { discount: discount(currentTicket) } : {}),
-      ...(needBirth ? { bday } : {}),
+      ...(showBlock
+        ? {
+            discount: discount(currentTicket),
+            bday,
+          }
+        : {}),
     },
-    needBirth,
   };
 };
 

@@ -12,8 +12,8 @@ import Legal from './Legal';
 import Payment from './Payment';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import SubmitButton from '../components/SubmitButton';
-import ConfirmPaymentDialog from './ConfirmPaymentDialog';
 import useCheckout from '../hooks/useCheckout';
+import { ConfirmationDialog } from './ConfirmationDialog';
 
 export default function CheckoutForm() {
   const { methods, onSubmit } = useCheckout();
@@ -22,7 +22,7 @@ export default function CheckoutForm() {
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
       <FormProvider {...methods}>
-        <ConfirmPaymentDialog />
+        <ConfirmationDialog />
         <div className="relative grid grid-cols-1 laptop:grid-cols-3 gap-8">
           <div className="space-y-8 laptop:col-span-2">
             <Passengers />

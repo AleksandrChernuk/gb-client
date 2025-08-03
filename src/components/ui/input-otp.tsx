@@ -16,7 +16,7 @@ function InputOTP({
   return (
     <OTPInput
       data-slot="input-otp"
-      containerClassName={cn('flex items-center gap-2 has-disabled:opacity-50', containerClassName)}
+      containerClassName={cn('flex items-center gap-2 has-disabled:opacity-50 justify-center', containerClassName)}
       className={cn('disabled:cursor-not-allowed', className)}
       {...props}
     />
@@ -42,7 +42,7 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        'data-[active=true]:ring-green-600 aria-invalid:border-red-50 data-[active=true]:aria-invalid:border-red-50 dark:bg-slate-900 border-green-200  relative flex h-12 w-12 items-center justify-center border-y border-r text-md shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]',
+        'data-[active=true]:ring-green-600 aria-invalid:border-red-500 data-[active=true]:aria-invalid:border-red-500 dark:bg-slate-900 border-green-200  relative flex h-12 w-12 items-center justify-center border-y border-r text-md shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]',
         className,
       )}
       {...props}
