@@ -1,19 +1,27 @@
+import { IconTelegram } from '@/components/icons/IconTelegram';
 import { IconFlagUA } from '../components/icons/IconFlagUA';
+import { IconWhatsapp } from '@/components/icons/IconWhatsapp';
+import { IconVber } from '@/components/icons/IconVber';
 
 export const supportNavlinks = [
   {
-    title: '+38 099 11 22 444',
+    title: '+380 (98) 744 64 19',
     icon: <IconFlagUA />,
-    src: 'tel:+380983619091',
+    src: 'tel:+380987446419',
   },
   {
-    title: '+38 099 11 22 444',
-    icon: <IconFlagUA />,
-    src: 'tel:+380983619092',
+    title: 'Telegram',
+    icon: <IconTelegram />,
+    src: 'https://t.me/+380987446419',
   },
   {
-    title: '+38 099 11 22 444',
-    icon: <IconFlagUA />,
-    src: 'tel:+380983619098',
+    title: 'WhatsApp',
+    icon: <IconWhatsapp />,
+    src: 'https://wa.me/380987446419',
+  },
+  {
+    title: 'Viber',
+    icon: <IconVber />,
+    src: 'viber://chat?number=380987446419',
   },
 ];

@@ -88,7 +88,7 @@ export const TicketCard = ({ element }: Props) => {
               </div>
 
               <span className="block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50">
-                {element.providerName || ''}
+                {element.carrier.name || ''}
               </span>
             </div>
 

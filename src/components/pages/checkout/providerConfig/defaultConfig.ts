@@ -6,7 +6,9 @@ import { isEmptyDiscounts } from '@/utils/isEmptyDiscounts';
 
 const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const discounts = currentTicket?.details?.discounts ?? [];
-  const isTranstempoWithSingleDiscount = currentTicket?.providerName === 'TRANSTEMPO' && isEmptyDiscounts(discounts);
+  const isTranstempoWithSingleDiscount =
+    isEmptyDiscounts(discounts) && !['1210', '1211'].some((id) => discounts.map((el) => el.id).includes(id));
+
   const showBlock = isTranstempoWithSingleDiscount;
 
   return {

@@ -8,6 +8,7 @@
     "go_home": "На головну",
     "refresh": "Оновити",
     "ticket_will_appear": "Квиток зʼявиться тут одразу після успішної оплати.",
-    "ticket_filename": "Квиток"
+    "ticket_filename": "Квиток",
+    "download_order": "Завантажити замовлення"
   }
 }

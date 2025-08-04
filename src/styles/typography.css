@@ -3,7 +3,7 @@
     @apply text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50;
   }
   h2 {
-    @apply text-xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-50;
+    @apply text-xl font-medium tracking-normal leading-[28.8px] laptop:text-2xl laptop:font-bold laptop:leading-[28.8px] text-slate-700 dark:text-slate-50;
   }
   h3 {
     @apply text-lg sm:text-xl md:text-2xl font-semibold leading-snug;

@@ -10,12 +10,21 @@ import { RefreshButton } from './modules/RefreshButton';
 import { getTranslations } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { cn } from '@/lib/utils';
+import { notFound } from 'next/navigation';
 
 export default async function PaymentResultPage({ payment_id }: { payment_id: string }) {
   const resOrder = await getOrderStatusAndPdf(payment_id);
-  const t = await getTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
 
+  if (!resOrder) {
+    notFound();
+  }
+
+  const t = await getTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
   const pdfBase64 = resOrder?.pdf;
+
+  const orderLink = resOrder?.orderLink;
+  const ticketLinks = resOrder?.ticketLinks;
+
   return (
     <div className="flex flex-col h-svh">
       <CleanOrderData />
@@ -59,6 +68,23 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
                       </a>
                     </Button>
                   </>
+                )}
+
+                {!!orderLink && (
+                  <div className="flex flex-col gap-4">
+                    <Button asChild variant={'outline'} size={'primery'} className="text-black">
+                      <a href={orderLink} target="_blanck">
+                        {t('download_order')}
+                      </a>
+                    </Button>
+                    {ticketLinks?.map((element, i) => (
+                      <Button key={i + 1} asChild variant={'outline'} size={'primery'} className="text-black">
+                        <a href={element} target="_blanck">
+                          {t('download_ticket')} <FileText />
+                        </a>
+                      </Button>
+                    ))}
+                  </div>
                 )}
 
                 {resOrder?.message === 'Payment is pending' && (

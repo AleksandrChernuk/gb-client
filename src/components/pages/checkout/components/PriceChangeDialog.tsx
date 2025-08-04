@@ -17,7 +17,7 @@ export const PriceChangeDialog = () => {
           {t('price_may_increase')}
         </DialogTitle>
         <DialogDescription className="text-base tablet:text-lg text-slate-700 dark:text-slate-200">
-          {t('price_may_increase')} <span className="text-green-300 font-medium">15:00 {t('book__min')}</span>{' '}
+          {t('book_within_1')} <span className="text-green-300 font-medium">15:00 {t('book__min')}</span>{' '}
           {t('book_within_2')}
         </DialogDescription>
       </DialogHeader>

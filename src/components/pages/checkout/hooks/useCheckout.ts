@@ -64,17 +64,6 @@ function useCheckout() {
 
     try {
       setLoadingResult(true);
-      console.log(
-        'normalizeData',
-        normalizeData({
-          fromCityId: from,
-          toCityId: to,
-          locale,
-          formData,
-          route: ticket,
-          user,
-        }),
-      );
       const res = await createOrder(
         normalizeData({
           fromCityId: from,

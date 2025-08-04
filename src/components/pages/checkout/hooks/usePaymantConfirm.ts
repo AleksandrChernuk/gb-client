@@ -3,14 +3,12 @@
 import { liqpayInitiate } from '@/actions/liqpay.actions';
 import { cancelOrder, confirmBook, smsValidateOrder } from '@/actions/orders.actions';
 import { useNewOrderResult } from '@/store/useOrderResult';
-import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export const usePaymantConfirm = () => {
   const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
-  const ticket = useSelectedTickets((s) => s.selectedTicket);
 
   const setInitiateOtpVerify = useNewOrderResult((s) => s.setInitiateOtpVerify);
 
@@ -40,6 +38,7 @@ export const usePaymantConfirm = () => {
     setSMSValidationoading(true);
     try {
       const data = {
+        myOrderId: initiateNewOrder.myOrderId,
         providerId: initiateNewOrder.providerId,
         providerOrderId: initiateNewOrder.providerOrderId,
         customerPhone: initiateNewOrder.customerPhone || '',
@@ -50,15 +49,14 @@ export const usePaymantConfirm = () => {
       setInitiateOtpVerify(res);
       if (res?.status === 'success') {
         toast.success('Код підтверджено');
-        return router.push(`/`);
+
+        return router.push(`/payment-result?payment_id=${res.orderId}`);
       } else {
         toast.error(res?.message || 'Код невірний');
         setSMSValidationoading(false);
       }
     } catch (error) {
       console.error(error);
-      setSMSValidationoading(false);
-
       toast.error('Сталася помилка при перевірці');
     } finally {
       setSMSValidationoading(false);
@@ -94,9 +92,7 @@ export const usePaymantConfirm = () => {
         setInitiateOtpVerify(res);
         return;
       }
-      if (ticket?.providerName === 'INFOBUS') {
-        return router.push(`/`);
-      }
+
       router.push(`/payment-result?payment_id=${res.orderId}`);
       toast.success('Заброньовано');
     } catch (error) {

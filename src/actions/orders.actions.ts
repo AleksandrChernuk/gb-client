@@ -1,41 +1,13 @@
 'use server';
 
 import { IRequestOrder } from '@/types/order-interface';
-
-interface ICancelBody {
-  providerId: string;
-  providerOrderId: string;
-}
-
-interface IConfirmOrderBody {
-  providerId: string;
-  providerOrderId: string;
-  myOrderId: string;
-  customerPhone: string;
-  customerEmail: string;
-  locale: string;
-}
-
-export interface IconfirmBookRes {
-  status: string;
-  message: string;
-  orderId: string;
-}
-
-export interface IPdfRes {
-  status: string;
-  message: string;
-  orderNumber: string;
-  pdf: string;
-}
-
-export interface ISmsValidateOrder {
-  providerId: string;
-  providerOrderId: string;
-  customerPhone: string;
-  validationCode: string;
-  locale: string;
-}
+import {
+  ICancelBody,
+  IconfirmBookRes,
+  IConfirmOrderBody,
+  IPdfRes,
+  ISmsValidateOrder,
+} from '@/types/order.actions.type';
 
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 

@@ -48,8 +48,8 @@ export const Support = ({ variant }: Props) => {
                     aria-label={item.title}
                     title={item.title}
                   >
-                    <Link prefetch={false} href={item.src}>
-                      <div className="w-4 h-4">{item.icon}</div>
+                    <Link prefetch={false} href={item.src} target="_blank">
+                      <div className="size-6">{item.icon}</div>
                       {item.title}
                     </Link>
                   </Button>
@@ -71,13 +71,14 @@ export const Support = ({ variant }: Props) => {
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-2 pb-0 pl-1">
-              <ul>
+              <ul className="space-y-2">
                 {supportNavlinks.map((item, idx) => (
                   <li key={`${item.title}+${idx}`}>
                     <Button asChild variant={'link'} aria-label={item.title} title={item.title}>
                       <Link
                         prefetch={false}
                         href={item.src}
+                        target="_blank"
                         className="flex flex-row items-center justify-start gap-2 p-1 text-base font-medium tracking-normal leading-[24px]"
                       >
                         <span className="w-[22.5px] h-[22.5px]">{item.icon && item.icon}</span>

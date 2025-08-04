@@ -3,9 +3,22 @@ import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/co
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { useTranslations } from 'next-intl';
+import { useTimerStore } from '@/store/useTimer';
+import { useNewOrderResult } from '@/store/useOrderResult';
+import { useRouter } from 'next/navigation';
 
 export function StillOnlineDialog() {
+  const resetInitiateNewOrder = useNewOrderResult((s) => s.resetInitiateNewOrder);
+  const router = useRouter();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+
+  const { reset } = useTimerStore();
+
+  const handleCancel = () => {
+    reset();
+    resetInitiateNewOrder();
+    router.back();
+  };
 
   return (
     <>
@@ -18,8 +31,8 @@ export function StillOnlineDialog() {
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
-        <Button size={'secondary'} variant="default">
-          OK
+        <Button variant="default" size="primery" onClick={handleCancel}>
+          {t('payment_confirm_to_search')}
         </Button>
       </DialogFooter>
     </>
