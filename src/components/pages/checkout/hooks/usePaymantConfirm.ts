@@ -50,6 +50,7 @@ export const usePaymantConfirm = () => {
       setInitiateOtpVerify(res);
       if (res?.status === 'success') {
         toast.success('Код підтверджено');
+        return router.push(`/`);
       } else {
         toast.error(res?.message || 'Код невірний');
         setSMSValidationoading(false);
