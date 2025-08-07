@@ -1,5 +1,5 @@
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
-import RequestPartnershipForm from '@/components/modules/request-partnership';
+import CooperationForm from '@/components/modules/cooperation-form';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { CustomCard } from '@/components/shared/CustomCard';
 import { joinUsAgents } from '@/constans/join.us.agents.constans';
@@ -103,7 +103,7 @@ export default async function ForAgentsPage() {
               <h3 className="mb-6 text-center text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 {t_common('leave_a_request')}
               </h3>
-              <RequestPartnershipForm />
+              <CooperationForm />
             </CustomCard>
           </Container>
         </section>

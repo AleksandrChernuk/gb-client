@@ -1,5 +1,7 @@
 {
   "forms": {
+    "suspicious_input": "Suspicious input",
+
     "first_name": "First Name",
     "first_name_placeholder": "Enter your first name",
     "last_name": "Last Name",
@@ -48,13 +50,15 @@
     "processing_data": "You must agree to data processing.",
     "contact_person": "Contact Person",
     "name_of_the_company": "Company Name",
+    "message_text": "Message text",
+    "message_text_placeholder": "Enter your message",
     "type_of_business": "Business Type",
     "e_mail": "Email",
     "phone": "Phone",
     "type_placeholder": "Enter business type",
     "e_mail_placeholder": "Enter your email",
     "phone_placeholder": "Enter your phone number",
-    "request_btn": "Send Request",
+    "request_btn": "Send",
 
     "document": "Document",
     "docType": {

@@ -1,5 +1,4 @@
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
-import RequestPartnershipForm from '@/components/modules/request-partnership';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { CustomCard } from '@/components/shared/CustomCard';
@@ -11,6 +10,7 @@ import world from '@/assets/images/world.avif';
 import business from '@/assets/images/business.avif';
 import group from '@/assets/images/group.avif';
 import { aboutUsStatistics } from '@/constans/about.us.statistics';
+import ContactForm from '@/components/modules/contact-form';
 
 export default async function AboutPage() {
   const [t_about, t_common] = await Promise.all([
@@ -154,9 +154,9 @@ export default async function AboutPage() {
           <Container size="xs" className="my-auto">
             <CustomCard className="dark:bg-slate-800">
               <h3 className="mb-6 text-center text-2xl font-bold tracking-normal leading-[28.8px] laptop:h1 text-slate-700 dark:text-slate-50">
-                {t_common('leave_a_request')}
+                {t_common('have_an_idea')}
               </h3>
-              <RequestPartnershipForm />
+              <ContactForm />
             </CustomCard>
           </Container>
         </section>

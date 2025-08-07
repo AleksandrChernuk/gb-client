@@ -8,6 +8,8 @@ import { TcityKey } from '@/store/useSearch/types';
 import { IconSwap } from '@/assets/icons/IconSwap';
 import { NotFoundCity } from './NotFoundCity';
 import { MainLoader } from '@/components/shared/MainLoader';
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
 
 type Props = {
   name: 'from' | 'to';
@@ -50,6 +52,8 @@ export default function CitySearchDesktop({
   onSelectCity,
   isFetchingLocations,
 }: Props) {
+  const t = useTranslations(MESSAGE_FILES.COMMON);
+
   return (
     <div role="dropdown-warapp" className="relative">
       <MainSearchInput
@@ -74,7 +78,7 @@ export default function CitySearchDesktop({
           handleToggleOpen();
         }}
         error={errors}
-        errorMassage="required"
+        errorMassage={t('required')}
         onBlur={handleBlur}
         aria-invalid={Boolean(city)}
         spellCheck="false"

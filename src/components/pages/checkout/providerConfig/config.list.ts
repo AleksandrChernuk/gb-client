@@ -2,19 +2,20 @@ import { IRouteResponse } from '@/types/route.types';
 import { z } from 'zod';
 import { FieldConfig } from './types';
 import { bdaySchema, passportExpirySchema } from './schemas';
+import { isCleanInput } from '@/schemas/schemas.constans';
 
 export const firstName: FieldConfig = {
   label: 'first_name',
   type: 'text',
   placeholder: 'first_name_placeholder',
-  schema: z.string().min(1, { message: 'required' }),
+  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
 };
 
 export const lastName: FieldConfig = {
   label: 'last_name',
   type: 'text',
   placeholder: 'last_name_placeholder',
-  schema: z.string().min(1, { message: 'required' }),
+  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
 };
 
 export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
@@ -78,7 +79,7 @@ export const documentNumber: FieldConfig = {
   label: 'document_number',
   type: 'text',
   placeholder: 'document_number_placeholder',
-  schema: z.string().min(1, { message: 'required' }),
+  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
 };
 
 export const citizenship: FieldConfig = {
@@ -92,7 +93,7 @@ export const middlename: FieldConfig = {
   label: 'middlename',
   type: 'text',
   placeholder: 'middlename_placeholder',
-  schema: z.string().min(1, { message: 'required' }),
+  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
 };
 
 export const expiryDate = (currentTicket: IRouteResponse | null): FieldConfig => {

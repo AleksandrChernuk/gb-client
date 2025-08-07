@@ -1,4 +1,4 @@
-import { passwordShema } from '@/schemas/schemas.constans';
+import { isCleanInput, passwordShema } from '@/schemas/schemas.constans';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { z } from 'zod';
 
@@ -29,5 +29,6 @@ export const profilePhoneForm = z.object({
         return phoneNumber ? phoneNumber.isValid() : false;
       },
       { message: 'invalid_number' },
-    ),
+    )
+    .refine(isCleanInput, { message: 'suspicious_input' }),
 });

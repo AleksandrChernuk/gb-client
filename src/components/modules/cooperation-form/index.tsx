@@ -2,27 +2,29 @@
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
-import { useRequestPartnershipSchema } from '@/schemas/request.partnership.schema';
-import { IRequestPartnershipForm } from '@/types/request.partnership';
+import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { cooperationSchema } from '@/schemas/cooperation.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
-export default function RequestPartnershipForm() {
-  const t = useTranslations('forms');
-  const partnershipSchem = useRequestPartnershipSchema(t);
+export default function CooperationForm() {
+  const t = useTranslations(MESSAGE_FILES.FORM);
 
-  const form = useForm<IRequestPartnershipForm>({
+  const form = useForm<z.infer<typeof cooperationSchema>>({
+    resolver: zodResolver(cooperationSchema),
     mode: 'onSubmit',
-    resolver: zodResolver(partnershipSchem),
-    defaultValues: { name: '', company: '', type: '', email: '', phone: '' },
+    defaultValues: { firstName: '', company: '', type: '', email: '', phone: '' },
   });
 
-  const onSubmit = (data: IRequestPartnershipForm) => {
-    console.log(data);
-    form.reset({ name: '', company: '', type: '', email: '', phone: '' });
+  const onSubmit = (data: z.infer<typeof cooperationSchema>) => {
+    toast.info(`${JSON.stringify(data)}`);
+    form.reset({ firstName: '', company: '', type: '', email: '', phone: '' });
   };
 
   return (
@@ -31,56 +33,60 @@ export default function RequestPartnershipForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
           <FormField
             control={form.control}
-            name="name"
-            render={({ field }) => (
+            name="firstName"
+            render={({ field, fieldState }) => (
               <FormItem className="w-full">
                 <FormLabel>{t('contact_person')}</FormLabel>
                 <FormControl>
                   <Input {...field} type="text" placeholder={t('first_name_placeholder')} />
                 </FormControl>
+                {!!fieldState.error && <FormErrorMassege>{t(`${fieldState.error.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="company"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem className="w-full">
                 <FormLabel>{t('name_of_the_company')}</FormLabel>
                 <FormControl>
                   <Input {...field} type="text" placeholder={t('last_name_placeholder')} />
                 </FormControl>
+                {!!fieldState.error && <FormErrorMassege>{t(`${fieldState.error.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="type"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem className="w-full">
                 <FormLabel>{t('type_of_business')}</FormLabel>
                 <FormControl>
                   <Input {...field} type="text" placeholder={t('type_placeholder')} />
                 </FormControl>
+                {!!fieldState.error && <FormErrorMassege>{t(`${fieldState.error.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem className="w-full">
                 <FormLabel>{t('e_mail')}</FormLabel>
                 <FormControl>
                   <Input {...field} type="email" placeholder={t('e_mail_placeholder')} />
                 </FormControl>
+                {!!fieldState.error && <FormErrorMassege>{t(`${fieldState.error.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="phone"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>{t('phone')}</FormLabel>
                 <FormControl>
@@ -92,12 +98,14 @@ export default function RequestPartnershipForm() {
                     placeholder={t('phone_placeholder')}
                   />
                 </FormControl>
+                {!!fieldState.error && <FormErrorMassege>{t(`${fieldState.error.message}`)}</FormErrorMassege>}
               </FormItem>
             )}
           />
           <Button
             type="submit"
             variant={'default'}
+            size={'primery'}
             className="w-full px-4 py-4 mt-6 text-base font-bold leading-6 tracking-normal rounded-full"
           >
             {t('request_btn')}

@@ -1,5 +1,16 @@
 import * as z from 'zod';
 
+export const forbiddenPatterns = [
+  /<script.*?>.*?<\/script>/gi,
+  /(<|%3C)script/gi,
+  /('|--|;|\/\*|\*\/|xp_)/gi,
+  /\b(SELECT|INSERT|DELETE|UPDATE|DROP|UNION|EXEC|INFORMATION_SCHEMA)\b/gi,
+];
+
+export const isCleanInput = (value: string): boolean => {
+  return !forbiddenPatterns.some((pattern) => pattern.test(value));
+};
+
 export const passwordShema = z
   .string()
   .trim()
@@ -14,7 +25,8 @@ export const passwordShema = z
   .refine((password) => /[0-9]/.test(password), { message: 'password_validate.number' })
   .refine((password) => /[!@#$%^&*]/.test(password), {
     message: 'password_validate.special',
-  });
+  })
+  .refine(isCleanInput, { message: 'suspicious_input' });
 
 export const emailShema = z.string().trim().min(1, { message: 'required' }).email('emailNotValid');
 
@@ -22,4 +34,4 @@ export const nameShema = z
   .string()
   .trim()
   .min(1, { message: 'required' })
-  .regex(/^[a-zA-Zа-яА-ЯіїєґІЇЄҐ'’ -]+$/, { message: 'noSpecialCharacters' });
+  .refine(isCleanInput, { message: 'suspicious_input' });

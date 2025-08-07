@@ -2,7 +2,7 @@ import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import { Container } from '@/components/shared/Container';
 import Image from 'next/image';
 import { CustomCard } from '@/components/shared/CustomCard';
-import RequestPartnershipForm from '@/components/modules/request-partnership';
+import CooperationForm from '@/components/modules/cooperation-form';
 import { improveYourSalesList } from '@/constans/improve.your.sales.constans';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import peopleWithSuitcases from '@/assets/images/people-with-suitcases-looking-straight-ahead-goin.avif';
@@ -129,7 +129,7 @@ export default async function ForCarriersPage() {
               <h2 className="mb-6 text-center text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 {t_common('leave_a_request')}
               </h2>
-              <RequestPartnershipForm />
+              <CooperationForm />
             </CustomCard>
           </Container>
         </section>

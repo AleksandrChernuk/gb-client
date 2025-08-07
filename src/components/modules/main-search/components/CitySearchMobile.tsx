@@ -89,7 +89,7 @@ export default function CitySearchMobile({
           endIcon={name === 'from' && <IconSwap />}
           swap={swap}
           error={errors}
-          errorMassage="required"
+          errorMassage={t('required')}
         />
       </SheetTrigger>
       <SheetContent>

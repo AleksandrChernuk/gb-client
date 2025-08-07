@@ -1,5 +1,6 @@
 {
   "forms": {
+    "suspicious_input": "Підозрілий ввід",
     "first_name": "Ім’я",
     "first_name_placeholder": "Введіть ім’я",
     "last_name": "Прізвище",
@@ -48,13 +49,15 @@
     "processing_data": "Погодьтеся на обробку персональних даних.",
     "contact_person": "Контактна особа",
     "name_of_the_company": "Назва компанії",
+    "message_text": "Текст повідомлення",
+    "message_text_placeholder": "Введіть текст повідомлення",
     "type_of_business": "Тип діяльності",
     "e_mail": "Електронна пошта",
     "phone": "Телефон",
     "type_placeholder": "Введіть тип діяльності",
     "e_mail_placeholder": "Ваша електронна пошта",
     "phone_placeholder": "Ваш номер телефону",
-    "request_btn": "Надіслати заявку",
+    "request_btn": "Надіслати",
     "document": "Документ",
     "seats_for_all_passengers": "Оберіть місця для всіх пасажирів",
 

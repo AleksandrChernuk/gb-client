@@ -1,5 +1,7 @@
 {
   "forms": {
+    "suspicious_input": "Подозрительный ввод",
+
     "first_name": "Имя",
     "first_name_placeholder": "Введите имя",
     "last_name": "Фамилия",
@@ -48,13 +50,15 @@
     "processing_data": "Согласитесь на обработку данных.",
     "contact_person": "Контактное лицо",
     "name_of_the_company": "Название компании",
+    "message_text": "Текст сообщения",
+    "message_text_placeholder": "Введите текст сообщения",
     "type_of_business": "Вид деятельности",
     "e_mail": "Электронная почта",
     "phone": "Телефон",
     "type_placeholder": "Введите вид деятельности",
     "e_mail_placeholder": "Введите email",
     "phone_placeholder": "Введите телефон",
-    "request_btn": "Отправить заявку",
+    "request_btn": "Отправить",
 
     "document": "Документ",
     "docType": {
