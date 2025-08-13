@@ -128,5 +128,9 @@
   "authDontHaveAccount": "Нет аккаунта?",
   "authAlreadyHaveAccount": "Уже зарегистрированы?",
   "authCreateAccount": "Создать аккаунт",
-  "authLogin": "Войти"
+  "authLogin": "Войти",
+  "toast": {
+    "success": "Успешно",
+    "error": "Что-то пошло не так"
+  }
 }

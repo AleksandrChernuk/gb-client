@@ -1,5 +1,6 @@
 'use client';
 
+import { sendFeedback } from '@/actions/mail.actions';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { FormErrorMassege } from '@/components/ui/form-error';
@@ -9,12 +10,14 @@ import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import { contactSchema } from '@/schemas/contact.form.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
 export default function ContactForm() {
   const t = useTranslations(MESSAGE_FILES.FORM);
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
@@ -22,9 +25,16 @@ export default function ContactForm() {
     defaultValues: { firstName: '', text: '', email: '' },
   });
 
-  const onSubmit = (data: z.infer<typeof contactSchema>) => {
-    toast.info(`${JSON.stringify(data)}`);
-    form.reset({ firstName: '', text: '', email: '' });
+  const onSubmit = async (data: z.infer<typeof contactSchema>) => {
+    startTransition(async () => {
+      try {
+        await sendFeedback(data);
+        toast.success('toast.success');
+        form.reset();
+      } catch (err) {
+        toast.error(typeof err === 'string' ? err : 'toast.error');
+      }
+    });
   };
 
   return (
@@ -82,7 +92,7 @@ export default function ContactForm() {
             size={'primery'}
             className="w-full px-4 py-4 mt-6 text-base font-bold leading-6 tracking-normal rounded-full"
           >
-            {t('request_btn')}
+            {isPending ? 'Loading...' : t('request_btn')}
           </Button>
         </form>
       </Form>

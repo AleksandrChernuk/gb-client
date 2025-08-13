@@ -59,6 +59,7 @@ export const TicketCard = ({ element }: Props) => {
           onClick={handleSelect}
         />
       }
+      providerName={element.providerName}
     >
       <div>
         <div>

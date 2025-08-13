@@ -13,12 +13,13 @@ type Props = {
   hasBorder?: boolean;
 };
 
-export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted }: Props) => {
+export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted, hasBorder }: Props) => {
   return (
     <div
       className={clsx(
-        'z-0 p-2 rounded-lg flex items-center justify-between gap-1 cursor-pointer   h-20 w-full',
+        'z-0 p-2 rounded-lg flex items-center justify-between gap-1 cursor-pointer h-20 w-full',
         (isHighlighted || isSelected) && 'dark:bg-slate-700 bg-slate-200',
+        hasBorder && 'border border-slate-300 dark:border-slate-600',
       )}
       onClick={handleSelectCity}
     >

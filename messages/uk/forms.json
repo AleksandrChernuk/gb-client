@@ -60,9 +60,11 @@
     "request_btn": "Надіслати",
     "document": "Документ",
     "seats_for_all_passengers": "Оберіть місця для всіх пасажирів",
-
     "emailNotValid": "Вкажіть дійсну електронну адресу",
-
+    "toast": {
+      "success": "Успішно",
+      "error": "Щось пішло не так"
+    },
     "docType": {
       "unknown": "Інший документ",
       "passport": "Паспорт",

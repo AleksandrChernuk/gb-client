@@ -74,6 +74,10 @@
     },
     "seats_for_all_passengers": "Pick seats for everyone",
 
+    "toast": {
+      "success": "Success",
+      "error": "Something went wrong"
+    },
     "genderList": {
       "male": "Male",
       "female": "Female",
