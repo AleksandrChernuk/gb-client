@@ -14,6 +14,8 @@ export interface IRouteDetailsResponse {
   discounts: IDiscount[] | null;
   returnRulesDescription: string[] | null;
   returnRules: IReturnRules[] | null;
+  routeInfo?: string | null;
+  canCyrillicOrderdata?: boolean;
   transportId?: string | null;
   busName: string | null;
   busNumber: string | null;

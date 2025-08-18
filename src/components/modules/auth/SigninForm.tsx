@@ -8,20 +8,20 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CircleAlert, LoaderCircle } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { useRouter } from '@/i18n/routing';
-import { useUserStore } from '@/store/useUser';
-import { signin } from '@/actions/auth.service';
+// import { useRouter } from '@/i18n/routing';
+// import { useUserStore } from '@/store/useUser';
+// import { signin } from '@/actions/auth.service';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
-  const locale = useLocale();
-  const router = useRouter();
+  // const locale = useLocale();
+  // const router = useRouter();
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, setIsPending] = useState(false);
@@ -38,22 +38,23 @@ const SigninForm = () => {
   const onSubmit = async (values: z.infer<typeof signinSchema>) => {
     try {
       setIsPending(true);
-      const result = await signin(values, locale);
+      // const result = await signin(values, locale);
+      console.log(values);
+      // const { message, currentUser } = result;
 
-      const { message, currentUser } = result;
+      // if (message === '2FA code sent') {
+      //   router.push(`/auth/verify-2FA/${result.email}`);
+      //   form.reset();
+      //   return;
+      // }
 
-      if (message === '2FA code sent') {
-        router.push(`/auth/verify-2FA/${result.email}`);
-        form.reset();
-        return;
-      }
+      // if (message === 'Successfully signin') {
+      //   useUserStore.getState().setUserStore(currentUser);
 
-      if (message === 'Successfully signin') {
-        useUserStore.getState().setUserStore(currentUser);
-
-        router.push('/profile');
-        form.reset();
-      }
+      //   router.push('/profile');
+      //   form.reset();
+      // }
+      form.reset();
     } catch (error) {
       setIsPending(false);
 

@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'test-dispatcher.bussystem.eu',
+        hostname: 'dispatcher.bussystem.eu',
         port: '',
         pathname: '/images/bus_foto/**',
       },

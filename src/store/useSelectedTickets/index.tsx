@@ -87,15 +87,15 @@ export const useSelectedTickets = create<useSelectedTicketsStore>()(
 
             const currentDetails: IRouteDetailsResponse = route.details || ({} as IRouteDetailsResponse);
 
-            const updatedDetails = {
+            const updatedDetails: IRouteDetailsResponse = {
               ...currentDetails,
               ...Object.fromEntries(
                 Object.entries(res || {}).map(([key, value]) => [
                   key,
-                  value !== null ? value : currentDetails[key as keyof IRouteDetailsResponse],
+                  currentDetails[key as keyof IRouteDetailsResponse] ?? value,
                 ]),
               ),
-            } as IRouteDetailsResponse;
+            };
 
             const updatedRoute: IRouteResponse = {
               ...route,

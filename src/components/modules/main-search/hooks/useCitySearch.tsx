@@ -91,9 +91,12 @@ export const useCitySearch = ({ name }: Props) => {
   }, []);
 
   useEffect(() => {
-    const cityIndex = cities?.findIndex((el) => el.id === city?.id) || 0;
-    setHighlightedIndex(cityIndex);
-  }, [city, cities]);
+    if (city) {
+      setValue(extractLocationDetails(city, language).locationName);
+    } else {
+      setValue('');
+    }
+  }, [city, language]);
 
   const getPlaceholder = useCallback(() => {
     return name === 'from' ? t('placeholderFrom') : t('placeholderTo');

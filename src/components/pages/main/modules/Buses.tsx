@@ -6,6 +6,7 @@ import Image from 'next/image';
 import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
 import { MESSAGE_FILES } from '@/constans/message.file.constans';
 import Link from 'next/link';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 export default async function Buses() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
@@ -15,17 +16,17 @@ export default async function Buses() {
     <section className="pb-8 tablet:pb-16">
       <Container size="m">
         <ul className="justify-between min-h-full gap-5 tablet:flex laptop:gap-40">
-          <li className="relative overflow-hidden  max-w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
-            <Image
-              alt={t_img_alts('buses')}
-              src={aTravellerImage}
-              placeholder="blur"
-              sizes="100vw"
-              className="rounded-3xl"
-              style={{
-                objectFit: 'contain',
-              }}
-            />
+          <li className="relative overflow-hidden min-w-0 max-w-[350px] mb-8 tablet:order-2 tablet:mb-0 tablet:w-1/2 mx-auto">
+            <AspectRatio ratio={1}>
+              <Image
+                alt={t_img_alts('buses')}
+                src={aTravellerImage}
+                placeholder="blur"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="rounded-3xl object-contain"
+              />
+            </AspectRatio>
           </li>
           <li className="flex flex-col tablet:w-1/2">
             <h3 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">

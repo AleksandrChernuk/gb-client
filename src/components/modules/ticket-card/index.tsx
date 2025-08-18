@@ -29,12 +29,11 @@ export const TicketCard = ({ element }: Props) => {
   const { handleGetDetails, handleSetTicket } = useTicketCard();
   const [tickets] = useTicketsDetails(useShallow((state) => [state.ticketDetailsMap]));
   const loadingSelectTicket = useSelectedTickets(useShallow((state) => state.loadingSelectTicket));
-
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
-
   const hasDetails = tickets[element.ticketId]?.details != null;
 
   const [isPending, startTransition] = useTransition();
+
   const handleSelect = () => {
     if (loadingSelectTicket) return;
     if (!element.ticketPricing.basePrice) return;

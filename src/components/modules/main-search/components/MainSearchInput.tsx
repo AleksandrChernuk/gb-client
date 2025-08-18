@@ -95,7 +95,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
               e.preventDefault();
               swap?.();
             }}
-            className="absolute transform rotate-90 -translate-y-1/2 cursor-pointer tablet:rotate-0 target:rotate-180 right-1 tablet:right-2 laptop:right-5 top-1/2"
+            className="absolute transform rotate-90 -translate-y-1/2 cursor-pointer tablet:rotate-0 target:rotate-180 right-1 tablet:right-2 laptop:right-5 top-1/2 z-20"
           >
             {endIcon}
           </div>

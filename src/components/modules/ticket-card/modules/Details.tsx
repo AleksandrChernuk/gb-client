@@ -27,6 +27,12 @@ export default function Details({ id }: Props) {
   const ticketDetails = useTicketsDetails((state) => state.ticketDetailsMap[id]);
 
   const loadingMap = useTicketsDetails((state) => state.loadingMap);
+  const busName = ticketDetails?.details?.busName;
+  const busNumber = ticketDetails?.details?.busNumber;
+  const busPictures = toArray(ticketDetails?.details?.busPictures);
+  const showPictures = busPictures.length > 1 && busPictures[0] !== null;
+  const showBusDetails = busName !== 'no_plan' || (busNumber && busNumber.trim() !== '') || showPictures;
+
   if (loadingMap[id])
     return (
       <div className="pt-10 flex items-center justify-center ">
@@ -74,22 +80,16 @@ export default function Details({ id }: Props) {
       </div>
 
       <div className="space-y-4">
-        <DetailsList label={t('luggage')} listClassName="">
-          {toArray(ticketDetails?.details?.luggageRules).map((el, idx) => (
-            <DetailsItem key={el + idx}>{el}</DetailsItem>
-          ))}
-        </DetailsList>
+        {!!ticketDetails?.details?.luggageRules && (
+          <DetailsList label={t('luggage')} listClassName="">
+            <DetailsItem>{toArray(ticketDetails.details.luggageRules).join(', ')}</DetailsItem>
+          </DetailsList>
+        )}
 
         <DetailsList label={t('return_policy')} listClassName="">
           {toArray(ticketDetails?.details?.returnRulesDescription).map((el, idx) => (
-            <DetailsItem key={el + idx}>{el}</DetailsItem>
+            <DetailsItem key={idx + 1}>{el}</DetailsItem>
           ))}
-        </DetailsList>
-
-        <DetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
-          {!!ticketDetails?.details?.amenities?.length && (
-            <DetailsItem>{toArray(ticketDetails?.details?.amenities).join(', ')}</DetailsItem>
-          )}
         </DetailsList>
 
         <DetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
@@ -103,14 +103,23 @@ export default function Details({ id }: Props) {
           )}
         </DetailsList>
 
-        <DetailsList label={t('bus')} listClassName=" flex-wrap">
-          {!!ticketDetails?.details?.busName && (
+        <DetailsList label={t('route_info')} listClassName="flex-row flex-wrap">
+          {ticketDetails?.details?.routeInfo && (
+            <DetailsItem>{ticketDetails?.details?.routeInfo.replace(/●\s*/g, ' ')}</DetailsItem>
+          )}
+        </DetailsList>
+
+        <DetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
+          {!!ticketDetails?.details?.amenities?.length && (
+            <DetailsItem>{toArray(ticketDetails?.details?.amenities).join(', ')}</DetailsItem>
+          )}
+        </DetailsList>
+        {showBusDetails && (
+          <DetailsList label={t('bus')} listClassName=" flex-wrap">
             <>
               <div className="flex flex-row flex-wrap gap-0.5">
-                <DetailsItem>
-                  {ticketDetails?.details?.busName}
-                  {ticketDetails?.details?.busNumber}
-                </DetailsItem>
+                <DetailsItem>{!!busName && busName.replace(/\[|\]/g, '')}</DetailsItem>
+                <DetailsItem>{ticketDetails?.details?.busNumber}</DetailsItem>
               </div>
               {ticketDetails?.details?.busPictures?.length &&
                 ticketDetails?.details?.busPictures?.length > 1 &&
@@ -127,8 +136,8 @@ export default function Details({ id }: Props) {
                   />
                 )}
             </>
-          )}
-        </DetailsList>
+          </DetailsList>
+        )}
       </div>
     </div>
   );

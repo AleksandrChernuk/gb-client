@@ -19,14 +19,10 @@ export default function TicketRoute({ route }: Props) {
   const matches = useMediaQuery('(max-width: 767px)');
 
   const locale = useLocale();
-
   const date_time_from = format(route.departure.dateTime || new Date(), 'HH:mm');
   const location_from = extractLocationDetails(route.departure.fromLocation, locale).locationName || '';
-  const address_from = route.departure.stationAddress || '';
-
   const date_time_to = format(route.arrival.dateTime || new Date(), 'HH:mm');
   const location_to = extractLocationDetails(route.arrival.toLocation, locale).locationName || '';
-  const address_to = route.arrival.stationAddress || '';
 
   const duration = route.duration?.split(':');
 
@@ -52,7 +48,8 @@ export default function TicketRoute({ route }: Props) {
                 {location_from}
               </div>
               <div className="text-xs tracking-normal leading-[18px] text-slate-700 dark:text-slate-200 tablet:text-sm font-normal tablet:leading-4">
-                {address_from}
+                {route.departure.stationName}
+                {route.departure.stationAddress}
               </div>
             </div>
 
@@ -61,7 +58,8 @@ export default function TicketRoute({ route }: Props) {
                 {location_to}
               </div>
               <div className="text-xs leading-[18px] text-slate-700 dark:text-slate-200 tablet:text-sm font-normal tablet:leading-4 tracking-normal">
-                {address_to}
+                {route.arrival.stationName}
+                {route.arrival.stationAddress}
               </div>
             </div>
           </div>
@@ -76,7 +74,8 @@ export default function TicketRoute({ route }: Props) {
               {location_from}
             </div>
             <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
-              {address_from}
+              {route.departure.stationName}
+              {route.departure.stationAddress}
             </div>
           </div>
 
@@ -100,7 +99,8 @@ export default function TicketRoute({ route }: Props) {
               {location_to}
             </div>
             <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
-              {address_to}
+              {route.arrival.stationName}
+              {route.arrival.stationAddress}
             </div>
           </div>
         </div>
