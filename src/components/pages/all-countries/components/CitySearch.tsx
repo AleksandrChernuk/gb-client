@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Button } from '@/components/ui/button';
 import { useAllCountriesContext } from '../context';
 

@@ -1,5 +1,5 @@
 import PaymentResultPage from '@/components/pages/payment-result';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 

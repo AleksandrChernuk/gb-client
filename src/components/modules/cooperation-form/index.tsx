@@ -6,8 +6,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MAX_USER_FEEDBACK_LEN } from '@/config/limitsChar';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { cooperationSchema } from '@/schemas/cooperation.schema';
+import { sanitizePlainText } from '@/utils/sanitize';
+import { sanitizeEmail } from '@/utils/sanitizeEmail';
+import { sanitizeUsername } from '@/utils/sanitizeUsername';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useTransition } from 'react';
@@ -28,7 +32,13 @@ export default function CooperationForm() {
   const onSubmit = async (data: z.infer<typeof cooperationSchema>) => {
     startTransition(async () => {
       try {
-        await sendProposal(data);
+        await sendProposal({
+          firstName: sanitizeUsername(data.firstName),
+          company: sanitizePlainText(data.company, MAX_USER_FEEDBACK_LEN, false),
+          type: sanitizePlainText(data.type, MAX_USER_FEEDBACK_LEN, false),
+          email: sanitizeEmail(data.email),
+          phone: data.phone,
+        });
         toast.success('toast.success');
         form.reset();
       } catch (err) {
@@ -115,7 +125,7 @@ export default function CooperationForm() {
           <Button
             type="submit"
             variant={'default'}
-            size={'primery'}
+            size={'primary'}
             className="w-full px-4 py-4 mt-6 text-base font-bold leading-6 tracking-normal rounded-full"
           >
             {isPending ? 'Loading...' : t('request_btn')}

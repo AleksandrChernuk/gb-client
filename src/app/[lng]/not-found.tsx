@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import MainHeader from '@/components/modules/header/MainHeader';
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
 import { CustomCard } from '@/components/shared/CustomCard';
@@ -44,7 +44,7 @@ export default async function NotFoundPage() {
               <h1 className="text-2xl laptop:text-[32px] font-bold tracking-normal leading-[28.8px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 {t('notFoundTitle')}!
               </h1>
-              <Button variant={'secondary'} size={'primery'} className="text-black">
+              <Button variant={'secondary'} size={'primary'} className="text-black">
                 <Link href={'/'}>{t('mainPageBtn')}</Link>
               </Button>
             </CustomCard>

@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Link } from '@/i18n/routing';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Input } from '../ui/input';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   variant: 'mobile' | 'desktop' | 'footer';

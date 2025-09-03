@@ -8,7 +8,7 @@ import { Container } from '@/components/shared/Container';
 import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default async function ForAgentsPage() {
   const t_common = await getTranslations(MESSAGE_FILES.COMMON);

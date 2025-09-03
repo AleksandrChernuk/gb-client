@@ -12,6 +12,44 @@ export const signinSchema = z.object({
   password: passwordShema,
 });
 
+export const resetPasswordSchema = z.object({
+  code: z.preprocess(
+    (v) => String(v ?? '').replace(/\D+/g, ''),
+    z.string().regex(/^\d{6}$/, { message: 'enter_6_digit_code' }),
+  ),
+  password: passwordShema,
+});
+
+export const verify2FASchema = z.object({
+  code: z.preprocess(
+    (v) => String(v ?? '').replace(/\D+/g, ''),
+    z.string().regex(/^\d{6}$/, { message: 'enter_6_digit_code' }),
+  ),
+});
+
+export const changePasswordSchema = z
+  .object({
+    code: z.preprocess(
+      (v) => String(v ?? '').replace(/\D+/g, ''),
+      z.string().regex(/^\d{6}$/, { message: 'enter_6_digit_code' }),
+    ),
+    currentPassword: passwordShema,
+    newPassword: z.string().trim().min(1, { message: 'required' }),
+  })
+  .superRefine(({ currentPassword, newPassword }, ctx) => {
+    if (currentPassword !== newPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['newPassword'],
+        message: 'passwords_do_not_match',
+      });
+    }
+  });
+
+export const forgotPasswordSchema = z.object({
+  email: emailShema,
+});
+
 export const otpVerifySchema = z.object({
   pin: z
     .string()

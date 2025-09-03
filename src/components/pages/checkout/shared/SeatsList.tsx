@@ -6,7 +6,7 @@ import { memo } from 'react';
 import Seat from '../components/Seat';
 import { ISeat, TypeSeatsMap } from '@/types/seat.interface';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   helm?: boolean;

@@ -1,5 +1,9 @@
 {
   "forms": {
+    "send": "Надіслати",
+    "passwords_do_not_match": "Паролі не співпадають",
+
+    "go_home": "На головну сторінку",
     "suspicious_input": "Підозрілий ввід",
     "first_name": "Ім’я",
     "first_name_placeholder": "Введіть ім’я",
@@ -93,6 +97,8 @@
     "password": "Пароль",
     "password_placeholder": "Введіть пароль",
     "new_password": "Новий пароль",
+    "confirmation_code": "Код підтвердження",
+
     "new_password_placeholder": "Введіть новий пароль",
     "confirm_new_password": "Підтвердьте новий пароль",
     "confirm_new_password_placeholder": "Повторіть новий пароль",
@@ -125,6 +131,19 @@
     "authDontHaveAccount": "Ще не маєте акаунта?",
     "authAlreadyHaveAccount": "Вже є акаунт?",
     "authCreateAccount": "Зареєструватися",
-    "authLogin": "Увійти"
+    "authLogin": "Увійти",
+    "user_not_found": "Такої пошти не існує",
+    "account_deactivated": "Акаунт видалений",
+    "oauth_password_not_settable": "Акаунт зареєстрований за допомогою Google",
+    "default_error": "Сталася помилка. Спробуйте ще раз.",
+    "otp_enter_code_and_new_password": "Введите 6-значный код, отправленный на вашу электронную почту, и новый пароль.",
+    "code_validity": "Код дійсний протягом 5 хвилин і може бути використаний лише один раз.",
+    "edit_email": "Змінити",
+    "resend_code": "Відправити код повторно",
+    "sending": "Відправка...",
+    "code_resent_success": "Код повторно надіслано ✅",
+    "code_resent_error": "Сталася помилка. Спробуйте пізніше.",
+    "enter_6_digit_code": "Введіть 6-значний код",
+    "change_password_button": "Змінити"
   }
 }

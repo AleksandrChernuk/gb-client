@@ -1,4 +1,4 @@
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 

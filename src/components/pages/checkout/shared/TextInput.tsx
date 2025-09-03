@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useController, useFormContext } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { memo } from 'react';
 import { FieldConfig } from '../providerConfig/types';

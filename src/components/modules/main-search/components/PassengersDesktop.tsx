@@ -3,7 +3,7 @@ import { PassengersButton } from './PassengersButton';
 import { MainSearchInput } from './MainSearchInput';
 import { IconPass } from '@/assets/icons/IconPass';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Dispatch, SetStateAction } from 'react';
 
 type Props = {

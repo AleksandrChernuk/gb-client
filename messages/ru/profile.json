@@ -2,13 +2,16 @@
   "profile": {
     "trips_hystori": "История поездок",
     "reviews": "Отзывы",
-    "contact_information": "Контактная информация",
+    "settings": "Настройки",
     "personal_data": "Персональные данные",
     "phone": "Телефон",
     "password_update": "Изменить пароль",
     "logout": "Выйти",
     "no_trips": "Поездок пока нет",
     "go_to_search": "Перейти к поиску",
-    "no_reviews": "Вы ещё не оставили ни одного отзыва"
+    "no_reviews": "Вы ещё не оставили ни одного отзыва",
+    "payments": "Платежи",
+    "orders": "Заказы",
+    "my_trips": "Мои поездки"
   }
 }

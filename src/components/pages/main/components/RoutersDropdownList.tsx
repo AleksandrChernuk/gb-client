@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import RoutersItem from './RoutersItem';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { ILocation } from '@/types/location.types';
 
 type Props = {

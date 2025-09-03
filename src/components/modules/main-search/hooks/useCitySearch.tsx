@@ -5,7 +5,7 @@ import { ILocation } from '@/types/location.types';
 import { useSearchStore } from '@/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useShallow } from 'zustand/react/shallow';
 import { useLocationsStore } from '@/store/useLocations';
 

@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import DetailsStopsItem from './DetailsStopsItem';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTicketsDetails } from '@/store/useTicketsDetails';
 
 type Props = {

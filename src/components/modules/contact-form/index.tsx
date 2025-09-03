@@ -6,8 +6,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MAX_USER_FEEDBACK_LEN } from '@/config/limitsChar';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { contactSchema } from '@/schemas/contact.form.schema';
+import { sanitizePlainText } from '@/utils/sanitize';
+import { sanitizeEmail } from '@/utils/sanitizeEmail';
+import { sanitizeUsername } from '@/utils/sanitizeUsername';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useTransition } from 'react';
@@ -28,11 +32,15 @@ export default function ContactForm() {
   const onSubmit = async (data: z.infer<typeof contactSchema>) => {
     startTransition(async () => {
       try {
-        await sendFeedback(data);
-        toast.success('toast.success');
+        await sendFeedback({
+          firstName: sanitizeUsername(data.firstName),
+          email: sanitizeEmail(data.email),
+          text: sanitizePlainText(data.text, MAX_USER_FEEDBACK_LEN, true),
+        });
+        toast.success(t('toast.success'));
         form.reset();
       } catch (err) {
-        toast.error(typeof err === 'string' ? err : 'toast.error');
+        toast.error(typeof err === 'string' ? err : t('toast.error'));
       }
     });
   };
@@ -89,7 +97,7 @@ export default function ContactForm() {
           <Button
             type="submit"
             variant={'default'}
-            size={'primery'}
+            size={'primary'}
             className="w-full px-4 py-4 mt-6 text-base font-bold leading-6 tracking-normal rounded-full"
           >
             {isPending ? 'Loading...' : t('request_btn')}

@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { FieldConfig } from '../providerConfig/types';
 import { useController, useFormContext } from 'react-hook-form';
 import useDateLocale from '@/hooks/useDateLocale';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { Calendar } from '@/components/ui/calendar';
 import { IconCalendar } from '@/assets/icons/IconCalendar';

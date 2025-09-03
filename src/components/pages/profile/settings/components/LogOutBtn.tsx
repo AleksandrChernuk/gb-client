@@ -2,7 +2,7 @@
 
 import { logout } from '@/actions/auth.service';
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useUserStore } from '@/store/useUser';
 import { LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';

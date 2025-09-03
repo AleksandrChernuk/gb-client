@@ -6,14 +6,14 @@ import { useTranslations } from 'next-intl';
 import useTicketCard from './hooks/useTicketCard';
 import MobileDetails from './modules/MobileDetails';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, LoaderCircle } from 'lucide-react';
 import Details from './modules/Details';
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import SelectButton from './components/SelectButton';
 import TicketRoute from './components/TicketRoute';
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import TickedCard from './components/TickedCard';
 import { useTicketsDetails } from '@/store/useTicketsDetails';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
@@ -134,13 +134,9 @@ export const TicketCard = ({ element }: Props) => {
                   }
                 }}
                 selectButton={
-                  <SelectButton
-                    variant="desktop"
-                    loading={isPending}
-                    buttonText={t('selectButton')}
-                    disabled={isPending}
-                    onClick={handleSelect}
-                  />
+                  <Button variant={'default'} size={'primary'} disabled={isPending} onClick={() => handleSelect()}>
+                    {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('selectButton')}
+                  </Button>
                 }
               >
                 <div className="my-6">

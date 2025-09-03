@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useRouter } from '@/i18n/routing';
 import { FaqSearchShema } from '@/schemas/faq.search.schema';
 import { IFaqSearchValue } from '@/types/faq.types';

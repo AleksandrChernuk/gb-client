@@ -8,23 +8,23 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CircleAlert, LoaderCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
-import FormError from '@/components/shared/FormError';
+// import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
-// import { useRouter } from '@/i18n/routing';
-// import { useUserStore } from '@/store/useUser';
-// import { signin } from '@/actions/auth.service';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { signin } from '@/actions/auth.service';
+import { REDIRECT_PATHS } from '@/config/redirectPaths';
+import { useUserStore } from '@/store/useUser';
+import FormError from '@/components/shared/FormError';
+import { useRouter } from '@/i18n/routing';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
-  // const locale = useLocale();
-  // const router = useRouter();
-
-  const [error, setError] = useState<string | undefined>('');
-  const [isPending, setIsPending] = useState(false);
+  const locale = useLocale();
+  const router = useRouter();
+  const [errorSignin, setErrorSignin] = useState<string | null>(null);
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof signinSchema>>({
@@ -33,35 +33,42 @@ const SigninForm = () => {
       email: '',
       password: '',
     },
+    mode: 'onBlur',
   });
 
-  const onSubmit = async (values: z.infer<typeof signinSchema>) => {
+  const onSubmit = async (data: z.infer<typeof signinSchema>) => {
+    console.log('values', data);
     try {
-      setIsPending(true);
-      // const result = await signin(values, locale);
-      console.log(values);
-      // const { message, currentUser } = result;
+      const result = await signin({ email: data.email, password: data.password }, locale);
 
-      // if (message === '2FA code sent') {
-      //   router.push(`/auth/verify-2FA/${result.email}`);
-      //   form.reset();
-      //   return;
-      // }
+      const { message, currentUser, error } = result;
 
-      // if (message === 'Successfully signin') {
-      //   useUserStore.getState().setUserStore(currentUser);
+      if (!!error) {
+        setErrorSignin(error);
+        form.reset();
+      }
 
-      //   router.push('/profile');
-      //   form.reset();
-      // }
-      form.reset();
+      if (message === '2FA code sent') {
+        router.push(`${REDIRECT_PATHS.verify2FA}/${result.email}`);
+        form.reset();
+      }
+
+      if (message === 'Verification code sent') {
+        router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`);
+        form.reset();
+      }
+
+      if (message === 'Successfully signin') {
+        useUserStore.getState().setUserStore(currentUser);
+
+        router.push(REDIRECT_PATHS.profile);
+        form.reset();
+      }
     } catch (error) {
-      setIsPending(false);
-
       if (error instanceof Error) {
-        setError(`Signin failed: ${error.message}`);
+        console.error('Signin failed:', JSON.stringify(error.message));
       } else {
-        setError(`Signin failed: ${String(error)}`);
+        console.error('Signin failed:', JSON.stringify(error));
       }
     }
   };
@@ -80,7 +87,7 @@ const SigninForm = () => {
                   <div className="relative">
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={form.formState.isSubmitting}
                       type="email"
                       placeholder="user@example.com"
                       aria-invalid={Boolean(fieldState?.invalid)}
@@ -107,7 +114,7 @@ const SigninForm = () => {
                   <div className="relative">
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={form.formState.isSubmitting}
                       type={!isViewPassword ? 'password' : 'text'}
                       placeholder="******"
                       aria-invalid={Boolean(fieldState?.invalid)}
@@ -126,15 +133,15 @@ const SigninForm = () => {
           />
         </div>
 
-        <FormError message={error} />
+        {errorSignin && <FormError message={errorSignin} />}
 
         <Button
           type="submit"
-          size={'primery'}
+          size={'primary'}
           className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
-          disabled={isPending}
+          disabled={form.formState.isSubmitting}
         >
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
+          {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
         </Button>
       </form>
     </Form>

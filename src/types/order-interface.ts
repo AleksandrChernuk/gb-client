@@ -86,12 +86,15 @@ export interface IRequestOrder {
   refundRules?: string[];
   baggageRules?: string[];
   tickets?: RequestTicket[];
+  timetableId?: string;
+  bustypeId?: string;
 }
 
 export interface ITransfer {
   transferCity: string;
   transferStation?: string;
   stopDuration?: string;
+  arrivalDateTime?: string;
 }
 
 export interface IOrderResponse {

@@ -1,4 +1,4 @@
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 import LogOutBtn from '../settings/components/LogOutBtn';
 import TripsList from './componets/TripsList';

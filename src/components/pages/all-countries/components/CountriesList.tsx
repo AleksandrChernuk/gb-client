@@ -6,7 +6,7 @@ import React from 'react';
 import { useAllCountriesContext } from '../context';
 import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { useLocale, useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default function CountriesList() {
   const { countrys, locations, selectCountry, selectedCountry } = useAllCountriesContext();

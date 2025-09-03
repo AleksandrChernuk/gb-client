@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { IconRouteLeft } from '../icons/IconRouteLeft';
 import { IconRouteRigth } from '../icons/IconRouteRigth';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import Image from 'next/image';
 
 type Props = {

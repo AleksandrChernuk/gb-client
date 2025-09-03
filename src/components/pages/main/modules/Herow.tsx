@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import desc from '@/assets/images/desc_full_2x.avif';
 import mob from '@/assets/images/mob_full_2x.avif';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default async function Herow() {
   const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);

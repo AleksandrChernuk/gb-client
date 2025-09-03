@@ -2,7 +2,7 @@
 
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { sortBuyItems } from '@/constans/sortbuylist.constans';
 import { useFilterTickets } from '@/store/useFilterTickets';
 import { TsortBy } from '@/types/sortfilter.types';

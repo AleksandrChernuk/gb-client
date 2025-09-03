@@ -5,7 +5,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { format } from 'date-fns';
 import { ChevronRight, Clock3, Route } from 'lucide-react';
 import DetailsStops from '../components/DetailsStops';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import DetailsList from '../components/DetailsList';
 import DetailsItem from '../components/DetailsItem';
 import { toArray } from '@/utils/toArray';

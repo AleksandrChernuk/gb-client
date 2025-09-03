@@ -4,7 +4,7 @@ import PasswordUpdateForm from './components/PasswordUpdateForm';
 import LogOutBtn from './components/LogOutBtn';
 import PersonalDataForm from './components/PersonalDataForm';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default async function ProfilePage() {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);

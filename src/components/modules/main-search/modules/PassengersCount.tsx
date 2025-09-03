@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useCallback, useState } from 'react';
 import PassengersMobile from '../components/PassengersMobile';
 import PassengersDesktop from '../components/PassengersDesktop';

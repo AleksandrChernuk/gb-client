@@ -4,7 +4,7 @@ import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import LoaderPage from './components/LoaderPage';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import Timer from './components/Timer';
 import Cleanup from './components/Cleanup';
 

@@ -22,7 +22,7 @@ import { MainSearchInput } from './MainSearchInput';
 import { IconFrom } from '@/assets/icons/IconFrom';
 import { IconTo } from '@/assets/icons/IconTo';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   name: 'from' | 'to';

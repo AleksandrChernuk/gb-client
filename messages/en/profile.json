@@ -2,13 +2,16 @@
   "profile": {
     "trips_hystori": "Trip history",
     "reviews": "Reviews",
-    "contact_information": "Contact information",
+    "settings": "Settings",
     "personal_data": "Personal data",
     "phone": "Phone",
     "password_update": "Change password",
     "logout": "Logout",
     "no_trips": "No trips yet",
     "go_to_search": "Go to search",
-    "no_reviews": "You haven’t left any reviews yet"
+    "no_reviews": "You haven’t left any reviews yet",
+    "payments": "Payments",
+    "orders": "Orders",
+    "my_trips": "My Trips"
   }
 }

@@ -1,6 +1,10 @@
 {
   "forms": {
+    "send": "Отправить",
+
+    "go_home": "На главную страницу",
     "suspicious_input": "Подозрительный ввод",
+    "passwords_do_not_match": "Пароли не совпадают",
 
     "first_name": "Имя",
     "first_name_placeholder": "Введите имя",
@@ -102,6 +106,8 @@
     "password": "Пароль",
     "password_placeholder": "Введите пароль",
     "new_password": "Новый пароль",
+    "confirmation_code": "Код подтверждения",
+
     "new_password_placeholder": "Введите новый пароль",
     "confirm_new_password": "Подтвердите пароль",
     "confirm_new_password_placeholder": "Повторите пароль",
@@ -132,5 +138,18 @@
   "toast": {
     "success": "Успешно",
     "error": "Что-то пошло не так"
-  }
+  },
+  "user_not_found": "Такой почты не существует",
+  "change_password_button": "Сменить",
+  "account_deactivated": "Аккаунт удален",
+  "oauth_password_not_settable": "Аккаунт зарегистрирован с помощью Google",
+  "default_error": "Произошла ошибка. Попробуйте еще раз.",
+  "otp_enter_code_and_new_password": "Введите 6-значный код, отправленный на вашу электронную почту, и новый пароль.",
+  "code_validity": "Код действителен в течение 5 минут и может быть использован только один раз.",
+  "edit_email": "Изменить",
+  "resend_code": "Отправить код повторно",
+  "sending": "Отправка...",
+  "code_resent_success": "Код повторно отправлен ✅",
+  "code_resent_error": "Произошла ошибка. Попробуйте позже.",
+  "enter_6_digit_code": "Введите 6-значный код"
 }

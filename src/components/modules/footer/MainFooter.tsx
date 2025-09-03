@@ -4,7 +4,7 @@ import FooterLinksList from '@/components/shared/FooterLinksList';
 import Logo from '@/components/shared/Logo';
 import { Support } from '@/components/shared/Support';
 import { footerNavLinks } from '@/constans/footer-nav-links.constans';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';

@@ -20,7 +20,7 @@ import { ScrollArea } from '@radix-ui/react-scroll-area';
 import SelectLocale from '@/components/shared/LanguageChanger';
 import { ProfileLink } from '@/components/shared/ProfileLink';
 import { Support } from '@/components/shared/Support';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);

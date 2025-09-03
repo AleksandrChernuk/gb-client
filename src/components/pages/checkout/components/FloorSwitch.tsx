@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { ReactNode, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   floor_first: ReactNode;
@@ -19,7 +19,7 @@ function FloorSwitch({ floor_first, floor_second }: Props) {
       <div className="grid grid-cols-2 gap-2 sticky top-0 py-4 bg-slate-50 dark:bg-slate-900 z-50">
         <Button
           aria-selected={floor === 'first'}
-          size={'samll_primery'}
+          size={'samll_primary'}
           variant={'outline'}
           onClick={() => setFloor('first')}
         >
@@ -28,7 +28,7 @@ function FloorSwitch({ floor_first, floor_second }: Props) {
 
         <Button
           aria-selected={floor === 'second'}
-          size={'samll_primery'}
+          size={'samll_primary'}
           variant={'outline'}
           onClick={() => setFloor('second')}
         >

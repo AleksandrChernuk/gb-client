@@ -1,30 +1,92 @@
+import { BACKEND_URL } from '@/config/constants';
 import { forwardHeaders } from '@/utils/headers.util';
+import { createJsonResponse } from '@/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
-export async function GET(req: Request) {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get('accessToken')?.value;
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
-  if (!accessToken) {
-    return new Response(JSON.stringify({ message: 'No access token' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' },
-    });
+interface ValidateOk {
+  authenticated: boolean;
+}
+
+interface ValidateFail {
+  authenticated: false;
+  reason?: string;
+}
+
+export async function GET(req: Request) {
+  if (!BACKEND_URL) {
+    return createJsonResponse(
+      {
+        authenticated: false,
+        reason: 'Service configuration error',
+      } as ValidateFail,
+      200,
+      {
+        'Cache-Control': 'no-store',
+        Vary: 'Cookie',
+      },
+    );
   }
 
-  const headers = new Headers(forwardHeaders(req));
-  headers.set('Authorization', `Bearer ${accessToken}`);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const deviceId = cookieStore.get('deviceId')?.value;
 
-  const res = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/validate`, {
-    method: 'GET',
-    headers,
-    credentials: 'include',
+  const cookieParts: string[] = [];
+  if (accessToken) cookieParts.push(`accessToken=${accessToken}`);
+  if (deviceId) cookieParts.push(`deviceId=${deviceId}`);
+
+  const headersToBackend = forwardHeaders(req, {
+    include: {
+      ...(cookieParts.length > 0 && { Cookie: cookieParts.join('; ') }),
+      'Accept-Language': req.headers.get('accept-language') || 'en',
+    },
   });
 
-  const data = await res.json();
+  let response: Response;
 
-  return new Response(JSON.stringify(data), {
-    status: res.status,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  try {
+    response = await fetch(`${BACKEND_URL}/api/v1/auth/validate`, {
+      method: 'GET',
+      headers: headersToBackend,
+    });
+  } catch {
+    return createJsonResponse(
+      {
+        authenticated: false,
+        reason: 'Backend service unavailable',
+      } as ValidateFail,
+      200,
+      {
+        'Cache-Control': 'no-store',
+        Vary: 'Cookie',
+      },
+    );
+  }
+
+  const commonHeaders = {
+    'Cache-Control': 'no-store',
+    Vary: 'Cookie',
+  } as const;
+
+  if (response.ok) {
+    const body: ValidateOk = { authenticated: true };
+    return createJsonResponse(body, 200, commonHeaders);
+  }
+
+  let reason = 'unauthorized';
+
+  try {
+    const text = await response.text();
+    const parsed = JSON.parse(text) as { message?: string };
+    if (parsed?.message) reason = parsed.message;
+  } catch {
+    // игнор
+  }
+
+  const body: ValidateFail = { authenticated: false, reason };
+
+  return createJsonResponse(body, 200, commonHeaders);
 }

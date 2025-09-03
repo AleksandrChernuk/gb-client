@@ -1,5 +1,12 @@
 {
   "common": {
+    "twofa_title": "Two-Step Verification",
+    "twofa_description": "Enter the 6-digit code sent to your email.",
+    "change_password_title": "Change Password",
+    "change_password": "Change password",
+    "reset_password_title": "Password Recovery",
+    "reset_password_text": "To reset and change your password, please enter your email in the input field. A password reset confirmation code will be sent to your email.",
+    "otp_enter_code_and_new_password": "Enter the 6-digit code sent to your email and your new password.",
     "try_again": "Try again",
 
     "page_in_progress": "We are working on this page to make it as helpful and convenient for you as possible. Very soon you’ll find new information and features here!",

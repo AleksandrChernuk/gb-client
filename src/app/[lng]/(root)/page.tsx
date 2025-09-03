@@ -2,7 +2,7 @@ import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import Main from '@/components/pages/main';
 
 type Props = {
@@ -68,6 +68,5 @@ export default async function Home({
 }>) {
   const { lng } = await params;
   setRequestLocale(lng as Locale);
-
   return <Main />;
 }

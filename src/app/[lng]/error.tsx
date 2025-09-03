@@ -3,7 +3,7 @@
 import MainHeader from '@/components/modules/header/MainHeader';
 import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
@@ -64,10 +64,10 @@ export default function Error({ error, reset }: Props) {
                 <h1 className="text-2xl laptop:text-[32px] font-bold tracking-normal leading-[28.8px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                   {t('errorTitle')}!
                 </h1>
-                <Button variant={'default'} size={'primery'} onClick={reset}>
+                <Button variant={'default'} size={'primary'} onClick={reset}>
                   {t('try_again')}
                 </Button>
-                <Button variant={'secondary'} size={'primery'} className="text-black">
+                <Button variant={'secondary'} size={'primary'} className="text-black">
                   <Link href={'/'}>{t('mainPageBtn')}</Link>
                 </Button>
               </CustomCard>

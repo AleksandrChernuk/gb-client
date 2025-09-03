@@ -2,7 +2,7 @@ import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import { CustomCard } from '@/components/shared/CustomCard';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import irectionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';

@@ -16,7 +16,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   onClickTrigger: () => void;
@@ -46,10 +46,7 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
           <SheetDescription className="sr-only"></SheetDescription>
           <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{t('details')}</h3>
           <SheetClose asChild>
-            <Button
-              variant={'default'}
-              className="flex items-center gap-1 p-1 text-base font-bold leading-6 tracking-normal bg-green-300 rounded-md"
-            >
+            <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
               <X color="#ffffff" />
             </Button>
           </SheetClose>

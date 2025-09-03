@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import pointOnCurt from '@/assets/images/point-on-curt.avif';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default async function GetStarted() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);

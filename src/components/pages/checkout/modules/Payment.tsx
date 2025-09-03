@@ -4,7 +4,7 @@ import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/f
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { PAYMENT_TYPES } from '@/constans/payment.methods.constans';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useNewOrderResult } from '@/store/useOrderResult';

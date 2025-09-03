@@ -8,11 +8,15 @@ import { CleanOrderData } from './modules/CleanStor';
 import { FileText } from 'lucide-react';
 import { RefreshButton } from './modules/RefreshButton';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 
-export default async function PaymentResultPage({ payment_id }: { payment_id: string }) {
+interface PaymentResultPageProps {
+  payment_id: string;
+}
+
+export default async function PaymentResultPage({ payment_id }: PaymentResultPageProps) {
   const resOrder = await getOrderStatusAndPdf(payment_id);
 
   if (!resOrder) {
@@ -20,10 +24,33 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
   }
 
   const t = await getTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
-  const pdfBase64 = resOrder?.pdf;
 
-  const orderLink = resOrder?.orderLink;
-  const ticketLinks = resOrder?.ticketLinks;
+  const { pdf: pdfBase64, orderLink, ticketLinks, status, message, orderNumber } = resOrder;
+
+  // Определяем состояние заказа
+  const isSuccess = status === 'success';
+  const isPending = message === 'Payment is pending';
+  // const isError = !isSuccess && !isPending;
+
+  // Вычисляем заголовок
+  const getTitle = () => {
+    if (isSuccess) {
+      return t.rich('order_success', {
+        orderNumber,
+        number: (chunks) => <span className="text-green-300">{chunks}</span>,
+      });
+    }
+    if (isPending) {
+      return t('order_pending');
+    }
+    return t('order_error');
+  };
+
+  // Проверяем наличие файлов для скачивания
+  const hasDownloadableContent = !!pdfBase64 || !!orderLink || !!ticketLinks?.length;
+
+  // Определяем количество колонок в сетке
+  const gridCols = hasDownloadableContent || isPending ? 'md:grid-cols-2' : '';
 
   return (
     <div className="flex flex-col h-svh">
@@ -33,68 +60,71 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
         <section className="py-5">
           <Container size="xs" className="w-full">
             <div className="space-y-6">
-              <h1 className="text-xl tablet:text-2xl text-center">
-                {resOrder?.status === 'success'
-                  ? t.rich('order_success', {
-                      orderNumber: resOrder?.orderNumber,
-                      number: (chunks) => <span className="text-green-300">{chunks}</span>,
-                    })
-                  : resOrder?.message === 'Payment is pending'
-                    ? t('order_pending')
-                    : t('order_error')}
-              </h1>
+              {/* Заголовок */}
+              <h1 className="text-xl tablet:text-2xl text-center">{getTitle()}</h1>
 
-              {resOrder?.status === 'success' && (
+              {/* Подзаголовок для успешных заказов */}
+              {isSuccess && (
                 <h3 className="text-center text-slate-700 dark:text-slate-50 text-lg tablet:text-xl">
-                  {resOrder?.message === 'Payment is pending' ? t('ticket_will_appear') : t('tickets_sent')}
+                  {isPending ? t('ticket_will_appear') : t('tickets_sent')}
                 </h3>
               )}
 
-              <div
-                className={cn(
-                  'grid grid-cols-1 gap-4 justify-center items-center',
-                  (!!pdfBase64 || resOrder?.message === 'Payment is pending') && 'md:grid-cols-2',
-                )}
-              >
-                {!!pdfBase64 && (
-                  <>
-                    <Button asChild variant={'outline'} size={'primery'} className="text-black">
-                      <a
-                        href={`data:application/pdf;base64,${pdfBase64}`}
-                        download={`${t('ticket_filename')}_${resOrder.orderNumber}.pdf`}
-                        rel="noopener noreferrer"
-                      >
-                        {t('download_ticket')} <FileText />
-                      </a>
-                    </Button>
-                  </>
+              {/* Сетка с кнопками */}
+              <div className={cn('grid grid-cols-1 gap-4 justify-center items-center', gridCols)}>
+                {/* PDF файл билета */}
+                {pdfBase64 && (
+                  <Button asChild variant="outline" size="primary" className="text-black">
+                    <a
+                      href={`data:application/pdf;base64,${pdfBase64}`}
+                      download={`${t('ticket_filename')}_${orderNumber}.pdf`}
+                      rel="noopener noreferrer"
+                      aria-label={`${t('download_ticket')} ${orderNumber}`}
+                    >
+                      {t('download_ticket')} <FileText className="ml-2" />
+                    </a>
+                  </Button>
                 )}
 
-                {!!orderLink && (
+                {/* Ссылки на заказы и билеты */}
+                {(orderLink || ticketLinks?.length) && (
                   <div className="flex flex-col gap-4">
-                    <Button asChild variant={'outline'} size={'primery'} className="text-black">
-                      <a href={orderLink} target="_blanck">
-                        {t('download_order')}
-                      </a>
-                    </Button>
-                    {ticketLinks?.map((element, i) => (
-                      <Button key={i + 1} asChild variant={'outline'} size={'primery'} className="text-black">
-                        <a href={element} target="_blanck">
-                          {t('download_ticket')} <FileText />
+                    {/* Ссылка на заказ */}
+                    {orderLink && (
+                      <Button asChild variant="outline" size="primary" className="text-black">
+                        <a href={orderLink} target="_blank" rel="noopener noreferrer" aria-label={t('download_order')}>
+                          {t('download_order')}
+                        </a>
+                      </Button>
+                    )}
+
+                    {/* Ссылки на билеты */}
+                    {ticketLinks?.map((ticketLink, index) => (
+                      <Button key={`ticket-${index}`} asChild variant="outline" size="primary" className="text-black">
+                        <a
+                          href={ticketLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${t('download_ticket')} ${index + 1}`}
+                        >
+                          {t('download_ticket')} <FileText className="ml-2" />
                         </a>
                       </Button>
                     ))}
                   </div>
                 )}
 
-                {resOrder?.message === 'Payment is pending' && (
+                {/* Кнопка обновления для ожидающих платежей */}
+                {isPending && (
                   <div>
                     <RefreshButton />
                   </div>
                 )}
+
+                {/* Кнопка возврата домой */}
                 <div>
-                  <Button asChild variant={'secondary'} size={'primery'} className="text-black">
-                    <Link href={'/'} prefetch={false}>
+                  <Button asChild variant="secondary" size="primary" className="text-black">
+                    <Link href="/" prefetch={false}>
                       {t('go_home')}
                     </Link>
                   </Button>
@@ -104,6 +134,7 @@ export default async function PaymentResultPage({ payment_id }: { payment_id: st
           </Container>
         </section>
       </main>
+
       <ThirdFooter />
     </div>
   );

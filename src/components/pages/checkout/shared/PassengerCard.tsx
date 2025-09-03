@@ -3,7 +3,7 @@ import { memo } from 'react';
 import UniversalField from './UniversalField';
 import { ProviderConfig } from '../providerConfig/types';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   providerConfig: ProviderConfig;

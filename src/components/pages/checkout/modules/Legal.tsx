@@ -1,7 +1,7 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { useController, useFormContext } from 'react-hook-form';

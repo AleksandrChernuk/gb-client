@@ -2,9 +2,27 @@ import AuthHeader from '@/components/modules/header/AuthHeader';
 import { Container } from '@/components/shared/Container';
 import { MobileNavTabs } from '@/components/shared/MobileNavTabs';
 import { NavTabs } from '@/components/shared/NavTabs';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { profile_links } from '@/constans/profile.nav.links';
 import { AuthGuardProvider } from '@/providers/AuthGuardProvider';
+
+export async function generateMetadata() {
+  return {
+    robots: {
+      index: false,
+      follow: false,
+      nocache: false,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  };
+}
 
 export default async function ProfileLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,9 +35,8 @@ export default async function ProfileLayout({ children }: { children: React.Reac
             <div className="w-full ">
               <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
                 <NavTabs items={profile_links} namespace={MESSAGE_FILES.PROFILE} />
-
                 <div className="flex-1">
-                  <div> {children}</div>
+                  <div>{children}</div>
                 </div>
               </div>
             </div>

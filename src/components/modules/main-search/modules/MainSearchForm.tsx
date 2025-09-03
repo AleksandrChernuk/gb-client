@@ -12,7 +12,7 @@ import DatePicker from './DatePicker';
 import PassengersCount from './PassengersCount';
 import { useRouter } from '@/i18n/routing';
 import { MainSearchShema } from '@/schemas/main.search.schema';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');

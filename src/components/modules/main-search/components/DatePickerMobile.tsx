@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { MainSearchInput } from './MainSearchInput';
 import useDateLocale from '@/hooks/useDateLocale';
 import { Calendar } from '@/components/ui/calendar';

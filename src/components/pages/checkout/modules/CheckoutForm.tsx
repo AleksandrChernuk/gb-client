@@ -10,7 +10,7 @@ import Trip from './Trip';
 import ToPay from './ToPay';
 import Legal from './Legal';
 import Payment from './Payment';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import SubmitButton from '../components/SubmitButton';
 import useCheckout from '../hooks/useCheckout';
 import { ConfirmationDialog } from './ConfirmationDialog';

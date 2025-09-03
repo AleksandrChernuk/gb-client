@@ -1,5 +1,5 @@
 import { AccountActionsList } from '@/constans/account-actions-list.constans';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import { useTranslations } from 'next-intl';

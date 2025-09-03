@@ -4,7 +4,7 @@ import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
@@ -24,7 +24,7 @@ export const ErrorTravel = () => {
         {t('something_happend')}!
       </h3>
 
-      <Button variant={'default'} size={'primery'} onClick={() => router.refresh()}>
+      <Button variant={'default'} size={'primary'} onClick={() => router.refresh()}>
         {t_COMMON('try_again')}
       </Button>
     </CustomCard>

@@ -1,6 +1,6 @@
 import { Container } from '@/components/shared/Container';
 import { faqConstans } from '@/constans/faq.constans';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 

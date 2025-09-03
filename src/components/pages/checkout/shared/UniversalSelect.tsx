@@ -4,7 +4,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { memo } from 'react';
 import { FieldConfig } from '../providerConfig/types';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FormErrorMassege } from '@/components/ui/form-error';

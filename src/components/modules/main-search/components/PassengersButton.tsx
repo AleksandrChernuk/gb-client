@@ -1,6 +1,6 @@
 'use client';
 
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Minus, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 

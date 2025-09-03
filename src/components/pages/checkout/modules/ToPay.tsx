@@ -1,7 +1,7 @@
 import { useSearchStore } from '@/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { getTotalPriceFromPassengers } from '../helpers/getTotalPriceFromPassengers';

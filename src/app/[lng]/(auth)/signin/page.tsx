@@ -46,7 +46,7 @@ export default async function SigninPage({
           headerLabel={'signinTitle'}
           backButtonHref="/signup"
           backButtonLabel="authCreateAccount"
-          forgotButtonHref="/signin/forgot"
+          forgotButtonHref="/forgot-password"
           forgotButtonLabel="resetPasBtn"
         >
           <SigninForm />

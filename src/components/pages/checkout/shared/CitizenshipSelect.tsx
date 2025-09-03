@@ -5,7 +5,7 @@ import { useFormContext, useController } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import countryList from 'react-select-country-list';
 import { FieldConfig } from '../providerConfig/types';
 import { FormErrorMassege } from '@/components/ui/form-error';

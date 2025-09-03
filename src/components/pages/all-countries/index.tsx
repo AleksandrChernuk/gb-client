@@ -7,7 +7,7 @@ import BackRouteButton from '@/components/shared/BackRouteButton';
 import { AllCountriesProvider } from './context';
 import { getLocale, getTranslations } from 'next-intl/server';
 import CityList from './components/CityList';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default async function AllCountriesPage() {
   const data = await getLocations({ query: '', perPage: 99 });

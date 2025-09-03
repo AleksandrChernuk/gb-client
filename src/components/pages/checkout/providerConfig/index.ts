@@ -1,4 +1,4 @@
-import { providersList } from '@/constans/providers';
+import { providersList } from '@/config/providers';
 import { IRouteResponse } from '@/types/route.types';
 import { ProviderConfig } from './types';
 import octobusConfig from './octobusConfig';

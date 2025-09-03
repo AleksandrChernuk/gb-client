@@ -7,7 +7,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import CardWrapper from '@/components/shared/CardWrapper';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default function CityList() {
   const { locations, selectedCountry } = useAllCountriesContext();

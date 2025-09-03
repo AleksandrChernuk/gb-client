@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import { User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Link } from '@/i18n/routing';
 
 type Props = {

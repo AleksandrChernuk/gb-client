@@ -18,7 +18,7 @@ import { useTranslations } from 'next-intl';
 import { useFilterTickets } from '@/store/useFilterTickets';
 import { useSearchStore } from '@/store/useSearch';
 import { useShallow } from 'zustand/react/shallow';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import useTicketsSearch from '../hooks/useTicketsSearch';
 import FilterSortByList from '../components/FilterRadioGroup';
 import FilterCheckBoxList from '../components/FilterCheckBoxList';
@@ -65,7 +65,7 @@ export const MobileFilter = () => {
           disabled={!isHydrated || isFetching || !enabled || data.length === 0}
           variant={'outline'}
           size={'icon'}
-          className="p-2 rounded-md border-primary"
+          className="p-2 rounded-md"
         >
           <SlidersHorizontal color="#098537" size={24} />
         </Button>
@@ -97,7 +97,7 @@ export const MobileFilter = () => {
           <SheetClose asChild>
             <Button
               variant={'outline'}
-              size={'samll_primery'}
+              size={'samll_primary'}
               className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px] text-primary bg-inherit"
               onClick={() => resetFilters()}
             >
@@ -108,7 +108,7 @@ export const MobileFilter = () => {
           <SheetClose asChild>
             <Button
               variant={'default'}
-              size={'samll_primery'}
+              size={'samll_primary'}
               className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]"
             >
               {t('view_trips')}

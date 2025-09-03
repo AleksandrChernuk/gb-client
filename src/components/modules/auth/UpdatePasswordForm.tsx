@@ -14,7 +14,7 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { useRouter } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
 import { updatePpasswordSchema } from '@/schemas/auth.schema';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 const UpdatePasswordForm = () => {
   const route = useRouter();
@@ -104,7 +104,7 @@ const UpdatePasswordForm = () => {
 
         <FormError message={error} />
 
-        <Button type="submit" size={'primery'} disabled={isPending}>
+        <Button type="submit" size={'primary'} disabled={isPending}>
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('updatePasswordBtn')}
         </Button>
       </form>

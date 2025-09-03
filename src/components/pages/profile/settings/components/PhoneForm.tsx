@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { PhoneInput } from '@/components/ui/phone-input';
 import FormActions from './FormActions';
 import { profilePhoneForm } from '@/schemas/profile.schemas';

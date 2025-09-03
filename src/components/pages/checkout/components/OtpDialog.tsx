@@ -7,7 +7,7 @@ import { LoaderCircle, TicketX } from 'lucide-react';
 import { usePaymantConfirm } from '../hooks/usePaymantConfirm';
 import { useNewOrderResult } from '@/store/useOrderResult';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useState } from 'react';
 
 export const OtpDialog = () => {
@@ -44,11 +44,11 @@ export const OtpDialog = () => {
         </InputOTP>
 
         <DialogFooter className={`grid grid-cols-1 gap-4 ${!!initiateNewOrder ? 'md:grid-cols-2' : ''}`}>
-          <Button variant="outline" size="primery" onClick={handleCancelOrder} type="button" className="text-slate-800">
+          <Button variant="outline" size="primary" onClick={handleCancelOrder} type="button" className="text-slate-800">
             {t('payment_confirm_cancel')} <TicketX />
           </Button>
 
-          <Button variant={'default'} size={'primery'} onClick={() => handleSMSValidation(pin)}>
+          <Button variant={'default'} size={'primary'} onClick={() => handleSMSValidation(pin)}>
             {smsValidationoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
           </Button>
         </DialogFooter>

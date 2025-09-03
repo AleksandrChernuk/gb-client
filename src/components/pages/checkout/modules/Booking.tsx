@@ -16,7 +16,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/ui/skeleton';
 import IconSeat from '../icons/IconSeat';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import FloorSheet from '../components/FloorSwitch';
 import { useController, useFormContext, useWatch } from 'react-hook-form';
 import { memo } from 'react';
@@ -129,7 +129,7 @@ const Booking = memo(function Booking() {
                 <Button
                   disabled={selectedSeats === 0}
                   type="button"
-                  size={'samll_primery'}
+                  size={'samll_primary'}
                   className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]"
                   variant={'default'}
                 >

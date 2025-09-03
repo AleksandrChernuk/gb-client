@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 
 import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import ViewPassword from '@/components/shared/ViewPassword';
 import { passwordProfieUpdateSchema } from '@/schemas/profile.schemas';
 import FormActions from './FormActions';

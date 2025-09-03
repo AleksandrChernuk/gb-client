@@ -8,20 +8,58 @@ const intlMiddleware = createMiddleware(routing);
 
 const PROTECTED_PATHS = ['/profile', '/dashboard'];
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-
   const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
 
-  if (isProtected) {
-    const accessToken = req.cookies.get('accessToken')?.value;
-    const refreshToken = req.cookies.get('refreshToken')?.value;
+  // Проверяем наличие токенов для рефреша
+  const accessToken = req.cookies.get('accessToken')?.value;
+  const refreshToken = req.cookies.get('refreshToken')?.value;
+  const deviceId = req.cookies.get('deviceId')?.value;
 
-    if (!accessToken && !refreshToken) {
+  // Если есть refreshToken и deviceId, но нет accessToken - рефреш
+  if (!accessToken && refreshToken && deviceId) {
+    try {
+      const refreshResponse = await fetch(new URL('/api/auth/refresh', req.url), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Cookie: `refreshToken=${refreshToken}; deviceId=${deviceId}`,
+          'Accept-Language': req.headers.get('accept-language') || 'en',
+        },
+      });
+
+      if (refreshResponse.ok) {
+        // Получаем новые куки из ответа
+        const setCookieHeaders = refreshResponse.headers.getSetCookie();
+
+        // Ответ с интернационализацией
+        const response = intlMiddleware(req);
+
+        // Добавляем новые куки к ответу
+        setCookieHeaders.forEach((cookieHeader) => {
+          response.headers.append('Set-Cookie', cookieHeader);
+        });
+
+        return response;
+      }
+    } catch (error) {
+      console.error('Middleware refresh failed:', error);
+    }
+  }
+
+  // Для защищенных маршрутов проверяем наличие токенов
+  if (isProtected) {
+    // После рефреша перепроверяем accessToken
+    const currentAccessToken = req.cookies.get('accessToken')?.value;
+    const currentRefreshToken = req.cookies.get('refreshToken')?.value;
+
+    if (!currentAccessToken && !currentRefreshToken) {
       const locale = pathname.split('/')[1] || routing.defaultLocale;
       return redirectToSignin(req, locale);
     }
   }
+
   if (pathname.startsWith('/payment-result/') && req.method === 'POST') {
     return NextResponse.redirect(req.nextUrl, 302);
   }

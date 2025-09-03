@@ -11,7 +11,7 @@ import { extractLocationDetails } from '@/lib/extractLocationDetails';
 import { ArrowRight } from 'lucide-react';
 import { useFilterTickets } from '@/store/useFilterTickets';
 import useTicketsSearch from '../hooks/useTicketsSearch';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { MobileFilter } from '../modules/Filter';
 
 export const Information = () => {

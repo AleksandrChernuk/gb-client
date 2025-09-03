@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle, TicketX } from 'lucide-react';
 import { useNewOrderResult } from '@/store/useOrderResult';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { usePaymantConfirm } from '../hooks/usePaymantConfirm';
 
@@ -60,7 +60,7 @@ export const NewOrderDialog = () => {
         {!isError && (
           <Button
             variant="outline"
-            size="primery"
+            size="primary"
             onClick={handleCancelOrder}
             disabled={payLoading}
             className="text-slate-800"
@@ -69,11 +69,11 @@ export const NewOrderDialog = () => {
           </Button>
         )}
         {!isError && paymentType !== 'BOOK' ? (
-          <Button size="primery" variant={'default'} className="text-white" onClick={handleConfirmlOrder}>
+          <Button size="primary" variant={'default'} className="text-white" onClick={handleConfirmlOrder}>
             {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
           </Button>
         ) : (
-          <Button size="primery" variant={'default'} className="text-white" onClick={handlePayOrder}>
+          <Button size="primary" variant={'default'} className="text-white" onClick={handlePayOrder}>
             {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_pay')}
           </Button>
         )}

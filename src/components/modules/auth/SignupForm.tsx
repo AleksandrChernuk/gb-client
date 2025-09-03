@@ -8,22 +8,23 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input';
 
 import { Button } from '@/components/ui/button';
-import { CircleAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { CircleAlert, LoaderCircle } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
-// import FormError from '@/components/shared/FormError';
+import FormError from '@/components/shared/FormError';
 import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
-// import { useRouter } from '@/i18n/routing';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
-// import { signup } from '@/actions/auth.service';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { signup } from '@/actions/auth.service';
+import { REDIRECT_PATHS } from '@/config/redirectPaths';
+import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
-  // const locale = useLocale();
-  // const router = useRouter();
-  // const [error, setError] = useState<string | undefined>('');
-  // const [isPending, setIsPending] = useState(false);
+  const locale = useLocale();
+  const router = useRouter();
+  const [error, setError] = useState<string | undefined>('');
+  const [isPending, setIsPending] = useState(false);
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -37,20 +38,21 @@ const SignupForm = () => {
 
   const onSubmit = async (value: z.infer<typeof signupSchema>) => {
     form.reset();
-    console.log(value);
-    // try {
-    //   setIsPending(true);
-    //   const result = await signup(value, locale);
-    //   router.push(`/signin/verify-2FA/${result.email}`);
-    //   form.reset();
-    // } catch (error) {
-    //   setIsPending(false);
-    //   if (error instanceof Error) {
-    //     setError(`Signup failed: ${error.message}`);
-    //   } else {
-    //     setError(`Signup failed: ${String(error)}`);
-    //   }
-    // }
+
+    try {
+      setIsPending(true);
+      const result = await signup(value, locale);
+
+      router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`);
+      form.reset();
+    } catch (error) {
+      setIsPending(false);
+      if (error instanceof Error) {
+        setError(`Signup failed: ${error.message}`);
+      } else {
+        setError(`Signup failed: ${String(error)}`);
+      }
+    }
   };
 
   return (
@@ -144,10 +146,10 @@ const SignupForm = () => {
             )}
           />
         </div>
-        {/* <FormError message={error} /> */}
+        <FormError message={error} />
 
-        <Button type="submit" size={'primery'} className="text-white text-base font-bold leading-6 tracking-normal">
-          {t('signupTitle')}
+        <Button type="submit" size={'primary'} className="text-white text-base font-bold leading-6 tracking-normal">
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signupTitle')}
         </Button>
       </form>
     </Form>

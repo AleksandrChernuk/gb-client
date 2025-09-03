@@ -1,7 +1,7 @@
 'use client';
 import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { useTimerStore } from '@/store/useTimer';
 import { useNewOrderResult } from '@/store/useOrderResult';
@@ -31,7 +31,7 @@ export function StillOnlineDialog() {
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
-        <Button variant="default" size="primery" onClick={handleCancel}>
+        <Button variant="default" size="primary" onClick={handleCancel}>
           {t('payment_confirm_to_search')}
         </Button>
       </DialogFooter>

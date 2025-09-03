@@ -12,7 +12,8 @@ export const sendFeedback = async (body: TContactMail) => {
   });
 
   if (!response.ok) {
-    throw new Error('Error');
+    const res = await response.json();
+    console.log(res);
   }
 
   return null;

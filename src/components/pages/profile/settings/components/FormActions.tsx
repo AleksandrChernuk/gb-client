@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { CircleX, LoaderCircle, Send, SquarePen } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 

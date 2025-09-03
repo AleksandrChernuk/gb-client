@@ -1,111 +1,44 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import { useState } from 'react';
-import FormError from '@/components/shared/FormError';
-import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { FormErrorMassege } from '@/components/ui/form-error';
-import { LoaderCircle } from 'lucide-react';
-import { otpVerifySchema } from '@/schemas/auth.schema';
-import { useUserStore } from '@/store/useUser';
-import { useParams } from 'next/navigation';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
-import { verifyEmail } from '@/actions/auth.service';
-import { toast } from 'sonner';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { TypeVerifyCode } from '@/types/auth.types';
+import { useTotp } from '@/hooks/useTotp';
 
-export default function OtpVerifyForm() {
-  const route = useRouter();
-  const params = useParams<{ tag: string; email: string }>();
-  const email = decodeURIComponent(params?.email || '');
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+interface IOtpVerifyForm {
+  length?: number;
+  email: string;
+  onSubmit?: (data: TypeVerifyCode) => Promise<void>;
+  autoSubmit?: boolean;
+}
 
-  const [error, setError] = useState<string | undefined>('');
-  const [isPending, setIsPending] = useState(false);
-
-  const form = useForm<z.infer<typeof otpVerifySchema>>({
-    resolver: zodResolver(otpVerifySchema),
-    defaultValues: {
-      pin: '',
-    },
+export default function OtpVerifyForm({ length = 6, onSubmit, email, autoSubmit = false }: IOtpVerifyForm) {
+  const { value, onChange, error, handleSubmit, isComplete } = useTotp({
+    length,
+    onSubmit,
+    email,
+    autoSubmit,
   });
 
-  const onSubmit = async (value: z.infer<typeof otpVerifySchema>) => {
-    try {
-      setIsPending(true);
-      const result = await verifyEmail({ email, code: value.pin });
-
-      const { message, currentUser } = result;
-
-      if (message !== 'Successfully signin' || !currentUser) {
-        toast.error('Invalid server response');
-        setIsPending(false);
-        form.reset();
-        return;
-      }
-
-      useUserStore.getState().setUserStore(currentUser);
-      route.push(`/profile`, { scroll: true });
-    } catch (error) {
-      setIsPending(false);
-
-      if (error instanceof Error) {
-        setError(`Verification failed: ${error.message}`);
-      } else {
-        setError(`Verification failed: ${String(error)}`);
-      }
-    } finally {
-      setIsPending(false);
-    }
-  };
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="pin"
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormControl>
-                <InputOTP maxLength={6} {...field} inputMode="numeric">
-                  <InputOTPGroup className=" justify-center w-full">
-                    <InputOTPSlot index={0} />
-                    <InputOTPSlot index={1} />
-                    <InputOTPSlot index={2} />
-                    <InputOTPSlot index={3} />
-                    <InputOTPSlot index={4} />
-                    <InputOTPSlot index={5} />
-                  </InputOTPGroup>
-                </InputOTP>
-              </FormControl>
-              {Boolean(fieldState?.error) && (
-                <FormErrorMassege className="text-center">
-                  {t(`otp_validate.${fieldState.error?.message}`)}
-                </FormErrorMassege>
-              )}
-              <FormDescription className="text-center text-sm">{t('otpVerifyText')}</FormDescription>
-            </FormItem>
-          )}
-        />
+    <div className="space-y-3">
+      <InputOTP maxLength={length} inputMode="numeric" value={value} onChange={onChange}>
+        <InputOTPGroup className="justify-center w-full">
+          {Array.from({ length }).map((_, idx) => (
+            <InputOTPSlot index={idx} key={idx} className="size-10" />
+          ))}
+        </InputOTPGroup>
+      </InputOTP>
 
-        <FormError message={error} />
+      {error && <p className="text-red-500">{error}</p>}
 
-        <Button
-          type="submit"
-          variant={'default'}
-          size={'primery'}
-          disabled={isPending}
-          className="w-full text-white rounded-full text-base font-bold leading-6 tracking-normal"
-        >
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('otpVerifyCode')}
-        </Button>
-      </form>
-    </Form>
+      <Button type="button" variant="default" size="primary" onClick={handleSubmit} disabled={!isComplete}>
+        {t('otpVerifyCode')}
+      </Button>
+    </div>
   );
 }

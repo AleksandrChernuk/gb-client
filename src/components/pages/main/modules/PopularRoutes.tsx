@@ -1,6 +1,6 @@
 import { Container } from '@/components/shared/Container';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import PopularRoutesList from '../components/PopularRoutesList';
 
 export default async function PopularRoutes() {

@@ -9,7 +9,7 @@ import { IconSwap } from '@/assets/icons/IconSwap';
 import { NotFoundCity } from './NotFoundCity';
 import { MainLoader } from '@/components/shared/MainLoader';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   name: 'from' | 'to';

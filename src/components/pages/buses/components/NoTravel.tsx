@@ -5,7 +5,7 @@ import noTravelImg from '@/assets/images/an-empty-bus-stop.avif';
 
 import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export const NoTravel = () => {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);

@@ -1,71 +1,74 @@
+import { BACKEND_URL } from '@/config/constants';
+import { RefreshResponse } from '@/types/auth.types';
+import { setRefreshCookies } from '@/utils/cookieBase.util';
 import { forwardHeaders } from '@/utils/headers.util';
+import { createJsonResponse } from '@/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST(req: Request) {
-  const headers = forwardHeaders(req);
+  if (!BACKEND_URL) {
+    return createJsonResponse({ message: 'BACKEND_URL is not configured' }, 500);
+  }
+
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+  const deviceId = cookieStore.get('deviceId')?.value;
+
+  // Ранний отказ
+  if (!refreshToken || !deviceId) {
+    return createJsonResponse({ message: 'Missing refreshToken or deviceId' }, 400);
+  }
+
+  const headersToBackend = forwardHeaders(req, {
+    include: {
+      Cookie: `refreshToken=${refreshToken}; deviceId=${deviceId}`,
+      'Accept-Language': req.headers.get('accept-language') || 'en',
+    },
+  });
+
+  let resp: Response;
 
   try {
-    const cookieStore = await cookies();
-    const currentRefreshToken = cookieStore.get('refreshToken')?.value;
-
-    if (!currentRefreshToken) {
-      return new Response(JSON.stringify({ message: 'No refresh token' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    const backendResponse = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/refresh`, {
+    resp = await fetch(`${BACKEND_URL}/api/v1/auth/refresh`, {
       method: 'POST',
-      headers,
-      credentials: 'include',
+      headers: headersToBackend,
     });
+  } catch {
+    return createJsonResponse({ message: 'Backend service unavailable' }, 503);
+  }
 
-    const result = await backendResponse.json();
-
-    if (!backendResponse.ok) {
-      return new Response(JSON.stringify({ message: result.message || 'Verification failed' }), {
-        status: backendResponse.status,
-        headers: { 'Content-Type': 'application/json' },
-      });
+  if (!resp.ok) {
+    // вернём реальный текст ошибки с бэка
+    const text = await resp.text();
+    let message = 'Unauthorized';
+    try {
+      const parsed = JSON.parse(text) as { message?: string };
+      if (parsed?.message) message = parsed.message;
+    } catch {
+      /* ignore */
     }
 
-    const { message, accessToken, refreshToken } = result;
-
-    if (refreshToken) {
-      cookieStore.set('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60, // 7 дней
-      });
-    }
-
-    if (accessToken) {
-      cookieStore.set('accessToken', accessToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 15 * 60, // 15 минут
-      });
-    }
-
-    return new Response(
-      JSON.stringify({
-        message,
-      }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      },
-    );
-  } catch (error) {
-    console.error('Refresh route error:', error);
-    return new Response(JSON.stringify({ message: 'Refresh Error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
+    return createJsonResponse({ message }, resp.status, {
+      'Cache-Control': 'no-store',
+      Vary: 'Cookie',
     });
   }
+
+  let data: RefreshResponse;
+  try {
+    data = (await resp.json()) as RefreshResponse;
+  } catch {
+    return createJsonResponse({ message: 'Invalid backend response' }, 502);
+  }
+
+  // Устанавливаем новые cookies
+  await setRefreshCookies(data);
+
+  return createJsonResponse({ message: data.message || 'Refresh success' }, 200, {
+    'Cache-Control': 'no-store',
+    Vary: 'Cookie',
+  });
 }

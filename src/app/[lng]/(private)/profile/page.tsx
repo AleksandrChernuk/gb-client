@@ -1,4 +1,7 @@
-import ProfilePage from '@/components/pages/profile/settings';
+import SettingForm from '@/components/modules/profile/SettingForm';
+import LogOutBtn from '@/components/pages/profile/settings/components/LogOutBtn';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata() {
   return {
@@ -19,7 +22,16 @@ export async function generateMetadata() {
 }
 
 const UserProfile = async () => {
-  return <ProfilePage />;
+  const t = await getTranslations(MESSAGE_FILES.PROFILE);
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="mb-4">{t('trips_hystori')}</h1> <LogOutBtn />
+      </div>
+      <SettingForm />
+    </div>
+  );
 };
 
 export default UserProfile;

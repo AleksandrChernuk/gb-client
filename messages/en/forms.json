@@ -1,7 +1,9 @@
 {
   "forms": {
+    "send": "Send",
+    "go_home": "Go to homepage",
     "suspicious_input": "Suspicious input",
-
+    "passwords_do_not_match": "Passwords do not match",
     "first_name": "First Name",
     "first_name_placeholder": "Enter your first name",
     "last_name": "Last Name",
@@ -102,6 +104,8 @@
     "password": "Password",
     "password_placeholder": "Enter password",
     "new_password": "New Password",
+    "confirmation_code": "Confirmation code",
+
     "new_password_placeholder": "Type your new password",
     "confirm_new_password": "Confirm Password",
     "confirm_new_password_placeholder": "Retype your new password",
@@ -127,6 +131,19 @@
     "authDontHaveAccount": "Don't have an account?",
     "authAlreadyHaveAccount": "Already registered?",
     "authCreateAccount": "Create an account",
-    "authLogin": "Log In"
+    "authLogin": "Log In",
+    "user_not_found": "This email does not exist",
+    "account_deactivated": "Account has been deleted",
+    "oauth_password_not_settable": "Account was registered via Google",
+    "default_error": "An error occurred. Please try again.",
+    "otp_enter_code_and_new_password": "Enter the 6-digit code sent to your email and your new password.",
+    "code_validity": "The code is valid for 5 minutes and can be used only once.",
+    "edit_email": "Edit",
+    "resend_code": "Resend code",
+    "sending": "Sending...",
+    "code_resent_success": "Code resent ✅",
+    "code_resent_error": "An error occurred. Please try again later.",
+    "enter_6_digit_code": "Enter the 6-digit code",
+    "change_password_button": "Change"
   }
 }

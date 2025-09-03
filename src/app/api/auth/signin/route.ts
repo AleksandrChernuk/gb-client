@@ -1,79 +1,77 @@
+import { BACKEND_URL } from '@/config/constants';
+import { SigninPending, SigninSuccess } from '@/types/auth.types';
+import { clearAuthCookies, setAuthCookies } from '@/utils/cookieBase.util';
 import { forwardHeaders } from '@/utils/headers.util';
-import { cookies } from 'next/headers';
+import { createJsonResponse } from '@/utils/jsonResponse.util';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
-  const headers = forwardHeaders(req);
+  if (!BACKEND_URL) {
+    return createJsonResponse({ message: 'BACKEND_URL is not configured' }, 500);
+  }
+
+  let body: unknown;
 
   try {
-    const data = await req.json();
+    body = await req.json();
+  } catch {
+    return createJsonResponse({ message: 'Invalid JSON' }, 400);
+  }
 
-    const backendResponse = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/signin`, {
+  const headersToBackend = forwardHeaders(req, {
+    forceJsonContentType: true,
+    include: {
+      'Accept-Language': req.headers.get('accept-language') || 'en',
+    },
+  });
+
+  let response: Response;
+
+  try {
+    response = await fetch(`${BACKEND_URL}/api/v1/auth/signin`, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(data),
-      credentials: 'include',
+      headers: headersToBackend,
+      body: JSON.stringify(body),
     });
+  } catch {
+    return createJsonResponse({ message: 'Backend service unavailable' }, 503);
+  }
 
-    const result = await backendResponse.json();
+  const text = await response.text();
 
-    if (!backendResponse.ok) {
-      return new Response(JSON.stringify({ message: result.message || 'Signin failed' }), {
-        status: backendResponse.status,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let data: any;
 
-    const { message, accessToken, refreshToken, currentUser } = result;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return createJsonResponse({ message: 'Bad backend response' }, 502);
+  }
 
-    if (message === '2FA code sent') {
-      return new Response(
-        JSON.stringify({
-          message,
-        }),
-        {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        },
-      );
-    }
+  if (!response.ok) {
+    await clearAuthCookies();
+    return createJsonResponse({ message: data?.message || 'Signin failed' }, response.status);
+  }
 
-    const cookieStore = await cookies();
-
-    if (refreshToken) {
-      cookieStore.set('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60, // 7 дней
-      });
-    }
-
-    if (accessToken) {
-      cookieStore.set('accessToken', accessToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 15 * 60, // 15 минут
-      });
-    }
-
-    return new Response(
-      JSON.stringify({
-        message,
-        currentUser,
-      }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      },
-    );
-  } catch (error) {
-    console.error('Signin Route Error:', error);
-    return new Response(JSON.stringify({ message: 'Internal Server Error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
+  // Если включена 2FA или почта не подтверждена - вернется message с текстом либо Verification, либо 2FA. Возвращаем текст, обрабатываем в компоненте.
+  if (!data?.accessToken || !data?.refreshToken) {
+    return createJsonResponse(data as SigninPending, 200, {
+      'Cache-Control': 'no-store',
     });
   }
+
+  // Успешная авторизация - устанавливаем cookies
+  await setAuthCookies(data as SigninSuccess);
+
+  // Возвращаем в компонент только безопасные данные
+  const safe = {
+    message: data.message,
+    currentUser: data.currentUser,
+  } satisfies Pick<SigninSuccess, 'message' | 'currentUser'>;
+
+  return createJsonResponse(safe, 200, {
+    'Cache-Control': 'no-store',
+  });
 }

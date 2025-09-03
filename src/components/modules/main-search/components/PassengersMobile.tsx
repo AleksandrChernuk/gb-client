@@ -15,7 +15,7 @@ import { PassengersButton } from '../components/PassengersButton';
 import { ChevronLeft } from 'lucide-react';
 import { MainSearchInput } from '../components/MainSearchInput';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   a: number;

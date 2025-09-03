@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import AccountActions from './AccountActions';
 import AuthSocial from './AuthSocial';
-import { MESSAGE_FILES } from '@/constans/message.file.constans';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 import Link from 'next/link';
 
 interface Props {
