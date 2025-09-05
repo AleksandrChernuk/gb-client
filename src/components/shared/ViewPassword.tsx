@@ -6,11 +6,18 @@ interface ViewPasswordProps {
   isViewPassword: boolean;
   setIsViewPassword: () => void;
   error?: boolean;
+  disabled?: boolean;
 }
 
-const ViewPassword = ({ isViewPassword, setIsViewPassword, error }: ViewPasswordProps) => {
+const ViewPassword = ({ isViewPassword, setIsViewPassword, error, disabled }: ViewPasswordProps) => {
+  console.log(disabled);
+
   return (
-    <div className="absolute inset-y-0 flex items-center cursor-pointer right-4" onClick={setIsViewPassword}>
+    <div
+      className={`absolute inset-y-0 flex items-center right-4 
+        ${disabled ? 'cursor-default opacity-50' : 'cursor-pointer'}`}
+      onClick={setIsViewPassword}
+    >
       {isViewPassword ? (
         <Eye size={24} className={`${error && 'stroke-[#de2a1a]'}`} />
       ) : (

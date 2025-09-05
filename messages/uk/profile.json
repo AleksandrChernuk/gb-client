@@ -3,15 +3,18 @@
     "trips_hystori": "Історія поїздок",
     "reviews": "Відгуки",
     "settings": "Налаштування",
-    "personal_data": "Особисті дані",
+    "personal_data": "Змінити ім'я",
     "phone": "Телефон",
     "password_update": "Змінити пароль",
+    "email_update": "Змінити email",
     "logout": "Вийти",
     "no_trips": "Ще немає жодної поїздки",
     "go_to_search": "Перейти до пошуку",
     "no_reviews": "Ви ще не залишали жодного відгуку",
     "payments": "Платежі",
     "my_trips": "Мої подорожі",
-    "orders": "Замовлення"
+    "orders": "Замовлення",
+    "delete_account_confirm_title": "Ви впевнені, що хочете видалити акаунт?",
+    "delete_account_confirm_text": "Ця дія є незворотною. Ваш акаунт буде деактивовано негайно та повністю видалено через 7 днів."
   }
 }

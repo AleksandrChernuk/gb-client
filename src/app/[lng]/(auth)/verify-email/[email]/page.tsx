@@ -1,46 +1,25 @@
-'use client';
-
-import { useParams, useRouter } from 'next/navigation';
-
-import { useLocale } from 'next-intl';
-
-import { TypeVerifyCode } from '@/types/auth.types';
-import { verifyEmail } from '@/actions/auth.service';
-import { useUserStore } from '@/store/useUser';
-import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import OtpVerifyForm from '@/components/modules/auth/OtpVerifyForm';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
 import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
-import ResendCode from '@/components/modules/auth/ResendCode';
+import VerifyEmailFrom from '@/components/modules/auth/VerifyEmailFrom';
+import { getTranslations } from 'next-intl/server';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { Params } from '@/types/common.types';
+import { notFound } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 
-const VerifyEmailPage = () => {
-  const locale = useLocale();
-  const router = useRouter();
-  const params = useParams<{ tag: string; email: string }>();
-  const email = decodeURIComponent(params?.email || '');
+type Props = {
+  params: Params;
+};
 
-  const handleSubmit = async (data: TypeVerifyCode) => {
-    try {
-      const result = await verifyEmail(data, locale);
+const VerifyEmailPage = async ({ params }: Props) => {
+  const { email } = await params;
+  const t = await getTranslations(MESSAGE_FILES.FORM);
 
-      const { message, currentUser } = result;
-
-      if (message !== 'Successfully signin' || !currentUser) {
-        throw new Error('Invalid server response');
-      }
-
-      useUserStore.getState().setUserStore(currentUser);
-
-      router.push(REDIRECT_PATHS.profile);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('Verification failed:', error.message);
-      } else {
-        console.error('Verification failed:', String(error));
-      }
-    }
-  };
+  if (!email) {
+    notFound();
+  }
 
   return (
     <section className="w-full">
@@ -50,8 +29,15 @@ const VerifyEmailPage = () => {
         </div>
 
         <AuthAssistantCard headerLabel="otpVerifyTitle">
-          <OtpVerifyForm length={6} email={email} onSubmit={handleSubmit} autoSubmit={true} />
-          {email && <ResendCode email={email} locale={locale} type="VERIFICATION" className="mt-10" />}
+          <VerifyEmailFrom email={email} />
+          <p className="my-4 text-center text-xs font-normal tracking-normal leading-[18px] text-red-600 ">
+            {t('code_validity')}
+          </p>
+          <div>
+            <Button asChild variant={'link'}>
+              <Link href="/">{t('go_home')}</Link>
+            </Button>
+          </div>
         </AuthAssistantCard>
       </Container>
     </section>

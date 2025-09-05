@@ -1,11 +1,14 @@
 import { isCleanInput, passwordShema } from '@/schemas/schemas.constans';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 import { z } from 'zod';
+import { emailShema } from './constans.schemas';
 
-export const personalDataSchema = z.object({
-  first_name: z.string().min(1, 'required'),
-  last_name: z.string().min(1, 'required'),
-  middlename: z.string().optional(),
+export const profileNameSchema = z.object({
+  name: z.string().min(1, 'required'),
+});
+export const profileEmailSchema = z.object({
+  email: emailShema,
+  password: passwordShema,
 });
 
 export const passwordProfieUpdateSchema = z

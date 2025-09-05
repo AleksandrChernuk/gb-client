@@ -9,9 +9,17 @@ type Props = {
   isInputEnabled: boolean;
   setIsInputEnabled: (v: boolean) => void;
   isSubmitting?: boolean;
+  disabled?: boolean;
+  disabledSubmit?: boolean;
 };
 
-export default function FormActions({ isInputEnabled, setIsInputEnabled, isSubmitting }: Props) {
+export default function FormActions({
+  isInputEnabled,
+  setIsInputEnabled,
+  isSubmitting,
+  disabled,
+  disabledSubmit,
+}: Props) {
   const t = useTranslations(MESSAGE_FILES.FORM);
   return (
     <div className="mt-4">
@@ -24,14 +32,14 @@ export default function FormActions({ isInputEnabled, setIsInputEnabled, isSubmi
               <Button type="button" className="text-red-400" variant="link" onClick={() => setIsInputEnabled(false)}>
                 <CircleX size={16} className="stroke-red-400" /> {t('close')}
               </Button>
-              <Button type="submit" variant="link">
+              <Button type="submit" variant="link" disabled={disabledSubmit}>
                 <Send size={16} className="stroke-green-300" /> {t('change')}
               </Button>
             </div>
           )}
         </>
       ) : (
-        <Button type="button" variant="link" onClick={() => setIsInputEnabled(true)}>
+        <Button type="button" disabled={disabled} variant="link" onClick={() => setIsInputEnabled(true)}>
           <SquarePen size={16} className="stroke-green-300" /> {t('edit')}
         </Button>
       )}

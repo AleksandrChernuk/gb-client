@@ -1,7 +1,11 @@
 {
   "forms": {
-    "send": "Отправить",
+    "change_password": "Сменить пароль",
+    "delete_account": "Удалить",
+    "cancel": "Отмена",
 
+    "send": "Отправить",
+    "new_email": "Новый email",
     "go_home": "На главную страницу",
     "suspicious_input": "Подозрительный ввод",
     "passwords_do_not_match": "Пароли не совпадают",

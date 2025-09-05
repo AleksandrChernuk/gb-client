@@ -17,7 +17,7 @@ export const NavTabs = ({ namespace, items }: Props) => {
   const pathname = usePathname();
 
   return (
-    <Container size="m" className="px-0 pl-5">
+    <Container size="m" className="px-0">
       <ul className="hidden tablet:flex items-start flex-col">
         {items.map((item) => (
           <li key={item.slug}>

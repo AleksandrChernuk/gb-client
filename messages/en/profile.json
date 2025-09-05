@@ -3,15 +3,17 @@
     "trips_hystori": "Trip history",
     "reviews": "Reviews",
     "settings": "Settings",
-    "personal_data": "Personal data",
+    "personal_data": "Change name",
     "phone": "Phone",
-    "password_update": "Change password",
+    "email_update": "Change email",
     "logout": "Logout",
     "no_trips": "No trips yet",
     "go_to_search": "Go to search",
     "no_reviews": "You haven’t left any reviews yet",
     "payments": "Payments",
     "orders": "Orders",
-    "my_trips": "My Trips"
+    "my_trips": "My Trips",
+    "delete_account_confirm_title": "Are you sure you want to delete your account?",
+    "delete_account_confirm_text": "This action is irreversible. Your account will be deactivated immediately and permanently deleted after 7 days."
   }
 }

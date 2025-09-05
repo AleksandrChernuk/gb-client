@@ -8,6 +8,16 @@
     "reset_password_text": "To reset and change your password, please enter your email in the input field. A password reset confirmation code will be sent to your email.",
     "otp_enter_code_and_new_password": "Enter the 6-digit code sent to your email and your new password.",
     "try_again": "Try again",
+    "delete_account_warning": "Attention! This action is irreversible",
+    "delete_account_text": "After confirmation, your account will be deactivated and permanently deleted within 7 days.",
+    "delete_account_cancel": "Cancel",
+    "delete_account_btn": "Delete",
+
+    "delete_account_title": "Account Deactivated",
+    "delete_account_message": "Your account has been successfully deactivated and will be permanently deleted within 7 days.",
+    "delete_account_thanks": "Thank you for using our service!",
+    "delete_account_back": "Return to Home",
+    "delete_account_redirect": "You will be automatically redirected in 10 seconds",
 
     "page_in_progress": "We are working on this page to make it as helpful and convenient for you as possible. Very soon you’ll find new information and features here!",
     "errorDescription": "An unexpected error has occurred. Please try again or return to the homepage.",

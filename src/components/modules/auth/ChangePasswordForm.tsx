@@ -45,8 +45,7 @@ export default function ChangePasswordForm() {
 
   const onSubmit = async (rowData: z.infer<typeof changePasswordSchema>) => {
     setIsLoading(true);
-
-    try {
+    https: try {
       await confirmChangePassword(rowData, locale);
 
       router.replace(REDIRECT_PATHS.profile);

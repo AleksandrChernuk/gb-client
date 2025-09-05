@@ -1,8 +1,14 @@
 {
   "forms": {
+    "change_password": "Change password",
+    "delete_account": "Delete",
+    "cancel": "Cancel",
+
     "send": "Send",
+    "new_email": "New email",
     "go_home": "Go to homepage",
     "suspicious_input": "Suspicious input",
+
     "passwords_do_not_match": "Passwords do not match",
     "first_name": "First Name",
     "first_name_placeholder": "Enter your first name",

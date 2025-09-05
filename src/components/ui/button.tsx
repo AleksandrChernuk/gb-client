@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-white text-sm font-bold leading-[16.8px] hover:bg-primary/90',
         destructive:
-          'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
+          'bg-red-400 text-white shadow-xs hover:bg-red-400/90 focus-visible:ring-red-400/20 dark:focus-visible:ring-red-400/40 dark:bg-red-400/60',
         outline:
           'w-full h-auto border border-slate-200 bg-inherit text-slate-800 dark:text-slate-50 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 aria-selected:bg-green-300 aria-selected:text-white',
         secondary: 'bg-green-600 text-black text-sm font-bold leading-[16.8px] hover:bg-green-600/80',

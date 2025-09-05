@@ -3,15 +3,17 @@
     "trips_hystori": "История поездок",
     "reviews": "Отзывы",
     "settings": "Настройки",
-    "personal_data": "Персональные данные",
+    "personal_data": "Изменить имя",
     "phone": "Телефон",
-    "password_update": "Изменить пароль",
+    "email_update": "Изменить email",
     "logout": "Выйти",
     "no_trips": "Поездок пока нет",
     "go_to_search": "Перейти к поиску",
     "no_reviews": "Вы ещё не оставили ни одного отзыва",
     "payments": "Платежи",
     "orders": "Заказы",
-    "my_trips": "Мои поездки"
+    "my_trips": "Мои поездки",
+    "delete_account_confirm_title": "Вы уверены, что хотите удалить аккаунт?",
+    "delete_account_confirm_text": "Это действие необратимо. Ваш аккаунт будет деактивирован немедленно и полностью удален через 7 дней."
   }
 }

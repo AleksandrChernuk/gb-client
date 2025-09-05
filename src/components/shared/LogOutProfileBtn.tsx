@@ -1,0 +1,58 @@
+'use client';
+
+import { logout } from '@/actions/auth.service';
+import { Button } from '@/components/ui/button';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { useUserStore } from '@/store/useUser';
+import { mapServerError } from '@/utils/mapServerError';
+import { LoaderCircle, LogOut } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
+export default function LogOutProfileBtn() {
+  const t = useTranslations(MESSAGE_FILES.PROFILE);
+  const t_form = useTranslations(MESSAGE_FILES.FORM);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+  const userStore = useUserStore();
+
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      const result = logout();
+
+      if (!result) {
+        throw new Error('Logout failed');
+      }
+      userStore.clearUserStore();
+      router.replace('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(t_form(mapServerError(error.message)));
+      } else {
+        toast.error(t_form(mapServerError('')));
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <Button onClick={handleLogout} variant={'link'}>
+        {isLoading ? (
+          <LoaderCircle className="animate-spin stroke-green-400" />
+        ) : (
+          <>
+            <LogOut />
+            {t('logout')}
+          </>
+        )}
+      </Button>
+    </div>
+  );
+}

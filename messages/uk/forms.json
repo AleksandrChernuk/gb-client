@@ -1,8 +1,12 @@
 {
   "forms": {
-    "send": "Надіслати",
-    "passwords_do_not_match": "Паролі не співпадають",
+    "change_password": "Змінити пароль",
+    "delete_account": "Видалити",
+    "cancel": "Скасувати",
 
+    "send": "Надіслати",
+    "new_email": "Новий email",
+    "passwords_do_not_match": "Паролі не співпадають",
     "go_home": "На головну сторінку",
     "suspicious_input": "Підозрілий ввід",
     "first_name": "Ім’я",
