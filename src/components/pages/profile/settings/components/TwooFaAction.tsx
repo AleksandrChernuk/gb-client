@@ -50,7 +50,8 @@ const TwooFaAction = () => {
         <LoaderCircle className="animate-spin" stroke="white" />
       ) : (
         <>
-          2FA:<span className="font-bold">{currentUser?.twoFA ? 'Off' : 'On'}</span>
+          2FA:
+          <span className="font-bold">{!currentUser?.twoFA ? <span className="text-red-200">Off</span> : 'On'}</span>
         </>
       )}
     </Button>

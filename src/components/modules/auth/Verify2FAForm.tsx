@@ -51,9 +51,9 @@ const Verify2FAForm = ({ email }: { email: string }) => {
       }
 
       useUserStore.getState().setUserStore(currentUser);
-      router.push(REDIRECT_PATHS.profile);
       form.reset();
       setIsLoading(false);
+      router.push(REDIRECT_PATHS.profile);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);

@@ -13,7 +13,7 @@ const PaymentsPage = () => {
   const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
 
-  const { data, isLoading, error } = useQuery<IUserPaymentsResponse>({
+  const { data, isFetching, error } = useQuery<IUserPaymentsResponse>({
     queryKey: ['payments', user?.id, locale],
     queryFn: async () => {
       const response = await getUserCustomerAndPayments({ userId: user!.id, locale, page: 1, perPage: 10 });
@@ -23,7 +23,7 @@ const PaymentsPage = () => {
 
   if (!data) return null;
 
-  if (isLoading) {
+  if (isFetching) {
     return <MainLoader />;
   }
 

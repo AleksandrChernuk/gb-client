@@ -52,10 +52,6 @@ export async function getUserCustomerAndPayments(data: GetUserRequestsData): Pro
 // ================= Мнтод получения ордеров Юзера ===================
 export async function getUserOrders(data: GetUserRequestsData): Promise<IUserOrdersResponse> {
   const { userId, locale, page, perPage } = data;
-  console.log('userId', userId);
-  console.log('locale', locale);
-  console.log('page', page);
-  console.log('perPage', perPage);
 
   // query параметры для пагинации
   const queryParams = new URLSearchParams();

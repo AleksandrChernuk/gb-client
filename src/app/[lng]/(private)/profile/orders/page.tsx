@@ -1,7 +1,15 @@
-import UserOrdersClientComponent from '@/components/modules/profile/UserOrdersClientComponent';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { getTranslations } from 'next-intl/server';
 
 const OrdersPage = async () => {
-  return <UserOrdersClientComponent />;
+  const t = await getTranslations(MESSAGE_FILES.PROFILE);
+
+  return (
+    <div>
+      <h1 className="mb-4">{t('orders')}</h1>
+      <OrdersPage />
+    </div>
+  );
 };
 
 export default OrdersPage;
