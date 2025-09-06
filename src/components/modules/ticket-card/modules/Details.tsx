@@ -39,6 +39,7 @@ export default function Details({ id }: Props) {
         <MainLoader />
       </div>
     );
+
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
       <div className="space-y-4">

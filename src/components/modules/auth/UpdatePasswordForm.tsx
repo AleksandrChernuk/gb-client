@@ -19,7 +19,7 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 const UpdatePasswordForm = () => {
   const route = useRouter();
 
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t = useTranslations(MESSAGE_FILES.FORM);
 
   const [error, setError] = useState<string | undefined>('');
   const [isPending, setIsPending] = useState(false);
@@ -54,7 +54,7 @@ const UpdatePasswordForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('authPassword')}</FormLabel>
+                <FormLabel>{t('password_placeholder')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -82,7 +82,7 @@ const UpdatePasswordForm = () => {
             name="confirmPassword"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('confirmPassword')}</FormLabel>
+                <FormLabel>{t('confirm_new_password_placeholder')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input

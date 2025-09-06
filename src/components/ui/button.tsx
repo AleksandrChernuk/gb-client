@@ -27,7 +27,7 @@ const buttonVariants = cva(
         secondary:
           'py-2 px-6 tablet:py-4 tablet:text-base font-bold leading-6 tracking-normal rounded-full min-w-[168px] min-h-[48px] tablet:max-h-[52px]',
         primary:
-          'w-full py-[12px] px-6 tablet:py-[12px] text-white rounded-full text-sm font-bold leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
+          'w-full py-2 px-6  text-white rounded-full text-sm font-bold leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
         samll_primary:
           'w-full px-2 py-2 text-white rounded-full text-sm font-medium leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
         mainSearch: 'h-auto px-6 py-4 tablet:min-w-[120px] laptop:min-w-[187px] laptop:max-w-[187px] grow-0',

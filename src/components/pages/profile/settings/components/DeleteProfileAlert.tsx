@@ -59,13 +59,13 @@ const DeleteProfileAlert = ({ setActiveForm }: Props) => {
       </p>
       <div className="flex gap-2">
         <div className="w-1/2">
-          <Button size={'default'} variant="outline" onClick={setActiveForm} disabled={isLoading}>
+          <Button size={'primary'} variant="outline" onClick={setActiveForm} disabled={isLoading}>
             {t('cancel')}
           </Button>
         </div>
         <div className="w-1/2">
           <Button
-            size={'default'}
+            size={'primary'}
             className="w-full bg-red-800 hover:bg-red-900"
             disabled={isLoading}
             onClick={handleDeleteAccount}

@@ -13,7 +13,7 @@ const DeleteProfileAction = ({ setActiveForm }: Props) => {
 
   return (
     <div>
-      <Button className="w-full bg-red-800 hover:bg-red-900" onClick={setActiveForm}>
+      <Button size={'primary'} className="w-full bg-red-800 hover:bg-red-900" onClick={setActiveForm}>
         {t('delete_account')}
       </Button>
     </div>

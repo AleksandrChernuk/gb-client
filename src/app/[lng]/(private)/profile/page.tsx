@@ -1,4 +1,4 @@
-import ProfilePage from '@/components/pages/profile/settings';
+import ProfileSettingsPage from '@/components/pages/profile/settings';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 
@@ -8,7 +8,7 @@ const UserProfile = async () => {
   return (
     <div>
       <h1 className="mb-4">{t('settings')}</h1>
-      <ProfilePage />
+      <ProfileSettingsPage />
     </div>
   );
 };

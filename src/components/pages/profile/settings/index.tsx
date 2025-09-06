@@ -1,25 +1,27 @@
-import ProfileFormCurd from './components/ProfileFormCard';
-import ChangeUserNameForm from './components/ChangeUserNameForm';
-import ChangeUserEmailForm from './components/ChangeUserEmailForm';
-import UserActions from './components/UserActions';
+import ProfileSettingsCard from './components/ProfileSettingsCard';
+import ProfileSettingActions from './modules/ProfileSettingActions';
+import UpdateProfileEmailForm from './modules/UpdateProfileEmailForm';
+import UpdateProfileNameForm from './modules/UpdateProfileNameForm';
 
-export default async function ProfilePage() {
+const ProfileSettingsPage = () => {
   return (
     <div className="flex flex-col tablet:flex-row gap-4">
       <div className="flex flex-col gap-4 tablet:w-1/2">
-        <ProfileFormCurd title="personal_data">
-          <ChangeUserNameForm />
-        </ProfileFormCurd>
+        <ProfileSettingsCard title="personal_data">
+          <UpdateProfileNameForm />
+        </ProfileSettingsCard>
 
-        <ProfileFormCurd title="email_update">
-          <ChangeUserEmailForm />
-        </ProfileFormCurd>
+        <ProfileSettingsCard title="email_update">
+          <UpdateProfileEmailForm />
+        </ProfileSettingsCard>
       </div>
       <div className="tablet:w-1/2">
-        <ProfileFormCurd>
-          <UserActions />
-        </ProfileFormCurd>
+        <ProfileSettingsCard>
+          <ProfileSettingActions />
+        </ProfileSettingsCard>
       </div>
     </div>
   );
-}
+};
+
+export default ProfileSettingsPage;

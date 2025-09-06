@@ -82,7 +82,7 @@ const SigninForm = () => {
             name="email"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('authEmail')}</FormLabel>
+                <FormLabel>{t('e_mail_placeholder')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -109,7 +109,7 @@ const SigninForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('authPassword')}</FormLabel>
+                <FormLabel>{t('password_placeholder')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -135,12 +135,7 @@ const SigninForm = () => {
 
         {errorSignin && <FormError message={errorSignin} />}
 
-        <Button
-          type="submit"
-          size={'primary'}
-          className="w-full py-[14px] px-6  tablet:py-4 text-white rounded-full text-base font-bold leading-6 tracking-normal max-h-[48px] tablet:max-h-[52px] "
-          disabled={form.formState.isSubmitting}
-        >
+        <Button type="submit" size={'primary'} disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
         </Button>
       </form>

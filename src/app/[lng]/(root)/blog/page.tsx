@@ -1,7 +1,7 @@
 // import BlogPage from '@/components/pages/blog';
 import ProfilePage from '@/components/pages/profile/settings';
 import { Container } from '@/components/shared/Container';
-import { NavTabs } from '@/components/shared/NavTabs';
+import ProfileNavTabs from '@/components/shared/ProfileNavTabs';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
@@ -80,7 +80,7 @@ export default async function Blog({
     <Container size="m" className="w-full">
       <div className="w-full py-2 tablet:py-10">
         <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
-          <NavTabs items={items} namespace={MESSAGE_FILES.PROFILE} />
+          <ProfileNavTabs items={items} namespace={MESSAGE_FILES.PROFILE} />
           <div className="flex-1">
             <ProfilePage />;
           </div>

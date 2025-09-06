@@ -45,7 +45,7 @@ const TwooFaAction = () => {
   };
 
   return (
-    <Button size={'default'} variant={'default'} onClick={handleToggle2FA} className="w-full" disabled={isLoading}>
+    <Button size={'primary'} variant={'default'} onClick={handleToggle2FA} className="w-full" disabled={isLoading}>
       {isLoading ? (
         <LoaderCircle className="animate-spin" stroke="white" />
       ) : (

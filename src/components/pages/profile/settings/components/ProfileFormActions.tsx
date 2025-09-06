@@ -13,13 +13,9 @@ type Props = {
   disabledSubmit?: boolean;
 };
 
-export default function FormActions({
-  isInputEnabled,
-  setIsInputEnabled,
-  isSubmitting,
-  disabled,
-  disabledSubmit,
-}: Props) {
+import React from 'react';
+
+const ProfileFormActions = ({ isInputEnabled, setIsInputEnabled, isSubmitting, disabled, disabledSubmit }: Props) => {
   const t = useTranslations(MESSAGE_FILES.FORM);
   return (
     <div className="mt-4">
@@ -45,4 +41,6 @@ export default function FormActions({
       )}
     </div>
   );
-}
+};
+
+export default ProfileFormActions;

@@ -14,9 +14,9 @@ import { profileNameSchema } from '@/schemas/profile.schemas';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
 import { updateUser } from '@/actions/auth.service';
-import FormActions from './FormActions';
+import ProfileFormActions from '../components/ProfileFormActions';
 
-export default function ChangeUserNameForm() {
+const UpdateProfileNameForm = () => {
   const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.FORM);
   const [isInputEnabled, setIsInputEnabled] = useState(false);
@@ -93,7 +93,7 @@ export default function ChangeUserNameForm() {
             )}
           />
         </div>
-        <FormActions
+        <ProfileFormActions
           isInputEnabled={isInputEnabled}
           setIsInputEnabled={handleSetEnabled}
           isSubmitting={isLoadingUpdateName}
@@ -102,4 +102,6 @@ export default function ChangeUserNameForm() {
       </form>
     </Form>
   );
-}
+};
+
+export default UpdateProfileNameForm;

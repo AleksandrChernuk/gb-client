@@ -47,7 +47,7 @@ const ChangePasswordAction = () => {
   return (
     <div>
       <Button
-        size={'default'}
+        size={'primary'}
         variant={'default'}
         className="w-full"
         disabled={isLoading}

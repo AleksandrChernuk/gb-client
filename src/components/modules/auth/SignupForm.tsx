@@ -125,7 +125,7 @@ const SignupForm = () => {
             name="password"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>{t('authPassword')}</FormLabel>
+                <FormLabel>{t('password_placeholder')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -148,7 +148,7 @@ const SignupForm = () => {
         </div>
         <FormError message={error} />
 
-        <Button type="submit" size={'primary'} className="text-white text-base font-bold leading-6 tracking-normal">
+        <Button type="submit" size={'primary'}>
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signupTitle')}
         </Button>
       </form>

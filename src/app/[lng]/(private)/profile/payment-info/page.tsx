@@ -1,7 +1,16 @@
-import PaymentsInfoClientComponent from '@/components/modules/profile/PaymentsInfoClientComponent';
+import PaymentsPage from '@/components/pages/profile/payments';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { getTranslations } from 'next-intl/server';
 
-const UserPaymentsPage = async () => {
-  return <PaymentsInfoClientComponent />;
+const Payments = async () => {
+  const t = await getTranslations(MESSAGE_FILES.PROFILE);
+
+  return (
+    <div>
+      <h1 className="mb-4">{t('payments')}</h1>
+      <PaymentsPage />
+    </div>
+  );
 };
 
-export default UserPaymentsPage;
+export default Payments;

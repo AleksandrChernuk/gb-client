@@ -12,7 +12,7 @@ type Props = {
   namespace: string;
 };
 
-export const NavTabs = ({ namespace, items }: Props) => {
+const ProfileNavTabs = ({ namespace, items }: Props) => {
   const t = useTranslations(namespace);
   const pathname = usePathname();
 
@@ -36,3 +36,5 @@ export const NavTabs = ({ namespace, items }: Props) => {
     </Container>
   );
 };
+
+export default ProfileNavTabs;

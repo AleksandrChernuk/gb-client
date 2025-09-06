@@ -1,4 +1,5 @@
 'use client';
+
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
@@ -9,7 +10,7 @@ type Props = {
   description?: string;
 };
 
-export default function ProfileFormCard({ title, description, children }: Props) {
+const ProfileSettingsCard = ({ title, description, children }: Props) => {
   const t = useTranslations(MESSAGE_FILES.PROFILE);
   return (
     <ul className="rounded-2xl border bg-card text-card-foreground shadow-xs p-4 tablet:p-6 border-slate-200 dark:border-transparent">
@@ -26,4 +27,6 @@ export default function ProfileFormCard({ title, description, children }: Props)
       <li>{children}</li>
     </ul>
   );
-}
+};
+
+export default ProfileSettingsCard;

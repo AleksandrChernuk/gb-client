@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import ChangePasswordAction from './ChangePasswordAction';
-import DeleteProfileAlert from './DeleteProfileAlert';
-import DeleteProfileAction from './DeleteProfileAction';
-import TwooFaAction from './TwooFaAction';
+import DeleteProfileAlert from '../components/DeleteProfileAlert';
+import TwooFaAction from '../components/TwooFaAction';
+import ChangePasswordAction from '../components/ChangePasswordAction';
+import DeleteProfileAction from '../components/DeleteProfileAction';
 
 type UpdateFormType = 'delete' | null;
 
-const UserActions = () => {
+const ProfileSettingActions = () => {
   const [activeForm, setActiveForm] = useState<UpdateFormType>(null);
 
   if (activeForm === 'delete') {
@@ -30,4 +30,4 @@ const UserActions = () => {
   );
 };
 
-export default UserActions;
+export default ProfileSettingActions;

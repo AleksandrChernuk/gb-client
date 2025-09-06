@@ -15,13 +15,16 @@ import { profileEmailSchema } from '@/schemas/profile.schemas';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
 import { logout, updateUser } from '@/actions/auth.service';
-import FormActions from './FormActions';
+
 import { useRouter } from '@/i18n/routing';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { CircleAlert } from 'lucide-react';
 import ViewPassword from '@/components/shared/ViewPassword';
 
-export default function ChangeUserEmailForm() {
+import React from 'react';
+import ProfileFormActions from '../components/ProfileFormActions';
+
+const UpdateProfileEmailForm = () => {
   const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.FORM);
   const router = useRouter();
@@ -146,7 +149,7 @@ export default function ChangeUserEmailForm() {
             )}
           />
         </div>
-        <FormActions
+        <ProfileFormActions
           disabled={currentUser?.method !== 'CREDENTIALS'}
           isInputEnabled={isInputEnabled}
           setIsInputEnabled={handleSetEnabled}
@@ -156,4 +159,6 @@ export default function ChangeUserEmailForm() {
       </form>
     </Form>
   );
-}
+};
+
+export default UpdateProfileEmailForm;
