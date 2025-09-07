@@ -1,14 +1,19 @@
-import { BACKEND_URL } from '@/config/constants';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
+
+import { BACKEND_URL } from '@/features/auth/config/constants';
+
+import { forwardHeaders } from '@/features/auth/utils/headers.util';
+import { createJsonResponse } from '@/features/auth/utils/jsonResponse.util';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export async function PATCH(req: Request) {
   if (!BACKEND_URL) {
-    return createJsonResponse({ message: 'BACKEND_URL is not configured' }, 500);
+    return createJsonResponse(
+      { message: 'BACKEND_URL is not configured' },
+      500
+    );
   }
 
   let body: {
@@ -37,7 +42,10 @@ export async function PATCH(req: Request) {
     forceJsonContentType: true,
     include: {
       'Accept-Language': req.headers.get('accept-language') || 'en',
-      Cookie: [accessToken && `accessToken=${accessToken}`, refreshToken && `refreshToken=${refreshToken}`]
+      Cookie: [
+        accessToken && `accessToken=${accessToken}`,
+        refreshToken && `refreshToken=${refreshToken}`,
+      ]
         .filter(Boolean)
         .join('; '),
     },
@@ -74,11 +82,15 @@ export async function PATCH(req: Request) {
   }
 
   if (!response.ok) {
-    return createJsonResponse({ message: data.message || 'Failed to update user' }, response.status);
+    return createJsonResponse(
+      { message: data.message || 'Failed to update user' },
+      response.status
+    );
   }
 
   // Если изменялся email или 2FA, токены могут быть инвалидированы на бэкенде
-  const sensitiveFieldsChanged = body.newEmail !== undefined || body.twoFA !== undefined;
+  const sensitiveFieldsChanged =
+    body.newEmail !== undefined || body.twoFA !== undefined;
 
   if (sensitiveFieldsChanged) {
     // Очищаем куки если были изменены критичные поля
@@ -95,6 +107,6 @@ export async function PATCH(req: Request) {
     {
       'Cache-Control': 'no-store',
       Vary: 'Cookie',
-    },
+    }
   );
 }

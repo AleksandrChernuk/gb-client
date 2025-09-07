@@ -6,7 +6,8 @@ import { IUserOrdersResponse } from '@/types/payments.Info.types';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { MainLoader } from '@/components/shared/MainLoader';
-import ErrorPaymant from '../payments/components/ErrorPaymants';
+import TryAgain from '@/components/shared/TryAgain';
+import OrderCart from './components/OrderCart';
 
 const OrdersPage = () => {
   const user = useUserStore((state) => state.currentUser);
@@ -28,7 +29,7 @@ const OrdersPage = () => {
   }
 
   if (isError) {
-    return <ErrorPaymant />;
+    return <TryAgain />;
   }
 
   if (!data || !data.data?.length) {
@@ -43,9 +44,7 @@ const OrdersPage = () => {
     <ul className="space-y-4">
       {data.data.map((element) => (
         <li key={element.orderId}>
-          <div className="border border-slate-50 dark:border-slate-700 p-4 bg-white shadow-xs tablet:p-4 dark:bg-slate-800 rounded-2xl ">
-            {element.carrierName}
-          </div>
+          <OrderCart item={element} />
         </li>
       ))}
     </ul>

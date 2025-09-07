@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
-import { LoaderCircle, LogOut } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -19,16 +19,14 @@ export default function LogOutProfileBtn() {
 
   const router = useRouter();
   const userStore = useUserStore();
-
   const handleLogout = async () => {
+    if (isLoading) return;
     setIsLoading(true);
     try {
-      const result = logout();
+      await logout();
 
-      if (!result) {
-        throw new Error('Logout failed');
-      }
       userStore.clearUserStore();
+
       router.replace('/');
     } catch (error) {
       if (error instanceof Error) {
@@ -40,18 +38,10 @@ export default function LogOutProfileBtn() {
       setIsLoading(false);
     }
   };
-
   return (
     <div>
-      <Button onClick={handleLogout} variant={'link'}>
-        {isLoading ? (
-          <LoaderCircle className="animate-spin stroke-green-400" />
-        ) : (
-          <>
-            <LogOut />
-            {t('logout')}
-          </>
-        )}
+      <Button onClick={handleLogout} variant={'outline'} size={'default'}>
+        {isLoading ? <LoaderCircle className="animate-spin stroke-green-400" /> : <>{t('logout')}</>}
       </Button>
     </div>
   );

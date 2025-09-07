@@ -7,13 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import PaymentsCard from './components/PaymentsCard';
 import { MainLoader } from '@/components/shared/MainLoader';
-import ErrorPaymant from './components/ErrorPaymants';
+import TryAgain from '@/components/shared/TryAgain';
 
 const PaymentsPage = () => {
   const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
 
-  const { data, isFetching, error } = useQuery<IUserPaymentsResponse>({
+  const { data, isLoading, isFetching, isError } = useQuery<IUserPaymentsResponse>({
     queryKey: ['payments', user?.id, locale],
     queryFn: async () => {
       const response = await getUserCustomerAndPayments({ userId: user!.id, locale, page: 1, perPage: 10 });
@@ -21,14 +21,22 @@ const PaymentsPage = () => {
     },
   });
 
-  if (!data) return null;
+  if (!user?.id) return <MainLoader />;
 
-  if (isFetching) {
+  if (isLoading || isFetching) {
     return <MainLoader />;
   }
 
-  if (error) {
-    return <ErrorPaymant />;
+  if (isError) {
+    return <TryAgain />;
+  }
+
+  if (!data || !data.data?.payments.length) {
+    return (
+      <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-2xl text-center text-slate-500 dark:text-slate-400">
+        Платежів не найдены
+      </div>
+    );
   }
 
   const { customer, payments } = data.data;

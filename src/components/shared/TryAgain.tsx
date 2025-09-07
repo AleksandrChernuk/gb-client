@@ -6,15 +6,20 @@ import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
-const ErrorPaymant = () => {
-  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
-  const t_COMMON = useTranslations(MESSAGE_FILES.COMMON);
+const TryAgain = ({ className }: { className?: string }) => {
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const router = useRouter();
 
   return (
-    <div className="tablet:p-6 bg-white dark:bg-slate-700 rounded-2xl flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-xs w-fit">
+    <div
+      className={cn(
+        'tablet:p-6 bg-white dark:bg-slate-700 rounded-2xl flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-xs w-fit',
+        className,
+      )}
+    >
       <div className="relative w-[313px] h-[313px] mx-auto overflow-hidden rounded-3xl">
         <Image src={errorImg} draggable={false} placeholder="blur" alt="peaple wait buses" />
       </div>
@@ -24,10 +29,10 @@ const ErrorPaymant = () => {
       </h3>
 
       <Button variant={'default'} size={'primary'} onClick={() => router.refresh()}>
-        {t_COMMON('try_again')}
+        {t('try_again')}
       </Button>
     </div>
   );
 };
 
-export default ErrorPaymant;
+export default TryAgain;

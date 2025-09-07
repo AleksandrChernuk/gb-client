@@ -1,5 +1,6 @@
 {
   "common": {
+    "something_happend": "Something happend",
     "twofa_title": "Two-Step Verification",
     "twofa_description": "Enter the 6-digit code sent to your email.",
     "change_password_title": "Change Password",

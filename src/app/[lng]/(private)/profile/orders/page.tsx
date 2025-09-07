@@ -1,7 +1,8 @@
+import OrdersPage from '@/components/pages/profile/orders';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 
-const OrdersPage = async () => {
+const Orders = async () => {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
@@ -12,4 +13,4 @@ const OrdersPage = async () => {
   );
 };
 
-export default OrdersPage;
+export default Orders;

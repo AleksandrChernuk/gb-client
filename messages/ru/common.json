@@ -1,5 +1,6 @@
 {
   "common": {
+    "something_happend": "Что-то произошло",
     "twofa_title": "Двухэтапная верификация",
     "twofa_description": "Введите 6-значный код, отправленный на вашу почту.",
     "change_password_title": "Смена пароля",
