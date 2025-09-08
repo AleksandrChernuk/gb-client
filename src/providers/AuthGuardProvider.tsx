@@ -30,6 +30,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch('/api/auth/validate-auth', {
         credentials: 'include',
       });
+
       const vr: ValidateResp = await res.json().catch(() => ({ authenticated: false }));
 
       if (vr.authenticated) {
@@ -44,7 +45,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (!refresh.ok) {
-        router.replace(`/${getLocale()}/${REDIRECT_PATHS.signin}`);
+        router.replace(`/${REDIRECT_PATHS.signin}`);
         return;
       }
 

@@ -1,3 +1,4 @@
+import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import AuthHeader from '@/components/modules/header/AuthHeader';
 import { Container } from '@/components/shared/Container';
 import LogOutProfileBtn from '@/components/shared/LogOutProfileBtn';
@@ -31,13 +32,13 @@ const ProfileLayout = async ({ children }: { children: React.ReactNode }) => {
     <AuthGuardProvider>
       <div className="flex flex-col h-svh">
         <AuthHeader />
-        <main className="bg-slate-[#E6E6E6] py-2 tablet:py-10">
-          <Container size="m" className="w-full">
+        <main className="bg-slate-50 dark:bg-slate-900 py-2 tablet:py-10 flex-1">
+          <Container size="l" className="w-full">
             <div className="w-full">
-              <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
+              <div className="flex-1 flex flex-col tablet:flex-row gap-8 tablet:gap-10 laptop:gap-12">
                 <ProfileNavTabs items={profile_links} namespace={MESSAGE_FILES.PROFILE} />
                 <div className="flex-1">
-                  <div className="flex items-center justify-between gap-4 mb-4 tablet:text-right ">
+                  <div className="flex items-center justify-between gap-4 mb-4 laptop:mb-10">
                     <ProfileMobileNav items={profile_links} namespace={MESSAGE_FILES.PROFILE} />
                     <ProfileAvatar className="hidden tablet:flex tablet:items-center tablet:justify-baseline tablet:gap-2" />
                     <LogOutProfileBtn />
@@ -48,6 +49,7 @@ const ProfileLayout = async ({ children }: { children: React.ReactNode }) => {
             </div>
           </Container>
         </main>
+        <ThirdFooter />
       </div>
     </AuthGuardProvider>
   );

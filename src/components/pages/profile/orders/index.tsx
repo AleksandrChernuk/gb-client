@@ -41,7 +41,7 @@ const OrdersPage = () => {
   }
 
   return (
-    <ul className="space-y-4">
+    <ul className="space-y-6 tablet:space-y-8">
       {data.data.map((element) => (
         <li key={element.orderId}>
           <OrderCart item={element} />
