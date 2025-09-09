@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { Container } from '@/components/shared/Container';
 import AuthHeader from '@/components/modules/header/AuthHeader';
 import { BusLoader } from '@/components/shared/BusLoader';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
+import { usePathname, useRouter } from 'next/navigation';
 
 type ValidateResp = { authenticated: boolean };
 
