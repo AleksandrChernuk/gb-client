@@ -37,7 +37,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
 
   const onSubmit = async (rowData: z.infer<typeof verify2FASchema>) => {
     try {
-      const result = await verifyEmail({ email: email, code: rowData.code }, locale);
+      const result = await verifyEmail({ email: decodeURIComponent(email || ''), code: rowData.code }, locale);
 
       const { message, currentUser } = result;
 
