@@ -11,10 +11,10 @@ import { useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
 import FormError from '@/components/shared/FormError';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { useRouter } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
 import { updatePpasswordSchema } from '@/schemas/auth.schema';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { useRouter } from '@/i18n/routing';
 
 const UpdatePasswordForm = () => {
   const route = useRouter();

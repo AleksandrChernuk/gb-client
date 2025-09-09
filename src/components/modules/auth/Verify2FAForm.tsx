@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { verify2FA } from '@/actions/auth.service';
 import { useUserStore } from '@/store/useUser';
@@ -19,6 +18,7 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
+import { useRouter } from '@/i18n/routing';
 
 const Verify2FAForm = ({ email }: { email: string }) => {
   const [isLoading, setIsLoading] = useState(false);

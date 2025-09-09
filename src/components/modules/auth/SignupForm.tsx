@@ -17,7 +17,7 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { signup } from '@/actions/auth.service';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 const SignupForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
