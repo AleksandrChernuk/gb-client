@@ -110,7 +110,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('edit_email')}
+              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('confirmation')}
             </Button>
           </div>
         </div>

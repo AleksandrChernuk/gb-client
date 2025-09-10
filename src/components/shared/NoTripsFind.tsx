@@ -3,15 +3,25 @@
 import Image from 'next/image';
 import noTravelImg from '@/assets/images/an-empty-bus-stop.avif';
 
-import { CustomCard } from '@/components/shared/CustomCard';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { cn } from '@/lib/utils';
 
-export const NoTravel = () => {
-  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+type Props = {
+  className?: string;
+  text: string;
+};
+
+const NoTripsFind = ({ className, text }: Props) => {
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <CustomCard className="flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-xs w-fit">
+    <div
+      className={cn(
+        'flex flex-col items-center self-center gap-4 p-5 mx-auto text-center w-fit tablet:p-6 bg-white dark:bg-slate-900 shadow-xs rounded-2xl',
+        className,
+      )}
+    >
       <Image
         src={noTravelImg}
         sizes="100vw"
@@ -21,8 +31,9 @@ export const NoTravel = () => {
         className="mx-auto overflow-hidden rounded-3xl w-[313px] h-auto"
       />
       <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50 ">
-        {t('no_travel')}!
+        {t(text)}!
       </h3>
-    </CustomCard>
+    </div>
   );
 };
+export default NoTripsFind;

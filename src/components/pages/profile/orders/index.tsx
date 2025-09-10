@@ -8,12 +8,15 @@ import { useLocale } from 'next-intl';
 import { MainLoader } from '@/components/shared/MainLoader';
 import TryAgain from '@/components/shared/TryAgain';
 import OrderCart from './components/OrderCart';
+import NoTripsFind from '@/components/shared/NoTripsFind';
+import { isNoTripsError } from './helpers/isNoTripsError';
+import { Container } from '@/components/shared/Container';
 
 const OrdersPage = () => {
   const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
 
-  const { data, isLoading, isFetching, isError } = useQuery<IUserOrdersResponse>({
+  const { data, isLoading, isFetching, isError, error } = useQuery<IUserOrdersResponse>({
     queryKey: ['orders', user?.id, locale, 1, 10],
     queryFn: async () => {
       return await getUserOrders({ userId: user!.id, locale, page: 1, perPage: 10 });
@@ -26,6 +29,10 @@ const OrdersPage = () => {
 
   if (isLoading || isFetching) {
     return <MainLoader />;
+  }
+
+  if (isError && isNoTripsError(error)) {
+    return <NoTripsFind text="no_travel_find" className="dark:bg-slate-700" />;
   }
 
   if (isError) {
@@ -41,13 +48,15 @@ const OrdersPage = () => {
   }
 
   return (
-    <ul className="space-y-6 tablet:space-y-8">
-      {data.data.map((element) => (
-        <li key={element.orderId}>
-          <OrderCart item={element} />
-        </li>
-      ))}
-    </ul>
+    <Container size="sm">
+      <ul className="space-y-6 tablet:space-y-8">
+        {data.data.map((element) => (
+          <li key={element.orderId}>
+            <OrderCart item={element} />
+          </li>
+        ))}
+      </ul>
+    </Container>
   );
 };
 

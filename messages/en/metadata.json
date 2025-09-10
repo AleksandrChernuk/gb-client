@@ -70,31 +70,17 @@
       "description": "Use the interactive GreenBus route planner to create your own journey. Choose cities and plan trips across Ukraine and Europe easily and quickly online.",
       "keywords": "GreenBus, route planner, route builder, map, bus transportation, Ukraine, Europe, travel, journey, build route"
     },
-    "signup": {
-      "title": "Sign Up | GreenBus",
-      "description": "Create your GreenBus account for quick ticket booking and convenient trip management.",
-      "keywords": "GreenBus, sign up, account, register, buy ticket, bus, travel"
+    "auth": {
+      "title": "Authorization | GreenBus",
+      "description": "Log in or create a GreenBus personal account to quickly book tickets, manage your trips, and access the latest travel updates.",
+      "keywords": "GreenBus, authorization, login, sign up, personal account, profile, tickets, bus, travel"
     },
-    "signin": {
-      "title": "Sign In | GreenBus",
-      "description": "Log in to your GreenBus account to manage bookings and view your trip history.",
-      "keywords": "GreenBus, sign in, login, account, tickets, bus, travel"
+    "profile": {
+      "title": "Profile | GreenBus – your personal account for trips and payments",
+      "description": "Manage your personal data, view trip history, tickets, and payments. Customize your account in the convenient GreenBus personal cabinet.",
+      "keywords": "GreenBus, profile, personal account, my trips, tickets, bookings, payments, settings"
     },
-    "confirmPassword": {
-      "title": "Password Confirmation | GreenBus",
-      "description": "Confirm your password to complete sign in or a sensitive action.",
-      "keywords": "GreenBus, password confirmation, password, account, security"
-    },
-    "forgotPassword": {
-      "title": "Password Recovery | GreenBus",
-      "description": "Recover your password to regain access to your GreenBus account and continue using the service.",
-      "keywords": "GreenBus, password recovery, forgot password, account, access"
-    },
-    "updatePassword": {
-      "title": "Update Password | GreenBus",
-      "description": "Change your password to enhance the security of your GreenBus account.",
-      "keywords": "GreenBus, update password, change password, account, security"
-    },
+
     "faq": {
       "title": "Frequently Asked Questions | GreenBus 🚍",
       "description": "Find answers to the most common questions about GreenBus bus transportation. Information about tickets, schedules, routes, and travel conditions.",

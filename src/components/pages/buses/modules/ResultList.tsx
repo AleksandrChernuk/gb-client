@@ -4,9 +4,9 @@ import { useFilterTickets } from '@/store/useFilterTickets';
 import { TicketCard } from '@/components/modules/ticket-card';
 import { BusLoader } from '../../../shared/BusLoader';
 import { ErrorTravel } from '../components/ErrorTravel';
-import { NoTravel } from '../components/NoTravel';
 import useTicketsSearch from '../hooks/useTicketsSearch';
 import { useSearchStore } from '@/store/useSearch';
+import NoTripsFind from '@/components/shared/NoTripsFind';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();
@@ -21,7 +21,7 @@ export default function ResultList() {
 
   if (error) return <ErrorTravel />;
 
-  if (!isFetching && data && data.length === 0) return <NoTravel />;
+  if (!isFetching && data && data.length === 0) return <NoTripsFind text="no_travel" />;
 
   if (!from && !to) return <ErrorTravel />;
   return (

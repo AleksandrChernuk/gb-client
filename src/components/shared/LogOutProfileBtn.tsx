@@ -40,7 +40,7 @@ export default function LogOutProfileBtn() {
   };
   return (
     <div>
-      <Button onClick={handleLogout} variant={'outline'} size={'default'}>
+      <Button onClick={handleLogout} variant="outline" size={'primary'}>
         {isLoading ? <LoaderCircle className="animate-spin stroke-green-400" /> : <>{t('logout')}</>}
       </Button>
     </div>

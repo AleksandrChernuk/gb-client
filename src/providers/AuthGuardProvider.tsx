@@ -6,11 +6,14 @@ import AuthHeader from '@/components/modules/header/AuthHeader';
 import { BusLoader } from '@/components/shared/BusLoader';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { usePathname, useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/useUser';
+import { useShallow } from 'zustand/react/shallow';
 
 type ValidateResp = { authenticated: boolean };
 
 export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
+  const currentUser = useUserStore(useShallow((state) => state.currentUser));
   const router = useRouter();
   const pathname = usePathname();
   const ranRef = useRef(false);
@@ -64,7 +67,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
     checkAndRefresh();
   }, [router, pathname]);
 
-  if (!ready)
+  if (!ready || !currentUser)
     return (
       <div className="flex flex-col h-screen">
         <AuthHeader />

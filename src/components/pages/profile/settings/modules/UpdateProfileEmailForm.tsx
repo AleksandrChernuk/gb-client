@@ -33,7 +33,7 @@ const UpdateProfileEmailForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, clearUserStore } = useUserStore();
-
+  console.log(currentUser?.method);
   const form = useForm<z.infer<typeof profileEmailSchema>>({
     resolver: zodResolver(profileEmailSchema),
     defaultValues: {
@@ -48,11 +48,12 @@ const UpdateProfileEmailForm = () => {
 
     try {
       const updateData: any = { newEmail: rowData.email.trim() };
+
       if (currentUser?.method === 'CREDENTIALS') {
         updateData.currentPassword = rowData.password;
       }
 
-      await updateUser({ newEmail: rowData.email.trim() }, locale);
+      await updateUser(updateData, locale);
       clearUserStore();
       logout();
 
@@ -103,7 +104,7 @@ const UpdateProfileEmailForm = () => {
                       placeholder={t('e_mail_placeholder')}
                       autoComplete="off"
                       aria-invalid={Boolean(fieldState?.invalid)}
-                      disabled={!isInputEnabled}
+                      disabled={form.formState.isSubmitting || !isInputEnabled}
                     />
                     {Boolean(fieldState?.error) && (
                       <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">

@@ -103,7 +103,10 @@
       "number": "Добавьте цифру",
       "special": "Добавьте спецсимвол (!@#$%^&*)"
     },
-    "signupTitle": "Регистрация",
+    "signup_btn": "Зарегистрироваться",
+    "verification_token_expired": "Срок действия токена подтверждения истек",
+    "name_changed_success": "Имя успешно изменено",
+
     "signinTitle": "Вход",
     "forgotTitle": "Забыли пароль?",
     "passwordsDoNotMatch": "Пароли не совпадают",
@@ -142,6 +145,8 @@
       "success": "Успешно",
       "error": "Что-то пошло не так"
     },
+    "confirmation": "Подтвердить",
+    "invalid_email_or_password": "Неверный email или пароль",
     "user_not_found": "Такой почты не существует",
     "change_password_button": "Сменить",
     "account_deactivated": "Аккаунт удален",

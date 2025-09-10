@@ -78,6 +78,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(!!route.departure.stationCoordsLon && { fromStationLon: Number(route.departure.stationCoordsLon) }),
     toCountry: extractLocationDetails(route.departure.fromLocation, locale).countryName,
     toStationId: `${route.arrival.stationId}`,
+    ...(!!route.duration && { duration: route.duration }),
     toStationName: `${route.arrival.stationName}`,
     toTimezone: route.arrival.toLocation.timezone.zoneName,
     customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,

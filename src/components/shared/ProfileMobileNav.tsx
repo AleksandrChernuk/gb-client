@@ -29,12 +29,7 @@ const ProfileMobileNav = ({ namespace, items }: Props) => {
     <div className="tablet:hidden">
       <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            size={'primary'}
-            aria-label={t('my_account')}
-            className="text-slate-700 dark:text-slate-50"
-          >
+          <Button variant="secondary" size={'primary'} aria-label={t('my_account')} className="text-slate-700 ">
             {t('my_account')}
           </Button>
         </DropdownMenuTrigger>
@@ -45,7 +40,7 @@ const ProfileMobileNav = ({ namespace, items }: Props) => {
           <DropdownMenuSeparator className="bg-green-300" />
           {items.map((item) => (
             <DropdownMenuItem key={item.slug}>
-              <Link prefetch={false} href={item.slug} onClick={() => setIsOpenMenu(false)} className="text-base">
+              <Link href={item.slug} onClick={() => setIsOpenMenu(false)} className="text-base">
                 {t(item.title)}
               </Link>
             </DropdownMenuItem>

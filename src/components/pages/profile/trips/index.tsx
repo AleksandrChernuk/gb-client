@@ -1,14 +1,24 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
-import TripsList from './componets/TripsList';
+import CurrentTrips from './componets/CurrentTrips';
+import CompletedTrips from './componets/CompletedTrips';
 
 export default async function TripsPage() {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
-    <div>
-      <h1 className="mb-4">{t('trips_hystori')}</h1>
-      <TripsList />
-    </div>
+    <Tabs defaultValue="upcoming" className="w-full ">
+      <TabsList className="gap-4">
+        <TabsTrigger value="upcoming">{t('upcoming_trips')}</TabsTrigger>
+        <TabsTrigger value="all">{t('all_trips')}</TabsTrigger>
+      </TabsList>
+      <TabsContent value="upcoming">
+        <CurrentTrips />
+      </TabsContent>
+      <TabsContent value="all">
+        <CompletedTrips />
+      </TabsContent>
+    </Tabs>
   );
 }

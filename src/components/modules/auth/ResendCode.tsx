@@ -42,6 +42,7 @@ const ResendCode = ({ email, locale, type, className }: ResendCodeProps) => {
   return (
     <div className="w-full">
       <Button
+        type="button"
         variant={'outline'}
         size={'primary'}
         onClick={() => {

@@ -44,7 +44,7 @@ const Verify2FAForm = ({ email }: { email: string }) => {
       const { message, currentUser } = result;
 
       if (message !== 'Successfully signin' || !currentUser) {
-        toast.error(mapServerError(''));
+        toast.error(t(`${mapServerError('')}`));
         setIsLoading(false);
         form.reset();
         return;
@@ -52,15 +52,14 @@ const Verify2FAForm = ({ email }: { email: string }) => {
 
       useUserStore.getState().setUserStore(currentUser);
       form.reset();
-      setIsLoading(false);
       router.push(REDIRECT_PATHS.profile);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
+        toast.error(t(`${mapServerError(error.message)}`));
         form.reset();
         setIsLoading(false);
       } else {
-        toast.error(String(error));
+        toast.error(t(`${mapServerError('')}`));
         form.reset();
         setIsLoading(false);
       }
@@ -113,8 +112,17 @@ const Verify2FAForm = ({ email }: { email: string }) => {
           {email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}
 
           <div className="w-full">
-            <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('edit_email')}
+            <Button
+              type="submit"
+              disabled={form.formState.isSubmitting || isLoading}
+              variant={'default'}
+              size={'primary'}
+            >
+              {form.formState.isSubmitting || isLoading ? (
+                <LoaderCircle className="animate-spin" stroke="white" />
+              ) : (
+                t('confirmation')
+              )}
             </Button>
           </div>
         </div>

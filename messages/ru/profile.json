@@ -48,6 +48,11 @@
     "baggage_rules": "Правила провоза багажа",
     "refund_rules": "Правила возврата",
     "carrier_phone": "Телефон перевозчика",
-    "details": "Детальнее"
+    "details": "Детальнее",
+    "no_payments_find": "Платежей не найдено",
+    "all_trips": "Все поездки",
+    "upcoming_trips": "Будущие поездки",
+    "error_load_trips": "Произошла ошибка при загрузке",
+    "no_current_trips": "Нет поездок"
   }
 }

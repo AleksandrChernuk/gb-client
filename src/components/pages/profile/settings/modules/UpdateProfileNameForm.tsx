@@ -47,7 +47,7 @@ const UpdateProfileNameForm = () => {
         setUserStore({ ...currentUser!, userName: result.user.userName });
       }
       setIsInputEnabled(false);
-      toast.success('Имя успешно изменено');
+      toast.success(t('name_changed_success'));
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));

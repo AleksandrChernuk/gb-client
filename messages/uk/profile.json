@@ -49,6 +49,11 @@
     "bus_number": "Номер автобуса",
     "baggage_rules": "Правила перевезення багажу",
     "refund_rules": "Правила повернення",
-    "details": "Детальніше"
+    "details": "Детальніше",
+    "no_payments_find": "Платежів не знайдено",
+    "all_trips": "Усі поїздки",
+    "upcoming_trips": "Майбутні поїздки",
+    "error_load_trips": "Сталася помилка при завантаженні",
+    "no_current_trips": "Немає поїздок"
   }
 }

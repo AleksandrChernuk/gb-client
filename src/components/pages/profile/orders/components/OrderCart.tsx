@@ -68,7 +68,7 @@ const OrderCart = ({ item }: Props) => {
               <div className="flex flex-col justify-between gap-2 tablet:gap-3">
                 <div>
                   <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.fromCityName}</p>
-                  <p className={`${CLS.stationTextMobile} ${CLS.textMuted}`}>{item.fromStationName}</p>
+                  <p className={`${CLS.stationTextMobile} ${CLS.textMuted}`}>{item.fromStationAddress}</p>
                 </div>
 
                 <div className={`text-xs font-normal tracking-normal leading-[18px] ${CLS.textBase}`}>
@@ -78,7 +78,7 @@ const OrderCart = ({ item }: Props) => {
 
                 <div>
                   <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.toCityName}</p>
-                  <p className={`${CLS.stationTextMobile} ${CLS.textMuted}`}>{item.toStationName}</p>
+                  <p className={`${CLS.stationTextMobile} ${CLS.textMuted}`}>{item.toStationAddress}</p>
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@ const OrderCart = ({ item }: Props) => {
           <div className="hidden tablet:grid justify-between w-full grid-cols-3 gap-2">
             <div className="flex flex-col gap-1">
               <div className={`${CLS.cityTitleDesktop} ${CLS.textBase}`}>{item.fromCityName}</div>
-              <div className={`ttext-xs ${CLS.stationTextDesktop} ${CLS.textMuted}`}>{item.fromStationName}</div>
+              <div className={`ttext-xs ${CLS.stationTextDesktop} ${CLS.textMuted}`}>{item.fromStationAddress}</div>
             </div>
 
             <div className="flex items-center justify-center gap-1">
@@ -106,7 +106,7 @@ const OrderCart = ({ item }: Props) => {
 
             <div className="flex flex-col gap-1">
               <div className={`${CLS.cityTitleDesktop} ${CLS.textBase}`}>{item.toCityName}</div>
-              <div className={`${CLS.stationTextDesktop} ${CLS.textMuted}`}>{item.toStationName}</div>
+              <div className={`${CLS.stationTextDesktop} ${CLS.textMuted}`}>{item.toStationAddress}</div>
             </div>
           </div>
 

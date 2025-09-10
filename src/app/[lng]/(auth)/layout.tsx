@@ -3,12 +3,35 @@ export const revalidate = 0;
 
 import AuthHeader from '@/components/modules/header/AuthHeader';
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Params } from '@/types/common.types';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
-export async function generateMetadata() {
+type Props = {
+  params: Params;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  const t = await getTranslations({
+    locale: lng,
+    namespace: MESSAGE_FILES.METADATA,
+  });
+
   return {
+    title: t('auth.title'),
+    description: t('auth.description'),
+    keywords: t('auth.keywords'),
+
+    appleWebApp: {
+      title: 'GreenBus',
+      capable: true,
+      statusBarStyle: 'default',
+    },
+
+    manifest: '/manifest.json',
+
     robots: {
       index: false,
       follow: false,
@@ -21,6 +44,22 @@ export async function generateMetadata() {
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+
+    metadataBase: new URL('https://greenbus.com.ua'),
+
+    alternates: {
+      canonical: `/${lng}/signin`,
+      languages: {
+        'x-default': '/uk/signin',
+        uk: '/uk/signin',
+        en: '/en/signin',
+        ru: '/ru/signin',
+      },
+    },
+
+    openGraph: {
+      images: '/logo.png',
     },
   };
 }

@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { CircleAlert, LoaderCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
-// import FormError from '@/components/shared/FormError';
 import { signinSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
@@ -19,12 +18,15 @@ import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { useUserStore } from '@/store/useUser';
 import FormError from '@/components/shared/FormError';
 import { useRouter } from '@/i18n/routing';
+import { mapServerError } from '@/utils/mapServerError';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
   const locale = useLocale();
   const router = useRouter();
   const [errorSignin, setErrorSignin] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [isViewPassword, setIsViewPassword] = useState(false);
 
   const form = useForm<z.infer<typeof signinSchema>>({
@@ -33,42 +35,56 @@ const SigninForm = () => {
       email: '',
       password: '',
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const onSubmit = async (data: z.infer<typeof signinSchema>) => {
-    console.log('values', data);
+    setIsLoading(true);
+    setErrorSignin('');
     try {
       const result = await signin({ email: data.email, password: data.password }, locale);
 
       const { message, currentUser, error } = result;
 
       if (!!error) {
-        setErrorSignin(error);
+        setErrorSignin(t(`${mapServerError(error.message)}`));
+        setIsViewPassword(false);
+        setIsLoading(false);
         form.reset();
       }
 
       if (message === '2FA code sent') {
-        router.push(`${REDIRECT_PATHS.verify2FA}/${result.email}`);
+        router.push(`${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
+        setIsViewPassword(false);
+        setIsLoading(false);
         form.reset();
       }
 
       if (message === 'Verification code sent') {
-        router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`);
+        router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
+        setIsViewPassword(false);
+        setIsLoading(false);
         form.reset();
       }
 
       if (message === 'Successfully signin') {
         useUserStore.getState().setUserStore(currentUser);
+        setIsLoading(false);
+        setIsViewPassword(false);
 
         router.push(REDIRECT_PATHS.profile);
+        setIsLoading(false);
         form.reset();
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Signin failed:', JSON.stringify(error.message));
+        setIsViewPassword(false);
+        setIsLoading(false);
+        setErrorSignin(t(`${mapServerError(error.message)}`));
       } else {
-        console.error('Signin failed:', JSON.stringify(error));
+        setIsViewPassword(false);
+        setIsLoading(false);
+        setErrorSignin(t(`${mapServerError('')}`));
       }
     }
   };
@@ -87,7 +103,7 @@ const SigninForm = () => {
                   <div className="relative">
                     <Input
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={form.formState.isSubmitting || isLoading}
                       type="email"
                       placeholder="user@example.com"
                       aria-invalid={Boolean(fieldState?.invalid)}
@@ -114,13 +130,14 @@ const SigninForm = () => {
                   <div className="relative">
                     <Input
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={form.formState.isSubmitting || isLoading}
                       type={!isViewPassword ? 'password' : 'text'}
                       placeholder="******"
                       aria-invalid={Boolean(fieldState?.invalid)}
                       autoComplete="off"
                     />
                     <ViewPassword
+                      disabled={form.formState.isSubmitting || isLoading}
                       error={Boolean(fieldState?.error)}
                       isViewPassword={isViewPassword}
                       setIsViewPassword={() => setIsViewPassword((prev) => !prev)}
@@ -135,7 +152,7 @@ const SigninForm = () => {
 
         {errorSignin && <FormError message={errorSignin} />}
 
-        <Button type="submit" size={'primary'} disabled={form.formState.isSubmitting}>
+        <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isLoading}>
           {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
         </Button>
       </form>

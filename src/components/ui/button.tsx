@@ -20,16 +20,16 @@ const buttonVariants = cva(
         main: 'bg-green-600 hover:bg-green-600/80 text-base font-bold leading-6 tracking-normal text-black rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
       },
       size: {
-        default: 'h-8 px-4 py-2 has-[>svg]:px-3',
+        default: 'h-8 px-4 py-3 has-[>svg]:px-3',
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
         icon: '',
         secondary:
           'py-2 px-6 tablet:py-4 tablet:text-base font-bold leading-6 tracking-normal rounded-full min-w-[168px] min-h-[48px] tablet:max-h-[52px]',
         primary:
-          'w-full py-2 px-6  text-white rounded-full text-sm font-bold leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
+          'w-full py-3 px-6  text-white rounded-full text-sm font-bold leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
         samll_primary:
-          'w-full px-2 py-2 text-white rounded-full text-sm font-medium leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
+          'w-full px-2 py-3 text-white rounded-full text-sm font-medium leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
         mainSearch: 'h-auto px-6 py-4 tablet:min-w-[120px] laptop:min-w-[187px] laptop:max-w-[187px] grow-0',
       },
     },

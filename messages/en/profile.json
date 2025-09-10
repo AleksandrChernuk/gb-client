@@ -48,6 +48,11 @@
     "baggage_rules": "Baggage rules",
     "refund_rules": "Refund rules",
     "carrier_phone": "Carrier phone",
-    "details": "Details"
+    "details": "Details",
+    "no_payments_find": "No payments found",
+    "all_trips": "All trips",
+    "upcoming_trips": "Upcoming trips",
+    "error_load_trips": "An error occurred while loading",
+    "no_current_trips": "No trips"
   }
 }

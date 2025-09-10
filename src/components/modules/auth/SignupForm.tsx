@@ -18,6 +18,7 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { signup } from '@/actions/auth.service';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { useRouter } from '@/i18n/routing';
+import { mapServerError } from '@/utils/mapServerError';
 
 const SignupForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
@@ -37,20 +38,23 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (value: z.infer<typeof signupSchema>) => {
-    form.reset();
+    setIsPending(true);
+    setError('');
 
     try {
-      setIsPending(true);
       const result = await signup(value, locale);
-
-      router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`);
+      router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
       form.reset();
     } catch (error) {
       setIsPending(false);
       if (error instanceof Error) {
-        setError(`Signup failed: ${error.message}`);
+        setIsViewPassword(false);
+        form.reset();
+        setError(t(`${mapServerError(error.message)}`));
       } else {
-        setError(`Signup failed: ${String(error)}`);
+        setError(t(`${mapServerError('')}`));
+        setIsViewPassword(false);
+        form.reset();
       }
     }
   };
@@ -76,6 +80,7 @@ const SignupForm = () => {
                         placeholder={t('first_name_placeholder')}
                         autoComplete="off"
                         aria-invalid={Boolean(fieldState?.invalid)}
+                        disabled={isPending}
                       />
                       {Boolean(fieldState?.invalid) && (
                         <div className="absolute inset-y-0 flex items-center cursor-pointer pointer-events-none right-4">
@@ -106,6 +111,7 @@ const SignupForm = () => {
                       }}
                       type="email"
                       placeholder={t('e_mail_placeholder')}
+                      disabled={isPending}
                       autoComplete="off"
                       aria-invalid={Boolean(fieldState?.invalid)}
                     />
@@ -131,10 +137,12 @@ const SignupForm = () => {
                     <Input
                       {...field}
                       type={!isViewPassword ? 'password' : 'text'}
+                      disabled={isPending}
                       placeholder="******"
                       aria-invalid={Boolean(fieldState?.invalid)}
                     />
                     <ViewPassword
+                      disabled={isPending}
                       error={Boolean(fieldState?.error)}
                       isViewPassword={isViewPassword}
                       setIsViewPassword={() => setIsViewPassword((prev) => !prev)}
@@ -148,8 +156,8 @@ const SignupForm = () => {
         </div>
         <FormError message={error} />
 
-        <Button type="submit" size={'primary'}>
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signupTitle')}
+        <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isPending}>
+          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signup_btn')}
         </Button>
       </form>
     </Form>

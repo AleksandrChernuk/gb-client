@@ -5,6 +5,7 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { useUserStore } from '@/store/useUser';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -12,6 +13,7 @@ import { useFormContext } from 'react-hook-form';
 export default function Contacts() {
   const { control } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.FORM);
+  const { currentUser } = useUserStore();
 
   return (
     <div className="flex flex-col gap-4 tablet:flex-row">
@@ -23,7 +25,7 @@ export default function Contacts() {
             <FormItem>
               <FormLabel className="text-sm font-normal tracking-normal leading-[21px] mb-2">Email</FormLabel>
               <FormControl>
-                <Input {...field} type="email" placeholder="Email" />
+                <Input disabled={!!currentUser} {...field} type="email" placeholder="Email" />
               </FormControl>
               {Boolean(fieldState?.error) && <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>}
             </FormItem>

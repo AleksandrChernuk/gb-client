@@ -53,7 +53,6 @@ export default async function AuthCard({
               <p className="text-xs  font-bold tracking-normal leading-[16.8px]">{t('forgotTitle')}</p>
               <Button asChild variant={'link'}>
                 <Link
-                  prefetch={false}
                   className="text-xs font-normal tracking-normal leading-[16.8px]"
                   href={forgotButtonHref}
                   aria-label="go reset password page"
@@ -69,7 +68,6 @@ export default async function AuthCard({
             </p>
             <Button asChild variant={'link'}>
               <Link
-                prefetch={false}
                 href={backButtonHref}
                 className="text-xs font-normal tracking-normal leading-[16.8px]"
                 aria-label="go signup page"

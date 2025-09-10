@@ -17,6 +17,8 @@
     "discounts_placeholder": "Оберіть знижку зі списку",
     "document_type": "Тип документа",
     "document_type_placeholder": "Оберіть документ",
+    "confirmation": "Підтвердити",
+
     "document_type_infobus": {
       "unknown": "Невідомо",
       "passport": "Паспорт",
@@ -84,7 +86,10 @@
       "diplomatic_passport": "Дипломатичний паспорт",
       "student_id": "Студентський квиток"
     },
-    "signupTitle": "Створити акаунт",
+    "signup_btn": "Зареєструватися",
+    "verification_token_expired": "Термін дії токена підтвердження закінчився",
+    "name_changed_success": "Ім'я успішно змінено",
+
     "signinTitle": "Увійти в акаунт",
     "forgotTitle": "Забули пароль?",
     "password_validate": {
@@ -136,6 +141,7 @@
     "authCreateAccount": "Зареєструватися",
     "authLogin": "Увійти",
     "user_not_found": "Такої пошти не існує",
+    "invalid_email_or_password": "Невірний email або пароль",
     "account_deactivated": "Акаунт видалений",
     "oauth_password_not_settable": "Акаунт зареєстрований за допомогою Google",
     "default_error": "Сталася помилка. Спробуйте ще раз.",

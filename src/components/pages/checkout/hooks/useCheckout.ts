@@ -40,7 +40,7 @@ function useCheckout() {
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],
   );
-  console.log('user', user);
+
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
