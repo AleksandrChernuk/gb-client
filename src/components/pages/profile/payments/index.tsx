@@ -9,7 +9,6 @@ import PaymentsCard from './components/PaymentsCard';
 import { MainLoader } from '@/components/shared/MainLoader';
 import { isNoPaymentsError } from './helpers/isNoPaymentsError';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Container } from '@/components/shared/Container';
 
 const PaymentsPage = () => {
   const user = useUserStore((state) => state.currentUser);
@@ -49,7 +48,7 @@ const PaymentsPage = () => {
   const { customer, payments } = data.data;
 
   return (
-    <Container size="sm">
+    <div className="max-w-[960px]">
       <ul className="space-y-6 tablet:space-y-8">
         {payments.map((element) => (
           <li key={element.paymentId}>
@@ -57,7 +56,7 @@ const PaymentsPage = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </div>
   );
 };
 

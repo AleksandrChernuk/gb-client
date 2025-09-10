@@ -10,7 +10,6 @@ import TryAgain from '@/components/shared/TryAgain';
 import OrderCart from './components/OrderCart';
 import NoTripsFind from '@/components/shared/NoTripsFind';
 import { isNoTripsError } from './helpers/isNoTripsError';
-import { Container } from '@/components/shared/Container';
 
 const OrdersPage = () => {
   const user = useUserStore((state) => state.currentUser);
@@ -48,7 +47,7 @@ const OrdersPage = () => {
   }
 
   return (
-    <Container size="sm">
+    <div className="max-w-[960px]">
       <ul className="space-y-6 tablet:space-y-8">
         {data.data.map((element) => (
           <li key={element.orderId}>
@@ -56,7 +55,7 @@ const OrdersPage = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </div>
   );
 };
 

@@ -4,7 +4,6 @@ import { getCurrentTrips } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
 import { UserCurrentTripType } from '@/types/profile.trips';
 import { useLocale, useTranslations } from 'next-intl';
-import { Container } from '@/components/shared/Container';
 import { MainLoader } from '@/components/shared/MainLoader';
 import { TripCard } from './TripCard';
 import { useQuery } from '@tanstack/react-query';
@@ -44,7 +43,7 @@ const CurrentTrips = () => {
   }
 
   return (
-    <Container size="sm">
+    <div className="max-w-[960px]">
       <ul className="mt-4 space-y-6 tablet:space-y-8">
         {trips.map((trip) => (
           <li key={trip.myOrderId}>
@@ -52,7 +51,7 @@ const CurrentTrips = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </div>
   );
 };
 
