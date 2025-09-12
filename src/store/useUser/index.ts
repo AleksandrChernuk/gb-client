@@ -27,7 +27,7 @@ export const useUserStore = create<IUserStore>()(
       name: 'user-store',
       storage: {
         getItem: (name) => {
-          const item = localStorage.getItem(name);
+          const item = sessionStorage.getItem(name);
           if (!item) {
             return null;
           }
@@ -36,21 +36,21 @@ export const useUserStore = create<IUserStore>()(
             return JSON.parse(item) as StorageValue<IUserStore>;
           } catch (error) {
             console.warn(`[Storage] Failed to parse JSON for key: ${name}. Removing corrupted entry.`, error);
-            localStorage.removeItem(name);
+            sessionStorage.removeItem(name);
             return null;
           }
         },
 
         setItem: (name, value) => {
           try {
-            localStorage.setItem(name, JSON.stringify(value));
+            sessionStorage.setItem(name, JSON.stringify(value));
           } catch (error) {
             console.error(`[Storage] Failed to store item: ${name}`, error);
           }
         },
 
         removeItem: (name) => {
-          localStorage.removeItem(name);
+          sessionStorage.removeItem(name);
         },
       },
     },

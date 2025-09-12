@@ -1,7 +1,8 @@
 {
   "common": {
     "something_happend": "Щось сталося",
-    "BOOK": "Бронювання",
+    "BOOK": "Оплачено",
+
     "PAYMENT_AT_BOARDING": "Оплата при посадці",
     "RESERVE": "Резерв",
     "no_travel": "Немає доступних рейсів",
@@ -164,6 +165,12 @@
     },
     "manifest": {
       "name": "next-intl example"
-    }
+    },
+
+    "download_pdf": "Завантажити PDF",
+    "order": "Замовлення",
+    "open_pdf_link": "Посилання на квиток",
+    "error_occurred": "Сталася помилка",
+    "Payment is pending": "Оплата очікується"
   }
 }

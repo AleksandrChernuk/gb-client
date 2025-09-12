@@ -72,7 +72,6 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
 
               {/* Сетка с кнопками */}
               <div className={cn('grid grid-cols-1 gap-4 justify-center items-center', gridCols)}>
-                {/* PDF файл билета */}
                 {pdfBase64 && (
                   <Button asChild variant="outline" size="primary" className="text-black">
                     <a
@@ -86,7 +85,6 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
                   </Button>
                 )}
 
-                {/* Ссылки на заказы и билеты */}
                 {(orderLink || ticketLinks?.length) && (
                   <div className="flex flex-col gap-4">
                     {/* Ссылка на заказ */}
@@ -98,7 +96,6 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
                       </Button>
                     )}
 
-                    {/* Ссылки на билеты */}
                     {ticketLinks?.map((ticketLink, index) => (
                       <Button key={`ticket-${index}`} asChild variant="outline" size="primary" className="text-black">
                         <a
@@ -114,14 +111,12 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
                   </div>
                 )}
 
-                {/* Кнопка обновления для ожидающих платежей */}
                 {isPending && (
                   <div>
                     <RefreshButton />
                   </div>
                 )}
 
-                {/* Кнопка возврата домой */}
                 <div>
                   <Button asChild variant="secondary" size="primary" className="text-black">
                     <Link href="/" prefetch={false}>

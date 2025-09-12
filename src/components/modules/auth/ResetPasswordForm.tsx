@@ -98,7 +98,7 @@ export default function ResetPasswordForm() {
               )}
             />
           </div>
-          <div className="w-full  ">
+          <div className="w-full">
             <FormField
               control={form.control}
               name="code"
@@ -138,7 +138,7 @@ export default function ResetPasswordForm() {
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('edit_email')}
+              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('change_button')}
             </Button>
           </div>
         </div>

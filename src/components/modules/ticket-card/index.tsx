@@ -12,11 +12,11 @@ import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/store/useSearch';
 import SelectButton from './components/SelectButton';
 import TicketRoute from './components/TicketRoute';
-import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import TickedCard from './components/TickedCard';
 import { useTicketsDetails } from '@/store/useTicketsDetails';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
+import CarrierLabel from './components/CarrierLabel';
 
 type Props = {
   element: IRouteResponse;
@@ -82,15 +82,7 @@ export const TicketCard = ({ element }: Props) => {
           </div>
           <div className="w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-700 rounded-2xl relative my-4" />
           <div className="relative grid grid-cols-2 tablet:grid-cols-[1fr_1fr_1fr] items-center gap-2">
-            <div className="flex items-center gap-2 text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50 shrink grow-0 text-nowrap truncate ...">
-              <div className="w-[45px] h-[16px] tablet:w-[70px] tablet:h-[24px] grow-0">
-                <IconCarriersBus />
-              </div>
-
-              <span className="block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50">
-                {element.carrier.name || ''}
-              </span>
-            </div>
+            <CarrierLabel carrierName={element.carrier.name || 'Deafault'} />
 
             <div className="hidden justify-self-center tablet:flex items-center gap-0.5 tablet:order-3 tablet:justify-self-end">
               <span className="text-slate-400 dark:text-slate-200 text-xs font-normal tracking-normal leading-[18px]">

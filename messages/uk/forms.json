@@ -89,7 +89,9 @@
     "signup_btn": "Зареєструватися",
     "verification_token_expired": "Термін дії токена підтвердження закінчився",
     "name_changed_success": "Ім'я успішно змінено",
-
+    "login_btn": "Увійти",
+    "signupTitle": "Реєстрація",
+    "resetPasBtn": "Відновити",
     "signinTitle": "Увійти в акаунт",
     "forgotTitle": "Забули пароль?",
     "password_validate": {
@@ -147,12 +149,11 @@
     "default_error": "Сталася помилка. Спробуйте ще раз.",
     "otp_enter_code_and_new_password": "Введите 6-значный код, отправленный на вашу электронную почту, и новый пароль.",
     "code_validity": "Код дійсний протягом 5 хвилин і може бути використаний лише один раз.",
-    "edit_email": "Змінити",
     "resend_code": "Відправити код повторно",
     "sending": "Відправка...",
     "code_resent_success": "Код повторно надіслано ✅",
     "code_resent_error": "Сталася помилка. Спробуйте пізніше.",
     "enter_6_digit_code": "Введіть 6-значний код",
-    "change_password_button": "Змінити"
+    "change_button": "Змінити"
   }
 }

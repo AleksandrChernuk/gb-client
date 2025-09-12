@@ -13,6 +13,7 @@
     "no_reviews": "You haven’t left any reviews yet",
     "payments": "Payments",
     "orders": "Orders",
+    "orders_not_found": "Orders not found",
     "my_trips": "My Trips",
     "delete_account_confirm_title": "Are you sure you want to delete your account?",
     "delete_account_confirm_text": "This action is irreversible. Your account will be deactivated immediately and permanently deleted after 7 days.",

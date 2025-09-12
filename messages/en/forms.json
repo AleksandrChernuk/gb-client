@@ -8,6 +8,7 @@
     "new_email": "New email",
     "go_home": "Go to homepage",
     "suspicious_input": "Suspicious input",
+    "resetPasBtn": "Reset",
 
     "passwords_do_not_match": "Passwords do not match",
     "first_name": "First Name",
@@ -103,7 +104,7 @@
       "number": "Add at least one number",
       "special": "Add at least one special character (!@#$%^&*)"
     },
-    "signupTitle": "Log In",
+    "login_btn": "Log In",
     "signup_btn": "Sign Up",
     "forgotTitle": "Forgot your password?",
     "passwordsDoNotMatch": "Passwords don’t match",
@@ -120,7 +121,7 @@
     "close": "Close",
     "verification_token_expired": "Verification token expired",
     "name_changed_success": "Name changed successfully",
-
+    "signinTitle": "Login",
     "consent_text": "I agree with the <pp>Privacy Policy</pp>.",
     "authYouCan": "In your account you can:",
     "authActionsBuy": "Buy booked tickets",
@@ -147,12 +148,11 @@
     "default_error": "An error occurred. Please try again.",
     "otp_enter_code_and_new_password": "Enter the 6-digit code sent to your email and your new password.",
     "code_validity": "The code is valid for 5 minutes and can be used only once.",
-    "edit_email": "Edit",
+    "change_button": "Edit",
     "resend_code": "Resend code",
     "sending": "Sending...",
     "code_resent_success": "Code resent ✅",
     "code_resent_error": "An error occurred. Please try again later.",
-    "enter_6_digit_code": "Enter the 6-digit code",
-    "change_password_button": "Change"
+    "enter_6_digit_code": "Enter the 6-digit code"
   }
 }

@@ -5,7 +5,6 @@ import { verify2FA } from '@/actions/auth.service';
 import { useUserStore } from '@/store/useUser';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import ResendCode from '@/components/modules/auth/ResendCode';
-import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,7 +14,6 @@ import { useState } from 'react';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { FormErrorMassege } from '@/components/ui/form-error';
-import { LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
 import { useRouter } from '@/i18n/routing';
@@ -108,24 +106,7 @@ const Verify2FAForm = ({ email }: { email: string }) => {
             )}
           />
         </div>
-        <div className="flex flex-col tablet:flex-row gap-2">
-          {email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}
-
-          <div className="w-full">
-            <Button
-              type="submit"
-              disabled={form.formState.isSubmitting || isLoading}
-              variant={'default'}
-              size={'primary'}
-            >
-              {form.formState.isSubmitting || isLoading ? (
-                <LoaderCircle className="animate-spin" stroke="white" />
-              ) : (
-                t('confirmation')
-              )}
-            </Button>
-          </div>
-        </div>
+        <div className="w-full">{email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}</div>
       </form>
     </Form>
   );

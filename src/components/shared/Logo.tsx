@@ -13,7 +13,6 @@ export default function Logo() {
   return (
     <Link
       href={'/'}
-      prefetch={false}
       scroll
       className={`flex items-center font-mulish text-[26.838px] font-extrabold tracking-normal leading-normal tablet:text-[31.88px] tablet:leading-[33.68px] ${mullish.className}`}
     >

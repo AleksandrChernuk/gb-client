@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import AuthHeader from '@/components/modules/header/AuthHeader';
 import { Container } from '@/components/shared/Container';

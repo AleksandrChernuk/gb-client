@@ -169,7 +169,7 @@ export default function ChangePasswordForm() {
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('change_password_button')}
+              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('change_button')}
             </Button>
           </div>
         </div>

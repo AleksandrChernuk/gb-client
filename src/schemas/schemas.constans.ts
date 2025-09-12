@@ -28,7 +28,7 @@ export const passwordShema = z
   })
   .refine(isCleanInput, { message: 'suspicious_input' });
 
-export const emailShema = z.string().trim().min(1, { message: 'required' }).email('emailNotValid');
+export const emailShema = z.string().trim().min(1, { message: 'required' }).email('email_validate.emailNotValid');
 
 export const nameShema = z
   .string()

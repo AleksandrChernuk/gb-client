@@ -5,27 +5,24 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import { ReactElement } from 'react';
 
 type Props = {
   item: UserOrdersType;
+  tickets?: ReactElement;
 };
 
 const CLS = {
-  label: 'block text-xs tablet:text-sm font-medium text-slate-500 dark:text-slate-300',
+  label: 'block text-xs tablet:text-sm font-medium dark:text-green-100 text-green-300 mb-2',
   value: 'text-sm tablet:text-base font-medium text-slate-700 dark:text-slate-50 break-words',
   list: 'space-y-1 text-xs tablet:text-sm text-slate-700 dark:text-slate-50',
 };
 
-export default function OrderDetails({ item }: Props) {
+export default function OrderDetails({ item, tickets }: Props) {
   const t = useTranslations(MESSAGE_FILES.PROFILE);
 
   return (
     <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
-      <div>
-        <span className={CLS.label}>{t('order_number')}</span>
-        <span className={CLS.value}>{item.orderNumber.padStart(9, '0')}</span>
-      </div>
-
       {item.routeName && (
         <div>
           <span className={CLS.label}>{t('route')}</span>
@@ -114,6 +111,13 @@ export default function OrderDetails({ item }: Props) {
               <li key={idx}>{rule}</li>
             ))}
           </ul>
+        </div>
+      ) : null}
+
+      {!!tickets ? (
+        <div>
+          <span className={CLS.label}>{t('refund_rules')}</span>
+          <div className={CLS.list}>{tickets}</div>
         </div>
       ) : null}
     </div>

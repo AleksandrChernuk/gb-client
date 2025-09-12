@@ -1,7 +1,7 @@
 {
   "common": {
     "something_happend": "Что-то произошло",
-    "BOOK": "Бронирование",
+    "BOOK": "Оплачено",
     "PAYMENT_AT_BOARDING": "Оплата при посадке",
     "RESERVE": "Резерв",
     "twofa_title": "Двухэтапная верификация",
@@ -85,10 +85,7 @@
     "updatePasswordBtn": "Сохранить",
     "confirmPassword": "Подтвердите пароль",
     "date_picker_title": "Когда вы планируете ехать?",
-
     "sendResetCode": "Отправить код сброса",
-
-    "resetPasBtn": "Восстановить",
     "authYouCan": "В личном кабинете вы можете:",
     "authActionsBuy": "Купить забронированный билет",
     "authActionsReturn": "Вернуть билеты",
@@ -104,7 +101,6 @@
     "authEmail": "Электронная почта",
     "authPassword": "Пароль",
     "authOr": "Или",
-    "authDontHaveAccount": "Нет аккаунта?",
     "authAlreadyHaveAccount": "Уже есть аккаунт?",
     "authCreateAccount": "Создать аккаунт",
     "authLogin": "Войти",
@@ -164,6 +160,11 @@
     },
     "manifest": {
       "name": "next-intl example"
-    }
+    },
+    "download_pdf": "Скачать PDF",
+    "order": "Заказ",
+    "open_pdf_link": "Ссылка на билет",
+    "Payment is pending": "Платёж в ожидании",
+    "error_occurred": "Произошла ошибка"
   }
 }

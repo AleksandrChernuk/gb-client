@@ -153,7 +153,7 @@ const SigninForm = () => {
         {errorSignin && <FormError message={errorSignin} />}
 
         <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isLoading}>
-          {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signinTitle')}
+          {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('login_btn')}
         </Button>
       </form>
     </Form>

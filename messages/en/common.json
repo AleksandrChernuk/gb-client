@@ -1,7 +1,7 @@
 {
   "common": {
     "something_happend": "Something happend",
-    "BOOK": "Book",
+    "BOOK": "Paid",
     "PAYMENT_AT_BOARDING": "Payment at boarding",
     "RESERVE": "Reserve",
     "details": "Details",
@@ -85,7 +85,6 @@
     "updatePasswordBtn": "Save",
     "confirmPassword": "Confirm Password",
     "sendResetCode": "Send reset code",
-    "resetPasBtn": "Reset",
     "authYouCan": "In personal account you can:",
     "authActionsBuy": "Buy a reserved ticket",
     "authActionsReturn": "Return tickets",
@@ -101,14 +100,8 @@
     "authEmail": "Email",
     "authPassword": "Password",
     "authOr": "Or",
-    "authDontHaveAccount": "No account?",
     "authAlreadyHaveAccount": "Already have an account?",
     "authCreateAccount": "Create an account",
-    "authLogin": "Login",
-    "required": "Required field",
-    "emailRequired": "Email is required.",
-    "emailNotValid": "This is not a valid email.",
-    "passwordLength": "Password must be at least 6 characters long.",
     "shortHours": "h",
     "shortMinutes": "m",
     "selectButton": "Select",
@@ -161,6 +154,11 @@
     },
     "manifest": {
       "name": "next-intl example"
-    }
+    },
+    "download_pdf": "Download PDF",
+    "order": "Order",
+    "open_pdf_link": "Ticket link",
+    "Payment is pending": "Payment is pending",
+    "error_occurred": "An error occurred"
   }
 }
