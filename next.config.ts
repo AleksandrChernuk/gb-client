@@ -29,5 +29,5 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
 };
 
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+const withNextIntl = createNextIntlPlugin();
 export default withNextIntl(nextConfig);
