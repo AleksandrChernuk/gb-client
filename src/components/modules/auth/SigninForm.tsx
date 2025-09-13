@@ -56,7 +56,7 @@ const SigninForm = () => {
       }
 
       if (message === '2FA code sent') {
-        router.push(`${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
+        router.push(`/${locale}/${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
@@ -64,7 +64,7 @@ const SigninForm = () => {
       }
 
       if (message === 'Verification code sent') {
-        router.push(`${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
+        router.push(`/${locale}/${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
@@ -73,7 +73,7 @@ const SigninForm = () => {
 
       if (message === 'Successfully signin') {
         setUserStore(currentUser);
-        router.replace(REDIRECT_PATHS.profile);
+        router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
         return;
       }
 
