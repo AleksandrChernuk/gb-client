@@ -25,7 +25,7 @@ export const useUserStore = create<IUserStore>()(
     }),
     {
       name: 'user-store',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
       // storage: {
       //   getItem: (name) => {
       //     const item = sessionStorage.getItem(name);
