@@ -73,6 +73,7 @@ const SigninForm = () => {
       if (currentUser) {
         useUserStore.getState().setUserStore(currentUser);
         router.replace(REDIRECT_PATHS.profile);
+        console.log('router.replace(REDIRECT_PATHS.profile)');
         return;
       }
 
