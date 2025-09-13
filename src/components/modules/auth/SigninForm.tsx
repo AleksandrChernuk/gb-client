@@ -15,10 +15,10 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { signin } from '@/actions/auth.service';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useUserStore } from '@/store/useUser';
 import FormError from '@/components/shared/FormError';
-import { useRouter } from '@/i18n/routing';
 import { mapServerError } from '@/utils/mapServerError';
+import { useUserStore } from '@/store/useUser';
+import { useRouter } from 'next/navigation';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
@@ -26,6 +26,7 @@ const SigninForm = () => {
   const router = useRouter();
   const [errorSignin, setErrorSignin] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setUserStore } = useUserStore();
 
   const [isViewPassword, setIsViewPassword] = useState(false);
 
@@ -70,10 +71,9 @@ const SigninForm = () => {
         return;
       }
 
-      if (currentUser) {
-        useUserStore.getState().setUserStore(currentUser);
+      if (message === 'Successfully signin') {
+        setUserStore(currentUser);
         router.replace(REDIRECT_PATHS.profile);
-        console.log('router.replace(REDIRECT_PATHS.profile)');
         return;
       }
 
