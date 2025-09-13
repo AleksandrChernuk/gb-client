@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, StorageValue } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ICurrentUser {
   id: string;
@@ -25,34 +25,35 @@ export const useUserStore = create<IUserStore>()(
     }),
     {
       name: 'user-store',
-      storage: {
-        getItem: (name) => {
-          const item = sessionStorage.getItem(name);
-          if (!item) {
-            return null;
-          }
+      storage: createJSONStorage(() => sessionStorage),
+      // storage: {
+      //   getItem: (name) => {
+      //     const item = sessionStorage.getItem(name);
+      //     if (!item) {
+      //       return null;
+      //     }
 
-          try {
-            return JSON.parse(item) as StorageValue<IUserStore>;
-          } catch (error) {
-            console.warn(`[Storage] Failed to parse JSON for key: ${name}. Removing corrupted entry.`, error);
-            sessionStorage.removeItem(name);
-            return null;
-          }
-        },
+      //     try {
+      //       return JSON.parse(item) as StorageValue<IUserStore>;
+      //     } catch (error) {
+      //       console.warn(`[Storage] Failed to parse JSON for key: ${name}. Removing corrupted entry.`, error);
+      //       sessionStorage.removeItem(name);
+      //       return null;
+      //     }
+      //   },
 
-        setItem: (name, value) => {
-          try {
-            sessionStorage.setItem(name, JSON.stringify(value));
-          } catch (error) {
-            console.error(`[Storage] Failed to store item: ${name}`, error);
-          }
-        },
+      //   setItem: (name, value) => {
+      //     try {
+      //       sessionStorage.setItem(name, JSON.stringify(value));
+      //     } catch (error) {
+      //       console.error(`[Storage] Failed to store item: ${name}`, error);
+      //     }
+      //   },
 
-        removeItem: (name) => {
-          sessionStorage.removeItem(name);
-        },
-      },
+      //   removeItem: (name) => {
+      //     sessionStorage.removeItem(name);
+      //   },
+      // },
     },
   ),
 );

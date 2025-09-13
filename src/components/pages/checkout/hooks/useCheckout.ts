@@ -61,6 +61,7 @@ function useCheckout() {
       toast.error('no data');
       return;
     }
+
     try {
       setLoadingResult(true);
       const res = await createOrder(
@@ -70,7 +71,7 @@ function useCheckout() {
           locale,
           formData,
           route: ticket,
-          user,
+          user: user,
         }),
       );
 
