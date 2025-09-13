@@ -2,8 +2,6 @@ import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
 
-export default createMiddleware(routing);
-
 const intlMiddleware = createMiddleware(routing);
 
 const PROTECTED_PATHS = ['/profile', '/dashboard'];
@@ -64,7 +62,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(req.nextUrl, 302);
   }
 
-  return intlMiddleware(req);
+  return createMiddleware(routing)(req);
 }
 
 function redirectToSignin(req: NextRequest, locale: string) {
@@ -74,5 +72,5 @@ function redirectToSignin(req: NextRequest, locale: string) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|ru|uk)/:path*', '/((?!api|trpc|_next|_vercel|.*\\..*).*)'],
+  matcher: ['/', '/(en|uk|ru)/:path*'],
 };

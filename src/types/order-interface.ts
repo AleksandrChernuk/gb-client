@@ -94,7 +94,7 @@ export interface ITransfer {
   transferCity: string;
   transferStation?: string;
   stopDuration?: string;
-  arrivalDateTime?: string;
+  arrivalDateTime: string;
 }
 
 export interface IOrderResponse {

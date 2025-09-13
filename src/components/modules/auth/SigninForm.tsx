@@ -40,7 +40,7 @@ const SigninForm = () => {
 
   const onSubmit = async (data: z.infer<typeof signinSchema>) => {
     setIsLoading(true);
-    setErrorSignin('');
+    setErrorSignin(null);
     try {
       const result = await signin({ email: data.email, password: data.password }, locale);
 
@@ -51,6 +51,7 @@ const SigninForm = () => {
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
+        return;
       }
 
       if (message === '2FA code sent') {
@@ -58,6 +59,7 @@ const SigninForm = () => {
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
+        return;
       }
 
       if (message === 'Verification code sent') {
@@ -65,27 +67,23 @@ const SigninForm = () => {
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
+        return;
       }
 
-      if (message === 'Successfully signin') {
+      if (currentUser) {
         useUserStore.getState().setUserStore(currentUser);
-        setIsLoading(false);
-        setIsViewPassword(false);
+        router.replace(REDIRECT_PATHS.profile);
+        return;
+      }
 
-        router.push(REDIRECT_PATHS.profile);
-        setIsLoading(false);
-        form.reset();
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setIsViewPassword(false);
-        setIsLoading(false);
-        setErrorSignin(t(`${mapServerError(error.message)}`));
-      } else {
-        setIsViewPassword(false);
-        setIsLoading(false);
-        setErrorSignin(t(`${mapServerError('')}`));
-      }
+      setErrorSignin(t('error_occurred'));
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : '';
+      setErrorSignin(t(mapServerError(msg)));
+    } finally {
+      setIsViewPassword(false);
+      setIsLoading(false);
+      form.reset({ email: data.email, password: '' });
     }
   };
 
