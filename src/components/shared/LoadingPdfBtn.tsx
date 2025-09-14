@@ -13,10 +13,8 @@ type Props = {
 
 const base64ToBlob = (base64: string, contentType = 'application/pdf'): Blob => {
   try {
-    // Убираем префикс data:application/pdf;base64, если есть
     const cleanBase64 = base64.includes(',') ? base64.split(',')[1] : base64;
 
-    // Проверяем валидность base64
     if (!cleanBase64 || cleanBase64.length === 0) {
       throw new Error('Empty base64 string');
     }
@@ -35,20 +33,23 @@ const base64ToBlob = (base64: string, contentType = 'application/pdf'): Blob => 
   }
 };
 
+// Проверка на iOS Chrome
+const isIOSChrome = () => {
+  const userAgent = navigator.userAgent;
+  return /iPhone|iPad|iPod/.test(userAgent) && /CriOS/.test(userAgent);
+};
+
 const LoadingPdfBtn = ({ pdf, orderNumber }: Props) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  // Мемоизируем создание blob URL чтобы избежать пересоздания
   const downloadUrl = useMemo(() => {
     if (!pdf) return null;
 
     try {
-      // Если это уже готовый URL
       if (pdf.startsWith('http://') || pdf.startsWith('https://')) {
         return pdf;
       }
 
-      // Если это base64 данные
       if (pdf.startsWith('data:') || pdf.length > 100) {
         const blob = base64ToBlob(pdf);
         return URL.createObjectURL(blob);
@@ -69,17 +70,74 @@ const LoadingPdfBtn = ({ pdf, orderNumber }: Props) => {
         return;
       }
 
-      // Очищаем blob URL после небольшой задержки
+      // Специальная обработка для iOS Chrome
+      if (isIOSChrome()) {
+        e.preventDefault();
+
+        try {
+          const blob = base64ToBlob(pdf);
+          const fileName = `${t('order')}-${orderNumber}.pdf`;
+
+          // Используем современный File System Access API если доступен
+          if ('showSaveFilePicker' in window) {
+            (async () => {
+              try {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const fileHandle = await (window as any).showSaveFilePicker({
+                  suggestedName: fileName,
+                  types: [
+                    {
+                      description: 'PDF files',
+                      accept: {
+                        'application/pdf': ['.pdf'],
+                      },
+                    },
+                  ],
+                });
+                const writable = await fileHandle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              } catch (err) {
+                console.log('Save picker cancelled or failed');
+              }
+            })();
+          } else {
+            // Fallback: создаем временную ссылку и кликаем по ней
+            const tempLink = document.createElement('a');
+            tempLink.href = downloadUrl;
+            tempLink.download = fileName;
+            tempLink.style.display = 'none';
+
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+
+            // Очищаем URL через небольшую задержку
+            setTimeout(() => {
+              if (downloadUrl.startsWith('blob:')) {
+                URL.revokeObjectURL(downloadUrl);
+              }
+            }, 100);
+          }
+        } catch (error) {
+          console.error('Download failed:', error);
+          alert('Ошибка при скачивании файла');
+        }
+
+        return;
+      }
+
+      // Для всех остальных браузеров - обычное поведение
       if (downloadUrl.startsWith('blob:')) {
         setTimeout(() => {
           URL.revokeObjectURL(downloadUrl);
         }, 1000);
       }
     },
-    [downloadUrl],
+    [downloadUrl, pdf, orderNumber, t],
   );
 
-  // Если нет PDF данных
   if (!pdf || !downloadUrl) {
     return (
       <Button variant={'outline'} size={'primary'} disabled className="text-slate-400">
@@ -90,18 +148,27 @@ const LoadingPdfBtn = ({ pdf, orderNumber }: Props) => {
   }
 
   return (
-    <Button asChild variant={'outline'} size={'primary'} className="text-slate-800 dark:text-slate-50">
-      <a
-        href={downloadUrl}
-        download={`${t('order')}-${orderNumber}.pdf`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2"
-        onClick={handleDownload}
-      >
-        <FileDown className="dark:stroke-green-100 stroke-green-300 size-5" />
-        {t('download_pdf')}
-      </a>
+    <Button asChild={!isIOSChrome()} variant={'outline'} size={'primary'} className="text-slate-800 dark:text-slate-50">
+      {isIOSChrome() ? (
+        // Для iOS Chrome - обычная кнопка с обработчиком
+        <button type="button" className="flex items-center gap-2" onClick={handleDownload}>
+          <FileDown className="dark:stroke-green-100 stroke-green-300 size-5" />
+          {t('download_pdf')}
+        </button>
+      ) : (
+        // Для всех остальных - обычная ссылка
+        <a
+          href={downloadUrl}
+          download={`${t('order')}-${orderNumber}.pdf`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2"
+          onClick={handleDownload}
+        >
+          <FileDown className="dark:stroke-green-100 stroke-green-300 size-5" />
+          {t('download_pdf')}
+        </a>
+      )}
     </Button>
   );
 };
