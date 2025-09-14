@@ -7,7 +7,7 @@ import { ILocation } from '@/types/location.types';
 import { TcityKey } from '@/store/useSearch/types';
 import { IconSwap } from '@/assets/icons/IconSwap';
 import { NotFoundCity } from './NotFoundCity';
-import { MainLoader } from '@/components/shared/MainLoader';
+import MainLoader from '@/components/shared/MainLoader';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 

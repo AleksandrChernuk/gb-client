@@ -4,53 +4,57 @@ import { getCurrentTrips } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
 import { UserCurrentTripType } from '@/types/profile.trips';
 import { useLocale, useTranslations } from 'next-intl';
-import { MainLoader } from '@/components/shared/MainLoader';
-import { TripCard } from './TripCard';
+import { TripCard } from '../modules/TripCard';
 import { useQuery } from '@tanstack/react-query';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { SkeletonCards } from '@/components/shared/SkeletonCards';
 
 const CurrentTrips = () => {
+  const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
-  const { currentUser } = useUserStore();
   const t = useTranslations(MESSAGE_FILES.PROFILE);
 
   const { data, isLoading, isFetching, isError } = useQuery<UserCurrentTripType[]>({
-    queryKey: ['current-trips', currentUser?.id, locale],
-    queryFn: () => getCurrentTrips(currentUser!.id, locale),
-    enabled: Boolean(currentUser?.id),
+    queryKey: ['current-trips', user?.id, locale],
+    queryFn: () => getCurrentTrips(user!.id, locale),
+    enabled: Boolean(user?.id),
     staleTime: 60_000,
     retry: false,
   });
 
-  if (!currentUser?.id || isLoading || isFetching) {
+  if (!user?.id || isLoading || isFetching) {
     return (
-      <div className="mt-4">
-        <MainLoader />
+      <div className="container mx-auto max-w-[805px] py-6">
+        <SkeletonCards items={1} />
       </div>
     );
   }
 
   if (isError) {
-    return <strong className="mt-4 block text-center text-red-500">{t('error_load_trips')}</strong>;
+    return (
+      <div className="container mx-auto max-w-[805px] py-6">
+        <strong className="block text-center text-red-500">{t('error_load_trips')}</strong>
+      </div>
+    );
   }
 
   const trips = data ?? [];
 
   if (trips.length === 0) {
     return (
-      <strong className="mt-4 block text-center text-slate-500 dark:text-slate-400">{t('error_load_trips')}</strong>
+      <div className="container mx-auto max-w-[805px] py-6">
+        <strong className="block text-center text-slate-500 dark:text-slate-400">{t('error_load_trips')}</strong>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-[960px]">
-      <ul className="mt-4 space-y-6 tablet:space-y-8">
+    <div className="container mx-auto max-w-[805px] py-6">
+      <div className="space-y-8">
         {trips.map((trip) => (
-          <li key={trip.myOrderId}>
-            <TripCard item={trip} />
-          </li>
+          <TripCard item={trip} key={trip.myOrderId} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

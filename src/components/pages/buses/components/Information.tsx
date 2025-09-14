@@ -1,6 +1,6 @@
 'use client';
 
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { format, toDate } from 'date-fns';
 import { useShallow } from 'zustand/react/shallow';
 import { Skeleton } from '@/components/ui/skeleton';

@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export const MainSearchSkeleton = () => {
+const MainSearchSkeleton = () => {
   return (
     <div className="relative flex flex-col overflow-hidden bg-white shadow-xs tablet:flex-row rounded-2xl dark:bg-slate-800">
       <div className="flex flex-col tablet:flex-row tablet:items-center p-4 tablet:px-4 tablet:py-3 tablet:gap-[25px] laptop:gap-10 w-full">
@@ -19,3 +19,5 @@ export const MainSearchSkeleton = () => {
     </div>
   );
 };
+
+export default MainSearchSkeleton;

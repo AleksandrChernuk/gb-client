@@ -1,6 +1,6 @@
 'use client';
 
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { faqConstans } from '@/constans/faq.constans';
 import { MESSAGE_FILES } from '@/config/message.file.constans';

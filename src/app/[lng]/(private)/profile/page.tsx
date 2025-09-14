@@ -6,10 +6,10 @@ const UserProfile = async () => {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
-    <div>
+    <>
       <h1 className="mb-4">{t('settings')}</h1>
       <ProfileSettingsPage />
-    </div>
+    </>
   );
 };
 

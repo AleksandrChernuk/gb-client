@@ -129,7 +129,7 @@ const Booking = memo(function Booking() {
                 <Button
                   disabled={selectedSeats === 0}
                   type="button"
-                  size={'samll_primary'}
+                  size={'small_primary'}
                   className="w-full px-5 py-3 text-sm font-bold tracking-normal leading-[16.8px]"
                   variant={'default'}
                 >

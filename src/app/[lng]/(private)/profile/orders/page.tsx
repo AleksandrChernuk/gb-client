@@ -6,10 +6,10 @@ const Orders = async () => {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
-    <div>
+    <>
       <h1 className="mb-4">{t('orders')}</h1>
       <OrdersPage />
-    </div>
+    </>
   );
 };
 

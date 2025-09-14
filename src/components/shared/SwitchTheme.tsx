@@ -5,7 +5,7 @@ import { useLayoutEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import { Switch } from '../ui/switch-theme';
 
-export const SwitchTheme = () => {
+const SwitchTheme = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -28,3 +28,5 @@ export const SwitchTheme = () => {
     <Switch checked={checked} onCheckedChange={handleChecked} />
   );
 };
+
+export default SwitchTheme;

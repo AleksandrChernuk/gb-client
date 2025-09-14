@@ -1,7 +1,7 @@
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import CooperationForm from '@/components/modules/cooperation-form';
 import BackRouteButton from '@/components/shared/BackRouteButton';
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { joinUsAgents } from '@/constans/join.us.agents.constans';
 import Image from 'next/image';
 import { Container } from '@/components/shared/Container';

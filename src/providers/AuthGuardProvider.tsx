@@ -6,15 +6,12 @@ import AuthHeader from '@/components/modules/header/AuthHeader';
 import { BusLoader } from '@/components/shared/BusLoader';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { usePathname, useRouter } from 'next/navigation';
-import { useUserStore } from '@/store/useUser';
-import { logout } from '@/actions/auth.service';
 
 type ValidateResp = { authenticated: boolean };
 
 export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const router = useRouter();
-  const { currentUser, clearUserStore } = useUserStore();
   const pathname = usePathname();
   const ranRef = useRef(false);
 
@@ -64,16 +61,8 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    if (!currentUser) {
-      logout().then(() => {
-        clearUserStore();
-        router.replace(`/${getLocale()}/${REDIRECT_PATHS.signin}`);
-      });
-      return;
-    }
-
     checkAndRefresh();
-  }, [router, pathname, currentUser, clearUserStore]);
+  }, [router, pathname]);
 
   if (!ready)
     return (

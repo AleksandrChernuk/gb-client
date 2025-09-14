@@ -2,7 +2,7 @@
 
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import Logo from '@/components/shared/Logo';
-import { SwitchTheme } from '@/components/shared/SwitchTheme';
+import SwitchTheme from '@/components/shared/SwitchTheme';
 import { Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
@@ -17,9 +17,9 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-import SelectLocale from '@/components/shared/LanguageChanger';
+import SelectLocale from '@/components/shared/SelectLocale';
 import { ProfileLink } from '@/components/shared/ProfileLink';
-import { Support } from '@/components/shared/Support';
+import Support from '@/components/shared/Support';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export const MobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {

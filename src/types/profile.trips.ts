@@ -9,7 +9,11 @@ export type UserCurrentTripType = {
   fromTimezone: string | null;
   toCityName: string;
   toCountry: string;
-  toStationName: string;
+  toStationName?: string;
+  fromCityId?: string;
+  toCityId?: string;
+  fromStationId?: string;
+  toStationId?: string;
   toStationAddress: string | null;
   toStationLat: number | null;
   toStationLon: number | null;

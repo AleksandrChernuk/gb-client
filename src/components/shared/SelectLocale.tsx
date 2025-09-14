@@ -15,7 +15,7 @@ type Props = {
   variant: 'mobile' | 'desktop';
 };
 
-export default function SelectLocale({ variant }: Props) {
+const SelectLocale = ({ variant }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -105,4 +105,6 @@ export default function SelectLocale({ variant }: Props) {
     default:
       return null;
   }
-}
+};
+
+export default SelectLocale;

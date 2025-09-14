@@ -15,7 +15,6 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { signin } from '@/actions/auth.service';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import FormError from '@/components/shared/FormError';
 import { mapServerError } from '@/utils/mapServerError';
 import { useUserStore } from '@/store/useUser';
 import { useRouter } from 'next/navigation';
@@ -149,7 +148,7 @@ const SigninForm = () => {
           />
         </div>
 
-        {errorSignin && <FormError message={errorSignin} />}
+        {errorSignin && <div>{errorSignin}</div>}
 
         <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isLoading}>
           {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('login_btn')}

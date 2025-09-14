@@ -52,7 +52,7 @@
     "details": "Детальнее",
     "no_payments_find": "Платежей не найдено",
     "all_trips": "Все поездки",
-    "upcoming_trips": "Будущие поездки",
+    "upcoming_trips": "Запланированные поездки",
     "error_load_trips": "Произошла ошибка при загрузке",
     "no_current_trips": "Нет поездок"
   }

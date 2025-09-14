@@ -13,7 +13,7 @@ type Props = {
   }[];
 };
 
-export default async function FooterLinksList({ navLinks, className }: Props) {
+const FooterLinksList = async ({ navLinks, className }: Props) => {
   const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
@@ -39,4 +39,6 @@ export default async function FooterLinksList({ navLinks, className }: Props) {
       )}
     </ul>
   );
-}
+};
+
+export default FooterLinksList;

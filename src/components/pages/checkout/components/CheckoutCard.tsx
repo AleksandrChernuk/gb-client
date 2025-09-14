@@ -1,4 +1,4 @@
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { ReactNode } from 'react';
 import StepNumber from './StepNumber';
 

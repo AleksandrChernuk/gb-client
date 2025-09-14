@@ -1,4 +1,4 @@
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { Link } from '@/i18n/routing';
 
 type Props = {

@@ -15,7 +15,7 @@ type Props = {
   footer: ReactNode;
 };
 
-export default function CustomDialog({ isOpen, title, description, footer }: Props) {
+const CustomDialog = ({ isOpen, title, description, footer }: Props) => {
   return (
     <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[512px] mx-auto px-5 rounded-2xl">
@@ -31,4 +31,6 @@ export default function CustomDialog({ isOpen, title, description, footer }: Pro
       </DialogContent>
     </Dialog>
   );
-}
+};
+
+export default CustomDialog;

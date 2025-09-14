@@ -12,7 +12,7 @@ const TicketLinkBtn = ({ href }: Props) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <Button asChild variant={'outline'} size={'primary'}>
+    <Button asChild variant={'outline'} size={'primary'} className="text-slate-800 dark:text-slate-50">
       <a href={href} target="_blank" rel="noopener noreferrer">
         {t('open_pdf_link')}
       </a>

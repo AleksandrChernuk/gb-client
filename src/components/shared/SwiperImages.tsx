@@ -18,7 +18,7 @@ type Props = {
   spaceBetween: number;
 };
 
-export default function SwiperImages({ items }: Props) {
+const SwiperImages = ({ items }: Props) => {
   return (
     <div className="flex items-center justify-center w-full h-[320px] mt-2">
       <Swiper
@@ -48,4 +48,6 @@ export default function SwiperImages({ items }: Props) {
       </Swiper>
     </div>
   );
-}
+};
+
+export default SwiperImages;

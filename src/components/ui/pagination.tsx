@@ -40,6 +40,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
           variant: isActive ? 'outline' : 'ghost',
           size,
         }),
+        `${isActive && 'text-green-300 dark:text-green-200 border-green-300 dark:border-green-200 hover:border-green-400 active:border-green-200/80 transition-colors duration-75'}`,
         className,
       )}
       {...props}
@@ -50,8 +51,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink aria-label="Go to previous page" className={cn('gap-1 px-2.5 sm:pl-2.5', className)} {...props}>
-      <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+      <ChevronLeftIcon className="stroke-green-300 dark:stroke-green-200" />
     </PaginationLink>
   );
 }
@@ -64,8 +64,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
       className={cn('gap-1 px-2.5 sm:pr-2.5', className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+      <ChevronRightIcon className="stroke-green-300 dark:stroke-green-200" />
     </PaginationLink>
   );
 }

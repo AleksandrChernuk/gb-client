@@ -11,21 +11,19 @@ import { format } from 'date-fns';
 import CarrierLabel from '@/components/modules/ticket-card/components/CarrierLabel';
 import { useQuery } from '@tanstack/react-query';
 import { getOrderStatusAndPdf } from '@/actions/orders.actions';
-import { MainLoader } from '@/components/shared/MainLoader';
+import MainLoader from '@/components/shared/MainLoader';
 import LoadingPdfBtn from '@/components/shared/LoadingPdfBtn';
 import TicketLinkBtn from '@/components/shared/TicketLinkBtn';
 import OrderDetails from './OrderDetails';
 
 const CLS = {
-  card: 'border border-slate-50 dark:border-slate-700 p-4 bg-white shadow-xs tablet:p-4 dark:bg-slate-800 rounded-2xl',
+  card: 'border border-slate-50 dark:border-slate-700 p-4 tablet:p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-xs',
   textBase: 'text-slate-700 dark:text-slate-50',
   textMuted: 'text-slate-400 dark:text-slate-200',
 
-  badgeRight: 'text:xs tablet:text-base font-bold text-green-300 text-right mb-4',
-  cityTitleMobile: 'text-sm font-bold tracking-normal tablet:text-xl laptop:text-2xl tablet:leading-6',
-
-  stationTextMobile: 'text-xs leading-[18px] tablet:text-sm font-normal tablet:leading-4 tracking-normal',
-  stationTextDesktop: 'text-xs leading-[18px] tablet:text-sm font-normal tablet:leading-4 tracking-normal',
+  cityTitleMobile: 'text-sm tablet:text-xl laptop:text-2xl font-bold tracking-normal tablet:leading-6',
+  stationTextMobile: 'text-xs tablet:text-sm font-normal tracking-normal leading-[18px] tablet:leading-4',
+  stationTextDesktop: 'text-xs tablet:text-sm font-normal tracking-normal leading-[18px] tablet:leading-4',
 
   price: 'text-xl tablet:text-2xl font-medium tracking-normal',
   currency: 'text-xs ml-[2px]',
@@ -35,8 +33,9 @@ const CLS = {
   carrierWrap: 'flex items-center gap-1',
   carrierName: 'block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all',
 
-  detailsBtn: 'items-center justify-center p-2 text-xs font-bold underline dark:text-green-100 text-green-300',
+  detailsBtn: 'items-center justify-center p-2 text-xs font-bold underline text-green-300 dark:text-green-100',
 
+  // плавное сворачивание контента
   collapse: 'overflow-hidden transition-all duration-300 ease-in-out',
   collapseOpen: 'max-h-[4000px] opacity-100',
   collapseClosed: 'max-h-0 opacity-0',
@@ -64,98 +63,96 @@ const OrderCart = ({ item }: Props) => {
 
   const { data, isLoading, isFetching, isError, error } = useQuery({
     queryKey: ['order-status-and-pdf', orderId],
-    queryFn: async () => {
-      return await getOrderStatusAndPdf(orderId || '');
-    },
+    queryFn: async () => getOrderStatusAndPdf(orderId || ''),
     enabled: !!orderId && isOpen,
   });
 
-  console.log(data);
+  const sectionId = `order-details-${item.orderId}`;
 
   return (
     <div className={CLS.card}>
-      <div className="flex items-center justify-between gap-1">
-        <div className="text-base tablet:text-xl dark:text-green-100 text-green-300">
+      {/* верхняя строка: номер + дата */}
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="text-green-300 dark:text-green-100 text-base tablet:text-xl">
           № {item.orderNumber.padStart(9, '0')}
         </div>
         <div className="flex items-center gap-2">
-          <CalendarArrowDown className="dark:stroke-green-100 stroke-green-300 size-5" />
-          <div className={` ${CLS.textBase}`}>{format(item.departureDateTime || new Date(), 'dd.MM.yy')}</div>
+          <CalendarArrowDown className="size-5 stroke-current text-green-300 dark:text-green-100" />
+          <div className={CLS.textBase}>{format(item.departureDateTime || new Date(), 'dd.MM.yy')}</div>
         </div>
       </div>
 
-      <div className={'w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-700 rounded-2xl relative my-4'} />
+      {/* разделитель */}
+      <div className="border-t border-[#e6e6e6] dark:border-slate-700 my-4" />
 
-      <div>
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <div>
-              <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.fromCityName}</p>
-            </div>
-            <LuRoute className="dark:stroke-green-100 stroke-green-300 " />
-            <div>
-              <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.toCityName}</p>
-            </div>
-          </div>
-
-          <div className={`${CLS.price} ${CLS.textBase}`}>
-            {item.totalPrice}
-            <span className={CLS.currency}>{item.currency}</span>
-          </div>
+      {/* маршрут + цена */}
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.fromCityName}</p>
+          <LuRoute aria-hidden className="shrink-0 text-green-300 dark:text-green-100" />
+          <p className={`${CLS.cityTitleMobile} ${CLS.textBase}`}>{item.toCityName}</p>
         </div>
 
-        <div className={'w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-700 rounded-2xl relative my-4'} />
+        <div className={`${CLS.price} ${CLS.textBase}`}>
+          {item.totalPrice}
+          <span className={CLS.currency}>{item.currency}</span>
+        </div>
+      </div>
 
-        <div className="flex items-center justify-between">
-          <CarrierLabel carrierName={item.carrierName || 'Deafault'} />
+      {/* разделитель */}
+      <div className="border-t border-[#e6e6e6] dark:border-slate-700 my-4" />
 
-          <div>
-            <Button
-              variant="link"
-              className={CLS.detailsBtn}
-              onClick={() => {
-                setIsOpen((p) => !p);
-                setOrderId(item.orderId);
-              }}
-            >
-              {t('details')}
-            </Button>
+      {/* перевозчик + кнопка деталей */}
+      <div className="flex items-center justify-between gap-2">
+        <CarrierLabel carrierName={item.carrierName || 'Deafault'} />
+
+        <Button
+          variant="link"
+          className={CLS.detailsBtn}
+          aria-expanded={isOpen}
+          aria-controls={sectionId}
+          disabled={isFetching}
+          onClick={() => {
+            setIsOpen((p) => !p);
+            setOrderId(item.orderId);
+          }}
+        >
+          {t('details')}
+        </Button>
+      </div>
+
+      {/* детали/билеты */}
+      <div id={sectionId} className={`${CLS.collapse} ${isOpen ? CLS.collapseOpen : CLS.collapseClosed}`}>
+        {isOpen && (
+          <div className="mt-4">
+            <OrderDetails
+              item={item}
+              tickets={
+                <>
+                  {(isError || error) && <div className="text-red-500 text-sm">{t(parseErrorKey(error.message))}</div>}
+
+                  {(isFetching || isLoading) && <MainLoader />}
+
+                  {data?.pdf && (
+                    <div>
+                      <LoadingPdfBtn pdf={data.pdf} orderNumber={item.orderNumber.padStart(9, '0')} />
+                    </div>
+                  )}
+
+                  {data?.ticketLinks && (
+                    <div className="space-y-2">
+                      {data.ticketLinks.map((e) => (
+                        <div key={e}>
+                          <TicketLinkBtn href={e} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
+              }
+            />
           </div>
-        </div>
-
-        <div>
-          {isOpen && (
-            <div className="mt-4">
-              <OrderDetails
-                item={item}
-                tickets={
-                  <>
-                    {(isError || error) && (
-                      <div className="text-red-500 text-sm">{t(parseErrorKey(error.message))}</div>
-                    )}
-
-                    {(isFetching || isLoading) && <MainLoader />}
-
-                    {data?.pdf && (
-                      <div>
-                        <LoadingPdfBtn pdf={data.pdf} orderNumber={item.orderNumber.padStart(9, '0')} />
-                      </div>
-                    )}
-                    {data?.ticketLinks && (
-                      <div>
-                        {data?.ticketLinks.map((e) => (
-                          <div key={e}>
-                            <TicketLinkBtn href={e} />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                }
-              />
-            </div>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

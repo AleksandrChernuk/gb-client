@@ -62,7 +62,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(req.nextUrl, 302);
   }
 
-  return createMiddleware(routing)(req);
+  return intlMiddleware(req);
 }
 
 function redirectToSignin(req: NextRequest, locale: string) {
@@ -72,5 +72,5 @@ function redirectToSignin(req: NextRequest, locale: string) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|uk|ru)/:path*'],
+  matcher: ['/', '/(en|uk|ru)(/.*)?', '/profile/:path*', '/dashboard/:path*'],
 };

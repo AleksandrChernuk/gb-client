@@ -1,4 +1,4 @@
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import Image from 'next/image';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 

@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-export default function LogOutProfileBtn() {
+const LogOutProfileBtn = () => {
   const t = useTranslations(MESSAGE_FILES.PROFILE);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
 
@@ -45,4 +45,6 @@ export default function LogOutProfileBtn() {
       </Button>
     </div>
   );
-}
+};
+
+export default LogOutProfileBtn;

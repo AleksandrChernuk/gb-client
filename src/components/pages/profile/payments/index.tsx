@@ -6,7 +6,7 @@ import { IUserPaymentsResponse } from '@/types/payments.Info.types';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale, useTranslations } from 'next-intl';
 import PaymentsCard from './components/PaymentsCard';
-import { MainLoader } from '@/components/shared/MainLoader';
+import MainLoader from '@/components/shared/MainLoader';
 import { isNoPaymentsError } from './helpers/isNoPaymentsError';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 

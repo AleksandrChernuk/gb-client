@@ -9,7 +9,7 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 import DetailsList from '../components/DetailsList';
 import DetailsItem from '../components/DetailsItem';
 import { toArray } from '@/utils/toArray';
-import { MainLoader } from '@/components/shared/MainLoader';
+import MainLoader from '@/components/shared/MainLoader';
 import SwiperImages from '@/components/shared/SwiperImages';
 import useDateLocale from '@/hooks/useDateLocale';
 import { useTicketsDetails } from '@/store/useTicketsDetails';

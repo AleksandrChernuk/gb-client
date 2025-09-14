@@ -1,8 +1,8 @@
 import { Container } from '@/components/shared/Container';
-import SelectLocale from '@/components/shared/LanguageChanger';
+import SelectLocale from '@/components/shared/SelectLocale';
 import Logo from '@/components/shared/Logo';
-import { Support } from '@/components/shared/Support';
-import { SwitchTheme } from '@/components/shared/SwitchTheme';
+import Support from '@/components/shared/Support';
+import SwitchTheme from '@/components/shared/SwitchTheme';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
 import { Suspense } from 'react';
 

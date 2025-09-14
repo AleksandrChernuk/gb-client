@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { CircleAlert, LoaderCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import ViewPassword from '@/components/shared/ViewPassword';
-import FormError from '@/components/shared/FormError';
 import { signupSchema } from '@/schemas/auth.schema';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
@@ -154,7 +153,8 @@ const SignupForm = () => {
             )}
           />
         </div>
-        <FormError message={error} />
+
+        {!!error && <div>{error}</div>}
 
         <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isPending}>
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signup_btn')}

@@ -14,7 +14,7 @@ type Props = {
   variant: 'mobile' | 'desktop' | 'footer';
 };
 
-export const Support = ({ variant }: Props) => {
+const Support = ({ variant }: Props) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   switch (variant) {
@@ -134,3 +134,5 @@ export const Support = ({ variant }: Props) => {
       return null;
   }
 };
+
+export default Support;

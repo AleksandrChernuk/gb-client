@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import Image from 'next/image';
 import Link from 'next/link';
 

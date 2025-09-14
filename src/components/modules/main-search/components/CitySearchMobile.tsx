@@ -1,4 +1,4 @@
-import { MainLoader } from '@/components/shared/MainLoader';
+import MainLoader from '@/components/shared/MainLoader';
 import { TcityKey } from '@/store/useSearch/types';
 import { ILocation } from '@/types/location.types';
 import { RefObject } from 'react';

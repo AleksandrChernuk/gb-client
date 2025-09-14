@@ -19,7 +19,7 @@ export default async function RootLayout({
   setRequestLocale(lng as Locale);
 
   return (
-    <div className="flex flex-col h-svh">
+    <div className="flex flex-col min-h-svh supports-[min-height:100dvh]:min-h-dvh">
       <MainHeader />
       {children}
     </div>

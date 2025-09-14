@@ -7,7 +7,7 @@ const MainSearchForm = dynamic(() => import('./modules/MainSearchForm'), {
   ssr: false,
 });
 
-import { MainSearchSkeleton } from '@/components/shared/MainSearchSkeleton';
+import MainSearchSkeleton from '@/components/shared/MainSearchSkeleton';
 
 export default function MainSearch() {
   return <MainSearchForm />;

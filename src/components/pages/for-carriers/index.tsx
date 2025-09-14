@@ -1,7 +1,7 @@
 import ThirdFooter from '@/components/modules/footer/ThirdFooter';
 import { Container } from '@/components/shared/Container';
 import Image from 'next/image';
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import CooperationForm from '@/components/modules/cooperation-form';
 import { improveYourSalesList } from '@/constans/improve.your.sales.constans';
 import BackRouteButton from '@/components/shared/BackRouteButton';

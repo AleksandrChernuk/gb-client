@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
 import Head from 'next/head';
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import Image from 'next/image';
 import Link from 'next/link';
 

@@ -1,4 +1,4 @@
-import { CustomCard } from '@/components/shared/CustomCard';
+import CustomCard from '@/components/shared/CustomCard';
 import { memo } from 'react';
 import UniversalField from './UniversalField';
 import { ProviderConfig } from '../providerConfig/types';

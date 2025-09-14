@@ -9,7 +9,7 @@ const mullish = Mulish({
   display: 'swap',
 });
 
-export default function Logo() {
+const Logo = () => {
   return (
     <Link
       href={'/'}
@@ -23,4 +23,6 @@ export default function Logo() {
       <span className="text-secondary">Bus</span>
     </Link>
   );
-}
+};
+
+export default Logo;
