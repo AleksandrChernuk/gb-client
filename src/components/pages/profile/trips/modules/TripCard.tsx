@@ -64,7 +64,7 @@ export const TripCard = ({ item }: Props) => {
 
   return (
     <div className="relative shadow-xs tablet:shadow-none rounded-t-2xl tablet:rounded-none">
-      <div className="p-4 bg-white shadow-none tablet:p-4 dark:bg-slate-900 rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
+      <div className="p-4 bg-white shadow-none tablet:p-4 dark:bg-slate-800 rounded-t-2xl tablet:rounded-2xl tablet:shadow-xs">
         <div>
           <div className="flex flex-row items-center justify-between gap-1 tablet:gap-2">
             <TicketRoute
@@ -85,7 +85,7 @@ export const TripCard = ({ item }: Props) => {
             </div>
           </div>
 
-          <div className="w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-700 rounded-2xl relative my-4" />
+          <div className="w-full h-[1px] bg-[#e6e6e6] dark:bg-slate-900 rounded-2xl relative my-4" />
 
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2 text-xs font-normal tracking-normal leading-[18px] text-slate-700 dark:text-slate-50 shrink grow-0 text-nowrap truncate ...">
