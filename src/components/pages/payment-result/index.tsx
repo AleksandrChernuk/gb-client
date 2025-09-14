@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
 import { CleanOrderData } from './modules/CleanStor';
-import { FileText } from 'lucide-react';
 import { RefreshButton } from './modules/RefreshButton';
 import { getTranslations } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
+import LoadingPdfBtn from '@/components/shared/LoadingPdfBtn';
+import TicketLinkBtn from '@/components/shared/TicketLinkBtn';
 
 interface PaymentResultPageProps {
   payment_id: string;
@@ -46,11 +47,8 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
     return t('order_error');
   };
 
-  // Проверяем наличие файлов для скачивания
-  const hasDownloadableContent = !!pdfBase64 || !!orderLink || !!ticketLinks?.length;
-
   // Определяем количество колонок в сетке
-  const gridCols = hasDownloadableContent || isPending ? 'md:grid-cols-2' : '';
+  const gridCols = orderLink || ticketLinks?.length || isPending ? 'md:grid-cols-2' : '';
 
   return (
     <div className="flex flex-col h-svh">
@@ -72,41 +70,15 @@ export default async function PaymentResultPage({ payment_id }: PaymentResultPag
 
               {/* Сетка с кнопками */}
               <div className={cn('grid grid-cols-1 gap-4 justify-center items-center', gridCols)}>
-                {pdfBase64 && (
-                  <Button asChild variant="outline" size="primary" className="text-black">
-                    <a
-                      href={`data:application/pdf;base64,${pdfBase64}`}
-                      download={`${t('ticket_filename')}_${orderNumber}.pdf`}
-                      rel="noopener noreferrer"
-                      aria-label={`${t('download_ticket')} ${orderNumber}`}
-                    >
-                      {t('download_ticket')} <FileText className="ml-2" />
-                    </a>
-                  </Button>
-                )}
+                {pdfBase64 && <LoadingPdfBtn pdf={pdfBase64} orderNumber={orderNumber.padStart(9, '0')} />}
 
                 {(orderLink || ticketLinks?.length) && (
                   <div className="flex flex-col gap-4">
                     {/* Ссылка на заказ */}
-                    {orderLink && (
-                      <Button asChild variant="outline" size="primary" className="text-black">
-                        <a href={orderLink} target="_blank" rel="noopener noreferrer" aria-label={t('download_order')}>
-                          {t('download_order')}
-                        </a>
-                      </Button>
-                    )}
+                    {orderLink && <TicketLinkBtn href={orderLink} />}
 
                     {ticketLinks?.map((ticketLink, index) => (
-                      <Button key={`ticket-${index}`} asChild variant="outline" size="primary" className="text-black">
-                        <a
-                          href={ticketLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${t('download_ticket')} ${index + 1}`}
-                        >
-                          {t('download_ticket')} <FileText className="ml-2" />
-                        </a>
-                      </Button>
+                      <TicketLinkBtn key={`ticket-${index}`} href={ticketLink} />
                     ))}
                   </div>
                 )}

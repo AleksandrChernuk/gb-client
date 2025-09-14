@@ -116,7 +116,7 @@ export default function OrderDetails({ item, tickets }: Props) {
 
       {!!tickets ? (
         <div>
-          <span className={CLS.label}>{t('refund_rules')}</span>
+          <span className={CLS.label}>Квитки</span>
           <div className={CLS.list}>{tickets}</div>
         </div>
       ) : null}

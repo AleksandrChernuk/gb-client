@@ -103,7 +103,7 @@ export const TripCard = ({ item }: Props) => {
           </div>
 
           <div className={`${CLS.collapse} ${isOpen ? CLS.collapseOpen : CLS.collapseClosed}`}>
-            {isOpen && <div className="mt-4">sdasdasd</div>}
+            {isOpen && <div className="mt-4">Test</div>}
           </div>
         </div>
       </div>
