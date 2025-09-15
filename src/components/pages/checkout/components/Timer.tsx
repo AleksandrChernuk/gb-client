@@ -2,12 +2,12 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { useRouter } from '@/i18n/routing';
 import CustomDialog from '@/components/shared/CustomDialog';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTimerStore } from '@/store/useTimer';
 import { useNewOrderResult } from '@/store/useOrderResult';
+import { useRouter } from 'next/navigation';
 
 const WARNING_DELAY_MS = 10000; // 10 секунд
 const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 1000; // 15 минут

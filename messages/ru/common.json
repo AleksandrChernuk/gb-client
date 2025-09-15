@@ -164,6 +164,7 @@
     "download_pdf": "Скачать PDF",
     "order": "Заказ",
     "open_pdf_link": "Ссылка на билет",
+    "e_ticket_link": "Электронный билет",
     "Payment is pending": "Платёж в ожидании",
     "error_occurred": "Произошла ошибка"
   }

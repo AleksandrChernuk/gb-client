@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import TripsPage from '@/components/pages/profile/trips';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';

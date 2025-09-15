@@ -7,7 +7,6 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
 import { verify2FASchema } from '@/schemas/auth.schema';
 import { useUserStore } from '@/store/useUser';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +18,7 @@ import ResendCode from './ResendCode';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
+import { useRouter } from 'next/navigation';
 
 export default function VerifyEmailFrom({ email }: { email: string }) {
   const locale = useLocale();
@@ -49,8 +49,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
       }
 
       useUserStore.getState().setUserStore(currentUser);
-
-      router.push(REDIRECT_PATHS.profile);
+      router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);

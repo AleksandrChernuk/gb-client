@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import ReviewsPage from '@/components/pages/profile/reviews';
 
 export async function generateMetadata() {

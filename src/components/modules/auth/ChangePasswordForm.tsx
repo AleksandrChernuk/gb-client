@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Input } from '@/components/ui/input';
@@ -20,7 +20,6 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import ResendCode from '@/components/modules/auth/ResendCode';
 import { mapServerError } from '@/utils/mapServerError';
 import { toast } from 'sonner';
-import { useRouter } from '@/i18n/routing';
 
 export default function ChangePasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +48,7 @@ export default function ChangePasswordForm() {
     https: try {
       await confirmChangePassword(rowData, locale);
 
-      router.replace(REDIRECT_PATHS.profile);
+      router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(mapServerError(err.message)));

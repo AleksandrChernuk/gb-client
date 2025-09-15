@@ -158,6 +158,7 @@
     "download_pdf": "Download PDF",
     "order": "Order",
     "open_pdf_link": "Ticket link",
+    "e_ticket_link": "Electronic ticket",
     "Payment is pending": "Payment is pending",
     "error_occurred": "An error occurred"
   }

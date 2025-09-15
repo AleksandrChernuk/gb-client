@@ -3,20 +3,21 @@
 import { useTransition } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useSearchStore } from '@/store/useSearch';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import CitySearch from './CitySearch';
 import DatePicker from './DatePicker';
 import PassengersCount from './PassengersCount';
-import { useRouter } from '@/i18n/routing';
 import { MainSearchShema } from '@/schemas/main.search.schema';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { useRouter } from 'next/navigation';
 
 const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isPending, startTransition] = useTransition();
+  const locale = useLocale();
 
   const route = useRouter();
   const t = useTranslations(MESSAGE_FILES.COMMON);
@@ -47,7 +48,7 @@ const MainSearchForm = () => {
     const queryString = query.toString();
 
     startTransition(() => {
-      route.push(`/buses?${queryString}`, { scroll: true });
+      route.push(`/${locale}/buses?${queryString}`, { scroll: true });
     });
   };
   const renderFields = (variant: 'mobile' | 'desktop') => (

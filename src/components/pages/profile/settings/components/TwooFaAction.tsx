@@ -4,12 +4,12 @@ import { logout, updateUser } from '@/actions/auth.service';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { LoaderCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -32,7 +32,7 @@ const TwooFaAction = () => {
 
       logout();
 
-      router.push(REDIRECT_PATHS.signin);
+      router.push(`/${locale}/${REDIRECT_PATHS.signin}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));

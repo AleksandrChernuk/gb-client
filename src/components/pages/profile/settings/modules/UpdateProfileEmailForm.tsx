@@ -16,13 +16,13 @@ import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
 import { logout, updateUser } from '@/actions/auth.service';
 
-import { useRouter } from '@/i18n/routing';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { CircleAlert } from 'lucide-react';
 import ViewPassword from '@/components/shared/ViewPassword';
 
 import React from 'react';
 import ProfileFormActions from '../components/ProfileFormActions';
+import { useRouter } from 'next/navigation';
 
 const UpdateProfileEmailForm = () => {
   const locale = useLocale();
@@ -57,7 +57,7 @@ const UpdateProfileEmailForm = () => {
       clearUserStore();
       logout();
 
-      router.push(`${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
+      router.push(`/${locale}/${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));

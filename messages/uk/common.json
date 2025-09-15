@@ -170,6 +170,7 @@
     "download_pdf": "Завантажити PDF",
     "order": "Замовлення",
     "open_pdf_link": "Посилання на квиток",
+    "e_ticket_link": "Електронний квиток",
     "error_occurred": "Сталася помилка",
     "Payment is pending": "Оплата очікується"
   }

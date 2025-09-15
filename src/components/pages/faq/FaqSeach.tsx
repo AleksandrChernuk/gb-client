@@ -4,15 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { useRouter } from '@/i18n/routing';
 import { FaqSearchShema } from '@/schemas/faq.search.schema';
 import { IFaqSearchValue } from '@/types/faq.types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 export default function FaqSeach() {
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   const form = useForm<IFaqSearchValue>({
@@ -22,7 +23,7 @@ export default function FaqSeach() {
   });
 
   const onSubmit = (data: IFaqSearchValue) => {
-    router.push(`/faq/search?q=${data.qwery.trim()}`);
+    router.push(`/${locale}/faq/search?q=${data.qwery.trim()}`);
     form.reset({ qwery: '' });
   };
 

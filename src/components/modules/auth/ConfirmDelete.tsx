@@ -4,13 +4,15 @@ import { logout } from '@/actions/auth.service';
 import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Link, useRouter } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
 import { useUserStore } from '@/store/useUser';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const ConfirmDelete = () => {
   const router = useRouter();
+  const locale = useLocale();
   const { clearUserStore } = useUserStore();
   const t = useTranslations(MESSAGE_FILES.FORM);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
@@ -21,14 +23,14 @@ const ConfirmDelete = () => {
       await logout();
 
       const timer = setTimeout(() => {
-        router.push('/');
+        router.push(`/${locale}`);
       }, 10000);
 
       return () => clearTimeout(timer);
     };
 
     cleanupAndRedirect();
-  }, [clearUserStore, router]);
+  }, [clearUserStore, locale, router]);
 
   return (
     <AuthAssistantCard

@@ -4,10 +4,10 @@ import { requestDeleteAccount } from '@/actions/auth.service';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { useTranslations } from 'use-intl';
@@ -36,7 +36,7 @@ const DeleteProfileAlert = ({ setActiveForm }: Props) => {
       const result = await requestDeleteAccount(currentUser.email, locale);
 
       router.push(
-        `${REDIRECT_PATHS.verifyDeleteAccount}?email=${encodeURIComponent(result.email || currentUser.email)}`,
+        `/${locale}/${REDIRECT_PATHS.verifyDeleteAccount}?email=${encodeURIComponent(result.email || currentUser.email)}`,
       );
     } catch (error) {
       if (error instanceof Error) {

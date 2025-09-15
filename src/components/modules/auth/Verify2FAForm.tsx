@@ -16,11 +16,15 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from 'next/navigation';
 
-const Verify2FAForm = ({ email }: { email: string }) => {
+type Props = {
+  email: string;
+};
+
+const Verify2FAForm = ({ email }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const setUserStore = useUserStore((s) => s.setUserStore);
   const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.FORM);
   const router = useRouter();
@@ -48,9 +52,9 @@ const Verify2FAForm = ({ email }: { email: string }) => {
         return;
       }
 
-      useUserStore.getState().setUserStore(currentUser);
+      setUserStore(currentUser);
       form.reset();
-      router.push(REDIRECT_PATHS.profile);
+      router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(`${mapServerError(error.message)}`));
@@ -106,7 +110,9 @@ const Verify2FAForm = ({ email }: { email: string }) => {
             )}
           />
         </div>
-        <div className="w-full">{email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}</div>
+        <div className="w-full">
+          {email && <ResendCode loading={isLoading} email={email} locale={locale} type="RESET_PASSWORD" />}
+        </div>
       </form>
     </Form>
   );

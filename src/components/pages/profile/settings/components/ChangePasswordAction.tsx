@@ -2,10 +2,10 @@ import { requestChangePassword } from '@/actions/auth.service';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -29,9 +29,9 @@ const ChangePasswordAction = () => {
       const result = await requestChangePassword(locale, currentUser.email);
 
       if (result.email) {
-        router.replace(`${REDIRECT_PATHS.changePassword}?email=${result.email}`);
+        router.replace(`/${locale}/${REDIRECT_PATHS.changePassword}?email=${result.email}`);
       } else {
-        router.replace(`${REDIRECT_PATHS.changePassword}?email=${currentUser.email}`);
+        router.replace(`/${locale}/${REDIRECT_PATHS.changePassword}?email=${currentUser.email}`);
       }
     } catch (error) {
       if (error instanceof Error) {

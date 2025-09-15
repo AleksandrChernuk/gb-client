@@ -7,14 +7,13 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useRouter } from '@/i18n/routing';
 import { verify2FASchema } from '@/schemas/auth.schema';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -47,7 +46,7 @@ export default function VerifyDeleteAccountForm() {
 
       clearUserStore();
 
-      router.replace(REDIRECT_PATHS.confirmDeleteAccount);
+      router.replace(`/${locale}/${REDIRECT_PATHS.confirmDeleteAccount}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(`${mapServerError(err.message)}`));
