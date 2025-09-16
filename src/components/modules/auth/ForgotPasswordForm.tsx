@@ -4,6 +4,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { useRouter } from '@/i18n/routing';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
@@ -17,7 +19,6 @@ import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { forgotPasswordSchema } from '@/schemas/auth.schema';
 import { mapServerError } from '@/utils/mapServerError';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 export default function ForgotPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,7 @@ export default function ForgotPasswordForm() {
       const payload: TypeForgotPassword = { email: rowData.email };
       await forgotPassword(payload, locale);
 
-      router.push(`/${locale}/${REDIRECT_PATHS.resetPassword}?email=${encodeURIComponent(rowData.email)}`);
+      router.push(`/${REDIRECT_PATHS.resetPassword}?email=${encodeURIComponent(rowData.email)}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(`${mapServerError(err.message)}`));

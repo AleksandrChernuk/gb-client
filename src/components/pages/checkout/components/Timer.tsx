@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTimerStore } from '@/store/useTimer';
 import { useNewOrderResult } from '@/store/useOrderResult';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 const WARNING_DELAY_MS = 10000; // 10 секунд
 const TIMEOUT_DIALOG_DELAY_MS = 15 * 60 * 1000; // 15 минут

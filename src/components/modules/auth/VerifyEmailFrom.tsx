@@ -18,7 +18,7 @@ import ResendCode from './ResendCode';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export default function VerifyEmailFrom({ email }: { email: string }) {
   const locale = useLocale();
@@ -105,7 +105,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
           />
         </div>
         <div className="flex flex-col tablet:flex-row gap-2">
-          {email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}
+          {email && <ResendCode email={email} locale={locale} type="VERIFICATION" />}
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>

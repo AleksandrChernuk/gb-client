@@ -5,7 +5,7 @@ import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -50,7 +50,7 @@ const ChangePasswordAction = () => {
         size={'primary'}
         variant={'default'}
         className="w-full"
-        disabled={isLoading}
+        disabled={isLoading || currentUser?.method !== 'CREDENTIALS'}
         onClick={handleChangePassword}
       >
         {t('change_password')}

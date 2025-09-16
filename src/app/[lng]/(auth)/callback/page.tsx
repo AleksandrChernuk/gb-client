@@ -1,9 +1,8 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { CurrentUser } from '@/types/auth.types';
+import { useRouter } from '@/i18n/routing';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { useUserStore } from '@/store/useUser';
 import { Container } from '@/components/shared/Container';
@@ -42,7 +41,7 @@ export default function CallbackPage() {
         const ex = await fetch(`/api/auth/oauth-exchange?code=${encodeURIComponent(code)}`, { credentials: 'include' });
 
         if (!ex.ok) {
-          router.replace(`/${locale}/${REDIRECT_PATHS.signin}`);
+          router.replace(`/${REDIRECT_PATHS.signin}`);
           return;
         }
 
@@ -66,7 +65,7 @@ export default function CallbackPage() {
       });
       const data: ValidateResp = await v.json().catch(() => ({ authenticated: false }));
       if (data.authenticated) {
-        router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
+        router.replace(`/${REDIRECT_PATHS.profile}`);
         return;
       }
 
@@ -81,12 +80,12 @@ export default function CallbackPage() {
         });
         const d2: ValidateResp = await v2.json().catch(() => ({ authenticated: false }));
         if (d2.authenticated) {
-          router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
+          router.replace(`/${REDIRECT_PATHS.profile}`);
           return;
         }
       }
 
-      router.replace(`/${locale}/${REDIRECT_PATHS.signin}`);
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     };
 
     run();

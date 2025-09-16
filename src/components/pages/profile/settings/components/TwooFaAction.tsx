@@ -9,7 +9,7 @@ import { mapServerError } from '@/utils/mapServerError';
 import { LoaderCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -32,7 +32,7 @@ const TwooFaAction = () => {
 
       logout();
 
-      router.push(`/${locale}/${REDIRECT_PATHS.signin}`);
+      router.push(`/${REDIRECT_PATHS.signin}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));
@@ -45,7 +45,13 @@ const TwooFaAction = () => {
   };
 
   return (
-    <Button size={'primary'} variant={'default'} onClick={handleToggle2FA} className="w-full" disabled={isLoading}>
+    <Button
+      size={'primary'}
+      variant={'default'}
+      onClick={handleToggle2FA}
+      className="w-full"
+      disabled={isLoading || currentUser?.method !== 'CREDENTIALS'}
+    >
       {isLoading ? (
         <LoaderCircle className="animate-spin" stroke="white" />
       ) : (

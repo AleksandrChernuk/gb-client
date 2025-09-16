@@ -1,11 +1,8 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 import '@/styles/globals.css';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import { Params } from '@/types/common.types';
 import ReactQueryContext from '@/providers/ReactQueryProvider';
@@ -16,6 +13,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
 import { GTMNoScript } from '@/components/shared/GTMAnalytics';
 import LocationsInitializer from '@/components/shared/LocationsInitializer';
+import ProfileCheckProvider from '@/providers/ProfileCheck.provider';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -40,26 +38,29 @@ export default async function MainLayout({
     return notFound();
   }
 
+  const messages = await getMessages();
+
   setRequestLocale(lng as Locale);
 
   return (
-    <NextIntlClientProvider>
-      <html lang={lng} suppressHydrationWarning className="scroll-smooth">
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        </head>
-        <body className={`${notoSans.className} antialiased`} suppressHydrationWarning>
+    <html lang={lng} suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      </head>
+      <body className={`${notoSans.className} antialiased`} suppressHydrationWarning>
+        <NextIntlClientProvider messages={messages}>
           <GTMNoScript />
           <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
           <ReactQueryContext>
             <ThemeProvider attribute="class" enableSystem>
               {children}
+              <ProfileCheckProvider />
             </ThemeProvider>
             <LocationsInitializer />
           </ReactQueryContext>
-          <Toaster richColors position="top-center" />
-        </body>
-      </html>
-    </NextIntlClientProvider>
+        </NextIntlClientProvider>
+        <Toaster richColors position="top-center" />
+      </body>
+    </html>
   );
 }

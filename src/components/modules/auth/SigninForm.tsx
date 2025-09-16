@@ -17,7 +17,7 @@ import { signin } from '@/actions/auth.service';
 import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { mapServerError } from '@/utils/mapServerError';
 import { useUserStore } from '@/store/useUser';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
@@ -55,7 +55,7 @@ const SigninForm = () => {
       }
 
       if (message === '2FA code sent') {
-        router.push(`/${locale}/${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
+        router.push(`/${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();
@@ -63,7 +63,7 @@ const SigninForm = () => {
       }
 
       if (message === 'Verification code sent') {
-        router.push(`/${locale}/${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
+        router.push(`/${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
         setIsViewPassword(false);
         setIsLoading(false);
         form.reset();

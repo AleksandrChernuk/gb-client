@@ -52,7 +52,7 @@ const ResendCode = ({ email, locale, type, className, loading }: ResendCodeProps
         disabled={isLoading || loading}
         className={cn('text-slate-700 dark:text-slate-100', className)}
       >
-        {isLoading || loading ? t('sending') : t('resend_code')}
+        {isLoading ? t('sending') : t('resend_code')}
       </Button>
     </div>
   );

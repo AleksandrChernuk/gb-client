@@ -16,7 +16,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 type Props = {
   email: string;
@@ -37,12 +37,11 @@ const Verify2FAForm = ({ email }: Props) => {
     mode: 'onChange',
   });
 
-  const onSubmit = async (rowData: z.infer<typeof verify2FASchema>) => {
+  const onSubmit = async (data: z.infer<typeof verify2FASchema>) => {
     setIsLoading(true);
 
     try {
-      const result = await verify2FA({ email: decodeURIComponent(email || ''), code: rowData.code }, locale);
-
+      const result = await verify2FA({ email: decodeURIComponent(email) || '', code: data.code }, locale);
       const { message, currentUser } = result;
 
       if (message !== 'Successfully signin' || !currentUser) {
@@ -111,7 +110,7 @@ const Verify2FAForm = ({ email }: Props) => {
           />
         </div>
         <div className="w-full">
-          {email && <ResendCode loading={isLoading} email={email} locale={locale} type="RESET_PASSWORD" />}
+          {email && <ResendCode loading={isLoading} email={email} locale={locale} type="TWO_FACTOR" />}
         </div>
       </form>
     </Form>

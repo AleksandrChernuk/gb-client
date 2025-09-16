@@ -13,12 +13,13 @@ import { mapServerError } from '@/utils/mapServerError';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import ResendCode from './ResendCode';
+import { useRouter } from '@/i18n/routing';
 
 export default function VerifyDeleteAccountForm() {
   const locale = useLocale();

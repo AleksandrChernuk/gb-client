@@ -1,3 +1,4 @@
+import { ICurrentUser, useUserStore } from '@/store/useUser';
 import { IUserOrdersResponse, IUserPaymentsResponse } from '@/types/payments.Info.types';
 import { IUserCompletedTrips, UserCurrentTripType } from '@/types/profile.trips';
 
@@ -160,4 +161,57 @@ export async function getCompletedTrips(data: GetUserRequestsData): Promise<IUse
   }
 
   return payload as IUserCompletedTrips;
+}
+
+let inflightProfile: Promise<ICurrentUser> | undefined;
+
+export async function getProfileAndStore(locale: string): Promise<ICurrentUser> {
+  const { setUserStore } = useUserStore.getState();
+
+  inflightProfile ??= (async () => {
+    try {
+      const res = await fetch('/api/user/profile', {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Accept-Language': locale },
+      });
+
+      if (!res.ok) {
+        let message = `Profile request failed (${res.status})`;
+
+        try {
+          const ct = res.headers.get('content-type') || '';
+
+          if (ct.includes('json')) {
+            const e = await res.json().catch(() => ({}));
+
+            message = (e && e.message) || message;
+          } else {
+            const t = await res.text().catch(() => '');
+
+            if (t) message = t;
+          }
+        } catch {}
+        throw new Error(message);
+      }
+
+      const ct = res.headers.get('content-type') || '';
+      const payload = ct.includes('json') ? await res.json() : await res.text();
+
+      if (typeof payload !== 'object' || payload === null) {
+        throw new Error('Invalid profile payload');
+      }
+
+      const user = payload as ICurrentUser;
+      setUserStore(user);
+      return user;
+    } catch (err) {
+      console.error('getProfileAndStore error:', err);
+      throw err;
+    } finally {
+      inflightProfile = undefined;
+    }
+  })();
+
+  return inflightProfile;
 }

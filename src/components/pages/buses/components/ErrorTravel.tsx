@@ -6,7 +6,7 @@ import Image from 'next/image';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export const ErrorTravel = () => {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);

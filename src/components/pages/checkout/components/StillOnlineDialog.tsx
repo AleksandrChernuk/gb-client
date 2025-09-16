@@ -5,7 +5,7 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { useTimerStore } from '@/store/useTimer';
 import { useNewOrderResult } from '@/store/useOrderResult';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export function StillOnlineDialog() {
   const resetInitiateNewOrder = useNewOrderResult((s) => s.resetInitiateNewOrder);

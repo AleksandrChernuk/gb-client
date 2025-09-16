@@ -3,7 +3,7 @@
 import { useTransition } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useSearchStore } from '@/store/useSearch';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
@@ -12,12 +12,11 @@ import DatePicker from './DatePicker';
 import PassengersCount from './PassengersCount';
 import { MainSearchShema } from '@/schemas/main.search.schema';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isPending, startTransition] = useTransition();
-  const locale = useLocale();
 
   const route = useRouter();
   const t = useTranslations(MESSAGE_FILES.COMMON);
@@ -48,7 +47,7 @@ const MainSearchForm = () => {
     const queryString = query.toString();
 
     startTransition(() => {
-      route.push(`/${locale}/buses?${queryString}`, { scroll: true });
+      route.push(`/buses?${queryString}`, { scroll: true });
     });
   };
   const renderFields = (variant: 'mobile' | 'desktop') => (

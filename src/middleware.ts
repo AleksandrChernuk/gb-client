@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
-const PROTECTED_PATHS = ['/profile', '/dashboard'];
+const PROTECTED_PATHS = ['/profile'];
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
@@ -72,5 +72,5 @@ function redirectToSignin(req: NextRequest, locale: string) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|uk|ru)(/.*)?', '/profile/:path*', '/dashboard/:path*'],
+  matcher: ['/', '/(en|uk|ru)/:path*'],
 };

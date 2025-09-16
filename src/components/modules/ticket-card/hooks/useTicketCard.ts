@@ -6,10 +6,9 @@ import { useLocale } from 'next-intl';
 import { useShallow } from 'zustand/react/shallow';
 import { useSelectedTickets } from '@/store/useSelectedTickets';
 import { useTicketsDetails } from '@/store/useTicketsDetails';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export default function useTicketCard() {
-  const locale = useLocale();
   const setSelectedTicket = useSelectedTickets(useShallow((state) => state.setSelectedTicket));
   const setTicketsDetails = useTicketsDetails(useShallow((state) => state.setTicketsDetails));
 
@@ -31,7 +30,7 @@ export default function useTicketCard() {
       travelDate: date,
     });
 
-    router.push(`/${locale}/checkout`, { scroll: true });
+    router.push(`/checkout`, { scroll: true });
   };
 
   const handleGetDetails = (element: IRouteResponse) => {

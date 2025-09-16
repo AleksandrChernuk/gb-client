@@ -5,7 +5,7 @@ import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 export default function BackRouteButton({ className }: { className?: string }) {
   const t = useTranslations(MESSAGE_FILES.COMMON);

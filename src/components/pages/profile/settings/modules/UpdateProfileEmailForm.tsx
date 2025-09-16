@@ -22,7 +22,7 @@ import ViewPassword from '@/components/shared/ViewPassword';
 
 import React from 'react';
 import ProfileFormActions from '../components/ProfileFormActions';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 
 const UpdateProfileEmailForm = () => {
   const locale = useLocale();
@@ -57,7 +57,7 @@ const UpdateProfileEmailForm = () => {
       clearUserStore();
       logout();
 
-      router.push(`/${locale}/${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
+      router.push(`/${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));

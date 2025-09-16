@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Input } from '@/components/ui/input';
@@ -20,6 +20,7 @@ import { FormErrorMassege } from '@/components/ui/form-error';
 import ResendCode from '@/components/modules/auth/ResendCode';
 import { mapServerError } from '@/utils/mapServerError';
 import { toast } from 'sonner';
+import { useRouter } from '@/i18n/routing';
 
 export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
