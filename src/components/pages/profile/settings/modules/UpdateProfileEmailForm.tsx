@@ -33,7 +33,7 @@ const UpdateProfileEmailForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, clearUserStore } = useUserStore();
-  console.log(currentUser?.method);
+
   const form = useForm<z.infer<typeof profileEmailSchema>>({
     resolver: zodResolver(profileEmailSchema),
     defaultValues: {

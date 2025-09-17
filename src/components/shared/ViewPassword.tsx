@@ -10,8 +10,6 @@ interface ViewPasswordProps {
 }
 
 const ViewPassword = ({ isViewPassword, setIsViewPassword, error, disabled }: ViewPasswordProps) => {
-  console.log(disabled);
-
   return (
     <div
       className={`absolute inset-y-0 flex items-center right-4 

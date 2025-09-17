@@ -6,13 +6,12 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useUserStore } from '@/store/useUser';
 import { mapServerError } from '@/utils/mapServerError';
 import { LoaderCircle } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 const LogOutProfileBtn = () => {
-  const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.PROFILE);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
 
@@ -28,7 +27,7 @@ const LogOutProfileBtn = () => {
 
       userStore.clearUserStore();
 
-      router.replace(`/${locale}`);
+      router.replace(`/`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t_form(mapServerError(error.message)));

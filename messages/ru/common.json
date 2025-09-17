@@ -131,11 +131,6 @@
       "noSpecialCharacters": "Имя не должно содержать специальных символов"
     },
 
-    "email_validate": {
-      "required": "Email обязателен для заполнения",
-      "emailNotValid": "Введите корректный email"
-    },
-
     "password_validate": {
       "required": "Email обязателен для заполнения",
       "emailNotValid": "Введите корректный email",

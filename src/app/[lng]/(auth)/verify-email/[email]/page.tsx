@@ -16,7 +16,6 @@ type Props = {
 const VerifyEmailPage = async ({ params }: Props) => {
   const { email } = await params;
   const t = await getTranslations(MESSAGE_FILES.FORM);
-  console.log(email);
 
   if (!email) {
     notFound();

@@ -23,8 +23,8 @@ const buttonVariants = cva(
           'bg-red-400 text-white shadow-xs hover:bg-red-400/90 active:bg-red-400/85 focus-visible:ring-red-400/30 dark:focus-visible:ring-red-400/40 dark:bg-red-400/60',
 
         outline:
-          'w-full h-auto border border-slate-200 bg-inherit text-slate-800 dark:text-slate-50 hover:bg-slate-50/60 ' +
-          'dark:border-slate-700 dark:hover:bg-slate-900/40 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 ' +
+          'w-full h-auto border border-green-300 bg-inherit text-green-300 dark:text-slate-50 hover:bg-green-200/10 ' +
+          'dark:border-green-100 dark:hover:bg-green-200/10 dark:hover:border-green-200 active:border-green-200 dark:active:border-green-400 ' +
           'aria-selected:bg-green-300 aria-selected:text-white',
 
         secondary:

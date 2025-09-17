@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';

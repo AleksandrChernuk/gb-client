@@ -42,7 +42,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (!refresh.ok) {
-        router.replace(`/${getLocale()}/auth/signin`);
+        router.replace(`/${getLocale()}/signin`);
         return;
       }
 
@@ -55,7 +55,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
       if (rr.authenticated) {
         setReady(true);
       } else {
-        router.replace(`/${getLocale()}/auth/signin`);
+        router.replace(`/${getLocale()}/signin`);
       }
     };
 

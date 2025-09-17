@@ -125,11 +125,6 @@
       "noSpecialCharacters": "Name must not contain special characters"
     },
 
-    "email_validate": {
-      "required": "Email is required",
-      "emailNotValid": "Enter a valid email address"
-    },
-
     "password_validate": {
       "minLength": "Password is too short (minimum 8 characters)",
       "maxLength": "Password is too long (maximum 20 characters)",

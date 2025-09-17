@@ -65,7 +65,6 @@ export async function verifyEmail(data: TypeVerifyCode, locale: string) {
 
 // =================== Signin ==================
 export async function signin(data: TypeSignin, locale: string) {
-  console.log(JSON.stringify(data));
   try {
     const response = await fetch('/api/auth/signin', {
       method: 'POST',

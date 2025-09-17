@@ -21,6 +21,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
+
   const t = await getTranslations({
     locale: lng,
     namespace: MESSAGE_FILES.METADATA,

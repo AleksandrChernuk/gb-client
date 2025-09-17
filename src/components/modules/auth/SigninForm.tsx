@@ -72,7 +72,7 @@ const SigninForm = () => {
 
       if (message === 'Successfully signin') {
         setUserStore(currentUser);
-        router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
+        router.replace(`/${REDIRECT_PATHS.profile}`);
         return;
       }
 

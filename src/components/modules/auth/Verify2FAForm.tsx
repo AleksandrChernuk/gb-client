@@ -53,7 +53,7 @@ const Verify2FAForm = ({ email }: Props) => {
 
       setUserStore(currentUser);
       form.reset();
-      router.replace(`/${locale}/${REDIRECT_PATHS.profile}`);
+      router.replace(`/${REDIRECT_PATHS.profile}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(`${mapServerError(error.message)}`));

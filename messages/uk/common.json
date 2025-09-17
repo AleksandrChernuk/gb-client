@@ -136,11 +136,6 @@
       "noSpecialCharacters": "Імʼя не повинно містити спеціальних символів"
     },
 
-    "email_validate": {
-      "required": "Email обовʼязковий",
-      "emailNotValid": "Введіть коректну електронну адресу"
-    },
-
     "password_validate": {
       "required": "Email обовʼязковий",
       "emailNotValid": "Введіть коректну електронну адресу",

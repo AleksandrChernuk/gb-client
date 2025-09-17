@@ -24,43 +24,87 @@ type Props = {
   item: UserCurrentTripType;
 };
 
+type TrenderExpandedContent = {
+  isOpen?: boolean;
+  isLoading?: boolean;
+  error?: boolean;
+  data: IRouteDetailsResponse | null | undefined;
+};
+
+const renderExpandedContent = ({ isLoading, error, data }: TrenderExpandedContent) => {
+  if (isLoading) {
+    return <div className="mt-4 p-4 text-center text-slate-500 dark:text-slate-400">Loading details...</div>;
+  }
+
+  if (error) {
+    return <div className="mt-4 p-4 text-center text-red-500 dark:text-red-400">Error loading trip details</div>;
+  }
+
+  if (data) {
+    console.log('empy data', data);
+    return (
+      <div className="mt-4 space-y-2">
+        <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-50">{data.amenities?.join('')}</h4>
+      </div>
+    );
+  }
+
+  return <div className="mt-4 text-sm text-slate-600 dark:text-slate-300">No additional details available</div>;
+};
+
 export const TripCard = ({ item }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const locale = useLocale();
 
-  const rowData = {
-    ...(item.routeId ? { routeId: item.routeId } : {}),
-    ...(item.intervalId ? { intervalId: item.intervalId } : {}),
-    ...(item.busId ? { busId: item.busId } : {}),
-    ...(item.fromCityId ? { fromCityId: Number(item.fromCityId) } : {}),
-    ...(item.toCityId ? { toCityId: Number(item.toCityId) } : {}),
-    ...(item.fromStationId ? { fromStationId: item.fromStationId } : {}),
-    ...(item.toStationId ? { toStationId: item.toStationId } : {}),
-    providerId: item.providerId,
-    travelDate: item.departureDateTime || undefined,
-    locale,
-    currency: item.currency || 'UAH',
-    ...(item.timetableId ? { timetableId: item.timetableId } : {}),
-    ...(item.bustypeId ? { bustypeId: item.bustypeId } : {}),
-  };
+  const rowData = useMemo(
+    () => ({
+      ...(item.routeId && { routeId: item.routeId }),
+      ...(item.intervalId && { intervalId: item.intervalId }),
+      ...(item.busId && { busId: item.busId }),
+      ...(item.fromCityId && { fromCityId: Number(item.fromCityId) }),
+      ...(item.toCityId && { toCityId: Number(item.toCityId) }),
+      ...(item.fromStationId && { fromStationId: String(item.fromStationId) }),
+      ...(item.toStationId && { toStationId: String(item.toStationId) }),
+      providerId: item.providerId,
+      travelDate: item.departureDateTime || undefined,
+      locale,
+      currency: item.currency || 'UAH',
+      ...(item.timetableId && { timetableId: item.timetableId }),
+      ...(item.bustypeId && { bustypeId: item.bustypeId }),
+    }),
+    [
+      item.routeId,
+      item.intervalId,
+      item.busId,
+      item.fromCityId,
+      item.toCityId,
+      item.fromStationId,
+      item.toStationId,
+      item.providerId,
+      item.departureDateTime,
+      item.currency,
+      item.timetableId,
+      item.bustypeId,
+      locale,
+    ],
+  );
+
+  console.log('rowData', rowData);
 
   const queryKey = useMemo(
-    () => ['currentTripsDetails', item.providerId, item.routeId, item.intervalId, item.timetableId, locale],
+    () => ['currentTripsDetails', item.providerId, item.routeId, item.intervalId, item.timetableId, locale] as const,
     [item.providerId, item.routeId, item.intervalId, item.timetableId, locale],
   );
 
-  const { data, isLoading, isError } = useQuery<IRouteDetailsResponse | null>({
+  console.log('queryKey', queryKey);
+
+  const { data, isLoading, isError } = useQuery<IRouteDetailsResponse | null | undefined>({
     queryKey,
     queryFn: () => getRouteDetails(rowData),
     enabled: isOpen,
     placeholderData: keepPreviousData,
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
-
-  console.log(data);
-  console.log(isLoading);
-  console.log(isError);
 
   return (
     <div className="relative shadow-xs tablet:shadow-none rounded-t-2xl tablet:rounded-none">
@@ -103,7 +147,7 @@ export const TripCard = ({ item }: Props) => {
           </div>
 
           <div className={`${CLS.collapse} ${isOpen ? CLS.collapseOpen : CLS.collapseClosed}`}>
-            {isOpen && <div className="mt-4">Test</div>}
+            {isOpen && <div className="mt-4">{renderExpandedContent({ data, isLoading, error: isError })}</div>}
           </div>
         </div>
       </div>

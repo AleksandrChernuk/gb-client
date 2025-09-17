@@ -75,6 +75,11 @@
       "success": "Успішно",
       "error": "Щось пішло не так"
     },
+
+    "email_validate": {
+      "required": "Email обовʼязковий",
+      "emailNotValid": "Введіть коректну електронну адресу"
+    },
     "docType": {
       "unknown": "Інший документ",
       "passport": "Паспорт",

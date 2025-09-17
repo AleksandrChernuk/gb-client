@@ -1,7 +1,6 @@
 'use client';
 import arrow from '@/assets/icons/arrow-mobile.svg';
 import { useTranslations } from 'next-intl';
-
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import Image from 'next/image';
@@ -10,12 +9,10 @@ import { IconRouteRigth } from '@/assets/icons/IconRouteRigth';
 
 type Props = {
   duration: string;
-
   location_from: string;
   location_from_name: string;
   location_from_address: string;
   date_time_from: string;
-
   location_to: string;
   location_to_name: string;
   location_t_address: string;
@@ -24,13 +21,10 @@ type Props = {
 
 export default function TicketRoute({
   duration,
-
   location_from,
   location_from_name,
   location_from_address,
-
   date_time_from,
-
   location_to,
   location_to_name,
   location_t_address,

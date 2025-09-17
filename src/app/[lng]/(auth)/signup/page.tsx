@@ -6,19 +6,8 @@ import AccountActions from '@/components/shared/AccountActions';
 import AuthCard from '@/components/shared/AuthCard';
 import BackRouteButton from '@/components/shared/BackRouteButton';
 import { Container } from '@/components/shared/Container';
-import { Params } from '@/types/common.types';
-import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
 
-export default async function SignupPage({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
-  const { lng } = await params;
-
-  setRequestLocale(lng as Locale);
-
+export default async function SignupPage() {
   return (
     <section className="w-full">
       <Container size="s" className="py-4 laptop:py-8">
