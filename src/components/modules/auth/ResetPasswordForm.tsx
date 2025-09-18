@@ -30,7 +30,7 @@ export default function ResetPasswordForm() {
 
   const router = useRouter();
   const param = useSearchParams();
-  const email = param.get('email');
+  const email = param?.get('email');
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),

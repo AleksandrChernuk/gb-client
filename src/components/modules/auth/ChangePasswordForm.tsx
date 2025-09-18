@@ -32,7 +32,7 @@ export default function ChangePasswordForm() {
 
   const router = useRouter();
   const param = useSearchParams();
-  const email = param.get('email');
+  const email = param?.get('email');
 
   const form = useForm<z.infer<typeof changePasswordSchema>>({
     resolver: zodResolver(changePasswordSchema),

@@ -5,15 +5,15 @@ import { notFound } from 'next/navigation';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n/locales';
 import { Params } from '@/types/common.types';
-import ReactQueryContext from '@/providers/ReactQueryProvider';
+import ReactQueryContext from '@/app/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
-import { ThemeProvider } from '@/providers/ThemeProvider';
+import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
 import { GTMNoScript } from '@/components/shared/GTMAnalytics';
 import LocationsInitializer from '@/components/shared/LocationsInitializer';
-import ProfileCheckProvider from '@/providers/ProfileCheck.provider';
+import ProfileCheckProvider from '@/app/providers/ProfileCheck.provider';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',

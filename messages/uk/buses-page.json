@@ -31,8 +31,6 @@
     "view_trips": "Показати",
     "filter": "Фільтр",
     "sort_buy_shortest_journeye": "Коротшим маршрутом",
-    "placeholderPassenger": "Пасажир",
-    "price_may_increase": "price_may_increase",
-    "book_within_time_to_avoid_price_increase": "book_within_time_to_avoid_price_increase"
+    "placeholderPassenger": "Пасажир"
   }
 }

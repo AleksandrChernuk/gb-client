@@ -31,8 +31,8 @@ export default function CallbackPage() {
 
   useEffect(() => {
     const run = async () => {
-      const status = params.get('status');
-      const code = params.get('code');
+      const status = params?.get('status');
+      const code = params?.get('code');
 
       if (status !== 'success') {
         router.replace(`/${REDIRECT_PATHS.signin}`);

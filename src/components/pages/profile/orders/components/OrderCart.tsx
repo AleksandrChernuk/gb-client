@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { CalendarArrowDown } from 'lucide-react';
+import { CalendarArrowDown, ChevronDown } from 'lucide-react';
 import { LuRoute } from 'react-icons/lu';
 import { format } from 'date-fns';
 import CarrierLabel from '@/components/modules/ticket-card/components/CarrierLabel';
@@ -33,7 +33,8 @@ const CLS = {
   carrierWrap: 'flex items-center gap-1',
   carrierName: 'block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all',
 
-  detailsBtn: 'items-center justify-center p-2 text-xs font-bold underline text-green-300 dark:text-green-100',
+  detailsBtn:
+    'flex items-center self-end gap-px p-2 text-green-300 dark:text-green-100 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap transition-all duration-200',
 
   // плавное сворачивание контента
   collapse: 'overflow-hidden transition-all duration-300 ease-in-out',
@@ -94,15 +95,13 @@ const OrderCart = ({ item }: Props) => {
         </div>
 
         <div className={`${CLS.price} ${CLS.textBase}`}>
-          {item.totalPrice}
+          {Math.floor(Number(item.totalPrice || 0))}
           <span className={CLS.currency}>{item.currency}</span>
         </div>
       </div>
 
-      {/* разделитель */}
       <div className="border-t border-[#e6e6e6] dark:border-slate-700 my-4" />
 
-      {/* перевозчик + кнопка деталей */}
       <div className="flex items-center justify-between gap-2">
         <CarrierLabel carrierName={item.carrierName || 'Deafault'} />
 
@@ -117,16 +116,20 @@ const OrderCart = ({ item }: Props) => {
             setOrderId(item.orderId);
           }}
         >
-          {t('details')}
+          <span>{!isOpen ? t('details') : t('collapse_details')}</span>
+          <ChevronDown
+            size={16}
+            className={`transition-transform duration-200 dark:stroke-green-100 stroke-green-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          />
         </Button>
       </div>
 
-      {/* детали/билеты */}
       <div id={sectionId} className={`${CLS.collapse} ${isOpen ? CLS.collapseOpen : CLS.collapseClosed}`}>
         {isOpen && (
           <div className="mt-4">
             <OrderDetails
               item={item}
+              orderStatus={data?.message}
               tickets={
                 <>
                   {(isError || error) && <div className="text-red-500 text-sm">{t(parseErrorKey(error.message))}</div>}

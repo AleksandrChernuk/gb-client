@@ -10,7 +10,7 @@ import ProfileMobileNav from '@/components/shared/ProfileMobileNav';
 import ProfileNavTabs from '@/components/shared/ProfileNavTabs';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { profile_links } from '@/constans/profile.nav.links';
-import { AuthGuardProvider } from '@/providers/AuthGuardProvider';
+import { AuthGuardProvider } from '@/app/providers/AuthGuardProvider';
 import { Params } from '@/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';

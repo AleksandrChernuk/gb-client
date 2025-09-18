@@ -52,7 +52,7 @@ const CurrentTrips = () => {
     <div className="container mx-auto max-w-[805px] py-6">
       <div className="space-y-8">
         {trips.map((trip) => (
-          <TripCard item={trip} key={trip.myOrderId} />
+          <TripCard item={trip} key={trip.myOrderId} showDetails />
         ))}
       </div>
     </div>

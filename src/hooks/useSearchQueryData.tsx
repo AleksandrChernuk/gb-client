@@ -24,11 +24,11 @@ export function useSearchQueryData(): SearchQueryData {
   const date = useSearchStore(useShallow((state) => state.date));
 
   return useMemo(() => {
-    const fromParam = searchParams.get('from');
-    const toParam = searchParams.get('to');
-    const adultParam = searchParams.get('adult');
-    const childrenParam = searchParams.get('children');
-    const dateParam = searchParams.get('date');
+    const fromParam = searchParams?.get('from');
+    const toParam = searchParams?.get('to');
+    const adultParam = searchParams?.get('adult');
+    const childrenParam = searchParams?.get('children');
+    const dateParam = searchParams?.get('date');
 
     return {
       from: fromParam ?? from,

@@ -42,6 +42,8 @@
     "order_number": "Order number",
     "route": "Route",
     "payment_date": "Payment date",
+    "payment_status": "Payment Status",
+
     "reserve_expires_at": "Reservation valid until",
     "carrier": "Carrier",
     "bus_model": "Bus model",
@@ -50,7 +52,6 @@
     "refund_rules": "Refund rules",
     "carrier_phone": "Carrier phone",
     "details": "Details",
-    "no_payments_find": "No payments found",
     "all_trips": "All trips",
     "upcoming_trips": "Upcoming trips",
     "error_load_trips": "An error occurred while loading",

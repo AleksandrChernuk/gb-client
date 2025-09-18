@@ -50,6 +50,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(!!route.identificators.routeId && { routeId: route.identificators.routeId }),
     ...(!!route.identificators.rideId && { rideId: route.identificators.rideId }),
     ...(!!route.identificators.tripId && { tripId: route.identificators.tripId }),
+    ...(!!route.identificators.timetableId && { timetableId: route.identificators.timetableId }),
     ...(!!route.identificators.intervalId && { intervalId: route.identificators.intervalId }),
     ...(!!route.identificators.busId && {
       busId: route.identificators.busId,

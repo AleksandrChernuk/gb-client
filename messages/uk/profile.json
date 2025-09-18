@@ -42,6 +42,8 @@
     "order_number": "Номер замовлення",
     "route": "Маршрут",
     "payment_date": "Дата оплати",
+    "payment_status": "Статус оплати",
+
     "reserve_expires_at": "Резервація дійсна до",
     "refund_date": "Дата повернення",
     "refund_amount": "Сума повернення",

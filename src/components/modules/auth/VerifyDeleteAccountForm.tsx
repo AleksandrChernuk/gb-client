@@ -29,7 +29,7 @@ export default function VerifyDeleteAccountForm() {
 
   const { currentUser, clearUserStore } = useUserStore();
   const param = useSearchParams();
-  const email = param.get('email') || currentUser?.email || '';
+  const email = param?.get('email') || currentUser?.email || '';
 
   const form = useForm<z.infer<typeof verify2FASchema>>({
     resolver: zodResolver(verify2FASchema),

@@ -11,7 +11,7 @@ export default function FaqTabs() {
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const searchValue = params.get('q');
+  const searchValue = params?.get('q');
 
   const slug = pathname === '/faq' ? '/faq/bronjuvannja-mists' : (pathname as keyof typeof faqConstans);
 

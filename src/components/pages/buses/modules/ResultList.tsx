@@ -2,11 +2,11 @@
 
 import { useFilterTickets } from '@/store/useFilterTickets';
 import { TicketCard } from '@/components/modules/ticket-card';
-import { BusLoader } from '../../../shared/BusLoader';
 import { ErrorTravel } from '../components/ErrorTravel';
 import useTicketsSearch from '../hooks/useTicketsSearch';
 import { useSearchStore } from '@/store/useSearch';
 import NoTripsFind from '@/components/shared/NoTripsFind';
+import { BusLoader } from '@/components/shared/BusLoader';
 
 export default function ResultList() {
   const { isFetching, data, error } = useTicketsSearch();

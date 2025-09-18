@@ -12,6 +12,9 @@
     "download_order": "Download order",
 
     "errors": {
+      "Order paid": "Order paid",
+      "Order created": "Order created",
+      "Payment is pending": "Payment is pending",
       "default": "Oops... Something went wrong",
       "limit": "The limit on the amount or number of customer payments has been exceeded",
       "frod": "The transaction has been identified as unusual / risky according to the Bank's Anti-Fraud rules",

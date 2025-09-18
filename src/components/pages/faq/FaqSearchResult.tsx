@@ -11,7 +11,7 @@ import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 export default function FaqSearchResult() {
   const params = useSearchParams();
-  const searchQuery = params.get('q')?.toLowerCase() || '';
+  const searchQuery = params?.get('q')?.toLowerCase() || '';
   const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   if (!searchQuery) {

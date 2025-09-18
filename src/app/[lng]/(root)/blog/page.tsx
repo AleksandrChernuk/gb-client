@@ -1,4 +1,3 @@
-// import BlogPage from '@/components/pages/blog';
 import ProfilePage from '@/components/pages/profile/settings';
 import { Container } from '@/components/shared/Container';
 import ProfileNavTabs from '@/components/shared/ProfileNavTabs';

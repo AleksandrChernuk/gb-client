@@ -19,7 +19,7 @@ const SelectLocale = ({ variant }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale() as Locale;
   const pathname = usePathname();
-  const searchParams = useSearchParams().toString();
+  const searchParams = useSearchParams()?.toString();
 
   if (pathname === '/checkout') {
     return null;

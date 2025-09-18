@@ -64,6 +64,7 @@ function useCheckout() {
 
     try {
       setLoadingResult(true);
+
       const res = await createOrder(
         normalizeData({
           fromCityId: from,

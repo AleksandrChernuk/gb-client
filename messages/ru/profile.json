@@ -42,6 +42,8 @@
     "order_number": "Номер заказа",
     "route": "Маршрут",
     "payment_date": "Дата оплаты",
+    "payment_status": "Статус оплаты",
+
     "reserve_expires_at": "Бронь действует до",
     "carrier": "Перевозчик",
     "bus_model": "Модель автобуса",

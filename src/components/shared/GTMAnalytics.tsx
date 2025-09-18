@@ -15,7 +15,7 @@ export function GTMAnalytics() {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'page_view',
-        page_path: `${pathname}${searchParams.toString() ? `?${searchParams}` : ''}`,
+        page_path: `${pathname}${searchParams?.toString() ? `?${searchParams}` : ''}`,
         page_title: document.title,
         page_locale: locale,
       });

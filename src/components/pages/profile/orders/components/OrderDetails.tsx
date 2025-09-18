@@ -10,16 +10,18 @@ import { ReactElement } from 'react';
 type Props = {
   item: UserOrdersType;
   tickets?: ReactElement;
+  orderStatus?: string;
 };
 
 const CLS = {
-  label: 'block text-xs tablet:text-sm font-medium dark:text-green-100 text-green-300 mb-2',
+  label: 'block text-xs tablet:text-sm font-medium dark:text-green-100 text-green-300 mb-1',
   value: 'text-sm tablet:text-base font-medium text-slate-700 dark:text-slate-50 break-words',
   list: 'space-y-1 text-xs tablet:text-sm text-slate-700 dark:text-slate-50',
 };
 
-export default function OrderDetails({ item, tickets }: Props) {
+export default function OrderDetails({ item, tickets, orderStatus }: Props) {
   const t = useTranslations(MESSAGE_FILES.PROFILE);
+  const tpr = useTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
 
   return (
     <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
@@ -29,42 +31,36 @@ export default function OrderDetails({ item, tickets }: Props) {
           <span className={CLS.value}>{item.routeName}</span>
         </div>
       )}
-
       {item.paymentDate && (
         <div>
           <span className={CLS.label}>{t('payment_date')}</span>
-          <span className={CLS.value}>{format(item.paymentDate, 'dd.MM.yyyy HH:mm')}</span>
+          <span className={CLS.value}>{format(item.paymentDate, 'dd.MM.yyyy, HH:mm')}</span>
         </div>
       )}
-
       {item.reserveExpiresAt && (
         <div>
           <span className={CLS.label}>{t('reserve_expires_at')}</span>
-          <span className={CLS.value}>{format(item.reserveExpiresAt, 'dd.MM.yyyy HH:mm')}</span>
+          <span className={CLS.value}>{format(item.reserveExpiresAt, 'dd.MM.yyyy, HH:mm')}</span>
         </div>
       )}
-
       {item.refundDate && (
         <div>
           <span className={CLS.label}>{t('refund_date')}</span>
-          <span className={CLS.value}>{format(item.refundDate, 'dd.MM.yyyy HH:mm')}</span>
+          <span className={CLS.value}>{format(item.refundDate, 'dd.MM.yyyy, HH:mm')}</span>
         </div>
       )}
-
       {item.totalRefundAmount && item.totalRefundAmount !== '0' && (
         <div>
           <span className={CLS.label}>{t('refund_amount')}</span>
-          <span className={CLS.value}>{item.totalRefundAmount}</span>
+          <span className={CLS.value}> {Math.floor(Number(item.totalRefundAmount || 0))}</span>
         </div>
       )}
-
       {item.carrierName && (
         <div>
           <span className={CLS.label}>{t('carrier')}</span>
           <span className={CLS.value}>{item.carrierName}</span>
         </div>
       )}
-
       {item.carrierPhone && (
         <div>
           <span className={CLS.label}>{t('carrier_phone')}</span>
@@ -77,21 +73,18 @@ export default function OrderDetails({ item, tickets }: Props) {
           </div>
         </div>
       )}
-
       {item.busModel && (
         <div>
           <span className={CLS.label}>{t('bus_model')}</span>
           <span className={CLS.value}>{item.busModel}</span>
         </div>
       )}
-
       {item.busNumber && (
         <div>
           <span className={CLS.label}>{t('bus_number')}</span>
           <span className={CLS.value}>{item.busNumber}</span>
         </div>
       )}
-
       {item.baggageRules?.length ? (
         <div>
           <span className={CLS.label}>{t('baggage_rules')}</span>
@@ -102,24 +95,31 @@ export default function OrderDetails({ item, tickets }: Props) {
           </ul>
         </div>
       ) : null}
-
       {item.refundRules?.length ? (
         <div>
           <span className={CLS.label}>{t('refund_rules')}</span>
           <ul className={CLS.list}>
             {item.refundRules.map((rule, idx) => (
-              <li key={idx}>{rule}</li>
+              <li key={idx} className="text-[12px]">
+                {rule}
+              </li>
             ))}
           </ul>
         </div>
       ) : null}
 
-      {!!tickets ? (
+      {orderStatus && (
         <div>
-          <span className={CLS.label}>Квитки</span>
+          <span className={CLS.label}>{t('payment_status')}</span>
+          <span className={CLS.value}>{tpr(`errors.${orderStatus}`)}</span>
+        </div>
+      )}
+
+      {!!tickets && (
+        <div>
           <div className={CLS.list}>{tickets}</div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

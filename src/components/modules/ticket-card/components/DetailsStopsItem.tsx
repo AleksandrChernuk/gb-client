@@ -1,4 +1,5 @@
 import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 
@@ -6,6 +7,7 @@ type Props = {
   isFirst?: boolean;
   isLast?: boolean;
   bus_changes?: boolean;
+  classNameItemContainer?: string;
   route: {
     departure_date_time: string | null | undefined;
     arrival_date_time: string | null | undefined;
@@ -15,7 +17,7 @@ type Props = {
   };
 };
 
-export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }: Props) {
+export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route, classNameItemContainer }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { departure_date_time, arrival_date_time, location_name, station_name, station_address } = route;
   const departureTime = format(departure_date_time || new Date(), 'HH:mm');
@@ -23,7 +25,7 @@ export default function DetailsStopsItem({ isFirst, isLast, bus_changes, route }
 
   return (
     <div
-      className={`relative flex items-start justify-start ${isLast && 'overflow-hidden z-10 bg-slate-50 tablet:bg-white dark:bg-slate-900'}`}
+      className={`relative flex items-start justify-start ${isLast && cn('overflow-hidden z-10 bg-slate-50 tablet:bg-white dark:bg-slate-900', classNameItemContainer)}`}
     >
       <div
         className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px]' : 'text-xs font-bold tracking-normal leading-[18px]'} text-slate-700 dark:text-slate-50 mr-9 min-w-[40px] max-w-[40px]`}

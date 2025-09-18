@@ -77,11 +77,27 @@ export default function Details({ id }: Props) {
           </div>
         </div>
 
-        <DetailsStops id={id} />
+        <DetailsStops
+          stops={ticketDetails.details?.stops}
+          to_station_address={ticketDetails?.departure.stationAddress}
+          to_station_name={ticketDetails?.departure?.stationName}
+          to_location_name={
+            ticketDetails && extractLocationDetails(ticketDetails?.departure?.fromLocation, currentLocale).locationName
+          }
+          to_departure_date_time={ticketDetails?.departure.dateTime}
+          to_arrival_date_time={ticketDetails?.departure.dateTime}
+          from_station_address={ticketDetails?.arrival.stationAddress}
+          from_station_name={ticketDetails?.arrival?.stationName}
+          from_location_name={
+            ticketDetails && extractLocationDetails(ticketDetails?.arrival?.toLocation, currentLocale).locationName
+          }
+          from_departure_date_time={ticketDetails?.arrival.dateTime}
+          from_arrival_date_time={ticketDetails?.arrival.dateTime}
+        />
       </div>
 
       <div className="space-y-4">
-        {!!ticketDetails?.details?.luggageRules && (
+        {!!ticketDetails?.details?.luggageRules && ticketDetails?.details?.luggageRules.length !== 0 && (
           <DetailsList label={t('luggage')} listClassName="">
             <DetailsItem>{toArray(ticketDetails.details.luggageRules).join(', ')}</DetailsItem>
           </DetailsList>
@@ -115,6 +131,7 @@ export default function Details({ id }: Props) {
             <DetailsItem>{toArray(ticketDetails?.details?.amenities).join(', ')}</DetailsItem>
           )}
         </DetailsList>
+
         {showBusDetails && (
           <DetailsList label={t('bus')} listClassName=" flex-wrap">
             <>

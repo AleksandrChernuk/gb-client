@@ -155,6 +155,7 @@
     "open_pdf_link": "Ticket link",
     "e_ticket_link": "Electronic ticket",
     "Payment is pending": "Payment is pending",
-    "error_occurred": "An error occurred"
+    "error_occurred": "An error occurred",
+    "no_payments_find": "No payments found"
   }
 }
