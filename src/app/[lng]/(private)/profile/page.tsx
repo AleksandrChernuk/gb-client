@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import ProfileSettingsPage from '@/components/pages/profile/settings';
+import ProfileSettingsPage from '@/components/modules/profile/settings';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 

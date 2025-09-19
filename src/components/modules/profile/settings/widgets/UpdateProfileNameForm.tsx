@@ -14,7 +14,7 @@ import { profileNameSchema } from '@/schemas/profile.schemas';
 import { toast } from 'sonner';
 import { mapServerError } from '@/utils/mapServerError';
 import { updateUser } from '@/actions/auth.service';
-import ProfileFormActions from '../components/ProfileFormActions';
+import ProfileFormActions from '../ui/ProfileFormActions';
 
 const UpdateProfileNameForm = () => {
   const locale = useLocale();

@@ -4,12 +4,12 @@ import { getCurrentTrips } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
 import { UserCurrentTripType } from '@/types/profile.trips';
 import { useLocale, useTranslations } from 'next-intl';
-import { TripCard } from '../modules/TripCard';
+import { TripCard } from './TripCard';
 import { useQuery } from '@tanstack/react-query';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { SkeletonCards } from '@/components/shared/SkeletonCards';
 
-const CurrentTrips = () => {
+const FutureTrips = () => {
   const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
   const t = useTranslations(MESSAGE_FILES.PROFILE);
@@ -59,4 +59,4 @@ const CurrentTrips = () => {
   );
 };
 
-export default CurrentTrips;
+export default FutureTrips;

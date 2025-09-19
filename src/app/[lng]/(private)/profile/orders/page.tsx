@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import OrdersPage from '@/components/pages/profile/orders';
+import OrdersPage from '@/components/modules/profile/orders';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 

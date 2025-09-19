@@ -1,39 +1,39 @@
 'use client';
 
-import { getUserCustomerAndPayments } from '@/actions/user.services.client';
+import { getUserOrders } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
-import { IUserPaymentsResponse } from '@/types/payments.Info.types';
+import { IUserOrdersResponse } from '@/types/payments.Info.types';
 import { useLocale } from 'next-intl';
-import PaymentsCard from './components/PaymentsCard';
 import MainLoader from '@/components/shared/MainLoader';
-import NoTripsFind from '@/components/shared/NoTripsFind';
 import TryAgain from '@/components/shared/TryAgain';
+import OrderCart from './widgets/OrderCart';
+import NoTripsFind from '@/components/shared/NoTripsFind';
+import { Pagination } from '@/components/shared/Pagination';
 import { usePaginatedQuery } from '@/hooks/usePaginatedQuery';
 import { SkeletonCards } from '@/components/shared/SkeletonCards';
-import { Pagination } from '@/components/shared/Pagination';
+import { isNoTripsError } from '../common/helpers';
 
-const perPage = 5;
+const perPage = 10;
 
-const PaymentsPage = () => {
+const OrdersPage = () => {
   const user = useUserStore((state) => state.currentUser);
   const locale = useLocale();
 
-  const { data, isLoading, isFetching, isError, currentPage, handlePageChange, totalPages } =
-    usePaginatedQuery<IUserPaymentsResponse>({
-      baseKey: ['payments', user?.id, locale],
+  const { data, isLoading, isFetching, isError, error, currentPage, handlePageChange, totalPages } =
+    usePaginatedQuery<IUserOrdersResponse>({
+      baseKey: ['orders', user?.id, locale],
       enabled: Boolean(user?.id),
       perPage,
       initialPage: 1,
-      fetchPage: (page, perPageArg) =>
-        getUserCustomerAndPayments({ userId: user!.id, locale, page, perPage: perPageArg }),
+      fetchPage: (page, perPageArg) => getUserOrders({ userId: user!.id, locale, page, perPage: perPageArg }),
       getTotalPages: (d) => d?.pagination?.totalPages ?? 1,
     });
 
   if (!user?.id) return <MainLoader className="min-h-full flex items-center justify-center" />;
 
-  if (isError) {
+  if (isError && isNoTripsError(error)) {
     return (
-      <NoTripsFind text="no_payments_find" className="dark:bg-slate-700 min-h-full flex items-center justify-center" />
+      <NoTripsFind text="no_travel_find" className="dark:bg-slate-700 min-h-full flex items-center justify-center" />
     );
   }
 
@@ -47,15 +47,15 @@ const PaymentsPage = () => {
         <div className="container mx-auto max-w-[805px] py-6">
           {isLoading || isFetching ? (
             <SkeletonCards items={perPage} />
-          ) : !data || !data.data.payments.length ? (
+          ) : !data || !data.data?.length ? (
             <NoTripsFind
               text="no_travel_find"
               className="dark:bg-slate-700 min-h-full flex items-center justify-center"
             />
           ) : (
             <div className="space-y-8">
-              {data.data.payments.map((element) => (
-                <PaymentsCard key={element.paymentId} item={element} customer={data.data.customer} />
+              {data.data.map((element) => (
+                <OrderCart key={element.orderId} item={element} />
               ))}
             </div>
           )}
@@ -74,4 +74,4 @@ const PaymentsPage = () => {
   );
 };
 
-export default PaymentsPage;
+export default OrdersPage;

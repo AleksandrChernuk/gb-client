@@ -21,7 +21,7 @@ import { CircleAlert } from 'lucide-react';
 import ViewPassword from '@/components/shared/ViewPassword';
 
 import React from 'react';
-import ProfileFormActions from '../components/ProfileFormActions';
+import ProfileFormActions from '../ui/ProfileFormActions';
 import { useRouter } from '@/i18n/routing';
 
 const UpdateProfileEmailForm = () => {

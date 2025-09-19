@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
-import CurrentTrips from './componets/CurrentTrips';
-import CompletedTrips from './componets/CompletedTrips';
+import CompletedTrips from './widgets/CompletedTrips';
+import FutureTrips from './widgets/FutureTrips';
 
 export default async function TripsPage() {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
@@ -14,7 +14,7 @@ export default async function TripsPage() {
         <TabsTrigger value="all">{t('all_trips')}</TabsTrigger>
       </TabsList>
       <TabsContent value="upcoming">
-        <CurrentTrips />
+        <FutureTrips />
       </TabsContent>
       <TabsContent value="all">
         <CompletedTrips />

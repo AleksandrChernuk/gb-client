@@ -1,4 +1,4 @@
-import ProfilePage from '@/components/pages/profile/settings';
+import ProfilePage from '@/components/modules/profile/settings';
 import { Container } from '@/components/shared/Container';
 import ProfileNavTabs from '@/components/shared/ProfileNavTabs';
 import { MESSAGE_FILES } from '@/config/message.file.constans';

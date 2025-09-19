@@ -56,6 +56,21 @@
     "all_trips": "Все поездки",
     "upcoming_trips": "Запланированные поездки",
     "error_load_trips": "Произошла ошибка при загрузке",
-    "no_current_trips": "Нет поездок"
+    "no_current_trips": "Нет поездок",
+
+    "profile_payment_payer": "Плательщик (ФИО)",
+    "profile_payment_amount": "Сумма транзакции",
+    "profile_payment_orderNumber": "Номер заказа",
+    "profile_payment_paymentDate": "Дата и время платежа",
+    "profile_payment_route": "Маршрут",
+    "profile_payment_provider": "Платёжный сервис",
+    "profile_payment_phone": "Телефон",
+    "profile_payment_email": "Электронная почта",
+    "profile_payment_birthdate": "Дата рождения",
+    "profile_payment_refunds": "Возвраты",
+    "profile_payment_refundDate": "Дата и время возврата",
+    "profile_payment_refundRoute": "Маршрут",
+    "profile_payment_refundProvider": "Платёжный сервис",
+    "profile_payment_refundAmount": "Сумма транзакции"
   }
 }

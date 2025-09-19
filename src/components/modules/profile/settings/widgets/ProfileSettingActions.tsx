@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import DeleteProfileAlert from '../components/DeleteProfileAlert';
-import TwooFaAction from '../components/TwooFaAction';
-import ChangePasswordAction from '../components/ChangePasswordAction';
-import DeleteProfileAction from '../components/DeleteProfileAction';
+import TwooFaAction from '../ui/TwooFaAction';
+import ChangePasswordAction from '../ui/ChangePasswordAction';
+import DeleteProfileAction from '../ui/DeleteProfileAction';
+import DeleteProfileAlert from '../ui/DeleteProfileAlert';
 
 type UpdateFormType = 'delete' | null;
 

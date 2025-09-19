@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import PaymentsPage from '@/components/pages/profile/payments';
+import PaymentsPage from '@/components/modules/profile/payments';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { getTranslations } from 'next-intl/server';
 import { unstable_noStore as noStore } from 'next/cache';

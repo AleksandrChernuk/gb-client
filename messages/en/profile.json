@@ -55,6 +55,21 @@
     "all_trips": "All trips",
     "upcoming_trips": "Upcoming trips",
     "error_load_trips": "An error occurred while loading",
-    "no_current_trips": "No trips"
+    "no_current_trips": "No trips",
+
+    "profile_payment_payer": "Payer (Full Name)",
+    "profile_payment_amount": "Transaction Amount",
+    "profile_payment_orderNumber": "Order Number",
+    "profile_payment_paymentDate": "Payment Date & Time",
+    "profile_payment_route": "Route",
+    "profile_payment_provider": "Payment Provider",
+    "profile_payment_phone": "Phone",
+    "profile_payment_email": "Email",
+    "profile_payment_birthdate": "Date of Birth",
+    "profile_payment_refunds": "Refunds",
+    "profile_payment_refundDate": "Refund Date & Time",
+    "profile_payment_refundRoute": "Refund Route",
+    "profile_payment_refundProvider": "Refund Provider",
+    "profile_payment_refundAmount": "Refund Amount"
   }
 }

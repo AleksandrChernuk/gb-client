@@ -57,6 +57,21 @@
     "all_trips": "Усі поїздки",
     "upcoming_trips": "Заплановані поїздки",
     "error_load_trips": "Сталася помилка при завантаженні",
-    "no_current_trips": "Немає поїздок"
+    "no_current_trips": "Немає поїздок",
+
+    "payment_payer": "Платник (ПІБ)",
+    "payment_amount": "Сума транзакції",
+    "payment_orderNumber": "Номер замовлення",
+    "payment_paymentDate": "Дата й час платежу",
+    "payment_route": "Маршрут",
+    "payment_provider": "Платіжний сервіс",
+    "payment_phone": "Телефон",
+    "payment_email": "Електронна пошта",
+    "payment_birthdate": "Дата народження",
+    "payment_refunds": "Повернення",
+    "payment_refundDate": "Дата й час повернення",
+    "payment_refundRoute": "Маршрут",
+    "payment_refundProvider": "Платіжний сервіс",
+    "payment_refundAmount": "Сума транзакції"
   }
 }

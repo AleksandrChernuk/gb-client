@@ -4,12 +4,12 @@ import { format } from 'date-fns';
 
 import { UserCurrentTripType } from '@/types/profile.trips';
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
-import TicketRoute from '../componets/TicketRoute';
+import TicketRoute from '../ui/TicketRoute';
 
 import TicketDetailsToggle from '@/components/modules/ticket-card/components/TicketDetailsToggle';
 
-import MobileDetailTripCard from './MobileDetailTripCard';
-import Details from './Details';
+import MobileDetailTripCard from '../ui/MobileDetailTripCard';
+import Details from '../ui/Details';
 import MainLoader from '@/components/shared/MainLoader';
 import { useDetails } from '../hooks/useDetails';
 import { useMediaQuery } from '@/hooks/useMediaQuery';

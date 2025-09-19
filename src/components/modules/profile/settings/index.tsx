@@ -1,7 +1,7 @@
-import ProfileSettingsCard from './components/ProfileSettingsCard';
-import ProfileSettingActions from './modules/ProfileSettingActions';
-import UpdateProfileEmailForm from './modules/UpdateProfileEmailForm';
-import UpdateProfileNameForm from './modules/UpdateProfileNameForm';
+import ProfileSettingsCard from './ui/ProfileSettingsCard';
+import ProfileSettingActions from './widgets/ProfileSettingActions';
+import UpdateProfileEmailForm from './widgets/UpdateProfileEmailForm';
+import UpdateProfileNameForm from './widgets/UpdateProfileNameForm';
 
 const ProfileSettingsPage = () => {
   return (

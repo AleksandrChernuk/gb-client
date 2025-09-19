@@ -8,15 +8,15 @@ import { IconRouteLeft } from '@/assets/icons/IconRouteLeft';
 import { IconRouteRigth } from '@/assets/icons/IconRouteRigth'; // проверь название
 
 type Props = {
-  duration: string; // ожидаем формат "HH:MM"
+  duration: string;
   location_from: string;
   location_from_name: string;
   location_from_address: string;
-  date_time_from: string; // "HH:mm"
+  date_time_from: string;
   location_to: string;
   location_to_name: string;
-  location_to_address: string; // <-- Переименовал для ясности
-  date_time_to: string; // "HH:mm"
+  location_to_address: string;
+  date_time_to: string;
 };
 
 export default function TicketRoute({
@@ -33,7 +33,7 @@ export default function TicketRoute({
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const [h, m] = (duration ?? '').split(':'); // безопасный сплит
+  const [h, m] = (duration ?? '').split(':');
 
   return (
     <>

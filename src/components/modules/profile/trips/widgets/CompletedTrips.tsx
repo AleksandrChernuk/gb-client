@@ -5,13 +5,13 @@ import { getCompletedTrips } from '@/actions/user.services.client';
 import { useLocale } from 'next-intl';
 import { useUserStore } from '@/store/useUser';
 import MainLoader from '@/components/shared/MainLoader';
-import { TripCard } from '../modules/TripCard';
+import { TripCard } from './TripCard';
 import { Pagination } from '@/components/shared/Pagination';
 import { usePaginatedQuery } from '@/hooks/usePaginatedQuery';
 import NoTripsFind from '@/components/shared/NoTripsFind';
-import { isNoTripsError } from '../../orders/helpers/isNoTripsError';
 import TryAgain from '@/components/shared/TryAgain';
 import { SkeletonCards } from '@/components/shared/SkeletonCards';
+import { isNoTripsError } from '../../common/helpers';
 
 const perPage = 5;
 
