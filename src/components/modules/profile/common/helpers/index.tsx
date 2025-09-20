@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { format } from 'date-fns';
 
-export const formatMoney = (value: string, currency?: string) => {
+export const formatMoney = (value: string | undefined | null, currency?: string) => {
   const amount = Math.max(0, Number(value ?? 0));
 
   const curr = currency?.toUpperCase() || 'UAH';
@@ -17,6 +17,15 @@ export const formatMoney = (value: string, currency?: string) => {
 export const formatDatePayment = (date: string) => {
   const updatedAt = date ? new Date(date as unknown as string) : null;
   return updatedAt ? format(updatedAt, 'dd.MM.yyyy HH:mm') : '—';
+};
+
+export const formatDate = (date: string) => {
+  const updatedAt = date ? new Date(date as unknown as string) : null;
+  return updatedAt ? format(updatedAt, 'dd.MM.yyyy') : '—';
+};
+export const formatTime = (date: string) => {
+  const updatedAt = date ? new Date(date as unknown as string) : null;
+  return updatedAt ? format(updatedAt, 'HH:mm') : '—';
 };
 
 export const transformFullName = (
@@ -60,4 +69,13 @@ export const isNoTripsError = (err: unknown) => {
     (err as any)?.cause?.message ||
     '';
   return /Customer data not found/i.test(msg);
+};
+
+export const parseErrorKey = (msg: string) => {
+  switch (msg) {
+    case 'Payment is pending':
+      return 'payment_pending';
+    default:
+      return 'error_occurred';
+  }
 };

@@ -2,10 +2,14 @@
 
 import { UserOrdersType } from '@/types/payments.Info.types';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { ReactElement } from 'react';
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
+import { MetaField } from '../../common/components/MetaField';
+import { formatMoney } from '../../common/helpers';
+import { S } from '../../common/styles/style';
+import { MESSAGE_FILES } from '@/config/message.file.constans';
 
 type Props = {
   item: UserOrdersType;
@@ -20,88 +24,77 @@ const CLS = {
 };
 
 export default function OrderDetails({ item, tickets, orderStatus }: Props) {
-  const t = useTranslations(MESSAGE_FILES.PROFILE);
+  const t = useTranslations();
   const tpr = useTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
 
   return (
-    <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
-      {item.routeName && (
-        <div>
-          <span className={CLS.label}>{t('route')}</span>
-          <span className={CLS.value}>{item.routeName}</span>
-        </div>
-      )}
+    <div className="grid grid-cols-2 tablet:grid-cols-3 gap-4">
+      {item.routeName && <MetaField label={TRANSLATION_KEYS.profile.route} value={item.routeName} />}
       {item.paymentDate && (
-        <div>
-          <span className={CLS.label}>{t('payment_date')}</span>
-          <span className={CLS.value}>{format(item.paymentDate, 'dd.MM.yyyy, HH:mm')}</span>
-        </div>
+        <MetaField
+          label={TRANSLATION_KEYS.profile.payment_date}
+          value={format(item.paymentDate, 'dd.MM.yyyy, HH:mm')}
+        />
       )}
       {item.reserveExpiresAt && (
-        <div>
-          <span className={CLS.label}>{t('reserve_expires_at')}</span>
-          <span className={CLS.value}>{format(item.reserveExpiresAt, 'dd.MM.yyyy, HH:mm')}</span>
-        </div>
+        <MetaField
+          label={TRANSLATION_KEYS.profile.reserve_expires_at}
+          value={format(item.reserveExpiresAt, 'dd.MM.yyyy, HH:mm')}
+        />
       )}
       {item.refundDate && (
-        <div>
-          <span className={CLS.label}>{t('refund_date')}</span>
-          <span className={CLS.value}>{format(item.refundDate, 'dd.MM.yyyy, HH:mm')}</span>
-        </div>
+        <MetaField label={TRANSLATION_KEYS.profile.refund_date} value={format(item.refundDate, 'dd.MM.yyyy, HH:mm')} />
       )}
       {item.totalRefundAmount && item.totalRefundAmount !== '0' && (
-        <div>
-          <span className={CLS.label}>{t('refund_amount')}</span>
-          <span className={CLS.value}> {Math.floor(Number(item.totalRefundAmount || 0))}</span>
-        </div>
+        <MetaField
+          label={TRANSLATION_KEYS.profile.refund_amount}
+          value={formatMoney(item.totalRefundAmount, item.currency)}
+        />
       )}
-      {item.carrierName && (
-        <div>
-          <span className={CLS.label}>{t('carrier')}</span>
-          <span className={CLS.value}>{item.carrierName}</span>
-        </div>
-      )}
+
+      {item.carrierName && <MetaField label={TRANSLATION_KEYS.profile.carrier} value={item.carrierName} />}
+
       {item.carrierPhone && (
         <div>
-          <span className={CLS.label}>{t('carrier_phone')}</span>
+          <p className={S.label}>{t(TRANSLATION_KEYS.profile.carrier_phone)}</p>
           <div className="flex flex-col gap-1">
             {item.carrierPhone.split(',').map((phone, idx) => (
-              <Link key={idx} href={`tel:${phone.trim()}`} className={CLS.value + ' hover:underline'}>
+              <Link
+                key={idx}
+                href={`tel:${phone.trim()}`}
+                className={CLS.value + ' hover:underline'}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+              >
                 {phone.trim()}
+                <MetaField value={phone.trim()} />
               </Link>
             ))}
           </div>
         </div>
       )}
-      {item.busModel && (
-        <div>
-          <span className={CLS.label}>{t('bus_model')}</span>
-          <span className={CLS.value}>{item.busModel}</span>
-        </div>
-      )}
-      {item.busNumber && (
-        <div>
-          <span className={CLS.label}>{t('bus_number')}</span>
-          <span className={CLS.value}>{item.busNumber}</span>
-        </div>
-      )}
+      {item.busModel && <MetaField label={TRANSLATION_KEYS.profile.bus_model} value={item.busModel} />}
+
+      {item.busNumber && <MetaField label={TRANSLATION_KEYS.profile.bus_number} value={item.busNumber} />}
+
       {item.baggageRules?.length ? (
-        <div>
-          <span className={CLS.label}>{t('baggage_rules')}</span>
+        <div className="col-span-2">
+          <p className={CLS.label}>{t(TRANSLATION_KEYS.profile.baggage_rules)}</p>
           <ul className={CLS.list}>
             {item.baggageRules.map((rule, idx) => (
-              <li key={idx}>{rule}</li>
+              <li key={idx}>{<MetaField value={rule} />}</li>
             ))}
           </ul>
         </div>
       ) : null}
+
       {item.refundRules?.length ? (
-        <div>
-          <span className={CLS.label}>{t('refund_rules')}</span>
+        <div className="col-span-2">
+          <span className={CLS.label}>{TRANSLATION_KEYS.profile.refund_rules}</span>
           <ul className={CLS.list}>
             {item.refundRules.map((rule, idx) => (
               <li key={idx} className="text-[12px]">
-                {rule}
+                <MetaField value={rule} />
               </li>
             ))}
           </ul>
@@ -109,14 +102,11 @@ export default function OrderDetails({ item, tickets, orderStatus }: Props) {
       ) : null}
 
       {orderStatus && (
-        <div>
-          <span className={CLS.label}>{t('payment_status')}</span>
-          <span className={CLS.value}>{tpr(`errors.${orderStatus}`)}</span>
-        </div>
+        <MetaField label={TRANSLATION_KEYS.profile.payment_status} value={tpr(`errors.${orderStatus}`)} />
       )}
 
       {!!tickets && (
-        <div>
+        <div className="col-span-2 sm:col-span-1">
           <div className={CLS.list}>{tickets}</div>
         </div>
       )}

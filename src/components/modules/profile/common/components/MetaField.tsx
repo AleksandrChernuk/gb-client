@@ -2,14 +2,23 @@
 
 import { useTranslations } from 'next-intl';
 import { S } from '../styles/style';
+import { cn } from '@/lib/utils';
 
-export const MetaField = ({ label, value }: { label: string; value?: React.ReactNode }) => {
+type Props = {
+  label?: string;
+  value?: React.ReactNode;
+  classNamesLabel?: string;
+  classNamesValue?: string;
+  classNamesBlock?: string;
+};
+
+export const MetaField = ({ label, value, classNamesLabel, classNamesValue, classNamesBlock }: Props) => {
   const t = useTranslations();
 
   return (
-    <div>
-      <p className={S.label}>{t(label)}</p>
-      <p className={S.value}>{value ?? '—'}</p>
+    <div className={cn('', classNamesBlock)}>
+      {!!label && <p className={cn(S.label, classNamesLabel)}>{t(label)}</p>}
+      <p className={cn(S.value, classNamesValue)}>{value ?? '—'}</p>
     </div>
   );
 };

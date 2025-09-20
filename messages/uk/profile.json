@@ -46,7 +46,6 @@
 
     "reserve_expires_at": "Резервація дійсна до",
     "refund_date": "Дата повернення",
-    "refund_amount": "Сума повернення",
     "carrier": "Перевізник",
     "bus_model": "Модель автобуса",
     "bus_number": "Номер автобуса",
@@ -58,11 +57,14 @@
     "upcoming_trips": "Заплановані поїздки",
     "error_load_trips": "Сталася помилка при завантаженні",
     "no_current_trips": "Немає поїздок",
-
+    "total_amount": "Сума замовлення",
     "payment_payer": "Платник (ПІБ)",
     "payment_amount": "Сума транзакції",
     "payment_orderNumber": "Номер замовлення",
     "payment_paymentDate": "Дата й час платежу",
+    "date_registration": "Дата оформлення",
+    "time_registration": "Час оформлення",
+
     "payment_route": "Маршрут",
     "payment_provider": "Платіжний сервіс",
     "payment_phone": "Телефон",

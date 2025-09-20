@@ -43,6 +43,8 @@
     "route": "Маршрут",
     "payment_date": "Дата оплаты",
     "payment_status": "Статус оплаты",
+    "date_registration": "Дата оформления",
+    "time_registration": "Время оформления",
 
     "reserve_expires_at": "Бронь действует до",
     "carrier": "Перевозчик",
@@ -57,7 +59,7 @@
     "upcoming_trips": "Запланированные поездки",
     "error_load_trips": "Произошла ошибка при загрузке",
     "no_current_trips": "Нет поездок",
-
+    "total_amount": "Сумма заказа",
     "profile_payment_payer": "Плательщик (ФИО)",
     "profile_payment_amount": "Сумма транзакции",
     "profile_payment_orderNumber": "Номер заказа",

@@ -43,6 +43,8 @@
     "route": "Route",
     "payment_date": "Payment date",
     "payment_status": "Payment Status",
+    "date_registration": "Date and time of registration",
+    "time_registration": "Time of registration",
 
     "reserve_expires_at": "Reservation valid until",
     "carrier": "Carrier",
@@ -56,7 +58,7 @@
     "upcoming_trips": "Upcoming trips",
     "error_load_trips": "An error occurred while loading",
     "no_current_trips": "No trips",
-
+    "total_amount": "Total amount",
     "profile_payment_payer": "Payer (Full Name)",
     "profile_payment_amount": "Transaction Amount",
     "profile_payment_orderNumber": "Order Number",

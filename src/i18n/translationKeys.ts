@@ -1,5 +1,13 @@
 export const TRANSLATION_KEYS = {
+  common: {
+    collapse_details: 'common.collapse_details',
+    details: 'common.details',
+  },
+
   profile: {
+    date_registration: 'profile.date_registration',
+    time_registration: 'profile.time_registration',
+    total_amount: 'profile.total_amount',
     my_account: 'profile.my_account',
     trips_hystori: 'profile.trips_hystori',
     reviews: 'profile.reviews',

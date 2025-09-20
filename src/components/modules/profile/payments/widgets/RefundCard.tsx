@@ -1,4 +1,4 @@
-import { TRANSLATION_KEYS } from '@/i18n/ translationKeys';
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
 import { MetaField } from '../../common/components/MetaField';
 import { S } from '../../common/styles/style';
 

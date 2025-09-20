@@ -12,8 +12,8 @@ export const S = {
   divider: 'my-4 h-px w-full bg-slate-200 dark:bg-slate-700',
 
   refundCard: 'grid grid-cols-2 lg:grid-cols-4 gap-4 p-2 border border-green-300 dark:border-green-100 rounded-2xl',
-  label: 'text-xs tracking-wide dark:text-green-600 text-green-300',
-  value: 'mt-1 text-base font-medium text-slate-800 dark:text-slate-50',
+  label: 'truncate text-xs tracking-wide dark:text-green-600 text-green-300',
+  value: 'truncate text-base font-medium text-slate-800 dark:text-slate-50',
 
   metaValueRow: 'mt-1 flex items-center gap-2 text-base font-medium text-slate-800 dark:text-slate-50',
 

@@ -11,7 +11,7 @@
     "ticket_filename": "Билет",
     "download_order": "Скачать заказ",
 
-    "errors": {
+    "payment_result_message": {
       "Order paid": "Оплачено",
       "Order created": "Забронировано",
       "Payment is pending": "Ожидает оплаты",

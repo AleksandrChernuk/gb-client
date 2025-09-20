@@ -14,7 +14,7 @@ import {
   transformFullName,
 } from '../../common/helpers';
 import { S } from '../../common/styles/style';
-import { TRANSLATION_KEYS } from '@/i18n/ translationKeys';
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
 import { MetaField } from '../../common/components/MetaField';
 import { useTranslations } from 'next-intl';
 
@@ -76,7 +76,7 @@ export default function PaymentsCard({ item, customer }: Props) {
 
       <div className={S.divider} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <MetaField label={TRANSLATION_KEYS.profile.payment_email} value={customer.phone} />
 
         <MetaField label={TRANSLATION_KEYS.profile.payment_email} value={customer?.phone} />
