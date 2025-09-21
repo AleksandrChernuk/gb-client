@@ -2,6 +2,9 @@ export const TRANSLATION_KEYS = {
   common: {
     collapse_details: 'common.collapse_details',
     details: 'common.details',
+    customer_not_found: 'common.customer_not_found',
+    not_found: 'common.not_found',
+    unknown_error: 'common.unknown_error',
   },
 
   profile: {

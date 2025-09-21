@@ -168,6 +168,9 @@
     "e_ticket_link": "Електронний квиток",
     "error_occurred": "Сталася помилка",
     "Payment is pending": "Оплата очікується",
-    "no_payments_find": "Платежів не знайдено"
+    "no_payments_find": "Платежів не знайдено",
+    "customer_not_found": "Записів не знайдено",
+    "not_found": "Не знайдено",
+    "unknown_error": "Невідома помилка"
   }
 }

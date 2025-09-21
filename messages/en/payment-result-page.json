@@ -11,7 +11,7 @@
     "ticket_filename": "Ticket",
     "download_order": "Download order",
 
-    "payment_result_message": {
+    "errors": {
       "Order paid": "Order paid",
       "Order created": "Order created",
       "Payment is pending": "Payment is pending",

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
 import { format } from 'date-fns';
 
 export const formatMoney = (value: string | undefined | null, currency?: string) => {
@@ -71,11 +72,27 @@ export const isNoTripsError = (err: unknown) => {
   return /Customer data not found/i.test(msg);
 };
 
-export const parseErrorKey = (msg: string) => {
-  switch (msg) {
-    case 'Payment is pending':
-      return 'payment_pending';
-    default:
-      return 'error_occurred';
+export const parseErrorKey = (err: unknown): string => {
+  const msg =
+    typeof err === 'string'
+      ? err
+      : err instanceof Error
+        ? err.message
+        : typeof (err as any)?.message === 'string'
+          ? (err as any).message
+          : '';
+
+  if (/customer data not found/i.test(msg) || /customer_not_found/i.test(msg)) {
+    return TRANSLATION_KEYS.common.customer_not_found;
   }
+
+  if (/not found/i.test(msg)) {
+    return TRANSLATION_KEYS.common.not_found;
+  }
+
+  return TRANSLATION_KEYS.common.unknown_error;
+};
+
+export const hasMessage = (e: unknown): e is { message: string } => {
+  return typeof e === 'object' && e !== null && 'message' in e && typeof (e as any).message === 'string';
 };

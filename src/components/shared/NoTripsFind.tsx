@@ -3,8 +3,6 @@
 import Image from 'next/image';
 import noTravelImg from '@/assets/images/an-empty-bus-stop.avif';
 
-import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
 import { cn } from '@/lib/utils';
 
 type Props = {
@@ -13,8 +11,6 @@ type Props = {
 };
 
 const NoTripsFind = ({ className, text }: Props) => {
-  const t = useTranslations(MESSAGE_FILES.COMMON);
-
   return (
     <div
       className={cn(
@@ -30,9 +26,7 @@ const NoTripsFind = ({ className, text }: Props) => {
         alt="peaple wait buses"
         className="mx-auto overflow-hidden rounded-3xl w-[313px] h-auto"
       />
-      <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50 ">
-        {t(text)}!
-      </h3>
+      <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] text-slate-700 dark:text-slate-50 ">{text}</h3>
     </div>
   );
 };

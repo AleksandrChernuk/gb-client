@@ -62,12 +62,11 @@ export default function OrderDetails({ item, tickets, orderStatus }: Props) {
               <Link
                 key={idx}
                 href={`tel:${phone.trim()}`}
-                className={CLS.value + ' hover:underline'}
+                className={S.value + ' hover:underline'}
                 target="_blank"
                 rel="nofollow noopener noreferrer"
               >
                 {phone.trim()}
-                <MetaField value={phone.trim()} />
               </Link>
             ))}
           </div>
@@ -82,7 +81,7 @@ export default function OrderDetails({ item, tickets, orderStatus }: Props) {
           <p className={CLS.label}>{t(TRANSLATION_KEYS.profile.baggage_rules)}</p>
           <ul className={CLS.list}>
             {item.baggageRules.map((rule, idx) => (
-              <li key={idx}>{<MetaField value={rule} />}</li>
+              <li key={idx}>{<MetaField classNamesValue="text-[12px]" value={rule} />}</li>
             ))}
           </ul>
         </div>
@@ -90,11 +89,11 @@ export default function OrderDetails({ item, tickets, orderStatus }: Props) {
 
       {item.refundRules?.length ? (
         <div className="col-span-2">
-          <span className={CLS.label}>{TRANSLATION_KEYS.profile.refund_rules}</span>
+          <span className={CLS.label}>{t(TRANSLATION_KEYS.profile.refund_rules)}</span>
           <ul className={CLS.list}>
             {item.refundRules.map((rule, idx) => (
-              <li key={idx} className="text-[12px]">
-                <MetaField value={rule} />
+              <li key={idx}>
+                <MetaField value={rule} classNamesValue="text-[12px]" />
               </li>
             ))}
           </ul>

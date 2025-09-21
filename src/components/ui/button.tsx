@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   [
-    // базовое
     'inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 rounded-2xl cursor-pointer',
     'disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]',
     'outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
@@ -24,7 +23,7 @@ const buttonVariants = cva(
 
         outline:
           'w-full h-auto border border-green-300 bg-inherit text-green-300 dark:text-slate-50 hover:bg-green-200/10 ' +
-          'dark:border-green-100 dark:hover:bg-green-200/10 dark:hover:border-green-200 active:border-green-200 dark:active:border-green-400 ' +
+          'dark:border-green-300 dark:hover:bg-green-200/10 dark:hover:border-green-200 active:border-green-200 dark:active:border-green-400 ' +
           'aria-selected:bg-green-300 aria-selected:text-white',
 
         secondary:
@@ -41,10 +40,10 @@ const buttonVariants = cva(
       },
 
       size: {
-        default: 'h-10 px-4 has-[>svg]:px-3',
+        default: 'h-8 px-4 has-[>svg]:px-3',
         sm: 'h-9 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-11 rounded-md px-6 has-[>svg]:px-4',
-        icon: 'size-10 has-[>svg]:px-0',
+        lg: 'h-8 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-8 has-[>svg]:px-0',
 
         secondary:
           'py-2 px-6 tablet:py-4 tablet:text-base font-bold leading-6 tracking-normal rounded-full min-w-[168px] min-h-[48px] tablet:max-h-[52px]',

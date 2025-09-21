@@ -30,13 +30,11 @@ export default function Details({ details, trip }: Props) {
     details.busName !== 'no_plan' || (details.busNumber && details.busNumber.trim() !== '') || showPictures;
   console.log(details);
   return (
-    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
+    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 mt-8 tablet:space-y-0">
       <div className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-start flex-col gap-2">
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] dark:text-green-100 text-green-300">
-              {t('route')}:
-            </h5>
+            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-green-300">{t('route')}:</h5>
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
               {` ${format(trip?.departureDateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
                     ${trip.fromCityName}`}

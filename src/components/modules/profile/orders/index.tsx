@@ -3,7 +3,7 @@
 import { getUserOrders } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
 import { IUserOrdersResponse } from '@/types/payments.Info.types';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import MainLoader from '@/components/shared/MainLoader';
 import TryAgain from '@/components/shared/TryAgain';
 import OrderCart from './widgets/OrderCart';
@@ -11,12 +11,14 @@ import NoTripsFind from '@/components/shared/NoTripsFind';
 import { Pagination } from '@/components/shared/Pagination';
 import { usePaginatedQuery } from '@/hooks/usePaginatedQuery';
 import { SkeletonCards } from '@/components/shared/SkeletonCards';
-import { isNoTripsError } from '../common/helpers';
+import { isNoTripsError, parseErrorKey } from '../common/helpers';
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
 
 const perPage = 10;
 
 const OrdersPage = () => {
   const user = useUserStore((state) => state.currentUser);
+  const t = useTranslations();
   const locale = useLocale();
 
   const { data, isLoading, isFetching, isError, error, currentPage, handlePageChange, totalPages } =
@@ -29,16 +31,19 @@ const OrdersPage = () => {
       getTotalPages: (d) => d?.pagination?.totalPages ?? 1,
     });
 
-  if (!user?.id) return <MainLoader className="min-h-full flex items-center justify-center" />;
+  if (!user?.id)
+    return (
+      <div className="h-full flex flex-col items-center justify-center">
+        <MainLoader />
+      </div>
+    );
 
   if (isError && isNoTripsError(error)) {
-    return (
-      <NoTripsFind text="no_travel_find" className="dark:bg-slate-700 min-h-full flex items-center justify-center" />
-    );
+    return <NoTripsFind text={t(parseErrorKey(error.message))} className="dark:bg-slate-700" />;
   }
 
   if (isError) {
-    return <TryAgain className="min-h-full flex items-center justify-center" />;
+    return <TryAgain className="dark:bg-slate-700" />;
   }
 
   return (
@@ -48,10 +53,7 @@ const OrdersPage = () => {
           {isLoading || isFetching ? (
             <SkeletonCards items={perPage} />
           ) : !data || !data.data?.length ? (
-            <NoTripsFind
-              text="no_travel_find"
-              className="dark:bg-slate-700 min-h-full flex items-center justify-center"
-            />
+            <NoTripsFind text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />
           ) : (
             <div className="space-y-8">
               {data.data.map((element) => (

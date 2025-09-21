@@ -3,7 +3,7 @@
 import { getUserCustomerAndPayments } from '@/actions/user.services.client';
 import { useUserStore } from '@/store/useUser';
 import { IUserPaymentsResponse } from '@/types/payments.Info.types';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import PaymentsCard from './widgets/PaymentsCard';
 import MainLoader from '@/components/shared/MainLoader';
 import NoTripsFind from '@/components/shared/NoTripsFind';
@@ -11,14 +11,17 @@ import TryAgain from '@/components/shared/TryAgain';
 import { usePaginatedQuery } from '@/hooks/usePaginatedQuery';
 import { SkeletonCards } from '@/components/shared/SkeletonCards';
 import { Pagination } from '@/components/shared/Pagination';
+import { TRANSLATION_KEYS } from '@/i18n/translationKeys';
+import { isNoTripsError, parseErrorKey } from '../common/helpers';
 
 const perPage = 5;
 
 const PaymentsPage = () => {
   const user = useUserStore((state) => state.currentUser);
+  const t = useTranslations();
   const locale = useLocale();
 
-  const { data, isLoading, isFetching, isError, currentPage, handlePageChange, totalPages } =
+  const { data, isLoading, isFetching, isError, error, currentPage, handlePageChange, totalPages } =
     usePaginatedQuery<IUserPaymentsResponse>({
       baseKey: ['payments', user?.id, locale],
       enabled: Boolean(user?.id),
@@ -29,16 +32,18 @@ const PaymentsPage = () => {
       getTotalPages: (d) => d?.pagination?.totalPages ?? 1,
     });
 
-  if (!user?.id) return <MainLoader className="min-h-full flex items-center justify-center" />;
-
-  if (isError) {
+  if (!user?.id)
     return (
-      <NoTripsFind text="no_payments_find" className="dark:bg-slate-700 min-h-full flex items-center justify-center" />
+      <div className="h-full flex flex-col items-center justify-center">
+        <MainLoader />
+      </div>
     );
-  }
 
+  if (isError && isNoTripsError(error)) {
+    return <NoTripsFind text={t(parseErrorKey(error.message))} className="dark:bg-slate-700" />;
+  }
   if (isError) {
-    return <TryAgain className="min-h-full flex items-center justify-center" />;
+    return <TryAgain className="dark:bg-slate-700" />;
   }
 
   return (
@@ -48,10 +53,7 @@ const PaymentsPage = () => {
           {isLoading || isFetching ? (
             <SkeletonCards items={perPage} />
           ) : !data || !data.data.payments.length ? (
-            <NoTripsFind
-              text="no_travel_find"
-              className="dark:bg-slate-700 min-h-full flex items-center justify-center"
-            />
+            <NoTripsFind text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />
           ) : (
             <div className="space-y-8">
               {data.data.payments.map((element) => (

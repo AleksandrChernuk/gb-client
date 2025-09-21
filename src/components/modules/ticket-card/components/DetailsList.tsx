@@ -13,7 +13,7 @@ export default function DetailsList({ label, children, className = '', listClass
 
   return (
     <div className={`space-y-1 ${className}`}>
-      <h5 className="text-sm font-bold tracking-normal leading-[18px] dark:text-green-100 text-green-300">{label}</h5>
+      <h5 className="text-sm font-bold tracking-normal leading-[18px] text-green-300">{label}</h5>
       <div className={cn('flex flex-col gap-1', listClassName)}>{children}</div>
     </div>
   );

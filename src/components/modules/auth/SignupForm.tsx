@@ -34,6 +34,7 @@ const SignupForm = () => {
       email: '',
       password: '',
     },
+    mode: 'onChange',
   });
 
   const onSubmit = async (value: z.infer<typeof signupSchema>) => {

@@ -13,7 +13,7 @@ export const OrderRoute = ({ fromCityName, toCityName }: Props) => {
       >
         {fromCityName}
       </p>
-      <LuRoute aria-hidden className="shrink-0 text-green-300 dark:text-green-100" />
+      <LuRoute aria-hidden className="shrink-0 text-green-300 dark:text-green-300" />
       <p
         className={`text-xl tablet:text-2xl font-medium tracking-normal tablet:leading-6 ext-slate-700 dark:text-slate-50`}
       >

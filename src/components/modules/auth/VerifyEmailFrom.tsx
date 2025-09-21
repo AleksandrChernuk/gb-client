@@ -1,7 +1,6 @@
 'use client';
 
 import { verifyEmail } from '@/actions/auth.service';
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { FormErrorMassege } from '@/components/ui/form-error';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
@@ -10,7 +9,6 @@ import { REDIRECT_PATHS } from '@/config/redirectPaths';
 import { verify2FASchema } from '@/schemas/auth.schema';
 import { useUserStore } from '@/store/useUser';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoaderCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -104,14 +102,8 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
             )}
           />
         </div>
-        <div className="flex flex-col tablet:flex-row gap-2">
-          {email && <ResendCode email={email} locale={locale} type="VERIFICATION" />}
-
-          <div className="w-full">
-            <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('confirmation')}
-            </Button>
-          </div>
+        <div className="w-full">
+          <ResendCode disabled={isLoading} email={email} locale={locale} type="VERIFICATION" />
         </div>
       </form>
     </Form>

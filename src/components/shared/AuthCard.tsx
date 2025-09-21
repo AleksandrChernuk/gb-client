@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import AccountActions from './AccountActions';
 import AuthSocial from './AuthSocial';
 import { MESSAGE_FILES } from '@/config/message.file.constans';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 interface Props {
   children: React.ReactNode;
@@ -47,13 +47,13 @@ export default async function AuthCard({
           <AuthSocial />
         </CardFooter>
 
-        <CardFooter className="flex flex-col items-center justify-start p-0 mt-4 gap-1 truncate tetx-text-slate-700 dark:text-slate-50 text-nowrap">
+        <CardFooter className="flex flex-col items-center justify-start p-0 mt-5 gap-4 truncate tetx-text-slate-700 dark:text-slate-50 text-nowrap">
           {backButtonLabel !== 'authLogin' && forgotButtonHref && (
-            <div className="flex items-center">
-              <p className="text-xs  font-bold tracking-normal leading-[16.8px]">{t('forgotTitle')}</p>
-              <Button asChild variant={'link'}>
+            <div className="flex items-center gap-2">
+              <p className="text-sm  font-bold tracking-normal leading-[16.8px]">{t('forgotTitle')}</p>
+              <Button asChild variant={'link'} className="h-auto">
                 <Link
-                  className="text-xs font-normal tracking-normal leading-[16.8px]"
+                  className="text-sm font-normal tracking-normal leading-[16.8px]"
                   href={forgotButtonHref}
                   aria-label="go reset password page"
                 >
@@ -62,14 +62,14 @@ export default async function AuthCard({
               </Button>
             </div>
           )}
-          <div className="flex items-center">
-            <p className="text-xs font-bold tracking-normal leading-[16.8px]">
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold tracking-normal leading-[16.8px]">
               {backButtonLabel === 'authLogin' ? t('authAlreadyHaveAccount') : t('authDontHaveAccount')}
             </p>
-            <Button asChild variant={'link'}>
+            <Button asChild variant={'link'} className="h-auto">
               <Link
                 href={backButtonHref}
-                className="text-xs font-normal tracking-normal leading-[16.8px]"
+                className="text-sm font-normal tracking-normal leading-[16.8px]"
                 aria-label="go signup page"
               >
                 {backButtonHref !== '/signup' ? t('signinTitle') : t('signupTitle')}

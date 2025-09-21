@@ -8,8 +8,8 @@ export default async function TripsPage() {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
-    <Tabs defaultValue="upcoming" className="w-full ">
-      <TabsList className="gap-4">
+    <Tabs defaultValue="upcoming" className="w-full flex-1">
+      <TabsList className="gap-4 h-fit">
         <TabsTrigger value="upcoming">{t('upcoming_trips')}</TabsTrigger>
         <TabsTrigger value="all">{t('all_trips')}</TabsTrigger>
       </TabsList>

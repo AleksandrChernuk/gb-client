@@ -14,10 +14,11 @@ interface ResendCodeProps {
   locale: string;
   type: 'VERIFICATION' | 'TWO_FACTOR' | 'CHANGE_EMAIL' | 'RESET_PASSWORD' | 'DELETE_ACCOUNT' | 'NEW_DEVICE_LOGIN';
   loading?: boolean;
+  disabled?: boolean;
   className?: string;
 }
 
-const ResendCode = ({ email, locale, type, className, loading }: ResendCodeProps) => {
+const ResendCode = ({ email, locale, type, className, loading, disabled }: ResendCodeProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const t = useTranslations(MESSAGE_FILES.FORM);
 
@@ -49,7 +50,7 @@ const ResendCode = ({ email, locale, type, className, loading }: ResendCodeProps
         onClick={() => {
           handleSubmit();
         }}
-        disabled={isLoading || loading}
+        disabled={isLoading || loading || disabled}
         className={cn('text-slate-700 dark:text-slate-100', className)}
       >
         {isLoading ? t('sending') : t('resend_code')}

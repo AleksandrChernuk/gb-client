@@ -9,10 +9,10 @@ const Trips = async () => {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);
 
   return (
-    <div>
+    <>
       <h1 className="mb-8">{t('trips_hystori')}</h1>
       <TripsPage />
-    </div>
+    </>
   );
 };
 

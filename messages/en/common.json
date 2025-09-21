@@ -156,6 +156,9 @@
     "e_ticket_link": "Electronic ticket",
     "Payment is pending": "Payment is pending",
     "error_occurred": "An error occurred",
-    "no_payments_find": "No payments found"
+    "no_payments_find": "No payments found",
+    "customer_not_found": "No records found",
+    "not_found": "Not found",
+    "unknown_error": "Unknown error"
   }
 }
