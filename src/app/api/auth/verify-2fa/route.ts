@@ -1,8 +1,8 @@
-import { BACKEND_URL } from '@/config/constants';
-import { Verify2FAResponse } from '@/types/auth.types';
-import { set2FACookies } from '@/utils/cookieBase.util';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { Verify2FAResponse } from '@/shared/types/auth.types';
+import { set2FACookies } from '@/shared/utils/cookieBase.util';
+import { forwardHeaders } from '@/shared/utils/headers.util';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';

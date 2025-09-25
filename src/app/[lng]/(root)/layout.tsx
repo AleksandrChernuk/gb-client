@@ -4,8 +4,8 @@ export const revalidate = 0;
 import { ReactNode } from 'react';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import { Params } from '@/types/common.types';
-import MainHeader from '@/components/modules/header/MainHeader';
+import { Params } from '@/shared/types/common.types';
+import MainHeader from '@/widgets/header/MainHeader';
 
 export default async function RootLayout({
   children,

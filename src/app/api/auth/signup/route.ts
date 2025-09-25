@@ -1,8 +1,8 @@
-import { BACKEND_URL } from '@/config/constants';
-import { TypeSignup } from '@/types/auth.types';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
-import { validateSignupPayload } from '@/utils/validatePayload.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { TypeSignup } from '@/shared/types/auth.types';
+import { forwardHeaders } from '@/shared/utils/headers.util';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
+import { validateSignupPayload } from '@/shared/utils/validatePayload.util';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';

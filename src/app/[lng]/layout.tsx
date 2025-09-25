@@ -1,19 +1,19 @@
 import '@/styles/globals.css';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/shared/i18n/routing';
+import { Locale } from '@/shared/i18n/locales';
 import { notFound } from 'next/navigation';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { Locale } from '@/i18n/locales';
-import { Params } from '@/types/common.types';
-import ReactQueryContext from '@/app/providers/ReactQueryProvider';
+import { Params } from '@/shared/types/common.types';
+import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
-import { ThemeProvider } from '@/app/providers/ThemeProvider';
+import { ThemeProvider } from '@/shared/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
-import { GTMNoScript } from '@/components/shared/GTMAnalytics';
-import LocationsInitializer from '@/components/shared/LocationsInitializer';
-import ProfileCheckProvider from '@/app/providers/ProfileCheck.provider';
+import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
+import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
+import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',

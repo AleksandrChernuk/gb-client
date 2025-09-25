@@ -1,7 +1,7 @@
-import { BACKEND_URL } from '@/config/constants';
-import { clearAuthCookies } from '@/utils/cookieBase.util';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { clearAuthCookies } from '@/shared/utils/cookieBase.util';
+import { forwardHeaders } from '@/shared/utils/headers.util';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';

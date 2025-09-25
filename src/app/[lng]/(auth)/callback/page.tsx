@@ -3,12 +3,12 @@
 import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { CurrentUser } from '@/types/auth.types';
-import { useRouter } from '@/i18n/routing';
-import { REDIRECT_PATHS } from '@/config/redirectPaths';
-import { useUserStore } from '@/store/useUser';
-import { Container } from '@/components/shared/Container';
-import { BusLoader } from '@/components/shared/BusLoader';
+import { CurrentUser } from '@/shared/types/auth.types';
+import { useRouter } from '@/shared/i18n/routing';
+import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
+import { useUserStore } from '@/shared/store/useUser';
+import { Container } from '@/shared/ui/Container';
+import { BusLoader } from '@/shared/ui/BusLoader';
 
 type ValidateResp = { authenticated: boolean };
 

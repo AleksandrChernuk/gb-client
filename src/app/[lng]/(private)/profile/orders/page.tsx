@@ -1,8 +1,8 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import OrdersPage from '@/components/modules/profile/orders';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import ProfileOrdersList from '@/widgets/profile-orders-list';
 import { getTranslations } from 'next-intl/server';
 
 const Orders = async () => {
@@ -11,7 +11,7 @@ const Orders = async () => {
   return (
     <>
       <h1 className="mb-4">{t('orders')}</h1>
-      <OrdersPage />
+      <ProfileOrdersList />
     </>
   );
 };

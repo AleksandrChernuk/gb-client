@@ -1,8 +1,8 @@
-import { BACKEND_URL } from '@/config/constants';
-import { ChangePasswordConfirm } from '@/types/auth.types';
-import { setChangePasswordCookies } from '@/utils/cookieBase.util';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { ChangePasswordConfirm } from '@/shared/types/auth.types';
+import { setChangePasswordCookies } from '@/shared/utils/cookieBase.util';
+import { forwardHeaders } from '@/shared/utils/headers.util';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';

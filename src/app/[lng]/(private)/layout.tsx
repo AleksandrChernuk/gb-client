@@ -1,19 +1,20 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import ThirdFooter from '@/components/modules/footer/ThirdFooter';
-import AuthHeader from '@/components/modules/header/AuthHeader';
-import { Container } from '@/components/shared/Container';
-import LogOutProfileBtn from '@/components/shared/LogOutProfileBtn';
-import ProfileAvatar from '@/components/shared/ProfileAvatar';
-import ProfileMobileNav from '@/components/shared/ProfileMobileNav';
-import ProfileNavTabs from '@/components/shared/ProfileNavTabs';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { profile_links } from '@/constans/profile.nav.links';
-import { AuthGuardProvider } from '@/app/providers/AuthGuardProvider';
-import { Params } from '@/types/common.types';
+import ThirdFooter from '@/widgets/footer/ThirdFooter';
+import AuthHeader from '@/widgets/header/AuthHeader';
+
+import { AuthGuardProvider } from '@/shared/providers/AuthGuardProvider';
+import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Container } from '@/shared/ui/Container';
+import ProfileNavTabs from '@/entities/profile/ProfileNavTabs';
+import { profile_links } from '@/shared/constans/profile.nav.links';
+import ProfileMobileNav from '@/entities/profile/ProfileMobileNav';
+import ProfileAvatar from '@/entities/profile/ProfileAvatar';
+import LogOutProfileBtn from '@/entities/profile/LogOutProfileBtn';
 
 type Props = {
   params: Params;

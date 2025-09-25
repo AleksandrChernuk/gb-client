@@ -1,5 +1,5 @@
-import { BACKEND_URL } from '@/config/constants';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {

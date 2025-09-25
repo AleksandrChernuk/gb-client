@@ -1,6 +1,6 @@
-import FaqTabs from '@/components/pages/faq/FaqTabs';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Params } from '@/types/common.types';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Params } from '@/shared/types/common.types';
+import FaqTabs from '@/widgets/faq/FaqTabs';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 

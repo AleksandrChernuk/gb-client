@@ -1,5 +1,5 @@
-import { BACKEND_URL } from '@/config/constants';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 import { cookies } from 'next/headers';
 
 export const dynamic = 'force-dynamic';

@@ -1,11 +1,11 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import SigninForm from '@/components/modules/auth/SigninForm';
-import AccountActions from '@/components/shared/AccountActions';
-import AuthCard from '@/components/shared/AuthCard';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import { Container } from '@/components/shared/Container';
+import AccountActions from '@/entities/auth/AccountActions';
+import AuthCard from '@/entities/auth/AuthCard';
+import SigninForm from '@/features/signin-form';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { Container } from '@/shared/ui/Container';
 
 export default async function SigninPage() {
   return (

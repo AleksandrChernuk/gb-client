@@ -1,7 +1,7 @@
-import { BACKEND_URL } from '@/config/constants';
-import { ExchangeResponse } from '@/types/auth.types';
-import { setOAuthCookies } from '@/utils/cookieBase.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { ExchangeResponse } from '@/shared/types/auth.types';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
+import { setOAuthCookies } from '@/shared/utils/cookieBase.util';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';

@@ -1,17 +1,17 @@
 'use client';
 
-import MainHeader from '@/components/modules/header/MainHeader';
-import { Container } from '@/components/shared/Container';
-import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import MainHeader from '@/widgets/header/MainHeader';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
 import Head from 'next/head';
-import CustomCard from '@/components/shared/CustomCard';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Container } from '@/shared/ui/Container';
+import { Button } from '@/shared/ui/button';
+import CustomCard from '@/shared/ui/CustomCard';
 
 export async function generateMetadata() {
   return {

@@ -1,12 +1,12 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-import AuthHeader from '@/components/modules/header/AuthHeader';
-import ThirdFooter from '@/components/modules/footer/ThirdFooter';
+import AuthHeader from '@/widgets/header/AuthHeader';
+import ThirdFooter from '@/widgets/footer/ThirdFooter';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
-import { Params } from '@/types/common.types';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { Params } from '@/shared/types/common.types';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 type Props = {
   params: Params;

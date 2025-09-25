@@ -1,11 +1,14 @@
-export const dynamic = 'force-dynamic';
-
-import { Params } from '@/types/common.types';
+import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Checkaut from '@/components/pages/checkout';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import ThirdFooter from '@/components/modules/footer/ThirdFooter';
+import { getTranslations } from 'next-intl/server';
+import ThirdFooter from '@/widgets/footer/ThirdFooter';
+
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Container } from '@/shared/ui/Container';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import Cleanup from '@/entities/checkout/Cleanup';
+import Timer from '@/entities/checkout/Timer';
+import CheckoutForm from '@/features/checkout-form';
 
 type Props = {
   params: Params;
@@ -63,18 +66,24 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function Checkout({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
-  const { lng } = await params;
-
-  setRequestLocale(lng as Locale);
+export default async function Checkout() {
+  const t = await getTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   return (
     <>
-      <Checkaut />
+      <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">
+        <section>
+          <h1 className="sr-only">{t('h1')}</h1>
+          <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px]">
+            <div className="my-4 laptop:my-8">
+              <BackRouteButton />
+            </div>
+            <Timer />
+            <Cleanup />
+            <CheckoutForm />
+          </Container>
+        </section>
+      </main>
       <ThirdFooter />
     </>
   );

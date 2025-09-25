@@ -1,7 +1,15 @@
-import PaymentResultPage from '@/components/pages/payment-result';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import { getOrderStatusAndPdf } from '@/shared/api/orders.actions';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Link } from '@/shared/i18n/routing';
+import { Button } from '@/shared/ui/button';
+import { Container } from '@/shared/ui/Container';
+import ThirdFooter from '@/widgets/footer/ThirdFooter';
+import { CleanOrderData } from '@/widgets/payment-result/CleanStor';
+import { ErrorPayment } from '@/widgets/payment-result/ErrorPayment';
+import { SuccessPayment } from '@/widgets/payment-result/SuccessPayment';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: Promise<{ lng: string }>;
@@ -66,5 +74,49 @@ export default async function Success({ params, searchParams }: Props) {
 
   setRequestLocale(lng as Locale);
 
-  return <PaymentResultPage payment_id={payment_id} />;
+  const resOrder = await getOrderStatusAndPdf(payment_id);
+
+  if (!resOrder) {
+    notFound();
+  }
+
+  const t = await getTranslations(MESSAGE_FILES.PAYMENT_RESULT_PAGE);
+
+  const { pdf, orderLink, ticketLinks, status, message, orderNumber } = resOrder;
+
+  const isSuccess = status !== 'error';
+
+  return (
+    <>
+      <CleanOrderData />
+      <main role="main" className="flex items-center justify-center flex-1 bg-slate-50 dark:bg-slate-900">
+        <section>
+          <Container size="xs" className="w-full">
+            <div className="p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-xs space-y-8">
+              {isSuccess && (
+                <SuccessPayment
+                  pdf={pdf}
+                  orderLink={orderLink}
+                  ticketLinks={ticketLinks}
+                  orderNumber={orderNumber.padStart(9, '0')}
+                />
+              )}
+
+              {!isSuccess && <ErrorPayment message={message} errorHeading="order_error" />}
+
+              <div className="text-left">
+                <Button asChild variant="link">
+                  <Link href="/" prefetch={false}>
+                    {t('go_home')}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </Container>
+        </section>
+      </main>
+
+      <ThirdFooter />
+    </>
+  );
 }

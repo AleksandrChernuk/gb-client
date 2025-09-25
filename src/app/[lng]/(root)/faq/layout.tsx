@@ -1,11 +1,11 @@
-import MainFooter from '@/components/modules/footer/MainFooter';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import { Container } from '@/components/shared/Container';
-import { Params } from '@/types/common.types';
+import MainFooter from '@/widgets/footer/MainFooter';
+import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import FaqSeach from '@/components/pages/faq/FaqSeach';
+import { Container } from '@/shared/ui/Container';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import FaqSeach from '@/widgets/faq/FaqSeach';
 
 export default async function FaqLayout({
   children,

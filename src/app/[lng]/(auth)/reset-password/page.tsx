@@ -1,12 +1,14 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Container } from '@/components/shared/Container';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
+import ResetPasswordForm from '@/features/reset-password-form';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { Button } from '@/shared/ui/button';
+import { Container } from '@/shared/ui/Container';
 import { getTranslations } from 'next-intl/server';
-import ResetPasswordForm from '@/components/modules/auth/ResetPasswordForm';
+import Link from 'next/link';
 
 export default async function ResetPasswordPage() {
   const t = await getTranslations(MESSAGE_FILES.FORM);

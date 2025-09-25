@@ -1,8 +1,6 @@
-import ProfilePage from '@/components/modules/profile/settings';
-import { Container } from '@/components/shared/Container';
-import ProfileNavTabs from '@/components/shared/ProfileNavTabs';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Params } from '@/types/common.types';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Params } from '@/shared/types/common.types';
+import { Container } from '@/shared/ui/Container';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
@@ -61,11 +59,6 @@ export async function generateMetadata({ params }: Props) {
     },
   };
 }
-const items = [
-  { slug: '/profile/orders', title: 'ordersTitle' },
-  { slug: '/profile/histori', title: 'historiTitle' },
-  { slug: '/profile', title: 'settingsTitle' },
-];
 
 export default async function Blog({
   params,
@@ -73,18 +66,18 @@ export default async function Blog({
   params: Params;
 }>) {
   const { lng } = await params;
-
+  const t = getTranslations(MESSAGE_FILES.COMMON);
   setRequestLocale(lng as Locale);
+
   return (
-    <Container size="m" className="w-full">
-      <div className="w-full py-2 tablet:py-10">
-        <div className="flex-1 flex flex-col tablet:flex-row gap-4 tablet:gap-8 laptop:gap-10">
-          <ProfileNavTabs items={items} namespace={MESSAGE_FILES.PROFILE} />
-          <div className="flex-1">
-            <ProfilePage />;
-          </div>
-        </div>
-      </div>
-    </Container>
+    <main className="bg-slate-50 dark:bg-slate-900 flex-1">
+      <section className="pt-10 laptop:pt-20">
+        <Container size="m" className="text-center">
+          <h1 className="text-xs laptop:text-2xl tracking-normal text-slate-700 dark:text-slate-50">
+            {t('page_in_progress')}
+          </h1>
+        </Container>
+      </section>
+    </main>
   );
 }

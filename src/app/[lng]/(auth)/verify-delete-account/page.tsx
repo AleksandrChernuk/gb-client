@@ -1,11 +1,11 @@
-import { Link } from '@/i18n/routing';
-import { Button } from '@/components/ui/button';
+import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
+import VerifyDeleteAccountForm from '@/features/delete-profile-form';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Link } from '@/shared/i18n/routing';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { Button } from '@/shared/ui/button';
+import { Container } from '@/shared/ui/Container';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Container } from '@/components/shared/Container';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
-import VerifyDeleteAccountForm from '@/components/modules/auth/VerifyDeleteAccountForm';
 
 export default async function VerifyDeleteAccountPage() {
   const t = await getTranslations(MESSAGE_FILES.FORM);

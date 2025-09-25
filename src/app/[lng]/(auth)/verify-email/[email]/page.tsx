@@ -1,13 +1,13 @@
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import { Container } from '@/components/shared/Container';
-import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
-import VerifyEmailFrom from '@/components/modules/auth/VerifyEmailFrom';
+import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
+import VerifyEmailFrom from '@/features/verify-email-form';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Link } from '@/shared/i18n/routing';
+import { Params } from '@/shared/types/common.types';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { Button } from '@/shared/ui/button';
+import { Container } from '@/shared/ui/Container';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Params } from '@/types/common.types';
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/routing';
 
 type Props = {
   params: Params;

@@ -1,8 +1,8 @@
-import { BACKEND_URL } from '@/config/constants';
-import { SigninPending, SigninSuccess } from '@/types/auth.types';
-import { clearAuthCookies, setAuthCookies } from '@/utils/cookieBase.util';
-import { forwardHeaders } from '@/utils/headers.util';
-import { createJsonResponse } from '@/utils/jsonResponse.util';
+import { BACKEND_URL } from '@/shared/configs/constants';
+import { SigninPending, SigninSuccess } from '@/shared/types/auth.types';
+import { clearAuthCookies, setAuthCookies } from '@/shared/utils/cookieBase.util';
+import { forwardHeaders } from '@/shared/utils/headers.util';
+import { createJsonResponse } from '@/shared/utils/jsonResponse.util';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';

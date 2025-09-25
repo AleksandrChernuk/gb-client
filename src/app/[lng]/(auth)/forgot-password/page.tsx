@@ -1,10 +1,13 @@
-import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/routing';
-import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
-import { Container } from '@/components/shared/Container';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import ForgotPasswordForm from '@/components/modules/auth/ForgotPasswordForm';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
+import ForgotPasswordForm from '@/features/forgot-password-form';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Link } from '@/shared/i18n/routing';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { Button } from '@/shared/ui/button';
+import { Container } from '@/shared/ui/Container';
 import { getTranslations } from 'next-intl/server';
 
 export default async function ForgotPasswordPage() {

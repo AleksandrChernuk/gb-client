@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import AuthAssistantCard from '@/components/shared/AuthAssistantCard';
-import { Container } from '@/components/shared/Container';
-import BackRouteButton from '@/components/shared/BackRouteButton';
-import { Button } from '@/components/ui/button';
-import Verify2FAForm from '@/components/modules/auth/Verify2FAForm';
-import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Params } from '@/types/common.types';
+
+import { Params } from '@/shared/types/common.types';
 import { notFound } from 'next/navigation';
+import { Container } from '@/shared/ui/Container';
+import { getTranslations } from 'next-intl/server';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import BackRouteButton from '@/shared/ui/BackRouteButton';
+import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
+import Verify2FAForm from '@/features/verify-2fa-form';
+import { Button } from '@/shared/ui/button';
 
 type Props = {
   params: Params;

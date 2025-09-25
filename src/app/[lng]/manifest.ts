@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import { Params } from '@/types/common.types';
+import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 type Props = {
   params: Params;

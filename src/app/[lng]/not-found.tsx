@@ -1,14 +1,14 @@
 import { getTranslations } from 'next-intl/server';
 
-import MainHeader from '@/components/modules/header/MainHeader';
-import { Container } from '@/components/shared/Container';
-import { Button } from '@/components/ui/button';
-import { MESSAGE_FILES } from '@/config/message.file.constans';
+import MainHeader from '@/widgets/header/MainHeader';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
 
-import CustomCard from '@/components/shared/CustomCard';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Container } from '@/shared/ui/Container';
+import CustomCard from '@/shared/ui/CustomCard';
+import { Button } from '@/shared/ui/button';
 
 export async function generateMetadata() {
   return {

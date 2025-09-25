@@ -1,9 +1,15 @@
-import { Params } from '@/types/common.types';
+import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { MESSAGE_FILES } from '@/config/message.file.constans';
-import Main from '@/components/pages/main';
+import Herow from '@/widgets/homepage/Herow';
+import Benefits from '@/widgets/homepage/Benefits';
+import Buses from '@/widgets/homepage/Buses';
+import PopularRoutes from '@/widgets/homepage/PopularRoutes';
+import GetStarted from '@/widgets/homepage/GetStarted';
+import Questions from '@/widgets/homepage/Questions';
+import MainFooter from '@/widgets/footer/MainFooter';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 type Props = {
   params: Params;
@@ -67,6 +73,20 @@ export default async function Home({
   params: Params;
 }>) {
   const { lng } = await params;
+
   setRequestLocale(lng as Locale);
-  return <Main />;
+
+  return (
+    <>
+      <main role="main" className="bg-slate-50 dark:bg-slate-900">
+        <Herow />
+        <Benefits />
+        <Buses />
+        <PopularRoutes />
+        <GetStarted />
+        <Questions />
+      </main>
+      <MainFooter />
+    </>
+  );
 }

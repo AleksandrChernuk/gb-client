@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif'],
     minimumCacheTTL: 2678400,
+    qualities: [25, 50, 75],
+
     remotePatterns: [
       {
         protocol: 'https',
@@ -35,6 +37,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
 };
 
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+const withNextIntl = createNextIntlPlugin('./src/shared/i18n/request.ts');
 
 export default withNextIntl(nextConfig);
