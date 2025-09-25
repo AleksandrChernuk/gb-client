@@ -16,6 +16,7 @@ type Props = {
 
 import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
+import { joinUsAgents } from '@/shared/constans/join.us.agents.constans';
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };

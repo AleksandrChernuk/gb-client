@@ -66,7 +66,7 @@ export default async function Blog({
   params: Params;
 }>) {
   const { lng } = await params;
-  const t = getTranslations(MESSAGE_FILES.COMMON);
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
   setRequestLocale(lng as Locale);
 
   return (

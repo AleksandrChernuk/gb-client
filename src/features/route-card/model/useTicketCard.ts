@@ -6,7 +6,7 @@ import { useLocale } from 'next-intl';
 import { useShallow } from 'zustand/react/shallow';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useTicketsDetails } from '@/shared/store/useTicketsDetails';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/shared/i18n/routing';
 
 export default function useTicketCard() {
   const setSelectedTicket = useSelectedTickets(useShallow((state) => state.setSelectedTicket));

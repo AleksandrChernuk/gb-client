@@ -4,9 +4,9 @@ import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { getTotalPriceFromPassengers } from '../models/helpers/getTotalPriceFromPassengers';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
-import { Passenger } from '@/features/checkout-form/models/types/types';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Skeleton } from '@/shared/ui/skeleton';
+import { Passenger } from '@/shared/utils/checkout.config';
 
 const ToPay = memo(function ToPay() {
   const adult = useSearchStore((state) => state.adult);
