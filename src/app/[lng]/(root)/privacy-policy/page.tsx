@@ -1,4 +1,5 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { renderDocumentHtml } from '@/shared/lib/renderDocumentHtml';
 import { Params } from '@/shared/types/common.types';
 import { Container } from '@/shared/ui/Container';
@@ -11,51 +12,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
-
-  return {
-    title: t('privacy-policy.title'),
-    description: t('privacy-policy.description'),
-    keywords: t('privacy-policy.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/privacy-policy`,
-      languages: {
-        'x-default': '/uk/privacy-policy',
-        uk: '/uk/privacy-policy',
-        en: '/en/privacy-policy',
-        ru: '/ru/privacy-policy',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
+  return generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'privacy-policy',
+  });
 }
 
 export default async function PrivacyPolicy({

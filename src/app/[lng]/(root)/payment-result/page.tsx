@@ -1,6 +1,7 @@
 import { getOrderStatusAndPdf } from '@/shared/api/orders.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/Container';
 import ThirdFooter from '@/widgets/footer/ThirdFooter';
@@ -18,54 +19,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePrivatePageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'success',
   });
-
-  return {
-    title: t('success.title'),
-    description: t('success.description'),
-    keywords: t('success.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: false,
-      follow: false,
-      nocache: false,
-      googleBot: {
-        index: false,
-        follow: false,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/result`,
-      languages: {
-        'x-default': '/uk/result',
-        uk: '/uk/result',
-        en: '/en/result',
-        ru: '/ru/result',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function Success({ params, searchParams }: Props) {

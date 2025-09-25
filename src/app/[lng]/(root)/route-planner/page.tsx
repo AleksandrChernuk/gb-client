@@ -1,4 +1,5 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params } from '@/shared/types/common.types';
 import { Container } from '@/shared/ui/Container';
 import { Locale } from 'next-intl';
@@ -10,51 +11,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
-
-  return {
-    title: t('route-planner.title'),
-    description: t('route-planner.description'),
-    keywords: t('route-planner.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/route-planner`,
-      languages: {
-        'x-default': '/uk/route-planner',
-        uk: '/uk/route-planner',
-        en: '/en/route-planner',
-        ru: '/ru/route-planner',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
+  return generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'route-planner',
+  });
 }
 
 export default async function RoutePlanner({

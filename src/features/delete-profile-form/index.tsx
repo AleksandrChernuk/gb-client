@@ -111,7 +111,7 @@ export default function VerifyDeleteAccountForm() {
               {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('delete_account')}
             </Button>
 
-            <ResendCode email={email} locale={locale} type="DELETE_ACCOUNT" className="mt-6" />
+            <ResendCode disabled={isLoading} email={email} locale={locale} type="DELETE_ACCOUNT" className="mt-6" />
           </div>
         </div>
       </form>

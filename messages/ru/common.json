@@ -154,7 +154,29 @@
       "description": "<p>К сожалению, произошла ошибка.</p><p>Вы можете попробовать <retry>перезагрузить страницу</retry>, которую вы посещали.</p>"
     },
     "manifest": {
-      "name": "next-intl example"
+      "name": "GreenBus - Автобусные билеты онлайн",
+      "short_name": "GreenBus",
+      "description": "Бронирование автобусных билетов по Украине и Европе",
+      "shortcuts": {
+        "search": {
+          "name": "Поиск автобусов",
+          "short_name": "Поиск",
+          "description": "Найти автобусные маршруты"
+        },
+        "orders": {
+          "name": "Мои заказы",
+          "short_name": "Заказы",
+          "description": "Просмотреть историю заказов"
+        }
+      }
+    },
+    "og-image": {
+      "subtitle": "Автобусные билеты по Украине и Европе",
+      "features": {
+        "online": "Онлайн бронирование",
+        "europe": "По всей Европе",
+        "reliable": "Быстро и надежно"
+      }
     },
     "download_pdf": "Скачать PDF",
     "order": "Заказ",

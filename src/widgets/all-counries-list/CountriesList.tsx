@@ -1,12 +1,12 @@
 'use client';
 
+import { Button } from '@/shared/ui/button';
 import React from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useAllCountriesContext } from '@/features/all-countries/model/useAllCountriesContext';
+import { useAllCountriesContext } from '@/features/all-countries/model/AllCountriesProvider';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import CardWrapper from '@/shared/ui/CardWrapper';
-import { Button } from '@/shared/ui/button';
 
 export default function CountriesList() {
   const { countrys, locations, selectCountry, selectedCountry } = useAllCountriesContext();

@@ -7,7 +7,6 @@ import AuthHeader from '@/widgets/header/AuthHeader';
 import { AuthGuardProvider } from '@/shared/providers/AuthGuardProvider';
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
 import ProfileNavTabs from '@/entities/profile/ProfileNavTabs';
@@ -15,6 +14,7 @@ import { profile_links } from '@/shared/constans/profile.nav.links';
 import ProfileMobileNav from '@/entities/profile/ProfileMobileNav';
 import ProfileAvatar from '@/entities/profile/ProfileAvatar';
 import LogOutProfileBtn from '@/entities/profile/LogOutProfileBtn';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
   params: Params;
@@ -22,49 +22,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-
-  const t = await getTranslations({
-    locale: lng,
+  return generatePrivatePageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'profile',
   });
-
-  return {
-    title: t('profile.title'),
-    description: t('profile.description'),
-    keywords: t('profile.keywords'),
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-    manifest: '/manifest.json',
-    robots: {
-      index: false,
-      follow: false,
-      nocache: false,
-      googleBot: {
-        index: false,
-        follow: false,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    metadataBase: new URL('https://greenbus.com.ua'),
-    alternates: {
-      canonical: `/${lng}/profile`,
-      languages: {
-        'x-default': '/uk/profile',
-        uk: '/uk/profile',
-        en: '/en/profile',
-        ru: '/ru/profile',
-      },
-    },
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 const ProfileLayout = async ({ children }: { children: React.ReactNode }) => {

@@ -13,6 +13,7 @@ import peopleWithSuitcases from '@/assets/images/people-with-suitcases-looking-s
 import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
 import { improveYourSalesList } from '@/shared/constans/improve.your.sales.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
   params: Params;
@@ -20,54 +21,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'for-cariers',
   });
-
-  return {
-    title: t('for-cariers.title'),
-    description: t('for-cariers.description'),
-    keywords: '',
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/for-carriers`,
-      languages: {
-        'x-default': '/uk/for-carriers',
-        uk: '/uk/for-carriers',
-        en: '/en/for-carriers',
-        ru: '/ru/for-carriers',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function ForCarriers({

@@ -45,7 +45,6 @@ export default function ProfileOrdersList() {
 
   return (
     <div className="flex flex-col flex-1">
-      <h1 className="mb-4">{t(TRANSLATION_KEYS.profile.orders)}</h1>
       <div className="flex-1">
         <div className="container mx-auto max-w-[805px] py-6">
           {isLoading || isFetching ? (

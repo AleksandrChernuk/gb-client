@@ -9,6 +9,7 @@ import BackRouteButton from '@/shared/ui/BackRouteButton';
 import Cleanup from '@/entities/checkout/Cleanup';
 import Timer from '@/entities/checkout/Timer';
 import CheckoutForm from '@/features/checkout-form';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
   params: Params;
@@ -16,54 +17,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePrivatePageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'checkout',
   });
-
-  return {
-    title: t('checkout.title'),
-    description: t('checkout.description'),
-    keywords: t('checkout.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: false,
-      follow: false,
-      nocache: false,
-      googleBot: {
-        index: false,
-        follow: false,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/checkout`,
-      languages: {
-        'x-default': '/uk/checkout',
-        uk: '/uk/checkout',
-        en: '/en/checkout',
-        ru: '/ru/checkout',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function Checkout() {

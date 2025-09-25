@@ -17,57 +17,15 @@ type Props = {
 import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
 import { joinUsAgents } from '@/shared/constans/join.us.agents.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'for-agents',
   });
-
-  return {
-    title: t('for-agents.title'),
-    description: t('for-agents.description'),
-    keywords: t('for-agents.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/for-agents`,
-      languages: {
-        'x-default': '/uk/for-agents',
-        uk: '/uk/for-agents',
-        en: '/en/for-agents',
-        ru: '/ru/for-agents',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function ForAgents({

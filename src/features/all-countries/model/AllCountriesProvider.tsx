@@ -2,7 +2,7 @@
 
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { ILocation } from '@/shared/types/location.types';
-import { createContext, useMemo, useState, ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState, ReactNode } from 'react';
 
 export type AllCountriesContent = {
   locations: ILocation[];
@@ -16,7 +16,17 @@ export type AllCountriesContent = {
   selectCountry: (loc: ILocation | null) => void;
 };
 
-export const AllCountriesContext = createContext<AllCountriesContent | null>(null);
+export const AllCountriesContext = createContext<AllCountriesContent>({
+  locations: [],
+  countrys: [],
+  cities: [],
+  selectedCountry: null,
+  searchCities: () => {},
+  searchCountry: () => {},
+  searchByQuery: () => {},
+  getCitiesByCountry: () => [],
+  selectCountry: () => {},
+});
 
 type Props = {
   children: ReactNode;
@@ -120,10 +130,9 @@ export const AllCountriesProvider = ({ children, locations, locale }: Props) => 
       const { countryName } = extractLocationDetails(countryLoc, locale);
       setFilteredCities(countryToCitiesMap.get(countryName) || []);
     } else {
-      setFilteredCities(allCities); // сброс
+      setFilteredCities(allCities); // Сброс на все города при loc === null
     }
   };
-
   return (
     <AllCountriesContext.Provider
       value={{
@@ -142,3 +151,5 @@ export const AllCountriesProvider = ({ children, locations, locale }: Props) => 
     </AllCountriesContext.Provider>
   );
 };
+
+export const useAllCountriesContext = () => useContext(AllCountriesContext);

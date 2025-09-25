@@ -1,6 +1,6 @@
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Container } from '@/shared/ui/Container';
 import MainSearch from '@/features/route-search-form';
 import DateTabs from '@/features/date-pagination-routes';
@@ -8,6 +8,7 @@ import MainFooter from '@/widgets/footer/MainFooter';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { RoutesResaltInformation } from '@/widgets/routes-resalt-information';
 import ResultList from '@/widgets/route-result-list';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
   params: Params;
@@ -15,54 +16,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePrivatePageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'buses',
   });
-
-  return {
-    title: t('buses.title'),
-    description: t('buses.description'),
-    keywords: t('buses.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/buses`,
-      languages: {
-        'x-default': '/uk/buses',
-        uk: '/uk/buses',
-        en: '/en/buses',
-        ru: '/ru/buses',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function Buses({

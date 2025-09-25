@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { ILocation } from '@/shared/types/location.types';
 import { useLocale, useTranslations } from 'next-intl';
+import { useAllCountriesContext } from '@/features/all-countries/model/AllCountriesProvider';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { useAllCountriesContext } from '@/features/all-countries/model/useAllCountriesContext';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+import { ILocation } from '@/shared/types/location.types';
 import { Button } from '@/shared/ui/button';
 import CardWrapper from '@/shared/ui/CardWrapper';
 

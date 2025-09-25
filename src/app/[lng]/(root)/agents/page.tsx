@@ -1,4 +1,5 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params } from '@/shared/types/common.types';
 import { Container } from '@/shared/ui/Container';
 import { Locale } from 'next-intl';
@@ -10,54 +11,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'agents',
   });
-
-  return {
-    title: t('agents.title'),
-    description: t('agents.description'),
-    keywords: t('agents.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/agents`,
-      languages: {
-        'x-default': '/uk/agents',
-        uk: '/uk/agents',
-        en: '/en/agents',
-        ru: '/ru/agents',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function Agents({

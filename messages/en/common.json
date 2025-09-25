@@ -148,7 +148,29 @@
       "title": "Something went wrong!"
     },
     "manifest": {
-      "name": "next-intl example"
+      "name": "GreenBus - Online Bus Tickets",
+      "short_name": "GreenBus",
+      "description": "Book bus tickets across Ukraine and Europe",
+      "shortcuts": {
+        "search": {
+          "name": "Search Buses",
+          "short_name": "Search",
+          "description": "Find bus routes"
+        },
+        "orders": {
+          "name": "My Orders",
+          "short_name": "Orders",
+          "description": "View order history"
+        }
+      }
+    },
+    "og-image": {
+      "subtitle": "Bus tickets across Ukraine and Europe",
+      "features": {
+        "online": "Online booking",
+        "europe": "Across Europe",
+        "reliable": "Fast & reliable"
+      }
     },
     "download_pdf": "Download PDF",
     "order": "Order",

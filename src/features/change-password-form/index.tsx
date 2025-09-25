@@ -167,7 +167,7 @@ export default function ChangePasswordForm() {
           </div>
         </div>
         <div className="flex flex-col tablet:flex-row gap-2">
-          {email && <ResendCode email={email} locale={locale} type="RESET_PASSWORD" />}
+          {email && <ResendCode disabled={isLoading} email={email} locale={locale} type="RESET_PASSWORD" />}
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>

@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getEntries('/faq'),
     ...getEntries('/buses'),
     ...getEntries('/carriers'),
-    ...getEntries('/faq'),
     ...getEntries('/blog'),
     ...getEntries('/agents'),
   ];
@@ -26,6 +25,9 @@ type Href = Parameters<typeof getPathname>[0]['href'];
 function getEntries(href: Href) {
   return routing.locales.map((locale) => ({
     url: getUrl(href, locale),
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: href === '/' ? 1.0 : 0.8,
     alternates: {
       languages: Object.fromEntries(routing.locales.map((cur) => [cur, getUrl(href, cur)])),
     },

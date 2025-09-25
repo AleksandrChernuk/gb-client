@@ -1,12 +1,13 @@
-import { AllCountriesProvider } from '@/features/location-search/AllCountriesProvider';
+import { AllCountriesProvider } from '@/features/all-countries/model/AllCountriesProvider';
 import MainSearch from '@/features/route-search-form';
 import { getLocations } from '@/shared/api/location.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params } from '@/shared/types/common.types';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
 import { Container } from '@/shared/ui/Container';
-import CountriesList from '@/widgets/all-countries-list';
-import CityList from '@/widgets/all-countries-list';
+import { CityList, CountriesList } from '@/widgets/all-counries-list';
+
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
@@ -16,54 +17,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'all-countries',
   });
-
-  return {
-    title: t('all-countries.title'),
-    description: t('all-countries.description'),
-    keywords: t('all-countries.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/all-countries`,
-      languages: {
-        'x-default': '/uk/all-countries',
-        uk: '/uk/all-countries',
-        en: '/en/all-countries',
-        ru: '/ru/all-countries',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function AllCountries({
@@ -76,19 +34,18 @@ export default async function AllCountries({
   setRequestLocale(lng as Locale);
   const data = await getLocations({ query: '', perPage: 99 });
   const t = await getTranslations(MESSAGE_FILES.ALL_COUNTRIES);
-
+  console.log(data);
   return (
     <main className="bg-slate-50 dark:bg-slate-800 flex-1">
+      <section className="bg-green-500 dark:bg-slate-900">
+        <Container size="l" className="py-5">
+          <div className="mb-4">
+            <BackRouteButton className="text-white" />
+          </div>
+          <MainSearch />
+        </Container>
+      </section>
       <AllCountriesProvider locations={data.data} locale={lng}>
-        <section className="bg-green-500 dark:bg-slate-900">
-          <Container size="l" className="py-5">
-            <div className="mb-4">
-              <BackRouteButton className="text-white" />
-            </div>
-            <MainSearch />
-          </Container>
-        </section>
-
         <section className="py-10">
           <Container size="m">
             <h1 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
@@ -101,6 +58,7 @@ export default async function AllCountries({
         <section className="pb-8">
           <Container size="m">
             <h2 className="mb-4 text-slate-700 dark:text-slate-50">{t('select_city')}</h2>
+
             <CityList />
           </Container>
         </section>
