@@ -1,8 +1,9 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params } from '@/shared/types/common.types';
 import FaqSearchResult from '@/widgets/faq/FaqSearchResult';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
@@ -10,54 +11,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'faq_booking',
+    path: '/faq/search',
   });
-
-  return {
-    title: t('faq_booking.title'),
-    description: t('faq_booking.description'),
-    keywords: t('faq_booking.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/faq/search`,
-      languages: {
-        'x-default': '/uk/faq/search',
-        uk: '/uk/faq/search',
-        en: '/en/faq/search',
-        ru: '/ru/faq/search',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function FaqSlug({

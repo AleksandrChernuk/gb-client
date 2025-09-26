@@ -1,5 +1,5 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 import { renderDocumentHtml } from '@/shared/lib/renderDocumentHtml';
 import { Params } from '@/shared/types/common.types';
 import { Container } from '@/shared/ui/Container';
@@ -12,10 +12,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  return generatePublicPageMetadata({
+  return generatePrivatePageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'privacy-policy',
+    path: 'privacy-policy',
   });
 }
 

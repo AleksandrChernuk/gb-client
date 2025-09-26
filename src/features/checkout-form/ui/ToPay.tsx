@@ -2,7 +2,7 @@ import { useSearchStore } from '@/shared/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { getTotalPriceFromPassengers } from '../models/helpers/getTotalPriceFromPassengers';
+import { getTotalPriceFromPassengers } from '../helpers/getTotalPriceFromPassengers';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Skeleton } from '@/shared/ui/skeleton';

@@ -17,7 +17,7 @@ import FloorSheet from '../../../entities/checkout/FloorSwitch';
 import { useController, useFormContext, useWatch } from 'react-hook-form';
 import { memo } from 'react';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
-import { seatsMaper } from '../models/helpers/seatMaper';
+import { seatsMaper } from '../helpers/seatMaper';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import { Skeleton } from '@/shared/ui/skeleton';

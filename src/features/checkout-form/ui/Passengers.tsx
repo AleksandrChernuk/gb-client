@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useMemo } from 'react';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
-import { getProviderConfigByName } from '@/features/checkout-form/models/config';
+import { getProviderConfigByName } from '@/features/checkout-form/config';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import PassengerCard from '@/entities/checkout/PassengerCard';
 import StepNumber from '@/entities/checkout/StepNumber';

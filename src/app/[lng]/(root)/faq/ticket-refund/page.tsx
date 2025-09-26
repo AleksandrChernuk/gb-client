@@ -1,8 +1,9 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params } from '@/shared/types/common.types';
 import FaqTabs from '@/widgets/faq/FaqTabs';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
@@ -10,54 +11,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  const t = await getTranslations({
-    locale: lng,
+  return generatePublicPageMetadata({
+    lng,
     namespace: MESSAGE_FILES.METADATA,
+    slug: 'faq_ticket_refund',
+    path: '/faq/ticket-refund',
   });
-
-  return {
-    title: t('faq_ticket_refund.title'),
-    description: t('faq_ticket_refund.description'),
-    keywords: t('faq_ticket_refund.keywords'),
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-
-    metadataBase: new URL('https://greenbus.com.ua'),
-
-    alternates: {
-      canonical: `/${lng}/faq/ticket-refund`,
-      languages: {
-        'x-default': '/uk/faq/ticket-refund',
-        uk: '/uk/faq/ticket-refund',
-        en: '/en/faq/ticket-refund',
-        ru: '/ru/faq/ticket-refund',
-      },
-    },
-
-    openGraph: {
-      images: '/logo.png',
-    },
-  };
 }
 
 export default async function TicketRefund({

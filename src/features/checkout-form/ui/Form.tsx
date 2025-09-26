@@ -3,7 +3,7 @@
 import { FormProvider } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import useCheckout from '@/features/checkout-form/models/hooks/useCheckout';
+import useCheckout from '@/features/checkout-form/hooks/useCheckout';
 import Passengers from '@/features/checkout-form/ui/Passengers';
 import CheckoutCard from '@/entities/checkout/CheckoutCard';
 import { ConfirmationDialog } from '@/features/checkout-form/ui/ConfirmationDialog';

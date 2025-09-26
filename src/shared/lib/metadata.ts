@@ -6,10 +6,13 @@ type PageType = 'public' | 'private';
 const buildBaseMetadata = (
   t: Awaited<ReturnType<typeof getTranslations>>,
   lng: Locale,
-  slug: string,
+  slug: string, // для переводов
+  path: string, // для URL и ссылок
   pageType: PageType = 'public',
 ) => {
   const isPublic = pageType === 'public';
+  const baseUrl = 'https://greenbus.com.ua';
+  const fullPath = path ? `/${lng}/${path}` : `/${lng}`;
 
   return {
     title: t(`${slug}.title`),
@@ -34,15 +37,15 @@ const buildBaseMetadata = (
         'max-snippet': isPublic ? -1 : 0,
       },
     },
-    metadataBase: new URL('https://greenbus.com.ua'),
+    metadataBase: new URL(baseUrl),
     ...(isPublic && {
       alternates: {
-        canonical: `/${lng}/${slug}`,
+        canonical: fullPath,
         languages: {
-          'x-default': `/uk/${slug}`,
-          uk: `/uk/${slug}`,
-          en: `/en/${slug}`,
-          ru: `/ru/${slug}`,
+          'x-default': `/uk${path ? `/${path}` : ''}`,
+          uk: `/uk${path ? `/${path}` : ''}`,
+          en: `/en${path ? `/${path}` : ''}`,
+          ru: `/ru${path ? `/${path}` : ''}`,
         },
       },
     }),
@@ -50,11 +53,11 @@ const buildBaseMetadata = (
       openGraph: {
         title: t(`${slug}.title`),
         description: t(`${slug}.description`),
-        url: `https://greenbus.com.ua/${lng}/${slug}`,
+        url: `${baseUrl}${fullPath}`,
         siteName: 'GreenBus',
         images: [
           {
-            url: '/logo.png',
+            url: `${baseUrl}/logo.png`, // абсолютный путь
             width: 512,
             height: 512,
             alt: 'GreenBus logo',
@@ -69,7 +72,7 @@ const buildBaseMetadata = (
         card: 'summary_large_image' as const,
         title: t(`${slug}.title`),
         description: t(`${slug}.description`),
-        images: ['/logo.png'],
+        images: [`${baseUrl}/logo.png`],
       },
     }),
   };
@@ -81,14 +84,21 @@ type MetadataOptions = {
   lng: Locale;
   namespace: string;
   slug: string;
+  path?: string;
   pageType?: PageType;
   overrides?: Partial<BaseMetadata>;
 };
 
-export async function createPageMetadata({ lng, namespace, slug, pageType = 'public', overrides }: MetadataOptions) {
+export async function createPageMetadata({
+  lng,
+  namespace,
+  slug,
+  path = '',
+  pageType = 'public',
+  overrides,
+}: MetadataOptions) {
   const t = await getTranslations({ locale: lng, namespace });
-  const base = buildBaseMetadata(t, lng, slug, pageType);
-
+  const base = buildBaseMetadata(t, lng, slug, path, pageType);
   return { ...base, ...overrides };
 }
 

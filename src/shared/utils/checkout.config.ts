@@ -1,7 +1,7 @@
 import { IRouteResponse } from '@/shared/types/route.types';
 import { z } from 'zod';
 import { FieldConfig } from '../types/checkot.types';
-import { bdaySchema, passportExpirySchema } from '../../features/checkout-form/models/config/schemas';
+import { bdaySchema, passportExpirySchema } from '../../features/checkout-form/config/schemas';
 import { isCleanInput } from '@/shared/validation/schemas.constans';
 
 export const firstName: FieldConfig = {

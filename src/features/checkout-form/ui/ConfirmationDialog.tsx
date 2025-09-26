@@ -4,7 +4,7 @@ import { NewOrderDialog } from '@/entities/checkout/NewOrderDialog';
 import { OtpDialog } from '@/entities/checkout/OtpDialog';
 import { PriceChangeDialog } from '@/features/checkout-form/ui/PriceChangeDialog';
 import { StillOnlineDialog } from '@/entities/checkout/StillOnlineDialog';
-import { useConfirmationDialogState } from '@/features/checkout-form/models/hooks/useConfirmOrederState';
+import { useConfirmationDialogState } from '@/features/checkout-form/hooks/useConfirmOrederState';
 import { Dialog, DialogContent } from '@/shared/ui/dialog';
 
 export function ConfirmationDialog() {

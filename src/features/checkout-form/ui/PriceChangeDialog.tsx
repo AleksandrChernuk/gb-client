@@ -2,7 +2,7 @@
 import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/shared/ui/dialog';
 import { Button } from '@/shared/ui/button';
 import { useTranslations } from 'next-intl';
-import useTimer from '@/features/checkout-form/models/hooks/useTimer';
+import useTimer from '@/features/checkout-form/hooks/useTimer';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 export const PriceChangeDialog = () => {

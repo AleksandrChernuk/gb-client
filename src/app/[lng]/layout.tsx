@@ -26,7 +26,6 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-// Функция для определения направления текста
 function getTextDirection(locale: Locale): 'ltr' | 'rtl' {
   const rtlLocales = ['ar', 'he', 'fa', 'ur'];
   return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
