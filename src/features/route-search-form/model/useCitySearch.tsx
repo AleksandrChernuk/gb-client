@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
 import { ILocation } from '@/shared/types/location.types';
 import { useSearchStore } from '@/shared/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
@@ -8,6 +8,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useLocationsStore } from '@/shared/store/useLocations';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+import { useCityData } from '@/features/route-search-form/model/useCityData';
 
 type Tname = 'from' | 'to';
 
@@ -17,40 +18,56 @@ type Props = {
 
 export const useCitySearch = ({ name }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
+  const deferredInputValue = useDeferredValue(inputValue);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const locations = useLocationsStore((state) => state.locations);
   const favoriteLocations = useLocationsStore(useShallow((state) => state.favoriteLocations));
 
-  const setCity = useSearchStore(useShallow((state) => state.setCity));
-  const city = useSearchStore(useShallow((state) => state[name]));
+  const setCityId = useSearchStore((state) => state.setCityId);
+
+  const { fromCity, toCity } = useCityData();
+  const city = name === 'from' ? fromCity : toCity;
 
   const language = useLocale();
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const placeholder = useMemo(() => {
+    return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
+  }, [name, t]);
 
   const cities = useMemo(() => {
-    if (value.trim().length === 0) {
+    if (deferredInputValue.trim().length === 0) {
       return favoriteLocations || [];
     }
-    const query = value.trim().toLowerCase();
+
+    const query = deferredInputValue.trim().toLowerCase();
     return (locations || []).filter((loc) => {
       const { locationName } = extractLocationDetails(loc, language);
       return locationName.toLowerCase().startsWith(query);
     });
-  }, [value, locations, favoriteLocations, language]);
+  }, [deferredInputValue, locations, favoriteLocations, language]);
+
+  const updateCityValue = useCallback(
+    (selectedCity: ILocation) => {
+      setInputValue(extractLocationDetails(selectedCity, language).locationName);
+    },
+    [language],
+  );
 
   const onSelectCity = useCallback(
     (newCity: ILocation) => {
-      setCity(name, newCity);
-      const cityIndex = cities?.findIndex((el) => el.id === newCity.id) || 0;
-      setHighlightedIndex(cityIndex);
-      setValue(extractLocationDetails(newCity, language).locationName);
+      setCityId(name, newCity.id);
+      const cityIndex = cities.findIndex((el) => el.id === newCity.id);
+      setHighlightedIndex(cityIndex >= 0 ? cityIndex : -1);
+      updateCityValue(newCity);
       setOpen(false);
       inputRef.current?.blur();
     },
-    [setCity, name, cities, language],
+    [setCityId, name, cities, updateCityValue],
   );
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
@@ -62,55 +79,63 @@ export const useCitySearch = ({ name }: Props) => {
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (!cities || cities.length === 0) return;
 
-      if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        setHighlightedIndex((prevIndex) => Math.min(prevIndex + 1, cities.length - 1));
-      }
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        setHighlightedIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-      }
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
-          const cityIndex = cities?.findIndex((el) => el.id === cities[highlightedIndex].id) || 0;
-          setHighlightedIndex(cityIndex);
-          onSelectCity(cities[highlightedIndex]);
-        }
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) => (prevIndex < cities.length - 1 ? prevIndex + 1 : prevIndex));
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+          break;
+        case 'Enter':
+          event.preventDefault();
+          if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
+            onSelectCity(cities[highlightedIndex]);
+          }
+          break;
+        case 'Escape':
+          event.preventDefault();
+          setOpen(false);
+          inputRef.current?.blur();
+          break;
       }
     },
     [cities, highlightedIndex, onSelectCity],
   );
 
-  const onInputChange = useCallback((newValue: string) => {
-    setValue(newValue);
-  }, []);
+  const onInputChange = (newValue: string) => {
+    setInputValue(newValue);
+    setHighlightedIndex(-1);
+    if (!open) setOpen(true);
+  };
 
-  const handleClearMobileInput = useCallback(() => {
-    setValue('');
-  }, []);
+  const handleClearMobileInput = () => {
+    setInputValue('');
+    setHighlightedIndex(-1);
+  };
+
+  const handleToggleOpen = () => setOpen((p) => !p);
 
   useEffect(() => {
     if (city) {
-      setValue(extractLocationDetails(city, language).locationName);
+      updateCityValue(city);
     } else {
-      setValue('');
+      setInputValue('');
     }
-  }, [city, language]);
-
-  const getPlaceholder = useCallback(() => {
-    return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
-  }, [name, t]);
-
-  const handleToggleOpen = useCallback(() => {
-    setOpen((p) => !p);
-  }, []);
+  }, [city, updateCityValue]);
 
   useEffect(() => {
-    if (!open && value.trim().length === 0 && city) {
-      setValue(extractLocationDetails(city, language).locationName);
+    if (!open && inputValue.trim().length === 0 && city) {
+      updateCityValue(city);
     }
-  }, [open, value, city, language]);
+  }, [open, inputValue, city, updateCityValue]);
+
+  useEffect(() => {
+    if (highlightedIndex >= cities.length) {
+      setHighlightedIndex(-1);
+    }
+  }, [cities.length, highlightedIndex]);
 
   return {
     open,
@@ -122,8 +147,8 @@ export const useCitySearch = ({ name }: Props) => {
     onKeyDown,
     onInputChange,
     handleBlur,
-    value,
+    value: inputValue,
     handleClearMobileInput,
-    placeholder: getPlaceholder(),
+    placeholder,
   };
 };

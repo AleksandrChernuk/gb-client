@@ -9,10 +9,22 @@ import BackRouteButton from '@/shared/ui/BackRouteButton';
 import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
 import Verify2FAForm from '@/features/verify-2fa-form';
 import { Button } from '@/shared/ui/button';
+import { Locale } from '@/shared/i18n/locales';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
   params: Params;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { lng, email } = (await params) as { lng: Locale; email: string };
+  return generatePrivatePageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'auth',
+    path: `/verify-2FA/${email}`,
+  });
+}
 
 const Verify2FAPage = async ({ params }: Props) => {
   const { email } = await params;

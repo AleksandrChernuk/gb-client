@@ -18,11 +18,11 @@ export default function Trip() {
 
   const date_time_from = format(selectedTicket.departure.dateTime || new Date(), 'HH:mm');
   const location_from = extractLocationDetails(selectedTicket.departure.fromLocation, locale).locationName || '';
-  const address_from = selectedTicket.departure.stationAddress || '';
+  const address_from = selectedTicket.departure.stationAddress || selectedTicket.departure.stationName || '';
 
   const date_time_to = format(selectedTicket.arrival.dateTime || new Date(), 'HH:mm');
   const location_to = extractLocationDetails(selectedTicket.arrival.toLocation, locale).locationName || '';
-  const address_to = selectedTicket.arrival.stationAddress || '';
+  const address_to = selectedTicket.arrival.stationAddress || selectedTicket.arrival.stationName || '';
 
   const duration = selectedTicket.duration?.split(':');
 

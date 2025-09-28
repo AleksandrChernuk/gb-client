@@ -1,11 +1,28 @@
 import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
 import VerifyDeleteAccountForm from '@/features/delete-profile-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Locale } from '@/shared/i18n/locales';
 import { Link } from '@/shared/i18n/routing';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
+import { Params } from '@/shared/types/common.types';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
 import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/Container';
 import { getTranslations } from 'next-intl/server';
+
+type Props = {
+  params: Params;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  return generatePrivatePageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'auth',
+    path: `/verify-delete-account`,
+  });
+}
 
 export default async function VerifyDeleteAccountPage() {
   const t = await getTranslations(MESSAGE_FILES.FORM);

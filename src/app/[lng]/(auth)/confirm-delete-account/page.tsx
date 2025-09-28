@@ -1,39 +1,36 @@
-'use client';
-
-import { logout } from '@/shared/api/auth.service';
-import { useUserStore } from '@/shared/store/useUser';
-import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import { Link, useRouter } from '@/shared/i18n/routing';
+import { Link } from '@/shared/i18n/routing';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import AuthAssistantCard from '@/entities/auth/AuthAssistantCard';
 import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/Container';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { ConfirmDeleteProfileAction } from '@/features/confirm-delete-profile';
+import { getTranslations } from 'next-intl/server';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
+import { Locale } from '@/shared/i18n/locales';
+import { Params } from '@/shared/types/common.types';
 
-const ConfirmDeleteAccountPage = () => {
-  const router = useRouter();
-  const { clearUserStore } = useUserStore();
-  const t = useTranslations(MESSAGE_FILES.FORM);
-  const t_common = useTranslations(MESSAGE_FILES.COMMON);
+type Props = {
+  params: Params;
+};
 
-  useEffect(() => {
-    const cleanupAndRedirect = async () => {
-      clearUserStore();
-      await logout();
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  return generatePrivatePageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'auth',
+    path: `/change-password`,
+  });
+}
 
-      const timer = setTimeout(() => {
-        router.push(`/`);
-      }, 10000);
-
-      return () => clearTimeout(timer);
-    };
-
-    cleanupAndRedirect();
-  }, [clearUserStore, router]);
+const ConfirmDeleteAccountPage = async () => {
+  const t = await getTranslations(MESSAGE_FILES.FORM);
+  const t_common = await getTranslations(MESSAGE_FILES.COMMON);
 
   return (
     <section className="w-full">
+      <ConfirmDeleteProfileAction />
       <Container size="xs" className="py-4 laptop:py-8">
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />

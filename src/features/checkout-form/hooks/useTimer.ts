@@ -27,15 +27,16 @@ export default function useTimer() {
     const interval = setInterval(() => {
       const now = Date.now();
       const elapsed = now - start;
-      if (elapsed >= 15 * 60 * 100) {
+
+      if (elapsed >= 10 * 60 * 1000) {
         setOpen(true);
         setOpenPriceChange(false);
         clearInterval(interval);
       }
-      if (!priceDialogShown && elapsed >= 10 * 100) {
+      if (!priceDialogShown && elapsed >= 20 * 1000) {
         setOpenPriceChange(true);
       }
-    }, 100);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [hasHydrated, priceDialogShown, setOpen, setOpenPriceChange, setStartedAt, startedAt]);

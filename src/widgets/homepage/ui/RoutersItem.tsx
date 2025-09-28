@@ -16,15 +16,15 @@ type TIRoutersItem = {
 
 export default function RoutersItem({ from, to }: TIRoutersItem) {
   const locale = useLocale();
-  const setCity = useSearchStore((state) => state.setCity);
+  const setCity = useSearchStore((state) => state.setCityId);
   const setDate = useSearchStore((state) => state.setDate);
   const setPassenger = useSearchStore((state) => state.setPassenger);
 
   const formatted = format(new Date() || new Date(), 'yyyy-MM-dd');
 
   const handleSetCity = () => {
-    setCity('to', to);
-    setCity('from', from);
+    setCity('to', to.id);
+    setCity('from', from.id);
     setDate(formatted);
     setPassenger('adult', 1);
   };

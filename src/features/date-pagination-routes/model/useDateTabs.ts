@@ -18,7 +18,7 @@ export const useDateTabs = () => {
   const from = useSearchStore(useShallow((state) => state.from));
   const to = useSearchStore(useShallow((state) => state.to));
 
-  const enabled = !!from?.id && !!to?.id;
+  const enabled = !!from && !!to;
 
   const [tabDate, setTabDate] = useState<Date>(toDate(currentDate || new Date()));
   const [datesArray, setDatesArray] = useState<Date[]>(createDateArr(toDate(tabDate), 5, Math.floor(5 / 2)));

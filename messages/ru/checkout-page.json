@@ -30,19 +30,20 @@
     "book_within_1": "Забронируйте свою поездку в течение ",
     "book__min": "минут",
     "book_within_2": ", чтобы сохранить место и избежать повышения цены в будущем.",
-    "payment_confirm_title": "Подтверждение оплаты",
-    "payment_confirm_error_title": "Произошла ошибка",
-    "payment_confirm_error_description": "Что-то пошло не так.",
-    "payment_confirm_final_amount": "Итоговая сумма",
-    "payment_confirm_cancel": "Отменить",
-    "payment_confirm_pay": "Оплатить",
-    "payment_confirm_book": "Забронировать",
     "payment_confirm_to_search": "К поиску",
     "price_note": "Стоимость может изменяться в зависимости от загрузки перевозчика. Финальная стоимость будет известна при подтверждении оплаты.",
     "passenger": "Пассажир",
     "child_passenger": "Детский",
     "passenger_number": "№{number}",
     "deselect_seat": "Снимите выделение с места, чтобы продолжить.",
-    "enter_confirmation_code": "Введите код подтверждения"
+    "enter_confirmation_code": "Введите код подтверждения",
+    "payment_confirm_error_title": "Ошибка подтверждения платежа",
+    "payment_confirm_title": "Подтверждение платежа",
+    "payment_confirm_error_description": "Произошла ошибка при подтверждении платежа",
+    "payment_confirm_final_amount": "Итоговая сумма к оплате",
+    "sms_confirmation_notice": "Для завершения бронирования потребуется SMS-подтверждение",
+    "payment_confirm_book": "Забронировать",
+    "payment_confirm_pay": "Оплатить",
+    "payment_confirm_cancel": "Отменить"
   }
 }

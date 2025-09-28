@@ -16,7 +16,8 @@ export type ReqTicketData = Partial<{
 }>;
 
 export type SelectedTicketsActions = {
-  setSelectedTicket: (data: ReqTicketData) => Promise<void>;
+  setSelectedTicket: (data: IRouteResponse) => void;
+  setLoading: (loading: boolean) => void;
   resetSelectedTicket: () => void;
 };
 

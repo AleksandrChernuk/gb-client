@@ -1,20 +1,23 @@
 'use client';
 
 import { useFilterTickets } from '@/shared/store/useFilterTickets';
-import { TicketCard } from '@/features/ticket-card/TicketCard';
-
 import { useSearchStore } from '@/shared/store/useSearch';
 import useTicketsSearch from '@/shared/hooks/useTicketsSearch';
 import { BusLoader } from '@/shared/ui/BusLoader';
 import RouteNotFound from '@/shared/ui/RouteNotFound';
 import { CustomError } from '@/entities/common/CustomError';
+import { RouteCard } from '@/features/route-card/RouteCard';
+import { useTranslations } from 'next-intl';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 export default function ResultList() {
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   const { isFetching, data, error } = useTicketsSearch();
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
   const isHydrated = useSearchStore((state) => state.isHydrated);
-  const from = useSearchStore((state) => state.from);
-  const to = useSearchStore((state) => state.to);
+
+  const fromId = useSearchStore((state) => state.from);
+  const toId = useSearchStore((state) => state.to);
 
   if (isFetching || !isHydrated) {
     return <BusLoader className={'flex items-center justify-center my-2'} />;
@@ -22,13 +25,14 @@ export default function ResultList() {
 
   if (error) return <CustomError />;
 
-  if (!isFetching && data && data.length === 0) return <RouteNotFound text="no_travel" />;
+  if (!isFetching && data && data.length === 0) return <RouteNotFound text={t('no_travel_find')} />;
 
-  if (!from && !to) return <CustomError />;
+  if (!fromId || !toId) return <CustomError />;
+
   return (
     <div className="flex flex-col space-y-10">
       {filteredTickets.map((route) => {
-        return <TicketCard key={`${route.ticketId}`} element={route} />;
+        return <RouteCard key={`${route.ticketId}`} element={route} />;
       })}
     </div>
   );

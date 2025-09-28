@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 'use client';
 
 import { getRoutes } from '@/shared/api/route.actions';
@@ -12,33 +11,34 @@ import { useShallow } from 'zustand/react/shallow';
 export default function useTicketsSearch() {
   const currentLanguage = useLocale();
 
-  const from = useSearchStore(useShallow((state) => state.from));
-  const to = useSearchStore(useShallow((state) => state.to));
+  const fromId = useSearchStore(useShallow((state) => state.from));
+  const toId = useSearchStore(useShallow((state) => state.to));
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
   const date = useSearchStore(useShallow((state) => state.date));
+
   const setTickets = useFilterTickets((state) => state.setTickets);
   const tickets = useFilterTickets((state) => state.filteredTickets);
 
-  const enabled = !!from?.id && !!to?.id && !!date;
+  const enabled = !!fromId && !!toId && !!date;
 
   const { isFetching, data, error } = useQuery({
-    queryKey: ['routes-search', from?.id, to?.id, adult, children, date, currentLanguage],
+    queryKey: ['routes-search', fromId, toId, adult, children, date, currentLanguage],
     queryFn: () =>
       getRoutes({
-        fromCityId: from?.id!,
-        toCityId: to?.id!,
+        fromCityId: fromId!,
+        toCityId: toId!,
         travelDate: date,
         locale: currentLanguage,
       }),
     enabled,
   });
+
   useEffect(() => {
     if (data) {
       setTickets(data.filter((element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= adult + children));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, adult, children, setTickets]);
 
   return {
     isFetching,

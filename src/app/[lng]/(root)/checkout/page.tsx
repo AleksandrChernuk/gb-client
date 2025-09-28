@@ -30,7 +30,7 @@ export default async function Checkout() {
 
   return (
     <>
-      <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900">
+      <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">
         <section>
           <h1 className="sr-only">{t('h1')}</h1>
           <Container size="l" className="tablet:max-w-[960px] laptop:max-w-[1368px]">

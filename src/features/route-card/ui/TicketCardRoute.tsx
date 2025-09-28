@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { IconRouteLeft } from '@/assets/icons/IconRouteLeft';
-import { IconRouteRigth } from '@/features/ticket-card/icons/IconRouteRigth';
+import { IconRouteRigth } from '@/assets/icons/IconRouteRigth';
 
 type Props = {
   route: IRouteResponse;

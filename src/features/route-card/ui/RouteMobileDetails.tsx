@@ -21,12 +21,10 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 type Props = {
   onClickTrigger: () => void;
   children: ReactNode;
-  selectButton: ReactNode;
-  price: number;
-  passengerCount: number;
+  detailsFooter: ReactNode;
 };
 
-export default function MobileDetails({ children, selectButton, onClickTrigger, price, passengerCount }: Props) {
+export default function MobileDetails({ children, detailsFooter, onClickTrigger }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
@@ -55,17 +53,7 @@ export default function MobileDetails({ children, selectButton, onClickTrigger, 
         <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
           {children}
         </ScrollArea>
-        <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">
-          <div className="mx-auto text-center">
-            <div className="text-xs font-normal tracking-normal leading-[18px] text-[#6f8b90] dark:text-slate-50">
-              {passengerCount} {t('placeholderPassenger')}
-            </div>
-            <div className="text-base font-normal leading-6 tracking-normal text-slate-700 dark:text-slate-200">
-              {price ?? 0} <span className="text-xs ml-[2px]">UAH</span>
-            </div>
-          </div>
-          <div className="w-1/2">{selectButton}</div>
-        </SheetFooter>
+        <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">{detailsFooter}</SheetFooter>
       </SheetContent>
     </Sheet>
   );

@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props) {
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'auth',
+    path: '/auth',
   });
 }
 

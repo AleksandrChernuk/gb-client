@@ -31,19 +31,20 @@
     "book_within_1": "Book your trip within ",
     "book__min": "minutes",
     "book_within_2": " to secure your spot and avoid potential price hikes later.",
-    "payment_confirm_title": "Payment confirmation",
-    "payment_confirm_error_title": "An error occurred",
-    "payment_confirm_error_description": "Something went wrong.",
-    "payment_confirm_final_amount": "Final amount",
-    "payment_confirm_cancel": "Cancel",
-    "payment_confirm_pay": "Pay",
-    "payment_confirm_book": "Book",
     "payment_confirm_to_search": "Back to search",
     "price_note": "The price may change depending on carrier load. The final amount will be known upon payment confirmation.",
     "passenger": "Passenger",
     "child_passenger": "Child",
     "passenger_number": "№{number}",
     "deselect_seat": "Deselect the selected seat to continue.",
-    "enter_confirmation_code": "Enter confirmation code"
+    "enter_confirmation_code": "Enter confirmation code",
+    "payment_confirm_error_title": "Payment confirmation error",
+    "payment_confirm_title": "Payment confirmation",
+    "payment_confirm_error_description": "An error occurred while confirming the payment",
+    "payment_confirm_final_amount": "Final amount to pay",
+    "sms_confirmation_notice": "An SMS confirmation is required to complete the booking",
+    "payment_confirm_book": "Book",
+    "payment_confirm_pay": "Pay",
+    "payment_confirm_cancel": "Cancel"
   }
 }

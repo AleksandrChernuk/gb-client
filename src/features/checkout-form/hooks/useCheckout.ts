@@ -9,13 +9,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale } from 'next-intl';
 import normalizeData from '../helpers/normalizeData';
-import { z } from 'zod';
 import { getCheckoutSchemaForProvider } from '../config/schemas';
 import { getProviderConfigByName } from '../config';
 import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { createOrder } from '@/shared/api/orders.actions';
+import { FormData, PassengerFormData } from '@/features/checkout-form/types';
 
 function useCheckout() {
   const locale = useLocale();
@@ -24,8 +24,8 @@ function useCheckout() {
 
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
-  const from = useSearchStore(useShallow((state) => state.from?.id));
-  const to = useSearchStore(useShallow((state) => state.to?.id));
+  const from = useSearchStore(useShallow((state) => state.from));
+  const to = useSearchStore(useShallow((state) => state.to));
   const ticket = useSelectedTickets(useShallow((state) => state.selectedTicket));
   const user = useUserStore(useShallow((state) => state.currentUser));
   const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
@@ -34,15 +34,22 @@ function useCheckout() {
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(
-    () => createPassengers(adult, children, providerConfig, ticket?.ticketPricing.basePrice || 0),
+    () =>
+      createPassengers(
+        adult,
+        children,
+        providerConfig,
+        ticket?.ticketPricing.basePrice || 0,
+      ) as unknown as PassengerFormData[],
     [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
   );
+
   const schema = useMemo(
     () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
     [providerConfig, ticket],
   );
 
-  const methods = useForm<z.infer<typeof schema>>({
+  const methods = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       passengers: defaultPassengers,
@@ -56,7 +63,7 @@ function useCheckout() {
     shouldFocusError: true,
   });
 
-  const onSubmit = async (formData: z.infer<typeof schema>) => {
+  const onSubmit = async (formData: FormData) => {
     if (!ticket || !from || !to) {
       setError('no data');
       toast.error('no data');

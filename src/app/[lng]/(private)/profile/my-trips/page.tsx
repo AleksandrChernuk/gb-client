@@ -6,6 +6,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import FutureTrips from '@/widgets/profile-future-trips-list';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import CompletedTrips from '@/widgets/profile-complete-trips-list';
+import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
+import { Locale } from '@/shared/i18n/locales';
+import { Params } from '@/shared/types/common.types';
+
+type Props = {
+  params: Params;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  return generatePrivatePageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'profile',
+    path: '/profile/my-trips',
+  });
+}
 
 const Trips = async () => {
   const t = await getTranslations(MESSAGE_FILES.PROFILE);

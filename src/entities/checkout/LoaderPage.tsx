@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function LoaderPage() {
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex items-center justify-center flex-1">
       <BusLoader />
     </div>
   );

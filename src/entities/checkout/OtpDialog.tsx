@@ -5,14 +5,14 @@ import { LoaderCircle, TicketX } from 'lucide-react';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { usePaymantConfirm } from '@/shared/hooks/usePaymantConfirm';
+import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { Button } from '@/shared/ui/button';
 
 export const OtpDialog = () => {
   const [pin, setPin] = useState('');
-  const { handleCancelOrder, smsValidationoading, handleSMSValidation } = usePaymantConfirm();
+  const { handleCancelOrder, smsValidationLoading, handleSMSValidation } = usePaymentConfirm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
   const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
@@ -49,7 +49,7 @@ export const OtpDialog = () => {
           </Button>
 
           <Button variant={'default'} size={'primary'} onClick={() => handleSMSValidation(pin)}>
-            {smsValidationoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
+            {smsValidationLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
           </Button>
         </DialogFooter>
       </DialogHeader>

@@ -13,11 +13,13 @@ export default function DateTabs() {
 
   const { tabDate, handleUpdateDate, datesArray, enabled } = useDateTabs();
 
+  console.log(tabDate);
+
   return (
     <div className="items-center justify-around gap-4 overflow-x-scroll tablet:gap-8 [&::-webkit-scrollbar]:hidden hidden tablet:flex">
       {datesArray.map((date) => {
         return (
-          <div key={format(date, 'dd MMM')}>
+          <div key={date.toISOString()}>
             <Button
               disabled={isBefore(addDays(date, 1), new Date()) || !enabled}
               variant={'link'}

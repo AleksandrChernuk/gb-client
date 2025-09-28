@@ -54,7 +54,7 @@ export const MobileFilter = () => {
   const from = useSearchStore(useShallow((state) => state.from));
   const to = useSearchStore(useShallow((state) => state.to));
 
-  const enabled = !!from?.id && !!to?.id;
+  const enabled = !!from && !!to;
 
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 

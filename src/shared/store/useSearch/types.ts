@@ -1,5 +1,3 @@
-import { ILocation } from '@/shared/types/location.types';
-
 export type TpassengerType = 'adult' | 'children';
 
 export type TcityKey = 'from' | 'to';
@@ -11,11 +9,9 @@ export type Terrors = {
 
 export type SearchState = {
   isHydrated: boolean;
-  from: ILocation | null;
-  to: ILocation | null;
-
+  from: number | null;
+  to: number | null;
   date: string;
-
   month: Date;
   adult: number;
   children: number;
@@ -24,8 +20,8 @@ export type SearchState = {
 
 export type SearchActions = {
   setDate: (newDate: string) => void;
-  setErrors: (cityKey: TcityKey, error: string | null) => void;
-  setCity: (cityKey: TcityKey, newCity: ILocation | null) => void;
+  setErrors: (cityKey: 'from' | 'to', error: string | null) => void;
+  setCityId: (cityKey: TcityKey, cityId: number | null) => void;
   setPassenger: (passengerType: TpassengerType, value: number) => void;
   incrementMonth: () => void;
   decrementMonth: () => void;

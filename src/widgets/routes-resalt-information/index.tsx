@@ -13,11 +13,11 @@ import { formatDate, toDate } from 'date-fns';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { MobileFilter } from '@/features/route-mobile-filter';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+import { useCityData } from '@/features/route-search-form/model/useCityData';
 
 export const RoutesResaltInformation = () => {
+  const { fromCity, toCity } = useCityData();
   const date = useSearchStore(useShallow((state) => state.date));
-  const from = useSearchStore(useShallow((state) => state.from));
-  const to = useSearchStore(useShallow((state) => state.to));
   const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
@@ -43,10 +43,10 @@ export const RoutesResaltInformation = () => {
       </div>
       <div className="flex items-center justify-between gap-1">
         <div className="flex items-center gap-2 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200 text-[12px] tablet:leading-4 tetx-slate-700 tablet:text-sm  text-nowrap truncate">
-          {from ? (
+          {fromCity ? (
             <div>
-              {from && extractLocationDetails(from, currentLanguage).locationName},{' '}
-              {from && extractLocationDetails(from, currentLanguage).countryName}
+              {fromCity && extractLocationDetails(fromCity, currentLanguage).locationName},{' '}
+              {fromCity && extractLocationDetails(fromCity, currentLanguage).countryName}
             </div>
           ) : (
             <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />
@@ -54,10 +54,10 @@ export const RoutesResaltInformation = () => {
           <div className="w-3 h-3 grow">
             <ArrowRight size={12} className="stroke-slate-700 dark:stroke-slate-200" />
           </div>
-          {to ? (
+          {toCity ? (
             <div className="flex items-center">
-              {to && extractLocationDetails(to, currentLanguage).locationName},{' '}
-              {to && extractLocationDetails(to, currentLanguage).countryName}
+              {toCity && extractLocationDetails(toCity, currentLanguage).locationName},{' '}
+              {toCity && extractLocationDetails(toCity, currentLanguage).countryName}
             </div>
           ) : (
             <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />

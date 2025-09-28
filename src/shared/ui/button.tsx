@@ -40,10 +40,10 @@ const buttonVariants = cva(
       },
 
       size: {
-        default: 'h-8 px-4 has-[>svg]:px-3',
+        default: 'h-9 px-4 has-[>svg]:px-3',
         sm: 'h-9 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-8 rounded-md px-6 has-[>svg]:px-4',
-        icon: 'size-8 has-[>svg]:px-0',
+        lg: 'h-9 rounded-md px-6 has-[>svg]:px-4',
+        icon: 'size-9 has-[>svg]:px-0',
 
         secondary:
           'py-2 px-6 tablet:py-4 tablet:text-base font-bold leading-6 tracking-normal rounded-full min-w-[168px] min-h-[48px] tablet:max-h-[52px]',

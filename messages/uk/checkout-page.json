@@ -30,20 +30,20 @@
     "book_within_1": "Забронюйте вашу поїздку протягом ",
     "book__min": "хвилин",
     "book_within_2": ", щоб гарантувати місце та уникнути можливого підвищення вартості.",
-
-    "payment_confirm_title": "Підтвердження оплати",
-    "payment_confirm_error_title": "Сталася помилка",
-    "payment_confirm_error_description": "Щось пішло не так.",
-    "payment_confirm_final_amount": "Фінальна вартість",
-    "payment_confirm_cancel": "Скасувати",
-    "payment_confirm_pay": "Оплатити",
-    "payment_confirm_book": "Бронювати",
     "payment_confirm_to_search": "До пошуку",
     "price_note": "Вартість може змінюватися залежно від навантаження перевізника. Фінальна вартість буде відома під час підтвердження оплати.",
     "passenger": "Пасажир",
     "child_passenger": "Дитячий",
     "passenger_number": "№{number}",
     "deselect_seat": "Зніміть вибране місце, щоб продовжити.",
-    "enter_confirmation_code": "Введіть код підтвердження"
+    "enter_confirmation_code": "Введіть код підтвердження",
+    "payment_confirm_error_title": "Помилка підтвердження платежу",
+    "payment_confirm_title": "Підтвердження платежу",
+    "payment_confirm_error_description": "Сталася помилка під час підтвердження платежу",
+    "payment_confirm_final_amount": "Кінцева сума до оплати",
+    "sms_confirmation_notice": "Для завершення бронювання потрібне SMS-підтвердження",
+    "payment_confirm_book": "Забронювати",
+    "payment_confirm_pay": "Оплатити",
+    "payment_confirm_cancel": "Скасувати"
   }
 }

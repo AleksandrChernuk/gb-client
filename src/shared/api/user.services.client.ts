@@ -1,6 +1,7 @@
-import { ICurrentUser, useUserStore } from '@/shared/store/useUser';
+import { useUserStore } from '@/shared/store/useUser';
 import { IUserOrdersResponse, IUserPaymentsResponse } from '@/shared/types/payments.Info.types';
 import { IUserCompletedTrips, UserCurrentTripType } from '@/shared/types/profile.trips';
+import { ICurrentUser } from '@/shared/types/user';
 
 type GetUserRequestsData = {
   userId: string;

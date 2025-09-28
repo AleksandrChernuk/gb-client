@@ -6,6 +6,7 @@ import { useCitySearch } from '../model/useCitySearch';
 import { useIsFetching } from '@tanstack/react-query';
 import CitySearchDesktop from './CitySearchDesktop';
 import CitySearchMobile from './CitySearchMobile';
+import { useCityData } from '@/features/route-search-form/model/useCityData';
 
 type Props = {
   name: 'from' | 'to';
@@ -15,10 +16,14 @@ type Props = {
 export default function CitySearch({ name, variant }: Props) {
   const swap = useSearchStore((state) => state.swap);
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
-  const city = useSearchStore((state) => state[name]);
+
+  const { fromCity, toCity } = useCityData();
+
+  const city = name === 'from' ? fromCity : toCity;
 
   const errors = useSearchStore((state) => state.errors[name]);
-  const setErrors = useSearchStore((state) => state.setErrors);
+  const setErrorsRaw = useSearchStore((state) => state.setErrors);
+
   const locale = useLocale();
 
   const search = useCitySearch({
@@ -27,9 +32,9 @@ export default function CitySearch({ name, variant }: Props) {
 
   const commonProps = {
     name,
-    city,
+    city: city,
     errors,
-    setErrors,
+    setErrors: setErrorsRaw,
     swap,
     isFetchingLocations,
     locale,

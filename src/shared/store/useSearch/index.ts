@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { SearchStore } from './types';
+
 export const useSearchStore = create<SearchStore>()(
   devtools(
     immer(
@@ -26,9 +27,9 @@ export const useSearchStore = create<SearchStore>()(
               state.date = newDate;
             }),
 
-          setCity: (cityKey, newCity) =>
+          setCityId: (cityKey, cityId) =>
             set((state) => {
-              state[cityKey] = newCity;
+              state[cityKey] = cityId;
             }),
 
           setPassenger: (passengerType, value) =>
@@ -71,13 +72,13 @@ export const useSearchStore = create<SearchStore>()(
           onRehydrateStorage: () => (state) => {
             if (state) {
               state.isHydrated = true;
+
               if (state.date && isBefore(new Date(state.date), new Date())) {
                 state.date = format(new Date(), 'yyyy-MM-dd');
               }
 
               const currentMonth = startOfMonth(new Date());
-              const stateMonth = new Date(state.month);
-              if (isBefore(stateMonth, currentMonth)) {
+              if (!state.month || isBefore(new Date(state.month), currentMonth)) {
                 state.month = new Date();
               }
             }

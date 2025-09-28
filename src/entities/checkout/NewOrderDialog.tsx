@@ -6,58 +6,106 @@ import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { usePaymantConfirm } from '@/shared/hooks/usePaymantConfirm';
+import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
+import { useRouter } from '@/shared/i18n/routing';
 
 export const NewOrderDialog = () => {
   const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
-  const { handleCancelOrder, payLoading, handlePayOrder, handleConfirmlOrder } = usePaymantConfirm();
+  const { handleCancelOrder, payLoading, handlePayOrder, handleConfirmOrder } = usePaymentConfirm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const { control } = useFormContext();
   const paymentType = useWatch({ control, name: 'payment' });
+  const router = useRouter();
 
   const isError = initiateNewOrder?.status === 'error';
   const alert = initiateNewOrder?.alertMessage;
+  const amount = Math.floor(Number(initiateNewOrder?.amount || 0));
+  const currency = initiateNewOrder?.currency;
+
+  // ИЗМЕНЕНО: вынесена логика определения кнопок
+  const showBookButton = !isError && paymentType !== 'BOOK';
+  const showCancelButton = !isError;
+
   const title = isError ? t('payment_confirm_error_title') : t('payment_confirm_title');
 
-  const description = isError ? (
-    <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>
-  ) : (
-    <div className="text-center space-y-2">
-      <p className="text-base">{t('payment_confirm_final_amount')}</p>
-      <p className="font-bold text-xl">
-        {Math.floor(Number(initiateNewOrder?.amount || 0))} {initiateNewOrder?.currency}
-      </p>
+  const renderAlertMessage = () => {
+    if (!alert) return null;
 
-      {paymentType === 'PAYMENT_AT_BOARDING' && (
-        <p className="text-xs text-green-300 text-left">
-          <span className="text-red-600 text-lg">*</span>Система може надіслати підтвердження через SMS
+    return (
+      <div className="space-y-1">
+        {alert.title && <p className="text-sm">{alert.title}</p>}
+        {alert.description && <p className="text-sm">{alert.description}</p>}
+      </div>
+    );
+  };
+
+  const renderDescription = () => {
+    if (isError) {
+      return (
+        <div>
+          <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="text-center space-y-2">
+        <p className="text-base">{t('payment_confirm_final_amount')}</p>
+        <p className="font-bold text-xl">
+          {amount} {currency}
         </p>
-      )}
-      <>
-        {alert && (
-          <>
-            {!!initiateNewOrder?.alertMessage.title && (
-              <p className="text-sm">{initiateNewOrder?.alertMessage.title}</p>
-            )}
-            {!!initiateNewOrder?.alertMessage.description && (
-              <p className="text-sm">{initiateNewOrder?.alertMessage.description}</p>
-            )}
-          </>
+        {paymentType === 'PAYMENT_AT_BOARDING' && (
+          <p className="text-xs text-green-300 text-left">
+            <span className="text-red-600 text-lg">*</span>
+            {t('sms_confirmation_notice')}
+          </p>
         )}
-      </>
-    </div>
-  );
+        {renderAlertMessage()}
+      </div>
+    );
+  };
+
+  const renderActionButtons = () => {
+    if (isError) {
+      return (
+        <Button size="primary" variant="default" onClick={() => router.back()} className="text-white">
+          {t('payment_confirm_to_search')}
+        </Button>
+      );
+    }
+
+    if (showBookButton) {
+      return (
+        <Button
+          size="primary"
+          variant="default"
+          className="text-white"
+          onClick={handleConfirmOrder}
+          disabled={payLoading}
+        >
+          {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
+        </Button>
+      );
+    }
+
+    return (
+      <Button size="primary" variant="default" className="text-white" onClick={handlePayOrder} disabled={payLoading}>
+        {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_pay')}
+      </Button>
+    );
+  };
 
   return (
     <>
       <DialogHeader className="gap-2">
         <DialogTitle className="tablet:text-2xl text-slate-700 dark:text-slate-50">{title}</DialogTitle>
         <DialogDescription asChild className="text-base tablet:text-lg text-slate-700 dark:text-slate-200">
-          {description}
+          {renderDescription()}
         </DialogDescription>
       </DialogHeader>
-      <DialogFooter className={`grid grid-cols-2 gap-4 ${!!isError ? 'md:grid-cols-1' : ''}`}>
-        {!isError && (
+
+      <DialogFooter className={`grid gap-4 ${isError ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-2'}`}>
+        {showCancelButton && (
           <Button
             variant="outline"
             size="primary"
@@ -68,15 +116,7 @@ export const NewOrderDialog = () => {
             {t('payment_confirm_cancel')} <TicketX />
           </Button>
         )}
-        {!isError && paymentType !== 'BOOK' ? (
-          <Button size="primary" variant={'default'} className="text-white" onClick={handleConfirmlOrder}>
-            {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
-          </Button>
-        ) : (
-          <Button size="primary" variant={'default'} className="text-white" onClick={handlePayOrder}>
-            {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_pay')}
-          </Button>
-        )}
+        {renderActionButtons()}
       </DialogFooter>
     </>
   );
