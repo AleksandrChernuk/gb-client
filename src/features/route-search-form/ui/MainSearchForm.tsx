@@ -30,6 +30,8 @@ const MainSearchForm = () => {
     isInitialized.current = true;
 
     const store = useSearchStore.getState();
+    store.setErrors('from', null);
+    store.setErrors('to', null);
 
     if (!store.from) {
       const fromId = searchParams.get('from');
@@ -88,8 +90,8 @@ const MainSearchForm = () => {
 
       if (!result.success) {
         const errors = result.error.format();
-        setErrors('from', errors.from?._errors[0] || null);
-        setErrors('to', errors.to?._errors[0] || null);
+        setErrors('from', t(errors.from?._errors[0] || '') || null);
+        setErrors('to', t(errors.to?._errors[0] || '') || null);
         return false;
       }
       return true;

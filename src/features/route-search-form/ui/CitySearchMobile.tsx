@@ -65,6 +65,7 @@ export default function CitySearchMobile({
   handleClearMobileInput,
 }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t_form = useTranslations(MESSAGE_FILES.FORM);
 
   return (
     <Sheet open={open} onOpenChange={handleToggleOpen}>
@@ -89,7 +90,7 @@ export default function CitySearchMobile({
           endIcon={name === 'from' && <IconSwap />}
           swap={swap}
           error={errors}
-          errorMassage={t('required')}
+          errorMassage={t_form('required')}
         />
       </SheetTrigger>
       <SheetContent>

@@ -52,7 +52,7 @@ export default function CitySearchDesktop({
   onSelectCity,
   isFetchingLocations,
 }: Props) {
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+  const t_form = useTranslations(MESSAGE_FILES.FORM);
 
   return (
     <div role="dropdown-warapp" className="relative">
@@ -78,7 +78,7 @@ export default function CitySearchDesktop({
           handleToggleOpen();
         }}
         error={errors}
-        errorMassage={t('required')}
+        errorMassage={t_form('required')}
         onBlur={handleBlur}
         aria-invalid={Boolean(city)}
         spellCheck="false"
