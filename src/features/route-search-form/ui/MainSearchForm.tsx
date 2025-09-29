@@ -31,7 +31,6 @@ const MainSearchForm = () => {
 
     const store = useSearchStore.getState();
 
-    // Если города уже есть в сторе — не перезаписываем
     if (!store.from) {
       const fromId = searchParams.get('from');
       if (fromId && !isNaN(parseInt(fromId))) {
@@ -46,7 +45,6 @@ const MainSearchForm = () => {
       }
     }
 
-    // Дата
     if (!store.date) {
       const dateParam = searchParams.get('date');
       if (dateParam) {
@@ -59,7 +57,6 @@ const MainSearchForm = () => {
       }
     }
 
-    // Пассажиры
     if (store.adult <= 1) {
       const adultParam = searchParams.get('adult');
       if (adultParam) {
@@ -85,11 +82,7 @@ const MainSearchForm = () => {
     const { from, to, date, adult, children, setErrors } = useSearchStore.getState();
 
     const validate = () => {
-      const result = MainSearchShema.safeParse({
-        from: from ? { id: from } : null,
-        to: to ? { id: to } : null,
-      });
-
+      const result = MainSearchShema.safeParse({ from, to });
       if (!result.success) {
         const errors = result.error.format();
         setErrors('from', errors.from?._errors[0] || null);

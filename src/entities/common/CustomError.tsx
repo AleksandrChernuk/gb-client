@@ -9,8 +9,7 @@ import CustomCard from '@/shared/ui/CustomCard';
 import { Button } from '@/shared/ui/button';
 
 export const CustomError = () => {
-  const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
-  const t_COMMON = useTranslations(MESSAGE_FILES.COMMON);
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const router = useRouter();
 
@@ -25,7 +24,7 @@ export const CustomError = () => {
       </h3>
 
       <Button variant={'default'} size={'primary'} onClick={() => router.refresh()}>
-        {t_COMMON('try_again')}
+        {t('try_again')}
       </Button>
     </CustomCard>
   );
