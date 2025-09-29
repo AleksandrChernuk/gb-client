@@ -4,13 +4,12 @@ import { ChevronUp } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { Locale } from '@/shared/i18n/locales';
 import { supportLocalesList } from '@/shared/constans/support-locales.constans';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
-import Link from 'next/link';
 import { Button } from '@/shared/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/shared/ui/accordion';
+import { Link, usePathname } from '@/shared/i18n/routing';
 
 type Props = {
   variant: 'mobile' | 'desktop';
