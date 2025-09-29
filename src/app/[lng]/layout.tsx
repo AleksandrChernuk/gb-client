@@ -84,7 +84,7 @@ export default async function MainLayout({
           <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
 
           <ReactQueryContext>
-            <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
+            <ThemeProvider attribute="class" disableTransitionOnChange={false}>
               {children}
               <ProfileCheckProvider />
               <LocationsInitializer />

@@ -80,9 +80,12 @@ const MainSearchForm = () => {
 
   const handleSubmit = () => {
     const { from, to, date, adult, children, setErrors } = useSearchStore.getState();
+    setErrors('from', null);
+    setErrors('to', null);
 
     const validate = () => {
       const result = MainSearchShema.safeParse({ from, to });
+
       if (!result.success) {
         const errors = result.error.format();
         setErrors('from', errors.from?._errors[0] || null);
