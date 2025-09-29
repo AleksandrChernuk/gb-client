@@ -2,7 +2,6 @@ import { ImageResponse } from 'next/og';
 import { getTranslations } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { IconLogo } from '@/assets/icons/IconLogo';
 
 export const alt = 'GreenBus';
 export const size = {
