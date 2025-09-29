@@ -2,7 +2,7 @@
 
 import { useShallow } from 'zustand/react/shallow';
 import { useSearchStore } from '@/shared/store/useSearch';
-import { useDate } from '../model/useDate';
+import { useDate } from '@/features/route-search-form/hooks/useDate';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import DatePickerDesktop from '@/features/route-search-form/ui/DatePickerDesktop';
 import DatePickerMobile from '@/features/route-search-form/ui/DatePickerMobile';

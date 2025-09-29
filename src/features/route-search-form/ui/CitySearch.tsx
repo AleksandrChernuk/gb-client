@@ -2,11 +2,11 @@
 
 import { useSearchStore } from '@/shared/store/useSearch';
 import { useLocale } from 'next-intl';
-import { useCitySearch } from '../model/useCitySearch';
 import { useIsFetching } from '@tanstack/react-query';
 import CitySearchDesktop from './CitySearchDesktop';
 import CitySearchMobile from './CitySearchMobile';
-import { useCityData } from '@/features/route-search-form/model/useCityData';
+import { useCityData } from '@/features/route-search-form/hooks/useCityData';
+import { useCitySearch } from '@/features/route-search-form/hooks/useCitySearch';
 
 type Props = {
   name: 'from' | 'to';

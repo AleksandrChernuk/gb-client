@@ -13,7 +13,7 @@ import { formatDate, toDate } from 'date-fns';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { MobileFilter } from '@/features/route-mobile-filter';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { useCityData } from '@/features/route-search-form/model/useCityData';
+import { useCityData } from '@/features/route-search-form/hooks/useCityData';
 
 export const RoutesResaltInformation = () => {
   const { fromCity, toCity } = useCityData();

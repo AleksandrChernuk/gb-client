@@ -13,72 +13,30 @@ import { MainSearchShema } from '@/shared/validation/main.search.schema';
 import PassengersCount from '@/features/route-search-form/ui/PassengersCount';
 import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
-import { useSearchParams } from 'next/navigation';
-import { isBefore, isValid, format } from 'date-fns';
+import { TSearchForm } from '@/features/route-search-form/types';
 
-const MainSearchForm = () => {
+const MainSearchForm = ({ initialValues }: TSearchForm) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isPending, startTransition] = useTransition();
-  const searchParams = useSearchParams();
   const isInitialized = useRef(false);
 
   const route = useRouter();
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   useEffect(() => {
-    if (isInitialized.current) return;
+    if (!initialValues || isInitialized.current) return;
     isInitialized.current = true;
 
     const store = useSearchStore.getState();
     store.setErrors('from', null);
     store.setErrors('to', null);
 
-    if (!store.from) {
-      const fromId = searchParams.get('from');
-      if (fromId && !isNaN(parseInt(fromId))) {
-        store.setCityId('from', parseInt(fromId));
-      }
-    }
-
-    if (!store.to) {
-      const toId = searchParams.get('to');
-      if (toId && !isNaN(parseInt(toId))) {
-        store.setCityId('to', parseInt(toId));
-      }
-    }
-
-    if (!store.date) {
-      const dateParam = searchParams.get('date');
-      if (dateParam) {
-        const date = new Date(dateParam);
-        if (isValid(date) && !isBefore(date, new Date())) {
-          store.setDate(dateParam);
-        } else {
-          store.setDate(format(new Date(), 'yyyy-MM-dd'));
-        }
-      }
-    }
-
-    if (store.adult <= 1) {
-      const adultParam = searchParams.get('adult');
-      if (adultParam) {
-        const adults = parseInt(adultParam);
-        if (adults >= 1 && adults <= 10) {
-          store.setPassenger('adult', adults);
-        }
-      }
-    }
-
-    if (store.children <= 0) {
-      const childrenParam = searchParams.get('children');
-      if (childrenParam) {
-        const children = parseInt(childrenParam);
-        if (children >= 0 && children <= 10) {
-          store.setPassenger('children', children);
-        }
-      }
-    }
-  }, [searchParams]);
+    if (initialValues.from) store.setCityId('from', initialValues.from);
+    if (initialValues.to) store.setCityId('to', initialValues.to);
+    if (initialValues.date) store.setDate(initialValues.date);
+    store.setPassenger('adult', initialValues.adult);
+    store.setPassenger('children', initialValues.children);
+  }, [initialValues]);
 
   const handleSubmit = () => {
     const { from, to, date, adult, children, setErrors } = useSearchStore.getState();

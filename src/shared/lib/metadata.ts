@@ -6,8 +6,8 @@ type PageType = 'public' | 'private';
 const buildBaseMetadata = (
   t: Awaited<ReturnType<typeof getTranslations>>,
   lng: Locale,
-  slug: string, // для переводов
-  path: string, // для URL и ссылок
+  slug: string,
+  path: string,
   pageType: PageType = 'public',
 ) => {
   const isPublic = pageType === 'public';

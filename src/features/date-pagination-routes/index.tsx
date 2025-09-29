@@ -1,6 +1,6 @@
 'use client';
 
-import { useDateTabs } from '@/features/date-pagination-routes/model/useDateTabs';
+import { useDateTabs } from '@/features/date-pagination-routes/hooks/useDateTabs';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import { useSearchStore } from '@/shared/store/useSearch';
 import { Button } from '@/shared/ui/button';

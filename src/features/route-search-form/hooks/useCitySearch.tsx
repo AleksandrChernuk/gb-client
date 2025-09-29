@@ -8,7 +8,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useLocationsStore } from '@/shared/store/useLocations';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { useCityData } from '@/features/route-search-form/model/useCityData';
+import { useCityData } from '@/features/route-search-form/hooks/useCityData';
 
 type Tname = 'from' | 'to';
 

@@ -8,6 +8,8 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { RoutesResaltInformation } from '@/widgets/routes-resalt-information';
 import ResultList from '@/widgets/route-result-list';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
+import { format, isBefore, isValid } from 'date-fns';
+import { redirect } from '@/shared/i18n/routing';
 
 type Props = {
   params: Params;
@@ -25,12 +27,41 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Buses({
   params,
+  searchParams,
 }: Readonly<{
   params: Params;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }>) {
   const { lng } = await params;
-
+  const resolvedSearchParams = await searchParams;
   setRequestLocale(lng as Locale);
+
+  const parseParam = (param: string | string[] | undefined): string | null => {
+    if (typeof param === 'string') return param;
+    if (Array.isArray(param)) return param[0];
+    return null;
+  };
+
+  const fromParam = parseParam(resolvedSearchParams.from);
+  const toParam = parseParam(resolvedSearchParams.to);
+  const dateParam = parseParam(resolvedSearchParams.date);
+  const adultParam = parseParam(resolvedSearchParams.adult);
+  const childrenParam = parseParam(resolvedSearchParams.children);
+
+  const initialValues = {
+    from: fromParam && !isNaN(parseInt(fromParam)) ? parseInt(fromParam) : null,
+    to: toParam && !isNaN(parseInt(toParam)) ? parseInt(toParam) : null,
+    date:
+      dateParam && isValid(new Date(dateParam)) && !isBefore(new Date(dateParam), new Date())
+        ? dateParam
+        : format(new Date(), 'yyyy-MM-dd'),
+    adult: adultParam ? Math.max(1, Math.min(10, parseInt(adultParam))) : 1,
+    children: childrenParam ? Math.max(0, Math.min(10, parseInt(childrenParam))) : 0,
+  };
+
+  if (!initialValues.from || !initialValues.to) {
+    redirect({ href: '/', locale: lng as Locale });
+  }
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-800">
@@ -38,7 +69,7 @@ export default async function Buses({
         <h1 className="sr-only">SearchPage</h1>
         <search className="bg-green-500 dark:bg-slate-900">
           <Container size="l" className="py-5 tablet:pt-8 ">
-            <MainSearch />
+            <MainSearch initialValues={initialValues} />
           </Container>
         </search>
       </section>
