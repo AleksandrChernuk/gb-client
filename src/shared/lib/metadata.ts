@@ -57,7 +57,6 @@ const buildBaseMetadata = (
         siteName: 'GreenBus',
         images: [
           {
-            url: `${baseUrl}/logo.png`, // абсолютный путь
             width: 512,
             height: 512,
             alt: 'GreenBus logo',
@@ -72,7 +71,6 @@ const buildBaseMetadata = (
         card: 'summary_large_image' as const,
         title: t(`${slug}.title`),
         description: t(`${slug}.description`),
-        images: [`${baseUrl}/logo.png`],
       },
     }),
   };
