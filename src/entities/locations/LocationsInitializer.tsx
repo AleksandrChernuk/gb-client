@@ -13,7 +13,7 @@ export default function LocationsInitializer() {
   const { data: locations } = useQuery({
     queryKey: ['locations'],
     queryFn: async () => {
-      const response = await getLocations({ query: '', perPage: 99 });
+      const response = await getLocations({ query: '', perPage: 500 });
       return response;
     },
   });
