@@ -1,4 +1,3 @@
-// shared/lib/buildRouteDetailsRequest.ts
 import { IRouteResponse, IGetRouteDetailsBody } from '@/shared/types/route.types';
 
 export interface RouteDetailsParams {

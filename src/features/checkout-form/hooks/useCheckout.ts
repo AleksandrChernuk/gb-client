@@ -20,7 +20,7 @@ import { FormData, PassengerFormData } from '@/features/checkout-form/types';
 function useCheckout() {
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const adult = useSearchStore(useShallow((state) => state.adult));
   const children = useSearchStore(useShallow((state) => state.children));
@@ -30,7 +30,7 @@ function useCheckout() {
   const user = useUserStore(useShallow((state) => state.currentUser));
   const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
-
+  console.log(ticket);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(
@@ -65,12 +65,15 @@ function useCheckout() {
 
   const onSubmit = async (formData: FormData) => {
     if (!ticket || !from || !to) {
-      setError('no data');
-      toast.error('no data');
+      const errorMsg = 'Missing required data';
+      setError(errorMsg);
+      toast.error(errorMsg);
       return;
     }
 
     try {
+      setError(null);
+      setLoading(true);
       setLoadingResult(true);
 
       const res = await createOrder(
@@ -85,13 +88,17 @@ function useCheckout() {
       );
 
       setInitiatePayment(res);
-    } catch (error) {
-      console.log(error);
-      toast.error('error');
+    } catch (error: unknown) {
+      console.error('Order creation failed:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create order';
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
+      setLoading(false);
       setLoadingResult(false);
     }
   };
+
   return { methods, onSubmit, error, loading };
 }
 

@@ -12,19 +12,37 @@ import {
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
 export const createOrder = async (body: IRequestOrder) => {
-  const response = await fetch(`${BASE_URL}/orders`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  console.log('body:', body);
 
-  if (!response.ok) {
-    return { status: 'error' };
+  try {
+    const response = await fetch(`${BASE_URL}/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      console.error('Order creation failed:', {
+        status: response.status,
+        statusText: response.statusText,
+        errorData,
+        requestBody: body,
+      });
+      return { status: 'error', message: errorData?.message || response.statusText };
+    }
+
+    const res = await response.json();
+    console.log('Order created successfully:', res);
+    return res;
+  } catch (error) {
+    console.error('Order creation exception:', {
+      error,
+      message: error instanceof Error ? error.message : 'Unknown error',
+      requestBody: body,
+    });
+    return { status: 'error', message: 'Network error' };
   }
-
-  const res = await response.json();
-  console.log(res);
-  return res;
 };
 
 export const smsValidateOrder = async (body: ISmsValidateOrder) => {
