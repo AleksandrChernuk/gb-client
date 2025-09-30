@@ -5,12 +5,14 @@ type Props = {
   isOpen: boolean;
   title: string;
   description?: ReactElement;
-  footer: ReactNode;
+
+  onOpenChange?: (open: boolean) => void;
+  footer?: ReactNode;
 };
 
-const CustomDialog = ({ isOpen, title, description, footer }: Props) => {
+const CustomDialog = ({ isOpen, title, description, footer, onOpenChange }: Props) => {
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[512px] mx-auto px-5 rounded-2xl">
         <DialogHeader className="">
           <DialogTitle className="text-xl lg:text-2xl font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
@@ -20,7 +22,7 @@ const CustomDialog = ({ isOpen, title, description, footer }: Props) => {
             {description}
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="flex-wrap gap-2">{footer}</DialogFooter>
+        {footer && <DialogFooter className="flex-wrap gap-2">{footer}</DialogFooter>}
       </DialogContent>
     </Dialog>
   );
