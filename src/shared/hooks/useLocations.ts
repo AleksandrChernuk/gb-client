@@ -5,7 +5,7 @@ export function useLocations() {
   return useQuery({
     queryKey: ['locations'],
     queryFn: async () => {
-      const response = await getLocations({ query: '', perPage: 99 });
+      const response = await getLocations({ query: '', perPage: 500 });
       return response.data;
     },
   });

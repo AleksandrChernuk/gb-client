@@ -33,7 +33,7 @@ export default async function AllCountries({
   const { lng } = await params;
 
   setRequestLocale(lng as Locale);
-  const data = await getLocations({ query: '', perPage: 99 });
+  const data = await getLocations({ query: '', perPage: 500 });
   const t = await getTranslations(MESSAGE_FILES.ALL_COUNTRIES);
   console.log(data);
   return (

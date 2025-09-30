@@ -10,7 +10,7 @@ import RoutersDropdownList from '@/widgets/homepage/ui/RoutersDropdownList';
 export default function PopularRoutesList() {
   const { isFetching, data } = useQuery({
     queryKey: ['locations'],
-    queryFn: () => getLocations({ query: '', perPage: 99 }),
+    queryFn: () => getLocations({ query: '', perPage: 500 }),
   });
 
   if (!data?.data) {
