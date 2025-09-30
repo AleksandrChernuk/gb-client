@@ -32,16 +32,18 @@ const UniversalSelect = memo(function UniversalSelect({ name, config }: Props) {
 
       <FormControl>
         <div className="flex items-center gap-2">
-          <div className="flex-1 h-full min-w-0">
+          <div className="flex-1 min-w-0">
             <Select onValueChange={onChange} value={value}>
-              <SelectTrigger className="w-full " size="full" aria-invalid={!!error}>
-                {config.translateOptions
-                  ? t_forms(
-                      config.options.find((opt) => opt.value === value)?.label || config.placeholder || config.label,
-                    )
-                  : config.options.find((opt) => opt.value === value)?.label ||
-                    t_forms(config.placeholder!) ||
-                    config.label}
+              <SelectTrigger className="w-full" size="full" aria-invalid={!!error}>
+                <span className="truncate block">
+                  {config.translateOptions
+                    ? t_forms(
+                        config.options.find((opt) => opt.value === value)?.label || config.placeholder || config.label,
+                      )
+                    : config.options.find((opt) => opt.value === value)?.label ||
+                      t_forms(config.placeholder!) ||
+                      config.label}
+                </span>
               </SelectTrigger>
               <SelectContent className="w-full">
                 <SelectGroup>
@@ -57,13 +59,16 @@ const UniversalSelect = memo(function UniversalSelect({ name, config }: Props) {
 
           {!!value && (
             <Button
+              type="button"
               variant="ghost"
-              className="flex w-fit py-1 cursor-pointer"
+              size="icon"
+              className="flex-shrink-0 h-10 w-10"
               onClick={() => {
                 onChange('');
               }}
+              aria-label="Clear selection"
             >
-              <Trash className="stroke-red-400 " />
+              <Trash className="h-4 w-4 stroke-red-400" />
             </Button>
           )}
         </div>

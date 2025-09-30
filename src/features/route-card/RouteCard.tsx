@@ -48,6 +48,8 @@ export const RouteCard = ({ element }: Props) => {
     },
   });
 
+  console.log('details', details);
+
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, adult, children);
 

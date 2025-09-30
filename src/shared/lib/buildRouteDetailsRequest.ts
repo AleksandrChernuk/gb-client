@@ -27,9 +27,10 @@ export function buildRouteDetailsRequest(params: RouteDetailsParams): IGetRouteD
     ...(identificators.routeId && { routeId: String(identificators.routeId) }),
     ...(identificators.intervalId && { intervalId: String(identificators.intervalId) }),
     ...(identificators.busId && { busId: String(identificators.busId) }),
-    ...(identificators.metadata ? { metadata: route.identificators.metadata } : {}),
+    ...(identificators.metadata !== undefined && { metadata: identificators.metadata }),
     ...(identificators.timetableId && { timetableId: identificators.timetableId }),
     ...(identificators.bustypeId && { bustypeId: identificators.bustypeId }),
+
     ...(identificators.hasPlan && { hasPlan: Boolean(identificators.hasPlan) }),
     ...(identificators.requestGetFreeSeats && { requestGetFreeSeats: Boolean(identificators.requestGetFreeSeats) }),
     ...(identificators.requestGetDiscount && { requestGetDiscount: Boolean(identificators.requestGetDiscount) }),

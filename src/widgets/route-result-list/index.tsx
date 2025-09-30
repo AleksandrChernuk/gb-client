@@ -28,7 +28,7 @@ export default function ResultList() {
   if (!isFetching && data && data.length === 0) return <RouteNotFound text={t('no_travel_find')} />;
 
   if (!fromId || !toId || !isHydrated) return <CustomError />;
-
+  console.log(data);
   return (
     <div className="flex flex-col space-y-10">
       {filteredTickets.map((route) => {

@@ -9,7 +9,6 @@ const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
 
   const isTranstempoWithSingleDiscount =
     isEmptyDiscounts(discounts) && !['1210', '1211'].some((id) => discounts.map((el) => el.id).includes(id));
-  console.log(isTranstempoWithSingleDiscount);
 
   const showBlock = !isTranstempoWithSingleDiscount;
 

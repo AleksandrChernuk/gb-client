@@ -121,6 +121,9 @@ export default function CitySearchMobile({
                 autoComplete="off"
                 autoCapitalize="off"
                 spellCheck="false"
+                onFocus={() => {
+                  onInputChange('');
+                }}
                 className="text-slate-700 dark:text-slate-50 placeholder:text-slate-300 dark:placeholder:text-slate-600 p-4 pr-10 h-full w-full bg-white dark:bg-slate-800 rounded-lg border-[1px] border-slate-700 focus:border-green-300 outline-green-300 placeholder:italic"
               />
               <ClearInputButton handleClear={handleClearMobileInput} />

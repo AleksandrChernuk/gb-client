@@ -76,6 +76,7 @@ export default function CitySearchDesktop({
             setErrors(name, null);
           }
           handleToggleOpen();
+          onInputChange('');
         }}
         error={errors}
         errorMassage={t_form('required')}

@@ -10,7 +10,7 @@ type ValidateResp = { authenticated: boolean };
 
 export default function ProfileCheckProvider() {
   const locale = useLocale();
-  const ranRef = useRef(false); // защита от двойного useEffect в dev
+  const ranRef = useRef(false);
   const clearUserStore = useUserStore((s) => s.clearUserStore);
 
   useEffect(() => {

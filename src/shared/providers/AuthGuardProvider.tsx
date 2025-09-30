@@ -12,7 +12,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const ranRef = useRef(false); // защита от двойного useEffect в dev
+  const ranRef = useRef(false);
 
   useEffect(() => {
     if (ranRef.current) return;
