@@ -35,7 +35,6 @@ export default async function AllCountries({
   setRequestLocale(lng as Locale);
   const data = await getLocations({ query: '', perPage: 500 });
   const t = await getTranslations(MESSAGE_FILES.ALL_COUNTRIES);
-  console.log(data);
   return (
     <main className="bg-slate-50 dark:bg-slate-800 flex-1">
       <section className="bg-green-500 dark:bg-slate-900">

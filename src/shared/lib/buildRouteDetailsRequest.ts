@@ -25,6 +25,8 @@ export function buildRouteDetailsRequest(params: RouteDetailsParams): IGetRouteD
     passengersCount: passCount,
 
     ...(identificators.routeId && { routeId: String(identificators.routeId) }),
+    ...(identificators.routeNumber && { routeNumber: String(identificators.routeNumber) }),
+
     ...(identificators.intervalId && { intervalId: String(identificators.intervalId) }),
     ...(identificators.busId && { busId: String(identificators.busId) }),
     ...(identificators.metadata !== undefined && { metadata: identificators.metadata }),

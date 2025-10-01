@@ -80,22 +80,27 @@ export default function RouteDetailsStops({
           <div>
             <div className={`relative flex flex-col items-start gap-2 mt-4`}>
               <span className="absolute z-0 left-0 top-0 h-full w-[2px] border-r-[2px] border-[#6f8b90] dark:border-slate-600 border-dashed translate-x-[56.5px]"></span>
-              {stops?.map((element, idx, array) => (
-                <DetailsStopsItem
-                  route={{
-                    station_address: element.station.address,
-                    station_name: element.station.name,
-                    location_name: element.location.name,
-                    departure_date_time: element.departureDateTime,
-                    arrival_date_time: element.arrivalDateTime,
-                  }}
-                  bus_changes={!!element.busChanges}
-                  key={idx}
-                  isFirst={idx === 0}
-                  isLast={idx === array.length - 1}
-                  classNameItemContainer={classNameItemContainer}
-                />
-              ))}
+
+              {stops
+                ?.filter((el) => el.station?.address || el.location?.name)
+                .map((element, idx, array) => {
+                  return (
+                    <DetailsStopsItem
+                      route={{
+                        station_name: element.station.name,
+                        location_name: element.location.name,
+                        station_address: element.station.address,
+                        departure_date_time: element.departureDateTime,
+                        arrival_date_time: element.arrivalDateTime,
+                      }}
+                      bus_changes={!!element.busChanges}
+                      key={idx}
+                      isFirst={idx === 0}
+                      isLast={idx === array.length - 1}
+                      classNameItemContainer={classNameItemContainer}
+                    />
+                  );
+                })}
             </div>
           </div>
         )}

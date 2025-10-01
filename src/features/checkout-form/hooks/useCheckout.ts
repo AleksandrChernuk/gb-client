@@ -30,7 +30,6 @@ function useCheckout() {
   const user = useUserStore(useShallow((state) => state.currentUser));
   const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
   const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
-  console.log(ticket);
   const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
   const defaultPassengers = useMemo(

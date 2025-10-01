@@ -9,8 +9,6 @@ type Props = {
 
 export const seatsMaper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
   if (!seatsMap || !Array.isArray(seatsMap) || !Array.isArray(freeSeats)) return [];
-  console.log(seatsMap);
-  console.log(freeSeats);
 
   return seatsMap.map((floor) => ({
     seats: floor.seats.map((row) =>

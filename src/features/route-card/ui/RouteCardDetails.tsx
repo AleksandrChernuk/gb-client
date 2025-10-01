@@ -27,9 +27,6 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
   const busName = route?.details?.busName;
   const busNumber = route?.details?.busNumber;
-  const busPictures = toArray(route?.details?.busPictures);
-  const showPictures = busPictures.length > 1 && busPictures[0] !== null;
-  const showBusDetails = busName !== 'no_plan' || (busNumber && busNumber.trim() !== '') || showPictures;
 
   if (loading)
     return (
@@ -37,7 +34,6 @@ export default function RouteCardDetails({ route, loading }: Props) {
         <MainLoader />
       </div>
     );
-
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
       <div className="space-y-4">
@@ -91,17 +87,29 @@ export default function RouteCardDetails({ route, loading }: Props) {
       </div>
 
       <div className="space-y-4">
-        {!!route?.details?.luggageRules && route?.details?.luggageRules.length !== 0 && (
+        {route?.details?.luggageRules && !route?.details?.luggageRules.length && (
           <RouteDetailsList label={t('luggage')} listClassName="">
-            <DetailsItem>{toArray(route.details.luggageRules).join(', ')}</DetailsItem>
+            <DetailsItem>
+              {route.details.luggageRules === 'string' ? (
+                <span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />
+              ) : (
+                toArray(route.details.luggageRules).map((el) => (
+                  <span key={el} dangerouslySetInnerHTML={{ __html: el || '' }} />
+                ))
+              )}
+            </DetailsItem>
           </RouteDetailsList>
         )}
 
-        <RouteDetailsList label={t('return_policy')} listClassName="">
-          {toArray(route?.details?.returnRulesDescription).map((el, idx) => (
-            <DetailsItem key={idx + 1}>{el}</DetailsItem>
-          ))}
-        </RouteDetailsList>
+        {(route?.details?.returnRulesDescription || route?.details?.returnRules) && (
+          <RouteDetailsList label={t('return_policy')}>
+            {toArray(route?.details?.returnRulesDescription).map((el, idx) => (
+              <DetailsItem key={idx + 1}>{el}</DetailsItem>
+            ))}
+            {route?.details?.returnRules &&
+              route?.details?.returnRules.map((el, idx) => <DetailsItem key={idx + 1}>{el.title}</DetailsItem>)}
+          </RouteDetailsList>
+        )}
 
         <RouteDetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
           {!isEmptyDiscounts(route?.details?.discounts) && (
@@ -115,7 +123,9 @@ export default function RouteCardDetails({ route, loading }: Props) {
         </RouteDetailsList>
 
         <RouteDetailsList label={t('route_info')} listClassName="flex-row flex-wrap">
-          {route?.details?.routeInfo && <DetailsItem>{route?.details?.routeInfo.replace(/●\s*/g, ' ')}</DetailsItem>}
+          {route?.details?.routeInfo && (
+            <DetailsItem>{<span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />}</DetailsItem>
+          )}
         </RouteDetailsList>
 
         <RouteDetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
@@ -124,11 +134,13 @@ export default function RouteCardDetails({ route, loading }: Props) {
           )}
         </RouteDetailsList>
 
-        {showBusDetails && (
+        {(busName || busNumber || busNumber) && (
           <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
             <>
               <div className="flex flex-row flex-wrap gap-0.5">
-                <DetailsItem>{!!busName && busName.replace(/\[|\]/g, '')}</DetailsItem>
+                {busName !== 'bus' && busName !== 'no_plan' && (
+                  <DetailsItem>{!!busName && busName.replace(/\[|\]/g, '')}</DetailsItem>
+                )}
                 <DetailsItem>{route?.details?.busNumber}</DetailsItem>
               </div>
               {route?.details?.busPictures?.length &&

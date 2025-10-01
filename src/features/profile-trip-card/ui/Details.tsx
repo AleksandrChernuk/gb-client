@@ -28,7 +28,6 @@ export default function Details({ details, trip }: Props) {
 
   const showBusDetails =
     details.busName !== 'no_plan' || (details.busNumber && details.busNumber.trim() !== '') || showPictures;
-  console.log(details);
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 mt-8 tablet:space-y-0">
       <div className="space-y-4">

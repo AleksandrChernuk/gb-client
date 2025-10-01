@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { IRouteResponse } from '@/shared/types/route.types';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import MobileDetails from './ui/RouteMobileDetails';
 import Details from './ui/RouteCardDetails';
 import { useShallow } from 'zustand/react/shallow';
@@ -30,6 +30,8 @@ type Props = {
 export const RouteCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+  const locale = useLocale();
+  const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
   const setSelectedTicket = useSelectTicket();
   const { loadingTicketId } = useSelectedTickets();
@@ -42,15 +44,12 @@ export const RouteCard = ({ element }: Props) => {
       route: element,
       fromCityId: element.departure.stationId ?? 0,
       toCityId: element.arrival.stationId ?? 0,
-      locale: 'uk',
-      passCount: 1,
+      locale: locale,
+      passCount: adult + children,
       travelDate: element.departure.dateTime ?? '',
     },
   });
 
-  console.log('details', details);
-
-  const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, adult, children);
 
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
