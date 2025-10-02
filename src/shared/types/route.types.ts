@@ -49,7 +49,6 @@ export interface IGetRouteDetailsBody {
   routeId?: string;
   intervalId?: string;
   busId?: string;
-  routeNumber?: string;
   fromCityId?: number;
   toCityId?: number;
   fromStationId?: string;

@@ -12,8 +12,6 @@ import {
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
 export const createOrder = async (body: IRequestOrder) => {
-  console.log('body:', body);
-
   try {
     const response = await fetch(`${BASE_URL}/orders`, {
       method: 'POST',

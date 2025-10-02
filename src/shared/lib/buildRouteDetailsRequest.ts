@@ -19,13 +19,12 @@ export function buildRouteDetailsRequest(params: RouteDetailsParams): IGetRouteD
     fromStationId: String(departure.stationId),
     toStationId: String(arrival.stationId),
     providerId: identificators.providerId,
-    travelDate,
+    travelDate: travelDate.split(' ')[0],
     currency: route.ticketPricing.currency,
     locale,
     passengersCount: passCount,
 
     ...(identificators.routeId && { routeId: String(identificators.routeId) }),
-    ...(identificators.routeNumber && { routeNumber: String(identificators.routeNumber) }),
 
     ...(identificators.intervalId && { intervalId: String(identificators.intervalId) }),
     ...(identificators.busId && { busId: String(identificators.busId) }),

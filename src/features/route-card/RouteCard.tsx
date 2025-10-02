@@ -42,8 +42,8 @@ export const RouteCard = ({ element }: Props) => {
     providerName: element.providerName,
     params: {
       route: element,
-      fromCityId: element.departure.stationId ?? 0,
-      toCityId: element.arrival.stationId ?? 0,
+      fromCityId: element.departure.fromLocation.id ?? 0,
+      toCityId: element.arrival.toLocation.id ?? 0,
       locale: locale,
       passCount: adult + children,
       travelDate: element.departure.dateTime ?? '',
