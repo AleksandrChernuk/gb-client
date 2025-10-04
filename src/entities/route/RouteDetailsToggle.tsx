@@ -20,7 +20,7 @@ const RouteDetailsToggle: React.FC<TicketDetailsToggleProps> = ({
   disabled = false,
 }) => {
   const baseClasses =
-    'flex items-center self-end gap-px p-2 text-green-300 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap transition-all duration-200';
+    'flex items-center self-end gap-px p-2 text-green-200 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap transition-all duration-200';
   const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : 'hover:text-green-400';
   const combinedClasses = `${baseClasses} ${disabledClasses} ${className}`.trim();
   const t = useTranslations(MESSAGE_FILES.COMMON);

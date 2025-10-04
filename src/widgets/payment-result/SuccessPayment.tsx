@@ -19,7 +19,7 @@ export const SuccessPayment = async ({ pdf, orderLink, ticketLinks, orderNumber 
       <h1 className="text-xl tablet:text-2xl text-center">
         {t.rich('order_success', {
           orderNumber,
-          number: (chunks) => <span className="text-green-300">{chunks}</span>,
+          number: (chunks) => <span className="text-green-200">{chunks}</span>,
         })}
       </h1>
       <h3 className="text-center text-slate-700 dark:text-slate-50 text-lg tablet:text-xl">{t('tickets_sent')}</h3>

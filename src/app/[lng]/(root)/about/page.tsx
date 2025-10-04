@@ -76,7 +76,7 @@ export default async function About({
             <ul className="flex items-start justify-between gap-1 tablet:gap-4">
               {aboutUsStatistics.map(({ id, title, text }) => (
                 <li key={id} className="text-center">
-                  <h3 className="mb-2 laptop:mb-4 text-base font-bold leading-6 tracking-normal text-green-300 tablet:text-2xl laptop:text-[32px] laptop:leading-[38.4px]">
+                  <h3 className="mb-2 laptop:mb-4 text-base font-bold leading-6 tracking-normal text-green-200 tablet:text-2xl laptop:text-[32px] laptop:leading-[38.4px]">
                     {t_about(`statistics.${title}`)}
                   </h3>
                   <p className="text-base font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-[27px] text-slate-400 dark:text-slate-200">

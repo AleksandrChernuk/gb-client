@@ -1,38 +1,43 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IRouteResponse } from '@/shared/types/route.types';
 import { FIELDS } from './constans';
 import { ProviderConfig } from '@/shared/types/checkot.types';
-import { bday, discount, firstName, lastName } from '@/shared/utils/checkout.config';
+import {
+  bday,
+  citizenship,
+  discount,
+  documentNumber,
+  documentType,
+  expiryDate,
+  firstName,
+  gender,
+  lastName,
+  middlename,
+} from '@/shared/utils/checkout.config';
 
 const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const details = currentTicket?.details;
   const hasDiscounts = !!details?.discounts?.length;
 
-  const required: string[] = [FIELDS.firstName, FIELDS.lastName];
-
-  if (hasDiscounts) {
-    required.push(FIELDS.discount, FIELDS.bday);
-  }
-
-  const fields: Record<string, any> = {
-    firstName,
-    lastName,
-  };
-
-  if (hasDiscounts) {
-    fields.discount = discount(currentTicket);
-    fields.bday = bday;
-  }
-
   return {
-    required,
-    fields,
+    required: [FIELDS.firstName, FIELDS.lastName, ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : [])],
+    fields: {
+      firstName,
+      lastName,
+      ...(details?.needMiddlename ? { middlename } : {}),
+      ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
+      ...(details?.needBirth ? { bday } : {}),
+      ...(details?.needCitizenship ? { citizenship } : {}),
+      ...(details?.needDoc ? { documentType, documentNumber } : {}),
+      ...(details?.needDocExpireDate ? { expiryDate: expiryDate(currentTicket) } : {}),
+      ...(details?.needGender ? { gender } : {}),
+    },
+
     needBirth: details?.needBirth,
     needDoc: details?.needDoc,
+    needMiddlename: details?.needMiddlename,
     needDocExpireDate: details?.needDocExpireDate,
     needCitizenship: details?.needCitizenship,
     needGender: details?.needGender,
-    needMiddlename: details?.needMiddlename,
   };
 };
 

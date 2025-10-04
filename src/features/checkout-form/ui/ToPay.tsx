@@ -45,7 +45,7 @@ const ToPay = memo(function ToPay() {
           </ul>
 
           <li>
-            <p className="text-xs text-green-300 dark:text-green-100">{t_CHECKOUT('price_note')}</p>
+            <p className="text-xs text-green-200 dark:text-green-100">{t_CHECKOUT('price_note')}</p>
           </li>
           <li className="w-full h-px bg-slate-700 dark:bg-slate-50" />
           <li>

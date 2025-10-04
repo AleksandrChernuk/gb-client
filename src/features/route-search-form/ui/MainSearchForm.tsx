@@ -14,6 +14,7 @@ import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
 import { TSearchForm } from '@/features/route-search-form/types';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import { validateField } from '@/features/route-search-form/helpers/validateField';
 
 const MainSearchForm = ({ initialValues }: TSearchForm) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -46,11 +47,8 @@ const MainSearchForm = ({ initialValues }: TSearchForm) => {
     const result = MainSearchShema.safeParse({ from, to });
 
     if (!result.success) {
-      const errs = result.error.format();
-      setErrors({
-        from: t(errs.from?._errors[0] || '') || null,
-        to: t(errs.to?._errors[0] || '') || null,
-      });
+      validateField('from', from, t, setErrors);
+      validateField('to', to, t, setErrors);
       return;
     }
 
@@ -72,9 +70,19 @@ const MainSearchForm = ({ initialValues }: TSearchForm) => {
 
   const renderFields = (variant: 'mobile' | 'desktop') => (
     <>
-      <CitySearch name="from" variant={variant} error={errors.from} />
+      <CitySearch
+        name="from"
+        variant={variant}
+        error={errors.from}
+        resetError={() => setErrors((prev) => ({ ...prev, from: null }))}
+      />
       {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
-      <CitySearch name="to" variant={variant} error={errors.to} />
+      <CitySearch
+        name="to"
+        variant={variant}
+        error={errors.to}
+        resetError={() => setErrors((prev) => ({ ...prev, to: null }))}
+      />
       {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
       <DatePicker variant={variant} />
       {variant === 'mobile' && <Separator className="h-[1px] my-2" />}

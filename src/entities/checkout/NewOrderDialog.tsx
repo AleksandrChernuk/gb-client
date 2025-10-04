@@ -50,7 +50,7 @@ export const NewOrderDialog = () => {
             {amount} {currency}
           </p>
           {paymentType === 'PAYMENT_AT_BOARDING' && (
-            <p className="text-xs text-green-300 text-left">
+            <p className="text-xs text-green-200 text-left">
               <span className="text-red-600 text-lg">*</span>
               {t('sms_confirmation_notice')}
             </p>

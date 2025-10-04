@@ -18,7 +18,7 @@ type Props = {
 };
 
 const CLS = {
-  label: 'block text-xs tablet:text-sm font-medium dark:text-green-100 text-green-300 mb-1',
+  label: 'block text-xs tablet:text-sm font-medium dark:text-green-100 text-green-200 mb-1',
   value: 'text-sm tablet:text-base font-medium text-slate-700 dark:text-slate-50 break-words',
   list: 'space-y-1 text-xs tablet:text-sm text-slate-700 dark:text-slate-50',
 };

@@ -14,7 +14,7 @@ export default function SearchCard({ title, text, href }: Props) {
       <Link
         prefetch={false}
         href={href}
-        className="text-base font-bold leading-6 tracking-normal text-green-300 underline dark:text-green-300"
+        className="text-base font-bold leading-6 tracking-normal text-green-200 underline dark:text-green-200"
       >
         {title}
       </Link>

@@ -1,4 +1,5 @@
 'use client';
+
 import arrow from '@/assets/icons/arrow-mobile.svg';
 import { IRouteResponse } from '@/shared/types/route.types';
 import { format } from 'date-fns';

@@ -48,7 +48,7 @@ const ProfileOrderCard = ({ item }: Props) => {
         <div>
           <p className={cn(S.value, 'flex items-center gap-1')}>
             {format(item.updatedAt, 'dd.MM.yyyy')}
-            <span className="text-xs p-1 border border-green-300 dark:border-green-100 rounded-xl text-green-300 dark:text-green-100">
+            <span className="text-xs p-1 border border-green-300 dark:border-green-100 rounded-xl text-green-200 dark:text-green-100">
               {format(item.updatedAt, 'HH:mm')}
             </span>
           </p>

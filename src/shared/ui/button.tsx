@@ -22,7 +22,7 @@ const buttonVariants = cva(
           'bg-red-400 text-white shadow-xs hover:bg-red-400/90 active:bg-red-400/85 focus-visible:ring-red-400/30 dark:focus-visible:ring-red-400/40 dark:bg-red-400/60',
 
         outline:
-          'w-full h-auto border border-green-300 bg-inherit text-green-300 dark:text-slate-50 hover:bg-green-200/10 ' +
+          'w-full h-auto border border-green-300 bg-inherit text-green-200 dark:text-slate-50 hover:bg-green-200/10 ' +
           'dark:border-green-300 dark:hover:bg-green-200/10 dark:hover:border-green-200 active:border-green-200 dark:active:border-green-400 ' +
           'aria-selected:bg-green-300 aria-selected:text-white',
 
@@ -32,7 +32,7 @@ const buttonVariants = cva(
         ghost:
           'bg-transparent text-slate-800 dark:text-slate-50 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 active:bg-slate-200/50 dark:active:bg-slate-700/50',
 
-        link: 'text-green-300 underline-offset-4 hover:underline active:opacity-90',
+        link: 'text-green-200 underline-offset-4 hover:underline active:opacity-90',
 
         main:
           'bg-green-600 hover:bg-green-600/80 active:bg-green-600/75 text-base font-bold leading-6 tracking-normal text-black ' +

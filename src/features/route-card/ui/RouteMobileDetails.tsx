@@ -1,6 +1,5 @@
 'use client';
 
-import { ScrollArea } from '@/shared/ui/scroll-area';
 import { X } from 'lucide-react';
 import { ReactNode } from 'react';
 import { Button } from '@/shared/ui/button';
@@ -38,11 +37,11 @@ export default function MobileDetails({ children, detailsFooter, onClickTrigger 
           {t('details')}
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="h-full">
         <SheetHeader className="justify-between">
           <SheetTitle className="sr-only"></SheetTitle>
           <SheetDescription className="sr-only"></SheetDescription>
-          <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{t('details')}</h3>
+          <h3 className="text-base font-medium leading-6 tracking-normal text-green-200">{t('details')}</h3>
           <SheetClose asChild>
             <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
               <X color="#ffffff" />
@@ -50,9 +49,9 @@ export default function MobileDetails({ children, detailsFooter, onClickTrigger 
           </SheetClose>
         </SheetHeader>
 
-        <ScrollArea className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
+        <div className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
           {children}
-        </ScrollArea>
+        </div>
         <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">{detailsFooter}</SheetFooter>
       </SheetContent>
     </Sheet>

@@ -12,13 +12,13 @@ import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 export function useSelectTicket() {
   const { setSelectedTicket, setLoading } = useSelectedTickets();
   const [params] = useRouterSearch();
-
   const router = useRouter();
   const queryClient = useQueryClient();
 
   return async (route: IRouteResponse, detailsParams: RouteDetailsParams) => {
     if (['EUROCLUB'].includes(route.providerName)) {
       setSelectedTicket({ route: route, adult: params.adult, children: params.children });
+
       router.push('/checkout');
       return;
     }
@@ -36,6 +36,7 @@ export function useSelectTicket() {
       const updatedRoute = updateRouteDetails(route, details);
 
       setSelectedTicket({ route: updatedRoute, adult: params.adult, children: params.children });
+
       router.push('/checkout');
     } finally {
       setLoading(null);

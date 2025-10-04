@@ -4,7 +4,6 @@ import { IconFrom } from '@/assets/icons/IconFrom';
 import { IconTo } from '@/assets/icons/IconTo';
 import { MainSearchInput } from './MainSearchInput';
 import { ILocation } from '@/shared/types/location.types';
-import { TcityKey } from '@/shared/store/useSearch/types';
 import { IconSwap } from '@/assets/icons/IconSwap';
 import { NotFoundCity } from './helpers/NotFoundCity';
 import { useTranslations } from 'next-intl';
@@ -22,8 +21,8 @@ type Props = {
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   handleToggleOpen: () => void;
-  setErrors: (cityKey: TcityKey, error: string | null) => void;
   swap: () => void;
+  resetError: () => void;
   cities: ILocation[];
   highlightedIndex: number;
   locale: 'en' | 'ru' | 'uk';
@@ -43,13 +42,13 @@ export default function CitySearchDesktop({
   onKeyDown,
   placeholder,
   handleToggleOpen,
-  setErrors,
   swap,
   cities,
   highlightedIndex,
   locale,
   city,
   onSelectCity,
+  resetError,
   isFetchingLocations,
 }: Props) {
   const t_form = useTranslations(MESSAGE_FILES.FORM);
@@ -73,7 +72,7 @@ export default function CitySearchDesktop({
         }}
         onFocus={() => {
           if (errors) {
-            setErrors(name, null);
+            resetError();
           }
           handleToggleOpen();
           onInputChange('');

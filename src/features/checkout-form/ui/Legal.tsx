@@ -35,7 +35,7 @@ export default function Legal() {
                 href="/privacy-policy"
                 prefetch={false}
                 target="_blanck"
-                className={`underline text-green-300 hover:text-green-100 ${!!error && 'text-[#de2a1a]'}`}
+                className={`underline  hover:text-green-100 ${!!error && 'text-[#de2a1a]'}`}
               >
                 {chunks}
               </Link>

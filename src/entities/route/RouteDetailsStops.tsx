@@ -110,7 +110,7 @@ export default function RouteDetailsStops({
         <Button
           onClick={() => setOpen((p) => !p)}
           variant={'link'}
-          className="flex items-center self-end gap-px p-2 text-green-300 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap"
+          className="flex items-center self-end gap-px p-2 text-green-200 underline cursor-pointer text-[12px] font-bold tracking-normal leading-[18px] text-nowrap"
         >{`${open ? t('collapse_route') : t('show_route')}`}</Button>
       )}
     </div>

@@ -26,7 +26,7 @@ export function FaqDisplay({ slug = '/faq/bronjuvannja-mists', value }: Props) {
             key={el.id}
             className="border-b-[1px] border-b-slate-50 dark:border-b-slate-700"
           >
-            <AccordionTrigger className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 data-[state=open]:text-green-300 dark:data-[state=open]:text-green-300">
+            <AccordionTrigger className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 data-[state=open]:text-green-200 dark:data-[state=open]:text-green-200">
               {t(`${el.title}.title`)}
             </AccordionTrigger>
             <AccordionContent className="text-slate-700 dark:text-slate-50 text-sm font-normal tracking-normal leading-[21px] ">

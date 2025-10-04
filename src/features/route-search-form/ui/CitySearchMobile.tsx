@@ -1,5 +1,4 @@
 import MainLoader from '@/shared/ui/MainLoader';
-import { TcityKey } from '@/shared/store/useSearch/types';
 import { ILocation } from '@/shared/types/location.types';
 import { RefObject } from 'react';
 import { NotFoundCity } from './helpers/NotFoundCity';
@@ -35,7 +34,7 @@ type Props = {
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   handleToggleOpen: () => void;
-  setErrors: (cityKey: TcityKey, error: string | null) => void;
+  resetError: () => void;
   swap: () => void;
   cities: ILocation[];
   highlightedIndex: number;
@@ -54,7 +53,7 @@ export default function CitySearchMobile({
   errors,
   placeholder,
   handleToggleOpen,
-  setErrors,
+  resetError,
   swap,
   cities,
   highlightedIndex,
@@ -84,7 +83,7 @@ export default function CitySearchMobile({
           open={open}
           onFocus={() => {
             if (errors) {
-              setErrors(name, null);
+              resetError();
             }
           }}
           endIcon={name === 'from' && <IconSwap />}

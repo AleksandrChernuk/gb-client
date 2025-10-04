@@ -32,10 +32,10 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
     <SheetHeader className="justify-between">
       <SheetTitle className="sr-only"></SheetTitle>
       <SheetDescription className="sr-only"></SheetDescription>
-      <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{title}</h3>
+      <h3 className="text-base font-bold leading-6 tracking-normal text-green-200">{title}</h3>
       <SheetClose asChild>
         <Button
-          className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal bg-green-300 p-2 rounded-md"
+          className="flex items-center gap-1 text-base font-medium leading-6 tracking-normal bg-green-200 p-2 rounded-md"
           variant={'default'}
           size={'icon'}
         >

@@ -9,12 +9,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale } from 'next-intl';
 import normalizeData from '../helpers/normalizeData';
 import { getCheckoutSchemaForProvider } from '../config/schemas';
-import { getProviderConfigByName } from '../config';
+// import { getProviderConfigByName } from '../config';
 import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { createOrder } from '@/shared/api/orders.actions';
 import { FormData, PassengerFormData } from '@/features/checkout-form/types';
+import { getProviderConfigByName } from '@/features/checkout-form/config';
 
 function useCheckout() {
   const locale = useLocale();

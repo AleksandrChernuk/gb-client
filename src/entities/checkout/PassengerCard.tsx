@@ -17,7 +17,7 @@ const PassengerCard = memo(function PassengerCard({ i, providerConfig, isChild }
   return (
     <li>
       <CustomCard className="dark:bg-slate-800 space-y-2">
-        <h3 className="text-sm tablet:text-xl text-green-300">
+        <h3 className="text-sm tablet:text-xl text-green-200">
           {isChild
             ? `${t('child_passenger')} ${t('passenger_number', { number: i + 1 })}`
             : `${t('passenger')} ${t('passenger_number', { number: i + 1 })}`}

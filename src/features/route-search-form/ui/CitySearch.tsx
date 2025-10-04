@@ -12,9 +12,10 @@ type Props = {
   name: 'from' | 'to';
   variant: 'mobile' | 'desktop';
   error: string | null | undefined;
+  resetError: () => void;
 };
 
-export default function CitySearch({ name, variant, error }: Props) {
+export default function CitySearch({ name, variant, error, resetError }: Props) {
   const swap = useSearchStore((state) => state.swap);
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
 
@@ -38,6 +39,7 @@ export default function CitySearch({ name, variant, error }: Props) {
     swap,
     isFetchingLocations,
     locale,
+    resetError,
     ...search,
   };
 

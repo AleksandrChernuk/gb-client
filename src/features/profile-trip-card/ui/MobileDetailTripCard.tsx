@@ -38,7 +38,7 @@ export default function MobileDetailTripCard({ children, open, onOpenChange }: P
         <SheetHeader className="justify-between">
           <SheetTitle className="sr-only"></SheetTitle>
           <SheetDescription className="sr-only"></SheetDescription>
-          <h3 className="text-base font-bold leading-6 tracking-normal text-green-300">{t('details')}</h3>
+          <h3 className="text-base font-bold leading-6 tracking-normal text-green-200">{t('details')}</h3>
           <SheetClose asChild>
             <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
               <X color="#ffffff" />

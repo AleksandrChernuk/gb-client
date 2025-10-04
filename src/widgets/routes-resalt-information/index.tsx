@@ -63,7 +63,7 @@ export const RoutesResaltInformation = () => {
             <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />
           )}
         </div>
-        <div className="text-[12px]  tablet:text-sm leading-6  text-green-300 text-nowrap truncate">
+        <div className="text-[12px]  tablet:text-sm leading-6  text-green-200 text-nowrap truncate">
           {`${isFetching ? 0 : filteredTickets?.length} ${t('resul_count')}`}
         </div>
       </div>

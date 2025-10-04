@@ -33,7 +33,7 @@ export default function Details({ details, trip }: Props) {
       <div className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-start flex-col gap-2">
-            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-green-300">{t('route')}:</h5>
+            <h5 className="text-sm font-bold tracking-normal leading-[18px] text-green-200">{t('route')}:</h5>
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
               {` ${format(trip?.departureDateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
                     ${trip.fromCityName}`}

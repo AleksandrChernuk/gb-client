@@ -122,9 +122,7 @@ export const RouteCard = ({ element }: Props) => {
               />
             }
           >
-            <div className="my-6">
-              <Details route={updateRouteDetails(element, details)} loading={isLoading} />
-            </div>
+            <Details route={updateRouteDetails(element, details)} loading={isLoading} />
           </MobileDetails>
         </div>
       </div>

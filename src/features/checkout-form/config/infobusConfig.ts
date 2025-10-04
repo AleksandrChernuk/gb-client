@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IRouteResponse } from '@/shared/types/route.types';
-import { ProviderConfig } from '@/shared/types/checkot.types';
-
+import { FIELDS } from './constans';
 import {
   bday,
   citizenship,
@@ -14,71 +12,35 @@ import {
   lastName,
   middlename,
 } from '@/shared/utils/checkout.config';
-
-import { FIELDS } from './constans';
+import { ProviderConfig } from '@/shared/types/checkot.types';
 
 const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
-  const details = currentTicket?.details;
   const hasDiscounts = !!currentTicket?.details?.discounts?.length;
-
-  const isEnabled = (flag?: boolean | string) => flag === true || flag === 'true' || flag === '1';
-
-  const required: string[] = [FIELDS.firstName, FIELDS.lastName];
-
-  if (isEnabled(details?.needMiddlename)) {
-    required.push(FIELDS.middlename);
-  }
-  if (hasDiscounts) {
-    required.push(FIELDS.discount);
-  }
-  if (isEnabled(details?.needBirth)) {
-    required.push(FIELDS.bday);
-  }
-  if (isEnabled(details?.needCitizenship)) {
-    required.push(FIELDS.citizenship);
-  }
-  if (isEnabled(details?.needDoc)) {
-    required.push(FIELDS.documentType, FIELDS.documentNumber);
-  }
-  if (isEnabled(details?.needDocExpireDate)) {
-    required.push(FIELDS.expiryDate);
-  }
-  if (isEnabled(details?.needGender)) {
-    required.push(FIELDS.gender);
-  }
-
-  // Формируем конфигурацию полей
-  const fields: Record<string, any> = {
-    firstName,
-    lastName,
-  };
-
-  if (isEnabled(details?.needMiddlename)) {
-    fields.middlename = middlename;
-  }
-  if (hasDiscounts) {
-    fields.discount = discount(currentTicket);
-  }
-  if (isEnabled(details?.needBirth)) {
-    fields.bday = bday;
-  }
-  if (isEnabled(details?.needCitizenship)) {
-    fields.citizenship = citizenship;
-  }
-  if (isEnabled(details?.needDoc)) {
-    fields.documentType = documentType;
-    fields.documentNumber = documentNumber;
-  }
-  if (isEnabled(details?.needDocExpireDate)) {
-    fields.expiryDate = expiryDate(currentTicket);
-  }
-  if (isEnabled(details?.needGender)) {
-    fields.gender = gender;
-  }
+  const details = currentTicket?.details;
 
   return {
-    required,
-    fields,
+    required: [
+      FIELDS.firstName,
+      FIELDS.lastName,
+      ...(details?.needMiddlename ? [FIELDS.middlename] : []),
+      ...(hasDiscounts ? [FIELDS.discount] : []),
+      ...(details?.needBirth ? [FIELDS.bday] : []),
+      ...(details?.needCitizenship ? [FIELDS.citizenship] : []),
+      ...(details?.needDoc ? [FIELDS.documentType, FIELDS.documentNumber] : []),
+      ...(details?.needDocExpireDate ? [FIELDS.expiryDate] : []),
+      ...(details?.needGender ? [FIELDS.gender] : []),
+    ],
+    fields: {
+      firstName,
+      lastName,
+      ...(details?.needMiddlename ? { middlename } : {}),
+      ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
+      ...(details?.needBirth ? { bday } : {}),
+      ...(details?.needCitizenship ? { citizenship } : {}),
+      ...(details?.needDoc ? { documentType, documentNumber } : {}),
+      ...(details?.needDocExpireDate ? { expiryDate: expiryDate(currentTicket) } : {}),
+      ...(details?.needGender ? { gender } : {}),
+    },
     needMiddlename: details?.needMiddlename,
     needBirth: details?.needBirth,
     needDoc: details?.needDoc,

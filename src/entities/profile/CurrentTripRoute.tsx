@@ -26,7 +26,7 @@ export default function CurrentTripRoute({
         <p className="text-sm tablet:text-xl laptop:text-2xl font-bold tracking-normal tablet:leading-6 text-slate-700 dark:text-slate-50">
           {fromCityName}
         </p>
-        <LuRoute aria-hidden className="shrink-0 text-green-300 dark:text-green-100" />
+        <LuRoute aria-hidden className="shrink-0 text-green-200 dark:text-green-100" />
         <p className="text-sm tablet:text-xl laptop:text-2xl font-bold tracking-normal tablet:leading-6 text-slate-700 dark:text-slate-50">
           {toCityName}
         </p>

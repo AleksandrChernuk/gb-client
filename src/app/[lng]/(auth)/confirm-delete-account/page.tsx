@@ -40,7 +40,7 @@ const ConfirmDeleteAccountPage = async () => {
           descriptiontext="delete_account_message"
           descriptionClassName="text-center"
         >
-          <p className="text-center my-2 text-lg font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px]laptop:mb-8 text-green-300">
+          <p className="text-center my-2 text-lg font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px]laptop:mb-8 text-green-200">
             {t_common('delete_account_thanks')}
           </p>
           <p className="my-4 text-center text-xs font-normal tracking-normal leading-[18px] text-red-600 ">

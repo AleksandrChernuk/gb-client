@@ -40,7 +40,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
           variant: isActive ? 'outline' : 'ghost',
           size,
         }),
-        `${isActive && 'text-green-300 dark:text-green-200 border-green-300 dark:border-green-200 hover:border-green-400 active:border-green-200/80 transition-colors duration-75'}`,
+        `${isActive && 'text-green-200 dark:text-green-200 border-green-300 dark:border-green-200 hover:border-green-400 active:border-green-200/80 transition-colors duration-75'}`,
         className,
       )}
       {...props}

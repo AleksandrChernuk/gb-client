@@ -19,13 +19,7 @@ const SubmitButton = memo(function SubmitButton() {
   );
 
   return (
-    <Button
-      variant="default"
-      size="primary"
-      type="submit"
-      className="w-full"
-      disabled={!form.formState.isValid || isLoading}
-    >
+    <Button variant="default" size="primary" type="submit" className="w-full" disabled={isLoading}>
       {isLoading ? <LoaderCircle className="animate-spin" /> : t('confirm')}
     </Button>
   );
