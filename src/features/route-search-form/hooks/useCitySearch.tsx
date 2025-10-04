@@ -2,13 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
 import { ILocation } from '@/shared/types/location.types';
-import { useSearchStore } from '@/shared/store/useSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { useShallow } from 'zustand/react/shallow';
 import { useLocationsStore } from '@/shared/store/useLocations';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 type Tname = 'from' | 'to';
 
@@ -27,7 +27,7 @@ export const useCitySearch = ({ name }: Props) => {
   const locations = useLocationsStore((state) => state.locations);
   const favoriteLocations = useLocationsStore(useShallow((state) => state.favoriteLocations));
 
-  const setCityId = useSearchStore((state) => state.setCityId);
+  const [, actions] = useRouterSearch();
 
   const { fromCity, toCity } = useCityData();
   const city = name === 'from' ? fromCity : toCity;
@@ -60,14 +60,14 @@ export const useCitySearch = ({ name }: Props) => {
 
   const onSelectCity = useCallback(
     (newCity: ILocation) => {
-      setCityId(name, newCity.id);
+      actions.setCityId(name, String(newCity.id));
       const cityIndex = cities.findIndex((el) => el.id === newCity.id);
       setHighlightedIndex(cityIndex >= 0 ? cityIndex : -1);
       updateCityValue(newCity);
       setOpen(false);
       inputRef.current?.blur();
     },
-    [setCityId, name, cities, updateCityValue],
+    [actions, name, cities, updateCityValue],
   );
 
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {

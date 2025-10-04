@@ -12,8 +12,8 @@ import RouteDetailsStops from '@/entities/route/RouteDetailsStops';
 import RouteDetailsList from '@/entities/route/RouteDetailsList';
 import DetailsItem from '@/entities/route/RouteDetailsItem';
 import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
-import RouteDetailsBusImages from '@/entities/route/RouteDetailsBusImages';
 import { IRouteResponse } from '@/shared/types/route.types';
+import RouteDetailsBusImages from '@/entities/route/RouteDetailsBusImages';
 
 type Props = {
   route: IRouteResponse;
@@ -26,7 +26,6 @@ export default function RouteCardDetails({ route, loading }: Props) {
   const { locale: dateLocale } = useDateLocale();
 
   const busName = route?.details?.busName;
-  const busNumber = route?.details?.busNumber;
 
   if (loading)
     return (
@@ -134,32 +133,40 @@ export default function RouteCardDetails({ route, loading }: Props) {
           )}
         </RouteDetailsList>
 
-        {(busName || busNumber || busNumber) && (
-          <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
-            <>
-              <div className="flex flex-row flex-wrap gap-0.5">
-                {busName !== 'bus' && busName !== 'no_plan' && (
-                  <DetailsItem>{!!busName && busName.replace(/\[|\]/g, '')}</DetailsItem>
-                )}
-                <DetailsItem>{route?.details?.busNumber}</DetailsItem>
-              </div>
-              {route?.details?.busPictures?.length &&
-                route?.details?.busPictures?.length > 1 &&
-                route?.details?.busPictures[0] !== null && (
-                  <RouteDetailsBusImages
-                    items={toArray(route?.details?.busPictures)?.map((el, i) => ({
-                      src: el,
-                      alt: `bus img ${i + 1}`,
-                      width: 200,
-                      height: 200,
-                    }))}
-                    slidesPerView={3}
-                    spaceBetween={20}
-                  />
-                )}
-            </>
-          </RouteDetailsList>
-        )}
+        {(() => {
+          const hasBusName = busName && busName !== 'bus' && busName !== 'no_plan';
+          const hasBusNumber = route?.details?.busNumber;
+          const busPictures = route?.details?.busPictures;
+          const hasBusPictures = busPictures && busPictures.length > 1 && busPictures[0] !== null;
+
+          // Показываем блок только если есть хотя бы одно из: валидное имя, номер или фото
+          const shouldShowBus = hasBusName || hasBusNumber || hasBusPictures;
+
+          return (
+            shouldShowBus && (
+              <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
+                <>
+                  <div className="flex flex-row flex-wrap gap-0.5">
+                    {hasBusName && <DetailsItem>{busName.replace(/\[|\]/g, '')}</DetailsItem>}
+                    {hasBusNumber && route?.details && <DetailsItem>{route.details.busNumber}</DetailsItem>}
+                  </div>
+                  {hasBusPictures && busPictures && (
+                    <RouteDetailsBusImages
+                      items={toArray(busPictures).map((el, i) => ({
+                        src: el,
+                        alt: `bus img ${i + 1}`,
+                        width: 200,
+                        height: 200,
+                      }))}
+                      slidesPerView={3}
+                      spaceBetween={20}
+                    />
+                  )}
+                </>
+              </RouteDetailsList>
+            )
+          );
+        })()}
       </div>
     </div>
   );

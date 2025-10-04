@@ -8,6 +8,7 @@ import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { PAYMENT_TYPES } from '@/shared/constans/payment.methods.constans';
+import { useShallow } from 'zustand/react/shallow';
 
 const Payment = () => {
   const { control } = useFormContext();
@@ -20,7 +21,13 @@ const Payment = () => {
     rules: { required: true },
   });
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const selectedTicket = useSelectedTickets((state) => state.selectedTicket);
+
+  const { selectedTicket } = useSelectedTickets(
+    useShallow((state) => ({
+      selectedTicket: state.selectedTicket?.route,
+    })),
+  );
+
   const loadingResult = useNewOrderResult((state) => state.loadingResult);
 
   return (

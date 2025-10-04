@@ -5,14 +5,15 @@ import { IconPass } from '@/assets/icons/IconPass';
 import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction } from 'react';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { PassengerType } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
   a: number;
   c: number;
   open: boolean;
   value: string;
-  handleIncrement: ({ type }: { type: 'adult' | 'children' }) => void;
-  handleDecrement: ({ type }: { type: 'adult' | 'children' }) => void;
+  handleIncrement: (type: PassengerType) => void;
+  handleDecrement: (type: PassengerType) => void;
   handleOpenChange: (isOpen: boolean) => void;
   handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
   passCount: number;
@@ -60,15 +61,15 @@ export default function PassengersDesktop({
           <PassengersButton
             type="adult"
             value={a}
-            handleIcrement={() => handleIncrement({ type: 'adult' })}
-            handleDecrement={() => handleDecrement({ type: 'adult' })}
+            handleIcrement={() => handleIncrement('adult')}
+            handleDecrement={() => handleDecrement('adult')}
           />
           <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
           <PassengersButton
             type="children"
             value={c}
-            handleIcrement={() => handleIncrement({ type: 'children' })}
-            handleDecrement={() => handleDecrement({ type: 'children' })}
+            handleIcrement={() => handleIncrement('children')}
+            handleDecrement={() => handleDecrement('children')}
           />
         </div>
       ) : null}

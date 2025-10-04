@@ -1,11 +1,13 @@
 'use client';
 
-import { useShallow } from 'zustand/react/shallow';
-import { useSearchStore } from '@/shared/store/useSearch';
+import { startOfMonth, addMonths, subMonths } from 'date-fns';
+
 import { useDate } from '@/features/route-search-form/hooks/useDate';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import DatePickerDesktop from '@/features/route-search-form/ui/DatePickerDesktop';
 import DatePickerMobile from '@/features/route-search-form/ui/DatePickerMobile';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import { useMemo, useState } from 'react';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -13,18 +15,25 @@ type Props = {
 
 export default function DatePicker({ variant }: Props) {
   const { locale } = useDateLocale();
-  const currentDate = useSearchStore(useShallow((state) => state.date));
-  const month = useSearchStore((state) => state.month);
-  const incrementMonth = useSearchStore((state) => state.incrementMonth);
-  const decrementMonth = useSearchStore((state) => state.decrementMonth);
-  const setMonth = useSearchStore((state) => state.setMonth);
+
+  const [params] = useRouterSearch();
+
+  const baseDate = useMemo(() => {
+    return params.date ?? new Date();
+  }, [params.date]);
+
+  const [month, setMonth] = useState(() => startOfMonth(baseDate));
+
+  const incrementMonth = () => setMonth((prev) => addMonths(prev, 1));
+  const decrementMonth = () => setMonth((prev) => subMonths(prev, 1));
 
   const dateUtils = useDate();
 
   const commonProps = {
     locale,
-    currentDate,
+    currentDate: baseDate,
     month,
+
     incrementMonth,
     decrementMonth,
     setMonth,

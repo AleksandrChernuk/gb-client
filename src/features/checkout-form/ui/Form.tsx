@@ -14,10 +14,19 @@ import ToPay from '@/features/checkout-form/ui/ToPay';
 import Legal from '@/features/checkout-form/ui/Legal';
 import SubmitButton from '@/entities/checkout/SubmitButton';
 import Booking from '@/features/checkout-form/ui/Booking';
+import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function CheckoutForm() {
   const { methods, onSubmit } = useCheckout();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+
+  const { selectedTicket, isHydrated } = useSelectedTickets(
+    useShallow((state) => ({
+      selectedTicket: state.selectedTicket,
+      isHydrated: state.isHydrated,
+    })),
+  );
 
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -41,7 +50,7 @@ export default function CheckoutForm() {
           </div>
           <div className="space-y-10 laptop:col-span-1">
             <CheckoutCard title={t('your_booking')}>
-              <Trip />
+              <Trip isHydrated={isHydrated} route={selectedTicket?.route || null} />
             </CheckoutCard>
 
             <ToPay />

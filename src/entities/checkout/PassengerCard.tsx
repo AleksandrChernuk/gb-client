@@ -39,4 +39,6 @@ const PassengerCard = memo(function PassengerCard({ i, providerConfig, isChild }
   );
 });
 
-export default PassengerCard;
+export default memo(PassengerCard, (prev, next) => {
+  return prev.i === next.i && prev.isChild === next.isChild && prev.providerConfig === next.providerConfig;
+});

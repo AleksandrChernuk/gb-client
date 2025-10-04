@@ -7,7 +7,6 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
 import Cleanup from '@/entities/checkout/Cleanup';
-import Timer from '@/entities/checkout/Timer';
 import CheckoutForm from '@/features/checkout-form';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
@@ -37,7 +36,7 @@ export default async function Checkout() {
             <div className="my-4 laptop:my-8">
               <BackRouteButton />
             </div>
-            <Timer />
+
             <Cleanup />
             <CheckoutForm />
           </Container>

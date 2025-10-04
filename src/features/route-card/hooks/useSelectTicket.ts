@@ -7,15 +7,18 @@ import { buildRouteDetailsRequest, RouteDetailsParams } from '@/shared/lib/build
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { IRouteResponse, IRouteDetailsResponse } from '@/shared/types/route.types';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 export function useSelectTicket() {
   const { setSelectedTicket, setLoading } = useSelectedTickets();
+  const [params] = useRouterSearch();
+
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  return async (route: IRouteResponse, params: RouteDetailsParams) => {
+  return async (route: IRouteResponse, detailsParams: RouteDetailsParams) => {
     if (['EUROCLUB'].includes(route.providerName)) {
-      setSelectedTicket(route);
+      setSelectedTicket({ route: route, adult: params.adult, children: params.children });
       router.push('/checkout');
       return;
     }
@@ -23,7 +26,7 @@ export function useSelectTicket() {
     setLoading(route.ticketId);
 
     try {
-      const requestBody = buildRouteDetailsRequest(params);
+      const requestBody = buildRouteDetailsRequest(detailsParams);
 
       const details = await queryClient.fetchQuery<IRouteDetailsResponse | null>({
         queryKey: ['route-details', route.ticketId, params],
@@ -32,7 +35,7 @@ export function useSelectTicket() {
 
       const updatedRoute = updateRouteDetails(route, details);
 
-      setSelectedTicket(updatedRoute);
+      setSelectedTicket({ route: updatedRoute, adult: params.adult, children: params.children });
       router.push('/checkout');
     } finally {
       setLoading(null);

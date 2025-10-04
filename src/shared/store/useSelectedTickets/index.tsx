@@ -3,11 +3,17 @@ import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { IRouteResponse } from '@/shared/types/route.types';
 
+type TSelectedTicket = {
+  route: IRouteResponse;
+  adult: number;
+  children: number;
+};
+
 export type useSelectedTicketsStore = {
   isHydrated: boolean;
-  selectedTicket: IRouteResponse | null;
+  selectedTicket: TSelectedTicket | null;
   loadingTicketId: string | null;
-  setSelectedTicket: (route: IRouteResponse) => void;
+  setSelectedTicket: (route: TSelectedTicket) => void;
   setLoading: (ticketId: string | null) => void;
   resetSelectedTicket: () => void;
 };
@@ -21,7 +27,7 @@ export const useSelectedTickets = create<useSelectedTicketsStore>()(
           selectedTicket: null,
           loadingTicketId: null,
 
-          setSelectedTicket: (route: IRouteResponse) => {
+          setSelectedTicket: (route: TSelectedTicket) => {
             set((state) => {
               state.selectedTicket = route;
               state.loadingTicketId = null;

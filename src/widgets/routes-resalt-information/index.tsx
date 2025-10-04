@@ -5,8 +5,6 @@ import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import useTicketsSearch from '@/shared/hooks/useTicketsSearch';
 import { useLocale, useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { useSearchStore } from '@/shared/store/useSearch';
-import { useShallow } from 'zustand/react/shallow';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import CustomCard from '@/shared/ui/CustomCard';
 import { formatDate, toDate } from 'date-fns';
@@ -14,11 +12,13 @@ import { Skeleton } from '@/shared/ui/skeleton';
 import { MobileFilter } from '@/features/route-mobile-filter';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 export const RoutesResaltInformation = () => {
   const { fromCity, toCity } = useCityData();
-  const date = useSearchStore(useShallow((state) => state.date));
-  const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
+
+  const [params] = useRouterSearch();
+
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   const { isFetching } = useTicketsSearch();
@@ -29,9 +29,9 @@ export const RoutesResaltInformation = () => {
   return (
     <CustomCard className="p-5 space-y-4 shadow-xs">
       <div className="flex items-center justify-between">
-        {isHydrated ? (
+        {params ? (
           <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
-            {formatDate(toDate(date), 'eee, d MMM', { locale })}
+            {formatDate(toDate(params.date), 'eee, d MMM', { locale })}
           </h3>
         ) : (
           <Skeleton className="h-[28px] min-w-20" />

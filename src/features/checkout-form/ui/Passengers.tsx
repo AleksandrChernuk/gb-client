@@ -9,13 +9,20 @@ import { getProviderConfigByName } from '@/features/checkout-form/config';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import PassengerCard from '@/entities/checkout/PassengerCard';
 import StepNumber from '@/entities/checkout/StepNumber';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function Passengers() {
   const t_new_order = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const { control } = useFormContext();
   const { fields } = useFieldArray({ control, name: 'passengers' });
-  const ticket = useSelectedTickets((state) => state.selectedTicket);
-  const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
+
+  const { route } = useSelectedTickets(
+    useShallow((state) => ({
+      route: state.selectedTicket?.route,
+    })),
+  );
+
+  const providerConfig = useMemo(() => getProviderConfigByName(route ?? null), [route]);
 
   return (
     <ul className="space-y-4">

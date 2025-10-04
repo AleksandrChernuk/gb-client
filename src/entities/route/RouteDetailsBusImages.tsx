@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import Image from 'next/image';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image from 'next/image';
+import { AspectRatio } from '@/shared/ui/aspect-ratio';
 
 type TImages = {
   src: string;
@@ -18,31 +19,29 @@ type Props = {
   spaceBetween: number;
 };
 
-const RouteDetailsBusImages = ({ items }: Props) => {
+const RouteDetailsBusImages = ({ items, spaceBetween }: Props) => {
   return (
-    <div className="flex items-center justify-center w-full h-[320px] mt-2">
+    <div className="flex items-center justify-center w-full mt-2">
       <Swiper
         pagination={{ dynamicBullets: true }}
         modules={[Pagination]}
-        className="mySwiper w-full h-full rounded-2xl overflow-hidden"
+        className="mySwiper w-full rounded-2xl overflow-hidden"
         style={{ maxWidth: 350 }}
-        spaceBetween={20}
+        spaceBetween={spaceBetween}
       >
-        {items.map((element) => (
-          <SwiperSlide
-            key={element.alt}
-            className="flex items-center justify-center h-[300px] rounded-2xl overflow-hidden"
-          >
-            <div className=" rounded-2xl overflow-hidden ">
+        {items.map((element, index) => (
+          <SwiperSlide key={`${element.alt}-${index}`} className="flex items-center justify-center pb-10">
+            <AspectRatio ratio={1} className="bg-gray-100 rounded-2xl overflow-hidden w-full">
               <Image
                 draggable={false}
                 src={element.src}
                 alt={element.alt}
                 width={element.width}
                 height={element.height}
-                className="w-full h-full object-contain  "
+                className="w-full h-full object-contain"
+                loading="lazy"
               />
-            </div>
+            </AspectRatio>
           </SwiperSlide>
         ))}
       </Swiper>

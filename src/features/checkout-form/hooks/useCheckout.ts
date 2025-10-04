@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchStore } from '@/shared/store/useSearch';
 import { useUserStore } from '@/shared/store/useUser';
 import { useMemo, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -22,34 +21,47 @@ function useCheckout() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const adult = useSearchStore(useShallow((state) => state.adult));
-  const children = useSearchStore(useShallow((state) => state.children));
-  const from = useSearchStore(useShallow((state) => state.from));
-  const to = useSearchStore(useShallow((state) => state.to));
-  const ticket = useSelectedTickets(useShallow((state) => state.selectedTicket));
+  const { selectedTicket } = useSelectedTickets(
+    useShallow((state) => ({
+      selectedTicket: state.selectedTicket,
+    })),
+  );
+
   const user = useUserStore(useShallow((state) => state.currentUser));
-  const setInitiatePayment = useNewOrderResult((state) => state.setInitiateNewOrder);
-  const setLoadingResult = useNewOrderResult((state) => state.setLoadingResult);
-  const providerConfig = useMemo(() => getProviderConfigByName(ticket), [ticket]);
 
-  const defaultPassengers = useMemo(
-    () =>
-      createPassengers(
-        adult,
-        children,
-        providerConfig,
-        ticket?.ticketPricing.basePrice || 0,
-      ) as unknown as PassengerFormData[],
-    [adult, children, providerConfig, ticket?.ticketPricing.basePrice],
+  const { setInitiateNewOrder, setLoadingResult } = useNewOrderResult(
+    useShallow((state) => ({
+      setInitiateNewOrder: state.setInitiateNewOrder,
+      setLoadingResult: state.setLoadingResult,
+    })),
   );
 
-  const schema = useMemo(
-    () => getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length),
-    [providerConfig, ticket],
-  );
+  const adult = selectedTicket?.adult ?? 0;
+  const children = selectedTicket?.children ?? 0;
+  const ticket = selectedTicket?.route;
+
+  const providerConfig = useMemo(() => (ticket ? getProviderConfigByName(ticket) : null), [ticket]);
+
+  const defaultPassengers = useMemo(() => {
+    if (!providerConfig || !ticket) return [];
+
+    const passengers = createPassengers(adult, children, providerConfig, ticket.ticketPricing.basePrice || 0);
+
+    if (!Array.isArray(passengers)) {
+      console.error('createPassengers did not return an array');
+      return [];
+    }
+
+    return passengers as PassengerFormData[];
+  }, [adult, children, providerConfig, ticket]);
+
+  const schema = useMemo(() => {
+    if (!providerConfig) return null;
+    return getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length);
+  }, [providerConfig, ticket]);
 
   const methods = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: schema ? zodResolver(schema) : undefined,
     defaultValues: {
       passengers: defaultPassengers,
       email: user?.email || '',
@@ -62,8 +74,10 @@ function useCheckout() {
     shouldFocusError: true,
   });
 
+  console.log(selectedTicket);
+
   const onSubmit = async (formData: FormData) => {
-    if (!ticket || !from || !to) {
+    if (!ticket) {
       const errorMsg = 'Missing required data';
       setError(errorMsg);
       toast.error(errorMsg);
@@ -77,8 +91,8 @@ function useCheckout() {
 
       const res = await createOrder(
         normalizeData({
-          fromCityId: from,
-          toCityId: to,
+          fromCityId: ticket.departure.fromLocation.id,
+          toCityId: ticket.arrival.toLocation.id,
           locale,
           formData,
           route: ticket,
@@ -86,7 +100,7 @@ function useCheckout() {
         }),
       );
 
-      setInitiatePayment(res);
+      setInitiateNewOrder(res);
     } catch (error: unknown) {
       console.error('Order creation failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Failed to create order';

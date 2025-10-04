@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { IconPass } from '@/assets/icons/IconPass';
 import { Separator } from '@/shared/ui/separator';
+import { PassengerType } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
   a: number;
@@ -23,8 +24,8 @@ type Props = {
   open: boolean;
   value: string;
   setOpen: (v: boolean) => void;
-  handleIncrement: ({ type }: { type: 'adult' | 'children' }) => void;
-  handleDecrement: ({ type }: { type: 'adult' | 'children' }) => void;
+  handleIncrement: (type: PassengerType) => void;
+  handleDecrement: (type: PassengerType) => void;
   handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
   handleOpenChange: (isOpen: boolean) => void;
 };
@@ -67,15 +68,15 @@ export default function PassengersMobile({
             </h3>
             <div>
               <PassengersButton
-                handleIcrement={() => handleIncrement({ type: 'adult' })}
-                handleDecrement={() => handleDecrement({ type: 'adult' })}
+                handleIcrement={() => handleIncrement('adult')}
+                handleDecrement={() => handleDecrement('adult')}
                 type="adult"
                 value={a}
               />
               <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
               <PassengersButton
-                handleIcrement={() => handleIncrement({ type: 'children' })}
-                handleDecrement={() => handleDecrement({ type: 'children' })}
+                handleIcrement={() => handleIncrement('children')}
+                handleDecrement={() => handleDecrement('children')}
                 type="children"
                 value={c}
               />

@@ -1,73 +1,40 @@
-import { useShallow } from 'zustand/react/shallow';
-import { useSearchStore } from '@/shared/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import PassengersMobile from './PassengersMobile';
 import PassengersDesktop from './PassengersDesktop';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { PassengerType, useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
   variant: 'mobile' | 'desktop';
 };
 
 export default function PassengersCount({ variant }: Props) {
-  const adult = useSearchStore(useShallow((state) => state.adult));
-  const children = useSearchStore(useShallow((state) => state.children));
-  const setPassenger = useSearchStore((state) => state.setPassenger);
-
-  const [a, setA] = useState(() => adult);
-  const [c, setC] = useState(() => children);
+  const [params, actions] = useRouterSearch();
 
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    if (!isOpen) {
-      setPassenger('adult', a);
-      setPassenger('children', c);
-    }
   };
 
-  const handleIncrement = ({ type }: { type: 'adult' | 'children' }) => {
-    switch (type) {
-      case 'adult':
-        return setA((p) => p + 1);
-
-      case 'children':
-        return setC((p) => p + 1);
-
-      default:
-        return;
-    }
+  const handleIncrement = (type: PassengerType) => {
+    actions.setPassenger(type, params[type] + 1);
   };
 
-  const handleDecrement = ({ type }: { type: 'adult' | 'children' }) => {
-    switch (type) {
-      case 'adult':
-        return setA((p) => p - 1);
-
-      case 'children':
-        return setC((p) => p - 1);
-
-      default:
-        return;
-    }
+  const handleDecrement = (type: PassengerType) => {
+    actions.setPassenger(type, params[type] - 1);
   };
 
-  const handleBlur = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
-        setOpen(false);
-        setPassenger('adult', a);
-        setPassenger('children', c);
-      }
-    },
-    [a, c, setPassenger],
-  );
+  const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setOpen(false);
+    }
+  }, []);
 
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const passCount = a + c;
+  const passCount = params.adult + params.children;
   const value =
     passCount === 1
       ? `${passCount} ${t('placeholderPassenger')}`
@@ -76,8 +43,8 @@ export default function PassengersCount({ variant }: Props) {
         : `${passCount} ${t('placeholderPassengers')}`;
 
   const sharedProps = {
-    a,
-    c,
+    a: params.adult,
+    c: params.children,
     open,
     value,
     setOpen,

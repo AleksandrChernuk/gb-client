@@ -1,42 +1,47 @@
 import { ZodType } from 'zod';
 
-export type SelectOption = { value: string; label: string };
-export type DiscountOption = { value: string; label: string; discountDescription?: string; discountPercent?: string };
+export type SelectOption = {
+  value: string;
+  label: string;
+};
+
+export type DiscountOption = {
+  value: string;
+  label: string;
+  discountDescription?: string;
+  discountPercent?: string;
+};
+
+type BaseField = {
+  label: string;
+  placeholder?: string;
+  schema?: ZodType;
+};
 
 export type FieldConfig =
-  | {
-      label: string;
+  | (BaseField & {
       type: 'text';
-      placeholder?: string;
       schema: ZodType;
-    }
-  | {
-      label: string;
+    })
+  | (BaseField & {
       type: 'select';
       options: SelectOption[];
-      placeholder?: string;
       schema: ZodType;
       translateOptions?: boolean;
-    }
-  | {
-      label: string;
+    })
+  | (BaseField & {
       type: 'date';
       placeholder: string;
-      schema?: ZodType;
-    }
-  | {
-      label: string;
+    })
+  | (BaseField & {
       type: 'citizenship';
       placeholder: string;
-      schema?: ZodType;
-    }
-  | {
-      label: string;
+    })
+  | (BaseField & {
       type: 'discount';
       options: DiscountOption[];
       placeholder: string;
-      schema?: ZodType;
-    };
+    });
 
 export type ProviderConfig = {
   required: string[];

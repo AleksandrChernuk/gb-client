@@ -90,8 +90,8 @@ export default function RouteDetailsStops({
                         station_name: element.station.name,
                         location_name: element.location.name,
                         station_address: element.station.address,
-                        departure_date_time: element.departureDateTime,
-                        arrival_date_time: element.arrivalDateTime,
+                        departure_date_time: element.departureDateTime ?? element.arrivalDateTime,
+                        arrival_date_time: element.arrivalDateTime ?? element.departureDateTime,
                       }}
                       bus_changes={!!element.busChanges}
                       key={idx}

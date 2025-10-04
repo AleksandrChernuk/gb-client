@@ -1,18 +1,26 @@
 'use client';
 
+import useTimer from '@/features/checkout-form/hooks/useTimer';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
-import useTimer from './useTimer';
+import { useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 type DialogState = 'OTP' | 'PRICE_CHANGE' | 'STILL_ONLINE' | 'NEW_ORDER' | 'NONE';
 
 export function useConfirmationDialogState(): DialogState {
-  const { open, openPriceChange } = useTimer();
-  const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
-  const initiateOtpVerify = useNewOrderResult((s) => s.initiateOtpVerify);
+  const { open } = useTimer();
 
-  if (initiateOtpVerify) return 'OTP';
-  if (openPriceChange) return 'PRICE_CHANGE';
-  if (open) return 'STILL_ONLINE';
-  if (initiateNewOrder) return 'NEW_ORDER';
-  return 'NONE';
+  const { initiateNewOrder, initiateOtpVerify } = useNewOrderResult(
+    useShallow((s) => ({
+      initiateNewOrder: s.initiateNewOrder,
+      initiateOtpVerify: s.initiateOtpVerify,
+    })),
+  );
+
+  return useMemo(() => {
+    if (initiateOtpVerify) return 'OTP';
+    if (open) return 'STILL_ONLINE';
+    if (initiateNewOrder) return 'NEW_ORDER';
+    return 'NONE';
+  }, [initiateOtpVerify, open, initiateNewOrder]);
 }

@@ -14,6 +14,8 @@ import { Toaster } from 'sonner';
 import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
 import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { getFavoriteLocations, getLocations } from '@/shared/api/location.actions';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -46,23 +48,27 @@ export default async function MainLayout({
 
   const messages = await getMessages();
   setRequestLocale(lng as Locale);
+  const locations = await getLocations({ query: '', perPage: 500 });
+  const favoriteLocations = await getFavoriteLocations();
 
   return (
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
       <body className={`${notoSans.className} ${notoSans.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
-          <GTMNoScript />
-          <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
+          <NuqsAdapter>
+            <GTMNoScript />
+            <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
 
-          <ReactQueryContext>
-            <ThemeProvider attribute="class" disableTransitionOnChange={false}>
-              {children}
-              <ProfileCheckProvider />
-              <LocationsInitializer />
-            </ThemeProvider>
-          </ReactQueryContext>
+            <ReactQueryContext>
+              <ThemeProvider attribute="class" disableTransitionOnChange={false}>
+                {children}
+                <ProfileCheckProvider />
+                <LocationsInitializer locations={locations.data} favoriteLocations={favoriteLocations} />
+              </ThemeProvider>
+            </ReactQueryContext>
 
-          <Toaster richColors position="top-center" closeButton duration={4000} />
+            <Toaster richColors position="top-center" closeButton duration={4000} />
+          </NuqsAdapter>
         </NextIntlClientProvider>
       </body>
     </html>

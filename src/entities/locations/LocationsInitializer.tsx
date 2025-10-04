@@ -1,41 +1,30 @@
 'use client';
 
-import { getFavoriteLocations, getLocations } from '@/shared/api/location.actions';
-import { useLocationsStore } from '@/shared/store/useLocations';
-import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { useLocationsStore } from '@/shared/store/useLocations';
 import { useShallow } from 'zustand/react/shallow';
+import { ILocation } from '@/shared/types/location.types';
 
-export default function LocationsInitializer() {
+type Props = {
+  locations?: ILocation[];
+  favoriteLocations?: ILocation[];
+};
+
+export default function LocationsInitializer({ locations, favoriteLocations }: Props) {
   const setLocations = useLocationsStore(useShallow((state) => state.setLocations));
   const setFavoriteLocations = useLocationsStore(useShallow((state) => state.setFavoriteLocations));
 
-  const { data: locations } = useQuery({
-    queryKey: ['locations'],
-    queryFn: async () => {
-      const response = await getLocations({ query: '', perPage: 500 });
-      return response;
-    },
-  });
-
-  const { data: favoritesLocations } = useQuery({
-    queryKey: ['locations', 'favorites'],
-    queryFn: getFavoriteLocations,
-  });
+  useEffect(() => {
+    if (locations?.length) {
+      setLocations(locations);
+    }
+  }, [locations, setLocations]);
 
   useEffect(() => {
-    if (locations) {
-      setLocations(locations?.data);
+    if (favoriteLocations?.length) {
+      setFavoriteLocations(favoriteLocations);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locations]);
-
-  useEffect(() => {
-    if (favoritesLocations) {
-      setFavoriteLocations(favoritesLocations);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favoritesLocations]);
+  }, [favoriteLocations, setFavoriteLocations]);
 
   return null;
 }

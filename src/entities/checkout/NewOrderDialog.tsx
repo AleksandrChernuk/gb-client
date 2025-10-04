@@ -1,36 +1,36 @@
 'use client';
-import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/shared/ui/dialog';
-import { Button } from '@/shared/ui/button';
-import { LoaderCircle, TicketX } from 'lucide-react';
-import { useNewOrderResult } from '@/shared/store/useOrderResult';
+
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
+import { LoaderCircle, TicketX } from 'lucide-react';
 import { useRouter } from '@/shared/i18n/routing';
+import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/shared/ui/dialog';
+import { Button } from '@/shared/ui/button';
+import { useNewOrderResult } from '@/shared/store/useOrderResult';
+import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 export const NewOrderDialog = () => {
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  const router = useRouter();
+
+  const { control } = useFormContext();
+  const paymentType = useWatch({ control, name: 'payment', exact: true });
+
   const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
   const { handleCancelOrder, payLoading, handlePayOrder, handleConfirmOrder } = usePaymentConfirm();
-  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-  const { control } = useFormContext();
-  const paymentType = useWatch({ control, name: 'payment' });
-  const router = useRouter();
 
   const isError = initiateNewOrder?.status === 'error';
   const alert = initiateNewOrder?.alertMessage;
-  const amount = Math.floor(Number(initiateNewOrder?.amount || 0));
-  const currency = initiateNewOrder?.currency;
+  const amount = Math.floor(Number(initiateNewOrder?.amount ?? 0));
+  const currency = initiateNewOrder?.currency ?? 'UAH';
 
-  // ИЗМЕНЕНО: вынесена логика определения кнопок
   const showBookButton = !isError && paymentType !== 'BOOK';
   const showCancelButton = !isError;
-
   const title = isError ? t('payment_confirm_error_title') : t('payment_confirm_title');
 
   const renderAlertMessage = () => {
-    if (!alert) return null;
-
+    if (!alert || typeof alert !== 'object') return null;
     return (
       <div className="space-y-1">
         {alert.title && <p className="text-sm">{alert.title}</p>}
@@ -39,42 +39,37 @@ export const NewOrderDialog = () => {
     );
   };
 
-  const renderDescription = () => {
-    if (isError) {
-      return (
-        <div>
-          <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="text-center space-y-2">
-        <p className="text-base">{t('payment_confirm_final_amount')}</p>
-        <p className="font-bold text-xl">
-          {amount} {currency}
-        </p>
-        {paymentType === 'PAYMENT_AT_BOARDING' && (
-          <p className="text-xs text-green-300 text-left">
-            <span className="text-red-600 text-lg">*</span>
-            {t('sms_confirmation_notice')}
+  const renderDescription = () => (
+    <div className="text-center space-y-2">
+      {isError ? (
+        <p>{initiateNewOrder?.message || t('payment_confirm_error_description')}</p>
+      ) : (
+        <>
+          <p className="text-base">{t('payment_confirm_final_amount')}</p>
+          <p className="font-bold text-xl">
+            {amount} {currency}
           </p>
-        )}
-        {renderAlertMessage()}
-      </div>
-    );
-  };
+          {paymentType === 'PAYMENT_AT_BOARDING' && (
+            <p className="text-xs text-green-300 text-left">
+              <span className="text-red-600 text-lg">*</span>
+              {t('sms_confirmation_notice')}
+            </p>
+          )}
+          {renderAlertMessage()}
+        </>
+      )}
+    </div>
+  );
 
   const renderActionButtons = () => {
-    if (isError) {
+    if (isError)
       return (
         <Button size="primary" variant="default" onClick={() => router.back()} className="text-white">
           {t('payment_confirm_to_search')}
         </Button>
       );
-    }
 
-    if (showBookButton) {
+    if (showBookButton)
       return (
         <Button
           size="primary"
@@ -86,7 +81,6 @@ export const NewOrderDialog = () => {
           {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
         </Button>
       );
-    }
 
     return (
       <Button size="primary" variant="default" className="text-white" onClick={handlePayOrder} disabled={payLoading}>

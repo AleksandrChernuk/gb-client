@@ -1,4 +1,3 @@
-import { useSearchStore } from '@/shared/store/useSearch';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -7,15 +6,24 @@ import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { Passenger } from '@/shared/utils/checkout.config';
+import { useShallow } from 'zustand/react/shallow';
+import { TimerDisplay } from '@/features/checkout-form/ui/TimerDisplay';
 
 const ToPay = memo(function ToPay() {
-  const adult = useSearchStore((state) => state.adult);
-  const children = useSearchStore((state) => state.children);
-  const isHydrated = useSelectedTickets((state) => state.isHydrated);
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const t_CHECKOUT = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
+  const { selectedTicket, isHydrated } = useSelectedTickets(
+    useShallow((state) => ({
+      selectedTicket: state.selectedTicket,
+      isHydrated: state.isHydrated,
+    })),
+  );
+
   const { control } = useFormContext();
+
+  const adult = selectedTicket?.adult ?? 0;
+  const children = selectedTicket?.children ?? 0;
 
   const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
 
@@ -37,7 +45,11 @@ const ToPay = memo(function ToPay() {
           </ul>
 
           <li>
-            <p className="text-xs text-green-300">{t_CHECKOUT('price_note')}</p>
+            <p className="text-xs text-green-300 dark:text-green-100">{t_CHECKOUT('price_note')}</p>
+          </li>
+          <li className="w-full h-px bg-slate-700 dark:bg-slate-50" />
+          <li>
+            <TimerDisplay />
           </li>
         </ul>
       ) : (

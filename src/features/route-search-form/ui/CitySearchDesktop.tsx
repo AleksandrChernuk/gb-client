@@ -18,7 +18,7 @@ type Props = {
   inputRef: RefObject<HTMLInputElement | null>;
   onInputChange: (v: string) => void;
   handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
-  errors: string | null;
+  errors: string | null | undefined;
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   handleToggleOpen: () => void;

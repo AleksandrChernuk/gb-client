@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useTransition } from 'react';
-import { useSearchStore } from '@/shared/store/useSearch';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { LoaderCircle } from 'lucide-react';
 import CitySearch from './CitySearch';
@@ -14,70 +13,71 @@ import PassengersCount from '@/features/route-search-form/ui/PassengersCount';
 import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
 import { TSearchForm } from '@/features/route-search-form/types';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 const MainSearchForm = ({ initialValues }: TSearchForm) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isPending, startTransition] = useTransition();
+  const [errors, setErrors] = useState<{ from?: string | null; to?: string | null }>({
+    from: null,
+    to: null,
+  });
   const isInitialized = useRef(false);
 
   const route = useRouter();
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
+  const [params, actions] = useRouterSearch();
+
   useEffect(() => {
     if (!initialValues || isInitialized.current) return;
     isInitialized.current = true;
 
-    const store = useSearchStore.getState();
-    store.setErrors('from', null);
-    store.setErrors('to', null);
-
-    if (initialValues.from) store.setCityId('from', initialValues.from);
-    if (initialValues.to) store.setCityId('to', initialValues.to);
-    if (initialValues.date) store.setDate(initialValues.date);
-    store.setPassenger('adult', initialValues.adult);
-    store.setPassenger('children', initialValues.children);
-  }, [initialValues]);
+    if (initialValues.from) actions.setCityId('from', `${initialValues.from}`);
+    if (initialValues.to) actions.setCityId('to', `${initialValues.to}`);
+    if (initialValues.date) actions.setDate(initialValues.date);
+    actions.setPassenger('adult', initialValues.adult);
+    actions.setPassenger('children', initialValues.children);
+  }, [initialValues, actions]);
 
   const handleSubmit = () => {
-    const { from, to, date, adult, children, setErrors } = useSearchStore.getState();
-    setErrors('from', null);
-    setErrors('to', null);
+    const { from, to, date, adult, children } = params;
 
-    const validate = () => {
-      const result = MainSearchShema.safeParse({ from, to });
+    const result = MainSearchShema.safeParse({ from, to });
 
-      if (!result.success) {
-        const errors = result.error.format();
-        setErrors('from', t(errors.from?._errors[0] || '') || null);
-        setErrors('to', t(errors.to?._errors[0] || '') || null);
-        return false;
-      }
-      return true;
-    };
+    if (!result.success) {
+      const errs = result.error.format();
+      setErrors({
+        from: t(errs.from?._errors[0] || '') || null,
+        to: t(errs.to?._errors[0] || '') || null,
+      });
+      return;
+    }
 
-    if (!validate()) return;
+    setErrors({ from: null, to: null });
 
-    const query = new URLSearchParams();
+    const searchParams = new URLSearchParams();
 
-    if (from) query.set('from', String(from));
-    if (to) query.set('to', String(to));
-    if (date) query.set('date', date);
-    if (adult) query.set('adult', String(adult));
-    if (children && children !== 0) query.set('children', String(children));
+    if (from) searchParams.set('from', from);
+    if (to) searchParams.set('to', to);
+    if (date) searchParams.set('date', date);
+
+    if (adult !== 1) searchParams.set('adult', String(adult));
+    if (children !== 0) searchParams.set('children', String(children));
 
     startTransition(() => {
-      route.push(`/buses?${query.toString()}`, { scroll: true });
+      route.push(`/buses?${searchParams.toString()}`, { scroll: true });
     });
   };
 
   const renderFields = (variant: 'mobile' | 'desktop') => (
     <>
-      <CitySearch name="from" variant={variant} />
-      {variant === 'mobile' && <Separator className="h-[1px] bg-slate-200 dark:bg-slate-700 my-2" />}
-      <CitySearch name="to" variant={variant} />
-      {variant === 'mobile' && <Separator className="h-[1px] bg-slate-200 dark:bg-slate-700 my-2" />}
+      <CitySearch name="from" variant={variant} error={errors.from} />
+      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
+      <CitySearch name="to" variant={variant} error={errors.to} />
+      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
       <DatePicker variant={variant} />
-      {variant === 'mobile' && <Separator className="h-[1px] bg-slate-200 dark:bg-slate-700 my-2" />}
+      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
       <PassengersCount variant={variant} />
     </>
   );
@@ -88,7 +88,7 @@ const MainSearchForm = ({ initialValues }: TSearchForm) => {
         <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
           {renderFields(isMobile ? 'mobile' : 'desktop')}
         </div>
-        <Button variant={'main'} size={'mainSearch'} disabled={isPending} onClick={handleSubmit}>
+        <Button variant="main" size="mainSearch" disabled={isPending} onClick={handleSubmit}>
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('searchBtn')}
         </Button>
       </div>

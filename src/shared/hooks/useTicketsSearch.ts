@@ -1,34 +1,29 @@
 'use client';
 
 import { getRoutes } from '@/shared/api/route.actions';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { useFilterTickets } from '@/shared/store/useFilterTickets';
-import { useSearchStore } from '@/shared/store/useSearch';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
-import { useShallow } from 'zustand/react/shallow';
 
 export default function useTicketsSearch() {
   const currentLanguage = useLocale();
 
-  const fromId = useSearchStore(useShallow((state) => state.from));
-  const toId = useSearchStore(useShallow((state) => state.to));
-  const adult = useSearchStore(useShallow((state) => state.adult));
-  const children = useSearchStore(useShallow((state) => state.children));
-  const date = useSearchStore(useShallow((state) => state.date));
+  const [params] = useRouterSearch();
 
   const setTickets = useFilterTickets((state) => state.setTickets);
   const tickets = useFilterTickets((state) => state.filteredTickets);
 
-  const enabled = !!fromId && !!toId && !!date;
+  const enabled = !!params.from && !!params.to && !!params.date;
 
   const { isFetching, data, error } = useQuery({
-    queryKey: ['routes-search', fromId, toId, adult, children, date, currentLanguage],
+    queryKey: ['routes-search', params.from, params.to, params.adult, params.children, params.date, currentLanguage],
     queryFn: () =>
       getRoutes({
-        fromCityId: fromId!,
-        toCityId: toId!,
-        travelDate: date,
+        fromCityId: Number(params.from ?? 0),
+        toCityId: Number(params.to ?? 0),
+        travelDate: params.date,
         locale: currentLanguage,
       }),
     enabled,
@@ -36,9 +31,13 @@ export default function useTicketsSearch() {
 
   useEffect(() => {
     if (data) {
-      setTickets(data.filter((element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= adult + children));
+      setTickets(
+        data.filter(
+          (element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= params.adult + params.children,
+        ),
+      );
     }
-  }, [data, adult, children, setTickets]);
+  }, [data, setTickets, params.adult, params.children]);
 
   return {
     isFetching,

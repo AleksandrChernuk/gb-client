@@ -31,7 +31,6 @@ export const createOrder = async (body: IRequestOrder) => {
     }
 
     const res = await response.json();
-    console.log('Order created successfully:', res);
     return res;
   } catch (error) {
     console.error('Order creation exception:', {
@@ -51,8 +50,6 @@ export const smsValidateOrder = async (body: ISmsValidateOrder) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log(res);
     return { status: 'error' };
   }
 

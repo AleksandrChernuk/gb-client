@@ -11,9 +11,10 @@ import { useCitySearch } from '@/features/route-search-form/hooks/useCitySearch'
 type Props = {
   name: 'from' | 'to';
   variant: 'mobile' | 'desktop';
+  error: string | null | undefined;
 };
 
-export default function CitySearch({ name, variant }: Props) {
+export default function CitySearch({ name, variant, error }: Props) {
   const swap = useSearchStore((state) => state.swap);
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
 
@@ -21,7 +22,6 @@ export default function CitySearch({ name, variant }: Props) {
 
   const city = name === 'from' ? fromCity : toCity;
 
-  const errors = useSearchStore((state) => state.errors[name]);
   const setErrorsRaw = useSearchStore((state) => state.setErrors);
 
   const locale = useLocale();
@@ -33,7 +33,7 @@ export default function CitySearch({ name, variant }: Props) {
   const commonProps = {
     name,
     city: city,
-    errors,
+    errors: error,
     setErrors: setErrorsRaw,
     swap,
     isFetchingLocations,

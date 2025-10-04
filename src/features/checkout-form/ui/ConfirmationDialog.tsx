@@ -2,30 +2,24 @@
 
 import { NewOrderDialog } from '@/entities/checkout/NewOrderDialog';
 import { OtpDialog } from '@/entities/checkout/OtpDialog';
-import { PriceChangeDialog } from '@/features/checkout-form/ui/PriceChangeDialog';
 import { StillOnlineDialog } from '@/entities/checkout/StillOnlineDialog';
 import { useConfirmationDialogState } from '@/features/checkout-form/hooks/useConfirmOrederState';
 import { Dialog, DialogContent } from '@/shared/ui/dialog';
+import useTimer from '@/features/checkout-form/hooks/useTimer';
 
 export function ConfirmationDialog() {
   const state = useConfirmationDialogState();
+  const { open } = useTimer();
 
-  const dialogContent = (() => {
-    switch (state) {
-      case 'NEW_ORDER':
-        return <NewOrderDialog />;
-      case 'OTP':
-        return <OtpDialog />;
-      case 'PRICE_CHANGE':
-        return <PriceChangeDialog />;
-      case 'STILL_ONLINE':
-        return <StillOnlineDialog />;
-      default:
-        return null;
-    }
-  })();
+  const dialogContent = open ? (
+    <StillOnlineDialog />
+  ) : state === 'OTP' ? (
+    <OtpDialog />
+  ) : state === 'NEW_ORDER' ? (
+    <NewOrderDialog />
+  ) : null;
 
-  const isOpen = state !== 'NONE';
+  const isOpen = open || state !== 'NONE';
 
   return (
     <Dialog open={isOpen}>

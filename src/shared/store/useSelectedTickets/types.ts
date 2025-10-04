@@ -1,8 +1,17 @@
+import { ILocation } from '@/shared/types/location.types';
 import { IRouteResponse } from '@/shared/types/route.types';
+
+type TselectedTicket = {
+  route: IRouteResponse | null;
+  adult: number;
+  children: number;
+  from: ILocation;
+  to: ILocation;
+};
 
 export type selectedTicketsState = {
   isHydrated: boolean;
-  selectedTicket: IRouteResponse | null;
+  selectedTicket: TselectedTicket;
   loadingSelectTicket: boolean;
 };
 
@@ -16,7 +25,7 @@ export type ReqTicketData = Partial<{
 }>;
 
 export type SelectedTicketsActions = {
-  setSelectedTicket: (data: IRouteResponse) => void;
+  setSelectedTicket: (data: TselectedTicket) => void;
   setLoading: (loading: boolean) => void;
   resetSelectedTicket: () => void;
 };

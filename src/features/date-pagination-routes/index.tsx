@@ -2,16 +2,17 @@
 
 import { useDateTabs } from '@/features/date-pagination-routes/hooks/useDateTabs';
 import useDateLocale from '@/shared/hooks/useDateLocale';
-import { useSearchStore } from '@/shared/store/useSearch';
+import { useIsHydration } from '@/shared/hooks/useIsHydration';
 import { Button } from '@/shared/ui/button';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { addDays, format, toDate, isBefore, isEqual } from 'date-fns';
 
 export default function DateTabs() {
   const { locale } = useDateLocale();
-  const isHydrated = useSearchStore((state) => state.isHydrated);
 
-  const { tabDate, handleUpdateDate, datesArray, enabled } = useDateTabs();
+  const { tabDate, handleUpdateDate, datesArray } = useDateTabs();
+
+  const { hydrated } = useIsHydration();
 
   return (
     <div className="items-center justify-around gap-4 overflow-x-scroll tablet:gap-8 [&::-webkit-scrollbar]:hidden hidden tablet:flex">
@@ -19,12 +20,12 @@ export default function DateTabs() {
         return (
           <div key={date.toISOString()}>
             <Button
-              disabled={isBefore(addDays(date, 1), new Date()) || !enabled}
+              disabled={isBefore(addDays(date, 1), new Date())}
               variant={'link'}
               onClick={() => handleUpdateDate(date)}
               aria-label={format(date, 'dd MMM')}
               aria-selected={isEqual(date, toDate(tabDate))}
-              aria-disabled={isBefore(addDays(date, 1), new Date()) || !enabled}
+              aria-disabled={isBefore(addDays(date, 1), new Date())}
               className={`${
                 isEqual(date, toDate(tabDate)) &&
                 'bg-slate-50 dark:bg-slate-800 aria-disabled:bg-slate-50 aria-disabled:opacity-100 aria-disabled:pointer-events-none'
@@ -34,14 +35,14 @@ export default function DateTabs() {
             >
               <ul className="flex flex-col items-center gap-1">
                 <li className="text-xs font-normal tracking-normal leading-[18px] tablet:text-base tablet:leading-6 first-letter:uppercase">
-                  {isHydrated ? (
+                  {hydrated ? (
                     format(date, 'EEE', { locale })
                   ) : (
                     <Skeleton className="w-[29px] h-[20px] bg-green-50 dark:bg-slate-700" />
                   )}
                 </li>
                 <li className="text-xs font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6">
-                  {isHydrated ? (
+                  {hydrated ? (
                     format(date, 'dd MMM', { locale })
                   ) : (
                     <Skeleton className="w-[55px] h-[20px] bg-green-50 dark:bg-slate-700" />
