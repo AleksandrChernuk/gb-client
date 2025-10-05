@@ -8,7 +8,5 @@ export const isEmptyDiscounts = (discounts: IDiscount[] | null | undefined): boo
   }
   if (discounts.some((e) => e.id === '1210' || e.id === '1211')) return true;
 
-  return discounts.every(
-    (d) => d.id == null && d.name == null && d.description == null && d.percent == null && d.category == null,
-  );
+  return discounts.every((d) => d === null);
 };

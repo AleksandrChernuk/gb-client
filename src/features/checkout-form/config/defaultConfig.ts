@@ -1,27 +1,25 @@
 import { FIELDS } from '@/features/checkout-form/config/constans';
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import { IRouteResponse } from '@/shared/types/route.types';
-import { bday, discount, firstName, lastName } from '@/shared/utils/checkout.config';
+import { bday, discount, firstName, lastName } from '@/features/checkout-form/helpers/checkout.config';
 import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
 
 const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
-  const discounts = currentTicket?.details?.discounts ?? [];
-  const isTranstempoWithSingleDiscount =
-    isEmptyDiscounts(discounts) && !['1210', '1211'].some((id) => discounts.map((el) => el.id).includes(id));
+  const details = currentTicket?.details;
+  const discounts = details?.discounts ?? [];
+  const canCyrillic = details?.canCyrillicOrderdata ?? true;
 
-  const showBlock = isTranstempoWithSingleDiscount;
+  const showBlock = !isEmptyDiscounts(discounts);
 
   return {
-    required: [FIELDS.firstName, FIELDS.lastName, ...(showBlock ? ['discount', 'bday'] : [])],
+    required: [FIELDS.firstName, FIELDS.lastName, ...(showBlock ? [FIELDS.discount, FIELDS.bday] : [])],
     fields: {
-      firstName,
-      lastName,
-      ...(showBlock
-        ? {
-            discount: discount(currentTicket),
-            bday,
-          }
-        : {}),
+      firstName: firstName(canCyrillic),
+      lastName: lastName(canCyrillic),
+      ...(showBlock && {
+        discount: discount(currentTicket),
+        bday,
+      }),
     },
   };
 };

@@ -77,8 +77,6 @@ function useCheckout() {
     shouldFocusError: true,
   });
 
-  console.log(selectedTicket);
-
   const onSubmit = async (formData: FormData) => {
     if (!ticket) {
       const errorMsg = t('order_missing_data');

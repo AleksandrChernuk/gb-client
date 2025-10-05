@@ -4,7 +4,6 @@ import { IRequestOrder, RequestTicket } from '@/shared/types/order-interface';
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const details = route.details;
-  console.log('route', route);
 
   const transtempoDiscount =
     route.providerName === 'TRANSTEMPO' && Array.isArray(route.details?.discounts) ? route.details.discounts[0] : null;
@@ -16,7 +15,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       ...(passenger.middlename && { middlename: passenger.middlename }),
       ...(passenger.middlename && { middlename: passenger.middlename }),
       ...(details?.needBirth && passenger.bday && { birthdate: passenger.bday }),
-      ...(passenger.documentType && { documentType: passenger.documentType }),
+      ...(passenger.documentType && { documentType: Number(passenger.documentType) }),
       ...(passenger.documentNumber && { documentNumber: passenger.documentNumber }),
       ...(passenger.gender && { gender: passenger.gender }),
       ...(passenger.citizenship && { citizenship: passenger.citizenship }),

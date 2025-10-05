@@ -19,11 +19,13 @@ export const createOrder = async (body: IRequestOrder) => {
   });
 
   if (!response.ok) {
+    const res = await response.json();
+    console.log(res);
+
     return { status: 'error' };
   }
 
   const res = await response.json();
-  console.log(res);
   return res;
 };
 

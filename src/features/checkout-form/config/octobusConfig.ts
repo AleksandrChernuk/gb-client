@@ -6,28 +6,37 @@ import {
   citizenship,
   discount,
   documentNumber,
-  documentType,
   expiryDate,
   firstName,
   gender,
   lastName,
   middlename,
-} from '@/shared/utils/checkout.config';
+  documentType,
+} from '@/features/checkout-form/helpers/checkout.config';
 
 const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const details = currentTicket?.details;
   const hasDiscounts = !!details?.discounts?.length;
 
+  const canCyrillic = details?.canCyrillicOrderdata ?? true;
+
   return {
-    required: [FIELDS.firstName, FIELDS.lastName, ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : [])],
+    required: [
+      FIELDS.firstName,
+      FIELDS.lastName,
+      FIELDS.documentType,
+      FIELDS.documentNumber,
+      ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
+    ],
     fields: {
-      firstName,
-      lastName,
+      firstName: firstName(canCyrillic),
+      lastName: lastName(canCyrillic),
+      documentType,
+      documentNumber,
       ...(details?.needMiddlename ? { middlename } : {}),
       ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
       ...(details?.needBirth ? { bday } : {}),
       ...(details?.needCitizenship ? { citizenship } : {}),
-      ...(details?.needDoc ? { documentType, documentNumber } : {}),
       ...(details?.needDocExpireDate ? { expiryDate: expiryDate(currentTicket) } : {}),
       ...(details?.needGender ? { gender } : {}),
     },

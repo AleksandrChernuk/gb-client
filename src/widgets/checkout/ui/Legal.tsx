@@ -28,7 +28,7 @@ export default function Legal() {
             className="aria-invalid:border-[#de2a1a]"
           />
         </FormControl>
-        <FormLabel className={`text-xs ${!!error && 'text-[#de2a1a]'}`}>
+        <FormLabel className={`text-sm ${!!error && 'text-[#de2a1a]'}`}>
           {t.rich('consent_text', {
             pp: (chunks) => (
               <Link

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { IRouteResponse } from '@/shared/types/route.types';
 import { useLocale, useTranslations } from 'next-intl';
 import MobileDetails from './ui/RouteMobileDetails';
@@ -29,13 +29,16 @@ type Props = {
 
 export const RouteCard = ({ element }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState<boolean>(false);
+
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const locale = useLocale();
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
   const setSelectedTicket = useSelectTicket();
   const { loadingTicketId } = useSelectedTickets();
-  const isLoadingCurrent = loadingTicketId === element.ticketId;
+  const isLoadingCurrent = loadingTicketId === element.ticketId && (isPending || loading);
 
   const { details, isLoading, fetchDetails, hasDetails } = useRouteDetails({
     ticketId: element.ticketId,
@@ -60,14 +63,19 @@ export const RouteCard = ({ element }: Props) => {
       disabled={isLoadingCurrent}
       buttonText={t('selectButton')}
       onClick={() => {
-        if (isLoadingCurrent) return;
-        setSelectedTicket(element, {
-          route: element,
-          fromCityId: element.departure.stationId ?? 0,
-          toCityId: element.arrival.stationId ?? 0,
-          locale: 'uk',
-          passCount: adult + children,
-          travelDate: element.departure.dateTime ?? '',
+        if (isPending) return;
+        setLoading(true);
+
+        startTransition(async () => {
+          await setSelectedTicket(element, {
+            route: element,
+            fromCityId: element.departure.stationId ?? 0,
+            toCityId: element.arrival.stationId ?? 0,
+            locale: locale,
+            passCount: adult + children,
+            travelDate: element.departure.dateTime ?? '',
+          });
+          setLoading(false);
         });
       }}
     />

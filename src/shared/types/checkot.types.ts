@@ -16,6 +16,7 @@ type BaseField = {
   label: string;
   placeholder?: string;
   schema?: ZodType;
+  alphabet?: string;
 };
 
 export type FieldConfig =

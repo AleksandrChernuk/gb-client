@@ -159,6 +159,9 @@
     "code_resent_success": "Код повторно надіслано ✅",
     "code_resent_error": "Сталася помилка. Спробуйте пізніше.",
     "enter_6_digit_code": "Введіть 6-значний код",
-    "change_button": "Змінити"
+    "change_button": "Змінити",
+    "too_long": "Занадто довге значення",
+    "only_cyrillic_allowed": "Допустимі лише кириличні символи",
+    "only_latin_allowed": "Допустимі лише латинські символи"
   }
 }

@@ -20,7 +20,11 @@ export default function ResultList() {
   const toId = useSearchStore((state) => state.to);
 
   if (isFetching || !isHydrated) {
-    return <BusLoader className={'flex items-center justify-center my-2'} />;
+    return (
+      <div className="pt-10">
+        <BusLoader className={'flex items-center justify-center my-2'} />
+      </div>
+    );
   }
 
   if (error) return <CustomError />;

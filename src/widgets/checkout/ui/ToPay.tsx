@@ -4,7 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Skeleton } from '@/shared/ui/skeleton';
-import { Passenger } from '@/shared/utils/checkout.config';
+import { Passenger } from '@/features/checkout-form/helpers/checkout.config';
 import { useShallow } from 'zustand/react/shallow';
 import { TimerDisplay } from '@/widgets/checkout/ui/TimerDisplay';
 import { getTotalPriceFromPassengers } from '@/features/checkout-form';

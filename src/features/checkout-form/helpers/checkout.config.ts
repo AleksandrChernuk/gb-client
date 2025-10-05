@@ -1,21 +1,44 @@
 import { IRouteResponse } from '@/shared/types/route.types';
 import { z } from 'zod';
-import { FieldConfig } from '../types/checkot.types';
-import { bdaySchema, passportExpirySchema } from '../../features/checkout-form/config/schemas';
+import { FieldConfig } from '../../../shared/types/checkot.types';
+import { bdaySchema, passportExpirySchema } from '../config/schemas';
 import { isCleanInput } from '@/shared/validation/schemas.constans';
 
-export const firstName: FieldConfig = {
-  label: 'first_name',
-  type: 'text',
-  placeholder: 'first_name_placeholder',
-  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
+const cyrillicRegex = /^[А-Яа-яІіЇїЄєҐґ'’\s-]+$/u;
+const latinRegex = /^[A-Za-z'’\s-]+$/;
+
+export const firstName = (canCyrillicOrderData?: boolean): FieldConfig => {
+  const alphabet = canCyrillicOrderData ? 'cyrillic' : 'latin';
+  const regex = canCyrillicOrderData ? cyrillicRegex : latinRegex;
+
+  return {
+    label: 'first_name',
+    type: 'text',
+    placeholder: 'first_name_placeholder',
+    alphabet,
+    schema: z
+      .string()
+      .min(2, { message: 'required' })
+      .max(50, { message: 'too_long' })
+      .regex(regex, { message: canCyrillicOrderData ? 'only_cyrillic_allowed' : 'only_latin_allowed' }),
+  };
 };
 
-export const lastName: FieldConfig = {
-  label: 'last_name',
-  type: 'text',
-  placeholder: 'last_name_placeholder',
-  schema: z.string().min(1, { message: 'required' }).refine(isCleanInput, { message: 'suspicious_input' }),
+export const lastName = (canCyrillicOrderData?: boolean): FieldConfig => {
+  const alphabet = canCyrillicOrderData ? 'cyrillic' : 'latin';
+  const regex = canCyrillicOrderData ? cyrillicRegex : latinRegex;
+
+  return {
+    label: 'last_name',
+    type: 'text',
+    placeholder: 'last_name_placeholder',
+    alphabet,
+    schema: z
+      .string()
+      .min(2, { message: 'required' })
+      .max(50, { message: 'too_long' })
+      .regex(regex, { message: canCyrillicOrderData ? 'only_cyrillic_allowed' : 'only_latin_allowed' }),
+  };
 };
 
 export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
@@ -49,28 +72,14 @@ export const documentType: FieldConfig = {
   placeholder: 'document_type_placeholder',
   translateOptions: true,
   options: [
-    { value: 'UNKNOWN', label: 'document_type_infobus.unknown' },
-    { value: 'PASSPORT', label: 'document_type_infobus.passport' },
-    { value: 'SAILORS_PASSPORT', label: 'document_type_infobus.sailors_passport' },
-    { value: 'BIRTH_CERTIFICATE', label: 'document_type_infobus.birth_certificate' },
-  ],
-  schema: z.string().min(1, { message: 'required' }),
-};
-
-export const documentTypeOctobus: FieldConfig = {
-  label: 'document_type',
-  type: 'select',
-  placeholder: 'document_type_placeholder',
-  translateOptions: true,
-  options: [
-    { value: 'UNKNOWN', label: 'document_type_infobus.unknown' },
-    { value: 'PASSPORT', label: 'document_type_infobus.passport' },
-    { value: 'MILITARY_ID', label: 'document_type_infobus.military_id' },
-    { value: 'FOREIGN_DOCUMENT', label: 'document_type_infobus.foreign_document' },
-    { value: 'TRAVEL_PASSPORT', label: 'document_type_infobus.travel_passport' },
-    { value: 'SAILORS_PASSPORT', label: 'document_type_infobus.sailors_passport' },
-    { value: 'BIRTH_CERTIFICATE', label: 'document_type_infobus.birth_certificate' },
-    { value: 'DIPLOMATIC_PASSPORT', label: 'document_type_infobus.diplomatic_passport' },
+    { value: '8', label: 'document_type_infobus.unknown' },
+    { value: '2', label: 'document_type_infobus.passport' },
+    { value: '4', label: 'document_type_infobus.military_id' },
+    { value: '1', label: 'document_type_infobus.foreign_document' },
+    { value: '6', label: 'document_type_infobus.travel_passport' },
+    { value: '5', label: 'document_type_infobus.sailors_passport' },
+    { value: '3', label: 'document_type_infobus.birth_certificate' },
+    { value: '7', label: 'document_type_infobus.diplomatic_passport' },
   ],
   schema: z.string().min(1, { message: 'required' }),
 };

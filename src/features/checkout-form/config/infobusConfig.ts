@@ -5,18 +5,20 @@ import {
   citizenship,
   discount,
   documentNumber,
-  documentType,
   expiryDate,
   firstName,
   gender,
   lastName,
   middlename,
-} from '@/shared/utils/checkout.config';
+  documentType,
+} from '@/features/checkout-form/helpers/checkout.config';
 import { ProviderConfig } from '@/shared/types/checkot.types';
 
 const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const hasDiscounts = !!currentTicket?.details?.discounts?.length;
   const details = currentTicket?.details;
+
+  const canCyrillic = details?.canCyrillicOrderdata ?? false;
 
   return {
     required: [
@@ -31,8 +33,8 @@ const infobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
       ...(details?.needGender ? [FIELDS.gender] : []),
     ],
     fields: {
-      firstName,
-      lastName,
+      firstName: firstName(canCyrillic),
+      lastName: lastName(canCyrillic),
       ...(details?.needMiddlename ? { middlename } : {}),
       ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
       ...(details?.needBirth ? { bday } : {}),

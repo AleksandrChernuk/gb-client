@@ -1,4 +1,4 @@
-import { Passenger } from '@/shared/utils/checkout.config';
+import { Passenger } from '@/features/checkout-form/helpers/checkout.config';
 
 function getTotalPriceFromPassengers(passengers: Passenger[]): number {
   const total = passengers.reduce((sum, passenger) => {

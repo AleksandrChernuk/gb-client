@@ -153,6 +153,9 @@
     "sending": "Sending...",
     "code_resent_success": "Code resent ✅",
     "code_resent_error": "An error occurred. Please try again later.",
-    "enter_6_digit_code": "Enter the 6-digit code"
+    "enter_6_digit_code": "Enter the 6-digit code",
+    "too_long": "Value is too long",
+    "only_cyrillic_allowed": "Only Cyrillic characters are allowed",
+    "only_latin_allowed": "Only Latin characters are allowed"
   }
 }
