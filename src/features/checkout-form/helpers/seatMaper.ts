@@ -6,7 +6,7 @@ type Props = {
   freeSeats?: IFreeSeats[] | null;
 };
 
-export const seatsMapper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
+const seatsMapper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
   if (!Array.isArray(seatsMap) || !Array.isArray(freeSeats)) {
     return [];
   }
@@ -30,3 +30,5 @@ export const seatsMapper = ({ seatsMap, freeSeats }: Props): TypeSeatsMap[] => {
     ),
   }));
 };
+
+export default seatsMapper;

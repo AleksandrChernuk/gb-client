@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { ISeat, TypeSeatsMap } from '@/shared/types/seat.interface';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import Seat from '@/entities/checkout/Seat';
+import Seat from '@/features/checkout-form/ui/Seat';
 import IconHelm from '@/assets/icons/IconHelm';
 
 type Props = {

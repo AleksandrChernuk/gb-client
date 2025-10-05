@@ -1,6 +1,6 @@
 import { Passenger } from '@/shared/utils/checkout.config';
 
-export function getTotalPriceFromPassengers(passengers: Passenger[]): number {
+function getTotalPriceFromPassengers(passengers: Passenger[]): number {
   const total = passengers.reduce((sum, passenger) => {
     const basePrice = Math.floor(passenger.price);
 
@@ -20,3 +20,5 @@ export function getTotalPriceFromPassengers(passengers: Passenger[]): number {
   // Округляем до 2 знаков после запятой
   return Math.round(total * 100) / 100;
 }
+
+export default getTotalPriceFromPassengers;

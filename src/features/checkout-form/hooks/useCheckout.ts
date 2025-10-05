@@ -6,25 +6,27 @@ import { useShallow } from 'zustand/react/shallow';
 import { createPassengers } from '../helpers/createPassList';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import normalizeData from '../helpers/normalizeData';
-import { getCheckoutSchemaForProvider } from '../config/schemas';
-// import { getProviderConfigByName } from '../config';
 import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { createOrder } from '@/shared/api/orders.actions';
 import { FormData, PassengerFormData } from '@/features/checkout-form/types';
-import { getProviderConfigByName } from '@/features/checkout-form/config';
+import { getCheckoutSchemaForProvider } from '@/features/checkout-form/config';
+import { getProviderConfigByName } from '@/features/checkout-form/config/getProviderConfigByName';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 function useCheckout() {
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
-  const { selectedTicket } = useSelectedTickets(
+  const { selectedTicket, updateRouteSeats } = useSelectedTickets(
     useShallow((state) => ({
       selectedTicket: state.selectedTicket,
+      updateRouteSeats: state.updateRouteSeats,
     })),
   );
 
@@ -79,7 +81,7 @@ function useCheckout() {
 
   const onSubmit = async (formData: FormData) => {
     if (!ticket) {
-      const errorMsg = 'Missing required data';
+      const errorMsg = t('order_missing_data');
       setError(errorMsg);
       toast.error(errorMsg);
       return;
@@ -101,10 +103,27 @@ function useCheckout() {
         }),
       );
 
+      if (res?.status === 'error' && res?.message === 'Seat is not available') {
+        toast.error(t('seat_unavailable_error'));
+
+        if (Array.isArray(res?.freeSeats) && res.freeSeats.length > 0) {
+          updateRouteSeats(res.freeSeats);
+
+          methods.reset({ selectedSeats: [] });
+
+          toast.info(t('seat_list_updated_title'), {
+            description: t('seat_list_updated_description'),
+            duration: 4000,
+          });
+        }
+
+        return;
+      }
+
       setInitiateNewOrder(res);
     } catch (error: unknown) {
-      console.error('Order creation failed:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create order';
+      console.error(t('order_create_failed'), error);
+      const errorMessage = error instanceof Error ? error.message : t('order_create_system_error');
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {

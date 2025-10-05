@@ -7,7 +7,7 @@ import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouter } from '@/shared/i18n/routing';
 
-export function StillOnlineDialog() {
+function StillOnlineDialog() {
   const resetInitiateNewOrder = useNewOrderResult((s) => s.resetInitiateNewOrder);
   const router = useRouter();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
@@ -38,3 +38,5 @@ export function StillOnlineDialog() {
     </>
   );
 }
+
+export default StillOnlineDialog;

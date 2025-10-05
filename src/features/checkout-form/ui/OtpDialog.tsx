@@ -8,10 +8,10 @@ import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/sh
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { Button } from '@/shared/ui/button';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
-import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { usePaymentConfirm } from '@/features/checkout-form/hooks';
 
-export const OtpDialog = () => {
+const OtpDialog = () => {
   const [pin, setPin] = useState('');
   const { handleCancelOrder, smsValidationLoading, handleSMSValidation } = usePaymentConfirm();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
@@ -62,3 +62,5 @@ export const OtpDialog = () => {
     </DialogHeader>
   );
 };
+
+export default OtpDialog;

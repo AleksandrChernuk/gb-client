@@ -7,10 +7,10 @@ import { useRouter } from '@/shared/i18n/routing';
 import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/shared/ui/dialog';
 import { Button } from '@/shared/ui/button';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
-import { usePaymentConfirm } from '@/shared/hooks/usePaymentConfirm';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { usePaymentConfirm } from '@/features/checkout-form/hooks';
 
-export const NewOrderDialog = () => {
+const NewOrderDialog = () => {
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const router = useRouter();
 
@@ -115,3 +115,5 @@ export const NewOrderDialog = () => {
     </>
   );
 };
+
+export default NewOrderDialog;

@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import StepNumber from './StepNumber';
 import CustomCard from '@/shared/ui/CustomCard';
 
 type Props = {
@@ -12,7 +11,9 @@ export default function CheckoutCard({ children, title, cardCount }: Props) {
   return (
     <ul className="space-y-4">
       <li className="flex items-center gap-2">
-        {cardCount && <StepNumber step={cardCount} />}
+        {cardCount && (
+          <div className="w-6 h-6 text-base font-bold text-center text-white rounded-sm bg-primary">{cardCount}</div>
+        )}
         <h3 className="text-lg font-bold leading-6 tracking-normal tablet:text-2xl tablet:font-medium tablet:leading-[28.8px] text-slate-700 dark:text-slate-50">
           {title}
         </h3>

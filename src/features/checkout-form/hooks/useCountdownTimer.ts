@@ -5,7 +5,7 @@ import { useTimerStore } from '@/shared/store/useTimer';
 
 const LIMIT_MS = 10 * 60 * 1000;
 
-export function useCountdownTimer() {
+function useCountdownTimer() {
   const { startedAt } = useTimerStore();
   const [remaining, setRemaining] = useState(LIMIT_MS);
 
@@ -31,3 +31,5 @@ export function useCountdownTimer() {
 
   return { remaining, formatted, minutes, seconds };
 }
+
+export default useCountdownTimer;

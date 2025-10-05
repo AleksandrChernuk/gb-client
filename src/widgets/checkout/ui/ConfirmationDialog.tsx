@@ -1,10 +1,7 @@
 'use client';
 
-import { NewOrderDialog } from '@/entities/checkout/NewOrderDialog';
-import { OtpDialog } from '@/entities/checkout/OtpDialog';
-import { StillOnlineDialog } from '@/entities/checkout/StillOnlineDialog';
-import { useConfirmationDialogState } from '@/features/checkout-form/hooks/useConfirmOrederState';
 import { Dialog, DialogContent } from '@/shared/ui/dialog';
+import { NewOrderDialog, OtpDialog, StillOnlineDialog, useConfirmationDialogState } from '@/features/checkout-form';
 import useTimer from '@/features/checkout-form/hooks/useTimer';
 
 export function ConfirmationDialog() {

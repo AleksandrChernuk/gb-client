@@ -4,7 +4,7 @@ import { FormItem, FormLabel } from '@/shared/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectGroup } from '@/shared/ui/select';
 import { useController, useFormContext } from 'react-hook-form';
 import { memo } from 'react';
-import { FieldConfig } from '../../shared/types/checkot.types';
+import { FieldConfig } from '../../../shared/types/checkot.types';
 import { useTranslations } from 'next-intl';
 import { Trash } from 'lucide-react';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';

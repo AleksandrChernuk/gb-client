@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useTimerStore } from '@/shared/store/useTimer';
 
-export default function useTimer() {
+function useTimer() {
   const { startedAt, open, reset, setStartedAt, setOpen, hasHydrated } = useTimerStore();
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -47,3 +47,4 @@ export default function useTimer() {
     reset,
   };
 }
+export default useTimer;

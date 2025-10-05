@@ -1,6 +1,6 @@
 'use client';
 
-import { useCountdownTimer } from '@/features/checkout-form/hooks/useCountdownTimer';
+import { useCountdownTimer } from '@/features/checkout-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';

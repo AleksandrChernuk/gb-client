@@ -7,7 +7,7 @@ import { Container } from '@/shared/ui/Container';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { aboutUsStatistics } from '@/shared/constans/about.us.statistics';
 import CustomCard from '@/shared/ui/CustomCard';
-import ContactForm from '@/features/checkout-form';
+import ContactForm from '@/widgets/checkout';
 import ThirdFooter from '@/widgets/footer/ThirdFooter';
 import irectionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
 import world from '@/assets/images/world.avif';

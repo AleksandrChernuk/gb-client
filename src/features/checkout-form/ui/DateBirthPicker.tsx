@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { ChevronDownIcon, Trash } from 'lucide-react';
 
-import { FieldConfig } from '../../shared/types/checkot.types';
+import { FieldConfig } from '../../../shared/types/checkot.types';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { Calendar } from '@/shared/ui/calendar';
@@ -24,7 +24,7 @@ function parseDate(value: string): Date | undefined {
   const date = parse(value, 'yyyy-MM-dd', new Date());
   return isValid(date) ? date : undefined;
 }
-export function DateBirthPicker({ name, config }: Props) {
+export default function DateBirthPicker({ name, config }: Props) {
   const { locale } = useDateLocale();
   const { control } = useFormContext();
   const t_forms = useTranslations(MESSAGE_FILES.FORM);

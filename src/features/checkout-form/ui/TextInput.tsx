@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useController, useFormContext } from 'react-hook-form';
 import { FormControl, FormItem, FormLabel } from '@/shared/ui/form';
 import { memo } from 'react';
-import { FieldConfig } from '../../shared/types/checkot.types';
+import { FieldConfig } from '../../../shared/types/checkot.types';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { FormErrorMassege } from '@/shared/ui/form-error';
 import { cn } from '@/shared/lib/utils';

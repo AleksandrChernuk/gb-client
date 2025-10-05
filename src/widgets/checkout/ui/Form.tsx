@@ -4,18 +4,18 @@ import { FormProvider } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import useCheckout from '@/features/checkout-form/hooks/useCheckout';
-import Passengers from '@/features/checkout-form/ui/Passengers';
-import CheckoutCard from '@/entities/checkout/CheckoutCard';
-import { ConfirmationDialog } from '@/features/checkout-form/ui/ConfirmationDialog';
-import Contacts from '@/features/checkout-form/ui/Contacts';
-import Payment from '@/features/checkout-form/ui/Payment';
-import Trip from '@/features/checkout-form/ui/Trip';
-import ToPay from '@/features/checkout-form/ui/ToPay';
-import Legal from '@/features/checkout-form/ui/Legal';
-import SubmitButton from '@/entities/checkout/SubmitButton';
-import Booking from '@/features/checkout-form/ui/Booking';
+import Passengers from '@/widgets/checkout/ui/Passengers';
+import { ConfirmationDialog } from '@/widgets/checkout/ui/ConfirmationDialog';
+import Contacts from '@/widgets/checkout/ui/Contacts';
+import Payment from '@/widgets/checkout/ui/Payment';
+import Trip from '@/widgets/checkout/ui/Trip';
+import ToPay from '@/widgets/checkout/ui/ToPay';
+import Legal from '@/widgets/checkout/ui/Legal';
+import SubmitButton from '@/features/checkout-form/ui/SubmitButton';
+import Booking from '@/widgets/checkout/ui/Booking';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useShallow } from 'zustand/react/shallow';
+import CheckoutCard from '@/features/checkout-form/ui/CheckoutCard';
 
 export default function CheckoutForm() {
   const { methods, onSubmit } = useCheckout();

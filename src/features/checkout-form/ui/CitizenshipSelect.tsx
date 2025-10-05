@@ -17,7 +17,7 @@ type Props = {
   config: FieldConfig;
 };
 
-function CitizenshipSelect({ name, config }: Props) {
+const CitizenshipSelect = ({ name, config }: Props) => {
   const { control, clearErrors } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.FORM);
   const options = useMemo(() => countryList().getData(), []);
@@ -71,6 +71,6 @@ function CitizenshipSelect({ name, config }: Props) {
       {!!error && <FormErrorMassege>{t(`${error.message}`)}</FormErrorMassege>}
     </FormItem>
   );
-}
+};
 
 export default memo(CitizenshipSelect);

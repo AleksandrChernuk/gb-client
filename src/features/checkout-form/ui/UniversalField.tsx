@@ -1,8 +1,8 @@
-import CitizenshipSelect from '@/entities/checkout/CitizenshipSelect';
-import { DateBirthPicker } from '@/entities/checkout/DateBirthPicker';
-import DiscountSelect from '@/entities/checkout/DiscountSelect';
-import TextInput from '@/entities/checkout/TextInput';
-import UniversalSelect from '@/entities/checkout/UniversalSelect';
+import CitizenshipSelect from '@/features/checkout-form/ui/CitizenshipSelect';
+import DateBirthPicker from '@/features/checkout-form/ui/DateBirthPicker';
+import DiscountSelect from '@/features/checkout-form/ui/DiscountSelect';
+import TextInput from '@/features/checkout-form/ui/TextInput';
+import UniversalSelect from '@/features/checkout-form/ui/UniversalSelect';
 import { FieldConfig } from '@/shared/types/checkot.types';
 import { memo } from 'react';
 
@@ -34,4 +34,5 @@ const UniversalField = memo(function UniversalField({ name, config, i }: Props) 
       return null;
   }
 });
+
 export default UniversalField;

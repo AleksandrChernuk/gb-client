@@ -4,15 +4,16 @@ import { IRequestOrder, RequestTicket } from '@/shared/types/order-interface';
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const details = route.details;
+  console.log('route', route);
+
+  const transtempoDiscount =
+    route.providerName === 'TRANSTEMPO' && Array.isArray(route.details?.discounts) ? route.details.discounts[0] : null;
 
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
-    const discountId =
-      passenger.discount ?? (route.providerName === 'TRANSTEMPO' ? route.details?.discounts?.[0]?.id : undefined);
-
     const ticketData: RequestTicket = {
       firstName: passenger.firstName,
       lastName: passenger.lastName,
-
+      ...(passenger.middlename && { middlename: passenger.middlename }),
       ...(passenger.middlename && { middlename: passenger.middlename }),
       ...(details?.needBirth && passenger.bday && { birthdate: passenger.bday }),
       ...(passenger.documentType && { documentType: passenger.documentType }),
@@ -23,17 +24,22 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       phone: formData.phone,
       email: formData.email,
 
-      seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[Number(idx)]?.seatId ?? '',
-      seatNumber:
-        formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[Number(idx)]?.seatNumber ?? '',
-
-      ...(discountId && { discountId }),
-      ...(passenger.discountDescription && { discountDescription: passenger.discountDescription }),
-      ...(passenger.discountPercent && { discountPercent: Number(passenger.discountPercent) }),
+      seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[idx]?.seatId ?? '',
+      seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[idx]?.seatNumber ?? '',
 
       withFees: true,
       buggageCount: 1,
     };
+
+    if (route.providerName === 'TRANSTEMPO' && transtempoDiscount) {
+      if (transtempoDiscount.id) ticketData.discountId = transtempoDiscount.id;
+      if (typeof transtempoDiscount.percent === 'number') ticketData.discountPercent = transtempoDiscount.percent;
+      if (transtempoDiscount.description) ticketData.discountDescription = transtempoDiscount.description;
+    }
+
+    if (passenger.discount) ticketData.discountId = passenger.discount;
+    if (passenger.discountDescription) ticketData.discountDescription = passenger.discountDescription;
+    if (passenger.discountPercent) ticketData.discountPercent = Number(passenger.discountPercent);
 
     return ticketData;
   });
@@ -79,19 +85,25 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     toStationId: `${route.arrival.stationId}`,
     toStationName: `${route.arrival.stationName}`,
     toTimezone: route.arrival.toLocation.timezone.zoneName,
+
+    ...(route?.identificators.bustypeId && { bustypeId: route.identificators.bustypeId }),
+
     ...(route?.arrival.stationAddress && { toStationAddress: route.arrival.stationAddress }),
     ...(route.arrival.stationCoordsLat && { toStationLat: Number(route.arrival.stationCoordsLat) }),
     ...(route.arrival.stationCoordsLon && { toStationLon: Number(route.arrival.stationCoordsLon) }),
 
-    departureDateTime: route.departure.dateTime ? `${route.departure.dateTime}` : '',
-    arrivalDateTime: route.arrival.dateTime ? `${route.arrival.dateTime}` : '',
+    departureDateTime: route.departure.dateTime ? `${route.departure.dateTime.split(' ')[0]}` : '',
+    arrivalDateTime: route.arrival.dateTime ? `${route.arrival.dateTime.split(' ')[0]}` : '',
     customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     ...(route.duration && { duration: route.duration }),
 
     ...(route.carrier.id && { carrierId: `${route.carrier.id}` }),
     ...(route.carrier.name && { carrierName: route.carrier.name }),
 
+    ...(route?.details?.automaticDiscountId && { automaticDiscountId: route.details.automaticDiscountId }),
+
     ...(route.details?.returnRulesDescription && { refundRules: route.details?.returnRulesDescription }),
+
     eTicket: !!route.eTicket,
 
     tripType: 'oneway',

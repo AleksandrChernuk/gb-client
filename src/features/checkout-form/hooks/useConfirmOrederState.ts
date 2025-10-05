@@ -7,7 +7,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 type DialogState = 'OTP' | 'PRICE_CHANGE' | 'STILL_ONLINE' | 'NEW_ORDER' | 'NONE';
 
-export function useConfirmationDialogState(): DialogState {
+function useConfirmationDialogState(): DialogState {
   const { open } = useTimer();
 
   const { initiateNewOrder, initiateOtpVerify } = useNewOrderResult(
@@ -24,3 +24,5 @@ export function useConfirmationDialogState(): DialogState {
     return 'NONE';
   }, [initiateOtpVerify, open, initiateNewOrder]);
 }
+
+export default useConfirmationDialogState;

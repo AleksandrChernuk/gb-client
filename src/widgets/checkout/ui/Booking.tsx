@@ -10,29 +10,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/sheet';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import IconSeat from '../icons/IconSeat';
-import FloorSheet from '../../../entities/checkout/FloorSwitch';
 import { useController, useFormContext, useWatch } from 'react-hook-form';
-import { memo, useMemo } from 'react';
-import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
-import { seatsMapper } from '../helpers/seatMaper';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
-import { Skeleton } from '@/shared/ui/skeleton';
 import { ScrollArea } from '@/shared/ui/scroll-area';
-import SeatsList from '@/entities/checkout/SeatsList';
-import { useShallow } from 'zustand/react/shallow';
+import SeatsList from '@/features/checkout-form/ui/SeatsList';
+import { BookingOpenButton, FloorSwitch, useSeatMap } from '@/features/checkout-form';
+import { memo } from 'react';
 
 const Booking = memo(function Booking() {
-  const { selectedTicket, isHydrated } = useSelectedTickets(
-    useShallow((state) => ({
-      selectedTicket: state.selectedTicket?.route,
-      isHydrated: state.isHydrated,
-    })),
-  );
-
+  const { hasSeatMap, seatMapWithStatus, isHydrated } = useSeatMap();
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
@@ -47,57 +36,20 @@ const Booking = memo(function Booking() {
 
   const passengers = useWatch({ control, name: 'passengers' });
 
-  const seatMapWithStatus = useMemo(
-    () =>
-      seatsMapper({
-        seatsMap: selectedTicket?.details?.seatsMap,
-        freeSeats: selectedTicket?.details?.freeSeatsMap,
-      }),
-    [selectedTicket?.details?.seatsMap, selectedTicket?.details?.freeSeatsMap],
-  );
-
   const selectedSeatsCount = Array.isArray(selectedSeats) ? selectedSeats.length : 0;
   const hasSelectedSeats = selectedSeatsCount > 0;
-  const hasSeatMap = seatMapWithStatus.length > 0;
   const passengersCount = passengers?.length ?? 0;
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          disabled={!hasSeatMap}
-          variant="outline"
-          type="button"
-          aria-invalid={!!error}
-          className="flex items-center justify-between w-full h-auto p-2 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900"
-        >
-          <div className="flex items-center gap-2 tablet:gap-4">
-            <div className="[&_svg]:fill-[#6f8b90] w-[45px] h-[56px]">
-              <IconSeat />
-            </div>
-
-            {isHydrated ? (
-              <div className="text-xs tablet:text-base font-medium leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink min-w-0">
-                {!hasSeatMap ? (
-                  <div className="flex flex-col items-start gap-1">
-                    <span>{t_page('free_seating')}</span>
-                    <span className="text-base font-medium leading-4 tracking-normal">{t_page('seat_guaranteed')}</span>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-start gap-1">
-                    <span>{t_page('choose_place')}</span>
-                    <span className={`text-sm ${error ? 'text-[#de2a1a]' : ''}`}>
-                      {`${t_page('selected_place')} ${selectedSeatsCount} ${t_page('selected_seats_status')} ${passengersCount} ${t_page('place')}`}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Skeleton className="min-w-18 h-[24px]" />
-            )}
-          </div>
-          <ChevronRight size={32} className="stroke-[#6f8b90] flex-shrink-0" />
-        </Button>
+        <BookingOpenButton
+          passengersCount={passengersCount}
+          hasSeatMap={hasSeatMap}
+          isHydrated={isHydrated}
+          error={!!error}
+          selectedSeatsCount={selectedSeatsCount}
+        />
       </SheetTrigger>
 
       <SheetContent>
@@ -121,7 +73,7 @@ const Booking = memo(function Booking() {
             {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
 
             {seatMapWithStatus.length >= 2 && (
-              <FloorSheet
+              <FloorSwitch
                 floor_first={<SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
                 floor_second={<SeatsList seatRows={seatMapWithStatus[1]} />}
               />

@@ -30,6 +30,7 @@ function FloorSwitch({ floor_first, floor_second }: Props) {
           aria-selected={floor === 'second'}
           size={'small_primary'}
           variant={'outline'}
+          className="text-slate-900 dark:text-slate-50"
           onClick={() => setFloor('second')}
         >
           {t('floor_2')}

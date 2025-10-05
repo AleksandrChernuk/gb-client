@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import CustomCard from '@/shared/ui/CustomCard';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import UniversalField from '@/entities/checkout/UniversalField';
+import UniversalField from '@/features/checkout-form/ui/UniversalField';
 
 type Props = {
   providerConfig: ProviderConfig;

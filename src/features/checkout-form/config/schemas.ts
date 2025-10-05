@@ -119,7 +119,7 @@ const seatSchema = z.object({
 });
 
 // Главная схема checkout формы
-export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSeats: boolean) {
+function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSeats: boolean) {
   return z
     .object({
       passengers: z.array(getPassengerSchemaByConfig(providerConfig)),
@@ -153,3 +153,5 @@ export function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, has
       }
     });
 }
+
+export default getCheckoutSchemaForProvider;

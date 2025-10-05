@@ -2,7 +2,7 @@
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import { PassengerFormData } from '@/features/checkout-form/types';
 
-export function createEmptyPassenger(config: ProviderConfig, isChildren = false, price: number): PassengerFormData {
+function createEmptyPassenger(config: ProviderConfig, isChildren = false, price: number): PassengerFormData {
   const passenger: Record<string, any> = {};
 
   for (const field of config.required) {
@@ -33,3 +33,5 @@ export function createPassengers(
     return createEmptyPassenger(providerConfig, isChild, price);
   });
 }
+
+export default createEmptyPassenger;

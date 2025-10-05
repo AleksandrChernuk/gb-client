@@ -6,8 +6,8 @@ import ThirdFooter from '@/widgets/footer/ThirdFooter';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
-import Cleanup from '@/entities/checkout/Cleanup';
-import CheckoutForm from '@/features/checkout-form';
+import Cleanup from '@/features/checkout-form/ui/Cleanup';
+import CheckoutForm from '@/widgets/checkout';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
