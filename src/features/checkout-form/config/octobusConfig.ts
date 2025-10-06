@@ -16,14 +16,13 @@ import {
 
 const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const details = currentTicket?.details;
-  const hasDiscounts = !!details?.discounts?.length;
+  const hasDiscounts = !!details?.discounts?.length || !details?.automaticDiscountId;
 
   return {
     required: [
       FIELDS.firstName,
       FIELDS.lastName,
-      FIELDS.documentType,
-      FIELDS.documentNumber,
+      ...(hasDiscounts ? [FIELDS.documentType, FIELDS.documentNumber] : []),
       ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
     ],
     fields: {
@@ -31,6 +30,8 @@ const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
       lastName: lastName(true),
       documentType,
       documentNumber,
+
+      ...(hasDiscounts || !!details?.automaticDiscountId ? { documentType, documentNumber } : {}),
       ...(details?.needMiddlename ? { middlename } : {}),
       ...(hasDiscounts ? { discount: discount(currentTicket) } : {}),
       ...(details?.needBirth ? { bday } : {}),
