@@ -3,7 +3,6 @@ import parsePhoneNumberFromString from 'libphonenumber-js';
 import { parse, isValid, subYears, subDays, isAfter, endOfDay } from 'date-fns';
 import { FieldConfig, ProviderConfig } from '@/shared/types/checkot.types';
 
-// Схема для даты рождения
 export const bdaySchema = z
   .string()
   .optional()
@@ -15,8 +14,8 @@ export const bdaySchema = z
       if (!isValid(date)) return false;
 
       const now = new Date();
-      const minDate = subYears(now, 100); // не старше 100 лет
-      const maxDate = endOfDay(now); // не в будущем
+      const minDate = subYears(now, 100);
+      const maxDate = endOfDay(now);
 
       return isAfter(date, minDate) && !isAfter(date, maxDate);
     },
@@ -60,7 +59,6 @@ function addRequiredIssue(ctx: z.RefinementCtx, path: string) {
 export function getPassengerSchemaByConfig(config: ProviderConfig) {
   const shape: Record<string, ZodTypeAny> = {};
 
-  // Добавляем обязательные поля из конфига
   for (const fieldName of config.required) {
     if (config.fields[fieldName]) {
       shape[fieldName] = getFieldSchema(config.fields[fieldName]);
@@ -76,6 +74,14 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
   return baseSchema.superRefine((data, ctx) => {
     if (isFlagEnabled(config.needBirth) && !data.bday) {
       addRequiredIssue(ctx, 'bday');
+    }
+
+    if (data.discountId && !data.bday) {
+      ctx.addIssue({
+        path: ['bday'],
+        code: z.ZodIssueCode.custom,
+        message: 'required',
+      });
     }
 
     if (isFlagEnabled(config.needDoc) && !data.documentNumber) {
@@ -100,7 +106,6 @@ export function getPassengerSchemaByConfig(config: ProviderConfig) {
   });
 }
 
-// Схема места
 const seatSchema = z.object({
   seatId: z.string().nullable(),
   type: z.string().nullable(),
@@ -110,7 +115,6 @@ const seatSchema = z.object({
   isSelected: z.boolean().nullable(),
 });
 
-// Главная схема checkout формы
 function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSeats: boolean) {
   return z
     .object({
@@ -131,7 +135,6 @@ function getCheckoutSchemaForProvider(providerConfig: ProviderConfig, hasFreeSea
       selectedSeats: z.array(seatSchema).optional(),
     })
     .superRefine((data, ctx) => {
-      // Проверяем выбор мест только если они доступны
       if (!hasFreeSeats) return;
 
       const hasEnoughSeats = Array.isArray(data.selectedSeats) && data.selectedSeats.length >= data.passengers.length;

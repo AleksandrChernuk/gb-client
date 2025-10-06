@@ -47,7 +47,7 @@ export const discount = (currentTicket: IRouteResponse | null): FieldConfig => {
     type: 'discount',
     placeholder: 'discounts_placeholder',
     options: (currentTicket?.details?.discounts || [])
-      .filter((d) => d.id !== '1210')
+      .filter((d) => d.id !== '1210' && d.id !== '1211')
       .map((d) => ({
         value: d.id ?? '',
         label: d.name && d.description ? `${d.name}, ${d.description}` : d.name || d.description || '',

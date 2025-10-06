@@ -23,7 +23,6 @@ export const createOrder = async (body: IRequestOrder) => {
   }
 
   const res = await response.json();
-  console.log(res);
   return res;
 };
 
@@ -35,8 +34,6 @@ export const smsValidateOrder = async (body: ISmsValidateOrder) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log(res);
     return { status: 'error' };
   }
 
@@ -70,9 +67,6 @@ export const confirmBook = async (body: IConfirmOrderBody): Promise<IconfirmBook
     });
 
     if (!response.ok) {
-      const data = await response.text();
-      console.log(data);
-
       return null;
     }
 

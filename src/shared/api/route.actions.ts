@@ -41,6 +41,7 @@ export const getRouteDetails = async (body: IGetRouteDetailsBody): Promise<IRout
     }
 
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.error('Error fetching route details:', error);

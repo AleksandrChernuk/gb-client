@@ -68,7 +68,7 @@ const UniversalSelect = memo(function UniversalSelect({ name, config }: Props) {
               }}
               aria-label="Clear selection"
             >
-              <Trash className="h-4 w-4 stroke-red-400" />
+              <Trash className=" stroke-red-400" />
             </Button>
           )}
         </div>

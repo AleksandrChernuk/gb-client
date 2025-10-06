@@ -17,7 +17,6 @@ import { useRouteDetails } from '@/features/route-card/hooks/useRouteDetails';
 import { updateRouteDetails } from '@/features/route-card/helpers/updateRouteDetails';
 import { RoteFreeSeats } from '@/features/route-card/ui/RoteFreeSeats';
 import { useSelectTicket } from '@/features/route-card/hooks/useSelectTicket';
-import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import RouteDetailsToggle from '@/entities/route/RouteDetailsToggle';
 import { MobileDetailsPrice } from '@/features/route-card/ui/MobileDetailsPrice';
 import { RoutePricing } from '@/features/route-card/ui/RoutePricing';
@@ -37,8 +36,6 @@ export const RouteCard = ({ element }: Props) => {
   const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
 
   const setSelectedTicket = useSelectTicket();
-  const { loadingTicketId } = useSelectedTickets();
-  const isLoadingCurrent = loadingTicketId === element.ticketId && (isPending || loading);
 
   const { details, isLoading, fetchDetails, hasDetails } = useRouteDetails({
     ticketId: element.ticketId,
@@ -59,8 +56,8 @@ export const RouteCard = ({ element }: Props) => {
     <SelectButton
       price={singlePrice}
       variant={variant}
-      loading={isLoadingCurrent}
-      disabled={isLoadingCurrent}
+      loading={loading}
+      disabled={loading}
       buttonText={t('selectButton')}
       onClick={() => {
         if (isPending) return;
@@ -69,13 +66,12 @@ export const RouteCard = ({ element }: Props) => {
         startTransition(async () => {
           await setSelectedTicket(element, {
             route: element,
-            fromCityId: element.departure.stationId ?? 0,
-            toCityId: element.arrival.stationId ?? 0,
+            fromCityId: element.departure.fromLocation.id ?? 0,
+            toCityId: element.arrival.toLocation.id ?? 0,
             locale: locale,
             passCount: adult + children,
             travelDate: element.departure.dateTime ?? '',
           });
-          setLoading(false);
         });
       }}
     />
