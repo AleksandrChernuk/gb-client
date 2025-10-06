@@ -69,9 +69,10 @@ export const isNoTripsError = (err: unknown) => {
     (err as any)?.data?.message ||
     (err as any)?.cause?.message ||
     '';
-  return /Customer data not found/i.test(msg);
-};
 
+  const lower = String(msg).toLowerCase();
+  return lower.includes('customer data not found');
+};
 export const parseErrorKey = (err: unknown): string => {
   const msg =
     typeof err === 'string'

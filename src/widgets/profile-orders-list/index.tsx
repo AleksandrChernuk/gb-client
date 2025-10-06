@@ -1,6 +1,5 @@
 'use client';
 
-import TryAgain from '@/entities/common/TryAgain';
 import ProfileOrderCard from '@/features/profile-order-card';
 import { getUserOrders } from '@/shared/api/user.services.client';
 import { usePaginatedQuery } from '@/shared/hooks/usePaginatedQuery';
@@ -10,6 +9,7 @@ import { CustomPagination } from '@/shared/ui/CustomPagination';
 import MainLoader from '@/shared/ui/MainLoader';
 import RouteNotFound from '@/shared/ui/RouteNotFound';
 import { SkeletonCards } from '@/shared/ui/SkeletonCards';
+import { isNoTripsError } from '@/shared/utils/route.details.helper';
 import { useLocale, useTranslations } from 'next-intl';
 
 const perPage = 5;
@@ -36,11 +36,8 @@ export default function ProfileOrdersList() {
     );
   }
 
-  if (isError) {
-    if (error?.message === 'NO_TRIPS') {
-      return <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />;
-    }
-    return <TryAgain className="dark:bg-slate-700" />;
+  if (isError && isNoTripsError(error)) {
+    return <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />;
   }
 
   return (
