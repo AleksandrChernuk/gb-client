@@ -26,9 +26,7 @@ const ProfileNavTabs = ({ namespace, items }: Props) => {
               variant="link"
               className={`hover:no-underline px-2 py-6 text-sm font-normal tracking-normal leading-[21px] tablet:leading-4 laptop:text-base laptop:leading-[27px] text-slate-700 dark:text-slate-50 rounded-none border-l-2 border-l-[#e6e6e6] dark:border-l-slate-700 ${pathname === item.slug && 'text-green-200  border-b-green-200 tablet:border-b-none  dark:text-green-100 border-l-green-200  dark:border-l-green-100 font-medium'}`}
             >
-              <Link prefetch={false} href={item.slug}>
-                {t(item.title)}
-              </Link>
+              <Link href={item.slug}>{t(item.title)}</Link>
             </Button>
           </li>
         ))}

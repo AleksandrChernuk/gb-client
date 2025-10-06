@@ -12,10 +12,10 @@ export const useSinginGoogle = () => {
     if (isLoading) return;
     setIsLoading(true);
     try {
-      await googleSignin(locale);
-    } finally {
-      setIsLoading(false);
+      googleSignin(locale);
+    } catch (e) {
+      console.log(e);
     }
   };
-  return { handleClick, isLoading };
+  return { handleClick, isLoading, setIsLoading };
 };
