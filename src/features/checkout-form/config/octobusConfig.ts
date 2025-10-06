@@ -18,8 +18,6 @@ const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
   const details = currentTicket?.details;
   const hasDiscounts = !!details?.discounts?.length;
 
-  const canCyrillic = details?.canCyrillicOrderdata ?? true;
-
   return {
     required: [
       FIELDS.firstName,
@@ -29,8 +27,8 @@ const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
       ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
     ],
     fields: {
-      firstName: firstName(canCyrillic),
-      lastName: lastName(canCyrillic),
+      firstName: firstName(true),
+      lastName: lastName(true),
       documentType,
       documentNumber,
       ...(details?.needMiddlename ? { middlename } : {}),

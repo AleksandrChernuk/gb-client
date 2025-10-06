@@ -7,15 +7,14 @@ import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
 const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const details = currentTicket?.details;
   const discounts = details?.discounts ?? [];
-  const canCyrillic = details?.canCyrillicOrderdata ?? true;
 
   const showBlock = !isEmptyDiscounts(discounts);
 
   return {
     required: [FIELDS.firstName, FIELDS.lastName, ...(showBlock ? [FIELDS.discount, FIELDS.bday] : [])],
     fields: {
-      firstName: firstName(canCyrillic),
-      lastName: lastName(canCyrillic),
+      firstName: firstName(true),
+      lastName: lastName(true),
       ...(showBlock && {
         discount: discount(currentTicket),
         bday,

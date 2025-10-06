@@ -91,8 +91,8 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(route.arrival.stationCoordsLat && { toStationLat: Number(route.arrival.stationCoordsLat) }),
     ...(route.arrival.stationCoordsLon && { toStationLon: Number(route.arrival.stationCoordsLon) }),
 
-    departureDateTime: route.departure.dateTime ? `${route.departure.dateTime.split(' ')[0]}` : '',
-    arrivalDateTime: route.arrival.dateTime ? `${route.arrival.dateTime.split(' ')[0]}` : '',
+    departureDateTime: route.departure.dateTime ? `${route.departure.dateTime}` : '',
+    arrivalDateTime: route.arrival.dateTime ? `${route.arrival.dateTime}` : '',
     customerTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     ...(route.duration && { duration: route.duration }),
 

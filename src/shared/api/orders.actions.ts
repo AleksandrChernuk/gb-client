@@ -19,13 +19,11 @@ export const createOrder = async (body: IRequestOrder) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log(res);
-
     return { status: 'error' };
   }
 
   const res = await response.json();
+  console.log(res);
   return res;
 };
 
@@ -38,7 +36,7 @@ export const smsValidateOrder = async (body: ISmsValidateOrder) => {
 
   if (!response.ok) {
     const res = await response.json();
-    console.log('smsValidateOrder', res);
+    console.log(res);
     return { status: 'error' };
   }
 
@@ -56,9 +54,7 @@ export const cancelOrder = async (body: ICancelBody, myOrderId: string) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log('cancelOrder', res);
-    return { status: 'error' };
+    throw new Error('Error');
   }
   return null;
 };
@@ -74,12 +70,15 @@ export const confirmBook = async (body: IConfirmOrderBody): Promise<IconfirmBook
     });
 
     if (!response.ok) {
-      const res = await response.json();
-      console.log('confirmBook', res);
+      const data = await response.text();
+      console.log(data);
+
       return null;
     }
 
     const data = await response.json();
+
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching route details:', error);
@@ -94,9 +93,7 @@ export async function getOrderStatusAndPdf(orderId: string): Promise<IPdfRes | n
   });
 
   if (!response.ok) {
-    const res = await response.json();
-    console.log('getOrderStatusAndPdf', res);
-    return null;
+    throw new Error('Не удалось получить билет');
   }
 
   const data = await response.json();

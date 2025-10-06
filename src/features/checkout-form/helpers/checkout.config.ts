@@ -4,12 +4,12 @@ import { FieldConfig } from '../../../shared/types/checkot.types';
 import { bdaySchema, passportExpirySchema } from '../config/schemas';
 import { isCleanInput } from '@/shared/validation/schemas.constans';
 
-const cyrillicRegex = /^[А-Яа-яІіЇїЄєҐґ'’\s-]+$/u;
 const latinRegex = /^[A-Za-z'’\s-]+$/;
+const bothRegex = /^[A-Za-zА-Яа-яІіЇїЄєҐґ'’\s-]+$/u;
 
 export const firstName = (canCyrillicOrderData?: boolean): FieldConfig => {
-  const alphabet = canCyrillicOrderData ? 'cyrillic' : 'latin';
-  const regex = canCyrillicOrderData ? cyrillicRegex : latinRegex;
+  const alphabet = canCyrillicOrderData ? 'any' : 'latin';
+  const regex = canCyrillicOrderData ? bothRegex : latinRegex;
 
   return {
     label: 'first_name',
@@ -20,13 +20,13 @@ export const firstName = (canCyrillicOrderData?: boolean): FieldConfig => {
       .string()
       .min(2, { message: 'required' })
       .max(50, { message: 'too_long' })
-      .regex(regex, { message: canCyrillicOrderData ? 'only_cyrillic_allowed' : 'only_latin_allowed' }),
+      .regex(regex, { message: 'only_latin_allowed' }),
   };
 };
 
 export const lastName = (canCyrillicOrderData?: boolean): FieldConfig => {
-  const alphabet = canCyrillicOrderData ? 'cyrillic' : 'latin';
-  const regex = canCyrillicOrderData ? cyrillicRegex : latinRegex;
+  const alphabet = canCyrillicOrderData ? 'any' : 'latin';
+  const regex = canCyrillicOrderData ? bothRegex : latinRegex;
 
   return {
     label: 'last_name',
@@ -37,7 +37,7 @@ export const lastName = (canCyrillicOrderData?: boolean): FieldConfig => {
       .string()
       .min(2, { message: 'required' })
       .max(50, { message: 'too_long' })
-      .regex(regex, { message: canCyrillicOrderData ? 'only_cyrillic_allowed' : 'only_latin_allowed' }),
+      .regex(regex, { message: 'only_latin_allowed' }),
   };
 };
 
