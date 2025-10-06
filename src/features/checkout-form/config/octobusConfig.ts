@@ -16,13 +16,13 @@ import {
 
 const octobusConfig = (currentTicket: IRouteResponse | null): ProviderConfig => {
   const details = currentTicket?.details;
-  const hasDiscounts = !!details?.discounts?.length || !details?.automaticDiscountId;
+  const hasDiscounts = !!details?.discounts?.length;
 
   return {
     required: [
       FIELDS.firstName,
       FIELDS.lastName,
-      ...(hasDiscounts ? [FIELDS.documentType, FIELDS.documentNumber] : []),
+      ...(hasDiscounts || !!details?.automaticDiscountId ? [FIELDS.documentType, FIELDS.documentNumber] : []),
       ...(hasDiscounts ? [FIELDS.discount, FIELDS.bday] : []),
     ],
     fields: {
