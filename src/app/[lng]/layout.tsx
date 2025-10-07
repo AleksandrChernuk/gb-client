@@ -9,7 +9,7 @@ import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
 import { ThemeProvider } from '@/shared/providers/ThemeProvider';
 import { Noto_Sans } from 'next/font/google';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
 import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
 import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
@@ -54,6 +54,7 @@ export default async function MainLayout({
   return (
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-NDJWDGB6" />
+      <GoogleAnalytics gaId="G-QL65KW5KP6" />
       <body className={`${notoSans.className} ${notoSans.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>
