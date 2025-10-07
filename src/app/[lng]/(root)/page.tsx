@@ -51,6 +51,7 @@ export default async function Home({
             placeholder="blur"
             width={740}
             height={233}
+            fetchPriority="high"
             className="tablet:hidden w-dvw h-auto"
             priority
             loading="eager"
@@ -63,6 +64,7 @@ export default async function Home({
             placeholder="blur"
             width={1240}
             height={233}
+            fetchPriority="high"
             className="hidden tablet:block w-dvw h-auto"
             priority
             loading="eager"

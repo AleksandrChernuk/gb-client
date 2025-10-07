@@ -53,11 +53,11 @@ export default async function MainLayout({
 
   return (
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-NDJWDGB6" />
       <body className={`${notoSans.className} ${notoSans.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>
             <GTMNoScript />
-            <GoogleTagManager gtmId="GTM-TCRLXDHZ" />
 
             <ReactQueryContext>
               <ThemeProvider attribute="class" disableTransitionOnChange={false}>
