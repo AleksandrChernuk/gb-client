@@ -3,28 +3,19 @@
 import { useEffect } from 'react';
 import { useLocationsStore } from '@/shared/store/useLocations';
 import { useShallow } from 'zustand/react/shallow';
-import { ILocation } from '@/shared/types/location.types';
+import { useFavoriteLocations, useLocations } from '@/shared/hooks/useLocations';
 
-type Props = {
-  locations?: ILocation[];
-  favoriteLocations?: ILocation[];
-};
-
-export default function LocationsInitializer({ locations, favoriteLocations }: Props) {
+export default function LocationsInitializer() {
   const setLocations = useLocationsStore(useShallow((state) => state.setLocations));
   const setFavoriteLocations = useLocationsStore(useShallow((state) => state.setFavoriteLocations));
 
-  useEffect(() => {
-    if (locations?.length) {
-      setLocations(locations);
-    }
-  }, [locations, setLocations]);
+  const { data } = useLocations();
 
+  const { data: favoriteLocations } = useFavoriteLocations();
   useEffect(() => {
-    if (favoriteLocations?.length) {
-      setFavoriteLocations(favoriteLocations);
-    }
-  }, [favoriteLocations, setFavoriteLocations]);
+    if (data?.length) setLocations(data);
+    if (favoriteLocations?.length) setFavoriteLocations(favoriteLocations);
+  }, [data, favoriteLocations, setFavoriteLocations, setLocations]);
 
   return null;
 }

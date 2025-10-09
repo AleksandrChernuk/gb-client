@@ -15,7 +15,6 @@ import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
 import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { getFavoriteLocations, getLocations } from '@/shared/api/location.actions';
 
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
@@ -48,8 +47,6 @@ export default async function MainLayout({
 
   const messages = await getMessages();
   setRequestLocale(lng as Locale);
-  const locations = await getLocations({ query: '', perPage: 500 });
-  const favoriteLocations = await getFavoriteLocations();
 
   return (
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
@@ -64,7 +61,7 @@ export default async function MainLayout({
               <ThemeProvider attribute="class" disableTransitionOnChange={false}>
                 {children}
                 <ProfileCheckProvider />
-                <LocationsInitializer locations={locations.data} favoriteLocations={favoriteLocations} />
+                <LocationsInitializer />
               </ThemeProvider>
             </ReactQueryContext>
 
