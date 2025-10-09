@@ -10,7 +10,7 @@ export default function LocationsInitializer() {
   const setFavoriteLocations = useLocationsStore(useShallow((state) => state.setFavoriteLocations));
 
   const { data } = useLocations();
-
+  console.log(data);
   const { data: favoriteLocations } = useFavoriteLocations();
   useEffect(() => {
     if (data?.length) setLocations(data);
