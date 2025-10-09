@@ -1,5 +1,4 @@
 import { Skeleton } from '@/shared/ui/skeleton';
-import React from 'react';
 
 export default function SkeletonRote() {
   const arr = Array.from({ length: 6 });

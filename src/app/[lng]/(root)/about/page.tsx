@@ -105,7 +105,7 @@ export default async function About({
                   src={group}
                   draggable={false}
                   placeholder="blur"
-                  quality={80}
+                  quality={75}
                   className="mx-auto tablet:mx-0 rounded-3xl h-auto"
                 />
               </li>
@@ -142,7 +142,7 @@ export default async function About({
                   src={world}
                   draggable={false}
                   placeholder="blur"
-                  quality={80}
+                  quality={75}
                   className="mx-auto tablet:mx-0 rounded-3xl h-auto"
                 />
               </li>

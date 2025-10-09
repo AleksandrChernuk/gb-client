@@ -17,7 +17,7 @@ export default function FaqTabs() {
 
   return (
     <Container size="l">
-      <div className="flex flex-col gap-8 tablet:flex-row tablet:gap-10">
+      <div className="grid grid-cols-1 tablet:grid-cols-3 gap-2">
         <FaqNav slug={slug} />
         <FaqDisplay slug={slug} value={searchValue ? searchValue : undefined} />
       </div>

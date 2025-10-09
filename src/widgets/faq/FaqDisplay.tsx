@@ -15,8 +15,8 @@ export function FaqDisplay({ slug = '/faq/bronjuvannja-mists', value }: Props) {
   const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
 
   return (
-    <CustomCard className="w-full dark:bg-slate-800">
-      <h3 className="mb-4 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 tablet:h3 tablet:mb-6">
+    <CustomCard className="w-full dark:bg-slate-800 tablet:col-span-2">
+      <h3 className="mb-4 text-base font-bold leading-6 tracking-normal text-green-200 dark:text-green-100 tablet:h3 tablet:mb-6">
         {t(`${faqConstans[slug].title}`)}
       </h3>
       <Accordion defaultValue={value} type="single" collapsible className="w-full ">

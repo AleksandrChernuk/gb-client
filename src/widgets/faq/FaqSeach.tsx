@@ -46,13 +46,15 @@ export default function FaqSeach() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            variant={'secondary'}
-            className="p-4 rounded-tl-none rounded-bl-none laptop:p-6 laptop:text-lg font-bold tracking-normal laptop:leading-[21.6px] tablet:text-base tablet:leading-6 tablet:min-h-[71px] tablet::min-w-[102px] laptop:min-w-[201px] laptop:min-h-[75px]"
-          >
-            {t('search')}
-          </Button>
+          <div>
+            <Button
+              type="submit"
+              variant={'secondary'}
+              className="h-full p-4 rounded-tl-none rounded-bl-none laptop:p-6 laptop:text-lg font-bold tracking-normal laptop:leading-[21.6px] tablet:text-base tablet:leading-6 tablet:min-h-[71px] tablet::min-w-[102px] laptop:min-w-[201px] laptop:min-h-[75px]"
+            >
+              {t('search')}
+            </Button>
+          </div>
         </form>
       </Form>
     </section>

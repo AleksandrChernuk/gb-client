@@ -25,7 +25,7 @@ export default async function Questions() {
               </p>
               <Link
                 prefetch={false}
-                className="block mb-6 text-base font-bold text-green-600! underline laptop:text-base"
+                className="block mb-6 text-base font-bold text-green-600! hover:underline transition-all laptop:text-base"
                 href={`${'/faq/routes-and-buses'}?q=${slug}`}
               >
                 {`${t_main('learn_more')} >`}
@@ -37,9 +37,9 @@ export default async function Questions() {
           <Link
             prefetch={false}
             href={'/faq'}
-            className="underline-offset-4 hover:underline py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px] text-[#e6e6e6] "
+            className="underline-offset-4 py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px] text-green-600! hover:underline transition-all"
           >
-            {t_main('questions_button')}
+            {`${t_main('questions_button')} >`}
           </Link>
         </div>
       </Container>

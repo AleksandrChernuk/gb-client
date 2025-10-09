@@ -27,7 +27,7 @@ export const RoutesResaltInformation = () => {
   const { locale } = useDateLocale();
 
   return (
-    <CustomCard className="p-5 space-y-4 shadow-xs">
+    <CustomCard className="p-5 space-y-4 shadow-xs relative">
       <div className="flex items-center justify-between">
         {params ? (
           <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
