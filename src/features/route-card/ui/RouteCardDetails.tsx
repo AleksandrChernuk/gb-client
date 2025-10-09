@@ -26,7 +26,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
   const { locale: dateLocale } = useDateLocale();
 
   const busName = route?.details?.busName;
-
+  console.log(route?.details);
   if (loading)
     return (
       <div className="h-full pt-10 flex items-center justify-center">
@@ -87,7 +87,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
       </div>
 
       <div className="space-y-4">
-        {route?.details?.luggageRules && !route?.details?.luggageRules.length && (
+        {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
           <RouteDetailsList label={t('luggage')} listClassName="">
             <DetailsItem>
               {route.details.luggageRules === 'string' ? (

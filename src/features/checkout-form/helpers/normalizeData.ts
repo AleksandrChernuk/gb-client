@@ -6,7 +6,9 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
   const details = route.details;
 
   const transtempoDiscount =
-    route.providerName === 'TRANSTEMPO' && Array.isArray(route.details?.discounts) ? route.details.discounts[0] : null;
+    route.providerName === 'TRANSTEMPO' && Array.isArray(route.details?.discounts)
+      ? route.details.discounts.find((d) => d.id !== '1210' && d.id !== '1211') || route.details.discounts[0]
+      : null;
 
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
     const ticketData: RequestTicket = {

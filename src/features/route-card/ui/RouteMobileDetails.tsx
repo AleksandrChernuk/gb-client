@@ -49,7 +49,7 @@ export default function MobileDetails({ children, detailsFooter, onClickTrigger 
           </SheetClose>
         </SheetHeader>
 
-        <div className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900">
+        <div className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-white dark:bg-slate-900">
           {children}
         </div>
         <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">{detailsFooter}</SheetFooter>

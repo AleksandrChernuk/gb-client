@@ -21,7 +21,6 @@ import { IconFrom } from '@/assets/icons/IconFrom';
 import { IconTo } from '@/assets/icons/IconTo';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 
 type Props = {
   name: 'from' | 'to';
@@ -65,20 +64,14 @@ export default function CitySearchMobile({
 }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
-
+  console.log(value);
   return (
     <Sheet open={open} onOpenChange={handleToggleOpen}>
       <SheetTrigger asChild>
         <MainSearchInput
           startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
           type="button"
-          value={
-            !!city
-              ? extractLocationDetails(city, locale).locationName
-              : name === 'from'
-                ? t('placeholderFrom')
-                : t('placeholderTo')
-          }
+          value={!!value.length ? value : placeholder}
           name={name}
           open={open}
           onFocus={() => {
@@ -120,9 +113,6 @@ export default function CitySearchMobile({
                 autoComplete="off"
                 autoCapitalize="off"
                 spellCheck="false"
-                onFocus={() => {
-                  onInputChange('');
-                }}
                 className="text-slate-700 dark:text-slate-50 placeholder:text-slate-300 dark:placeholder:text-slate-600 p-4 pr-10 h-full w-full bg-white dark:bg-slate-800 rounded-lg border-[1px] border-slate-700 focus:border-green-300 outline-green-300 placeholder:italic"
               />
               <ClearInputButton handleClear={handleClearMobileInput} />

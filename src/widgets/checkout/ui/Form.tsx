@@ -27,6 +27,7 @@ export default function CheckoutForm() {
       isHydrated: state.isHydrated,
     })),
   );
+
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
       <FormProvider {...methods}>

@@ -30,8 +30,8 @@ export default function TicketCardRoute({ route }: Props) {
   return (
     <>
       {matches ? (
-        <div className="flex gap-2">
-          <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50">
+        <div className="flex gap-2 items-center">
+          <div className="flex flex-col justify-between text-slate-700 dark:text-slate-50 gap-4">
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_from}</div>
             <div className="text-xs font-normal tracking-normal leading-[18px] text-slate-400 dark:text-slate-200">
               {(duration && route.duration) || ''}
@@ -39,7 +39,7 @@ export default function TicketCardRoute({ route }: Props) {
             <div className="text-sm font-bold tracking-normal leading-[16.8px]">{date_time_to}</div>
           </div>
 
-          <div className="w-[26px] h-[80px] shrink-0">
+          <div className="w-[26px] h-[90px] shrink-0">
             <Image src={arrow} alt="arrow" className="size-full" unoptimized />
           </div>
 

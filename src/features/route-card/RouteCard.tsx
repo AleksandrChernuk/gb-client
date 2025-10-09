@@ -97,7 +97,7 @@ export const RouteCard = ({ element }: Props) => {
       <div className="relative grid grid-cols-2 tablet:grid-cols-[1fr_1fr_1fr] items-center gap-2">
         <CarrierLabel carrierName={element.carrier.name || 'Deafault'} />
 
-        <RoteFreeSeats title={`${t('places')}:`} seats={element.seats.freeSeats ?? 0} />
+        <RoteFreeSeats title={`${t('places')}`} seats={element.seats.freeSeats ?? 0} />
 
         <div className="items-center justify-center hidden tablet:flex tablet:order-2 tablet:justify-self-center">
           <RouteDetailsToggle

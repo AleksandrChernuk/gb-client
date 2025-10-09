@@ -1,5 +1,4 @@
 import { PAYMENT_TYPES } from '@/shared/constans/payment.methods.constans';
-import { Badge } from '@/shared/ui/badge';
 import { ReactElement, ReactNode } from 'react';
 
 type Props = {
@@ -18,9 +17,7 @@ export default function RouteCardWrapper({ children, selectButton, providerName,
             <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>
             {canPaymentToDriver && providerName !== 'KLR' && <div className="size-6">{PAYMENT_TYPES[0].ICON}</div>}
           </div>
-          <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
-            {providerName || ''}
-          </Badge>
+          <div className="border border-green-200 text-green-200 text-xs p-1 rounded-full">{providerName || ''}</div>
         </div>
 
         {children}
