@@ -101,7 +101,11 @@ function useCheckout() {
         }),
       );
 
-      console.log(res);
+      if (res?.status === 'error' && res?.message === 'Order total price not equal amount request!') {
+        toast.error(t('order_price_mismatch_error'));
+        setError(t('order_price_mismatch_error'));
+        return;
+      }
 
       if (res?.status === 'error' && res?.message === 'Seat is not available') {
         toast.error(t('seat_unavailable_error'));

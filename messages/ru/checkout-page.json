@@ -69,6 +69,7 @@
     "payment_incomplete_data": "Неполные данные для оплаты",
     "payment_init_error": "Ошибка инициализации платёжной системы",
     "payment_process_error": "Ошибка при обработке оплаты",
-    "payment_order": "Оплата заказа"
+    "payment_order": "Оплата замовлення",
+    "order_price_mismatch_error": "Общая сумма заказа не совпадает с суммой запроса"
   }
 }
