@@ -101,6 +101,8 @@ function useCheckout() {
         }),
       );
 
+      console.log(res);
+
       if (res?.status === 'error' && res?.message === 'Seat is not available') {
         toast.error(t('seat_unavailable_error'));
 
@@ -117,7 +119,7 @@ function useCheckout() {
 
         return;
       }
-
+      console.log(res);
       setInitiateNewOrder(res);
     } catch (error: unknown) {
       console.error(t('order_create_failed'), error);

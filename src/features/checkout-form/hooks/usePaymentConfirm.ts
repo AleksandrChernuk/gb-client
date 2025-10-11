@@ -165,7 +165,7 @@ const usePaymentConfirm = () => {
 
     try {
       const paymentData = {
-        amount: Math.round(Number(initiateNewOrder!.amount)),
+        amount: Number(initiateNewOrder!.amount),
         currency: initiateNewOrder!.currency,
         providerId: initiateNewOrder!.providerId || '',
         providerOrderId: initiateNewOrder!.providerOrderId || '',

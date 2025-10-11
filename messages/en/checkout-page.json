@@ -70,6 +70,6 @@
     "payment_incomplete_data": "Incomplete data for payment",
     "payment_init_error": "Payment system initialization error",
     "payment_process_error": "Error during payment processing",
-    "payment_order_en": "Order payment"
+    "payment_order": "Order payment"
   }
 }
