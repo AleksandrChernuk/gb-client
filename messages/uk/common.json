@@ -193,6 +193,17 @@
           "description": "Переглянути історію замовлень"
         }
       }
-    }
+    },
+
+    "contact_phone_1": "Телефон 1",
+    "contact_phone_2": "Телефон 2",
+    "contact_telegram": "Telegram",
+    "contact_whatsapp": "WhatsApp",
+    "contact_viber": "Viber",
+    "footer_aria_label": "Нижній колонтитул сайту GreenBus — контакти, розділи та соціальні посилання",
+    "instagram_aria": "Сторінка GreenBus у Instagram",
+    "tiktok_aria": "Сторінка GreenBus у TikTok",
+    "x_aria": "Сторінка GreenBus у X (Twitter)",
+    "facebook_aria": "Сторінка GreenBus у Facebook"
   }
 }

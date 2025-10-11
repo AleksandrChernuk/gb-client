@@ -165,12 +165,12 @@ const usePaymentConfirm = () => {
 
     try {
       const paymentData = {
-        amount: Number(initiateNewOrder!.amount),
+        amount: Math.round(Number(initiateNewOrder!.amount)),
         currency: initiateNewOrder!.currency,
         providerId: initiateNewOrder!.providerId || '',
         providerOrderId: initiateNewOrder!.providerOrderId || '',
         myOrderId: initiateNewOrder!.myOrderId || '',
-        description: initiateNewOrder!.providerId || 'Payment',
+        description: `${t('payment_order')} ${String(initiateNewOrder?.myOrderNumber || 0).padStart(9, '0')}`,
         locale: initiateNewOrder!.locale || 'uk',
         customerEmail: initiateNewOrder!.customerEmail || '',
       };

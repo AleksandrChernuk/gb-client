@@ -68,6 +68,7 @@
     "booking_error": "Ошибка при бронировании",
     "payment_incomplete_data": "Неполные данные для оплаты",
     "payment_init_error": "Ошибка инициализации платёжной системы",
-    "payment_process_error": "Ошибка при обработке оплаты"
+    "payment_process_error": "Ошибка при обработке оплаты",
+    "payment_order_ru": "Оплата заказа"
   }
 }

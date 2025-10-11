@@ -17,7 +17,8 @@ export default async function MainFooter({ className }: TMainFooter) {
 
   return (
     <footer
-      aria-label="Footer"
+      role="contentinfo"
+      aria-label={t('footer_aria_label') ?? 'Website footer'}
       className={cn('w-full py-6 laptop:py-8 border-t-1 border-t-[#e6e6e6] dark:border-t-slate-700', className)}
     >
       <Container size="m">
@@ -48,6 +49,7 @@ export default async function MainFooter({ className }: TMainFooter) {
                 <Link
                   href={'mailto:greenbus.ukraine@gmail.com'}
                   target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="greenbus.ukraine@gmail.com"
                   className="inline-flex text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200"
                   prefetch={false}

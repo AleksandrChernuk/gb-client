@@ -30,6 +30,7 @@ export interface INewOrderResponse {
   currency: string;
   providerId: string;
   providerOrderId: string;
+  myOrderNumber: number;
   myOrderId: string;
   customerPhone?: string;
   detal: string;

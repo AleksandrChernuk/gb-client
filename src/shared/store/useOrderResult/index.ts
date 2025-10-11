@@ -13,7 +13,6 @@ export type OrderResultState = {
 export type OrderResultActions = {
   setInitiateNewOrder: (data: INewOrderResponse | null) => void;
   setInitiateOtpVerify: (data: IOtpVerifySend | null) => void;
-
   resetInitiateNewOrder: () => void;
   setLoadingResult: (v: boolean) => void;
 };

@@ -10,6 +10,7 @@ type Props = {
     title: string;
     href: string;
     icon?: JSX.Element;
+    ariaLabel?: string;
   }[];
 };
 
@@ -18,10 +19,16 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
 
   return (
     <ul className={cn('flex flex-col gap-1 tablet:gap-2', className)}>
-      {navLinks.map(({ title, href, icon }) =>
+      {navLinks.map(({ title, href, icon, ariaLabel }) =>
         icon ? (
           <li key={href}>
-            <Link prefetch={false} href={href} className="inline-block p-1 bg-green-100 rounded-full hover:underline">
+            <Link
+              target="_blanck"
+              prefetch={false}
+              aria-label={t(ariaLabel || '')}
+              href={href}
+              className="inline-block p-1 bg-green-100 rounded-full hover:underline"
+            >
               {icon}
             </Link>
           </li>

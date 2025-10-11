@@ -68,6 +68,7 @@
     "booking_error": "Помилка при бронюванні",
     "payment_incomplete_data": "Неповні дані для оплати",
     "payment_init_error": "Помилка ініціалізації платіжної системи",
-    "payment_process_error": "Помилка при обробці оплати"
+    "payment_process_error": "Помилка при обробці оплати",
+    "payment_order": "Оплата замовлення"
   }
 }

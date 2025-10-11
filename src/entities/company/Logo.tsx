@@ -13,6 +13,7 @@ const Logo = () => {
   return (
     <Link
       href={'/'}
+      aria-label="На головну сторінку GreenBus"
       scroll
       className={`flex items-center font-mulish text-[26.838px] font-extrabold tracking-normal leading-normal tablet:text-[31.88px] tablet:leading-[33.68px] ${mullish.className}`}
     >

@@ -187,6 +187,17 @@
     "no_payments_find": "Платежей не найдено",
     "customer_not_found": "Записей не найдено",
     "not_found": "Не найдено",
-    "unknown_error": "Неизвестная ошибка"
+    "unknown_error": "Неизвестная ошибка",
+
+    "contact_phone_1": "Телефон 1",
+    "contact_phone_2": "Телефон 2",
+    "contact_telegram": "Телеграм",
+    "contact_whatsapp": "Ватсап",
+    "contact_viber": "Вайбер",
+    "footer_aria_label": "Подвал сайта GreenBus — контакты, разделы и социальные ссылки",
+    "instagram_aria": "Страница GreenBus в Instagram",
+    "tiktok_aria": "Страница GreenBus в TikTok",
+    "x_aria": "Страница GreenBus в X (Twitter)",
+    "facebook_aria": "Страница GreenBus в Facebook"
   }
 }

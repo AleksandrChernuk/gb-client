@@ -57,23 +57,27 @@ export const footerNavLinks = {
   social: [
     {
       title: 'instagram',
-      href: 'http://instagram.com/',
-      icon: <IconInstagram />,
+      href: 'https://instagram.com/',
+      icon: <IconInstagram aria-label="Instagram" />,
+      ariaLabel: 'instagram_aria',
     },
     {
       title: 'tiktok',
-      href: 'https://www.tiktok.com/',
-      icon: <IconTikTok />,
+      href: 'https://www.tiktok.com/@greenbusukraine',
+      icon: <IconTikTok aria-label="TikTok" />,
+      ariaLabel: 'tiktok_aria',
     },
     {
       title: 'x',
-      href: 'https://x.com/',
-      icon: <IconX />,
+      href: 'https://x.com/@GreenBusUkraine',
+      icon: <IconX aria-label="X (Twitter)" />,
+      ariaLabel: 'x_aria',
     },
     {
       title: 'facebook',
       href: 'https://www.facebook.com/',
-      icon: <IconFacebook />,
+      icon: <IconFacebook aria-label="Facebook" />,
+      ariaLabel: 'facebook_aria',
     },
   ],
 };

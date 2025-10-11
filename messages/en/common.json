@@ -181,6 +181,16 @@
     "no_payments_find": "No payments found",
     "customer_not_found": "No records found",
     "not_found": "Not found",
-    "unknown_error": "Unknown error"
+    "unknown_error": "Unknown error",
+    "contact_phone_1": "Phone 1",
+    "contact_phone_2": "Phone 2",
+    "contact_telegram": "Telegram",
+    "contact_whatsapp": "WhatsApp",
+    "contact_viber": "Viber",
+    "footer_aria_label": "GreenBus website footer — contacts, sections, and social links",
+    "instagram_aria": "GreenBus page on Instagram",
+    "tiktok_aria": "GreenBus page on TikTok",
+    "x_aria": "GreenBus page on X (Twitter)",
+    "facebook_aria": "GreenBus page on Facebook"
   }
 }
