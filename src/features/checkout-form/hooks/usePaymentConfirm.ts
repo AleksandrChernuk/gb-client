@@ -170,7 +170,7 @@ const usePaymentConfirm = () => {
         providerId: initiateNewOrder!.providerId || '',
         providerOrderId: initiateNewOrder!.providerOrderId || '',
         myOrderId: initiateNewOrder!.myOrderId || '',
-        description: `${t('payment_order')} ${String(initiateNewOrder?.myOrderNumber || 0).padStart(9, '0')}`,
+        description: `${t('payment_order')} №${String(initiateNewOrder?.myOrderNumber || 0).padStart(9, '0')}`,
         locale: initiateNewOrder!.locale || 'uk',
         customerEmail: initiateNewOrder!.customerEmail || '',
       };
