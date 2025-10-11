@@ -70,6 +70,8 @@
     "payment_init_error": "Ошибка инициализации платёжной системы",
     "payment_process_error": "Ошибка при обработке оплаты",
     "payment_order": "Оплата замовлення",
-    "order_price_mismatch_error": "Общая сумма заказа не совпадает с суммой запроса"
+    "order_price_mismatch_error": "Общая сумма заказа не совпадает с суммой запроса",
+    "service_unavailable_title": "Сервис временно недоступен",
+    "service_unavailable_desc": "Мы уже работаем над восстановлением — скоро всё заработает."
   }
 }

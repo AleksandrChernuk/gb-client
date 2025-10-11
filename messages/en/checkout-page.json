@@ -71,6 +71,8 @@
     "payment_init_error": "Payment system initialization error",
     "payment_process_error": "Error during payment processing",
     "payment_order": "Order payment",
-    "order_price_mismatch_error": "The total order amount does not match the request amount"
+    "order_price_mismatch_error": "The total order amount does not match the request amount",
+    "service_unavailable_title": "Service temporarily unavailable",
+    "service_unavailable_desc": "We’re working to restore it — it will be back soon."
   }
 }
