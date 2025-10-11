@@ -5,10 +5,8 @@ import { IRequestOrder, RequestTicket } from '@/shared/types/order-interface';
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const details = route.details;
 
-  const transtempoDiscount =
-    route.providerName === 'TRANSTEMPO' && Array.isArray(route.details?.discounts)
-      ? route.details.discounts.find((d) => d.id !== '1210' && d.id !== '1211') || route.details.discounts[0]
-      : null;
+  const discounts = Array.isArray(route.details?.discounts) ? route.details.discounts : [];
+  const isTranstempo = route.providerName === 'TRANSTEMPO';
 
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
     const ticketData: RequestTicket = {
@@ -32,15 +30,22 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       buggageCount: 1,
     };
 
-    if (route.providerName === 'TRANSTEMPO' && transtempoDiscount) {
-      if (transtempoDiscount.id) ticketData.discountId = transtempoDiscount.id;
-      if (typeof transtempoDiscount.percent === 'number') ticketData.discountPercent = transtempoDiscount.percent;
-      if (transtempoDiscount.description) ticketData.discountDescription = transtempoDiscount.description;
+    if (isTranstempo && discounts.length > 0) {
+      if (passenger.discount) {
+        ticketData.discountId = String(passenger.discount);
+        if (passenger.discountDescription) ticketData.discountDescription = passenger.discountDescription;
+        if (passenger.discountPercent) ticketData.discountPercent = Number(passenger.discountPercent);
+      } else {
+        const defaultDiscount = discounts[0];
+        if (defaultDiscount?.id != null) ticketData.discountId = String(defaultDiscount.id);
+        if (typeof defaultDiscount?.percent === 'number') ticketData.discountPercent = defaultDiscount.percent;
+        if (defaultDiscount?.description) ticketData.discountDescription = defaultDiscount.description;
+      }
+    } else if (!isTranstempo) {
+      if (passenger.discount) ticketData.discountId = String(passenger.discount);
+      if (passenger.discountDescription) ticketData.discountDescription = passenger.discountDescription;
+      if (passenger.discountPercent) ticketData.discountPercent = Number(passenger.discountPercent);
     }
-
-    if (passenger.discount) ticketData.discountId = passenger.discount;
-    if (passenger.discountDescription) ticketData.discountDescription = passenger.discountDescription;
-    if (passenger.discountPercent) ticketData.discountPercent = Number(passenger.discountPercent);
 
     return ticketData;
   });
