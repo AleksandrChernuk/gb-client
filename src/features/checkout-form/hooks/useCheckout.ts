@@ -123,7 +123,6 @@ function useCheckout() {
 
         return;
       }
-      console.log(res);
       setInitiateNewOrder(res);
     } catch (error: unknown) {
       console.error(t('order_create_failed'), error);

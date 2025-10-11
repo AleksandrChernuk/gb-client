@@ -24,7 +24,6 @@ const SubmitButton = memo(function SubmitButton() {
 
   return (
     <>
-      {' '}
       <Button
         variant="default"
         size="primary"
@@ -38,7 +37,7 @@ const SubmitButton = memo(function SubmitButton() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="text-center">
           <DialogTitle className="font-bold">{t('service_unavailable_title')}</DialogTitle>
-          <DialogDescription>{t('service_unavailable_desc')}</DialogDescription>
+          <DialogDescription className="dark:text-slate-200">{t('service_unavailable_desc')}</DialogDescription>
         </DialogContent>
       </Dialog>
     </>

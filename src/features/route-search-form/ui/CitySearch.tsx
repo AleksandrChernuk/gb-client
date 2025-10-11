@@ -7,6 +7,7 @@ import CitySearchDesktop from './CitySearchDesktop';
 import CitySearchMobile from './CitySearchMobile';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
 import { useCitySearch } from '@/features/route-search-form/hooks/useCitySearch';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
   name: 'from' | 'to';
@@ -16,7 +17,8 @@ type Props = {
 };
 
 export default function CitySearch({ name, variant, error, resetError }: Props) {
-  const swap = useSearchStore((state) => state.swap);
+  const [, actions] = useRouterSearch();
+
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
 
   const { fromCity, toCity } = useCityData();
@@ -36,7 +38,7 @@ export default function CitySearch({ name, variant, error, resetError }: Props) 
     city: city,
     errors: error,
     setErrors: setErrorsRaw,
-    swap,
+    swap: actions.swap,
     isFetchingLocations,
     locale,
     resetError,

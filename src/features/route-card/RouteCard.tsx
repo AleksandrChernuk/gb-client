@@ -5,8 +5,6 @@ import { IRouteResponse } from '@/shared/types/route.types';
 import { useLocale, useTranslations } from 'next-intl';
 import MobileDetails from './ui/RouteMobileDetails';
 import Details from './ui/RouteCardDetails';
-import { useShallow } from 'zustand/react/shallow';
-import { useSearchStore } from '@/shared/store/useSearch';
 import TicketRoute from './ui/TicketCardRoute';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import RouteCardWrapper from '@/entities/route/RouteCard';
@@ -20,6 +18,7 @@ import { useSelectTicket } from '@/features/route-card/hooks/useSelectTicket';
 import RouteDetailsToggle from '@/entities/route/RouteDetailsToggle';
 import { MobileDetailsPrice } from '@/features/route-card/ui/MobileDetailsPrice';
 import { RoutePricing } from '@/features/route-card/ui/RoutePricing';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
   element: IRouteResponse;
@@ -33,7 +32,8 @@ export const RouteCard = ({ element }: Props) => {
 
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const locale = useLocale();
-  const [adult, children] = useSearchStore(useShallow((state) => [state.adult, state.children]));
+
+  const [params] = useRouterSearch();
 
   const setSelectedTicket = useSelectTicket();
 
@@ -45,12 +45,12 @@ export const RouteCard = ({ element }: Props) => {
       fromCityId: element.departure.fromLocation.id ?? 0,
       toCityId: element.arrival.toLocation.id ?? 0,
       locale: locale,
-      passCount: adult + children,
+      passCount: params.adult + params.children,
       travelDate: element.departure.dateTime ?? '',
     },
   });
 
-  const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, adult, children);
+  const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.adult, params.children);
 
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
@@ -69,7 +69,7 @@ export const RouteCard = ({ element }: Props) => {
             fromCityId: element.departure.fromLocation.id ?? 0,
             toCityId: element.arrival.toLocation.id ?? 0,
             locale: locale,
-            passCount: adult + children,
+            passCount: params.adult + params.children,
             travelDate: element.departure.dateTime ?? '',
           });
         });
@@ -121,7 +121,7 @@ export const RouteCard = ({ element }: Props) => {
                 price={totalPrice}
                 currency={element.ticketPricing.currency}
                 placeholderPassenger={t('placeholderPassenger')}
-                passengerCount={adult + children}
+                passengerCount={params.adult + params.children}
                 selectButton={<SelectButtonComponent variant="details" />}
               />
             }

@@ -16,12 +16,12 @@ import { Button } from '@/shared/ui/button';
 import { Separator } from '@/shared/ui/separator';
 import { useTranslations } from 'next-intl';
 import { useFilterTickets } from '@/shared/store/useFilterTickets';
-import { useSearchStore } from '@/shared/store/useSearch';
-import { useShallow } from 'zustand/react/shallow';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import useTicketsSearch from '@/shared/hooks/useTicketsSearch';
 import FilterSortByList from '@/features/route-mobile-filter/ui/FilterRadioGroup';
 import FilterCheckBoxList from '@/features/route-mobile-filter/ui/FilterCheckBoxList';
+import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import { useIsHydration } from '@/shared/hooks/useIsHydration';
 
 type TMobileFilterHeader = {
   title: string;
@@ -49,12 +49,12 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
 export const MobileFilter = () => {
   const resetFilters = useFilterTickets((state) => state.resetFilters);
   const { isFetching, data } = useTicketsSearch();
-  const isHydrated = useSearchStore(useShallow((state) => state.isHydrated));
 
-  const from = useSearchStore(useShallow((state) => state.from));
-  const to = useSearchStore(useShallow((state) => state.to));
+  const [params] = useRouterSearch();
 
-  const enabled = !!from && !!to;
+  const { hydrated } = useIsHydration();
+
+  const enabled = !!params.from && !!params.to;
 
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
@@ -62,7 +62,7 @@ export const MobileFilter = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          disabled={!isHydrated || isFetching || !enabled || data.length === 0}
+          disabled={!hydrated || isFetching || !enabled || data.length === 0}
           variant={'outline'}
           size={'icon'}
           className="p-2 rounded-md"

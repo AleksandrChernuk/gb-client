@@ -64,7 +64,6 @@ export default function CitySearchMobile({
 }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
-  console.log(value);
   return (
     <Sheet open={open} onOpenChange={handleToggleOpen}>
       <SheetTrigger asChild>

@@ -26,7 +26,9 @@ export default function RouteCardDetails({ route, loading }: Props) {
   const { locale: dateLocale } = useDateLocale();
 
   const busName = route?.details?.busName;
+
   console.log(route?.details);
+
   if (loading)
     return (
       <div className="h-full pt-10 flex items-center justify-center">
