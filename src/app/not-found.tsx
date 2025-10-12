@@ -1,5 +1,3 @@
-'use client';
-
 import { Container } from '@/shared/ui/Container';
 import CustomCard from '@/shared/ui/CustomCard';
 import errorImg from '@/assets/images/something-happened-on-the-site.avif';
