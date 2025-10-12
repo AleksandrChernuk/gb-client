@@ -3,21 +3,40 @@ import { Locale } from 'next-intl';
 import { host } from '@/config';
 import { getPathname, routing } from '@/shared/i18n/routing';
 
+const excluded: string[] = [
+  '/buses',
+  '/checkout',
+  '/signin',
+  '/signup',
+  '/success',
+  '/profile',
+  '/orders',
+  '/forgot',
+  '/error',
+  '/update-password',
+  '/verify-2FA',
+  '/admin',
+  '/dashboard',
+  '/api',
+  '/_next',
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    ...getEntries('/'),
-    ...getEntries('/about'),
-    ...getEntries('/privacy-policy'),
-    ...getEntries('/oll-countries'),
-    ...getEntries('/oferta'),
-    ...getEntries('/for-carriers'),
-    ...getEntries('/for-agents'),
-    ...getEntries('/faq'),
-    ...getEntries('/buses'),
-    ...getEntries('/carriers'),
-    ...getEntries('/blog'),
-    ...getEntries('/agents'),
+  const pages: string[] = [
+    '/',
+    '/about',
+    '/privacy-policy',
+    '/all-countries',
+    '/oferta',
+    '/for-carriers',
+    '/for-agents',
+    '/faq',
+    '/carriers',
+    '/blog',
+    '/agents',
   ];
+
+  return pages.filter((path) => !excluded.includes(path)).flatMap((href) => getEntries(href));
 }
 
 type Href = Parameters<typeof getPathname>[0]['href'];
