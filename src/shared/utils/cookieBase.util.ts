@@ -10,9 +10,8 @@ export function cookieBase() {
   return {
     httpOnly: true as const,
     secure: true,
-    sameSite: 'none' as const,
+    sameSite: 'lax' as const,
     path: '/',
-    domain: '.greenbus.com.ua',
   };
 }
 
