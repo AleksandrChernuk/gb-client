@@ -62,8 +62,8 @@ export default function RouteDetailsStops({
               station_address: from_station_address,
               station_name: from_station_name,
               location_name: from_location_name,
-              departure_date_time: from_departure_date_time,
-              arrival_date_time: from_arrival_date_time,
+              departure_date_time: from_arrival_date_time,
+              arrival_date_time: from_departure_date_time,
             }}
             isLast
             classNameItemContainer={classNameItemContainer}
