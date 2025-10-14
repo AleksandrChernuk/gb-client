@@ -1,4 +1,3 @@
-import '@/styles/globals.css';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/shared/i18n/routing';
 import { Locale } from '@/shared/i18n/locales';
@@ -19,6 +18,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 const notoSans = Noto_Sans({
   variable: '--nato-sans',
   subsets: ['latin', 'cyrillic'],
+  adjustFontFallback: true,
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
 });

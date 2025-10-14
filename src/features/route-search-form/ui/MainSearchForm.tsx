@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { LoaderCircle } from 'lucide-react';
 import CitySearch from './CitySearch';
@@ -12,34 +12,21 @@ import { MainSearchShema } from '@/shared/validation/main.search.schema';
 import PassengersCount from '@/features/route-search-form/ui/PassengersCount';
 import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
-import { TSearchForm } from '@/features/route-search-form/types';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { validateField } from '@/features/route-search-form/helpers/validateField';
 
-const MainSearchForm = ({ initialValues }: TSearchForm) => {
+const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isPending, startTransition] = useTransition();
   const [errors, setErrors] = useState<{ from?: string | null; to?: string | null }>({
     from: null,
     to: null,
   });
-  const isInitialized = useRef(false);
 
   const route = useRouter();
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const [params, actions] = useRouterSearch();
-
-  useEffect(() => {
-    if (!initialValues || isInitialized.current) return;
-    isInitialized.current = true;
-
-    if (initialValues.from) actions.setCityId('from', `${initialValues.from}`);
-    if (initialValues.to) actions.setCityId('to', `${initialValues.to}`);
-    if (initialValues.date) actions.setDate(initialValues.date);
-    actions.setPassenger('adult', initialValues.adult);
-    actions.setPassenger('children', initialValues.children);
-  }, [initialValues, actions]);
+  const [params] = useRouterSearch();
 
   const handleSubmit = () => {
     const { from, to, date, adult, children } = params;
@@ -75,6 +62,7 @@ const MainSearchForm = ({ initialValues }: TSearchForm) => {
         variant={variant}
         error={errors.from}
         resetError={() => setErrors((prev) => ({ ...prev, from: null }))}
+        setErrorsRaw={setErrors}
       />
       {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
       <CitySearch
@@ -82,6 +70,7 @@ const MainSearchForm = ({ initialValues }: TSearchForm) => {
         variant={variant}
         error={errors.to}
         resetError={() => setErrors((prev) => ({ ...prev, to: null }))}
+        setErrorsRaw={setErrors}
       />
       {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
       <DatePicker variant={variant} />

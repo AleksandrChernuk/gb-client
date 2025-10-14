@@ -21,6 +21,7 @@ import { IconFrom } from '@/assets/icons/IconFrom';
 import { IconTo } from '@/assets/icons/IconTo';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { useLocale } from 'next-intl';
 
 type Props = {
   name: 'from' | 'to';
@@ -37,10 +38,9 @@ type Props = {
   swap: () => void;
   cities: ILocation[];
   highlightedIndex: number;
-  locale: 'en' | 'ru' | 'uk';
   city: ILocation | null;
   onSelectCity: (newCity: ILocation) => void;
-  isFetchingLocations: number;
+  isFetchingLocations: boolean;
   handleClearMobileInput: () => void;
 };
 
@@ -56,7 +56,6 @@ export default function CitySearchMobile({
   swap,
   cities,
   highlightedIndex,
-  locale,
   city,
   onSelectCity,
   isFetchingLocations,
@@ -64,6 +63,8 @@ export default function CitySearchMobile({
 }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const t_form = useTranslations(MESSAGE_FILES.FORM);
+  const locale = useLocale();
+
   return (
     <Sheet open={open} onOpenChange={handleToggleOpen}>
       <SheetTrigger asChild>

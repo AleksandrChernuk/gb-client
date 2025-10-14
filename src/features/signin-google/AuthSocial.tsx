@@ -1,6 +1,6 @@
 'use client';
 
-import { useSinginGoogle } from '@/features/signin-google/models/useSinginGoogle';
+import { useSinginGoogle } from '@/features/signin-google/useSinginGoogle';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import { useTranslations } from 'next-intl';

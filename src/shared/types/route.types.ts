@@ -118,6 +118,7 @@ export interface IRouteResponse {
   duration: string | null;
   busChange: boolean | null;
   eTicket: boolean | null;
+  ticketChange: boolean | null;
   ticketPricing: {
     ticketCode?: string | null;
     basePrice: number | null;

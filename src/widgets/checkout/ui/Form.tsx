@@ -48,6 +48,7 @@ export default function CheckoutForm() {
               <Payment />
             </CheckoutCard>
           </div>
+
           <div className="space-y-10 laptop:col-span-1">
             <CheckoutCard title={t('your_booking')}>
               <Trip isHydrated={isHydrated} route={selectedTicket?.route || null} />

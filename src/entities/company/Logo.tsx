@@ -7,6 +7,7 @@ const mullish = Mulish({
   subsets: ['latin'],
   weight: '800',
   display: 'swap',
+  adjustFontFallback: true,
 });
 
 const Logo = () => {

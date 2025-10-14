@@ -52,6 +52,10 @@ export const RouteCard = ({ element }: Props) => {
 
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.adult, params.children);
 
+  if (element?.providerName === 'INFOBUS') {
+    console.log('INFOBUS provider detected:', element);
+  }
+
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       price={singlePrice}

@@ -6,7 +6,7 @@ import { MainSearchInput } from './MainSearchInput';
 import { ILocation } from '@/shared/types/location.types';
 import { IconSwap } from '@/assets/icons/IconSwap';
 import { NotFoundCity } from './helpers/NotFoundCity';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import MainLoader from '@/shared/ui/MainLoader';
 
@@ -25,10 +25,9 @@ type Props = {
   resetError: () => void;
   cities: ILocation[];
   highlightedIndex: number;
-  locale: 'en' | 'ru' | 'uk';
   city: ILocation | null;
   onSelectCity: (newCity: ILocation) => void;
-  isFetchingLocations: number;
+  isFetchingLocations: boolean;
 };
 
 export default function CitySearchDesktop({
@@ -45,13 +44,13 @@ export default function CitySearchDesktop({
   swap,
   cities,
   highlightedIndex,
-  locale,
   city,
   onSelectCity,
   resetError,
   isFetchingLocations,
 }: Props) {
   const t_form = useTranslations(MESSAGE_FILES.FORM);
+  const locale = useLocale();
 
   return (
     <div role="dropdown-warapp" className="relative">
@@ -84,6 +83,7 @@ export default function CitySearchDesktop({
         spellCheck="false"
         endIcon={name === 'from' && <IconSwap />}
         swap={swap}
+        disabled={isFetchingLocations}
       />
       {open ? (
         <div
