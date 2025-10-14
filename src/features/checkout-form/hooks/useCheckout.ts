@@ -100,6 +100,19 @@ function useCheckout() {
           user: user,
         }),
       );
+      console.log(
+        'normalizeData',
+        normalizeData({
+          fromCityId: ticket.departure.fromLocation.id,
+          toCityId: ticket.arrival.toLocation.id,
+          locale,
+          formData,
+          route: ticket,
+          user: user,
+        }),
+      );
+
+      console.log('res', res);
 
       if (res?.status === 'error' && res?.message === 'Order total price not equal amount request!') {
         toast.error(t('order_price_mismatch_error'));

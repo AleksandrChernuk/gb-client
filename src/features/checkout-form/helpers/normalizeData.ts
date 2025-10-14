@@ -108,7 +108,11 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
 
     ...(route?.details?.automaticDiscountId && { automaticDiscountId: route.details.automaticDiscountId }),
 
+    // ...(route.details?.returnRulesDescription && { returnRulesDescription: route.details?.returnRulesDescription }),
+
     ...(route.details?.returnRulesDescription && { refundRules: route.details?.returnRulesDescription }),
+
+    ...(route.details?.luggageRules && { baggageRules: route.details?.luggageRules }),
 
     eTicket: !!route.eTicket,
 

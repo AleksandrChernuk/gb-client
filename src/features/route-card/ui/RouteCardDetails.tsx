@@ -92,7 +92,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
         {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
           <RouteDetailsList label={t('luggage')} listClassName="">
             <DetailsItem>
-              {route.details.luggageRules === 'string' ? (
+              {!!route.details.luggageRules.length ? (
                 <span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />
               ) : (
                 toArray(route.details.luggageRules).map((el) => (

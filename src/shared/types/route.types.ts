@@ -32,7 +32,7 @@ export interface IRouteDetailsResponse {
   needMiddlename?: boolean | string;
   luggageFee: number | null;
   luggageMaxCount: number | null;
-  luggageRules: string[] | string | null;
+  luggageRules?: string[] | null;
   amenities: string[] | null;
   insurer: IInsurer | null;
 }
