@@ -88,6 +88,7 @@ export interface IRequestOrder {
   tickets?: RequestTicket[];
   timetableId?: string;
   bustypeId?: string;
+  ticketChange?: boolean;
 }
 
 export interface ITransfer {

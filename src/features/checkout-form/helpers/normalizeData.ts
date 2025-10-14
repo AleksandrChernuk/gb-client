@@ -115,6 +115,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     tripType: 'oneway',
     orderType: formData.payment,
     currency: 'UAH',
+    ticketChange: !!route.ticketChange,
     locale,
 
     ...(user?.id && { userId: user.id }),
