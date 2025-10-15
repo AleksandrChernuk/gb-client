@@ -92,13 +92,9 @@ export default function RouteCardDetails({ route, loading }: Props) {
         {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
           <RouteDetailsList label={t('luggage')} listClassName="">
             <DetailsItem>
-              {!!route.details.luggageRules.length ? (
-                <span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />
-              ) : (
-                toArray(route.details.luggageRules).map((el) => (
-                  <span key={el} dangerouslySetInnerHTML={{ __html: el || '' }} />
-                ))
-              )}
+              {route.details.luggageRules.map((e) => (
+                <span key={e} dangerouslySetInnerHTML={{ __html: e || '' }} />
+              ))}
             </DetailsItem>
           </RouteDetailsList>
         )}
@@ -109,7 +105,9 @@ export default function RouteCardDetails({ route, loading }: Props) {
               <DetailsItem key={idx + 1}>{el}</DetailsItem>
             ))}
             {route?.details?.returnRules &&
-              route?.details?.returnRules.map((el, idx) => <DetailsItem key={idx + 1}>{el.title}</DetailsItem>)}
+              route?.details?.returnRules.map((el, idx) => (
+                <DetailsItem key={idx + 1}>{el.title ?? el.description}</DetailsItem>
+              ))}
           </RouteDetailsList>
         )}
 

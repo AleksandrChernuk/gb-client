@@ -37,7 +37,7 @@ const SubmitButton = memo(function SubmitButton() {
         {isLoading ? <LoaderCircle className="animate-spin" /> : t('confirm')}
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="text-center">
+        <DialogContent className="text-center ">
           <DialogTitle className="font-bold">{t('service_unavailable_title')}</DialogTitle>
           <DialogDescription className="dark:text-slate-200">{t('service_unavailable_desc')}</DialogDescription>
         </DialogContent>
