@@ -36,15 +36,16 @@ export default async function ForgotPasswordPage() {
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-
-        <AuthAssistantCard headerLabel="reset_password_title" descriptiontext="reset_password_text">
-          <ForgotPasswordForm />
-          <div className="text-left mt-4">
-            <Button asChild variant={'link'}>
-              <Link href="/">{t('go_home')}</Link>
-            </Button>
-          </div>
-        </AuthAssistantCard>
+        <div className="relative">
+          <AuthAssistantCard headerLabel="reset_password_title" descriptiontext="reset_password_text">
+            <ForgotPasswordForm />
+            <div className="text-left mt-4">
+              <Button asChild variant={'link'}>
+                <Link href="/">{t('go_home')}</Link>
+              </Button>
+            </div>
+          </AuthAssistantCard>
+        </div>
       </Container>
     </section>
   );

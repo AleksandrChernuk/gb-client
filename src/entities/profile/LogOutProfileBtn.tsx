@@ -6,7 +6,7 @@ import { mapServerError } from '@/shared/errors/mapServerError';
 import { useRouter } from '@/shared/i18n/routing';
 import { useUserStore } from '@/shared/store/useUser';
 import { Button } from '@/shared/ui/button';
-import { LoaderCircle } from 'lucide-react';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -29,19 +29,20 @@ const LogOutProfileBtn = () => {
 
       router.replace(`/`);
     } catch (error) {
+      setIsLoading(false);
       if (error instanceof Error) {
         toast.error(t_form(mapServerError(error.message)));
       } else {
         toast.error(t_form(mapServerError('')));
       }
-    } finally {
-      setIsLoading(false);
     }
   };
   return (
     <div>
+      {isLoading && <LoadingScreen />}
+
       <Button onClick={handleLogout} variant="outline" size={'primary'} className="text-slate-700 dark:text-slate-200">
-        {isLoading ? <LoaderCircle className="animate-spin stroke-green-400" /> : <>{t('logout')}</>}
+        {t('logout')}
       </Button>
     </div>
   );

@@ -6,6 +6,22 @@ import { IReturnRules } from './return.rules.interface';
 import { TypeSeatsMap } from './seat.interface';
 import { IStops } from './stops.interface';
 
+export interface IBaggagePrice {
+  baggage_id: string;
+  baggage_type_id: string;
+  baggage_type: string;
+  baggage_type_abbreviated: string | null;
+  baggage_title: string;
+  length: string;
+  width: string;
+  height: string;
+  kg: string;
+  max_in_bus: string;
+  max_per_person: string;
+  price: number;
+  currency: string;
+}
+
 export interface IRouteDetailsResponse {
   providerLocationFrom: string | null;
   providerLocationTo: string | null;
@@ -35,6 +51,7 @@ export interface IRouteDetailsResponse {
   luggageRules?: string[] | null;
   amenities: string[] | null;
   insurer: IInsurer | null;
+  baggagePrice: IBaggagePrice[] | null;
 }
 
 export interface IGetRoutesBody {

@@ -18,6 +18,7 @@ import { verify2FASchema } from '@/shared/validation/auth.schema';
 import { mapServerError } from '@/shared/errors/mapServerError';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
 import ResendCode from '@/entities/auth/ResendCode';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 export default function VerifyEmailFrom({ email }: { email: string }) {
   const locale = useLocale();
@@ -35,6 +36,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
   });
 
   const onSubmit = async (rowData: z.infer<typeof verify2FASchema>) => {
+    setIsLoading(true);
     try {
       const result = await verifyEmail({ email: decodeURIComponent(email || ''), code: rowData.code }, locale);
 
@@ -63,6 +65,8 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
   };
   return (
     <Form {...form}>
+      {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="w-full  ">
           <FormField

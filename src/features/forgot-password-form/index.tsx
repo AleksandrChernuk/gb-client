@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/shared/ui/input';
 import { useLocale, useTranslations } from 'next-intl';
-import { CircleAlert, LoaderCircle } from 'lucide-react';
+import { CircleAlert } from 'lucide-react';
 import { FormErrorMassege } from '@/shared/ui/form-error';
 
 import { TypeForgotPassword } from '@/shared/types/auth.types';
@@ -97,7 +97,7 @@ export default function ForgotPasswordForm() {
             disabled={isLoading || !form.formState.isValid}
             className="w-full"
           >
-            {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('send')}
+            {t('send')}
           </Button>
         </div>
       </form>

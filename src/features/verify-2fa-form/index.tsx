@@ -17,6 +17,7 @@ import { useRouter } from '@/shared/i18n/routing';
 import { verify2FASchema } from '@/shared/validation/auth.schema';
 import { mapServerError } from '@/shared/errors/mapServerError';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 type Props = {
   email: string;
@@ -69,6 +70,7 @@ const Verify2FAForm = ({ email }: Props) => {
 
   return (
     <Form {...form}>
+      {isLoading && <LoadingScreen />}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="w-full  ">
           <FormField

@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/f
 import { Input } from '@/shared/ui/input';
 
 import { Button } from '@/shared/ui/button';
-import { CircleAlert, LoaderCircle } from 'lucide-react';
+import { CircleAlert } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/shared/ui/form-error';
 import { signup } from '@/shared/api/auth.service';
@@ -18,6 +18,7 @@ import { signupSchema } from '@/shared/validation/auth.schema';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
 import { mapServerError } from '@/shared/errors/mapServerError';
 import ViewPassword from '@/shared/ui/ViewPassword';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 const SignupForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
@@ -61,6 +62,7 @@ const SignupForm = () => {
 
   return (
     <Form {...form}>
+      {isPending && <LoadingScreen />}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
         <div className="space-y-4">
           <FormField
@@ -155,10 +157,10 @@ const SignupForm = () => {
           />
         </div>
 
-        {!!error && <div>{error}</div>}
+        {!!error && <div className="p-2 rounded-lg text-red-400 border border-red-400 my-2">{error}</div>}
 
         <Button type="submit" size={'primary'} disabled={!form.formState.isValid || isPending}>
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('signup_btn')}
+          {t('signup_btn')}
         </Button>
       </form>
     </Form>

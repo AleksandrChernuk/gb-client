@@ -6,23 +6,6 @@ import { Container } from '@/shared/ui/Container';
 import BackRouteButton from '@/shared/ui/BackRouteButton';
 import { ConfirmDeleteProfileAction } from '@/features/confirm-delete-profile';
 import { getTranslations } from 'next-intl/server';
-import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
-import { Locale } from '@/shared/i18n/locales';
-import { Params } from '@/shared/types/common.types';
-
-type Props = {
-  params: Params;
-};
-
-export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: Locale };
-  return generatePrivatePageMetadata({
-    lng,
-    namespace: MESSAGE_FILES.METADATA,
-    slug: 'auth',
-    path: `/change-password`,
-  });
-}
 
 const ConfirmDeleteAccountPage = async () => {
   const t = await getTranslations(MESSAGE_FILES.FORM);

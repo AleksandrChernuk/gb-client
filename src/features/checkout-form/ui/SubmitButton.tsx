@@ -29,7 +29,7 @@ const SubmitButton = memo(function SubmitButton() {
       <Button
         variant="default"
         size="primary"
-        type="button"
+        type="submit"
         className="w-full"
         onClick={() => setOpen((p) => !p)}
         disabled={isLoading}

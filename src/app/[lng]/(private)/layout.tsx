@@ -37,7 +37,7 @@ const ProfileLayout = async ({ children }: { children: React.ReactNode }) => {
         <AuthHeader />
         <main className="bg-slate-50 dark:bg-slate-900 py-2 tablet:py-10 flex-1 flex flex-col">
           <Container size="l" className="w-full flex flex-col flex-1 min-h-0">
-            <div className="flex flex-col tablet:flex-row gap-8 laptop:gap-12 pb-8 flex-1 min-h-0">
+            <div className="flex flex-col tablet:flex-row gap-8 laptop:gap-12 pb-8 flex-1 min-h-0 relative">
               <ProfileNavTabs items={profile_links} namespace={MESSAGE_FILES.PROFILE} />
               <div className="flex-1 flex flex-col min-h-0">
                 <div className="flex items-center justify-between gap-4 mb-4 laptop:mb-10">

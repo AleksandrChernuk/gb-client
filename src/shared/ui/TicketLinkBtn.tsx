@@ -14,7 +14,7 @@ const TicketLinkBtn = ({ href, textBtn = 'open_pdf_link' }: Props) => {
 
   return (
     <Button asChild variant={'outline'} size={'primary'} className="text-slate-800 dark:text-slate-50">
-      <a href={href} rel="noopener noreferrer">
+      <a href={href} rel="noopener noreferrer" target="_blank">
         {t(textBtn)}
       </a>
     </Button>

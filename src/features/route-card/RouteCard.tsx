@@ -52,10 +52,6 @@ export const RouteCard = ({ element }: Props) => {
 
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.adult, params.children);
 
-  if (element?.providerName === 'INFOBUS') {
-    console.log('INFOBUS provider detected:', element);
-  }
-
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       price={singlePrice}
@@ -106,7 +102,9 @@ export const RouteCard = ({ element }: Props) => {
         <div className="items-center justify-center hidden tablet:flex tablet:order-2 tablet:justify-self-center">
           <RouteDetailsToggle
             isOpen={isOpen}
+            disabled={loading}
             toggleOpen={() => {
+              if (loading) return;
               setIsOpen((p) => !p);
               fetchDetails();
             }}
@@ -115,6 +113,7 @@ export const RouteCard = ({ element }: Props) => {
 
         <div className="flex items-center justify-center ml-auto tablet:hidden">
           <MobileDetails
+            disabledTrigger={loading}
             onClickTrigger={() => {
               if (!hasDetails) {
                 fetchDetails();

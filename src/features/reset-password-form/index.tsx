@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
-import { LoaderCircle } from 'lucide-react';
 
 import { toast } from 'sonner';
 import { resetPasswordSchema } from '@/shared/validation/auth.schema';
@@ -24,6 +23,7 @@ import { mapServerError } from '@/shared/errors/mapServerError';
 import { FormErrorMassege } from '@/shared/ui/form-error';
 import ViewPassword from '@/shared/ui/ViewPassword';
 import ResendCode from '@/entities/auth/ResendCode';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +68,8 @@ export default function ResetPasswordForm() {
 
   return (
     <Form {...form}>
+      {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="flex flex-col gap-4 w-full max-w-[380px] mx-auto">
           <div className="w-full">
@@ -141,7 +143,7 @@ export default function ResetPasswordForm() {
 
           <div className="w-full">
             <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
-              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('change_button')}
+              {t('change_button')}
             </Button>
           </div>
         </div>

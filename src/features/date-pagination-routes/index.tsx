@@ -28,8 +28,8 @@ export default function DateTabs() {
               aria-disabled={isBefore(addDays(date, 1), new Date())}
               className={`${
                 isEqual(date, toDate(tabDate)) &&
-                'bg-slate-50 dark:bg-slate-800 aria-disabled:bg-slate-50 aria-disabled:opacity-100 aria-disabled:pointer-events-none'
-              } hover:no-underline p-4 laptop:px-6 h-auto w-auto tablet:w-24 laptop:w-32 rounded-none rounded-t-lg text-black dark:text-slate-50  ${
+                'bg-slate-50 dark:bg-slate-800 aria-disabled:bg-slate-50 aria-disabled:opacity-100 aria-disabled:pointer-events-none '
+              } hover:no-underline p-4 laptop:px-6 h-auto w-auto tablet:w-24 laptop:w-32 rounded-none rounded-t-lg text-black dark:text-slate-50 transition-none ${
                 !isEqual(date, toDate(tabDate)) && 'text-white'
               }`}
             >

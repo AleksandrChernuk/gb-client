@@ -2,7 +2,7 @@
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { CircleAlert, LoaderCircle } from 'lucide-react';
+import { CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FormErrorMassege } from '@/shared/ui/form-error';
 
@@ -10,6 +10,7 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 import ViewPassword from '@/shared/ui/ViewPassword';
 import { useSignin } from '@/features/signin-form/useSignin';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 const SigninForm = () => {
   const t = useTranslations(MESSAGE_FILES.FORM);
@@ -18,6 +19,7 @@ const SigninForm = () => {
 
   return (
     <Form {...form}>
+      {isLoading && <LoadingScreen />}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
           <FormField
@@ -77,10 +79,10 @@ const SigninForm = () => {
           />
         </div>
 
-        {errorSignin && <div>{errorSignin}</div>}
+        {!!errorSignin && <div className="p-2 rounded-lg text-red-400 border border-red-400 my-2">{errorSignin}</div>}
 
         <Button type="submit" size={'primary'} disabled={isLoading}>
-          {form.formState.isSubmitting ? <LoaderCircle className="animate-spin" stroke="white" /> : t('login_btn')}
+          {t('login_btn')}
         </Button>
       </form>
     </Form>

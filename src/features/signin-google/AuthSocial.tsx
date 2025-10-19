@@ -3,6 +3,7 @@
 import { useSinginGoogle } from '@/features/signin-google/useSinginGoogle';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 import { useTranslations } from 'next-intl';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -12,6 +13,8 @@ export default function AuthSocial() {
 
   return (
     <div className="flex items-center w-full">
+      {isLoading && <LoadingScreen />}
+
       <Button
         variant="outline"
         type="button"
@@ -21,7 +24,7 @@ export default function AuthSocial() {
         disabled={isLoading}
         aria-busy={isLoading}
       >
-        <FcGoogle className={`mr-2 h-6 w-6 ${isLoading ? 'animate-spin' : ''}`} />
+        <FcGoogle className={`mr-2 h-6 w-6`} />
         {t('auth_google_btn')}
       </Button>
     </div>

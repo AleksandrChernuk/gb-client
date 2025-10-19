@@ -2,13 +2,14 @@
 
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { LoaderCircle, TicketX } from 'lucide-react';
+import { TicketX } from 'lucide-react';
 import { useRouter } from '@/shared/i18n/routing';
 import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/shared/ui/dialog';
 import { Button } from '@/shared/ui/button';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { usePaymentConfirm } from '@/features/checkout-form/hooks';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 const NewOrderDialog = () => {
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
@@ -78,19 +79,21 @@ const NewOrderDialog = () => {
           onClick={handleConfirmOrder}
           disabled={payLoading}
         >
-          {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_book')}
+          {t('payment_confirm_book')}
         </Button>
       );
 
     return (
       <Button size="primary" variant="default" className="text-white" onClick={handlePayOrder} disabled={payLoading}>
-        {payLoading ? <LoaderCircle className="animate-spin" /> : t('payment_confirm_pay')}
+        {t('payment_confirm_pay')}
       </Button>
     );
   };
 
   return (
     <>
+      {payLoading && <LoadingScreen />}
+
       <DialogHeader className="gap-2">
         <DialogTitle className="tablet:text-2xl text-slate-700 dark:text-slate-50">{title}</DialogTitle>
         <DialogDescription asChild className="text-base tablet:text-lg text-slate-700 dark:text-slate-200">

@@ -57,7 +57,7 @@ const Payment = () => {
             </FormLabel>
           </FormItem>
 
-          {selectedTicket?.allowedOperations.canPaymentToDriver && selectedTicket.providerName !== 'KLR' && (
+          {selectedTicket?.allowedOperations.canPaymentToDriver && (
             <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
               <FormControl>
                 <RadioGroupItem value={PAYMENT_TYPES[1].VALUE} checked={value === PAYMENT_TYPES[1].VALUE} />

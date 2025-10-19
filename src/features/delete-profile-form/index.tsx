@@ -20,6 +20,7 @@ import { verify2FASchema } from '@/shared/validation/auth.schema';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
 import { mapServerError } from '@/shared/errors/mapServerError';
 import ResendCode from '@/entities/auth/ResendCode';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 export default function VerifyDeleteAccountForm() {
   const locale = useLocale();
@@ -65,6 +66,8 @@ export default function VerifyDeleteAccountForm() {
 
   return (
     <Form {...form}>
+      {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="w-full  ">
           <FormField

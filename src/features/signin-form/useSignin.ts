@@ -29,7 +29,7 @@ export const useSignin = () => {
       email: '',
       password: '',
     },
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const onSubmit = async (data: z.infer<typeof signinSchema>) => {
@@ -42,23 +42,18 @@ export const useSignin = () => {
 
       if (!!error) {
         setErrorSignin(t(`${mapServerError(error.message)}`));
-        setIsViewPassword(false);
-        setIsLoading(false);
         form.reset({ email: data.email, password: '' });
         return;
       }
 
       if (message === '2FA code sent') {
         router.push(`/${REDIRECT_PATHS.verify2FA}/${result.email}`, { scroll: true });
-        setIsViewPassword(false);
-        setIsLoading(false);
         return;
       }
 
       if (message === 'Verification code sent') {
         router.push(`/${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
-        setIsViewPassword(false);
-        setIsLoading(false);
+
         return;
       }
 
@@ -70,6 +65,8 @@ export const useSignin = () => {
 
       setErrorSignin(t('error_occurred'));
     } catch (e) {
+      setIsLoading(false);
+
       const msg = e instanceof Error ? e.message : '';
       setErrorSignin(t(mapServerError(msg)));
     } finally {

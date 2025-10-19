@@ -6,7 +6,6 @@ import { getCurrentTrips } from '@/shared/api/user.services.client';
 import { TRANSLATION_KEYS } from '@/shared/i18n/translationKeys';
 import { useUserStore } from '@/shared/store/useUser';
 import { UserCurrentTripType } from '@/shared/types/profile.trips';
-import MainLoader from '@/shared/ui/MainLoader';
 import RouteNotFound from '@/shared/ui/RouteNotFound';
 import { SkeletonCards } from '@/shared/ui/SkeletonCards';
 import { isNoTripsError, parseErrorKey } from '@/shared/utils/route.details.helper';
@@ -25,13 +24,6 @@ const FutureTrips = () => {
     staleTime: 60_000,
     retry: false,
   });
-
-  if (!user?.id)
-    return (
-      <div className="h-full flex flex-col items-center justify-center">
-        <MainLoader />
-      </div>
-    );
 
   if (isError && isNoTripsError(error)) {
     return <RouteNotFound text={t(parseErrorKey(error.message))} className="dark:bg-slate-700" />;

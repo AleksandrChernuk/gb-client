@@ -100,19 +100,6 @@ function useCheckout() {
           user: user,
         }),
       );
-      console.log(
-        'normalizeData',
-        normalizeData({
-          fromCityId: ticket.departure.fromLocation.id,
-          toCityId: ticket.arrival.toLocation.id,
-          locale,
-          formData,
-          route: ticket,
-          user: user,
-        }),
-      );
-
-      console.log('res', res);
 
       if (res?.status === 'error' && res?.message === 'Order total price not equal amount request!') {
         toast.error(t('order_price_mismatch_error'));
@@ -136,6 +123,13 @@ function useCheckout() {
 
         return;
       }
+
+      if (res?.status === 'error') {
+        toast.error(t('order_price_mismatch_error'));
+        setError(t('order_price_mismatch_error'));
+        return;
+      }
+
       setInitiateNewOrder(res);
     } catch (error: unknown) {
       console.error(t('order_create_failed'), error);

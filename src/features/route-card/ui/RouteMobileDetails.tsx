@@ -21,15 +21,17 @@ type Props = {
   onClickTrigger: () => void;
   children: ReactNode;
   detailsFooter: ReactNode;
+  disabledTrigger?: boolean;
 };
 
-export default function MobileDetails({ children, detailsFooter, onClickTrigger }: Props) {
+export default function MobileDetails({ children, detailsFooter, onClickTrigger, disabledTrigger }: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
+          disabled={disabledTrigger}
           variant={'link'}
           className="items-center justify-center p-2 text-xs font-bold underline"
           onClick={onClickTrigger}

@@ -94,7 +94,6 @@ const usePaymentConfirm = () => {
       } catch (error) {
         console.error('SMS validation error:', error);
         toast.error(t('sms_code_error'));
-      } finally {
         setSMSValidationLoading(false);
       }
     },
@@ -148,7 +147,6 @@ const usePaymentConfirm = () => {
     } catch (error) {
       console.error('Confirm order error:', error);
       toast.error(t('booking_error'));
-    } finally {
       setPayLoading(false);
     }
   }, [initiateNewOrder, setInitiateOtpVerify, router, validateOrderData]);
@@ -185,7 +183,6 @@ const usePaymentConfirm = () => {
     } catch (error) {
       console.error('Pay order error:', error);
       toast.error(t('payment_process_error'));
-    } finally {
       setPayLoading(false);
     }
   }, [initiateNewOrder, validateOrderData]);

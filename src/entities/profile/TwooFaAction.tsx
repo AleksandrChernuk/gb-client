@@ -8,8 +8,8 @@ import { useRouter } from '@/shared/i18n/routing';
 
 import { useUserStore } from '@/shared/store/useUser';
 import { Button } from '@/shared/ui/button';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
-import { LoaderCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import { useState } from 'react';
@@ -36,33 +36,29 @@ const TwooFaAction = () => {
 
       router.push(`/${REDIRECT_PATHS.signin}`);
     } catch (error) {
+      setIsLoading(false);
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));
       } else {
         toast.error(t(mapServerError('')));
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
-    <Button
-      size={'primary'}
-      variant={'default'}
-      onClick={handleToggle2FA}
-      className="w-full"
-      disabled={isLoading || currentUser?.method !== 'CREDENTIALS'}
-    >
-      {isLoading ? (
-        <LoaderCircle className="animate-spin" stroke="white" />
-      ) : (
-        <>
-          2FA:
-          <span className="font-bold">{!currentUser?.twoFA ? <span className="text-red-200">Off</span> : 'On'}</span>
-        </>
-      )}
-    </Button>
+    <>
+      {isLoading && <LoadingScreen />}
+      <Button
+        size={'primary'}
+        variant={'default'}
+        onClick={handleToggle2FA}
+        className="w-full"
+        disabled={isLoading || currentUser?.method !== 'CREDENTIALS'}
+      >
+        2FA:
+        <span className="font-bold">{!currentUser?.twoFA ? <span className="text-red-200">Off</span> : 'On'}</span>
+      </Button>
+    </>
   );
 };
 

@@ -20,7 +20,9 @@ export function ConfirmationDialog() {
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="sm:max-w-[512px] mx-auto rounded-2xl gap-4">{dialogContent}</DialogContent>
+      <DialogContent className="sm:max-w-[512px] mx-auto rounded-2xl ">
+        <div className="grid gap-4 w-full relative">{dialogContent}</div>
+      </DialogContent>
     </Dialog>
   );
 }

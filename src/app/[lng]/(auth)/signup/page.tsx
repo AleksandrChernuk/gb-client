@@ -32,11 +32,13 @@ export default async function SignupPage() {
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-        <AuthCard headerLabel={'signupTitle'} backButtonHref="/signin" backButtonLabel="authLogin">
-          <SignupForm />
-        </AuthCard>
-        <div className="block mt-6 tablet:hidden">
-          <AccountActions />
+        <div className=" relative">
+          <AuthCard headerLabel={'signupTitle'} backButtonHref="/signin" backButtonLabel="authLogin">
+            <SignupForm />
+          </AuthCard>
+          <div className="block mt-6 tablet:hidden">
+            <AccountActions />
+          </div>
         </div>
       </Container>
     </section>

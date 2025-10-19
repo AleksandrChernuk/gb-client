@@ -1,4 +1,5 @@
 import { cn } from '@/shared/lib/utils';
+import { LoaderCircle } from 'lucide-react';
 
 interface LoadingScreenProps {
   className?: string;
@@ -12,11 +13,7 @@ export function LoadingScreen({ className }: LoadingScreenProps) {
         className,
       )}
     >
-      <div className="flex space-x-2">
-        <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:0ms]" />
-        <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:150ms]" />
-        <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:300ms]" />
-      </div>
+      <LoaderCircle role="status" aria-label="Loading" className={'size-10 animate-spin stroke-green-200'} />
     </div>
   );
 }

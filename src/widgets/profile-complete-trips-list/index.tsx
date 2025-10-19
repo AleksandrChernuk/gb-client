@@ -5,7 +5,6 @@ import { getCompletedTrips } from '@/shared/api/user.services.client';
 import { useLocale, useTranslations } from 'next-intl';
 import { useUserStore } from '@/shared/store/useUser';
 import { usePaginatedQuery } from '@/shared/hooks/usePaginatedQuery';
-import MainLoader from '@/shared/ui/MainLoader';
 import { isNoTripsError, parseErrorKey } from '@/shared/utils/route.details.helper';
 import RouteNotFound from '@/shared/ui/RouteNotFound';
 import TryAgain from '@/entities/common/TryAgain';
@@ -31,13 +30,6 @@ const CompletedTrips = () => {
       fetchPage: (page, perPageArg) => getCompletedTrips({ userId: user!.id, locale, page, perPage: perPageArg }),
       getTotalPages: (d) => d?.pagination?.totalPages ?? 1,
     });
-
-  if (!user?.id)
-    return (
-      <div className="h-full flex flex-col items-center justify-center">
-        <MainLoader />
-      </div>
-    );
 
   if (isError && isNoTripsError(error)) {
     return <RouteNotFound text={t(parseErrorKey(error))} className="dark:bg-slate-700" />;

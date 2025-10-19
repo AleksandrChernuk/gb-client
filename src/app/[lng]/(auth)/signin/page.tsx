@@ -32,17 +32,19 @@ export default async function SigninPage() {
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-        <AuthCard
-          headerLabel={'signinTitle'}
-          backButtonHref="/signup"
-          backButtonLabel="authCreateAccount"
-          forgotButtonHref="/forgot-password"
-          forgotButtonLabel="resetPasBtn"
-        >
-          <SigninForm />
-        </AuthCard>
-        <div className="block mt-6 tablet:hidden">
-          <AccountActions />
+        <div className="relative">
+          <AuthCard
+            headerLabel={'signinTitle'}
+            backButtonHref="/signup"
+            backButtonLabel="authCreateAccount"
+            forgotButtonHref="/forgot-password"
+            forgotButtonLabel="resetPasBtn"
+          >
+            <SigninForm />
+          </AuthCard>
+          <div className="block mt-6 tablet:hidden">
+            <AccountActions />
+          </div>
         </div>
       </Container>
     </section>

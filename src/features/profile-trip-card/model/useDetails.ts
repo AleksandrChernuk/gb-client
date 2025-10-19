@@ -43,5 +43,6 @@ export const useDetails = ({ item }: { item: UserCurrentTripType }) => {
     placeholderData: keepPreviousData,
     refetchOnWindowFocus: false,
   });
+
   return { data, isLoading, setIsOpen, isOpen };
 };

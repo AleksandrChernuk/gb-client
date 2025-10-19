@@ -35,18 +35,19 @@ export default async function ResetPasswordPage() {
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-
-        <AuthAssistantCard headerLabel="change_password" descriptiontext="otp_enter_code_and_new_password">
-          <ResetPasswordForm />
-          <p className="my-4 text-center text-xs font-normal tracking-normal leading-[18px] text-red-600 ">
-            {t('code_validity')}
-          </p>
-          <div className="flex flex-col tablet:flex-row">
-            <Button asChild variant={'link'}>
-              <Link href="/">{t('go_home')}</Link>
-            </Button>
-          </div>
-        </AuthAssistantCard>
+        <div className="relative">
+          <AuthAssistantCard headerLabel="change_password" descriptiontext="otp_enter_code_and_new_password">
+            <ResetPasswordForm />
+            <p className="my-4 text-center text-xs font-normal tracking-normal leading-[18px] text-red-600 ">
+              {t('code_validity')}
+            </p>
+            <div className="flex flex-col tablet:flex-row">
+              <Button asChild variant={'link'}>
+                <Link href="/">{t('go_home')}</Link>
+              </Button>
+            </div>
+          </AuthAssistantCard>
+        </div>
       </Container>
     </section>
   );

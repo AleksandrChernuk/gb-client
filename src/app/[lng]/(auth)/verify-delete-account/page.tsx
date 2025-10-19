@@ -33,15 +33,16 @@ export default async function VerifyDeleteAccountPage() {
         <div className="mb-4 laptop:mb-8">
           <BackRouteButton />
         </div>
-
-        <AuthAssistantCard headerLabel="delete_account_warning" descriptiontext="delete_account_text">
-          <VerifyDeleteAccountForm />
-          <div className="text-left mt-4">
-            <Button asChild variant={'link'}>
-              <Link href="/">{t('go_home')}</Link>
-            </Button>
-          </div>
-        </AuthAssistantCard>
+        <div className="relative">
+          <AuthAssistantCard headerLabel="delete_account_warning" descriptiontext="delete_account_text">
+            <VerifyDeleteAccountForm />
+            <div className="text-left mt-4">
+              <Button asChild variant={'link'}>
+                <Link href="/">{t('go_home')}</Link>
+              </Button>
+            </div>
+          </AuthAssistantCard>
+        </div>
       </Container>
     </section>
   );

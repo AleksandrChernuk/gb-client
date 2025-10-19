@@ -9,6 +9,7 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { requestChangePassword } from '@/shared/api/auth.service';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
 import { Button } from '@/shared/ui/button';
+import { LoadingScreen } from '@/shared/ui/loading-screen';
 
 const ChangePasswordAction = () => {
   const locale = useLocale();
@@ -40,13 +41,13 @@ const ChangePasswordAction = () => {
       } else {
         toast.error(t(mapServerError('')));
       }
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <div>
+      {isLoading && <LoadingScreen />}
       <Button
         size={'primary'}
         variant={'default'}
