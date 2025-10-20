@@ -12,8 +12,8 @@ import { toArray } from '@/shared/utils/toArray';
 import RouteDetailsStops from '@/entities/route/RouteDetailsStops';
 import RouteDetailsList from '@/entities/route/RouteDetailsList';
 import DetailsItem from '@/entities/route/RouteDetailsItem';
-import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
 import RouteDetailsBusImages from '@/entities/route/RouteDetailsBusImages';
+import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
 
 type Props = { details: IRouteDetailsResponse; trip: UserCurrentTripType };
 
@@ -22,12 +22,12 @@ export default function Details({ details, trip }: Props) {
 
   const { locale: dateLocale } = useDateLocale();
 
-  const busPictures = toArray(details?.busPictures);
+  const stripLinks = (html: string) => {
+    return html.replace(/<a[^>]*>(.*?)<\/a>/gi, '$1').replace(/https?:\/\/[^\s<]+/gi, '');
+  };
 
-  const showPictures = busPictures.length > 1 && busPictures[0] !== null;
+  const busName = details?.busName;
 
-  const showBusDetails =
-    details.busName !== 'no_plan' || (details.busNumber && details.busNumber.trim() !== '') || showPictures;
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 mt-8 tablet:space-y-0">
       <div className="space-y-4">
@@ -80,17 +80,28 @@ export default function Details({ details, trip }: Props) {
       </div>
 
       <div className="space-y-4">
-        {!!details?.luggageRules && details?.luggageRules.length !== 0 && (
+        {details?.luggageRules && !!details?.luggageRules.length && (
           <RouteDetailsList label={t('luggage')} listClassName="">
-            <DetailsItem>{toArray(details.luggageRules).join(', ')}</DetailsItem>
+            <DetailsItem>
+              {details.luggageRules.map((e) => {
+                const cleanHTML = stripLinks(e || '');
+                return <span key={e} dangerouslySetInnerHTML={{ __html: cleanHTML }} />;
+              })}
+            </DetailsItem>
           </RouteDetailsList>
         )}
 
-        <RouteDetailsList label={t('return_policy')} listClassName="">
-          {toArray(details?.returnRulesDescription).map((el, idx) => (
-            <DetailsItem key={idx + 1}>{el}</DetailsItem>
-          ))}
-        </RouteDetailsList>
+        {(details?.returnRulesDescription || details?.returnRules) && (
+          <RouteDetailsList label={t('return_policy')}>
+            {toArray(details?.returnRulesDescription).map((el, idx) => (
+              <DetailsItem key={idx + 1}>{el}</DetailsItem>
+            ))}
+            {details?.returnRules &&
+              details?.returnRules.map((el, idx) => (
+                <DetailsItem key={idx + 1}>{el.title ?? el.description}</DetailsItem>
+              ))}
+          </RouteDetailsList>
+        )}
 
         <RouteDetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
           {!isEmptyDiscounts(details?.discounts) && (
@@ -104,41 +115,49 @@ export default function Details({ details, trip }: Props) {
         </RouteDetailsList>
 
         <RouteDetailsList label={t('route_info')} listClassName="flex-row flex-wrap">
-          {details?.routeInfo && <DetailsItem>{details?.routeInfo.replace(/●\s*/g, ' ')}</DetailsItem>}
+          {details?.routeInfo && (
+            <DetailsItem>{<span dangerouslySetInnerHTML={{ __html: details?.routeInfo || '' }} />}</DetailsItem>
+          )}
         </RouteDetailsList>
 
         <RouteDetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
           {!!details?.amenities?.length && <DetailsItem>{toArray(details?.amenities).join(', ')}</DetailsItem>}
         </RouteDetailsList>
 
-        <RouteDetailsList label={t('return_policy')} listClassName="text-[12px]">
-          {toArray(details?.returnRulesDescription).map((el, idx) => (
-            <DetailsItem key={idx + 1}>{el}</DetailsItem>
-          ))}
-        </RouteDetailsList>
+        {(() => {
+          const hasBusName = busName && busName !== 'bus' && busName !== 'no_plan';
+          const hasBusNumber = details?.busNumber;
+          const busPictures = details?.busPictures;
+          const hasBusPictures = busPictures && busPictures.length > 1 && busPictures[0] !== null;
 
-        {showBusDetails && (
-          <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
-            <>
-              <div className="flex flex-row flex-wrap gap-0.5">
-                <DetailsItem>{!!details.busName && details.busName.replace(/\[|\]/g, '')}</DetailsItem>
-                <DetailsItem>{details?.busNumber}</DetailsItem>
-              </div>
-              {details?.busPictures?.length && details?.busPictures?.length > 1 && details?.busPictures[0] !== null && (
-                <RouteDetailsBusImages
-                  items={toArray(details?.busPictures)?.map((el, i) => ({
-                    src: el,
-                    alt: `bus img ${i + 1}`,
-                    width: 200,
-                    height: 200,
-                  }))}
-                  slidesPerView={3}
-                  spaceBetween={20}
-                />
-              )}
-            </>
-          </RouteDetailsList>
-        )}
+          // Показываем блок только если есть хотя бы одно из: валидное имя, номер или фото
+          const shouldShowBus = hasBusName || hasBusNumber || hasBusPictures;
+
+          return (
+            shouldShowBus && (
+              <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
+                <>
+                  <div className="flex flex-row flex-wrap gap-0.5">
+                    {hasBusName && <DetailsItem>{busName.replace(/\[|\]/g, '')}</DetailsItem>}
+                    {hasBusNumber && details && <DetailsItem>{details.busNumber}</DetailsItem>}
+                  </div>
+                  {hasBusPictures && busPictures && (
+                    <RouteDetailsBusImages
+                      items={toArray(busPictures).map((el, i) => ({
+                        src: el,
+                        alt: `bus img ${i + 1}`,
+                        width: 200,
+                        height: 200,
+                      }))}
+                      slidesPerView={3}
+                      spaceBetween={20}
+                    />
+                  )}
+                </>
+              </RouteDetailsList>
+            )
+          );
+        })()}
       </div>
     </div>
   );

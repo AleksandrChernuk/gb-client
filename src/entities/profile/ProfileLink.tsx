@@ -20,7 +20,7 @@ export const ProfileLink = ({ variant }: Props) => {
           size={'icon'}
           className="outline-1 justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px] p-0 py-2 "
         >
-          <Link href={'/profile'}>
+          <Link href={'/profile'} scroll prefetch>
             <User size={24} className="stroke-green-300 " />
             {t('mainNavProfileLink')}
           </Link>
@@ -31,6 +31,8 @@ export const ProfileLink = ({ variant }: Props) => {
       return (
         <Link
           href={'/profile'}
+          scroll
+          prefetch
           className="hover:underline flex items-center group text-black! text-base font-medium tracking-normal leading-[24px] gap-1 hover:text-[#8e8e8e]! dark:hover:text-slate-200 dark:text-slate-50!"
         >
           <div

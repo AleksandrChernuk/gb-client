@@ -78,9 +78,9 @@ export default function PaymentsCard({ item, customer }: Props) {
       <div className={S.divider} />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <MetaField label={TRANSLATION_KEYS.profile.payment_email} value={customer.phone} />
+        <MetaField label={TRANSLATION_KEYS.profile.payment_email} value={customer.email} />
 
-        <MetaField label={TRANSLATION_KEYS.profile.payment_email} value={customer?.phone} />
+        <MetaField label={TRANSLATION_KEYS.profile.phone} value={customer?.phone} />
 
         {customer?.birthdate && (
           <MetaField label={TRANSLATION_KEYS.profile.payment_birthdate} value={customer.birthdate} />

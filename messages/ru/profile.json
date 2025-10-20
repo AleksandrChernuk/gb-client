@@ -55,7 +55,7 @@
     "carrier_phone": "Телефон перевозчика",
     "details": "Детальнее",
     "no_payments_find": "Платежей не найдено",
-    "all_trips": "Все поездки",
+    "all_trips": "Завершённые поездки",
     "upcoming_trips": "Запланированные поездки",
     "error_load_trips": "Произошла ошибка при загрузке",
     "no_current_trips": "Нет поездок",

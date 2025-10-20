@@ -54,7 +54,7 @@
     "refund_rules": "Refund rules",
     "carrier_phone": "Carrier phone",
     "details": "Details",
-    "all_trips": "All trips",
+    "all_trips": "Completed trips",
     "upcoming_trips": "Upcoming trips",
     "error_load_trips": "An error occurred while loading",
     "no_current_trips": "No trips",
