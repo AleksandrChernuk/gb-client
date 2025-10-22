@@ -1,44 +1,41 @@
-import { memo } from 'react';
-import { useTranslations } from 'next-intl';
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import CustomCard from '@/shared/ui/CustomCard';
-import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import UniversalField from '@/features/checkout-form/ui/UniversalField';
+import Baggage from '@/features/checkout-form/ui/Baggage';
+import { IBaggagePrice } from '@/shared/types/route.types';
 
 type Props = {
   providerConfig: ProviderConfig;
-  isChild?: boolean;
   i: number;
+  paidBaggage?: IBaggagePrice[] | null;
 };
 
-const PassengerCard = memo(function PassengerCard({ i, providerConfig, isChild }: Props) {
-  const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
-
+function PassengerCard({ i, providerConfig, paidBaggage }: Props) {
   return (
     <li>
-      <CustomCard className="dark:bg-slate-800 space-y-2">
-        <h3 className="text-sm tablet:text-xl text-green-200">
-          {isChild
-            ? `${t('child_passenger')} ${t('passenger_number', { number: i + 1 })}`
-            : `${t('passenger')} ${t('passenger_number', { number: i + 1 })}`}
-        </h3>
+      <CustomCard className="dark:bg-slate-800 space-y-4 shadow-sm">
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
           {providerConfig.required.map((fieldName) => {
             return (
               <UniversalField
                 i={i}
                 key={`${fieldName}-${i + 1}`}
-                name={`passengers.${i}.${fieldName}`}
+                name={`c${i}.${fieldName}`}
                 config={providerConfig.fields[fieldName]}
               />
             );
           })}
         </div>
+
+        {paidBaggage && paidBaggage.length > 1 && (
+          <>
+            <h4 className="text-base tablet:text-lg text-green-300 font-medium mb-2">Багаж</h4>
+            <Baggage i={i} baggage={paidBaggage} />
+          </>
+        )}
       </CustomCard>
     </li>
   );
-});
+}
 
-export default memo(PassengerCard, (prev, next) => {
-  return prev.i === next.i && prev.isChild === next.isChild && prev.providerConfig === next.providerConfig;
-});
+export default PassengerCard;

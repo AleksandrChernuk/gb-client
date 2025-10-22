@@ -1,9 +1,8 @@
 'use client';
 
 import { useUserStore } from '@/shared/store/useUser';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { createPassengers } from '../helpers/createPassList';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
@@ -12,10 +11,10 @@ import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { createOrder } from '@/shared/api/orders.actions';
-import { FormData, PassengerFormData } from '@/features/checkout-form/types';
-import { getCheckoutSchemaForProvider } from '@/features/checkout-form/config';
-import { getProviderConfigByName } from '@/features/checkout-form/config/getProviderConfigByName';
+import { FormData } from '@/features/checkout-form/types';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import useDefaultPassengers from '@/features/checkout-form/hooks/useDefaultPassengers';
+import useCheckouSchema from '@/features/checkout-form/hooks/useCheckouSchema';
 
 function useCheckout() {
   const locale = useLocale();
@@ -23,13 +22,17 @@ function useCheckout() {
   const [loading, setLoading] = useState<boolean>(false);
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
+  const { schema } = useCheckouSchema();
+
+  const { defaultPassengers } = useDefaultPassengers();
+
   const { selectedTicket, updateRouteSeats } = useSelectedTickets(
     useShallow((state) => ({
       selectedTicket: state.selectedTicket,
       updateRouteSeats: state.updateRouteSeats,
     })),
   );
-
+  console.log('selectedTicket', selectedTicket);
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const { setInitiateNewOrder, setLoadingResult } = useNewOrderResult(
@@ -38,30 +41,6 @@ function useCheckout() {
       setLoadingResult: state.setLoadingResult,
     })),
   );
-
-  const adult = selectedTicket?.adult ?? 0;
-  const children = selectedTicket?.children ?? 0;
-  const ticket = selectedTicket?.route;
-
-  const providerConfig = useMemo(() => (ticket ? getProviderConfigByName(ticket) : null), [ticket]);
-
-  const defaultPassengers = useMemo(() => {
-    if (!providerConfig || !ticket) return [];
-
-    const passengers = createPassengers(adult, children, providerConfig, ticket.ticketPricing.basePrice || 0);
-
-    if (!Array.isArray(passengers)) {
-      console.error('createPassengers did not return an array');
-      return [];
-    }
-
-    return passengers as PassengerFormData[];
-  }, [adult, children, providerConfig, ticket]);
-
-  const schema = useMemo(() => {
-    if (!providerConfig) return null;
-    return getCheckoutSchemaForProvider(providerConfig, !!ticket?.details?.seatsMap?.length);
-  }, [providerConfig, ticket]);
 
   const methods = useForm<FormData>({
     resolver: schema ? zodResolver(schema) : undefined,
@@ -78,7 +57,7 @@ function useCheckout() {
   });
 
   const onSubmit = async (formData: FormData) => {
-    if (!ticket) {
+    if (!selectedTicket) {
       const errorMsg = t('order_missing_data');
       setError(errorMsg);
       toast.error(errorMsg);
@@ -92,11 +71,11 @@ function useCheckout() {
 
       const res = await createOrder(
         normalizeData({
-          fromCityId: ticket.departure.fromLocation.id,
-          toCityId: ticket.arrival.toLocation.id,
+          fromCityId: selectedTicket.route.departure.fromLocation.id,
+          toCityId: selectedTicket.route.arrival.toLocation.id,
           locale,
           formData,
-          route: ticket,
+          route: selectedTicket.route,
           user: user,
         }),
       );
@@ -141,7 +120,7 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
-
+  console.log(methods.getValues('passengers'));
   return { methods, onSubmit, error, loading };
 }
 

@@ -7,17 +7,17 @@ import { TypeSeatsMap } from './seat.interface';
 import { IStops } from './stops.interface';
 
 export interface IBaggagePrice {
-  baggage_id: string;
-  baggage_type_id: string;
-  baggage_type: string;
-  baggage_type_abbreviated: string | null;
-  baggage_title: string;
+  baggageId: string;
+  baggageTypeId: string;
+  baggageType: string;
+  baggageTypeAbbreviated: string | null;
+  baggageTitle: string;
   length: string;
   width: string;
   height: string;
   kg: string;
-  max_in_bus: string;
-  max_per_person: string;
+  maxInBus: string;
+  maxPerPerson: string;
   price: number;
   currency: string;
 }
@@ -135,7 +135,8 @@ export interface IRouteResponse {
   duration: string | null;
   busChange: boolean | null;
   eTicket: boolean | null;
-  ticketChange: boolean | null;
+  ticketChange: boolean;
+  refundOnlyOrder: boolean | null;
   ticketPricing: {
     ticketCode?: string | null;
     basePrice: number | null;

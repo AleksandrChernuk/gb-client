@@ -9,7 +9,7 @@ type Props = {
 
 export default function CheckoutCard({ children, title, cardCount }: Props) {
   return (
-    <ul className="space-y-4">
+    <ul className="space-y-4 ">
       <li className="flex items-center gap-2">
         {cardCount && (
           <div className="w-6 h-6 text-base font-bold text-center text-white rounded-sm bg-primary">{cardCount}</div>
@@ -19,7 +19,7 @@ export default function CheckoutCard({ children, title, cardCount }: Props) {
         </h3>
       </li>
       <li>
-        <CustomCard className="p-3 tablet:p-4 dark:bg-slate-800">{children}</CustomCard>
+        <CustomCard className="p-3 tablet:p-4 dark:bg-slate-800 shadow-sm">{children}</CustomCard>
       </li>
     </ul>
   );

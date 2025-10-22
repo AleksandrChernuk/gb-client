@@ -33,7 +33,7 @@ export default function BookingOpenButton({
       variant="outline"
       type="button"
       aria-invalid={!!error}
-      className="flex items-center justify-between w-full h-auto p-2 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900"
+      className="flex items-center justify-between w-full h-auto p-2 border rounded-lg bg-inherit border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-700 active:border-slate-700 dark:active:border-slate-900 shadow-sm disabled:opacity-100"
     >
       <div className="flex items-center gap-2 tablet:gap-4">
         <div className="[&_svg]:fill-[#6f8b90] w-[45px] h-[56px]">
@@ -41,16 +41,18 @@ export default function BookingOpenButton({
         </div>
 
         {isHydrated ? (
-          <div className="text-xs tablet:text-base font-medium leading-6 tracking-normal text-slate-700 dark:text-slate-50 shrink min-w-0">
+          <div className="text-xs tablet:text-base leading-6 tracking-normal text-black dark:text-slate-50 shrink min-w-0">
             {!hasSeatMap ? (
               <div className="flex flex-col items-start gap-1">
                 <span>{t_page('free_seating')}</span>
-                <span className="text-base font-medium leading-4 tracking-normal">{t_page('seat_guaranteed')}</span>
+                <span className="text-base leading-4 tracking-normal text-green-300">{t_page('seat_guaranteed')}</span>
               </div>
             ) : (
               <div className="flex flex-col items-start gap-1">
-                <span>{t_page('choose_place')}</span>
-                <span className={`text-sm ${error ? 'text-[#de2a1a]' : ''}`}>
+                <span className="text-green-300">{t_page('choose_place')}</span>
+                <span
+                  className={`text-sm ${error ? 'text-[#de2a1a]  dark:text-[#de2a1a]' : 'text-black dark:text-slate-50'}`}
+                >
                   {`${t_page('selected_place')} ${selectedSeatsCount} ${t_page('selected_seats_status')} ${passengersCount} ${t_page('place')}`}
                 </span>
               </div>

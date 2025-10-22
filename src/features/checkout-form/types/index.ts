@@ -1,3 +1,4 @@
+import { TPaidBaggage } from '@/shared/types/paid.baggage.types';
 import { IRouteResponse } from '@/shared/types/route.types';
 import { ICurrentUser } from '@/shared/types/user';
 
@@ -13,6 +14,7 @@ export interface PassengerFormData {
   discount?: string;
   discountDescription?: string;
   discountPercent?: string;
+  paidBaggage?: TPaidBaggage[] | null;
 }
 
 export interface FormData {

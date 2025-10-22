@@ -1,3 +1,5 @@
+import { TPaidBaggage } from '@/shared/types/paid.baggage.types';
+
 export interface ISeatOrder {
   seatId?: number;
   seatNumber?: number;
@@ -28,6 +30,7 @@ export type RequestTicket = {
   discountPercent?: number;
   withFees?: boolean;
   buggageCount?: number;
+  paidBaggage?: TPaidBaggage[];
 };
 
 export interface IRequestOrder {
@@ -89,6 +92,7 @@ export interface IRequestOrder {
   timetableId?: string;
   bustypeId?: string;
   ticketChange?: boolean;
+  refundOnlyOrder: boolean | null;
 }
 
 export interface ITransfer {

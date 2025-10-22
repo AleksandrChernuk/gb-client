@@ -27,7 +27,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[idx]?.seatNumber ?? '',
 
       withFees: true,
-      buggageCount: 1,
+      ...(passenger.paidBaggage && { paidBaggage: passenger.paidBaggage }),
     };
 
     if (isTranstempo && discounts.length > 0) {
@@ -115,7 +115,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
     ...(route.details?.luggageRules && { baggageRules: route.details?.luggageRules }),
 
     eTicket: !!route.eTicket,
-
+    refundOnlyOrder: route.refundOnlyOrder,
     tripType: 'oneway',
     orderType: formData.payment,
     currency: 'UAH',
