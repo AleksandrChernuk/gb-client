@@ -23,7 +23,7 @@ export default function SelectButton({
           {...props}
           variant={'default'}
           size={'primary'}
-          className="w-full text-amber-50 py-3 px-4 rounded-none rounded-b-2xl "
+          className="w-full text-amber-50 py-3 px-4 rounded-none rounded-b-2xl slashed-zero"
         >
           {loading ? (
             <LoaderCircle className="animate-spin" stroke="white" />

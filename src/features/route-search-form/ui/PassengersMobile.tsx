@@ -15,24 +15,20 @@ import { MainSearchInput } from './MainSearchInput';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { IconPass } from '@/assets/icons/IconPass';
-import { Separator } from '@/shared/ui/separator';
-import { PassengerType } from '@/shared/hooks/useRouterSearch';
 
 type Props = {
-  a: number;
-  c: number;
+  v: number;
   open: boolean;
   value: string;
   setOpen: (v: boolean) => void;
-  handleIncrement: (type: PassengerType) => void;
-  handleDecrement: (type: PassengerType) => void;
+  handleIncrement: () => void;
+  handleDecrement: () => void;
   handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
   handleOpenChange: (isOpen: boolean) => void;
 };
 
 export default function PassengersMobile({
-  a,
-  c,
+  v,
   open,
   value,
   handleIncrement,
@@ -67,19 +63,7 @@ export default function PassengersMobile({
               {t('placeholderPassengers')}
             </h3>
             <div>
-              <PassengersButton
-                handleIcrement={() => handleIncrement('adult')}
-                handleDecrement={() => handleDecrement('adult')}
-                type="adult"
-                value={a}
-              />
-              <Separator className="h-[1px] my-4 rounded-lg bg-[#e6e6e6] dark:bg-slate-700" />
-              <PassengersButton
-                handleIcrement={() => handleIncrement('children')}
-                handleDecrement={() => handleDecrement('children')}
-                type="children"
-                value={c}
-              />
+              <PassengersButton handleIcrement={handleIncrement} handleDecrement={handleDecrement} value={v} />
             </div>
           </div>
         </div>

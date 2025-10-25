@@ -2,8 +2,7 @@ export type InitialValues = {
   from: number | null;
   to: number | null;
   date: string;
-  adult: number;
-  children: number;
+  voyagers: number;
 };
 
 export type TSearchForm = {

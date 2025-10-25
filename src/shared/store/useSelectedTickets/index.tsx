@@ -6,8 +6,7 @@ import { IFreeSeats } from '@/shared/types/free.seats.interface';
 
 type TSelectedTicket = {
   route: IRouteResponse;
-  adult: number;
-  children: number;
+  voyagers: number;
 };
 
 export type useSelectedTicketsStore = {
@@ -16,7 +15,6 @@ export type useSelectedTicketsStore = {
   loadingTicketId: string | null;
   setSelectedTicket: (route: TSelectedTicket) => void;
   updateRouteSeats: (freeSeats: IFreeSeats[]) => void;
-
   setLoading: (ticketId: string | null) => void;
   resetSelectedTicket: () => void;
 };

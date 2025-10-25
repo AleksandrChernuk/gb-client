@@ -29,7 +29,7 @@ const MainSearchForm = () => {
   const [params] = useRouterSearch();
 
   const handleSubmit = () => {
-    const { from, to, date, adult, children } = params;
+    const { from, to, date, voyagers } = params;
 
     const result = MainSearchShema.safeParse({ from, to });
 
@@ -47,8 +47,7 @@ const MainSearchForm = () => {
     if (to) searchParams.set('to', to);
     if (date) searchParams.set('date', date);
 
-    if (adult !== 1) searchParams.set('adult', String(adult));
-    if (children !== 0) searchParams.set('children', String(children));
+    if (voyagers !== 1) searchParams.set('voyagers', String(voyagers));
 
     startTransition(() => {
       route.push(`/buses?${searchParams.toString()}`, { scroll: true });
@@ -85,7 +84,13 @@ const MainSearchForm = () => {
         <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
           {renderFields(isMobile ? 'mobile' : 'desktop')}
         </div>
-        <Button variant="main" size="mainSearch" disabled={isPending} onClick={handleSubmit}>
+        <Button
+          variant="main"
+          size="mainSearch"
+          disabled={isPending}
+          onClick={handleSubmit}
+          className="disabled:opacity-100"
+        >
           {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('searchBtn')}
         </Button>
       </div>

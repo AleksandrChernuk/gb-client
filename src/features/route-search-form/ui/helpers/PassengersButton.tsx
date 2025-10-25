@@ -5,35 +5,32 @@ import { Minus, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type Props = {
-  type: 'adult' | 'children';
   value: number;
   handleIcrement: () => void;
   handleDecrement: () => void;
 };
 
-export const PassengersButton = ({ value, type, handleIcrement, handleDecrement }: Props) => {
+export const PassengersButton = ({ value, handleIcrement, handleDecrement }: Props) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const isAdult = type === 'adult';
   const maxValue = 10;
-  const minValue = isAdult ? 1 : 0;
 
   return (
-    <div className={`flex flex-row items-center justify-between gap-20 ${isAdult && 'border-px border-[#e6e6e6]'}`}>
-      <p className="text-sm font-normal leading-4 tracking-normal text-slate-700 dark:text-slate-50 text-nowrap">
-        {isAdult ? t('adult') : t('children')}
+    <div className={`flex flex-row items-center justify-between gap-20`}>
+      <p className="text-sm leading-4 tracking-normal text-slate-700 dark:text-slate-50 text-nowrap font-medium">
+        {t('placeholderPassengers')}
       </p>
 
       <div className="bg-white flex gap-2 items-center justify-between p-1 w-24 dark:bg-slate-900 dark:hover:bg-black border-[1px] border-[#6f8b90] dark:border-[#6f8b90] rounded-md transition-all">
         <button
           className="p-1"
           onClick={() => {
-            if (value === minValue) {
+            if (value === 1) {
               return;
             }
             handleDecrement();
           }}
-          aria-label={`Decrement ${isAdult ? 'adult' : 'children'}`}
+          aria-label={`Decrement  Passengers`}
         >
           <Minus size={16} className="stroke-slate-700 dark:stroke-slate-200" />
         </button>
@@ -50,7 +47,7 @@ export const PassengersButton = ({ value, type, handleIcrement, handleDecrement 
             }
             handleIcrement();
           }}
-          aria-label={`Increment ${isAdult ? 'adult' : 'children'}`}
+          aria-label={`Increment  Passengers'}`}
         >
           <Plus size={16} className="stroke-slate-700 dark:stroke-slate-200" />
         </button>

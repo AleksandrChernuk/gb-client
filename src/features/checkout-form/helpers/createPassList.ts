@@ -2,7 +2,7 @@
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import { PassengerFormData } from '@/features/checkout-form/types';
 
-function createEmptyPassenger(config: ProviderConfig, isChildren = false, price: number): PassengerFormData {
+function createEmptyPassenger(config: ProviderConfig, price: number): PassengerFormData {
   const passenger: Record<string, any> = {};
 
   for (const field of config.required) {
@@ -11,7 +11,6 @@ function createEmptyPassenger(config: ProviderConfig, isChildren = false, price:
     }
   }
 
-  passenger.isChildren = isChildren;
   passenger.price = Math.round(price);
   passenger.discountId = '';
   passenger.discountDescription = '';
@@ -20,17 +19,9 @@ function createEmptyPassenger(config: ProviderConfig, isChildren = false, price:
   return passenger as PassengerFormData;
 }
 
-export function createPassengers(
-  adultCount: number,
-  childCount: number,
-  providerConfig: ProviderConfig,
-  price: number,
-): PassengerFormData[] {
-  const totalCount = adultCount + childCount;
-
-  return Array.from({ length: totalCount }, (_, index) => {
-    const isChild = index >= adultCount;
-    return createEmptyPassenger(providerConfig, isChild, price);
+export function createPassengers(voyagers: number, providerConfig: ProviderConfig, price: number): PassengerFormData[] {
+  return Array.from({ length: voyagers }, () => {
+    return createEmptyPassenger(providerConfig, price);
   });
 }
 

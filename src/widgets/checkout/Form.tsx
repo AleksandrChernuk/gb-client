@@ -4,7 +4,7 @@ import { FormProvider } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import useCheckout from '@/features/checkout-form/hooks/useCheckout';
-import Passengers from '@/widgets/checkout/ui/Passengers';
+import PassengersList from '@/widgets/checkout/ui/PassengersList';
 import { ConfirmationDialog } from '@/widgets/checkout/ui/ConfirmationDialog';
 import Contacts from '@/widgets/checkout/ui/Contacts';
 import Payment from '@/widgets/checkout/ui/Payment';
@@ -34,7 +34,9 @@ export default function CheckoutForm() {
         <ConfirmationDialog />
         <div className="relative grid grid-cols-1 laptop:grid-cols-3 gap-8">
           <div className="space-y-8 laptop:col-span-2">
-            <Passengers />
+            <CheckoutCard title={t('passenger')} cardCount={1} needCard>
+              <PassengersList />
+            </CheckoutCard>
 
             <CheckoutCard title={t('seat_reservation')} cardCount={2}>
               <Booking />

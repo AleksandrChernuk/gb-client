@@ -1,5 +1,6 @@
 import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 import { cn } from '@/shared/lib/utils';
+import { Badge } from '@/shared/ui/badge';
 
 const CarrierLabel = ({ carrierName, className }: { carrierName: string; className?: string }) => {
   return (
@@ -13,9 +14,12 @@ const CarrierLabel = ({ carrierName, className }: { carrierName: string; classNa
         <IconCarriersBus />
       </div>
 
-      <span className="truncate block text-[10px] tablet:text-xs font-normal tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50">
+      <Badge
+        variant={'outline'}
+        className="transition-none font-medium truncate block text-[10px] tablet:text-xs tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50 "
+      >
         {carrierName}
-      </span>
+      </Badge>
     </div>
   );
 };

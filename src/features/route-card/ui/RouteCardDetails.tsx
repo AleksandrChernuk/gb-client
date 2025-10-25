@@ -9,11 +9,11 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { toArray } from '@/shared/utils/toArray';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import RouteDetailsStops from '@/entities/route/RouteDetailsStops';
-import RouteDetailsList from '@/entities/route/RouteDetailsList';
-import DetailsItem from '@/entities/route/RouteDetailsItem';
 import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
 import { IRouteResponse } from '@/shared/types/route.types';
 import RouteDetailsBusImages from '@/entities/route/RouteDetailsBusImages';
+
+import { RouteDetailsSection, RouteDetailsField } from '@/shared/ui/route-details';
 
 type Props = {
   route: IRouteResponse;
@@ -29,20 +29,20 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
   if (loading)
     return (
-      <div className="h-full pt-10 flex items-center justify-center">
+      <div className="h-full flex items-center justify-center pt-10">
         <MainLoader />
       </div>
     );
 
   return (
-    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0 py-10">
+    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
       <div className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
               {t('route')}:
             </h5>
-            <div className="flex items-center gap-2  text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-200 font-bold text-xs mobile:tracking-normal mobile:leading-[18px]">
               {` ${format(route?.departure.dateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
                     ${route && extractLocationDetails(route?.departure.fromLocation, currentLocale).locationName}`}
               <ChevronRight size={16} className="stroke-green-300" />
@@ -51,11 +51,11 @@ export default function RouteCardDetails({ route, loading }: Props) {
             </div>
           </div>
 
-          <div className="gap-2 flex items-center text-slate-400 dark:text-slate-200 text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+          <div className="gap-2 flex items-center text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
             <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
             <span>
               {t('travel_time')}:{' '}
-              <span className="text-slate-400 dark:text-slate-200 ">
+              <span className="text-slate-500 dark:text-slate-200 font-bold">
                 {route.duration?.split(':')[0]}
                 {t('shortHours')}:{route.duration?.split(':')[1]}
                 {t('shortMinutes')}
@@ -88,49 +88,51 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
       <div className="space-y-4">
         {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
-          <RouteDetailsList label={t('luggage')} listClassName="">
-            <DetailsItem>
+          <RouteDetailsSection label={t('luggage')} listClassName="">
+            <RouteDetailsField>
               {route.details.luggageRules.map((e) => (
                 <span key={e} dangerouslySetInnerHTML={{ __html: e || '' }} />
               ))}
-            </DetailsItem>
-          </RouteDetailsList>
+            </RouteDetailsField>
+          </RouteDetailsSection>
         )}
 
         {(route?.details?.returnRulesDescription || route?.details?.returnRules) && (
-          <RouteDetailsList label={t('return_policy')}>
+          <RouteDetailsSection label={t('return_policy')}>
             {toArray(route?.details?.returnRulesDescription).map((el, idx) => (
-              <DetailsItem key={idx + 1}>{el}</DetailsItem>
+              <RouteDetailsField key={idx + 1}>{el}</RouteDetailsField>
             ))}
             {route?.details?.returnRules &&
               route?.details?.returnRules.map((el, idx) => (
-                <DetailsItem key={idx + 1}>{el.title ?? el.description}</DetailsItem>
+                <RouteDetailsField key={idx + 1}>{el.title ?? el.description}</RouteDetailsField>
               ))}
-          </RouteDetailsList>
+          </RouteDetailsSection>
         )}
 
-        <RouteDetailsList label={t('discounts')} listClassName="flex-row flex-wrap">
+        <RouteDetailsSection label={t('discounts')} listClassName="flex-row flex-wrap">
           {!isEmptyDiscounts(route?.details?.discounts) && (
-            <DetailsItem>
+            <RouteDetailsField>
               {toArray(route?.details?.discounts)
                 .map((d) => d.description || d.name)
                 .filter(Boolean)
                 .join(', ')}
-            </DetailsItem>
+            </RouteDetailsField>
           )}
-        </RouteDetailsList>
+        </RouteDetailsSection>
 
-        <RouteDetailsList label={t('route_info')} listClassName="flex-row flex-wrap">
+        <RouteDetailsSection label={t('route_info')} listClassName="flex-row flex-wrap">
           {route?.details?.routeInfo && (
-            <DetailsItem>{<span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />}</DetailsItem>
+            <RouteDetailsField>
+              {<span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />}
+            </RouteDetailsField>
           )}
-        </RouteDetailsList>
+        </RouteDetailsSection>
 
-        <RouteDetailsList label={t('amenities')} listClassName="flex-row flex-wrap">
+        <RouteDetailsSection label={t('amenities')} listClassName="flex-row flex-wrap">
           {!!route?.details?.amenities?.length && (
-            <DetailsItem>{toArray(route?.details?.amenities).join(', ')}</DetailsItem>
+            <RouteDetailsField>{toArray(route?.details?.amenities).join(', ')}</RouteDetailsField>
           )}
-        </RouteDetailsList>
+        </RouteDetailsSection>
 
         {(() => {
           const hasBusName = busName && busName !== 'bus' && busName !== 'no_plan';
@@ -143,11 +145,11 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
           return (
             shouldShowBus && (
-              <RouteDetailsList label={t('bus')} listClassName=" flex-wrap">
+              <RouteDetailsSection label={t('bus')} listClassName=" flex-wrap">
                 <>
                   <div className="flex flex-row flex-wrap gap-0.5">
-                    {hasBusName && <DetailsItem>{busName.replace(/\[|\]/g, '')}</DetailsItem>}
-                    {hasBusNumber && route?.details && <DetailsItem>{route.details.busNumber}</DetailsItem>}
+                    {hasBusName && <RouteDetailsField>{busName.replace(/\[|\]/g, '')}</RouteDetailsField>}
+                    {hasBusNumber && route?.details && <RouteDetailsField>{route.details.busNumber}</RouteDetailsField>}
                   </div>
                   {hasBusPictures && busPictures && (
                     <RouteDetailsBusImages
@@ -162,7 +164,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
                     />
                   )}
                 </>
-              </RouteDetailsList>
+              </RouteDetailsSection>
             )
           );
         })()}

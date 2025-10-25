@@ -3,8 +3,7 @@ import { IRouteResponse } from '@/shared/types/route.types';
 
 type TselectedTicket = {
   route: IRouteResponse | null;
-  adult: number;
-  children: number;
+  voyagers: number;
   from: ILocation;
   to: ILocation;
 };

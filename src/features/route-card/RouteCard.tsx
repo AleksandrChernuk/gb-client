@@ -25,7 +25,7 @@ type Props = {
   disabled?: boolean;
 };
 
-export const RouteCard = ({ element }: Props) => {
+export const RouteCard = ({ element, disabled }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,19 +45,19 @@ export const RouteCard = ({ element }: Props) => {
       fromCityId: element.departure.fromLocation.id ?? 0,
       toCityId: element.arrival.toLocation.id ?? 0,
       locale: locale,
-      passCount: params.adult + params.children,
+      passCount: params.voyagers,
       travelDate: element.departure.dateTime ?? '',
     },
   });
 
-  const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.adult, params.children);
+  const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.voyagers);
 
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       price={singlePrice}
       variant={variant}
       loading={loading}
-      disabled={loading}
+      disabled={loading || disabled}
       buttonText={t('selectButton')}
       onClick={() => {
         if (isPending) return;
@@ -69,7 +69,7 @@ export const RouteCard = ({ element }: Props) => {
             fromCityId: element.departure.fromLocation.id ?? 0,
             toCityId: element.arrival.toLocation.id ?? 0,
             locale: locale,
-            passCount: params.adult + params.children,
+            passCount: params.voyagers,
             travelDate: element.departure.dateTime ?? '',
           });
         });
@@ -124,7 +124,7 @@ export const RouteCard = ({ element }: Props) => {
                 price={totalPrice}
                 currency={element.ticketPricing.currency}
                 placeholderPassenger={t('placeholderPassenger')}
-                passengerCount={params.adult + params.children}
+                passengerCount={params.voyagers}
                 selectButton={<SelectButtonComponent variant="details" />}
               />
             }

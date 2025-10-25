@@ -22,8 +22,7 @@ const ToPay = memo(function ToPay() {
 
   const { control } = useFormContext();
 
-  const adult = selectedTicket?.adult ?? 0;
-  const children = selectedTicket?.children ?? 0;
+  const voyagers = selectedTicket?.voyagers ?? 0;
 
   const passengers = useWatch({ control, name: 'passengers' }) as Passenger[];
 
@@ -45,7 +44,7 @@ const ToPay = memo(function ToPay() {
           </ul>
 
           <li>
-            <p className="text-xs text-green-200 dark:text-green-100">{t_CHECKOUT('price_note')}</p>
+            <p className="text-xs text-green-300 dark:text-green-100">{t_CHECKOUT('price_note')}</p>
           </li>
           <li className="w-full h-px bg-slate-700 dark:bg-slate-50" />
           <li>
@@ -61,12 +60,8 @@ const ToPay = memo(function ToPay() {
           <ul className="flex items-center gap-1">
             <li>
               <p className="text-base font-normal tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
-                {adult && `${t('adult')}: ${adult}`}
-              </p>
-            </li>
-            <li>
-              <p className="text-base tracking-normal leading-[18px] tablet:text-lg tablet:leading-6 text-slate-700 dark:text-slate-50">
-                {children >= 1 && `, ${t('children')}: ${children}`}
+                {voyagers && `${t('placeholderPassengers')}: `}
+                {voyagers}
               </p>
             </li>
           </ul>

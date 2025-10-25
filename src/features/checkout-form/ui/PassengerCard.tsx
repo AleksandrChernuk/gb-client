@@ -1,16 +1,22 @@
+'use client';
+
 import { ProviderConfig } from '@/shared/types/checkot.types';
 import CustomCard from '@/shared/ui/CustomCard';
 import UniversalField from '@/features/checkout-form/ui/UniversalField';
 import Baggage from '@/features/checkout-form/ui/Baggage';
-import { IBaggagePrice } from '@/shared/types/route.types';
+import { IBaggagePrice, IRouteDetailsResponse } from '@/shared/types/route.types';
+
+import { BaggageItem } from '@/features/checkout-form/ui/BaggageItem';
+import { BaggageFree } from '@/assets/icons/baggageFree';
 
 type Props = {
   providerConfig: ProviderConfig;
-  i: number;
+  index: number;
   paidBaggage?: IBaggagePrice[] | null;
+  routeDetails: IRouteDetailsResponse | null | undefined;
 };
 
-function PassengerCard({ i, providerConfig, paidBaggage }: Props) {
+function PassengerCard({ index, providerConfig, paidBaggage, routeDetails }: Props) {
   return (
     <li>
       <CustomCard className="dark:bg-slate-800 space-y-4 shadow-sm">
@@ -18,19 +24,27 @@ function PassengerCard({ i, providerConfig, paidBaggage }: Props) {
           {providerConfig.required.map((fieldName) => {
             return (
               <UniversalField
-                i={i}
-                key={`${fieldName}-${i + 1}`}
-                name={`c${i}.${fieldName}`}
+                i={index}
+                key={`${fieldName}-${index + 1}`}
+                name={`c${index}.${fieldName}`}
                 config={providerConfig.fields[fieldName]}
               />
             );
           })}
         </div>
 
-        {paidBaggage && paidBaggage.length > 1 && (
+        {paidBaggage && paidBaggage.length > 1 && routeDetails?.luggageRules && (
           <>
             <h4 className="text-base tablet:text-lg text-green-300 font-medium mb-2">Багаж</h4>
-            <Baggage i={i} baggage={paidBaggage} />
+            {routeDetails?.luggageRules && (
+              <BaggageItem
+                icon={<BaggageFree />}
+                title="В вартість входить"
+                description={routeDetails?.luggageRules?.join('. ') ?? ''}
+              />
+            )}
+
+            <Baggage index={index} baggage={paidBaggage} />
           </>
         )}
       </CustomCard>

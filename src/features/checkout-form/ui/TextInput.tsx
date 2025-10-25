@@ -35,7 +35,7 @@ const TextInput = memo(function TextInput({ name, config }: Props) {
         <Input
           ref={ref}
           type="text"
-          value={value}
+          value={value ?? ''}
           onChange={onChange}
           onBlur={onBlur}
           placeholder={config.placeholder && t_forms(config.placeholder)}

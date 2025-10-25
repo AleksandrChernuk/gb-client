@@ -13,14 +13,13 @@ export default function useDefaultPassengers() {
     [selectedTicket],
   );
 
-  const adult = selectedTicket?.adult ?? 0;
-  const children = selectedTicket?.children ?? 0;
+  const voyagers = selectedTicket?.voyagers ?? 0;
   const ticket = selectedTicket?.route;
 
   const defaultPassengers = useMemo(() => {
     if (!providerConfig || !ticket) return [];
 
-    const passengers = createPassengers(adult, children, providerConfig, ticket.ticketPricing.basePrice || 0);
+    const passengers = createPassengers(voyagers, providerConfig, ticket.ticketPricing.basePrice || 0);
 
     if (!Array.isArray(passengers)) {
       console.error('createPassengers did not return an array');
@@ -32,6 +31,6 @@ export default function useDefaultPassengers() {
     }
 
     return passengers as PassengerFormData[];
-  }, [adult, children, providerConfig, ticket]);
+  }, [voyagers, providerConfig, ticket]);
   return { defaultPassengers };
 }

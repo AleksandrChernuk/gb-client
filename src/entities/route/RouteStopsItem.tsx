@@ -28,7 +28,7 @@ export default function RouteStopsItem({ isFirst, isLast, bus_changes, route, cl
       className={`relative flex items-start justify-start ${isLast && cn('overflow-hidden z-10 bg-slate-50 tablet:bg-white dark:bg-slate-900', classNameItemContainer)}`}
     >
       <div
-        className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px]' : 'text-xs font-bold tracking-normal leading-[18px]'} text-slate-700 dark:text-slate-50 mr-9 min-w-[40px] max-w-[40px]`}
+        className={`${isFirst || isLast ? 'text-sm font-bold tracking-normal leading-[16.8px] text-slate-700 dark:text-slate-50' : 'text-xs font-bold tracking-normal leading-[18px] text-slate-500 dark:text-slate-50'}  mr-9 min-w-[40px] max-w-[40px]`}
       >
         {isFirst ? departureTime : arrivalTime}
       </div>

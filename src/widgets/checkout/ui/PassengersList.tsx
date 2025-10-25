@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
@@ -8,7 +7,7 @@ import PassengerCard from '@/features/checkout-form/ui/PassengerCard';
 import { useShallow } from 'zustand/react/shallow';
 import { getProviderConfigByName } from '@/features/checkout-form/config/getProviderConfigByName';
 
-export default function Passengers() {
+export default function PassengersList() {
   const { control } = useFormContext();
   const { fields } = useFieldArray({ control, name: 'passengers' });
 
@@ -22,9 +21,9 @@ export default function Passengers() {
   return (
     <ul className="space-y-6">
       {fields.map((field, i) => (
-        //@ts-ignore
         <PassengerCard
-          i={i}
+          routeDetails={route?.details}
+          index={i}
           key={field.id}
           providerConfig={providerConfig}
           paidBaggage={route?.details?.baggagePrice}

@@ -44,7 +44,7 @@
     "libphonenumber-js": "^1.11.19",
     "liqpay-sdk-nodejs": "https://github.com/liqpay/sdk-nodejs",
     "lucide-react": "^0.475.0",
-    "motion": "^12.23.22",
+    "motion": "^12.23.24",
     "next": "^15.2.4",
     "next-intl": "^4.0.2",
     "next-themes": "^0.4.6",

@@ -32,7 +32,7 @@ function useCheckout() {
       updateRouteSeats: state.updateRouteSeats,
     })),
   );
-  console.log('selectedTicket', selectedTicket);
+
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const { setInitiateNewOrder, setLoadingResult } = useNewOrderResult(
@@ -120,7 +120,6 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
-  console.log(methods.getValues('passengers'));
   return { methods, onSubmit, error, loading };
 }
 

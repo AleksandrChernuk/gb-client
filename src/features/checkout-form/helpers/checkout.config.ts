@@ -127,11 +127,6 @@ export const gender: FieldConfig = {
   schema: z.string().min(1, { message: 'required' }),
 };
 
-export type TPassengersProps = {
-  adult?: string;
-  childrenPass?: string;
-};
-
 export type Passenger = {
   firstName: '';
   isChildren: boolean;

@@ -13,6 +13,7 @@ import { MobileFilter } from '@/features/route-mobile-filter';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import { BorderBeam } from '@/shared/ui/border-beam';
 
 export const RoutesResaltInformation = () => {
   const { fromCity, toCity } = useCityData();
@@ -27,8 +28,8 @@ export const RoutesResaltInformation = () => {
   const { locale } = useDateLocale();
 
   return (
-    <CustomCard className="p-5 space-y-4 shadow-xs relative">
-      <div className="flex items-center justify-between">
+    <CustomCard className="p-4 shadow-sm relative">
+      <div className="flex items-center justify-between mb-2">
         {params ? (
           <h3 className="text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 first-letter:uppercase">
             {formatDate(toDate(params.date), 'eee, d MMM', { locale })}
@@ -63,10 +64,11 @@ export const RoutesResaltInformation = () => {
             <Skeleton className="h-3 bg-green-50 dark:bg-slate-700 min-w-20" />
           )}
         </div>
-        <div className="text-[12px]  tablet:text-sm leading-6  text-green-200 text-nowrap truncate">
+        <div className="text-[12px]  tablet:text-sm leading-6  text-green-300 text-nowrap truncate">
           {`${isFetching ? 0 : filteredTickets?.length} ${t('resul_count')}`}
         </div>
       </div>
+      <BorderBeam duration={10} delay={3} size={100} borderWidth={1} />
     </CustomCard>
   );
 };

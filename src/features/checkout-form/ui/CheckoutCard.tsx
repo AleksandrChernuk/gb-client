@@ -5,9 +5,10 @@ type Props = {
   children: ReactNode;
   title: string;
   cardCount?: number;
+  needCard?: boolean;
 };
 
-export default function CheckoutCard({ children, title, cardCount }: Props) {
+export default function CheckoutCard({ children, title, cardCount, needCard }: Props) {
   return (
     <ul className="space-y-4 ">
       <li className="flex items-center gap-2">
@@ -19,7 +20,8 @@ export default function CheckoutCard({ children, title, cardCount }: Props) {
         </h3>
       </li>
       <li>
-        <CustomCard className="p-3 tablet:p-4 dark:bg-slate-800 shadow-sm">{children}</CustomCard>
+        {!needCard && <CustomCard className="p-3 tablet:p-4 dark:bg-slate-800 shadow-sm">{children}</CustomCard>}
+        {needCard && <>{children}</>}
       </li>
     </ul>
   );

@@ -39,20 +39,17 @@ export const parseAsNullableString = createParser({
 
 export type CityKey = 'from' | 'to';
 
-export type PassengerType = 'adult' | 'children';
-
 export type SearchParams = {
   from: string | null;
   to: string | null;
   date: string;
-  adult: number;
-  children: number;
+  voyagers: number;
 };
 
 export type SearchParamsActions = {
   setDate: (date: string) => void;
   setCityId: (cityKey: CityKey, cityId: string | null) => void;
-  setPassenger: (type: PassengerType, value: number) => void;
+  setPassenger: (value: number) => void;
   swap: () => void;
   reset: () => void;
 };
@@ -65,8 +62,7 @@ export function useRouterSearch(): UseRouterSearchReturn {
       from: parseAsNullableString,
       to: parseAsNullableString,
       date: parseAsSearchDate,
-      adult: parseAsInteger.withDefault(1),
-      children: parseAsInteger.withDefault(0),
+      voyagers: parseAsInteger.withDefault(1),
     },
     {
       history: 'push',
@@ -80,8 +76,7 @@ export function useRouterSearch(): UseRouterSearchReturn {
       from: rawParams.from,
       to: rawParams.to,
       date: rawParams.date || format(new Date(), 'yyyy-MM-dd'),
-      adult: rawParams.adult,
-      children: rawParams.children,
+      voyagers: rawParams.voyagers,
     }),
     [rawParams],
   );
@@ -96,9 +91,9 @@ export function useRouterSearch(): UseRouterSearchReturn {
         setRawParams({ [cityKey]: cityId });
       },
 
-      setPassenger: (type: PassengerType, value: number) => {
-        const clampedValue = Math.max(0, Math.min(value, 99));
-        setRawParams({ [type]: clampedValue });
+      setPassenger: (value: number) => {
+        const clampedValue = Math.max(0, Math.min(value, 20));
+        setRawParams({ voyagers: clampedValue });
       },
 
       swap: () => {
@@ -113,8 +108,7 @@ export function useRouterSearch(): UseRouterSearchReturn {
           from: null,
           to: null,
           date: format(new Date(), 'yyyy-MM-dd'),
-          adult: 1,
-          children: 0,
+          voyagers: 1,
         });
       },
     }),

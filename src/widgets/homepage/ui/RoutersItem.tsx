@@ -23,7 +23,7 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
       prefetch={false}
       href={{
         pathname: '/buses',
-        query: { from: from.id, to: to.id, date: formatted, adult: 1 },
+        query: { from: from.id, to: to.id, date: formatted, voyagers: 1 },
       }}
       scroll={true}
       className="truncate block h-auto bg-white hover:bg-slate-50 focus:bg-slate-50 border-[1px] 

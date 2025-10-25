@@ -17,7 +17,7 @@ export function useSelectTicket() {
 
   return async (route: IRouteResponse, detailsParams: RouteDetailsParams) => {
     if (['EUROCLUB'].includes(route.providerName)) {
-      setSelectedTicket({ route: route, adult: params.adult, children: params.children });
+      setSelectedTicket({ route: route, voyagers: params.voyagers });
 
       router.push('/checkout');
       return;
@@ -35,7 +35,7 @@ export function useSelectTicket() {
 
       const updatedRoute = updateRouteDetails(route, details);
 
-      setSelectedTicket({ route: updatedRoute, adult: params.adult, children: params.children });
+      setSelectedTicket({ route: updatedRoute, voyagers: params.voyagers });
 
       router.push('/checkout');
     } finally {

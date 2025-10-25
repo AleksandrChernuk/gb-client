@@ -18,7 +18,7 @@ export default function useTicketsSearch() {
   const enabled = !!params.from && !!params.to && !!params.date;
 
   const { isFetching, data, error } = useQuery({
-    queryKey: ['routes-search', params.from, params.to, params.adult, params.children, params.date, currentLanguage],
+    queryKey: ['routes-search', params.from, params.to, params.voyagers, params.date, currentLanguage],
     queryFn: () =>
       getRoutes({
         fromCityId: Number(params.from ?? 0),
@@ -31,13 +31,9 @@ export default function useTicketsSearch() {
 
   useEffect(() => {
     if (data) {
-      setTickets(
-        data.filter(
-          (element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= params.adult + params.children,
-        ),
-      );
+      setTickets(data.filter((element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= params.voyagers));
     }
-  }, [data, setTickets, params.adult, params.children]);
+  }, [data, setTickets, params.voyagers]);
 
   return {
     isFetching,
