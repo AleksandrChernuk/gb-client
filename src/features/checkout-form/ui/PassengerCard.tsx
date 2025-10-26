@@ -4,7 +4,7 @@ import { ProviderConfig } from '@/shared/types/checkot.types';
 import CustomCard from '@/shared/ui/CustomCard';
 import UniversalField from '@/features/checkout-form/ui/UniversalField';
 import Baggage from '@/features/checkout-form/ui/Baggage';
-import { IBaggagePrice, IRouteDetailsResponse } from '@/shared/types/route.types';
+import { IBaggagePrice } from '@/shared/types/route.types';
 
 import { BaggageItem } from '@/features/checkout-form/ui/BaggageItem';
 import { BaggageFree } from '@/assets/icons/baggageFree';
@@ -13,10 +13,11 @@ type Props = {
   providerConfig: ProviderConfig;
   index: number;
   paidBaggage?: IBaggagePrice[] | null;
-  routeDetails: IRouteDetailsResponse | null | undefined;
+  luggageRules?: string[] | null;
 };
 
-function PassengerCard({ index, providerConfig, paidBaggage, routeDetails }: Props) {
+function PassengerCard({ index, providerConfig, paidBaggage, luggageRules }: Props) {
+  console.log(luggageRules);
   return (
     <li>
       <CustomCard className="dark:bg-slate-800 space-y-4 shadow-sm">
@@ -33,18 +34,17 @@ function PassengerCard({ index, providerConfig, paidBaggage, routeDetails }: Pro
           })}
         </div>
 
-        {paidBaggage && paidBaggage.length > 1 && routeDetails?.luggageRules && (
+        {luggageRules && (
           <>
             <h4 className="text-base tablet:text-lg text-green-300 font-medium mb-2">Багаж</h4>
-            {routeDetails?.luggageRules && (
+            {luggageRules && (
               <BaggageItem
                 icon={<BaggageFree />}
                 title="В вартість входить"
-                description={routeDetails?.luggageRules?.join('. ') ?? ''}
+                description={luggageRules?.join('. ') ?? ''}
               />
             )}
-
-            <Baggage index={index} baggage={paidBaggage} />
+            {paidBaggage && paidBaggage.length > 1 && <Baggage index={index} baggage={paidBaggage} />}
           </>
         )}
       </CustomCard>

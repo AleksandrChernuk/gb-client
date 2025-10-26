@@ -1,14 +1,14 @@
 'use client';
 
-import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import useTicketsSearch from '@/shared/hooks/useTicketsSearch';
 import { BusLoader } from '@/shared/ui/BusLoader';
 import RouteNotFound from '@/shared/ui/RouteNotFound';
 import { CustomError } from '@/entities/common/CustomError';
-import { RouteCard } from '@/features/route-card/RouteCard';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import { useFilterTickets } from '@/shared/store/useFilterTickets';
+import { SingleRouteCard } from '@/features/route-card/variants-ui/SingleRouteCard';
 
 export default function ResultList() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
@@ -32,9 +32,9 @@ export default function ResultList() {
 
   return (
     <div className="flex flex-col space-y-10">
-      {filteredTickets.map((route) => {
-        return <RouteCard key={`${route.ticketId}`} element={route} />;
-      })}
+      {filteredTickets.map((route, i) => (
+        <SingleRouteCard key={i} data={route} />
+      ))}
     </div>
   );
 }

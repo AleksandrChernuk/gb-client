@@ -3,9 +3,7 @@
 import { useState, useTransition } from 'react';
 import { IRouteResponse } from '@/shared/types/route.types';
 import { useLocale, useTranslations } from 'next-intl';
-import MobileDetails from './ui/RouteMobileDetails';
-import Details from './ui/RouteCardDetails';
-import TicketRoute from './ui/TicketCardRoute';
+
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import RouteCardWrapper from '@/entities/route/RouteCard';
 import SelectButton from '@/entities/route/RouteSelectButton';
@@ -13,19 +11,22 @@ import CarrierLabel from '@/shared/ui/RouteCarrierLabel';
 import { usePricing } from '@/features/route-card/hooks/usePricing';
 import { useRouteDetails } from '@/features/route-card/hooks/useRouteDetails';
 import { updateRouteDetails } from '@/features/route-card/helpers/updateRouteDetails';
-import { RoteFreeSeats } from '@/features/route-card/ui/RoteFreeSeats';
+import { RoteFreeSeats } from '@/features/route-card/base-ui/RoteFreeSeats';
 import { useSelectTicket } from '@/features/route-card/hooks/useSelectTicket';
 import RouteDetailsToggle from '@/entities/route/RouteDetailsToggle';
-import { MobileDetailsPrice } from '@/features/route-card/ui/MobileDetailsPrice';
-import { RoutePricing } from '@/features/route-card/ui/RoutePricing';
+import { MobileDetailsPrice } from '@/features/route-card/base-ui/MobileDetailsPrice';
+import { RoutePricing } from '@/features/route-card/base-ui/RoutePricing';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+import TicketCardRoute from '@/features/route-card/base-ui/TicketCardRoute';
+import MobileDetails from '@/features/route-card/details-ui/RouteMobileDetails';
+import RouteCardDetails from '@/features/route-card/details-ui/RouteCardDetails';
 
 type Props = {
-  element: IRouteResponse;
+  data: IRouteResponse;
   disabled?: boolean;
 };
 
-export const RouteCard = ({ element, disabled }: Props) => {
+export const SingleRouteCard = ({ data: element, disabled }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState<boolean>(false);
@@ -84,7 +85,7 @@ export const RouteCard = ({ element, disabled }: Props) => {
       canPaymentToDriver={!!element.allowedOperations.canPaymentToDriver}
     >
       <div className="flex flex-row items-center justify-between gap-1 tablet:gap-2">
-        <TicketRoute route={element} />
+        <TicketCardRoute route={element} />
 
         <div className="flex-col items-center hidden gap-2 tablet:flex tablet:gap-4">
           <RoutePricing price={singlePrice} currency={element.ticketPricing.currency} />
@@ -129,16 +130,17 @@ export const RouteCard = ({ element, disabled }: Props) => {
               />
             }
           >
-            <Details route={updateRouteDetails(element, details)} loading={isLoading} />
+            <RouteCardDetails route={updateRouteDetails(element, details)} loading={isLoading} />
           </MobileDetails>
         </div>
       </div>
+
       <div
         className={`hidden tablet:block overflow-hidden transition-all duration-100 ${
           isOpen ? 'max-h-[4000px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        {isOpen && <Details route={updateRouteDetails(element, details)} loading={isLoading} />}
+        {isOpen && <RouteCardDetails route={updateRouteDetails(element, details)} loading={isLoading} />}
       </div>
     </RouteCardWrapper>
   );

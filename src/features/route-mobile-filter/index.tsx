@@ -48,7 +48,7 @@ const MobileFilterHeader: React.FC<TMobileFilterHeader> = ({ title }: TMobileFil
 
 export const MobileFilter = () => {
   const resetFilters = useFilterTickets((state) => state.resetFilters);
-  const { isFetching, data } = useTicketsSearch();
+  const { isFetching } = useTicketsSearch();
 
   const [params] = useRouterSearch();
 
@@ -62,7 +62,7 @@ export const MobileFilter = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          disabled={!hydrated || isFetching || !enabled || data.length === 0}
+          disabled={!hydrated || isFetching || !enabled || resetFilters.length === 0}
           variant={'outline'}
           size={'icon'}
           className="p-2 rounded-md"

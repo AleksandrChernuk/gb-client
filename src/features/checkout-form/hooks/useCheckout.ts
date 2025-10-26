@@ -10,7 +10,7 @@ import normalizeData from '../helpers/normalizeData';
 import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
-import { createOrder } from '@/shared/api/orders.actions';
+// import { createOrder } from '@/shared/api/orders.actions';
 import { FormData } from '@/features/checkout-form/types';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import useDefaultPassengers from '@/features/checkout-form/hooks/useDefaultPassengers';
@@ -26,18 +26,18 @@ function useCheckout() {
 
   const { defaultPassengers } = useDefaultPassengers();
 
-  const { selectedTicket, updateRouteSeats } = useSelectedTickets(
+  const { selectedTicket } = useSelectedTickets(
     useShallow((state) => ({
       selectedTicket: state.selectedTicket,
-      updateRouteSeats: state.updateRouteSeats,
+      // updateRouteSeats: state.updateRouteSeats,
     })),
   );
 
   const user = useUserStore(useShallow((state) => state.currentUser));
 
-  const { setInitiateNewOrder, setLoadingResult } = useNewOrderResult(
+  const { setLoadingResult } = useNewOrderResult(
     useShallow((state) => ({
-      setInitiateNewOrder: state.setInitiateNewOrder,
+      // setInitiateNewOrder: state.setInitiateNewOrder,
       setLoadingResult: state.setLoadingResult,
     })),
   );
@@ -68,8 +68,7 @@ function useCheckout() {
       setError(null);
       setLoading(true);
       setLoadingResult(true);
-
-      const res = await createOrder(
+      console.log(
         normalizeData({
           fromCityId: selectedTicket.route.departure.fromLocation.id,
           toCityId: selectedTicket.route.arrival.toLocation.id,
@@ -79,37 +78,47 @@ function useCheckout() {
           user: user,
         }),
       );
+      // const res = await createOrder(
+      //   normalizeData({
+      //     fromCityId: selectedTicket.route.departure.fromLocation.id,
+      //     toCityId: selectedTicket.route.arrival.toLocation.id,
+      //     locale,
+      //     formData,
+      //     route: selectedTicket.route,
+      //     user: user,
+      //   }),
+      // );
 
-      if (res?.status === 'error' && res?.message === 'Order total price not equal amount request!') {
-        toast.error(t('order_price_mismatch_error'));
-        setError(t('order_price_mismatch_error'));
-        return;
-      }
+      // if (res?.status === 'error' && res?.message === 'Order total price not equal amount request!') {
+      //   toast.error(t('order_price_mismatch_error'));
+      //   setError(t('order_price_mismatch_error'));
+      //   return;
+      // }
 
-      if (res?.status === 'error' && res?.message === 'Seat is not available') {
-        toast.error(t('seat_unavailable_error'));
+      // if (res?.status === 'error' && res?.message === 'Seat is not available') {
+      //   toast.error(t('seat_unavailable_error'));
 
-        if (Array.isArray(res?.freeSeats) && res.freeSeats.length > 0) {
-          updateRouteSeats(res.freeSeats);
+      //   if (Array.isArray(res?.freeSeats) && res.freeSeats.length > 0) {
+      //     updateRouteSeats(res.freeSeats);
 
-          methods.reset({ selectedSeats: [] });
+      //     methods.reset({ selectedSeats: [] });
 
-          toast.info(t('seat_list_updated_title'), {
-            description: t('seat_list_updated_description'),
-            duration: 4000,
-          });
-        }
+      //     toast.info(t('seat_list_updated_title'), {
+      //       description: t('seat_list_updated_description'),
+      //       duration: 4000,
+      //     });
+      //   }
 
-        return;
-      }
+      //   return;
+      // }
 
-      if (res?.status === 'error') {
-        toast.error(t('order_price_mismatch_error'));
-        setError(t('order_price_mismatch_error'));
-        return;
-      }
+      // if (res?.status === 'error') {
+      //   toast.error(t('order_price_mismatch_error'));
+      //   setError(t('order_price_mismatch_error'));
+      //   return;
+      // }
 
-      setInitiateNewOrder(res);
+      // setInitiateNewOrder(res);
     } catch (error: unknown) {
       console.error(t('order_create_failed'), error);
       const errorMessage = error instanceof Error ? error.message : t('order_create_system_error');

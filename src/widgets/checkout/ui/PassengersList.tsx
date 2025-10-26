@@ -22,9 +22,9 @@ export default function PassengersList() {
     <ul className="space-y-6">
       {fields.map((field, i) => (
         <PassengerCard
-          routeDetails={route?.details}
           index={i}
           key={field.id}
+          luggageRules={route?.details?.luggageRules}
           providerConfig={providerConfig}
           paidBaggage={route?.details?.baggagePrice}
         />

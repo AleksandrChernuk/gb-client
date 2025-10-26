@@ -6,10 +6,10 @@ import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
+import { adaptRoutesForRender, TAdaptedRoute } from '@/shared/lib/adaptRoutesForRender';
 
 export default function useTicketsSearch() {
   const currentLanguage = useLocale();
-
   const [params] = useRouterSearch();
 
   const setTickets = useFilterTickets((state) => state.setTickets);
@@ -31,13 +31,20 @@ export default function useTicketsSearch() {
 
   useEffect(() => {
     if (data) {
-      setTickets(data.filter((element) => element?.seats?.freeSeats && element?.seats?.freeSeats >= params.voyagers));
+      const adapted = adaptRoutesForRender(data);
+
+      const singleRoutes = adapted.filter((r: TAdaptedRoute) => r.type === 'single');
+
+      const plainRoutes = singleRoutes.map((r) => r.data);
+
+      setTickets(plainRoutes);
     }
-  }, [data, setTickets, params.voyagers]);
+  }, [data, setTickets]);
 
   return {
     isFetching,
+    data,
     error,
-    data: enabled ? (data ?? []) : tickets,
+    tickets,
   };
 }

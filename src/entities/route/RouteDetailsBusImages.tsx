@@ -31,7 +31,7 @@ const RouteDetailsBusImages = ({ items, spaceBetween }: Props) => {
       >
         {items.map((element, index) => (
           <SwiperSlide key={`${element.alt}-${index}`} className="flex items-center justify-center pb-10">
-            <AspectRatio ratio={1} className="bg-gray-100 rounded-2xl overflow-hidden w-full">
+            <AspectRatio ratio={1} className="bg-inherit rounded-2xl overflow-hidden w-full">
               <Image
                 draggable={false}
                 src={element.src}

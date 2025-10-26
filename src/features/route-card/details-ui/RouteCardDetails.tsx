@@ -29,15 +29,15 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
   if (loading)
     return (
-      <div className="h-full flex items-center justify-center pt-10">
+      <div className="h-full flex items-center justify-center pt-8">
         <MainLoader />
       </div>
     );
 
   return (
-    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:mt-8 tablet:space-y-0">
+    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:space-y-0 pt-8">
       <div className="space-y-4">
-        <div className="space-y-2">
+        <div className="space-y-4">
           <div className="flex items-center gap-2">
             <h5 className="text-sm font-bold tracking-normal leading-[18px] text-slate-700 dark:text-slate-50">
               {t('route')}:
@@ -53,14 +53,14 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
           <div className="gap-2 flex items-center text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
             <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
-            <span>
-              {t('travel_time')}:{' '}
-              <span className="text-slate-500 dark:text-slate-200 font-bold">
+            <div className="flex gap-0.5 items-center text-slate-500 dark:text-slate-50">
+              {t('travel_time')}:
+              <div className="text-slate-500 dark:text-slate-200 font-bold">
                 {route.duration?.split(':')[0]}
                 {t('shortHours')}:{route.duration?.split(':')[1]}
                 {t('shortMinutes')}
-              </span>
-            </span>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 ">
@@ -140,7 +140,6 @@ export default function RouteCardDetails({ route, loading }: Props) {
           const busPictures = route?.details?.busPictures;
           const hasBusPictures = busPictures && busPictures.length > 1 && busPictures[0] !== null;
 
-          // Показываем блок только если есть хотя бы одно из: валидное имя, номер или фото
           const shouldShowBus = hasBusName || hasBusNumber || hasBusPictures;
 
           return (

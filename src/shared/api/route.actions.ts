@@ -1,15 +1,11 @@
 'use server';
 
-import {
-  IGetRouteDetailsBody,
-  IGetRoutesBody,
-  IRouteDetailsResponse,
-  IRouteResponse,
-} from '@/shared/types/route.types';
+import { IProviderRoutes } from '@/shared/types/providerRoutes-interface';
+import { IGetRouteDetailsBody, IGetRoutesBody, IRouteDetailsResponse } from '@/shared/types/route.types';
 
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
 
-export const getRoutes = async (body: IGetRoutesBody): Promise<IRouteResponse[]> => {
+export const getRoutes = async (body: IGetRoutesBody): Promise<IProviderRoutes[]> => {
   const response = await fetch(`${BASE_URL}/routes`, {
     method: 'POST',
     headers: {
