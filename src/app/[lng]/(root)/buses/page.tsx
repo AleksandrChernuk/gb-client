@@ -9,6 +9,7 @@ import { RoutesResaltInformation } from '@/widgets/routes-resalt-information';
 import ResultList from '@/widgets/route-result-list';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
 import { redirect } from '@/shared/i18n/routing';
+import ScrollButton from '@/shared/ui/scroll-button';
 
 type Props = {
   params: Params;
@@ -67,6 +68,7 @@ export default async function Buses({
           </div>
         </Container>
       </section>
+      <ScrollButton />
     </main>
   );
 }

@@ -12,7 +12,7 @@ import { SingleRouteCard } from '@/features/route-card/variants-ui/SingleRouteCa
 
 export default function ResultList() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
-  const { isFetching, data, error } = useTicketsSearch();
+  const { isFetching, error } = useTicketsSearch();
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   const [params] = useRouterSearch();
@@ -26,11 +26,10 @@ export default function ResultList() {
   }
   if (error) return <CustomError />;
 
-  if (!isFetching && data && data.length === 0) return <RouteNotFound text={t('no_travel_find')} />;
+  if (!isFetching && filteredTickets && filteredTickets.length === 0)
+    return <RouteNotFound text={t('no_travel_find')} />;
 
   if (!params.from || !params.to) return <CustomError />;
-
-  console.log(data);
 
   return (
     <div className="flex flex-col space-y-10">
