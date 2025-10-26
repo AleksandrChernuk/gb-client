@@ -63,7 +63,7 @@ const MainSearchForm = () => {
         resetError={() => setErrors((prev) => ({ ...prev, from: null }))}
         setErrorsRaw={setErrors}
       />
-      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
+      {variant === 'mobile' && <Separator className="h-[1px] my-2  bg-slate-300 dark:bg-slate-700" />}
       <CitySearch
         name="to"
         variant={variant}
@@ -71,9 +71,9 @@ const MainSearchForm = () => {
         resetError={() => setErrors((prev) => ({ ...prev, to: null }))}
         setErrorsRaw={setErrors}
       />
-      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
+      {variant === 'mobile' && <Separator className="h-[1px] my-2  bg-slate-300 dark:bg-slate-700" />}
       <DatePicker variant={variant} />
-      {variant === 'mobile' && <Separator className="h-[1px] my-2" />}
+      {variant === 'mobile' && <Separator className="h-[1px] my-2 bg-slate-300 dark:bg-slate-700" />}
       <PassengersCount variant={variant} />
     </>
   );

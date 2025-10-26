@@ -17,7 +17,7 @@ export const PassengersButton = ({ value, handleIcrement, handleDecrement }: Pro
 
   return (
     <div className={`flex flex-row items-center justify-between gap-20`}>
-      <p className="text-sm leading-4 tracking-normal text-slate-700 dark:text-slate-50 text-nowrap font-medium">
+      <p className="text-lg leading-4 tracking-normal text-slate-700 dark:text-slate-50 text-nowrap font-medium">
         {t('placeholderPassengers')}
       </p>
 

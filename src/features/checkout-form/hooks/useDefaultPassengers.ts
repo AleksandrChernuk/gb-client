@@ -32,5 +32,6 @@ export default function useDefaultPassengers() {
 
     return passengers as PassengerFormData[];
   }, [voyagers, providerConfig, ticket]);
+
   return { defaultPassengers };
 }

@@ -49,7 +49,7 @@ export default function DatePickerDesktop({
 
       {open ? (
         <div
-          className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white shadow-xs top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in"
+          className="absolute left-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in shadow-sm"
           onMouseDown={(event) => {
             event.preventDefault();
             event.stopPropagation();

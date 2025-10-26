@@ -13,7 +13,6 @@ import { MobileFilter } from '@/features/route-mobile-filter';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
-import { BorderBeam } from '@/shared/ui/border-beam';
 
 export const RoutesResaltInformation = () => {
   const { fromCity, toCity } = useCityData();
@@ -68,7 +67,6 @@ export const RoutesResaltInformation = () => {
           {`${isFetching ? 0 : filteredTickets?.length} ${t('resul_count')}`}
         </div>
       </div>
-      <BorderBeam duration={10} delay={3} size={100} borderWidth={1} />
     </CustomCard>
   );
 };

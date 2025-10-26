@@ -59,19 +59,15 @@ export default function PassengersMobile({
         </SheetHeader>
         <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
           <div className="my-5">
-            <h3 className="mb-6 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50">
-              {t('placeholderPassengers')}
-            </h3>
-            <div>
-              <PassengersButton handleIcrement={handleIncrement} handleDecrement={handleDecrement} value={v} />
-            </div>
+            <PassengersButton handleIcrement={handleIncrement} handleDecrement={handleDecrement} value={v} />
           </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
             <Button
               variant={'default'}
-              className="w-full py-2 text-base font-bold leading-6 tracking-normal rounded-full"
+              size={'primary'}
+              className="w-full text-base font-bold leading-6 tracking-normal rounded-full"
             >
               {t('continue')}
             </Button>

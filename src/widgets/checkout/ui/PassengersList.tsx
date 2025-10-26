@@ -24,7 +24,6 @@ export default function PassengersList() {
         <PassengerCard
           index={i}
           key={field.id}
-          luggageRules={route?.details?.luggageRules}
           providerConfig={providerConfig}
           paidBaggage={route?.details?.baggagePrice}
         />

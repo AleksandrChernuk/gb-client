@@ -30,6 +30,8 @@ export default function ResultList() {
 
   if (!params.from || !params.to) return <CustomError />;
 
+  console.log(data);
+
   return (
     <div className="flex flex-col space-y-10">
       {filteredTickets.map((route, i) => (

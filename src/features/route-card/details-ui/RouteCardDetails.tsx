@@ -29,13 +29,13 @@ export default function RouteCardDetails({ route, loading }: Props) {
 
   if (loading)
     return (
-      <div className="h-full flex items-center justify-center pt-8">
+      <div className="h-full flex items-center justify-center py-8">
         <MainLoader />
       </div>
     );
 
   return (
-    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:space-y-0 pt-8">
+    <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:space-y-0 py-8">
       <div className="space-y-4">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -90,9 +90,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
         {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
           <RouteDetailsSection label={t('luggage')} listClassName="">
             <RouteDetailsField>
-              {route.details.luggageRules.map((e) => (
-                <span key={e} dangerouslySetInnerHTML={{ __html: e || '' }} />
-              ))}
+              {route.details.luggageRules?.map((item) => item.replace(/^●\s*/, '').trim()).join('. ') ?? ''}
             </RouteDetailsField>
           </RouteDetailsSection>
         )}
@@ -102,6 +100,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
             {toArray(route?.details?.returnRulesDescription).map((el, idx) => (
               <RouteDetailsField key={idx + 1}>{el}</RouteDetailsField>
             ))}
+
             {route?.details?.returnRules &&
               route?.details?.returnRules.map((el, idx) => (
                 <RouteDetailsField key={idx + 1}>{el.title ?? el.description}</RouteDetailsField>
@@ -123,7 +122,7 @@ export default function RouteCardDetails({ route, loading }: Props) {
         <RouteDetailsSection label={t('route_info')} listClassName="flex-row flex-wrap">
           {route?.details?.routeInfo && (
             <RouteDetailsField>
-              {<span dangerouslySetInnerHTML={{ __html: route?.details?.routeInfo || '' }} />}
+              {route.details.routeInfo?.replace(/●\s*/g, '').replace(/\.\s*/g, '.\n').trim() ?? ''}
             </RouteDetailsField>
           )}
         </RouteDetailsSection>

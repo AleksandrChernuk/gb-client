@@ -10,7 +10,6 @@ import normalizeData from '../helpers/normalizeData';
 import { toast } from 'sonner';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
-// import { createOrder } from '@/shared/api/orders.actions';
 import { FormData } from '@/features/checkout-form/types';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import useDefaultPassengers from '@/features/checkout-form/hooks/useDefaultPassengers';
@@ -29,10 +28,9 @@ function useCheckout() {
   const { selectedTicket } = useSelectedTickets(
     useShallow((state) => ({
       selectedTicket: state.selectedTicket,
-      // updateRouteSeats: state.updateRouteSeats,
+      updateRouteSeats: state.updateRouteSeats,
     })),
   );
-
   const user = useUserStore(useShallow((state) => state.currentUser));
 
   const { setLoadingResult } = useNewOrderResult(
@@ -129,6 +127,7 @@ function useCheckout() {
       setLoadingResult(false);
     }
   };
+
   return { methods, onSubmit, error, loading };
 }
 

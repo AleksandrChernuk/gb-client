@@ -87,7 +87,7 @@ export default function CitySearchDesktop({
       />
       {open ? (
         <div
-          className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-xs top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in p-4 w-[400px]"
+          className="absolute left-0 z-50 mt-5 duration-200 bg-white shadow-sm top-full rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in p-4 w-[400px]"
           onMouseDown={(event) => {
             event.preventDefault();
             event.stopPropagation();
