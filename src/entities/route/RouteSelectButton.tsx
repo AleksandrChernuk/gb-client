@@ -34,7 +34,9 @@ export default function SelectButton({
               <span className="text-xs ml-[2px]">UAH</span>
             </>
           )}{' '}
-          <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          {!props.disabled && (
+            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          )}
         </Button>
       );
 
@@ -46,7 +48,9 @@ export default function SelectButton({
           className="relative w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] text-[12px] font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full [&_svg]:shrink-0"
         >
           {loading ? <LoaderCircle className="animate-spin" /> : buttonText}{' '}
-          <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          {!props.disabled && (
+            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          )}{' '}
         </Button>
       );
 
@@ -54,7 +58,9 @@ export default function SelectButton({
       return (
         <Button {...props} variant={'default'} size={'primary'} className="relative">
           {loading ? <LoaderCircle className="animate-spin" /> : buttonText}{' '}
-          <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          {!props.disabled && (
+            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
+          )}{' '}
         </Button>
       );
 
