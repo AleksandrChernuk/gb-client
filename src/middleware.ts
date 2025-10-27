@@ -72,5 +72,5 @@ function redirectToSignin(req: NextRequest, locale: string) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|uk|ru)/:path*'],
+  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
 };

@@ -33,26 +33,26 @@ export const footerNavLinks = {
       title: 'faq',
       href: '/faq',
     },
-    {
-      title: 'blog',
-      href: '/blog',
-    },
-    {
-      title: 'bus_routes',
-      href: '/route-planner',
-    },
+    // {
+    //   title: 'blog',
+    //   href: '/blog',
+    // },
+    // {
+    //   title: 'bus_routes',
+    //   href: '/route-planner',
+    // },
     {
       title: 'oll_countries',
       href: '/all-countries',
     },
-    {
-      title: 'carriers',
-      href: '/carriers',
-    },
-    {
-      title: 'agents',
-      href: '/agents',
-    },
+    // {
+    //   title: 'carriers',
+    //   href: '/carriers',
+    // },
+    // {
+    //   title: 'agents',
+    //   href: '/agents',
+    // },
   ],
   social: [
     {
