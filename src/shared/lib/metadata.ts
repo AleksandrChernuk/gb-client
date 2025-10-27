@@ -55,12 +55,12 @@ const buildBaseMetadata = (
     metadataBase: new URL(baseUrl),
     ...(isPublic && {
       alternates: {
-        canonical: fullPath,
+        canonical: `${baseUrl}${fullPath}`,
         languages: {
-          'x-default': `/uk${path ? `/${path}` : ''}`,
-          uk: `/uk${path ? `/${path}` : ''}`,
-          en: `/en${path ? `/${path}` : ''}`,
-          ru: `/ru${path ? `/${path}` : ''}`,
+          'x-default': `${baseUrl}/uk${path ? `/${path}` : ''}`,
+          uk: `${baseUrl}/uk${path ? `/${path}` : ''}`,
+          en: `${baseUrl}/en${path ? `/${path}` : ''}`,
+          ru: `${baseUrl}/ru${path ? `/${path}` : ''}`,
         },
       },
     }),
