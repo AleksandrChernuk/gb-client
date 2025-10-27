@@ -17,7 +17,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng, email } = (await params) as { lng: Locale; email: string };
-  return generatePrivatePageMetadata({
+  return await generatePrivatePageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'auth',

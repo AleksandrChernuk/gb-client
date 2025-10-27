@@ -21,7 +21,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  return generatePublicPageMetadata({
+  return await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'for-cariers',
