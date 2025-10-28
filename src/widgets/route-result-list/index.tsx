@@ -9,6 +9,7 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import { SingleRouteCard } from '@/features/route-card/variants-ui/SingleRouteCard';
+import { adaptRoutesForRender, TAdaptedRoute } from '@/shared/lib/adaptRoutesForRender';
 
 export default function ResultList() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
@@ -30,9 +31,15 @@ export default function ResultList() {
     return <RouteNotFound text={t('no_travel_find')} />;
 
   if (!params.from || !params.to) return <CustomError />;
+
+  const adapted = adaptRoutesForRender(data);
+
+  const singleRoutes = adapted.filter((r: TAdaptedRoute) => r.type === 'single');
+
+  const plainRoutes = singleRoutes.map((r) => r.data);
   return (
     <div className="flex flex-col space-y-10">
-      {filteredTickets.map((route, i) => (
+      {plainRoutes.map((route, i) => (
         <SingleRouteCard key={i} data={route} />
       ))}
     </div>
