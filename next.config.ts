@@ -5,25 +5,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/uk',
-        permanent: true,
-      },
-
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'greenbus.com.ua' }],
-        destination: 'https://greenbus.com.ua/:path*',
-        permanent: true,
-      },
-
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.greenbus.com.ua' }],
-        destination: 'https://greenbus.com.ua/:path*',
-        permanent: true,
-      },
-      {
         source: '/route-planner',
         destination: '/',
         permanent: true,
