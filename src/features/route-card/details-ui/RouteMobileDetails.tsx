@@ -16,15 +16,23 @@ import {
 } from '@/shared/ui/sheet';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import CarrierLabel from '@/shared/ui/RouteCarrierLabel';
 
 type Props = {
   onClickTrigger: () => void;
   children: ReactNode;
   detailsFooter: ReactNode;
   disabledTrigger?: boolean;
+  carrierName: string;
 };
 
-export default function MobileDetails({ children, detailsFooter, onClickTrigger, disabledTrigger }: Props) {
+export default function MobileDetails({
+  children,
+  detailsFooter,
+  onClickTrigger,
+  disabledTrigger,
+  carrierName,
+}: Props) {
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
@@ -43,7 +51,7 @@ export default function MobileDetails({ children, detailsFooter, onClickTrigger,
         <SheetHeader className="justify-between">
           <SheetTitle className="sr-only"></SheetTitle>
           <SheetDescription className="sr-only"></SheetDescription>
-          <h3 className="text-base font-medium leading-6 tracking-normal text-green-300">{t('details')}</h3>
+          <CarrierLabel carrierName={carrierName} />
           <SheetClose asChild>
             <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
               <X color="#ffffff" />

@@ -125,6 +125,7 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
 
         <div className="flex items-center justify-center ml-auto tablet:hidden">
           <MobileDetails
+            carrierName={element.carrier.name || 'Deafault'}
             disabledTrigger={loading}
             onClickTrigger={() => {
               if (!hasDetails) {

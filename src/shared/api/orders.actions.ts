@@ -19,13 +19,18 @@ export const createOrder = async (body: IRequestOrder) => {
   });
 
   if (!response.ok) {
-    const res = await response.json();
+    const res = await response.text();
     console.log(res);
     return { status: 'error' };
   }
 
-  const res = await response.json();
-  return res;
+  try {
+    const res = await response.json();
+    return res;
+  } catch (error) {
+    console.error('CreateOrder parse JSON error:', error);
+    return { status: 'error' };
+  }
 };
 
 export const smsValidateOrder = async (body: ISmsValidateOrder) => {
