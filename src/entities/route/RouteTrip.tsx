@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import arrow from '@/assets/icons/arrow-mobile.svg';
 import { IRouteResponse } from '@/shared/types/route.types';
@@ -26,6 +27,11 @@ export default function RouteTrip({ route }: Props) {
 
   const duration = route.duration?.split(':');
 
+  const getValue = (value: any) => {
+    if (typeof value === 'object' && value !== null) return Object.values(value)[0] ?? '';
+    return value ?? '';
+  };
+
   return (
     <>
       {matches ? (
@@ -48,8 +54,8 @@ export default function RouteTrip({ route }: Props) {
                 {location_from}
               </div>
               <div className="text-xs tracking-normal leading-[18px] text-slate-700 dark:text-slate-200 tablet:text-sm font-normal tablet:leading-4">
-                {route.departure.stationName}
-                {route.departure.stationAddress}
+                {getValue(route.departure.stationName)}
+                {getValue(route.departure.stationAddress)}
               </div>
             </div>
 
@@ -58,8 +64,8 @@ export default function RouteTrip({ route }: Props) {
                 {location_to}
               </div>
               <div className="text-xs leading-[18px] text-slate-700 dark:text-slate-200 tablet:text-sm font-normal tablet:leading-4 tracking-normal">
-                {route.arrival.stationName}
-                {route.arrival.stationAddress}
+                {getValue(route.arrival.stationName)}
+                {getValue(route.arrival.stationAddress)}
               </div>
             </div>
           </div>
@@ -74,8 +80,8 @@ export default function RouteTrip({ route }: Props) {
               {location_from}
             </div>
             <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
-              {route.departure.stationName}
-              {route.departure.stationAddress}
+              {getValue(route.departure.stationName)}
+              {getValue(route.departure.stationAddress)}
             </div>
           </div>
 
@@ -99,8 +105,8 @@ export default function RouteTrip({ route }: Props) {
               {location_to}
             </div>
             <div className="text-sm font-normal leading-4 tracking-normal text-slate-400 dark:text-slate-200 text-wrap">
-              {route.arrival.stationName}
-              {route.arrival.stationAddress}
+              {getValue(route.arrival.stationName)}
+              {getValue(route.arrival.stationAddress)}
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { sortBuy } from '@/shared/constans/sortbuylist.constans';
 export const useFilterTickets = create<FilterTicketsStore>()(
   devtools(
     immer((set) => ({
+      hasHydrated: false,
       tickets: [],
       filteredTickets: [],
       carriers: [],

@@ -8,6 +8,7 @@ export type FilterTicketsState = {
   sortBy: TSortBuy;
   carriers: ICarriers[];
   filterCarriers: string[];
+  hasHydrated: boolean;
 };
 
 export type FilterTicketsActions = {

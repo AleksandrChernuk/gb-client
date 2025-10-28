@@ -9,11 +9,10 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import { SingleRouteCard } from '@/features/route-card/variants-ui/SingleRouteCard';
-import { adaptRoutesForRender, TAdaptedRoute } from '@/shared/lib/adaptRoutesForRender';
 
 export default function ResultList() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
-  const { isFetching, error, data } = useTicketsSearch();
+  const { isFetching, error } = useTicketsSearch();
   const filteredTickets = useFilterTickets((state) => state.filteredTickets);
 
   const [params] = useRouterSearch();
@@ -27,20 +26,15 @@ export default function ResultList() {
   }
   if (error) return <CustomError />;
 
-  if (!isFetching && !data && filteredTickets && filteredTickets.length === 0)
+  if (!isFetching && filteredTickets && filteredTickets.length === 0)
     return <RouteNotFound text={t('no_travel_find')} />;
 
   if (!params.from || !params.to) return <CustomError />;
 
-  const adapted = adaptRoutesForRender(data);
-
-  const singleRoutes = adapted.filter((r: TAdaptedRoute) => r.type === 'single');
-
-  const plainRoutes = singleRoutes.map((r) => r.data);
   return (
     <div className="flex flex-col space-y-10">
-      {plainRoutes.map((route, i) => (
-        <SingleRouteCard key={i} data={route} />
+      {filteredTickets.map((route) => (
+        <SingleRouteCard key={route.ticketId} data={route} />
       ))}
     </div>
   );
