@@ -27,7 +27,6 @@ type Props = {
 };
 
 export const SingleRouteCard = ({ data: element, disabled }: Props) => {
-  console.log(element);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState<boolean>(false);
