@@ -17,7 +17,7 @@ export default function RouteCardWrapper({ children, selectButton, providerName,
             <div className="size-6">{PAYMENT_TYPES[0].ICON}</div>
             {canPaymentToDriver && providerName !== 'KLR' && <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>}
           </div>
-          <div className="flex items-center gap-2 justify-end mb-1">{providerName}</div>
+          <div className="text-green-300">{providerName[0]}</div>
         </div>
 
         {children}
