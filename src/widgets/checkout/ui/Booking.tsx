@@ -25,7 +25,6 @@ const Booking = memo(function Booking() {
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
-
   const {
     field: { value: selectedSeats },
     fieldState: { error },

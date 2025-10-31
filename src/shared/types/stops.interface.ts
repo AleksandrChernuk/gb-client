@@ -1,7 +1,7 @@
 export interface IStops {
   departureDateTime: string | null;
   arrivalDateTime: string | null;
-  stoppingTime: string | null; // h:m
+  stoppingTime: string | null; // hh:mm
   location: {
     id: string | null;
     name: string | undefined | null;
@@ -18,4 +18,9 @@ export interface IStops {
     lon: number | null;
   };
   busChanges: boolean | null;
+  isChangeStations?: boolean; // Надо ли менять станции
+  isDepartureChangeStations?: boolean; // Станция прибытия для пересадки
+  isArrivalChangeStations?: boolean; // Станция пересадки для отправления
+  changeStationsType?: 'manual' | 'auto'; // manual - пересадка за яку відповідає перевізник, auto - пасажир сам відповідає за пересадку
+  transferTime?: string; // 'hh:mm'
 }

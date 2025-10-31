@@ -58,6 +58,8 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
 
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.voyagers);
 
+  const updatedRoute = updateRouteDetails(element, details);
+
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       price={singlePrice}
@@ -82,6 +84,39 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
           });
         });
       }}
+    />
+  );
+
+  const RouteCardDetailsComponent = () => (
+    <RouteCardDetails
+      departure={{
+        dateTime: updatedRoute.departure.dateTime,
+        stationAddress: updatedRoute.departure.stationAddress,
+        stationName: updatedRoute.departure.stationName,
+        location: updatedRoute.departure.fromLocation,
+      }}
+      arrival={{
+        dateTime: updatedRoute.arrival.dateTime,
+        stationAddress: updatedRoute.arrival.stationAddress,
+        stationName: updatedRoute.arrival.stationName,
+        location: updatedRoute.arrival.toLocation,
+      }}
+      routeDetails={{
+        duration: updatedRoute.duration,
+        stops: updatedRoute.details?.stops,
+        luggageRules: updatedRoute.details?.luggageRules,
+        returnRulesDescription: updatedRoute.details?.returnRulesDescription,
+        returnRules: updatedRoute.details?.returnRules,
+        discounts: updatedRoute.details?.discounts,
+        routeInfo: updatedRoute.details?.routeInfo,
+        amenities: updatedRoute.details?.amenities,
+      }}
+      bus={{
+        name: updatedRoute.details?.busName,
+        number: updatedRoute.details?.busNumber,
+        pictures: updatedRoute.details?.busPictures,
+      }}
+      loading={isLoading}
     />
   );
 
@@ -142,7 +177,7 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
               />
             }
           >
-            <RouteCardDetails route={updateRouteDetails(element, details)} loading={isLoading} />
+            <RouteCardDetailsComponent />
           </MobileDetails>
         </div>
       </div>
@@ -152,7 +187,7 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
           isOpen ? 'max-h-[4000px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        {isOpen && <RouteCardDetails route={updateRouteDetails(element, details)} loading={isLoading} />}
+        {isOpen && <RouteCardDetailsComponent />}
       </div>
     </RouteCardWrapper>
   );

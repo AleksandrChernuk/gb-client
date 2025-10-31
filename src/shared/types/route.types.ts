@@ -1,3 +1,4 @@
+import { IChangeStations } from '@/shared/types/route.change.stations.interface';
 import { IDiscount } from './discount-interface';
 import { IFreeSeats } from './free.seats.interface';
 import { IInsurer } from './insurer.interface';
@@ -100,10 +101,10 @@ export interface IRouteResponse {
     bustypeId?: string | null;
     searchId?: string;
     providerId: string;
-    hasPlan?: boolean | string;
-    requestGetFreeSeats?: boolean | string;
-    requestGetDiscount?: boolean | string;
-    requestGetBaggage?: boolean | string;
+    hasPlan?: boolean;
+    requestGetFreeSeats?: boolean;
+    requestGetDiscount?: boolean;
+    requestGetBaggage?: boolean;
   };
   providerName: string;
   allowedOperations: {
@@ -134,9 +135,10 @@ export interface IRouteResponse {
   };
   duration: string | null;
   busChange: boolean | null;
+  changeStations?: IChangeStations[]; //! New
   eTicket: boolean | null;
   ticketChange: boolean;
-  refundOnlyOrder: boolean | null;
+  refundOnlyOrder: boolean | null; // Возврат всего ордера - true, по билетам - false
   ticketPricing: {
     ticketCode?: string | null;
     basePrice: number | null;

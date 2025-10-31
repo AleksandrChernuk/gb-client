@@ -8,7 +8,11 @@ export function updateRouteDetails(route: IRouteResponse, res?: Partial<IRouteDe
     ...Object.fromEntries(
       Object.entries(res || {}).map(([key, value]) => [
         key,
-        currentDetails[key as keyof IRouteDetailsResponse] ?? value,
+        // Якщо value === null і є поточне значення - залишаємо поточне
+        // Інакше - використовуємо нове значення
+        value === null && currentDetails[key as keyof IRouteDetailsResponse] !== undefined
+          ? currentDetails[key as keyof IRouteDetailsResponse]
+          : value,
       ]),
     ),
   };

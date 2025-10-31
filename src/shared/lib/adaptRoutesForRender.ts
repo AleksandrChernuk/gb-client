@@ -1,4 +1,4 @@
-import { IProviderRoutes } from '@/shared/types/providerRoutes-interface';
+import { IProviderRoutes } from '@/shared/types/provider.routes.interface';
 import { IRouteResponse } from '@/shared/types/route.types';
 
 export type TAdaptedRoute =

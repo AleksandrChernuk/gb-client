@@ -10,29 +10,80 @@ import { toArray } from '@/shared/utils/toArray';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import RouteDetailsStops from '@/entities/route/RouteDetailsStops';
 import { isEmptyDiscounts } from '@/shared/utils/isEmptyDiscounts';
-import { IRouteResponse } from '@/shared/types/route.types';
+import { IStops } from '@/shared/types/stops.interface';
+import { IReturnRules } from '@/shared/types/return.rules.interface';
+import { IDiscount } from '@/shared/types/discount-interface';
 import RouteDetailsBusImages from '@/entities/route/RouteDetailsBusImages';
-
 import { RouteDetailsSection, RouteDetailsField } from '@/shared/ui/route-details';
+import { ILocation } from '@/shared/types/location.types';
+
+type DepartureData = {
+  dateTime?: string | null;
+  stationAddress?: string | null;
+  stationName?: string | null;
+  location?: ILocation;
+};
+
+type ArrivalData = {
+  dateTime?: string | null;
+  stationAddress?: string | null;
+  stationName?: string | null;
+  location?: ILocation;
+};
+
+type RouteDetailsData = {
+  duration?: string | null;
+  stops?: IStops[] | null;
+  luggageRules?: string[] | null;
+  returnRulesDescription?: string[] | null;
+  returnRules?: IReturnRules[] | null;
+  discounts?: IDiscount[] | null;
+  routeInfo?: string | null;
+  amenities?: string[] | null;
+};
+
+type BusData = {
+  name?: string | null;
+  number?: string | null;
+  pictures?: string[] | null;
+};
 
 type Props = {
-  route: IRouteResponse;
+  departure?: DepartureData;
+  arrival?: ArrivalData;
+  routeDetails?: RouteDetailsData;
+  bus?: BusData;
   loading?: boolean;
 };
 
-export default function RouteCardDetails({ route, loading }: Props) {
+export default function RouteCardDetails({ departure, arrival, routeDetails, bus, loading }: Props) {
   const currentLocale = useLocale();
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
   const { locale: dateLocale } = useDateLocale();
 
-  const busName = route?.details?.busName;
-
-  if (loading)
+  if (loading) {
     return (
       <div className="h-full flex items-center justify-center py-8">
         <MainLoader />
       </div>
     );
+  }
+
+  const departureLocationName = departure?.location
+    ? extractLocationDetails(departure.location, currentLocale).locationName
+    : '';
+  const arrivalLocationName = arrival?.location
+    ? extractLocationDetails(arrival.location, currentLocale).locationName
+    : '';
+
+  const busName = bus?.name;
+  const hasBusName = busName && busName !== 'bus' && busName !== 'no_plan';
+  const hasBusNumber = bus?.number;
+  const busPictures = bus?.pictures;
+  const hasBusPictures = busPictures && busPictures.length > 1 && busPictures[0] !== null;
+  const shouldShowBus = hasBusName || hasBusNumber || hasBusPictures;
+
+  const durationParts = routeDetails?.duration?.split(':');
 
   return (
     <div className="space-y-4 tablet:grid tablet:grid-cols-2 tablet:gap-2 tablet:space-y-0 py-8">
@@ -43,75 +94,83 @@ export default function RouteCardDetails({ route, loading }: Props) {
               {t('route')}:
             </h5>
             <div className="flex items-center gap-2 text-slate-500 dark:text-slate-200 font-bold text-xs mobile:tracking-normal mobile:leading-[18px]">
-              {` ${format(route?.departure.dateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
-                    ${route && extractLocationDetails(route?.departure.fromLocation, currentLocale).locationName}`}
-              <ChevronRight size={16} className="stroke-green-300" />
-              {` ${format(route?.arrival.dateTime || new Date(), 'EEE dd', { locale: dateLocale })}, 
-                   ${route && extractLocationDetails(route?.arrival.toLocation, currentLocale).locationName}`}
+              {departure?.dateTime && (
+                <>
+                  {format(new Date(departure.dateTime), 'EEE dd', { locale: dateLocale })}, {departureLocationName}
+                  <ChevronRight size={16} className="stroke-green-300" />
+                </>
+              )}
+              {arrival?.dateTime && (
+                <>
+                  {format(new Date(arrival.dateTime), 'EEE dd', { locale: dateLocale })}, {arrivalLocationName}
+                </>
+              )}
             </div>
           </div>
 
-          <div className="gap-2 flex items-center text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
-            <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
-            <div className="flex gap-0.5 items-center text-slate-500 dark:text-slate-50">
-              {t('travel_time')}:
-              <div className="text-slate-500 dark:text-slate-200 font-bold">
-                {route.duration?.split(':')[0]}
-                {t('shortHours')}:{route.duration?.split(':')[1]}
-                {t('shortMinutes')}
+          {durationParts && durationParts.length >= 2 && (
+            <div className="gap-2 flex items-center text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+              <Route className="rotate-90 stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
+              <div className="flex gap-0.5 items-center text-slate-500 dark:text-slate-50">
+                {t('travel_time')}:
+                <div className="text-slate-500 dark:text-slate-200 font-bold">
+                  {durationParts[0]}
+                  {t('shortHours')}:{durationParts[1]}
+                  {t('shortMinutes')}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-2">
             <Clock3 className="stroke-[#6f8b90] dark:stroke-slate-200" size={16} />
-            <p className="text-wrap text-slate-400 dark:text-slate-200  text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
+            <p className="text-wrap text-slate-400 dark:text-slate-200 text-xs mobile:font-normal mobile:tracking-normal mobile:leading-[18px]">
               {t('local_time')}
             </p>
           </div>
         </div>
 
         <RouteDetailsStops
-          stops={route.details?.stops}
-          to_station_address={route?.departure.stationAddress}
-          to_station_name={route?.departure?.stationName}
-          to_location_name={route && extractLocationDetails(route?.departure?.fromLocation, currentLocale).locationName}
-          to_departure_date_time={route?.departure.dateTime}
-          to_arrival_date_time={route?.departure.dateTime}
-          from_station_address={route?.arrival.stationAddress}
-          from_station_name={route?.arrival?.stationName}
-          from_location_name={route && extractLocationDetails(route?.arrival?.toLocation, currentLocale).locationName}
-          from_departure_date_time={route?.arrival.dateTime}
-          from_arrival_date_time={route?.arrival.dateTime}
+          stops={routeDetails?.stops}
+          to_station_address={departure?.stationAddress}
+          to_station_name={departure?.stationName}
+          to_location_name={departureLocationName}
+          to_departure_date_time={departure?.dateTime}
+          to_arrival_date_time={departure?.dateTime}
+          from_station_address={arrival?.stationAddress}
+          from_station_name={arrival?.stationName}
+          from_location_name={arrivalLocationName}
+          from_departure_date_time={arrival?.dateTime}
+          from_arrival_date_time={arrival?.dateTime}
         />
       </div>
 
       <div className="space-y-4">
-        {route?.details?.luggageRules && !!route?.details?.luggageRules.length && (
+        {routeDetails?.luggageRules && routeDetails.luggageRules.length > 0 && (
           <RouteDetailsSection label={t('luggage')} listClassName="">
             <RouteDetailsField>
-              {route.details.luggageRules?.map((item) => item.replace(/^●\s*/, '').trim()).join('. ') ?? ''}
+              {routeDetails.luggageRules.map((item) => item.replace(/^●\s*/, '').trim()).join('. ')}
             </RouteDetailsField>
           </RouteDetailsSection>
         )}
 
-        {(route?.details?.returnRulesDescription || route?.details?.returnRules) && (
+        {(routeDetails?.returnRulesDescription || routeDetails?.returnRules) && (
           <RouteDetailsSection label={t('return_policy')}>
-            {toArray(route?.details?.returnRulesDescription).map((el, idx) => (
-              <RouteDetailsField key={idx + 1}>{el}</RouteDetailsField>
-            ))}
-
-            {route?.details?.returnRules &&
-              route?.details?.returnRules.map((el, idx) => (
-                <RouteDetailsField key={idx + 1}>{el.title ?? el.description}</RouteDetailsField>
+            {routeDetails.returnRulesDescription &&
+              toArray(routeDetails.returnRulesDescription).map((el, idx) => (
+                <RouteDetailsField key={`desc-${idx}`}>{el}</RouteDetailsField>
               ))}
+
+            {routeDetails.returnRules?.map((el, idx) => (
+              <RouteDetailsField key={`rule-${idx}`}>{el.title ?? el.description}</RouteDetailsField>
+            ))}
           </RouteDetailsSection>
         )}
 
         <RouteDetailsSection label={t('discounts')} listClassName="flex-row flex-wrap">
-          {!isEmptyDiscounts(route?.details?.discounts) && (
+          {!isEmptyDiscounts(routeDetails?.discounts) && (
             <RouteDetailsField>
-              {toArray(route?.details?.discounts)
+              {toArray(routeDetails?.discounts)
                 .map((d) => d.description || d.name)
                 .filter(Boolean)
                 .join(', ')}
@@ -119,53 +178,40 @@ export default function RouteCardDetails({ route, loading }: Props) {
           )}
         </RouteDetailsSection>
 
-        <RouteDetailsSection label={t('route_info')} listClassName="flex-row flex-wrap">
-          {route?.details?.routeInfo && (
+        {routeDetails?.routeInfo && (
+          <RouteDetailsSection label={t('route_info')} listClassName="flex-row flex-wrap">
             <RouteDetailsField>
-              {route.details.routeInfo?.replace(/●\s*/g, '').replace(/\.\s*/g, '.\n').trim() ?? ''}
+              {routeDetails.routeInfo.replace(/●\s*/g, '').replace(/\.\s*/g, '.\n').trim()}
             </RouteDetailsField>
-          )}
-        </RouteDetailsSection>
+          </RouteDetailsSection>
+        )}
 
-        <RouteDetailsSection label={t('amenities')} listClassName="flex-row flex-wrap">
-          {!!route?.details?.amenities?.length && (
-            <RouteDetailsField>{toArray(route?.details?.amenities).join(', ')}</RouteDetailsField>
-          )}
-        </RouteDetailsSection>
+        {routeDetails?.amenities && routeDetails.amenities.length > 0 && (
+          <RouteDetailsSection label={t('amenities')} listClassName="flex-row flex-wrap">
+            <RouteDetailsField>{toArray(routeDetails.amenities).join(', ')}</RouteDetailsField>
+          </RouteDetailsSection>
+        )}
 
-        {(() => {
-          const hasBusName = busName && busName !== 'bus' && busName !== 'no_plan';
-          const hasBusNumber = route?.details?.busNumber;
-          const busPictures = route?.details?.busPictures;
-          const hasBusPictures = busPictures && busPictures.length > 1 && busPictures[0] !== null;
-
-          const shouldShowBus = hasBusName || hasBusNumber || hasBusPictures;
-
-          return (
-            shouldShowBus && (
-              <RouteDetailsSection label={t('bus')} listClassName=" flex-wrap">
-                <>
-                  <div className="flex flex-row flex-wrap gap-0.5">
-                    {hasBusName && <RouteDetailsField>{busName.replace(/\[|\]/g, '')}</RouteDetailsField>}
-                    {hasBusNumber && route?.details && <RouteDetailsField>{route.details.busNumber}</RouteDetailsField>}
-                  </div>
-                  {hasBusPictures && busPictures && (
-                    <RouteDetailsBusImages
-                      items={toArray(busPictures).map((el, i) => ({
-                        src: el,
-                        alt: `bus img ${i + 1}`,
-                        width: 200,
-                        height: 200,
-                      }))}
-                      slidesPerView={3}
-                      spaceBetween={20}
-                    />
-                  )}
-                </>
-              </RouteDetailsSection>
-            )
-          );
-        })()}
+        {shouldShowBus && (
+          <RouteDetailsSection label={t('bus')} listClassName="flex-wrap">
+            <div className="flex flex-row flex-wrap gap-0.5">
+              {hasBusName && busName && <RouteDetailsField>{busName.replace(/\[|\]/g, '')}</RouteDetailsField>}
+              {hasBusNumber && bus?.number && <RouteDetailsField>{bus.number}</RouteDetailsField>}
+            </div>
+            {hasBusPictures && busPictures && (
+              <RouteDetailsBusImages
+                items={toArray(busPictures).map((el, i) => ({
+                  src: el,
+                  alt: `bus img ${i + 1}`,
+                  width: 200,
+                  height: 200,
+                }))}
+                slidesPerView={3}
+                spaceBetween={20}
+              />
+            )}
+          </RouteDetailsSection>
+        )}
       </div>
     </div>
   );

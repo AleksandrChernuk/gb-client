@@ -17,14 +17,14 @@ const useSeatMap = () => {
     () =>
       seatsMapper({
         seatsMap: selectedTicket?.details?.seatsMap,
-        freeSeats: selectedTicket?.details?.freeSeatsMap,
+        freeSeatsMap: selectedTicket?.details?.freeSeatsMap,
       }),
     [selectedTicket?.details?.seatsMap, selectedTicket?.details?.freeSeatsMap],
   );
 
   const hasSeatMap = seatMapWithStatus.length > 0;
 
-  return { hasSeatMap, seatMapWithStatus, isHydrated };
+  return { isHydrated, seatMapWithStatus, hasSeatMap };
 };
 
 export default useSeatMap;

@@ -1,6 +1,6 @@
 'use server';
 
-import { IProviderRoutes } from '@/shared/types/providerRoutes-interface';
+import { IProviderRoutes } from '@/shared/types/provider.routes.interface';
 import { IGetRouteDetailsBody, IGetRoutesBody, IRouteDetailsResponse } from '@/shared/types/route.types';
 
 const BASE_URL = 'https://greenbus-backend.onrender.com/api/v1';
