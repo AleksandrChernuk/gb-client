@@ -4,11 +4,21 @@ export interface ILocationQueryParams {
   perPage?: number;
 }
 
+export interface ILocationDescription {
+  id: number;
+  language: string;
+  description: string;
+  locationId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ILocationDetails {
   locationName: string;
   locationType: string;
   countryName: string;
   regionName: string;
+  description: string;
 }
 
 export interface ILocation {
@@ -23,6 +33,7 @@ export interface ILocation {
   createdAt: Date;
   updatedAt: Date;
   translations: ILocationTranslations[];
+  description: ILocationDescription[];
   locationType: ILocationType;
   timezone: ITimezone;
   country: ICountry;

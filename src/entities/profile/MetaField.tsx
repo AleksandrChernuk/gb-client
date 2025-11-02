@@ -16,7 +16,7 @@ export const MetaField = ({ label, value, classNamesLabel, classNamesValue, clas
   const t = useTranslations();
 
   return (
-    <div className={cn('', classNamesBlock)}>
+    <div className={cn('subpixel-antialiased slashed-zero', classNamesBlock)}>
       {!!label && <p className={cn(S.label, classNamesLabel)}>{t(label)}</p>}
       <p className={cn(S.value, classNamesValue)}>{value ?? '—'}</p>
     </div>

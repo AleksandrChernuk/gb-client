@@ -16,7 +16,7 @@ const CarrierLabel = ({ carrierName, className }: { carrierName: string; classNa
 
       <Badge
         variant={'outline'}
-        className="transition-none font-medium truncate block text-[10px] tablet:text-xs tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50 "
+        className="transition-none font-medium truncate block text-[10px] tablet:text-xs tracking-normal leading-[18px] break-all text-slate-700 dark:text-slate-50 antialiased"
       >
         {carrierName}
       </Badge>

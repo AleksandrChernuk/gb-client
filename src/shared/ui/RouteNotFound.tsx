@@ -13,7 +13,7 @@ const RouteNotFound = ({ className, text }: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col items-center self-center gap-4 p-5 mx-auto text-center w-fit tablet:p-6 bg-white dark:bg-slate-900 shadow-xs rounded-2xl',
+        'flex flex-col items-center self-center gap-4 p-5 mx-auto text-center w-fit tablet:p-6 bg-white dark:bg-slate-900 shadow-sm rounded-2xl',
         className,
       )}
     >

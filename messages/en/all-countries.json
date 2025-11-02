@@ -1,1 +1,18 @@
-{ "all-countries": { "all": "All", "select_country": "Select a country", "select_city": "Select a city" } }
+{
+  "all-countries": {
+    "all": "All",
+    "select_country": "Select a country",
+    "select_city": "Select a city",
+    "search_section_title": "Search section",
+    "search_aria_label": "Bus ticket search",
+
+    "tickets_heading": "Bus tickets to {locationName}",
+
+    "teaser_text": "Planning to visit {locationName}? On greenbus.com.ua you can find bus tickets to {locationName}. Use the search form above to reserve a seat on a modern bus from trusted carriers.",
+
+    "about_city_heading": "About {locationName}",
+
+    "map_title": "Map of {locationName}",
+    "map_aria_label": "Location map of {locationName}"
+  }
+}

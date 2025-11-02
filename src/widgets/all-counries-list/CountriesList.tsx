@@ -1,53 +1,22 @@
 'use client';
 
+import { ICountryListItem } from '@/app/[lng]/(root)/all-countries/page';
 import { Button } from '@/shared/ui/button';
-import React from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useAllCountriesContext } from '@/features/all-countries/model/AllCountriesProvider';
-import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import CardWrapper from '@/shared/ui/CardWrapper';
+import CustomCard from '@/shared/ui/CustomCard';
+import Link from 'next/link';
 
-export default function CountriesList() {
-  const { countrys, locations, selectCountry, selectedCountry } = useAllCountriesContext();
-  const locale = useLocale();
-  const t = useTranslations(MESSAGE_FILES.ALL_COUNTRIES);
-
-  const selectedCountryName = selectedCountry ? extractLocationDetails(selectedCountry, locale).countryName : null;
-
+export function CountriesList({ countries, locale }: { countries: ICountryListItem[]; locale: string }) {
   return (
-    <CardWrapper className="dark:bg-slate-900 tablet:p-4">
-      <ul className="flex items-center flex-wrap gap-4">
-        <li key="all-countries">
-          <Button
-            variant="ghost"
-            className={`px-2 py-1 rounded-sm ${selectedCountry === null ? 'bg-green-500 text-white' : ''}`}
-            onClick={() => selectCountry(null)}
-          >
-            {t('all')}
-          </Button>
-        </li>
-
-        {countrys.map((countryName) => {
-          const location = locations.find((loc) => extractLocationDetails(loc, locale).countryName === countryName);
-
-          if (!location) return null;
-
-          const isActive = selectedCountryName === countryName;
-
-          return (
-            <li key={countryName}>
-              <Button
-                variant="ghost"
-                className={`px-2 py-1 rounded-sm ${isActive ? 'bg-green-500 text-white' : ''}`}
-                onClick={() => selectCountry(location)}
-              >
-                {countryName}
-              </Button>
-            </li>
-          );
-        })}
+    <CustomCard>
+      <ul className="grid gap-1 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {countries.map((c) => (
+          <li key={c.slug}>
+            <Button variant={'link'} asChild>
+              <Link href={`/${locale}/all-countries/${c.slug}?cid=${c.countryId}`}>{c.name}</Link>
+            </Button>
+          </li>
+        ))}
       </ul>
-    </CardWrapper>
+    </CustomCard>
   );
 }

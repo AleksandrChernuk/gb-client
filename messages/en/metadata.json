@@ -105,6 +105,24 @@
       "title": "Search FAQ Topics and Sections | GreenBus 🚍",
       "description": "Find the topics and sections you need in the GreenBus FAQ. Get quick access to up-to-date information about routes, tickets, and travel.",
       "keywords": "FAQ search, questions and answers, GreenBus, topic search, customer support, travel, tickets"
+    },
+    "country": {
+      "title": "Bus Tickets — {countryName}",
+      "description": "All bus routes to/from {countryName}. Online booking, schedules, prices and intercity directions. Buy tickets quickly and safely with GreenBus!",
+      "keywords": "bus tickets, {countryName}, routes, schedule, online booking, prices, departure cities, bus",
+      "og_title": "Bus Routes — {countryName}",
+      "og_description": "View available directions, prices and bus schedules to/from {countryName}.",
+      "not_found_title": "Country not found",
+      "not_found_description": "Page unavailable."
+    },
+    "location": {
+      "title": "Bus Tickets — {city}, {countryName}",
+      "description": "Bus routes to {city}: online tickets, schedules, prices and convenient intercity directions. Order bus tickets quickly and safely with GreenBus.",
+      "keywords": "bus tickets, {city}, {countryName}, routes, schedule, online booking, prices, departure points",
+      "og_title": "Bus Tickets — {city}, {countryName}",
+      "og_description": "Bus routes to {city}: online tickets, schedules and prices. Buy tickets quickly and safely with GreenBus.",
+      "not_found_title": "City not found",
+      "not_found_description": "City page unavailable."
     }
   }
 }

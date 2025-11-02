@@ -43,12 +43,12 @@ const ProfileOrderCard = ({ item }: Props) => {
       <div className="flex items-start justify-between">
         <MetaField
           value={formatOrderNumber(item.orderNumber)}
-          classNamesValue="text-lg laptop:text-xl font-semibold text-slate-900 dark:text-white"
+          classNamesValue="text-lg laptop:text-xl font-semibold text-slate-900 dark:text-white slashed-zero oldstyle-nums"
         />
         <div>
-          <p className={cn(S.value, 'flex items-center gap-1')}>
+          <p className={cn(S.value, 'flex items-center gap-1 subpixel-antialiased')}>
             {format(item.updatedAt, 'dd.MM.yyyy')}
-            <span className="text-xs p-1 border border-green-300 dark:border-green-100 rounded-xl text-green-200 dark:text-green-100">
+            <span className="text-xs p-1 border border-green-300 rounded-xl text-green-300 proportional-nums">
               {format(item.updatedAt, 'HH:mm')}
             </span>
           </p>

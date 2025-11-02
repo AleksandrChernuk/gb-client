@@ -14,7 +14,7 @@ export const CustomError = () => {
   const router = useRouter();
 
   return (
-    <CustomCard className="flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-xs w-fit">
+    <CustomCard className="flex flex-col items-center self-center gap-4 p-5 mx-auto text-center shadow-sm w-fit">
       <div className="relative w-[313px] h-[313px] mx-auto overflow-hidden rounded-3xl">
         <Image src={errorImg} draggable={false} placeholder="blur" alt="peaple wait buses" />
       </div>

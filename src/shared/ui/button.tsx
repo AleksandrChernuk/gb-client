@@ -32,7 +32,7 @@ const buttonVariants = cva(
         ghost:
           'bg-transparent text-slate-800 dark:text-slate-50 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 active:bg-slate-200/50 dark:active:bg-slate-700/50',
 
-        link: 'text-green-200 underline-offset-4 hover:underline active:opacity-90',
+        link: 'text-green-300 underline-offset-4 hover:underline active:opacity-90',
 
         main:
           'bg-green-600 hover:bg-green-600/80 active:bg-green-600/75 text-base font-bold leading-6 tracking-normal text-black ' +

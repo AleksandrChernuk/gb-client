@@ -1,1 +1,19 @@
-{ "all-countries": { "all": "Усі", "select_country": "Оберіть країну", "select_city": "Оберіть місто" } }
+{
+  "all-countries": {
+    "all": "Усі",
+    "select_country": "Оберіть країну",
+    "select_city": "Оберіть місто",
+
+    "search_section_title": "Пошуковий розділ",
+    "search_aria_label": "Пошук автобусних квитків",
+
+    "tickets_heading": "Квитки на автобуси до {locationName}",
+
+    "teaser_text": "Хочете поїхати в {locationName}? На сайті greenbus.com.ua ви знайдете квитки на автобуси в {locationName}. Скористайтеся пошуковою формою вгорі, щоб забронювати місце на сучасний автобус від перевірених перевізників.",
+
+    "about_city_heading": "Про місто {locationName}",
+
+    "map_title": "Карта міста {locationName}",
+    "map_aria_label": "Карта розташування {locationName}"
+  }
+}
