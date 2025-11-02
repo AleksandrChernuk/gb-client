@@ -132,16 +132,16 @@ export default function RouteCardDetails({ departure, arrival, routeDetails, bus
 
         <RouteDetailsStops
           stops={routeDetails?.stops}
-          to_station_address={departure?.stationAddress}
-          to_station_name={departure?.stationName}
-          to_location_name={departureLocationName}
-          to_departure_date_time={departure?.dateTime}
-          to_arrival_date_time={departure?.dateTime}
-          from_station_address={arrival?.stationAddress}
-          from_station_name={arrival?.stationName}
-          from_location_name={arrivalLocationName}
-          from_departure_date_time={arrival?.dateTime}
-          from_arrival_date_time={arrival?.dateTime}
+          to_station_address={arrival?.stationAddress}
+          to_station_name={arrival?.stationName}
+          to_location_name={arrivalLocationName}
+          to_departure_date_time={arrival?.dateTime}
+          to_arrival_date_time={arrival?.dateTime}
+          from_station_address={departure?.stationAddress}
+          from_station_name={departure?.stationName}
+          from_location_name={departureLocationName}
+          from_departure_date_time={departure?.dateTime}
+          from_arrival_date_time={departure?.dateTime}
         />
       </div>
 

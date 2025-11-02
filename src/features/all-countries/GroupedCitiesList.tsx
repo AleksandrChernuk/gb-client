@@ -3,6 +3,7 @@ import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import CustomCard from '@/shared/ui/CustomCard';
 import { Button } from '@/shared/ui/button';
 import Link from 'next/link';
+import slugify from 'slugify';
 
 type GroupedItem = {
   letter: string;
@@ -14,26 +15,38 @@ type Props = {
   locale: string;
 };
 
-export function GroupedCitiesList({ groups, locale }: Props) {
+function GroupedCitiesList({ groups, locale }: Props) {
   return (
     <>
       {groups.map(({ letter, items }) => (
         <div key={letter} className="mb-8">
           <div className="text-lg font-bold text-slate-50 px-2 bg-green-300 rounded-sm w-fit mb-4">{letter}</div>
-          <CustomCard>
-            <ul className="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <CustomCard className="shadow-sm">
+            <ul className="flex flex-row flex-wrap gap-2 items-center">
               {items.map((city) => {
                 const county = extractLocationDetails(city, 'en').countryName.toLocaleLowerCase();
 
-                const name = extractLocationDetails(city, 'en').locationName.toLocaleLowerCase();
+                const rawName = extractLocationDetails(city, 'en').locationName.toLocaleLowerCase();
                 const dispalyName = extractLocationDetails(city, locale).locationName;
 
-                const citySlug = `${name}?lid=${city.id}`;
+                const safeSlug = slugify(rawName, {
+                  lower: true,
+                  strict: true,
+                  locale: 'en',
+                });
+
+                const citySlug = `${safeSlug}?to=${city.id}`;
 
                 return (
                   <li key={city.id}>
-                    <Button variant="link" asChild>
-                      <Link href={`/${locale}/all-countries/${county}/${citySlug}`}>{dispalyName}</Link>
+                    <Button variant="link" asChild className="dark:text-green-200">
+                      <Link
+                        prefetch={false}
+                        href={`/${locale}/all-countries/${county}/${citySlug}`}
+                        rel="nofollow noopener noreferrer"
+                      >
+                        {dispalyName}
+                      </Link>
                     </Button>
                   </li>
                 );
@@ -45,3 +58,5 @@ export function GroupedCitiesList({ groups, locale }: Props) {
     </>
   );
 }
+
+export default GroupedCitiesList;

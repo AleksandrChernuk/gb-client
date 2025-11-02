@@ -4,15 +4,14 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params, TParams } from '@/shared/types/common.types';
 import { Container } from '@/shared/ui/Container';
-
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ILocation } from '@/shared/types/location.types';
-import { CountriesList } from '@/widgets/all-counries-list/CountriesList';
-import { AutoBreadcrumb } from '@/shared/ui/AutoBreadcrumb';
-import CitySearch from '@/widgets/all-counries-list/CitySeach';
-import { GroupedCitiesListClient } from '@/widgets/all-counries-list/GroupedCitiesListClient';
 import { mapCountries } from '@/shared/lib/mapCountries';
+import MainFooter from '@/widgets/footer/MainFooter';
+import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
+import { notFound } from 'next/navigation';
+import { CitySearch, CountriesList, GroupedCitiesListClient } from '@/features/all-countries';
 
 export interface ICountryListItem {
   slug: string;
@@ -40,45 +39,53 @@ export default async function AllCountries({
   setRequestLocale(lng as Locale);
 
   const data = await getLocations({ query: '', perPage: 1000 });
-  const locations: ILocation[] = data.data;
 
+  if (!data) {
+    notFound();
+  }
+
+  const locations: ILocation[] = data.data;
   const countries = mapCountries(locations, lng);
+  const t = await getTranslations({ locale: lng as Locale, namespace: MESSAGE_FILES.ALL_COUNTRIES });
 
   return (
-    <main className="bg-slate-50 dark:bg-slate-800 flex-1">
-      <section className="bg-green-500 dark:bg-slate-900">
-        <Container size="l" className="py-5">
-          <div className="mb-4">
-            <AutoBreadcrumb hideCurrent />
-          </div>
-          <MainSearch />
-        </Container>
-      </section>
+    <>
+      <main className="bg-slate-50 dark:bg-slate-800 flex-1">
+        <section className="bg-green-500 dark:bg-slate-900">
+          <Container size="l" className="py-5">
+            <div className="mb-4">
+              <BreadcrumbSimple items={[{ label: t('breadcrumbs_home'), href: '/' }]} />
+            </div>
+            <MainSearch />
+          </Container>
+        </section>
 
-      <section className="pt-10">
-        <Container size="m">
-          <h1 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-            {`Виберіть країну від'їзду автобуса`}
-          </h1>
+        <section className="pt-10">
+          <Container size="m">
+            <h1 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              {t('meet_buses_in_your_city')}
+            </h1>
 
-          <CountriesList countries={countries} locale={lng} />
-        </Container>
-      </section>
+            <CountriesList countries={countries} locale={lng} />
+          </Container>
+        </section>
 
-      <section className="pt-8 pb-4">
-        <Container size="m">
-          <h2 className="mb-1 text-lg font-bold tracking-normal leading-[28.8px] laptop:text-[28px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-            {`Зустрічайте автобуси у своєму місті!`}
-          </h2>
-          <CitySearch />
-        </Container>
-      </section>
+        <section className="pt-8 pb-4">
+          <Container size="m">
+            <h2 className="mb-1 text-lg font-bold tracking-normal leading-[28.8px] laptop:text-[28px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              {t('select_departure_country')}
+            </h2>
+            <CitySearch />
+          </Container>
+        </section>
 
-      <section>
-        <Container size="m">
-          <GroupedCitiesListClient initialLocations={locations} locale={lng} />
-        </Container>
-      </section>
-    </main>
+        <section>
+          <Container size="m">
+            <GroupedCitiesListClient initialLocations={locations} locale={lng} />
+          </Container>
+        </section>
+      </main>
+      <MainFooter />
+    </>
   );
 }

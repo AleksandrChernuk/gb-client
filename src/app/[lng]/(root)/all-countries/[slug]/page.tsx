@@ -1,16 +1,21 @@
 import { getLocations } from '@/shared/api/location.actions';
-import { ILocation } from '@/shared/types/location.types';
 import Link from 'next/link';
 import { Container } from '@/shared/ui/Container';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { Button } from '@/shared/ui/button';
-import { AutoBreadcrumb } from '@/shared/ui/AutoBreadcrumb';
 import MainSearch from '@/features/route-search-form';
 import CustomCard from '@/shared/ui/CustomCard';
 import { TSearchParams } from '@/shared/types/common.types';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import slugify from 'slugify';
+import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
+import MainFooter from '@/widgets/footer/MainFooter';
+import { filterCityLocations } from '@/shared/lib/filterCityLocations';
+import { notFound } from 'next/navigation';
+import { InfoAllCcountries } from '@/features/all-countries';
+import { generateCountryMetadata } from '@/shared/lib/generateCountryMetadata';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
@@ -21,96 +26,14 @@ export async function generateMetadata({ params, searchParams }: Readonly<Props>
   const query = await searchParams;
 
   const countryId = Number(query.cid);
-
   const data = await getLocations({ query: '', perPage: 2000 });
-  const locations: ILocation[] = data.data;
 
-  const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
-
-  const reference = locations.find((loc) => {
-    if (countryId) return loc.country.id === countryId;
-
-    const en = extractLocationDetails(loc, 'en').countryName.toLowerCase();
-    return en === slug.toLowerCase();
+  return generateCountryMetadata({
+    lng,
+    slug,
+    countryId,
+    locations: data.data,
   });
-
-  if (!reference) {
-    return {
-      title: t('country.not_found_title'),
-      description: t('country.not_found_description'),
-      robots: { index: false, follow: false },
-    };
-  }
-
-  const detailsEn = extractLocationDetails(reference, 'en');
-  const details = extractLocationDetails(reference, lng);
-
-  const countryName = details.countryName;
-  const countrySlug = detailsEn.countryName.toLowerCase();
-
-  const urlPath =
-    `https://greenbus.com.ua/${lng}/all-countries/${countrySlug}` + (countryId ? `?cid=${countryId}` : '');
-
-  return {
-    title: t('country.title', { countryName }),
-    description: t('country.description', { countryName }),
-    keywords: t('country.keywords', { countryName }),
-
-    alternates: {
-      canonical: urlPath,
-      languages: {
-        'x-default': `https://greenbus.com.ua/uk/all-countries/${countrySlug}`,
-        uk: `https://greenbus.com.ua/uk/all-countries/${countrySlug}`,
-        en: `https://greenbus.com.ua/en/all-countries/${countrySlug}`,
-        ru: `https://greenbus.com.ua/ru/all-countries/${countrySlug}`,
-      },
-    },
-
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        maxSnippet: -1,
-        maxImagePreview: 'large',
-        maxVideoPreview: -1,
-      },
-    },
-
-    openGraph: {
-      title: t('country.og_title', { countryName }),
-      description: t('country.og_description', { countryName }),
-      url: urlPath,
-      type: 'website',
-      siteName: 'GreenBus',
-      locale: lng,
-      images: [
-        {
-          url: 'https://greenbus.com.ua/apple-touch-icon.png',
-          width: 512,
-          height: 512,
-          alt: 'GreenBus Logo',
-        },
-      ],
-    },
-
-    twitter: {
-      card: 'summary_large_image',
-      title: t('country.og_title', { countryName }),
-      description: t('country.og_description', { countryName }),
-      images: ['https://greenbus.com.ua/apple-touch-icon.png'],
-    },
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    manifest: '/manifest.json',
-    metadataBase: new URL('https://greenbus.com.ua'),
-  };
 }
 
 export default async function CountryPage({ params, searchParams }: Props) {
@@ -120,55 +43,77 @@ export default async function CountryPage({ params, searchParams }: Props) {
   const countryId = Number(queri.cid);
 
   const data = await getLocations({ query: '', perPage: 2000 });
-  const locations: ILocation[] = data.data;
 
   setRequestLocale(lng as Locale);
 
-  const cityLocations = locations.filter((loc) => {
-    if (countryId) {
-      return loc.country.id === countryId;
-    }
-    const englishCountryName = extractLocationDetails(loc, 'en').countryName.toLocaleLowerCase();
+  if (!data) {
+    notFound();
+  }
 
-    return englishCountryName === slug.toLowerCase();
-  });
+  const cityLocations = filterCityLocations(data.data, lng, slug, countryId);
+
+  const t = await getTranslations({ locale: lng as Locale, namespace: MESSAGE_FILES.ALL_COUNTRIES });
 
   return (
-    <main className="bg-slate-50 dark:bg-slate-800 flex-1">
-      <section className="bg-green-500 dark:bg-slate-900">
-        <Container size="l" className="py-5">
-          <div className="mb-4">
-            <AutoBreadcrumb hideCurrent />
-          </div>
-          <MainSearch />
-        </Container>
-      </section>
+    <>
+      <main className="bg-slate-50 dark:bg-slate-800 flex-1">
+        <section className="bg-green-500 dark:bg-slate-900">
+          <Container size="l" className="py-5">
+            <div className="mb-4">
+              <BreadcrumbSimple
+                items={[
+                  { label: t('breadcrumbs_home'), href: '/' },
+                  { label: t('breadcrumbs_all_countries'), href: `/${lng}/all-countries` },
+                  { label: extractLocationDetails(cityLocations[0], lng).countryName },
+                ]}
+              />
+            </div>
+            <MainSearch />
+          </Container>
+        </section>
 
-      <section className="py-10">
-        <Container size="l">
-          <h1 className="text-2xl font-bold mb-6">
-            Квитки на автобуси {extractLocationDetails(cityLocations[0], lng).countryName}
-          </h1>
-          <CustomCard>
-            <ul className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {cityLocations.map((location) => {
-                const name = extractLocationDetails(location, 'en').locationName.toLocaleLowerCase();
-                const citySlug = `${name}?lid=${location.id}`;
+        <section className="py-10">
+          <Container size="l">
+            <h1 className="text-xl tablet:text-2xl font-bold mb-4">
+              {t('bus_tickets')} {extractLocationDetails(cityLocations[0], lng).countryName}
+            </h1>
 
-                return (
-                  <li key={location.id}>
-                    <Button asChild variant={'link'}>
-                      <Link href={`/${lng}/all-countries/${slug}/${citySlug}`}>
-                        {extractLocationDetails(location, lng).locationName}
-                      </Link>
-                    </Button>
-                  </li>
-                );
-              })}
-            </ul>
-          </CustomCard>
-        </Container>
-      </section>
-    </main>
+            <InfoAllCcountries
+              text={t('teaser_text', { locationName: extractLocationDetails(cityLocations[0], lng).countryName })}
+            />
+
+            <CustomCard className="shadow-sm">
+              <ul className="flex flex-row flex-wrap items-center gap-2 my-6">
+                {cityLocations.map((location) => {
+                  const name = extractLocationDetails(location, 'en').locationName.toLocaleLowerCase();
+                  const safeSlug = slugify(name, {
+                    lower: true,
+                    strict: true,
+                    locale: 'en',
+                  });
+
+                  const citySlug = `${safeSlug}?to=${location.id}`;
+
+                  return (
+                    <li key={location.id}>
+                      <Button asChild variant={'link'} className="dark:text-green-200">
+                        <Link
+                          href={`/${lng}/all-countries/${slug}/${citySlug}`}
+                          prefetch={false}
+                          rel="nofollow noopener noreferrer"
+                        >
+                          {extractLocationDetails(location, lng).locationName}
+                        </Link>
+                      </Button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </CustomCard>
+          </Container>
+        </section>
+      </main>
+      <MainFooter />
+    </>
   );
 }

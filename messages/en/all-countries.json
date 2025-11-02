@@ -1,6 +1,12 @@
 {
   "all-countries": {
+    "breadcrumbs_home": "Home",
+    "breadcrumbs_all_countries": "All countries",
+    "bus_tickets": "Bus Tickets",
     "all": "All",
+    "select_departure_country": "Select the bus departure country",
+    "meet_buses_in_your_city": "Meet buses in your city!",
+    "find_your_city": "Find your city",
     "select_country": "Select a country",
     "select_city": "Select a city",
     "search_section_title": "Search section",

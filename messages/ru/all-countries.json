@@ -1,5 +1,11 @@
 {
   "all-countries": {
+    "breadcrumbs_home": "Главная",
+    "breadcrumbs_all_countries": "Все страны",
+    "bus_tickets": "Билеты на автобусы",
+    "select_departure_country": "Выберите страну отправления автобуса",
+    "meet_buses_in_your_city": "Встречайте автобусы в своём городе!",
+    "find_your_city": "Ищите свой город",
     "all": "Все",
     "select_country": "Выберите страну",
     "select_city": "Выберите город",
