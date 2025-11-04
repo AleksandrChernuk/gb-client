@@ -10,6 +10,7 @@ import { adaptRoutesForRender, TAdaptedRoute } from '@/shared/lib/adaptRoutesFor
 
 export default function useTicketsSearch() {
   const currentLanguage = useLocale();
+
   const [params] = useRouterSearch();
 
   const setTickets = useFilterTickets((state) => state.setTickets);

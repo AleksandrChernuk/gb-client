@@ -1,15 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NormalizeDataParams } from '@/features/checkout-form/types';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+import { IFreeSeats } from '@/shared/types/free.seats.interface';
 import { IRequestOrder, RequestTicket } from '@/shared/types/order-interface';
+
+function isFreeSeatsArray(seats: any): seats is IFreeSeats[] {
+  return Array.isArray(seats);
+}
 
 const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: NormalizeDataParams): IRequestOrder => {
   const details = route.details;
+  const freeSeats = route.details?.freeSeatsMap;
 
   const discounts = Array.isArray(route.details?.discounts) ? route.details.discounts : [];
   const isTranstempo = route.providerName === 'ТрансТемпо';
 
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
-    console.log(idx);
+    const freeSeat = isFreeSeatsArray(freeSeats) ? freeSeats[idx] : null;
+
     const ticketData: RequestTicket = {
       firstName: passenger.firstName,
       lastName: passenger.lastName,
@@ -24,8 +32,8 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       phone: formData.phone,
       email: formData.email,
 
-      // seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[idx]?.seatId ?? '',
-      // seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[idx]?.seatNumber ?? '',
+      seatId: formData.selectedSeats?.[idx]?.seatId ?? freeSeat?.seatId ?? '',
+      seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? freeSeat?.seatNumber ?? '',
 
       withFees: true,
       ...(passenger.paidBaggage && { paidBaggage: passenger.paidBaggage }),

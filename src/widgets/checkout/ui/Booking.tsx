@@ -17,11 +17,24 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import SeatsList from '@/features/checkout-form/ui/SeatsList';
-import { BookingOpenButton, FloorSwitch, useSeatMap } from '@/features/checkout-form';
+import { BookingOpenButton, FloorSwitch } from '@/features/checkout-form';
 import { memo } from 'react';
+import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
+import { useShallow } from 'zustand/react/shallow';
+import { TypeSeatsMap } from '@/shared/types/seat.interface';
+
+function isSeatsMapArray(seatsMap: string | TypeSeatsMap[] | null | undefined): seatsMap is TypeSeatsMap[] {
+  return Array.isArray(seatsMap);
+}
 
 const Booking = memo(function Booking() {
-  const { hasSeatMap, seatMapWithStatus, isHydrated } = useSeatMap();
+  const { selectedTicket, isHydrated } = useSelectedTickets(
+    useShallow((state) => ({
+      selectedTicket: state.selectedTicket?.route,
+      isHydrated: state.isHydrated,
+    })),
+  );
+
   const t_page = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
   const t_common = useTranslations(MESSAGE_FILES.COMMON);
   const { control } = useFormContext();
@@ -44,7 +57,7 @@ const Booking = memo(function Booking() {
       <SheetTrigger asChild>
         <BookingOpenButton
           passengersCount={passengersCount}
-          hasSeatMap={hasSeatMap}
+          hasSeatMap={!!selectedTicket?.details?.seatsMap && selectedTicket?.details?.seatsMap.length > 0}
           isHydrated={isHydrated}
           error={!!error}
           selectedSeatsCount={selectedSeatsCount}
@@ -69,14 +82,20 @@ const Booking = memo(function Booking() {
 
         <ScrollArea className="relative w-full px-2 mx-auto overflow-y-scroll grow bg-slate-50 dark:bg-slate-900 shadow-xs">
           <div className="flex flex-col gap-2">
-            {seatMapWithStatus.length === 1 && <SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
+            {selectedTicket?.details &&
+              isSeatsMapArray(selectedTicket?.details?.seatsMap) &&
+              selectedTicket?.details?.seatsMap.length === 1 && (
+                <SeatsList helm={true} seatRows={selectedTicket?.details?.seatsMap[0]} />
+              )}
 
-            {seatMapWithStatus.length >= 2 && (
-              <FloorSwitch
-                floor_first={<SeatsList helm={true} seatRows={seatMapWithStatus[0]} />}
-                floor_second={<SeatsList seatRows={seatMapWithStatus[1]} />}
-              />
-            )}
+            {selectedTicket?.details &&
+              isSeatsMapArray(selectedTicket?.details?.seatsMap) &&
+              selectedTicket?.details?.seatsMap.length >= 2 && (
+                <FloorSwitch
+                  floor_first={<SeatsList helm={true} seatRows={selectedTicket?.details?.seatsMap[0]} />}
+                  floor_second={<SeatsList seatRows={selectedTicket?.details?.seatsMap[1]} />}
+                />
+              )}
           </div>
         </ScrollArea>
 
