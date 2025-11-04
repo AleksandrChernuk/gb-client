@@ -39,7 +39,8 @@ export interface IRouteDetailsResponse {
   busPictures: string[] | null;
   seatsCount: number | null;
   seatsMap: TypeSeatsMap[] | string | null;
-  freeSeatsMap: IFreeSeats[] | null;
+  freeSeatsMap?: IFreeSeats[] | (number | string)[] | null;
+  freeSeats: number | null;
   maxTickets?: number | string;
   needBirth?: boolean | string;
   needDoc?: boolean | string;
@@ -81,8 +82,10 @@ export interface IGetRouteDetailsBody {
   bustypeId?: string;
   hasPlan?: boolean;
   requestGetFreeSeats?: boolean;
+  freeSeats?: IFreeSeats[] | (number | string)[] | null;
   requestGetDiscount?: boolean;
   requestGetBaggage?: boolean;
+  basePrice: number | null;
 }
 
 export interface IRouteResponse {
@@ -101,7 +104,7 @@ export interface IRouteResponse {
     bustypeId?: string | null;
     searchId?: string;
     providerId: string;
-    hasPlan?: boolean;
+    hasPlan?: number;
     requestGetFreeSeats?: boolean;
     requestGetDiscount?: boolean;
     requestGetBaggage?: boolean;
@@ -156,6 +159,7 @@ export interface IRouteResponse {
     name: string | null;
     logo: string | null;
     rating: number | null;
+    phone: string | null; //! Телефон диспетчера
   };
   details: IRouteDetailsResponse | null;
 }

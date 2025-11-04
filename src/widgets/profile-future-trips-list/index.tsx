@@ -1,7 +1,7 @@
 'use client';
 
 import TryAgain from '@/entities/common/TryAgain';
-import { TripCard } from '@/features/profile-trip-card';
+// import { TripCard } from '@/features/profile-trip-card';
 import { getCurrentTrips } from '@/shared/api/user.services.client';
 import { TRANSLATION_KEYS } from '@/shared/i18n/translationKeys';
 import { useUserStore } from '@/shared/store/useUser';
@@ -41,9 +41,9 @@ const FutureTrips = () => {
         <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />
       ) : (
         <div className="space-y-8">
-          {data.map((trip) => (
+          {/* {data.map((trip) => (
             <TripCard item={trip} key={trip.myOrderId} showDetails />
-          ))}
+          ))} */}
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ export interface RouteDetailsParams {
 
 export function buildRouteDetailsRequest(params: RouteDetailsParams): IGetRouteDetailsBody {
   const { route, fromCityId, toCityId, locale, passCount, travelDate } = params;
-  const { identificators, departure, arrival } = route;
+  const { identificators, departure, arrival, ticketPricing, details } = route;
 
   return {
     fromCityId,
@@ -23,6 +23,9 @@ export function buildRouteDetailsRequest(params: RouteDetailsParams): IGetRouteD
     currency: route.ticketPricing.currency,
     locale,
     passengersCount: passCount,
+    basePrice: ticketPricing.basePrice,
+
+    ...(details?.freeSeatsMap && { freeSeats: details.freeSeatsMap }),
 
     ...(identificators.routeId && { routeId: String(identificators.routeId) }),
 

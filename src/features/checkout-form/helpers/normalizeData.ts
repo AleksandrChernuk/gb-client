@@ -9,6 +9,7 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
   const isTranstempo = route.providerName === 'ТрансТемпо';
 
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
+    console.log(idx);
     const ticketData: RequestTicket = {
       firstName: passenger.firstName,
       lastName: passenger.lastName,
@@ -23,8 +24,8 @@ const normalizeData = ({ fromCityId, toCityId, locale, formData, user, route }: 
       phone: formData.phone,
       email: formData.email,
 
-      seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[idx]?.seatId ?? '',
-      seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[idx]?.seatNumber ?? '',
+      // seatId: formData.selectedSeats?.[idx]?.seatId ?? route.details?.freeSeatsMap?.[idx]?.seatId ?? '',
+      // seatNumber: formData.selectedSeats?.[idx]?.seatNumber ?? route.details?.freeSeatsMap?.[idx]?.seatNumber ?? '',
 
       withFees: true,
       ...(passenger.paidBaggage && { paidBaggage: passenger.paidBaggage }),

@@ -10,7 +10,7 @@ import RouteNotFound from '@/shared/ui/RouteNotFound';
 import TryAgain from '@/entities/common/TryAgain';
 import { SkeletonCards } from '@/shared/ui/SkeletonCards';
 import { TRANSLATION_KEYS } from '@/shared/i18n/translationKeys';
-import { TripCard } from '@/features/profile-trip-card';
+// import { TripCard } from '@/features/profile-trip-card';
 import { CustomPagination } from '@/shared/ui/CustomPagination';
 
 const perPage = 5;
@@ -49,9 +49,9 @@ const CompletedTrips = () => {
             <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />
           ) : (
             <div className="space-y-8">
-              {data.data.map((trip) => (
+              {/* {data.data.map((trip) => (
                 <TripCard item={trip} key={trip.myOrderId} />
-              ))}
+              ))} */}
             </div>
           )}
         </div>
