@@ -36,7 +36,8 @@ export default function CallbackPage() {
       const code = params?.get('code');
 
       if (status !== 'success') {
-        router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.signin}` : `/${locale}/${REDIRECT_PATHS.signin}`);
+        router.replace(locale === 'uk' ? REDIRECT_PATHS.profile : `/${locale}${REDIRECT_PATHS.profile}`);
+
         return;
       }
 
