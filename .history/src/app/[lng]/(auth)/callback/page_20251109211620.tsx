@@ -74,7 +74,6 @@ export default function CallbackPage() {
       const v = await fetch('/api/auth/validate-auth', {
         credentials: 'include',
       });
-
       const data: ValidateResp = await v.json().catch(() => ({ authenticated: false }));
       if (data.authenticated) {
         router.replace(REDIRECT_PATHS.profile);

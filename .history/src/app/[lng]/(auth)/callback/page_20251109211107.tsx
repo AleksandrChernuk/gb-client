@@ -56,17 +56,12 @@ export default function CallbackPage() {
           raw && typeof raw === 'object' && 'currentUser' in raw
             ? (raw as { currentUser?: unknown }).currentUser
             : undefined;
+
         if (isCurrentUser(cu)) {
           const store = useUserStore.getState();
           store.setUserStore(cu);
 
-          // Даємо час на синхронізацію стору та створення юзера на бекенді
-          await new Promise((res) => setTimeout(res, 300));
-
-          // Після успішного обміну редіректимо одразу на профіль
-          // Бекенд вже створив юзера і встановив cookies
-          router.replace(REDIRECT_PATHS.profile);
-          return;
+          await new Promise((res) => setTimeout(res, 100));
         }
       }
 
@@ -74,7 +69,6 @@ export default function CallbackPage() {
       const v = await fetch('/api/auth/validate-auth', {
         credentials: 'include',
       });
-
       const data: ValidateResp = await v.json().catch(() => ({ authenticated: false }));
       if (data.authenticated) {
         router.replace(REDIRECT_PATHS.profile);
