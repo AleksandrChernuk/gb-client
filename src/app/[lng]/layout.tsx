@@ -7,7 +7,7 @@ import { Params } from '@/shared/types/common.types';
 import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
 import { ThemeProvider } from '@/shared/providers/ThemeProvider';
-import { Noto_Sans } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { Toaster } from 'sonner';
 import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
@@ -15,10 +15,9 @@ import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
-const notoSans = Noto_Sans({
-  variable: '--nato-sans',
+const inter = Rubik({
+  variable: '--font-rubik',
   subsets: ['latin', 'cyrillic'],
-  adjustFontFallback: true,
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
 });
@@ -52,7 +51,7 @@ export default async function MainLayout({
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-NDJWDGB6" />
       <GoogleAnalytics gaId="G-QL65KW5KP6" />
-      <body className={`${notoSans.className} ${notoSans.variable} antialiased`} suppressHydrationWarning>
+      <body className={`${inter.className} ${inter.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>
             <GTMNoScript />

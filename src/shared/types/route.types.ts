@@ -39,7 +39,7 @@ export interface IRouteDetailsResponse {
   busPictures: string[] | null;
   seatsCount: number | null;
   seatsMap: TypeSeatsMap[] | string | null;
-  freeSeatsMap?: IFreeSeats[] | (number | string)[] | null;
+  freeSeatsMap?: IFreeSeats[] | (number | string)[] | null; // - если не обьект то возьми строку либо число и приведу в строку
   freeSeats: number | null;
   maxTickets?: number | string;
   needBirth?: boolean | string;

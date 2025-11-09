@@ -37,7 +37,6 @@ export default function useTicketsSearch() {
       const singleRoutes = adapted.filter((r: TAdaptedRoute) => r.type === 'single');
 
       const plainRoutes = singleRoutes.map((r) => r.data);
-
       setTickets(plainRoutes);
     }
   }, [data, setTickets]);

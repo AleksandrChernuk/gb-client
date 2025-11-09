@@ -22,7 +22,6 @@ export function useRouteDetails({ ticketId, params, providerName }: Props) {
     queryKey,
     queryFn: async () => {
       const requestBody = buildRouteDetailsRequest({ ...params });
-
       return await getRouteDetails(requestBody);
     },
     enabled: enabled && !['EUROCLUB'].includes(providerName),

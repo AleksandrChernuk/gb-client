@@ -4,6 +4,7 @@ import { ProviderConfig } from '@/shared/types/checkot.types';
 import CustomCard from '@/shared/ui/CustomCard';
 import UniversalField from '@/features/checkout-form/ui/UniversalField';
 import { IBaggagePrice } from '@/shared/types/route.types';
+import Baggage from '@/features/checkout-form/ui/Baggage';
 
 type Props = {
   providerConfig: ProviderConfig;
@@ -11,7 +12,7 @@ type Props = {
   paidBaggage?: IBaggagePrice[] | null;
 };
 
-function PassengerCard({ index, providerConfig }: Props) {
+function PassengerCard({ index, providerConfig, paidBaggage }: Props) {
   return (
     <li>
       <CustomCard className="dark:bg-slate-800 space-y-4 shadow-sm">
@@ -28,12 +29,7 @@ function PassengerCard({ index, providerConfig }: Props) {
           })}
         </div>
 
-        {/* {paidBaggage && paidBaggage.length > 1 && (
-          <>
-            <h4 className="text-base tablet:text-lg text-green-300 font-medium mb-2">Багаж</h4>
-            <Baggage index={index} baggage={paidBaggage} />
-          </>
-        )} */}
+        <Baggage index={index} baggage={paidBaggage} />
       </CustomCard>
     </li>
   );

@@ -1,5 +1,5 @@
-import { getCheckoutSchemaForProvider } from '@/features/checkout-form/config';
-import { getProviderConfigByName } from '@/features/checkout-form/config/getProviderConfigByName';
+import { getCheckoutSchemaForProvider } from '@/features/checkout-form/lib/providerFormConfig';
+import { getProviderConfigByName } from '@/features/checkout-form/lib/providerFormConfig/getProviderConfigByName';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';

@@ -1,11 +1,11 @@
 import { TPaidBaggage } from '@/shared/types/paid.baggage.types';
 import { IBaggagePrice } from '@/shared/types/route.types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 type TuseBaggag = {
   index: number;
-  baggage: IBaggagePrice[];
+  baggage?: IBaggagePrice[] | null;
 };
 
 export const useBaggag = ({ index, baggage }: TuseBaggag) => {
@@ -13,27 +13,48 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
 
   const { control, setValue } = useFormContext();
 
-  const selectedPaidBaggage: IBaggagePrice[] =
-    useWatch({ control, name: `passengers.${index}.paidBaggage`, exact: true }) ?? [];
+  // безопасно достаём текущие данные багажа
+  const selectedPaidBaggage: TPaidBaggage[] =
+    useWatch({
+      control,
+      name: `passengers.${index}.paidBaggage`,
+      exact: true,
+    }) ?? [];
+
+  // 🔒 защита от некорректных данных
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const safeBaggage: IBaggagePrice[] = Array.isArray(baggage)
+    ? baggage.filter(
+        (b): b is IBaggagePrice => !!b && typeof b.baggageId === 'string' && typeof b.maxPerPerson !== 'undefined',
+      )
+    : [];
 
   const updateBackend = (baggageId: string, count: number, baggageItem: TPaidBaggage) => {
-    let updated: TPaidBaggage[] = selectedPaidBaggage.filter((b) => b.baggageId !== baggageId);
+    if (!baggageId || !baggageItem) return; // защита
+
+    let updated: TPaidBaggage[] = Array.isArray(selectedPaidBaggage)
+      ? selectedPaidBaggage.filter((b) => b?.baggageId !== baggageId)
+      : [];
 
     if (count > 0) {
-      updated = [
-        ...updated,
-        ...Array(count).fill({
-          ...baggageItem,
-        }),
-      ];
+      updated = [...updated, ...Array.from({ length: count }, () => ({ ...baggageItem }))];
     }
 
-    setValue(`passengers.${index}.paidBaggage`, updated, { shouldDirty: true, shouldValidate: false });
+    try {
+      setValue(`passengers.${index}.paidBaggage`, updated, {
+        shouldDirty: true,
+        shouldValidate: false,
+      });
+    } catch (e) {
+      console.error('❌ setValue failed in useBaggag:', e);
+    }
   };
 
   const handleAdd = (item: IBaggagePrice) => {
+    if (!item?.baggageId) return;
+    const max = Number(item.maxPerPerson ?? 0);
     const current = localCounts[item.baggageId] ?? 0;
-    if (current < Number(item.maxPerPerson)) {
+    if (current < max) {
       const newCount = current + 1;
       setLocalCounts((prev) => ({ ...prev, [item.baggageId]: newCount }));
       updateBackend(item.baggageId, newCount, item);
@@ -41,6 +62,7 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
   };
 
   const handleRemove = (item: TPaidBaggage) => {
+    if (!item?.baggageId) return;
     const current = localCounts[item.baggageId] ?? 0;
     if (current > 0) {
       const newCount = current - 1;
@@ -49,14 +71,18 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
     }
   };
 
-  const grouped = baggage.reduce(
-    (acc, item) => {
-      acc[item.baggageType] = acc[item.baggageType] || [];
-      acc[item.baggageType].push(item);
-      return acc;
-    },
-    {} as Record<string, IBaggagePrice[]>,
-  );
+  // безопасная группировка багажа
+  const grouped = useMemo(() => {
+    const acc: Record<string, IBaggagePrice[]> = {};
+    if (!safeBaggage.length) return acc;
+
+    for (const item of safeBaggage) {
+      const type = item.baggageType || 'unknown';
+      if (!acc[type]) acc[type] = [];
+      acc[type].push(item);
+    }
+    return acc;
+  }, [safeBaggage]);
 
   return { grouped, handleRemove, handleAdd, localCounts };
 };

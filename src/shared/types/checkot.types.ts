@@ -53,4 +53,7 @@ export type ProviderConfig = {
   needCitizenship?: boolean | string;
   needGender?: boolean | string;
   needMiddlename?: boolean | string;
+  automaticDiscount?: boolean | string;
+  hasAutomaticDiscount?: boolean | string;
+  requireBdayForDiscount?: boolean | string;
 };
