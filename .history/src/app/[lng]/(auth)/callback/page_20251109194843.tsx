@@ -82,11 +82,12 @@ export default function CallbackPage() {
         });
         const d2: ValidateResp = await v2.json().catch(() => ({ authenticated: false }));
         if (d2.authenticated) {
-          router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.profile}` : `/${locale}/${REDIRECT_PATHS.profile}`);
+          router.replace(`/${REDIRECT_PATHS.profile}`);
           return;
         }
       }
-      router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.signin}` : `/${locale}/${REDIRECT_PATHS.signin}`);
+
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     };
 
     run();
