@@ -26,7 +26,6 @@ function isCurrentUser(v: any): v is CurrentUser {
 
 export default function CallbackPage() {
   const router = useRouter();
-  console.log(router);
   const params = useSearchParams();
   const locale = useLocale();
 
@@ -36,8 +35,7 @@ export default function CallbackPage() {
       const code = params?.get('code');
 
       if (status !== 'success') {
-        router.replace(locale === 'uk' ? REDIRECT_PATHS.profile : `/${locale}${REDIRECT_PATHS.profile}`);
-
+        router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.signin}` : `/${locale}/${REDIRECT_PATHS.signin}`);
         return;
       }
 
@@ -45,10 +43,11 @@ export default function CallbackPage() {
         const ex = await fetch(`/api/auth/oauth-exchange?code=${encodeURIComponent(code)}`, { credentials: 'include' });
 
         if (!ex.ok) {
-          router.replace(locale === 'uk' ? REDIRECT_PATHS.signin : `/${locale}${REDIRECT_PATHS.signin}`);
+          router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.signin}` : `/${locale}/${REDIRECT_PATHS.signin}`);
           return;
         }
 
+        // ожидаем { message?: string; currentUser?: CurrentUser }
         const raw: unknown = await ex.json();
 
         // достаём currentUser
@@ -68,7 +67,7 @@ export default function CallbackPage() {
       });
       const data: ValidateResp = await v.json().catch(() => ({ authenticated: false }));
       if (data.authenticated) {
-        router.replace(locale === 'uk' ? REDIRECT_PATHS.profile : `/${locale}${REDIRECT_PATHS.profile}`);
+        router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.profile}` : `/${locale}/${REDIRECT_PATHS.profile}`);
         return;
       }
 
@@ -83,11 +82,11 @@ export default function CallbackPage() {
         });
         const d2: ValidateResp = await v2.json().catch(() => ({ authenticated: false }));
         if (d2.authenticated) {
-          router.replace(locale === 'uk' ? REDIRECT_PATHS.profile : `/${locale}${REDIRECT_PATHS.profile}`);
+          router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.profile}` : `/${locale}/${REDIRECT_PATHS.profile}`);
           return;
         }
       }
-      router.replace(locale === 'uk' ? REDIRECT_PATHS.signin : `/${locale}${REDIRECT_PATHS.signin}`);
+      router.replace(locale === 'uk' ? `/${REDIRECT_PATHS.signin}` : `/${locale}/${REDIRECT_PATHS.signin}`);
     };
 
     run();

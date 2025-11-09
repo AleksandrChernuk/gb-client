@@ -49,6 +49,7 @@ export default function CallbackPage() {
           return;
         }
 
+        // ожидаем { message?: string; currentUser?: CurrentUser }
         const raw: unknown = await ex.json();
 
         // достаём currentUser
