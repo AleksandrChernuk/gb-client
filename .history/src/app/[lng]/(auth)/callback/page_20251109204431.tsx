@@ -84,12 +84,12 @@ export default function CallbackPage() {
         });
         const d2: ValidateResp = await v2.json().catch(() => ({ authenticated: false }));
         if (d2.authenticated) {
-          router.replace(REDIRECT_PATHS.profile);
+          router.replace(`/${REDIRECT_PATHS.profile}`);
 
           return;
         }
       }
-      router.replace(REDIRECT_PATHS.signin);
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     };
 
     run();

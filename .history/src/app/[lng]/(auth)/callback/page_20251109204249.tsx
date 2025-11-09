@@ -36,7 +36,7 @@ export default function CallbackPage() {
       const code = params?.get('code');
 
       if (status !== 'success') {
-        router.replace(REDIRECT_PATHS.signin);
+        router.replace(`/${REDIRECT_PATHS.signin}`);
         return;
       }
 
@@ -44,7 +44,7 @@ export default function CallbackPage() {
         const ex = await fetch(`/api/auth/oauth-exchange?code=${encodeURIComponent(code)}`, { credentials: 'include' });
 
         if (!ex.ok) {
-          router.replace(REDIRECT_PATHS.signin);
+          router.replace(`/${REDIRECT_PATHS.signin}`);
           return;
         }
 
@@ -68,8 +68,7 @@ export default function CallbackPage() {
       });
       const data: ValidateResp = await v.json().catch(() => ({ authenticated: false }));
       if (data.authenticated) {
-        router.replace(REDIRECT_PATHS.profile);
-
+        router.replace(`/${REDIRECT_PATHS.profile}`);
         return;
       }
 
@@ -84,12 +83,12 @@ export default function CallbackPage() {
         });
         const d2: ValidateResp = await v2.json().catch(() => ({ authenticated: false }));
         if (d2.authenticated) {
-          router.replace(REDIRECT_PATHS.profile);
+          router.replace(`/${REDIRECT_PATHS.profile}`);
 
           return;
         }
       }
-      router.replace(REDIRECT_PATHS.signin);
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     };
 
     run();
