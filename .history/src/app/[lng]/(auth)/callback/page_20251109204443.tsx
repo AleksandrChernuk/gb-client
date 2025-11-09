@@ -58,10 +58,7 @@ export default function CallbackPage() {
             : undefined;
 
         if (isCurrentUser(cu)) {
-          const store = useUserStore.getState();
-          store.setUserStore(cu);
-
-          await new Promise((res) => setTimeout(res, 100));
+          useUserStore.getState().setUserStore(cu);
         }
       }
 

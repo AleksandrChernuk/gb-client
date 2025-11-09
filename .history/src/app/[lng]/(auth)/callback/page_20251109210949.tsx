@@ -61,7 +61,8 @@ export default function CallbackPage() {
           const store = useUserStore.getState();
           store.setUserStore(cu);
 
-          await new Promise((res) => setTimeout(res, 100));
+          // Подождём чуть-чуть, чтобы Zustand успел триггернуть подписки
+          await new Promise((res) => setTimeout(res, 50));
         }
       }
 
