@@ -20,8 +20,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
 
     const getLocale = () => {
       const seg = (pathname || '/').split('/')[1];
-      if (['en', 'ru'].includes(seg)) return seg;
-      return 'uk';
+      return ['en', 'uk', 'ru'].includes(seg) ? seg : 'en';
     };
 
     const checkAndRefresh = async () => {

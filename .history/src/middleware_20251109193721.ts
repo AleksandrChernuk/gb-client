@@ -68,6 +68,7 @@ export async function middleware(req: NextRequest) {
 function redirectToSignin(req: NextRequest, locale: string) {
   const url = req.nextUrl.clone();
 
+  // Если дефолтная локаль (uk), без префикса
   if (locale === routing.defaultLocale) {
     url.pathname = '/signin';
   } else {
