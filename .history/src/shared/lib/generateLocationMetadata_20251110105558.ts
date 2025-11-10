@@ -48,9 +48,11 @@ export async function generateLocationMetadata({ lng, locationId }: GenerateLoca
   const displayCity = details.locationName;
   const displayCountry = details.countryName;
 
+  // ✅ Canonical URL для поточної мови
   const canonicalUrl = buildLocationUrl(lng, country, city, locationId);
 
-  const manifestPath = `/manifest.${lng}.json`;
+  // ✅ Динамічний manifest в залежності від мови
+  const manifestPath = lng === 'uk' ? '/manifest.json' : `/manifest.${lng}.json`;
 
   return {
     title: t('location.title', { city: displayCity, countryName: displayCountry }),
@@ -60,9 +62,13 @@ export async function generateLocationMetadata({ lng, locationId }: GenerateLoca
     alternates: {
       canonical: canonicalUrl,
       languages: {
+        // ✅ x-default вказує на українську версію БЕЗ префікса
         'x-default': buildLocationUrl('uk', country, city, locationId),
+        // ✅ uk БЕЗ префікса
         uk: buildLocationUrl('uk', country, city, locationId),
+        // ✅ ru З префіксом /ru
         ru: buildLocationUrl('ru', country, city, locationId),
+        // ✅ en З префіксом /en
         en: buildLocationUrl('en', country, city, locationId),
       },
     },

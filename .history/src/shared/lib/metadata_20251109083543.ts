@@ -13,13 +13,20 @@ const buildBaseMetadata = (
   const isPublic = pageType === 'public';
   const baseUrl = 'https://greenbus.com.ua';
 
+  // ✅ Формируем путь: uk без префикса, ru и en с префиксом
   const getLocalizedPath = (locale: Locale, urlPath: string) => {
-    return `/${locale}/${urlPath}`;
+    if (locale === 'uk') {
+      // Украинская версия БЕЗ префикса
+      return urlPath ? `/${urlPath}` : '';
+    }
+    // Остальные языки С префиксом
+    return urlPath ? `/${locale}/${urlPath}` : `/${locale}`;
   };
 
   const fullPath = getLocalizedPath(lng, path);
 
-  const manifestPath = `/manifest.${lng}.json`;
+  // ✅ Динамический manifest в зависимости от языка
+  const manifestPath = lng === 'uk' ? '/manifest.json' : `/manifest.${lng}.json`;
 
   return {
     title: t(`${slug}.title`),
@@ -64,9 +71,13 @@ const buildBaseMetadata = (
       alternates: {
         canonical: `${baseUrl}${fullPath}`,
         languages: {
+          // ✅ x-default указывает на украинскую версию БЕЗ префикса
           'x-default': `${baseUrl}${getLocalizedPath('uk', path)}`,
+          // ✅ uk без префикса
           uk: `${baseUrl}${getLocalizedPath('uk', path)}`,
+          // ✅ ru с префиксом /ru
           ru: `${baseUrl}${getLocalizedPath('ru', path)}`,
+          // ✅ en с префиксом /en
           en: `${baseUrl}${getLocalizedPath('en', path)}`,
         },
       },

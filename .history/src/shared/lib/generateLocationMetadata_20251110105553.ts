@@ -1,59 +1,63 @@
 import { getTranslations } from 'next-intl/server';
 import { Locale } from 'next-intl';
+import { getLocationById } from '@/shared/api/location.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { ILocation } from '@/shared/types/location.types';
 
-interface GenerateCountryMetadataParams {
+interface GenerateLocationMetadataParams {
   lng: Locale;
-  slug: string;
-  countryId?: number;
-  locations: ILocation[];
+  locationId?: number;
 }
 
-// ✅ Хелпер для формування URL країни з правильними префіксами
-function buildCountryUrl(locale: Locale, countrySlug: string, countryId?: number): string {
+// ✅ Хелпер для формування URL з правильними префіксами
+function buildLocationUrl(locale: Locale, country: string, city: string, locationId: number): string {
   const baseUrl = 'https://greenbus.com.ua';
-  const path = `all-countries/${countrySlug}`;
-  const query = countryId ? `?cid=${countryId}` : '';
+  const path = `all-countries/${country}/${city}`;
+  const query = `?lid=${locationId}`;
 
   return `${baseUrl}/${locale}/${path}${query}`;
 }
 
-export async function generateCountryMetadata({ lng, slug, countryId, locations }: GenerateCountryMetadataParams) {
+export async function generateLocationMetadata({ lng, locationId }: GenerateLocationMetadataParams) {
   const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
 
-  const reference = locations.find((loc) => {
-    if (countryId) return loc.country.id === countryId;
-
-    const en = extractLocationDetails(loc, 'en').countryName.toLowerCase();
-    return en === slug.toLowerCase();
-  });
-
-  if (!reference) {
+  if (!locationId) {
     return {
-      title: t('country.not_found_title'),
-      description: t('country.not_found_description'),
+      title: t('location.not_found_title'),
+      description: t('location.not_found_description'),
       robots: { index: false, follow: false },
     };
   }
 
-  const detailsEn = extractLocationDetails(reference, 'en');
-  const details = extractLocationDetails(reference, lng);
+  const data = await getLocationById(locationId);
 
-  const countryName = details.countryName;
-  const countrySlug = detailsEn.countryName.toLowerCase();
+  if (!data) {
+    return {
+      title: t('location.not_found_title'),
+      description: t('location.not_found_description'),
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const en = extractLocationDetails(data, 'en');
+  const details = extractLocationDetails(data, lng);
+
+  const city = en.locationName.toLowerCase();
+  const country = en.countryName.toLowerCase();
+
+  const displayCity = details.locationName;
+  const displayCountry = details.countryName;
 
   // ✅ Canonical URL для поточної мови
-  const canonicalUrl = buildCountryUrl(lng, countrySlug, countryId);
+  const canonicalUrl = buildLocationUrl(lng, country, city, locationId);
 
   // ✅ Динамічний manifest в залежності від мови
   const manifestPath = lng === 'uk' ? '/manifest.json' : `/manifest.${lng}.json`;
 
   return {
-    title: t('country.title', { countryName }),
-    description: t('country.description', { countryName }),
-    keywords: t('country.keywords', { countryName }),
+    title: t('location.title', { city: displayCity, countryName: displayCountry }),
+    description: t('location.description', { city: displayCity }),
+    keywords: t('location.keywords', { city: displayCity, countryName: displayCountry }),
 
     alternates: {
       canonical: canonicalUrl,
@@ -78,8 +82,8 @@ export async function generateCountryMetadata({ lng, slug, countryId, locations 
     },
 
     openGraph: {
-      title: t('country.og_title', { countryName }),
-      description: t('country.og_description', { countryName }),
+      title: t('location.og_title', { city: displayCity, countryName: displayCountry }),
+      description: t('location.og_description', { city: displayCity }),
       url: canonicalUrl,
       type: 'website',
       siteName: 'GreenBus',
@@ -89,15 +93,15 @@ export async function generateCountryMetadata({ lng, slug, countryId, locations 
           url: 'https://greenbus.com.ua/og-image.png',
           width: 1200,
           height: 630,
-          alt: `GreenBus - ${countryName}`,
+          alt: `GreenBus - ${displayCity}, ${displayCountry}`,
         },
       ],
     },
 
     twitter: {
       card: 'summary_large_image',
-      title: t('country.og_title', { countryName }),
-      description: t('country.og_description', { countryName }),
+      title: t('location.og_title', { city: displayCity, countryName: displayCountry }),
+      description: t('location.og_description', { city: displayCity }),
       images: ['https://greenbus.com.ua/og-image.png'],
     },
 

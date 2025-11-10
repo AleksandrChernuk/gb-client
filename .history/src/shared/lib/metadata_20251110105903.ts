@@ -67,6 +67,7 @@ const buildBaseMetadata = (
           'x-default': `${baseUrl}${getLocalizedPath('uk', path)}`,
           uk: `${baseUrl}${getLocalizedPath('uk', path)}`,
           ru: `${baseUrl}${getLocalizedPath('ru', path)}`,
+          // ✅ en с префиксом /en
           en: `${baseUrl}${getLocalizedPath('en', path)}`,
         },
       },

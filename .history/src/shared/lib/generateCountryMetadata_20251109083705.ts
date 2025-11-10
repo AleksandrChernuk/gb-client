@@ -17,6 +17,12 @@ function buildCountryUrl(locale: Locale, countrySlug: string, countryId?: number
   const path = `all-countries/${countrySlug}`;
   const query = countryId ? `?cid=${countryId}` : '';
 
+  if (locale === 'uk') {
+    // Українська БЕЗ префікса
+    return `${baseUrl}/${path}${query}`;
+  }
+
+  // Інші мови З префіксом
   return `${baseUrl}/${locale}/${path}${query}`;
 }
 
@@ -58,9 +64,13 @@ export async function generateCountryMetadata({ lng, slug, countryId, locations 
     alternates: {
       canonical: canonicalUrl,
       languages: {
+        // ✅ x-default вказує на українську версію БЕЗ префікса
         'x-default': buildCountryUrl('uk', countrySlug, countryId),
+        // ✅ uk БЕЗ префікса
         uk: buildCountryUrl('uk', countrySlug, countryId),
+        // ✅ ru З префіксом /ru
         ru: buildCountryUrl('ru', countrySlug, countryId),
+        // ✅ en З префіксом /en
         en: buildCountryUrl('en', countrySlug, countryId),
       },
     },

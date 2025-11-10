@@ -48,9 +48,11 @@ export async function generateLocationMetadata({ lng, locationId }: GenerateLoca
   const displayCity = details.locationName;
   const displayCountry = details.countryName;
 
+  // ✅ Canonical URL для поточної мови
   const canonicalUrl = buildLocationUrl(lng, country, city, locationId);
 
-  const manifestPath = `/manifest.${lng}.json`;
+  // ✅ Динамічний manifest в залежності від мови
+  const manifestPath = lng === 'uk' ? '/manifest.json' : `/manifest.${lng}.json`;
 
   return {
     title: t('location.title', { city: displayCity, countryName: displayCountry }),
