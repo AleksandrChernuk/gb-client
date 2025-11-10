@@ -49,8 +49,6 @@ export default function ProfileCheckProvider() {
 
         if (!firstCheck.authenticated) {
           // Попытка рефреша
-          await new Promise((r) => setTimeout(r, 300));
-
           const refreshed = await safeRefresh();
 
           if (!refreshed) {
