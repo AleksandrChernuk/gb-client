@@ -6,29 +6,28 @@ import { useLocale, useTranslations } from 'next-intl';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { confirmChangePassword } from '@/shared/api/auth.service';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
 
-import ResendCode from '@/entities/auth/ResendCode';
-
 import { toast } from 'sonner';
+import { resetPasswordSchema } from '@/shared/validation/auth.schema';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouter } from '@/shared/i18n/routing';
-import { changePasswordSchema } from '@/shared/validation/auth.schema';
+import { resetPassword } from '@/shared/api/auth.service';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
 import { mapServerError } from '@/shared/errors/mapServerError';
-import ViewPassword from '@/shared/ui/ViewPassword';
 import { FormErrorMassege } from '@/shared/ui/form-error';
+import ViewPassword from '@/shared/ui/ViewPassword';
+import ResendCode from '@/entities/auth/ResendCode';
 import { LoadingScreen } from '@/shared/ui/loading-screen';
 
-export default function ChangePasswordForm() {
+export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isViewPassword, setIsViewPassword] = useState(false);
-  const [isViewNewPassword, setIsViewNewPassword] = useState(false);
-
   const t = useTranslations(MESSAGE_FILES.FORM);
   const locale = useLocale();
 
@@ -36,30 +35,33 @@ export default function ChangePasswordForm() {
   const param = useSearchParams();
   const email = param?.get('email');
 
-  const form = useForm<z.infer<typeof changePasswordSchema>>({
-    resolver: zodResolver(changePasswordSchema),
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       code: '',
-      currentPassword: '',
-      newPassword: '',
+      password: '',
     },
     mode: 'onChange',
   });
 
-  const onSubmit = async (rowData: z.infer<typeof changePasswordSchema>) => {
+  const onSubmit = async (rowData: z.infer<typeof resetPasswordSchema>) => {
     setIsLoading(true);
-    https: try {
-      await confirmChangePassword(rowData, locale);
 
-      router.replace(`${REDIRECT_PATHS.profile}`);
+    const data = { code: rowData.code, newPassword: rowData.password };
+
+    try {
+      await resetPassword(data, locale);
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     } catch (err) {
       if (err instanceof Error) {
-        toast.error(t(mapServerError(err.message)));
+        toast.error(t(`${mapServerError(err.message)}`));
         form.reset();
       } else {
-        toast.error(t(mapServerError('')));
+        //default error
+        toast.error(t(`${mapServerError('')}`));
         form.reset();
       }
+    } finally {
       setIsLoading(false);
     }
   };
@@ -67,12 +69,13 @@ export default function ChangePasswordForm() {
   return (
     <Form {...form}>
       {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="flex flex-col gap-4 w-full max-w-[380px] mx-auto">
           <div className="w-full">
             <FormField
               control={form.control}
-              name="currentPassword"
+              name="password"
               render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('new_password')}</FormLabel>
@@ -90,37 +93,6 @@ export default function ChangePasswordForm() {
                         error={Boolean(fieldState?.error)}
                         isViewPassword={isViewPassword}
                         setIsViewPassword={() => setIsViewPassword((prev) => !prev)}
-                      />
-                    </div>
-                  </FormControl>
-                  {Boolean(fieldState?.error) && (
-                    <FormErrorMassege>{t(`${fieldState.error?.message}`)}</FormErrorMassege>
-                  )}
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormField
-              control={form.control}
-              name="newPassword"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                  <FormLabel>{t('confirm_new_password_placeholder')}</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        disabled={form.formState.isSubmitting}
-                        type={!isViewNewPassword ? 'password' : 'text'}
-                        placeholder="******"
-                        aria-invalid={Boolean(fieldState?.invalid)}
-                        autoComplete="off"
-                      />
-                      <ViewPassword
-                        error={Boolean(fieldState?.error)}
-                        isViewPassword={isViewNewPassword}
-                        setIsViewPassword={() => setIsViewNewPassword((prev) => !prev)}
                       />
                     </div>
                   </FormControl>

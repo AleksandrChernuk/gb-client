@@ -31,9 +31,9 @@ const ChangePasswordAction = () => {
       const result = await requestChangePassword(locale, currentUser.email);
 
       if (result.email) {
-        router.replace(`${REDIRECT_PATHS.changePassword}?email=${result.email}`);
+        router.replace(`/${REDIRECT_PATHS.changePassword}?email=${result.email}`);
       } else {
-        router.replace(`${REDIRECT_PATHS.changePassword}?email=${currentUser.email}`);
+        router.replace(`/${REDIRECT_PATHS.changePassword}?email=${currentUser.email}`);
       }
     } catch (error) {
       if (error instanceof Error) {

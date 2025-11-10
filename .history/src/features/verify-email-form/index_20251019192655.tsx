@@ -1,34 +1,31 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-import { verify2FA } from '@/shared/api/auth.service';
+import { verifyEmail } from '@/shared/api/auth.service';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
+import { FormErrorMassege } from '@/shared/ui/form-error';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
+
 import { useUserStore } from '@/shared/store/useUser';
-import ResendCode from '@/entities/auth/ResendCode';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useLocale, useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
-import { FormErrorMassege } from '@/shared/ui/form-error';
 import { toast } from 'sonner';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouter } from '@/shared/i18n/routing';
 import { verify2FASchema } from '@/shared/validation/auth.schema';
 import { mapServerError } from '@/shared/errors/mapServerError';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
+import ResendCode from '@/entities/auth/ResendCode';
 import { LoadingScreen } from '@/shared/ui/loading-screen';
 
-type Props = {
-  email: string;
-};
-
-const Verify2FAForm = ({ email }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const setUserStore = useUserStore((s) => s.setUserStore);
+export default function VerifyEmailFrom({ email }: { email: string }) {
   const locale = useLocale();
-  const t = useTranslations(MESSAGE_FILES.FORM);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const t = useTranslations(MESSAGE_FILES.FORM);
 
   const form = useForm<z.infer<typeof verify2FASchema>>({
     resolver: zodResolver(verify2FASchema),
@@ -38,39 +35,38 @@ const Verify2FAForm = ({ email }: Props) => {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: z.infer<typeof verify2FASchema>) => {
+  const onSubmit = async (rowData: z.infer<typeof verify2FASchema>) => {
     setIsLoading(true);
-
     try {
-      const result = await verify2FA({ email: decodeURIComponent(email) || '', code: data.code }, locale);
+      const result = await verifyEmail({ email: decodeURIComponent(email || ''), code: rowData.code }, locale);
+
       const { message, currentUser } = result;
 
       if (message !== 'Successfully signin' || !currentUser) {
-        toast.error(t(`${mapServerError('')}`));
+        toast.error(mapServerError(''));
         setIsLoading(false);
         form.reset();
         return;
       }
 
-      setUserStore(currentUser);
-      form.reset();
-      router.replace(`${REDIRECT_PATHS.profile}`);
+      useUserStore.getState().setUserStore(currentUser);
+      router.replace(`/${REDIRECT_PATHS.profile}`);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(t(`${mapServerError(error.message)}`));
+        toast.error(error.message);
         form.reset();
         setIsLoading(false);
       } else {
-        toast.error(t(`${mapServerError('')}`));
+        toast.error(String(error));
         form.reset();
         setIsLoading(false);
       }
     }
   };
-
   return (
     <Form {...form}>
       {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="w-full  ">
           <FormField
@@ -112,11 +108,9 @@ const Verify2FAForm = ({ email }: Props) => {
           />
         </div>
         <div className="w-full">
-          {email && <ResendCode loading={isLoading} email={email} locale={locale} type="TWO_FACTOR" />}
+          <ResendCode disabled={isLoading} email={email} locale={locale} type="VERIFICATION" />
         </div>
       </form>
     </Form>
   );
-};
-
-export default Verify2FAForm;
+}

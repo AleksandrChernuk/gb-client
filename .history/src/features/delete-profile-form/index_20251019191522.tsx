@@ -1,34 +1,36 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-import { verify2FA } from '@/shared/api/auth.service';
-import { useUserStore } from '@/shared/store/useUser';
-import ResendCode from '@/entities/auth/ResendCode';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useState } from 'react';
+import { confirmDeleteAccount } from '@/shared/api/auth.service';
+import { Button } from '@/shared/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/shared/ui/form';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { FormErrorMassege } from '@/shared/ui/form-error';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
+import { useUserStore } from '@/shared/store/useUser';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoaderCircle } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouter } from '@/shared/i18n/routing';
 import { verify2FASchema } from '@/shared/validation/auth.schema';
-import { mapServerError } from '@/shared/errors/mapServerError';
 import { REDIRECT_PATHS } from '@/shared/configs/redirectPaths';
+import { mapServerError } from '@/shared/errors/mapServerError';
+import ResendCode from '@/entities/auth/ResendCode';
 import { LoadingScreen } from '@/shared/ui/loading-screen';
 
-type Props = {
-  email: string;
-};
-
-const Verify2FAForm = ({ email }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const setUserStore = useUserStore((s) => s.setUserStore);
+export default function VerifyDeleteAccountForm() {
   const locale = useLocale();
-  const t = useTranslations(MESSAGE_FILES.FORM);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations(MESSAGE_FILES.FORM);
+
+  const { currentUser, clearUserStore } = useUserStore();
+  const param = useSearchParams();
+  const email = param?.get('email') || currentUser?.email || '';
 
   const form = useForm<z.infer<typeof verify2FASchema>>({
     resolver: zodResolver(verify2FASchema),
@@ -38,26 +40,18 @@ const Verify2FAForm = ({ email }: Props) => {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: z.infer<typeof verify2FASchema>) => {
+  const onSubmit = async (rowData: z.infer<typeof verify2FASchema>) => {
     setIsLoading(true);
 
     try {
-      const result = await verify2FA({ email: decodeURIComponent(email) || '', code: data.code }, locale);
-      const { message, currentUser } = result;
+      await confirmDeleteAccount({ code: rowData.code, email }, locale);
 
-      if (message !== 'Successfully signin' || !currentUser) {
-        toast.error(t(`${mapServerError('')}`));
-        setIsLoading(false);
-        form.reset();
-        return;
-      }
+      clearUserStore();
 
-      setUserStore(currentUser);
-      form.reset();
-      router.replace(`${REDIRECT_PATHS.profile}`);
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(t(`${mapServerError(error.message)}`));
+      router.replace(`/${REDIRECT_PATHS.confirmDeleteAccount}`);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(t(`${mapServerError(err.message)}`));
         form.reset();
         setIsLoading(false);
       } else {
@@ -65,12 +59,15 @@ const Verify2FAForm = ({ email }: Props) => {
         form.reset();
         setIsLoading(false);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <Form {...form}>
       {isLoading && <LoadingScreen />}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="w-full  ">
           <FormField
@@ -111,12 +108,16 @@ const Verify2FAForm = ({ email }: Props) => {
             )}
           />
         </div>
-        <div className="w-full">
-          {email && <ResendCode loading={isLoading} email={email} locale={locale} type="TWO_FACTOR" />}
+        <div className="flex flex-col gap-2">
+          <div className="w-full">
+            <Button type="submit" disabled={isLoading || !form.formState.isValid} variant={'default'} size={'primary'}>
+              {isLoading ? <LoaderCircle className="animate-spin" stroke="white" /> : t('delete_account')}
+            </Button>
+
+            <ResendCode disabled={isLoading} email={email} locale={locale} type="DELETE_ACCOUNT" className="mt-6" />
+          </div>
         </div>
       </form>
     </Form>
   );
-};
-
-export default Verify2FAForm;
+}

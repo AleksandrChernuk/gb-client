@@ -44,7 +44,7 @@ const SignupForm = () => {
 
     try {
       const result = await signup(value, locale);
-      router.replace(`${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
+      router.replace(`/${REDIRECT_PATHS.verifyEmail}/${result.email}`, { scroll: true });
       form.reset();
     } catch (error) {
       setIsPending(false);

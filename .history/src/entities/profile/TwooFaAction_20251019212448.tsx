@@ -34,7 +34,7 @@ const TwooFaAction = () => {
 
       logout();
 
-      router.push(`${REDIRECT_PATHS.signin}`);
+      router.push(`/${REDIRECT_PATHS.signin}`);
     } catch (error) {
       setIsLoading(false);
       if (error instanceof Error) {

@@ -51,7 +51,7 @@ export default function ChangePasswordForm() {
     https: try {
       await confirmChangePassword(rowData, locale);
 
-      router.replace(`${REDIRECT_PATHS.profile}`);
+      router.replace(`/${REDIRECT_PATHS.profile}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(mapServerError(err.message)));
