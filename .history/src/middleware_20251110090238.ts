@@ -68,7 +68,7 @@ function redirectToSignin(req: NextRequest, locale: string) {
   const url = req.nextUrl.clone();
 
   // если уже на странице входа — выходим, иначе будет цикл
-  if (url.pathname.endsWith('/signin')) {
+  if (url.pathname.endsWith('/signin') || url.pathname.endsWith('/auth/signin')) {
     return NextResponse.next();
   }
 
