@@ -15,7 +15,6 @@ export const useSinginGoogle = () => {
       googleSignin(locale);
     } catch (e) {
       console.log(e);
-      setIsLoading(false);
     }
   };
   return { handleClick, isLoading, setIsLoading };
