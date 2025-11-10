@@ -73,6 +73,7 @@ function redirectToSignin(req: NextRequest, locale: string) {
     return NextResponse.next();
   }
 
+  // ✅ корректный путь
   url.pathname = locale === routing.defaultLocale ? '/signin' : `/${locale}/signin`;
 
   return NextResponse.redirect(url);

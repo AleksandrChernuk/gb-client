@@ -66,13 +66,14 @@ export async function middleware(req: NextRequest) {
 }
 
 function redirectToSignin(req: NextRequest, locale: string) {
-  const url = new URL(req.url);
+  const url = new URL(req.url); // ✅ теперь путь от корня
 
   // 🚫 предотвращаем цикл
   if (url.pathname.endsWith('/signin')) {
     return NextResponse.next();
   }
 
+  // ✅ корректный путь
   url.pathname = locale === routing.defaultLocale ? '/signin' : `/${locale}/signin`;
 
   return NextResponse.redirect(url);
