@@ -86,7 +86,6 @@ export default function CallbackPage() {
         method: 'POST',
         credentials: 'include',
       });
-
       if (r.ok) {
         const v2 = await fetch('/api/auth/validate-auth', {
           credentials: 'include',
