@@ -66,11 +66,17 @@ export async function middleware(req: NextRequest) {
 }
 
 function redirectToSignin(req: NextRequest, locale: string) {
-  const url = req.nextUrl.clone();
-  url.pathname = `/${locale}/signin`;
+  const url = new URL(req.url);
+
+  if (url.pathname.endsWith('/signin')) {
+    return NextResponse.next();
+  }
+
+  url.pathname = locale === routing.defaultLocale ? '/signin' : `/${locale}/signin`;
+
   return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: ['/', '/(en|uk|ru)/:path*'],
+  matcher: ['/', '/(ru|en)/:path*', '/((?!api|trpc|_next|_vercel|.*\\..*|auth/signin).*)'],
 };

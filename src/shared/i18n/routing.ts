@@ -10,8 +10,9 @@ export const routing = defineRouting({
     sameSite: 'lax',
   },
   localePrefix: {
-    mode: 'as-needed',
+    mode: 'always',
     prefixes: {
+      uk: '/uk',
       ru: '/ru',
       en: '/en',
     },

@@ -54,7 +54,7 @@ const UpdateProfileEmailForm = () => {
       clearUserStore();
       logout();
 
-      router.push(`${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
+      router.push(`/${REDIRECT_PATHS.verifyEmail}/${encodeURIComponent(rowData.email.trim())}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(t(mapServerError(error.message)));

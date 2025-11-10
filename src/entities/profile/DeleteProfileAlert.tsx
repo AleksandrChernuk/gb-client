@@ -36,7 +36,7 @@ const DeleteProfileAlert = ({ setActiveForm }: Props) => {
       const result = await requestDeleteAccount(currentUser.email, locale);
 
       router.push(
-        `${REDIRECT_PATHS.verifyDeleteAccount}?email=${encodeURIComponent(result.email || currentUser.email)}`,
+        `/${REDIRECT_PATHS.verifyDeleteAccount}?email=${encodeURIComponent(result.email || currentUser.email)}`,
       );
     } catch (error) {
       if (error instanceof Error) {

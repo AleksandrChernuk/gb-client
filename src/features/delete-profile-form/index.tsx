@@ -48,7 +48,7 @@ export default function VerifyDeleteAccountForm() {
 
       clearUserStore();
 
-      router.replace(`${REDIRECT_PATHS.confirmDeleteAccount}`);
+      router.replace(`/${REDIRECT_PATHS.confirmDeleteAccount}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(`${mapServerError(err.message)}`));

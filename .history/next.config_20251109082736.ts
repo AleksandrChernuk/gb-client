@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
         destination: '/:path*',
         permanent: true,
       },
-      // Старый редирект
       {
         source: '/route-planner',
         destination: '/',

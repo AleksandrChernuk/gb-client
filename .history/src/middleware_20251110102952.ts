@@ -8,6 +8,15 @@ const PROTECTED_PATHS = ['/profile'];
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
+
+  const segments = pathname.split('/').filter(Boolean);
+  const possibleLocale = segments[0];
+  const isLocaleInPath = ['ru', 'en'].includes(possibleLocale);
+  const pathWithoutLocale = isLocaleInPath ? `/${segments.slice(1).join('/')}` : pathname;
+
+  // Проверяем защищенность пути (без локали)
+  const isProtected = PROTECTED_PATHS.some((path) => pathWithoutLocale.startsWith(path));
+
   const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
 
   // Проверяем наличие токенов для рефреша
@@ -66,11 +75,17 @@ export async function middleware(req: NextRequest) {
 }
 
 function redirectToSignin(req: NextRequest, locale: string) {
-  const url = req.nextUrl.clone();
-  url.pathname = `/${locale}/signin`;
+  const url = new URL(req.url);
+
+  if (url.pathname.endsWith('/signin')) {
+    return NextResponse.next();
+  }
+
+  url.pathname = locale === routing.defaultLocale ? '/signin' : `/${locale}/signin`;
+
   return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: ['/', '/(en|uk|ru)/:path*'],
+  matcher: ['/', '/(ru|en)/:path*', '/((?!api|trpc|_next|_vercel|.*\\..*|auth/signin).*)'],
 };

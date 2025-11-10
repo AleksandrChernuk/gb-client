@@ -50,7 +50,7 @@ export default function VerifyEmailFrom({ email }: { email: string }) {
       }
 
       useUserStore.getState().setUserStore(currentUser);
-      router.replace(`${REDIRECT_PATHS.profile}`);
+      router.replace(`/${REDIRECT_PATHS.profile}`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);

@@ -51,7 +51,7 @@ export default function ResetPasswordForm() {
 
     try {
       await resetPassword(data, locale);
-      router.replace(`${REDIRECT_PATHS.signin}`);
+      router.replace(`/${REDIRECT_PATHS.signin}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(`${mapServerError(err.message)}`));

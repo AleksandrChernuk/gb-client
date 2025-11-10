@@ -41,7 +41,7 @@ export default function ForgotPasswordForm() {
       const payload: TypeForgotPassword = { email: rowData.email };
       await forgotPassword(payload, locale);
 
-      router.push(`${REDIRECT_PATHS.resetPassword}?email=${encodeURIComponent(rowData.email)}`);
+      router.push(`/${REDIRECT_PATHS.resetPassword}?email=${encodeURIComponent(rowData.email)}`);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(t(`${mapServerError(err.message)}`));

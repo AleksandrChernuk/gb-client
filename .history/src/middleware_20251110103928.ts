@@ -8,7 +8,14 @@ const PROTECTED_PATHS = ['/profile'];
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
+
+  const segments = pathname.split('/').filter(Boolean);
+  const possibleLocale = segments[0];
+  const isLocaleInPath = ['ru', 'en'].includes(possibleLocale);
+  const pathWithoutLocale = isLocaleInPath ? `/${segments.slice(1).join('/')}` : pathname;
+
+  // Проверяем защищенность пути (без локали)
+  const isProtected = PROTECTED_PATHS.some((path) => pathWithoutLocale.startsWith(path));
 
   // Проверяем наличие токенов для рефреша
   const accessToken = req.cookies.get('accessToken')?.value;
