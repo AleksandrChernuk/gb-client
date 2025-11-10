@@ -64,7 +64,6 @@ export async function middleware(req: NextRequest) {
 
   return intlMiddleware(req);
 }
-
 function redirectToSignin(req: NextRequest, locale: string) {
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}/auth/signin`;
