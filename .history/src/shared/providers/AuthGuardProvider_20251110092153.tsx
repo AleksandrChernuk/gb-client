@@ -93,7 +93,7 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const user = useUserStore();
+  const user = useUserStore((s) => s.user);
   const ranRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -165,7 +165,6 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
           router.replace(`/${getLocale()}/signin`);
         }
       } catch (err) {
-        console.log(err);
         if (mounted) router.replace(`/${getLocale()}/signin`);
       }
     };

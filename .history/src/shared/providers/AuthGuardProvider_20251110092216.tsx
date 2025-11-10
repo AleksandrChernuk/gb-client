@@ -165,7 +165,6 @@ export function AuthGuardProvider({ children }: { children: React.ReactNode }) {
           router.replace(`/${getLocale()}/signin`);
         }
       } catch (err) {
-        console.log(err);
         if (mounted) router.replace(`/${getLocale()}/signin`);
       }
     };
