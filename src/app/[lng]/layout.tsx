@@ -49,7 +49,7 @@ export default async function MainLayout({
 
   return (
     <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
-      <GoogleTagManager gtmId="GTM-NDJWDGB6" />
+      <GoogleTagManager gtmId="GTM-MXK3BV2C" />
       <GoogleAnalytics gaId="G-QL65KW5KP6" />
       <body className={`${inter.className} ${inter.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
