@@ -9,6 +9,7 @@ import BackRouteButton from '@/shared/ui/BackRouteButton';
 import Cleanup from '@/features/checkout-form/ui/Cleanup';
 import CheckoutForm from '@/widgets/checkout';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 type Props = {
   params: Params;
@@ -29,6 +30,7 @@ export default async function Checkout() {
 
   return (
     <>
+      <GoogleTagManager gtmId="GTM-MXK3BV2C" />
       <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-900 flex-1">
         <section>
           <h1 className="sr-only">{t('h1')}</h1>

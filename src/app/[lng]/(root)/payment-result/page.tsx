@@ -8,6 +8,7 @@ import ThirdFooter from '@/widgets/footer/ThirdFooter';
 import { CleanOrderData } from '@/widgets/payment-result/CleanStor';
 import { ErrorPayment } from '@/widgets/payment-result/ErrorPayment';
 import { SuccessPayment } from '@/widgets/payment-result/SuccessPayment';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -47,6 +48,7 @@ export default async function Success({ params, searchParams }: Props) {
 
   return (
     <>
+      <GoogleTagManager gtmId="GTM-MXK3BV2C" />
       <CleanOrderData />
       <main role="main" className="flex items-center justify-center flex-1 bg-slate-50 dark:bg-slate-900">
         <section>
