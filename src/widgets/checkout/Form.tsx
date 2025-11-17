@@ -16,10 +16,13 @@ import Booking from '@/widgets/checkout/ui/Booking';
 import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useShallow } from 'zustand/react/shallow';
 import CheckoutCard from '@/features/checkout-form/ui/CheckoutCard';
+import { useRouter } from '@/shared/i18n/routing';
+import { useEffect } from 'react';
 
 export default function CheckoutForm() {
   const { methods, onSubmit } = useCheckout();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
+  const router = useRouter();
 
   const { selectedTicket, isHydrated } = useSelectedTickets(
     useShallow((state) => ({
@@ -27,6 +30,14 @@ export default function CheckoutForm() {
       isHydrated: state.isHydrated,
     })),
   );
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    if (!selectedTicket) {
+      router.replace('/');
+    }
+  }, [isHydrated, selectedTicket, router]);
 
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
