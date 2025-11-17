@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: Props) {
 
 const Verify2FAPage = async ({ params }: Props) => {
   const { email } = await params;
-  console.log(email);
 
   if (!email) {
     notFound();

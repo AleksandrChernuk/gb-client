@@ -26,7 +26,6 @@ function isCurrentUser(v: any): v is CurrentUser {
 
 export default function CallbackPage() {
   const router = useRouter();
-  console.log(router);
   const params = useSearchParams();
   const locale = useLocale();
 
