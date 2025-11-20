@@ -63,34 +63,36 @@ const SeatsList = memo(function SeatsList({ helm, seatRows }: Props) {
             </div>
           </li>
         )}
-        {seatRows.seats.map((row, rowIndex) => (
-          <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-2">
-            {row.map((seat, seatIndex) =>
-              seat.type ? (
-                <Seat
-                  onClick={() => handleSetSeats(seat)}
-                  key={`${rowIndex}-${seatIndex}`}
-                  seatNumber={seat.seatNumber}
-                  available={seat.type === 'SEAT' && seat.status === 'FREE'}
-                  isFree={seat.status === 'FREE'}
-                  //@ts-ignore
-                  isSelected={selectedSeats.some(
+        {seatRows.seats
+          .filter((row) => Array.isArray(row))
+          .map((row, rowIndex) => (
+            <li key={rowIndex} className="flex justify-between gap-2 tablet:gap-2">
+              {row.map((seat, seatIndex) =>
+                seat.type ? (
+                  <Seat
+                    onClick={() => handleSetSeats(seat)}
+                    key={`${rowIndex}-${seatIndex}`}
+                    seatNumber={seat.seatNumber}
+                    available={seat.type === 'SEAT' && seat.status === 'FREE'}
+                    isFree={seat.status === 'FREE'}
                     //@ts-ignore
+                    isSelected={selectedSeats.some(
+                      //@ts-ignore
 
-                    (e) =>
-                      (seat.seatId && e.seatId === seat.seatId) ||
-                      (seat.seatNumber && e.seatNumber === seat.seatNumber),
-                  )}
-                />
-              ) : (
-                <div
-                  key={`empty-${rowIndex}-${seatIndex}`}
-                  className="min-w-[20px] max-w-[45px] h-[55px] tablet:w-[55px] tablet:h-[65px]"
-                ></div>
-              ),
-            )}
-          </li>
-        ))}
+                      (e) =>
+                        (seat.seatId && e.seatId === seat.seatId) ||
+                        (seat.seatNumber && e.seatNumber === seat.seatNumber),
+                    )}
+                  />
+                ) : (
+                  <div
+                    key={`empty-${rowIndex}-${seatIndex}`}
+                    className="min-w-[20px] max-w-[45px] h-[55px] tablet:w-[55px] tablet:h-[65px]"
+                  ></div>
+                ),
+              )}
+            </li>
+          ))}
       </ul>
     </div>
   );
