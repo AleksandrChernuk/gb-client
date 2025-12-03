@@ -33,10 +33,10 @@ export const footerNavLinks = {
       title: 'faq',
       href: '/faq',
     },
-    // {
-    //   title: 'blog',
-    //   href: '/blog',
-    // },
+    {
+      title: 'blog',
+      href: '/blog',
+    },
     // {
     //   title: 'bus_routes',
     //   href: '/route-planner',

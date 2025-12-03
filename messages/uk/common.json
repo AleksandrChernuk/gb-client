@@ -2,7 +2,8 @@
   "common": {
     "something_happend": "Щось сталося",
     "BOOK": "Оплачено",
-
+    "articles_title": "Новини та статті",
+    "read": "Читати",
     "PAYMENT_AT_BOARDING": "Оплата при посадці",
     "RESERVE": "Резерв",
     "no_travel": "Немає доступних рейсів",

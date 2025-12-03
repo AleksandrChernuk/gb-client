@@ -1,6 +1,9 @@
 {
   "common": {
     "something_happend": "Что-то произошло",
+    "articles_title": "Новости и статьи",
+    "read": "Читать",
+
     "BOOK": "Оплачено",
     "PAYMENT_AT_BOARDING": "Оплата при посадке",
     "RESERVE": "Резерв",
