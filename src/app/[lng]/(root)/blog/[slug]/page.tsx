@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lng: Loca
   const url = `${baseUrl}/${lng}/${path}`;
 
   return {
-    title: desc.title,
-    description: desc.description,
+    title: desc.metaTitle,
+    description: desc.metaDescription,
     metadataBase: new URL(baseUrl),
 
     alternates: {
