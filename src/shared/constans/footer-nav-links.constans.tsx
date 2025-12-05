@@ -75,7 +75,7 @@ export const footerNavLinks = {
     },
     {
       title: 'facebook',
-      href: 'https://www.facebook.com/',
+      href: 'https://www.facebook.com/groups/greenbus.ukraine',
       icon: <IconFacebook aria-label="Facebook" />,
       ariaLabel: 'facebook_aria',
     },
