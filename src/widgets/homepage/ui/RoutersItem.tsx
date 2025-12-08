@@ -16,7 +16,7 @@ type TIRoutersItem = {
 export default function RoutersItem({ from, to }: TIRoutersItem) {
   const locale = useLocale();
 
-  const formatted = format(new Date() || new Date(), 'yyyy-MM-dd');
+  const formatted = format(new Date(), 'yyyy-MM-dd');
 
   return (
     <Link

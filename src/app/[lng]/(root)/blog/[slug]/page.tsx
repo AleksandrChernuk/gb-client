@@ -110,7 +110,6 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
 
   return (
     <>
-      {' '}
       <main className="bg-slate-50 dark:bg-slate-900 flex-1">
         <section className="py-10">
           <Container size="m">

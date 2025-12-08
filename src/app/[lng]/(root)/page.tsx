@@ -6,7 +6,6 @@ import desc from '@/assets/images/desc_full_2x.webp';
 import mob from '@/assets/images/mob_full_2x.webp';
 import Benefits from '@/widgets/homepage/Benefits';
 import PopularRoutes from '@/widgets/homepage/PopularRoutes';
-import GetStarted from '@/widgets/homepage/GetStarted';
 import Questions from '@/widgets/homepage/Questions';
 import MainFooter from '@/widgets/footer/MainFooter';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
@@ -17,6 +16,7 @@ import { Container } from '@/shared/ui/Container';
 import { AspectRatio } from '@/shared/ui/aspect-ratio';
 import MainSearch from '@/features/route-search-form';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import { ArticlesPreview } from '@/widgets/homepage/ArticlesPreview';
 
 type Props = {
   params: Params;
@@ -115,7 +115,7 @@ export default async function Home({
           </Container>
         </section>
         <PopularRoutes />
-        <GetStarted />
+        <ArticlesPreview />
         <Questions />
       </main>
       <MainFooter />
