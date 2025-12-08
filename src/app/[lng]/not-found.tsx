@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import MainHeader from '@/widgets/header/MainHeader';
-import errorImg from '@/assets/images/something-happened-on-the-site.avif';
+import errorImg from '@/assets/images/something-happened-on-the-site.webp';
 
 import Image from 'next/image';
 import Link from 'next/link';

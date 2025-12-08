@@ -3,7 +3,7 @@
 import MainHeader from '@/widgets/header/MainHeader';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import errorImg from '@/assets/images/something-happened-on-the-site.avif';
+import errorImg from '@/assets/images/something-happened-on-the-site.webp';
 
 import Head from 'next/head';
 import Image from 'next/image';

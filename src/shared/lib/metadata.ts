@@ -19,7 +19,7 @@ const buildBaseMetadata = (
 
   const fullPath = getLocalizedPath(lng, path);
 
-  const manifestPath = `/manifest.${lng}.json`;
+  const manifestPath = `${baseUrl}/manifest.json`;
 
   return {
     title: t(`${slug}.title`),
@@ -59,7 +59,7 @@ const buildBaseMetadata = (
         { url: '/apple-touch-icon-180x180.png', sizes: '180x180', type: 'image/png' },
       ],
     },
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL('https://greenbus.com.ua'),
     ...(isPublic && {
       alternates: {
         canonical: `${baseUrl}${fullPath}`,

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import noTravelImg from '@/assets/images/an-empty-bus-stop.avif';
+import noTravelImg from '@/assets/images/an-empty-bus-stop.webp';
 import { cn } from '@/shared/lib/utils';
 
 type Props = {

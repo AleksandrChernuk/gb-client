@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import desc from '@/assets/images/desc_full_2x.avif';
-import mob from '@/assets/images/mob_full_2x.avif';
+import desc from '@/assets/images/desc_full_2x.webp';
+import mob from '@/assets/images/mob_full_2x.webp';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
 import MainSearch from '@/features/route-search-form';

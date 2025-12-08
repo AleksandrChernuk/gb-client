@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import errorImg from '@/assets/images/something-happened-on-the-site.avif';
+import errorImg from '@/assets/images/something-happened-on-the-site.webp';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouter } from '@/shared/i18n/routing';
 import CustomCard from '@/shared/ui/CustomCard';

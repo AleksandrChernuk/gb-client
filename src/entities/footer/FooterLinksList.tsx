@@ -27,7 +27,7 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
               prefetch={false}
               aria-label={t(ariaLabel || '')}
               href={href}
-              className="inline-block p-1 bg-green-100 rounded-full hover:underline"
+              className="inline-block p-2 bg-green-100 rounded-full hover:underline"
             >
               {icon}
             </Link>

@@ -9,9 +9,9 @@ import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 
-import peopleWithSuitcases from '@/assets/images/people-with-suitcases-looking-straight-ahead-goin.avif';
-import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
-import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
+import peopleWithSuitcases from '@/assets/images/people-with-suitcases-looking-straight-ahead-goin.webp';
+import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.webp';
+import directionWith from '@/assets/images/direction-with-a-road-in-the-city.webp';
 import { improveYourSalesList } from '@/shared/constans/improve.your.sales.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 

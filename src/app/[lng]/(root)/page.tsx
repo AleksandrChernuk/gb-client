@@ -1,9 +1,9 @@
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.avif';
-import desc from '@/assets/images/desc_full_2x.avif';
-import mob from '@/assets/images/mob_full_2x.avif';
+import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.webp';
+import desc from '@/assets/images/desc_full_2x.webp';
+import mob from '@/assets/images/mob_full_2x.webp';
 import Benefits from '@/widgets/homepage/Benefits';
 import PopularRoutes from '@/widgets/homepage/PopularRoutes';
 import GetStarted from '@/widgets/homepage/GetStarted';

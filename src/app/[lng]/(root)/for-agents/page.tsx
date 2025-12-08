@@ -14,8 +14,8 @@ type Props = {
   params: Params;
 };
 
-import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.avif';
-import directionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
+import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.webp';
+import directionWith from '@/assets/images/direction-with-a-road-in-the-city.webp';
 import { joinUsAgents } from '@/shared/constans/join.us.agents.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 

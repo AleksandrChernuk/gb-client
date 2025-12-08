@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import pointOnCurt from '@/assets/images/point-on-curt.avif';
+import pointOnCurt from '@/assets/images/point-on-curt.webp';
 import { Container } from '@/shared/ui/Container';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';

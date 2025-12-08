@@ -26,12 +26,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-function getTextDirection(locale: Locale): 'ltr' | 'rtl' {
-  const rtlLocales = ['ar', 'he', 'fa', 'ur'];
-  return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
-}
-
-export default async function MainLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: Readonly<{
@@ -48,7 +43,7 @@ export default async function MainLayout({
   setRequestLocale(lng as Locale);
 
   return (
-    <html lang={lng} dir={getTextDirection(lng as Locale)} suppressHydrationWarning>
+    <html lang={lng} suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-MXK3BV2C" />
       <GoogleAnalytics gaId="G-QL65KW5KP6" />
       <body className={`${inter.className} ${inter.variable} antialiased`} suppressHydrationWarning>

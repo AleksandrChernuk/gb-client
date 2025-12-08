@@ -8,10 +8,10 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { aboutUsStatistics } from '@/shared/constans/about.us.statistics';
 import CustomCard from '@/shared/ui/CustomCard';
 import ThirdFooter from '@/widgets/footer/ThirdFooter';
-import irectionWith from '@/assets/images/direction-with-a-road-in-the-city.avif';
-import world from '@/assets/images/world.avif';
-import business from '@/assets/images/business.avif';
-import group from '@/assets/images/group.avif';
+import irectionWith from '@/assets/images/direction-with-a-road-in-the-city.webp';
+import world from '@/assets/images/world.webp';
+import business from '@/assets/images/business.webp';
+import group from '@/assets/images/group.webp';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import ContactForm from '@/features/contact-form';
 
