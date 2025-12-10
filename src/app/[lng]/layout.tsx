@@ -14,6 +14,7 @@ import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
 import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Rubik({
   variable: '--font-rubik',
@@ -50,6 +51,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>
             <GTMNoScript />
+            <SpeedInsights />
 
             <ReactQueryContext>
               <ThemeProvider attribute="class" disableTransitionOnChange={false}>
