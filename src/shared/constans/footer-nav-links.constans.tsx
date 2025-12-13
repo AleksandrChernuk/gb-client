@@ -57,7 +57,7 @@ export const footerNavLinks = {
   social: [
     {
       title: 'instagram',
-      href: 'https://instagram.com/',
+      href: 'https://instagram.com/greenbus_ukraine',
       icon: <IconInstagram aria-label="Instagram" />,
       ariaLabel: 'instagram_aria',
     },
@@ -75,7 +75,7 @@ export const footerNavLinks = {
     },
     {
       title: 'facebook',
-      href: 'https://www.facebook.com/groups/greenbus.ukraine',
+      href: 'https://www.facebook.com/greenbus.ukraine',
       icon: <IconFacebook aria-label="Facebook" />,
       ariaLabel: 'facebook_aria',
     },
