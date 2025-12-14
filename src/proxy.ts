@@ -73,7 +73,7 @@ function redirectToSignin(request: NextRequest, locale: string) {
 
 export const config = {
   matcher: [
-    '/((?!sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|favicon\\.ico|_next|api|.*\\.(?:png|jpg|jpeg|webp|svg|ico|gif|xml)$).*)',
+    '/((?!api|trpc|_next|_vercel|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|favicon\\.ico|.*\\..*$).*)',
     '/(en|uk|ru)/:path*',
   ],
 };
