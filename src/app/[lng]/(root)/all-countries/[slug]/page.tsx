@@ -64,7 +64,6 @@ export default async function CountryPage({ params, searchParams }: Props) {
                 items={[
                   { label: t('breadcrumbs_home'), href: '/' },
                   { label: t('breadcrumbs_all_countries'), href: `/${lng}/all-countries` },
-                  { label: extractLocationDetails(cityLocations[0], lng).countryName },
                 ]}
               />
             </div>

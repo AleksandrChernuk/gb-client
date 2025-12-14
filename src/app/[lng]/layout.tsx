@@ -15,6 +15,7 @@ import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Script from 'next/script';
 
 const inter = Rubik({
   variable: '--font-rubik',
@@ -43,10 +44,26 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   setRequestLocale(lng as Locale);
 
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'GreenBus',
+    url: `https://greenbus.com.ua/${lng}`,
+    inLanguage: lng,
+  };
+
   return (
     <html lang={lng} suppressHydrationWarning>
+      <head>
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <GoogleTagManager gtmId="GTM-MXK3BV2C" />
       <GoogleAnalytics gaId="G-QL65KW5KP6" />
+
       <body className={`${inter.className} ${inter.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>

@@ -66,7 +66,6 @@ export default async function LocationPage({ params, searchParams }: Props) {
                   { label: t('breadcrumbs_home'), href: '/' },
                   { label: t('breadcrumbs_all_countries'), href: `/${lng}/all-countries` },
                   { label: `${details.countryName}`, href: `/${lng}/all-countries/${slugCountry}` },
-                  { label: `${details.locationName}` },
                 ]}
               />
             </div>

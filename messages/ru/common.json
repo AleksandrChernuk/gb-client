@@ -4,7 +4,8 @@
     "articles_title": "Новости и статьи",
     "read": "Читать",
     "all_news": "Все новости",
-
+    "breadcrumb_main": "Главная",
+    "breadcrumb_blog": "Новости и статьи",
     "BOOK": "Оплачено",
     "PAYMENT_AT_BOARDING": "Оплата при посадке",
     "RESERVE": "Резерв",

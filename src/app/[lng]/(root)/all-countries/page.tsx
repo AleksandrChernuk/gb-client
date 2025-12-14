@@ -12,6 +12,7 @@ import MainFooter from '@/widgets/footer/MainFooter';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 import { notFound } from 'next/navigation';
 import { CitySearch, CountriesList, GroupedCitiesListClient } from '@/features/all-countries';
+import { H1 } from '@/shared/ui/H1';
 
 export interface ICountryListItem {
   slug: string;
@@ -62,9 +63,7 @@ export default async function AllCountries({
 
         <section className="pt-10">
           <Container size="m">
-            <h1 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-              {t('meet_buses_in_your_city')}
-            </h1>
+            <H1>{t('meet_buses_in_your_city')}</H1>
 
             <CountriesList countries={countries} locale={lng} />
           </Container>

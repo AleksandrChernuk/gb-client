@@ -7,12 +7,21 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/shared/i18n/routing';
 import { cn } from '@/shared/lib/utils';
 
-export default function BackRouteButton({ className }: { className?: string }) {
+type Props = {
+  backRoute?: string;
+  className?: string;
+};
+
+export default function BackRouteButton({ className, backRoute }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const router = useRouter();
 
   const handleGoBack = () => {
+    if (!!backRoute) {
+      router.push(backRoute);
+      return;
+    }
     router.back();
   };
 

@@ -1,13 +1,21 @@
 import { getArticleBySlug, getArticles } from '@/shared/api/articles.actions';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { buildArticleMetadata } from '@/shared/seo/articleMetadata';
 import { IArticleResponse } from '@/shared/types/article.types';
 import { AspectRatio } from '@/shared/ui/aspect-ratio';
-import BackRouteButton from '@/shared/ui/BackRouteButton';
+import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 import { Container } from '@/shared/ui/Container';
+import { H1 } from '@/shared/ui/H1';
+import Main from '@/shared/ui/Main';
+import Section from '@/shared/ui/Section';
+import { ShareButton } from '@/shared/ui/ShareButton';
 import MainFooter from '@/widgets/footer/MainFooter';
 import { Locale } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-
-const baseUrl = 'https://greenbus.com.ua';
+import Script from 'next/script';
+import { buildBreadcrumbSchema } from '@/shared/seo/breadcrumbs.schema';
+import { BASE_URL } from '@/shared/configs/constants';
 
 export async function generateStaticParams() {
   const res = await getArticles({ perPage: 9999 });
@@ -26,74 +34,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lng: Locale; slug: string }> }) {
   const { lng, slug } = await params;
-
   const article = await getArticleBySlug(slug);
 
-  const desc = article.descriptions.find((d) => d.language === lng) ?? article.descriptions[0];
-  const cover = article.photos.find((p) => p.isCover);
-
-  const path = `blog/${slug}`;
-  const url = `${baseUrl}/${lng}/${path}`;
-
-  return {
-    title: desc.metaTitle,
-    description: desc.metaDescription,
-    metadataBase: new URL(baseUrl),
-
-    alternates: {
-      canonical: url,
-      languages: {
-        'x-default': `${baseUrl}/uk/${path}`,
-        uk: `${baseUrl}/uk/${path}`,
-        ru: `${baseUrl}/ru/${path}`,
-        en: `${baseUrl}/en/${path}`,
-      },
-    },
-
-    openGraph: {
-      title: desc.title,
-      description: desc.description,
-      url,
-      siteName: 'GreenBus',
-      images: cover
-        ? [
-            {
-              url: cover.url,
-              width: 1200,
-              height: 630,
-              alt: cover.alt ?? desc.title,
-            },
-          ]
-        : [],
-      locale: lng,
-      type: 'article',
-    },
-
-    twitter: {
-      card: 'summary_large_image',
-      title: desc.title,
-      description: desc.description,
-      images: cover ? [cover.url] : [],
-    },
-
-    robots: {
-      index: true,
-      follow: true,
-    },
-
-    appleWebApp: {
-      title: 'GreenBus',
-      capable: true,
-      statusBarStyle: 'default',
-    },
-
-    icons: {
-      icon: '/favicon.ico',
-      shortcut: '/favicon.ico',
-    },
-
-    manifest: '/manifest.json',
-  };
+  return buildArticleMetadata(article, lng, slug);
 }
 
 function getDescriptionByLang(article: IArticleResponse, lang: string) {
@@ -105,18 +48,44 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
 
   const article = await getArticleBySlug(slug);
   const cover = article.photos.find((p) => p.isCover);
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   const desc = getDescriptionByLang(article, lng);
 
+  const breadcrumbSchema = buildBreadcrumbSchema(
+    [
+      {
+        name: t('breadcrumb_main'),
+        url: `${BASE_URL}/${lng}`,
+      },
+      {
+        name: t('breadcrumb_blog'),
+        url: `${BASE_URL}/${lng}/blog`,
+      },
+    ],
+    lng,
+  );
+
   return (
     <>
-      <main className="bg-slate-50 dark:bg-slate-900 flex-1">
-        <section className="py-10">
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Main>
+        <Section>
           <Container size="m">
-            <div className="mb-4">
-              <BackRouteButton />
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <BreadcrumbSimple
+                items={[
+                  { label: t('breadcrumb_main'), href: '/' },
+                  { label: t('breadcrumb_blog'), href: '/blog' },
+                ]}
+              />
+              <ShareButton shareUrl={`https://greenbus.com.ua/${lng}/blog/${article.slug}`} title={desc.title} />
             </div>
-            <h1 className="text-2xl font-semibold mb-4">{desc.title}</h1>
+            <H1>{desc.title}</H1>{' '}
             {cover && (
               <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg mb-4">
                 <Image src={cover.url} alt={cover.alt} fill className="h-full w-full rounded-lg object-cover" />
@@ -127,8 +96,8 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
               dangerouslySetInnerHTML={{ __html: desc.content }}
             />
           </Container>
-        </section>
-      </main>
+        </Section>
+      </Main>
       <MainFooter />
     </>
   );

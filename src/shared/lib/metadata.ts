@@ -19,8 +19,6 @@ const buildBaseMetadata = (
 
   const fullPath = getLocalizedPath(lng, path);
 
-  const manifestPath = `${baseUrl}/manifest.json`;
-
   return {
     title: t(`${slug}.title`),
     description: t(`${slug}.description`),
@@ -30,7 +28,6 @@ const buildBaseMetadata = (
       capable: true,
       statusBarStyle: 'default' as const,
     },
-    manifest: manifestPath,
     robots: {
       index: isPublic,
       follow: isPublic,
