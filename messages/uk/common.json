@@ -1,6 +1,9 @@
 {
   "common": {
     "something_happend": "Щось сталося",
+    "copy_link": "Скопіювати посилання",
+    "copied": "Скопійовано",
+    "copy_link_label": "Скопіюйте посилання",
     "BOOK": "Оплачено",
     "articles_title": "Новини та статті",
     "read": "Читати",

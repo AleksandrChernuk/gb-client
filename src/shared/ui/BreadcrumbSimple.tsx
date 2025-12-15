@@ -18,7 +18,7 @@ export function BreadcrumbSimple({ items }: { items: Crumb[] }) {
       <BreadcrumbList>
         {items.map((item, idx) => {
           return (
-            <span key={idx} className="flex items-center gap-1">
+            <span key={idx} className="flex items-center gap-1 truncate">
               {idx > 0 && <BreadcrumbSeparator />}
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>

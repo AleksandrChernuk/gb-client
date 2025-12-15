@@ -62,6 +62,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
         name: t('breadcrumb_blog'),
         url: `${BASE_URL}/${lng}/blog`,
       },
+      { name: desc.title, url: `/blog/${article.slug}` },
     ],
     lng,
   );
@@ -81,6 +82,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 items={[
                   { label: t('breadcrumb_main'), href: '/' },
                   { label: t('breadcrumb_blog'), href: '/blog' },
+                  { label: desc.title, href: `/blog/${article.slug}` },
                 ]}
               />
               <ShareButton shareUrl={`https://greenbus.com.ua/${lng}/blog/${article.slug}`} title={desc.title} />

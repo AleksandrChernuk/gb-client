@@ -33,7 +33,7 @@ export default function AcriclesList() {
   if (isLoading || isFetching) {
     return (
       <SkeletonCards
-        className="space-y-0 grid grid-cols-1 tablet:grid-cols-2 gap-4 mb-4"
+        className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-4"
         items={4}
         skeletonClassName="min-h-[420px]"
       />

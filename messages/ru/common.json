@@ -2,6 +2,9 @@
   "common": {
     "something_happend": "Что-то произошло",
     "articles_title": "Новости и статьи",
+    "copy_link": "Копировать ссылку",
+    "copied": "Скопировано",
+    "copy_link_label": "Скопируйте ссылку",
     "read": "Читать",
     "all_news": "Все новости",
     "breadcrumb_main": "Главная",

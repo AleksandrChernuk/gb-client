@@ -1,6 +1,9 @@
 {
   "common": {
     "something_happend": "Something happend",
+    "copy_link": "Copy link",
+    "copied": "Copied",
+    "copy_link_label": "Copy the link",
     "BOOK": "Paid",
     "PAYMENT_AT_BOARDING": "Payment at boarding",
     "RESERVE": "Reserve",

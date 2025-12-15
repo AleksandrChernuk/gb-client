@@ -1,8 +1,10 @@
 'use client';
 
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/ui/dropdown-menu';
 import { Share2, Copy, Send, MessageCircle, Facebook, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
 type Props = {
@@ -12,6 +14,7 @@ type Props = {
 
 export const ShareButton = ({ title, shareUrl }: Props) => {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations(MESSAGE_FILES.COMMON);
 
   const text = useMemo(() => encodeURIComponent(title ?? ''), [title]);
   const url = useMemo(() => encodeURIComponent(shareUrl), [shareUrl]);
@@ -20,8 +23,7 @@ export const ShareButton = ({ title, shareUrl }: Props) => {
     try {
       await navigator.clipboard.writeText(shareUrl);
     } catch {
-      // Safari fallback
-      window.prompt('Скопируйте ссылку:', shareUrl);
+      window.prompt(`${t('copy_link_label')}:`, shareUrl);
     }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -30,8 +32,8 @@ export const ShareButton = ({ title, shareUrl }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" aria-label="Поделиться">
-          <Share2 className="h-4 w-4" />
+        <Button variant="ghost" aria-label="Поделиться" size={'icon'}>
+          <Share2 className="size-4" />
         </Button>
       </DropdownMenuTrigger>
 
@@ -85,7 +87,7 @@ export const ShareButton = ({ title, shareUrl }: Props) => {
 
         <DropdownMenuItem onClick={copyLink} className="flex items-center gap-2">
           <Copy className="h-4 w-4" />
-          {copied ? 'Скопировано' : 'Копировать ссылку'}
+          {copied ? t('copied') : t('copy_link')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
