@@ -7,7 +7,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import RouteCardWrapper from '@/entities/route/RouteCard';
 import SelectButton from '@/entities/route/RouteSelectButton';
-import CarrierLabel from '@/shared/ui/RouteCarrierLabel';
 import { usePricing } from '@/features/route-card/hooks/usePricing';
 import { useRouteDetails } from '@/features/route-card/hooks/useRouteDetails';
 import { updateRouteDetails } from '@/features/route-card/helpers/updateRouteDetails';
@@ -20,6 +19,7 @@ import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import TicketCardRoute from '@/features/route-card/base-ui/TicketCardRoute';
 import MobileDetails from '@/features/route-card/details-ui/RouteMobileDetails';
 import RouteCardDetails from '@/features/route-card/details-ui/RouteCardDetails';
+import CarrierLabel from '@/features/router-carier-label';
 
 type Props = {
   data: IRouteResponse;
