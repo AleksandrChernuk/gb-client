@@ -16,6 +16,7 @@ import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
+import ClarityInit from '@/shared/ui/ClarityInit';
 
 const inter = Rubik({
   variable: '--font-rubik',
@@ -69,7 +70,7 @@ export default async function LocaleLayout({
           <NuqsAdapter>
             <GTMNoScript />
             <SpeedInsights />
-
+            <ClarityInit />
             <ReactQueryContext>
               <ThemeProvider attribute="class" disableTransitionOnChange={false}>
                 {children}
