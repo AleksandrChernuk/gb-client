@@ -1,7 +1,8 @@
-import { IconCarriersBus } from '@/assets/icons/IconCarriersBus';
 import { getCarrierLogo } from '@/features/router-carier-label/carrier.helpers';
+import { ProviderName } from '@/features/router-carier-label/providers.constants';
 import { cn } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
+import Image from 'next/image';
 
 const CarrierLabel = ({
   carrierName,
@@ -12,7 +13,8 @@ const CarrierLabel = ({
   className?: string;
   providerName?: string;
 }) => {
-  const Logo = getCarrierLogo(carrierName);
+  const logo = getCarrierLogo(carrierName, providerName as ProviderName);
+
   return (
     <div
       className={cn(
@@ -20,20 +22,14 @@ const CarrierLabel = ({
         className,
       )}
     >
-      {Logo ? (
-        <div className="w-[45px] h-[16px] tablet:w-[70px] tablet:h-[24px] shrink-0">
-          <Logo />
+      {logo ? (
+        <div className="w-full h-10 tablet:h-12 relative">
+          <Image src={logo.src} alt={logo.alt} fill className="object-contain object-left" />
         </div>
       ) : (
-        <>
-          <div className="w-[45px] h-[16px] tablet:w-[70px] tablet:h-[24px] shrink-0">
-            <IconCarriersBus />
-          </div>
-
-          <Badge variant="outline" className="font-medium truncate block text-[10px] tablet:text-xs">
-            {carrierName}
-          </Badge>
-        </>
+        <Badge variant="outline" className="font-medium truncate block text-[10px] tablet:text-xs">
+          {carrierName}
+        </Badge>
       )}
 
       {!!providerName && <div className="text-green-300">{providerName[0]}</div>}
