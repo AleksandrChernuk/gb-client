@@ -74,4 +74,36 @@ export const CARRIER_REGISTRY = [
     logoSrc: '/images/klr.png',
     alt: 'klr',
   },
+  {
+    provider: PROVIDERS.VASILKIV,
+    match: (name: string) => name.includes(PROVIDERS.VASILKIV.toLowerCase().trim()),
+    logoSrc: '/images/vasilkiv.png',
+    alt: 'VASILKIV',
+  },
+  {
+    provider: PROVIDERS.REGA,
+    match: (name: string) => name.includes(PROVIDERS.REGA.toLowerCase().trim()),
+    logoSrc: '/images/rega.png',
+    alt: 'regabus',
+  },
+  {
+    provider: PROVIDERS.PROSTOBUS,
+    match: (name: string) => name.includes(PROVIDERS.PROSTOBUS.toLowerCase().trim()),
+    logoSrc: '/images/prostobus.png',
+    alt: 'prostobus',
+  },
+
+  {
+    provider: PROVIDERS.SEMBUS,
+    match: (name: string) => name.includes(PROVIDERS.SEMBUS.toLowerCase().trim()),
+    logoSrc: '/images/sembus.png',
+    alt: 'sembus',
+  },
+
+  {
+    provider: PROVIDERS.VITALTRANS,
+    match: (name: string) => name.includes(PROVIDERS.VITALTRANS.toLowerCase().trim()),
+    logoSrc: '/images/vilartrans.png',
+    alt: 'VITALTRANS',
+  },
 ] as const;
