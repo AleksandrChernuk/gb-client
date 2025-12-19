@@ -58,7 +58,10 @@ export const CARRIER_REGISTRY = [
   },
   {
     provider: PROVIDERS.EWE,
-    match: (name: string) => name.includes(PROVIDERS.EWE.toLowerCase().trim()),
+    match: (name: string) =>
+      ['EAST WEST EUROLINES/ТзОВ "Гал-Всесвіт"', PROVIDERS.EWE].some((alias) =>
+        name.includes(alias.toLowerCase().trim()),
+      ),
     logoSrc: '/images/ewe.png',
     alt: 'ewe',
   },
@@ -106,4 +109,57 @@ export const CARRIER_REGISTRY = [
     logoSrc: '/images/vilartrans.png',
     alt: 'VITALTRANS',
   },
+
+  {
+    provider: PROVIDERS.MONOBUS,
+    match: (name: string) => name.includes(PROVIDERS.MONOBUS.toLowerCase().trim()),
+    logoSrc: '/images/MONOBUS.png',
+    alt: 'VITALTRANS',
+  },
+
+  {
+    provider: PROVIDERS.LUXBUS,
+    match: (name: string) => name.includes(PROVIDERS.LUXBUS.toLowerCase().trim()),
+    logoSrc: '/images/luxbus.png',
+    alt: 'luxbus',
+  },
+  {
+    provider: PROVIDERS.TOUR,
+    match: (name: string) => name.includes(PROVIDERS.TOUR.toLowerCase().trim()),
+    logoSrc: '/images/tour.png',
+    alt: 'tour',
+  },
+  {
+    provider: PROVIDERS.KANTOL,
+    match: (name: string) => name.includes(PROVIDERS.KANTOL.toLowerCase().trim()),
+    logoSrc: '/images/kantol.png',
+    alt: 'KANTOL',
+  },
+
+  {
+    provider: PROVIDERS.ELITEXPRESS,
+    match: (name: string) => name.includes(PROVIDERS.ELITEXPRESS.toLowerCase().trim()),
+    logoSrc: '/images/elittrans.png',
+    alt: 'ELITEXPRESS',
+  },
+  {
+    provider: PROVIDERS.TERNVOYAGE,
+    match: (name: string) => name.includes(PROVIDERS.TERNVOYAGE.toLowerCase().trim()),
+    logoSrc: '/images/elittrans.png',
+    alt: 'ternvoyage',
+  },
+  {
+    provider: PROVIDERS.ZTIME,
+    match: (name: string) => name.includes(PROVIDERS.ZTIME.toLowerCase().trim()),
+    logoSrc: '/images/ztime.png',
+    alt: 'ZTIME',
+  },
+  {
+    provider: PROVIDERS.BORYSPIL,
+    match: (name: string) => name.includes(PROVIDERS.BORYSPIL.toLowerCase().trim()),
+    logoSrc: '/images/boryspil.png',
+    alt: 'boryspil',
+  },
+
+  ,
 ] as const;

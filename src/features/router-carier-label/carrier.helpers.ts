@@ -6,6 +6,9 @@ export const getCarrierLogo = (carrierName: string, provider?: ProviderName) => 
   const normalized = carrierName.toLowerCase().trim();
 
   for (const item of CARRIER_REGISTRY) {
+    if (!item) {
+      return undefined;
+    }
     if (provider && item.provider && item.provider !== provider) continue;
 
     if (item.match(normalized)) {

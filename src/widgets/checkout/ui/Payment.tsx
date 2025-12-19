@@ -57,19 +57,21 @@ const Payment = () => {
             </FormLabel>
           </FormItem>
 
-          {selectedTicket?.allowedOperations.canPaymentToDriver && selectedTicket?.providerName !== 'KLR' && (
-            <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
-              <FormControl>
-                <RadioGroupItem value={PAYMENT_TYPES[1].VALUE} checked={value === PAYMENT_TYPES[1].VALUE} />
-              </FormControl>
-              <FormLabel className="flex items-center w-full space-x-3 font-normal cursor-pointer">
-                <span className="text-base font-medium leading-4 tracking-normal laptop:text-base laptop:font-bold laptop:leading-6 text-slate-700 dark:text-slate-50">
-                  {t(PAYMENT_TYPES[1].INTL_KEY)}
-                </span>
-                <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>
-              </FormLabel>
-            </FormItem>
-          )}
+          {selectedTicket?.allowedOperations.canPaymentToDriver &&
+            selectedTicket?.providerName !== 'KLR' &&
+            selectedTicket.carrier.name !== 'ТУРЮКРЕЙН ТОВ' && (
+              <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
+                <FormControl>
+                  <RadioGroupItem value={PAYMENT_TYPES[1].VALUE} checked={value === PAYMENT_TYPES[1].VALUE} />
+                </FormControl>
+                <FormLabel className="flex items-center w-full space-x-3 font-normal cursor-pointer">
+                  <span className="text-base font-medium leading-4 tracking-normal laptop:text-base laptop:font-bold laptop:leading-6 text-slate-700 dark:text-slate-50">
+                    {t(PAYMENT_TYPES[1].INTL_KEY)}
+                  </span>
+                  <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>
+                </FormLabel>
+              </FormItem>
+            )}
         </RadioGroup>
       </FormControl>
       <FormMessage />

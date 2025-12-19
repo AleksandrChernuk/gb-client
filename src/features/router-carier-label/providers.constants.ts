@@ -16,6 +16,15 @@ export const PROVIDERS = {
   PROSTOBUS: 'Prosto Bus Plus (ПП "АВТОТРАНЗИТ")',
   SEMBUS: 'SEM BUS',
   VITALTRANS: 'Vilartrans s.r.o',
+  MONOBUS: 'MONOBUS Sp. z o. o.',
+  LUXBUS: 'ВЕРСТЮК Г.Д. ФОП',
+  TOUR: 'ТУРЮКРЕЙН ТОВ',
+  KANTOL: 'КАНТОЛ БУСТРЕВЕЛ ТОВ',
+  ELITEXPRESS: 'ЕЛІТ ЕКСПРЕСС ТОВ',
+  TERNVOYAGE: 'ПП ТЕРНВОЯЖ',
+  ZTIME: 'Ковель.АТП',
+  BORYSPIL: 'АТАСС-БОРИСПІЛЬ ПРАТ',
 } as const;
 
 export type ProviderName = (typeof PROVIDERS)[keyof typeof PROVIDERS];
+// EAST WEST EUROLINES/ТзОВ "Гал-Всесвіт"
