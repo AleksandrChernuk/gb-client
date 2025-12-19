@@ -160,6 +160,64 @@ export const CARRIER_REGISTRY = [
     logoSrc: '/images/boryspil.png',
     alt: 'boryspil',
   },
-
-  ,
+  {
+    provider: PROVIDERS.LIS,
+    match: (name: string) => name.includes(PROVIDERS.LIS.toLowerCase().trim()),
+    logoSrc: '/images/lisautotrans.png',
+    alt: 'LIS',
+  },
+  {
+    provider: PROVIDERS.PANBUS,
+    match: (name: string) => name.includes(PROVIDERS.PANBUS.toLowerCase().trim()),
+    logoSrc: '/images/panbus.png',
+    alt: 'panbus',
+  },
+  {
+    provider: PROVIDERS.MAXBUS,
+    match: (name: string) => name.includes(PROVIDERS.MAXBUS.toLowerCase().trim()),
+    logoSrc: '/images/maxbus.png',
+    alt: 'maxbus',
+  },
+  {
+    provider: PROVIDERS.VOLYNEXPRESS,
+    match: (name: string) => name.includes(PROVIDERS.VOLYNEXPRESS.toLowerCase().trim()),
+    logoSrc: '/images/volynekspres.png',
+    alt: 'VOLYNEXPRESS',
+  },
+  {
+    provider: PROVIDERS.MUSTANG,
+    match: (name: string) => name.includes(PROVIDERS.MUSTANG.toLowerCase().trim()),
+    logoSrc: '/images/mustang.png',
+    alt: 'mustang',
+  },
+  {
+    provider: PROVIDERS.ITRAVELBUS,
+    match: (name: string) => name.includes(PROVIDERS.ITRAVELBUS.toLowerCase().trim()),
+    logoSrc: '/images/itravelbus.png',
+    alt: 'ITRAVELBUS',
+  },
+  {
+    provider: PROVIDERS.ATLASTRAVELBUS,
+    match: (name: string) => name.includes(PROVIDERS.ATLASTRAVELBUS.toLowerCase().trim()),
+    logoSrc: '/images/atlastravelbus.png',
+    alt: 'ATLASTRAVELBUS/AVTOEKSPRES',
+  },
+  {
+    provider: PROVIDERS.KAZNA,
+    match: (name: string) => name.includes(PROVIDERS.KAZNA.toLowerCase().trim()),
+    logoSrc: '/images/cazna.png',
+    alt: 'KAZNA',
+  },
+  {
+    provider: PROVIDERS.EUROVOYAGE,
+    match: (name: string) => name.includes(PROVIDERS.EUROVOYAGE.toLowerCase().trim()),
+    logoSrc: '/images/eurovoyage.png',
+    alt: 'eurovoyage',
+  },
+  {
+    provider: PROVIDERS.SUNSUN,
+    match: (name: string) => name.includes(PROVIDERS.SUNSUN.toLowerCase().trim()),
+    logoSrc: '/images/sunsunbus.png',
+    alt: 'SUNSUN',
+  },
 ] as const;

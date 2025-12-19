@@ -24,6 +24,16 @@ export const PROVIDERS = {
   TERNVOYAGE: 'ПП ТЕРНВОЯЖ',
   ZTIME: 'Ковель.АТП',
   BORYSPIL: 'АТАСС-БОРИСПІЛЬ ПРАТ',
+  LIS: 'ЛИС-АВТО-ТРАНС',
+  PANBUS: 'ПАН-БУС',
+  MAXBUS: 'MAX BUS',
+  VOLYNEXPRESS: 'ВОЛИНЬ ЕКСПРЕС',
+  MUSTANG: 'МУСТАНГ ТРАНС ТОВ',
+  ITRAVELBUS: 'I TRAVEL BUS',
+  ATLASTRAVELBUS: 'ATLASTRAVELBUS/AVTOEKSPRES',
+  KAZNA: 'КАЗНА ТРАНС',
+  EUROVOYAGE: 'EUROVOYAGE',
+  SUNSUN: 'САНСАН БУС ТОВ',
 } as const;
 
 export type ProviderName = (typeof PROVIDERS)[keyof typeof PROVIDERS];
