@@ -4,11 +4,11 @@ import { FormControl, FormItem, FormLabel, FormMessage } from '@/shared/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/shared/ui/radio-group';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
+// import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { PAYMENT_TYPES } from '@/shared/constans/payment.methods.constans';
-import { useShallow } from 'zustand/react/shallow';
+// import { useShallow } from 'zustand/react/shallow';
 
 const Payment = () => {
   const { control } = useFormContext();
@@ -22,11 +22,11 @@ const Payment = () => {
   });
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
-  const { selectedTicket } = useSelectedTickets(
-    useShallow((state) => ({
-      selectedTicket: state.selectedTicket?.route,
-    })),
-  );
+  // const { selectedTicket } = useSelectedTickets(
+  //   useShallow((state) => ({
+  //     selectedTicket: state.selectedTicket?.route,
+  //   })),
+  // );
 
   const loadingResult = useNewOrderResult((state) => state.loadingResult);
 
@@ -56,7 +56,7 @@ const Payment = () => {
               <div className="size-6">{PAYMENT_TYPES[0].ICON}</div>
             </FormLabel>
           </FormItem>
-
+          {/* 
           {selectedTicket?.allowedOperations.canPaymentToDriver &&
             selectedTicket?.providerName !== 'KLR' &&
             selectedTicket.carrier.name !== 'ТУРЮКРЕЙН ТОВ' && (
@@ -71,7 +71,7 @@ const Payment = () => {
                   <div className="size-6">{PAYMENT_TYPES[1].ICON}</div>
                 </FormLabel>
               </FormItem>
-            )}
+            )} */}
         </RadioGroup>
       </FormControl>
       <FormMessage />

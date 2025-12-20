@@ -79,7 +79,11 @@ export const CARRIER_REGISTRY = [
   },
   {
     provider: PROVIDERS.VASILKIV,
-    match: (name: string) => name.includes(PROVIDERS.VASILKIV.toLowerCase().trim()),
+
+    match: (name: string) =>
+      ['ВАСИЛЬКІВТРАНСАВТО/КРИВОШАПКА ФОП', PROVIDERS.VASILKIV].some((alias) =>
+        name.includes(alias.toLowerCase().trim()),
+      ),
     logoSrc: '/images/vasilkiv.png',
     alt: 'VASILKIV',
   },

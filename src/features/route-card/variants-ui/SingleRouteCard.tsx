@@ -59,7 +59,6 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.voyagers);
 
   const updatedRoute = updateRouteDetails(element, details);
-
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       price={singlePrice}
