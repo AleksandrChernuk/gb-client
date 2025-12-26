@@ -8,6 +8,13 @@ import { TPaidBaggage } from '@/shared/types/paid.baggage.types';
 import { IChangeStations } from '@/shared/types/route.change.stations.interface';
 import { IRouteResponse } from '@/shared/types/route.types';
 
+//totalPrice - самому посчитать общую суму токобасу со скидками
+//totalPrice?:number - передавать токобасу общую сумму со скидками и передавать на оформление ордера
+
+//passengers?: number;- для поиска маршрутов,
+//забблокировать токобас - для видачі в поиск "TOCOBUS"
+//в роут инфо записсиваеться перессадка
+
 /* -------------------------------------------------------------
  * 🧩  Утилиты для обработки мест
  * ------------------------------------------------------------- */
@@ -167,7 +174,7 @@ export const normalizeData = ({
     fromCityName: departure.locationName,
     fromCountry: departure.countryName,
     fromTimezone: route.departure.fromLocation.timezone.zoneName,
-    fromStationId: `${route.departure.stationId}`,
+    fromStationId: `${route.departure.stationId ?? 0}`,
     fromStationName: `${route.departure.stationName}`,
     ...(route.departure.stationAddress && { fromStationAddress: route.departure.stationAddress }),
     ...(route.departure.stationCoordsLat && { fromStationLat: Number(route.departure.stationCoordsLat) }),
@@ -176,7 +183,7 @@ export const normalizeData = ({
     toCityId,
     toCityName: arrival.locationName,
     toCountry: arrival.countryName,
-    toStationId: `${route.arrival.stationId}`,
+    toStationId: `${route.arrival.stationId ?? 0}`,
     toStationName: `${route.arrival.stationName}`,
     toTimezone: route.arrival.toLocation.timezone.zoneName,
     ...(route.arrival.stationAddress && { toStationAddress: route.arrival.stationAddress }),
