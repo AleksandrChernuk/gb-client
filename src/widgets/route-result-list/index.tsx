@@ -31,7 +31,7 @@ export default function ResultList() {
 
   if (!params.from || !params.to) return <CustomError />;
 
-  const tocobusTickets = filteredTickets?.filter((route) => route.providerName === 'TOCOBUS');
+  const tocobusTickets = filteredTickets?.filter((route) => route.providerName !== 'TOCOBUS');
 
   if (!tocobusTickets || tocobusTickets.length === 0) {
     return <RouteNotFound text={t('no_travel_find')} />;
