@@ -31,9 +31,15 @@ export default function ResultList() {
 
   if (!params.from || !params.to) return <CustomError />;
 
+  const tocobusTickets = filteredTickets?.filter((route) => route.providerName === 'TOCOBUS');
+
+  if (!tocobusTickets || tocobusTickets.length === 0) {
+    return <RouteNotFound text={t('no_travel_find')} />;
+  }
+
   return (
     <div className="flex flex-col space-y-10">
-      {filteredTickets.map((route) => (
+      {tocobusTickets.map((route) => (
         <SingleRouteCard key={route.ticketId} data={route} />
       ))}
     </div>
