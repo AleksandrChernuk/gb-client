@@ -3,13 +3,33 @@ import { host } from '@/config';
 import { getPathname, routing } from '@/shared/i18n/routing';
 import { getArticles } from '@/shared/api/articles.actions';
 
+/* ---------- TYPES ---------- */
+
+type ArticleApiResponse = {
+  data: {
+    slug: string;
+    updatedAt: string;
+    descriptions: { language: 'uk' | 'ru' | 'en' }[];
+  }[];
+};
+
+/* ---------- ENTRY ---------- */
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await getArticles();
+  const response = (await getArticles()) as ArticleApiResponse | { error: string };
 
-  const posts: { slug: string; updatedAt: string }[] = Array.isArray(response) ? response : [];
+  const posts =
+    'data' in response
+      ? response.data.map((post) => ({
+          slug: post.slug,
+          updatedAt: post.updatedAt,
+        }))
+      : [];
 
-  return [...getPages(), ...getBlog(posts)];
+  return [...getStaticPages(), ...getBlogPages(posts)];
 }
+
+/* ---------- STATIC PAGES ---------- */
 
 const pages: string[] = [
   '/',
@@ -24,7 +44,7 @@ const pages: string[] = [
   '/agents',
 ];
 
-function getPages() {
+function getStaticPages() {
   return pages.flatMap((href) =>
     buildEntries(href, {
       priority: getPriority(href),
@@ -33,7 +53,9 @@ function getPages() {
   );
 }
 
-function getBlog(posts: { slug: string; updatedAt: string }[]) {
+/* ---------- BLOG ---------- */
+
+function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
   return posts.flatMap((post) =>
     buildEntries(`/blog/${post.slug}`, {
       priority: 0.8,
@@ -42,6 +64,8 @@ function getBlog(posts: { slug: string; updatedAt: string }[]) {
     }),
   );
 }
+
+/* ---------- HELPERS ---------- */
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 
@@ -63,6 +87,8 @@ function buildEntries(
     },
   }));
 }
+
+/* ---------- SEO RULES ---------- */
 
 function getPriority(href: string) {
   if (href === '/') return 1.0;
