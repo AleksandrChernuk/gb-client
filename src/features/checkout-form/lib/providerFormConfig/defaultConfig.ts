@@ -11,7 +11,7 @@ const defaultConfig = (currentTicket: IRouteResponse | null): ProviderConfig => 
 
   const hideForTranstempo = provider === 'transtempo' && Array.isArray(discounts) && discounts.length === 1;
 
-  const showBlock = !isEmptyDiscounts(discounts) && !hideForTranstempo && provider === 'euroclub';
+  const showBlock = !isEmptyDiscounts(discounts) && !hideForTranstempo && provider !== 'euroclub';
 
   return {
     required: [FIELDS.firstName, FIELDS.lastName, ...(showBlock ? [FIELDS.discount, FIELDS.bday] : [])],
