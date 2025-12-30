@@ -1,25 +1,15 @@
 import { MetadataRoute } from 'next';
-import { Locale } from 'next-intl';
 import { host } from '@/config';
 import { getPathname, routing } from '@/shared/i18n/routing';
+import { getArticles } from '@/shared/api/articles.actions';
 
-const excluded: string[] = [
-  '/buses',
-  '/checkout',
-  '/signin',
-  '/signup',
-  '/success',
-  '/profile',
-  '/orders',
-  '/forgot',
-  '/error',
-  '/update-password',
-  '/verify-2FA',
-  '/admin',
-  '/dashboard',
-  '/api',
-  '/_next',
-];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const response = await getArticles();
+
+  const posts: { slug: string; updatedAt: string }[] = Array.isArray(response) ? response : [];
+
+  return [...getPages(), ...getBlog(posts)];
+}
 
 const pages: string[] = [
   '/',
@@ -31,39 +21,57 @@ const pages: string[] = [
   '/for-agents',
   '/faq',
   '/carriers',
-  '/blog',
   '/agents',
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.filter((path) => !excluded.includes(path)).flatMap((href) => getEntries(href));
+function getPages() {
+  return pages.flatMap((href) =>
+    buildEntries(href, {
+      priority: getPriority(href),
+      changeFrequency: getChangeFreq(href),
+    }),
+  );
+}
+
+function getBlog(posts: { slug: string; updatedAt: string }[]) {
+  return posts.flatMap((post) =>
+    buildEntries(`/blog/${post.slug}`, {
+      priority: 0.8,
+      changeFrequency: 'weekly',
+      lastModified: post.updatedAt,
+    }),
+  );
 }
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 
-function getEntries(href: Href) {
+function buildEntries(
+  href: Href,
+  seo: {
+    priority: number;
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'];
+    lastModified?: string;
+  },
+) {
   return routing.locales.map((locale) => ({
-    url: getUrl(href, locale),
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: getPriority(href),
+    url: host + getPathname({ locale, href }),
+    priority: seo.priority,
+    changeFrequency: seo.changeFrequency,
+    ...(seo.lastModified && { lastModified: seo.lastModified }),
     alternates: {
-      languages: Object.fromEntries(routing.locales.map((cur) => [cur, getUrl(href, cur)])),
+      languages: Object.fromEntries(routing.locales.map((lng) => [lng, host + getPathname({ locale: lng, href })])),
     },
   }));
 }
 
-function getUrl(href: Href, locale: Locale) {
-  const pathname = getPathname({ locale, href });
-  return host + pathname;
+function getPriority(href: string) {
+  if (href === '/') return 1.0;
+  if (['/for-carriers', '/carriers'].includes(href)) return 0.9;
+  return 0.6;
 }
 
-function getPriority(href: Href): number {
-  const path = typeof href === 'string' ? href : href.pathname;
-
-  if (path === '/') return 1.0;
-
-  if (['/about', '/for-carriers', '/carriers'].includes(path)) return 0.9;
-
-  return 0.8;
+function getChangeFreq(href: string) {
+  if (href === '/') return 'daily';
+  if (['/for-carriers', '/carriers'].includes(href)) return 'weekly';
+  return 'monthly';
 }
