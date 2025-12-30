@@ -76,7 +76,7 @@ const buildBaseMetadata = (
         siteName: 'GreenBus',
         images: [
           {
-            url: `${baseUrl}/og-image.png`, // Добавь картинку для OG
+            url: `${baseUrl}/og-image.png`,
             width: 1200,
             height: 630,
             alt: 'GreenBus - Автобусні квитки онлайн',
