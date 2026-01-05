@@ -23,7 +23,7 @@ const NewOrderDialog = () => {
 
   const isError = initiateNewOrder?.status === 'error';
   const alert = initiateNewOrder?.alertMessage;
-  const amount = Math.floor(Number(initiateNewOrder?.amount ?? 0));
+  const amount = Number(initiateNewOrder?.amount ?? 0);
   const currency = initiateNewOrder?.currency ?? 'UAH';
 
   const showBookButton = !isError && paymentType !== 'BOOK';

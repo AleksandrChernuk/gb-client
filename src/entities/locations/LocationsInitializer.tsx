@@ -16,11 +16,13 @@ export default function LocationsInitializer() {
       const response = await getLocations({ query: '', perPage: 500 });
       return response;
     },
+    staleTime: 60 * 60 * 1000,
   });
 
   const { data: favoritesLocations } = useQuery({
     queryKey: ['locations', 'favorites'],
     queryFn: getFavoriteLocations,
+    staleTime: 60 * 60 * 1000,
   });
 
   useEffect(() => {

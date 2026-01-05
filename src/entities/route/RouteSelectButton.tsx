@@ -7,6 +7,7 @@ type Props = {
   buttonText: string;
   loading: boolean;
   price?: number;
+  currency: string;
   variant: 'mobile' | 'desktop' | 'details';
 };
 
@@ -15,6 +16,7 @@ export default function SelectButton({
   buttonText,
   variant,
   price,
+  currency,
   ...props
 }: ComponentProps<'button'> & Props) {
   switch (variant) {
@@ -31,7 +33,7 @@ export default function SelectButton({
           ) : (
             <>
               {price}
-              <span className="text-xs ml-[2px]">UAH</span>
+              <span className="text-xs ml-[2px]">{currency}</span>
             </>
           )}{' '}
           {!props.disabled && (

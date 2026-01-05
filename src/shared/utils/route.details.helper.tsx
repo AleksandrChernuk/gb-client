@@ -11,7 +11,7 @@ export const formatMoney = (value: string | undefined | null, currency?: string)
       amount,
     );
   } catch {
-    return `${Math.floor(amount)} ${curr}`;
+    return `${amount} ${curr}`;
   }
 };
 

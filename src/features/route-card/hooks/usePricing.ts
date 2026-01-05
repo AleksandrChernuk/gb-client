@@ -5,8 +5,8 @@ import { useMemo } from 'react';
 export const usePricing = (basePrice: number, voyager: number) => {
   return useMemo(
     () => ({
-      singlePrice: Math.floor(basePrice || 0),
-      totalPrice: Math.floor(basePrice || 0) * voyager,
+      singlePrice: basePrice,
+      totalPrice: basePrice * voyager,
       passengerCount: voyager,
     }),
     [basePrice, voyager],

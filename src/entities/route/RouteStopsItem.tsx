@@ -31,7 +31,6 @@ export default function RouteStopsItem({
   station_name,
   station_address,
   classNameItemContainer = '',
-
   isDepartureChangeStations,
   isArrivalChangeStations,
   changeStationsType,
@@ -51,7 +50,7 @@ export default function RouteStopsItem({
     <div
       className={cn(
         'relative flex items-start justify-start',
-        isLast && 'overflow-hidden z-10 bg-slate-50 tablet:bg-white dark:bg-slate-900',
+        isLast && 'overflow-hidden z-10 bg-white dark:bg-slate-900',
         isLast && classNameItemContainer,
       )}
     >

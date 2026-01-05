@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { getTotalPriceFromPassengers } from '@/features/checkout-form/helpers';
 import { getFreeSeatData } from '@/features/checkout-form/lib/normalize/getFreeSeatData';
 import { TNormalizeParams } from '@/features/checkout-form/types/normalize.request.form.types';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
@@ -14,10 +15,6 @@ import { IRouteResponse } from '@/shared/types/route.types';
 //passengers?: number;- для поиска маршрутов,
 //забблокировать токобас - для видачі в поиск "TOCOBUS"
 //в роут инфо записсиваеться перессадка
-
-/* -------------------------------------------------------------
- * 🧩  Утилиты для обработки мест
- * ------------------------------------------------------------- */
 
 function extractSeatsForChangeStations(
   changeStations: IChangeStations[],
@@ -48,12 +45,10 @@ function extractSeatInfo(
   selectedSeats: { seatId?: string; seatNumber?: string }[] | undefined,
   passengerIndex: number,
 ): { seatId: string; seatNumber: string } {
-  // 1️⃣ Если есть changeStations → собрать все по индексам
   if (Array.isArray(route.changeStations) && route.changeStations.length > 0) {
     return extractSeatsForChangeStations(route.changeStations, passengerIndex);
   }
 
-  // 2️⃣ Если пользователь выбрал место сам
   const selectedSeat = selectedSeats?.[passengerIndex];
   if (selectedSeat && (selectedSeat.seatId || selectedSeat.seatNumber)) {
     return {
@@ -62,19 +57,13 @@ function extractSeatInfo(
     };
   }
 
-  // 3️⃣ Если есть свободные места из details.freeSeatsMap
   if (Array.isArray(freeSeats) && passengerIndex < freeSeats.length) {
     const freeSeatItem = freeSeats[passengerIndex];
     return getFreeSeatData(freeSeatItem);
   }
 
-  // 4️⃣ Фолбэк
   return { seatId: '', seatNumber: '' };
 }
-
-/* -------------------------------------------------------------
- * 🚀 Основная функция normalizeData
- * ------------------------------------------------------------- */
 
 export const normalizeData = ({
   fromCityId,
@@ -89,10 +78,11 @@ export const normalizeData = ({
   const discounts = Array.isArray(details?.discounts) ? details.discounts : [];
   const isTranstempo = route.providerName.toLowerCase() === 'transtempo';
 
+  const totalPrice = getTotalPriceFromPassengers(formData.passengers);
+
   const tickets: RequestTicket[] = formData.passengers.map((passenger, idx) => {
     const { seatId, seatNumber } = extractSeatInfo(route, freeSeats, formData.selectedSeats, idx);
 
-    // 🎒 Платный багаж
     const paidBaggage =
       Array.isArray(passenger.paidBaggage) && passenger.paidBaggage.length > 0
         ? passenger.paidBaggage.map((b: TPaidBaggage) => ({
@@ -108,7 +98,6 @@ export const normalizeData = ({
           }))
         : undefined;
 
-    // 🎟 Тикет
     const ticket: RequestTicket = {
       firstName: passenger.firstName,
       lastName: passenger.lastName,
@@ -152,7 +141,6 @@ export const normalizeData = ({
     return ticket;
   });
 
-  // 🌍 Локации
   const departure = extractLocationDetails(route.departure.fromLocation, locale);
   const arrival = extractLocationDetails(route.arrival.toLocation, locale);
 
@@ -213,6 +201,7 @@ export const normalizeData = ({
     ...(tickets[0]?.lastName && { customerLastName: tickets[0].lastName }),
     customerEmail: formData.email,
     customerPhone: formData.phone,
+    ...(route.providerName === 'TOCOBUS' && { totalPrice }),
     tickets,
   };
 };

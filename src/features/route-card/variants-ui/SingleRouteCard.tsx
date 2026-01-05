@@ -61,6 +61,7 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
   const updatedRoute = updateRouteDetails(element, details);
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
+      currency={element.ticketPricing.currency}
       price={singlePrice}
       variant={variant}
       loading={loading}

@@ -47,7 +47,7 @@ export const TripCard = ({ item, showDetails }: Props) => {
             />
 
             <div className="text-2xl font-medium tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50 hidden tablet:flex">
-              {`${Math.floor(Number(item.totalPrice) || 0)}`}
+              {item.totalPrice}
               <span className="text-xs ml-[2px]">{item.currency}</span>
             </div>
           </div>
@@ -93,7 +93,7 @@ export const TripCard = ({ item, showDetails }: Props) => {
 
       <div className="tablet:hidden">
         <div className="bg-green-300 w-full text-amber-50 py-3 px-4 rounded-none rounded-b-2xl text-base font-bold leading-6 tracking-normal text-center">
-          {`${Math.floor(Number(item.totalPrice) || 0)}`} <span className="text-xs ml-[2px]">{item.currency}</span>
+          {item.totalPrice} <span className="text-xs ml-[2px]">{item.currency}</span>
         </div>
       </div>
     </div>

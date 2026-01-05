@@ -93,6 +93,7 @@ export interface IRequestOrder {
   bustypeId?: string;
   ticketChange?: boolean;
   refundOnlyOrder: boolean | null;
+  totalPrice?: number;
 }
 
 export interface ITransfer {
