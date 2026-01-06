@@ -1,5 +1,3 @@
-export const revalidate = 60;
-
 import { ReactNode } from 'react';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';

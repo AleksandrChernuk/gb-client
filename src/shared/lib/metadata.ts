@@ -14,7 +14,17 @@ const buildBaseMetadata = (
   const baseUrl = 'https://greenbus.com.ua';
 
   const getLocalizedPath = (locale: Locale, urlPath: string) => {
-    return `/${locale}/${urlPath}`;
+    const cleanPath = urlPath.startsWith('/') ? urlPath.slice(1) : urlPath;
+    return cleanPath ? `/${locale}/${cleanPath}` : `/${locale}`;
+  };
+
+  const getOgLocale = (lng: Locale): string => {
+    const localeMap: Record<Locale, string> = {
+      uk: 'uk_UA',
+      ru: 'ru_RU',
+      en: 'en_US',
+    };
+    return localeMap[lng] || 'uk_UA';
   };
 
   const fullPath = getLocalizedPath(lng, path);
@@ -56,10 +66,11 @@ const buildBaseMetadata = (
         { url: '/apple-touch-icon-180x180.png', sizes: '180x180', type: 'image/png' },
       ],
     },
+
     metadataBase: new URL('https://greenbus.com.ua'),
     ...(isPublic && {
       alternates: {
-        canonical: `${baseUrl}${fullPath}`,
+        canonical: `${baseUrl}/${path}`,
         languages: {
           'x-default': `${baseUrl}${getLocalizedPath('uk', path)}`,
           uk: `${baseUrl}${getLocalizedPath('uk', path)}`,
@@ -82,7 +93,7 @@ const buildBaseMetadata = (
             alt: 'GreenBus - Автобусні квитки онлайн',
           },
         ],
-        locale: lng,
+        locale: getOgLocale(lng),
         type: 'website' as const,
       },
     }),

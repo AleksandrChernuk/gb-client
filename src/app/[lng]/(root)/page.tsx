@@ -57,6 +57,7 @@ export default async function Home({
             loading="eager"
             decoding="sync"
             quality={75}
+            sizes="(max-width: 768px) 100vw, 0vw"
           />
           <Image
             src={desc}
@@ -70,6 +71,7 @@ export default async function Home({
             loading="eager"
             decoding="sync"
             quality={75}
+            sizes="(min-width: 769px) 100vw, 0vw"
           />
 
           <Container size="l" className="-mt-10">
