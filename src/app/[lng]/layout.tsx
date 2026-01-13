@@ -18,15 +18,27 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
 import ClarityInit from '@/shared/ui/ClarityInit';
 
-const inter = Rubik({
+const rubik = Rubik({
   variable: '--font-rubik',
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
+  preload: true,
 });
 
+export async function generateMetadata() {
+  return {
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
+    },
+    manifest: '/site.webmanifest',
+  };
+}
+
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return routing.locales.map((locale) => ({ lng: locale }));
 }
 
 export default async function LocaleLayout({
@@ -51,28 +63,55 @@ export default async function LocaleLayout({
     name: 'GreenBus',
     url: `https://greenbus.com.ua/${lng}`,
     inLanguage: lng,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `https://greenbus.com.ua/${lng}/search?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'GreenBus',
+    url: 'https://greenbus.com.ua',
+    logo: 'https://greenbus.com.ua/logo.png',
+    description: 'Онлайн бронирование автобусных билетов',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      availableLanguage: ['Ukrainian', 'Russian', 'English'],
+    },
   };
 
   return (
     <html lang={lng} suppressHydrationWarning>
-      <head>
+      <body className={rubik.className}>
         <Script
           id="website-schema"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-      </head>
-      <GoogleTagManager gtmId="GTM-MXK3BV2C" />
-      <GoogleAnalytics gaId="G-QL65KW5KP6" />
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
 
-      <body className={`${inter.className} ${inter.variable} antialiased`} suppressHydrationWarning>
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MXK3BV2C'} />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-QL65KW5KP6'} />
+
+        <GTMNoScript />
+
         <NextIntlClientProvider messages={messages}>
           <NuqsAdapter>
-            <GTMNoScript />
-            <SpeedInsights />
-            <ClarityInit />
             <ReactQueryContext>
-              <ThemeProvider attribute="class" disableTransitionOnChange={false}>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
                 {children}
                 <ProfileCheckProvider />
                 <LocationsInitializer />
@@ -82,6 +121,9 @@ export default async function LocaleLayout({
             <Toaster richColors position="top-center" closeButton duration={4000} />
           </NuqsAdapter>
         </NextIntlClientProvider>
+
+        <SpeedInsights />
+        <ClarityInit />
       </body>
     </html>
   );
