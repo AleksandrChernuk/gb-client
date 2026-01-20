@@ -6,8 +6,8 @@ export const IconLogo = () => {
       height={48}
       viewBox="0 0 39 48"
       fill="none"
-      role="img"
-      aria-label="Логотип GreenBus"
+      role="presentation"
+      aria-hidden="true"
     >
       <g clipPath="url(#clip0_225_14340)">
         <path

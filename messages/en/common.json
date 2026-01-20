@@ -1,5 +1,8 @@
 {
   "common": {
+    "logo_aria_label_header": "GreenBus — home page",
+    "logo_aria_label_footer": "GreenBus — back to home (footer)",
+    "logo_aria_label_mobile": "GreenBus — home page (mobile menu)",
     "something_happend": "Something happend",
     "copy_link": "Copy link",
     "copied": "Copied",
@@ -11,9 +14,11 @@
     "breadcrumb_blog": "News & Articles",
     "no_travel": "No available routes",
     "no_travel_find": "No trips found",
-    "articles_title": "News & Articles",
+    "articles_title": "Travel blog and bus news",
+    "articles_link_title": "Useful tips and news about international bus routes",
+
+    "all_news": "Read all articles",
     "read": "Read",
-    "all_news": "All news",
     "breadcrumb_main": "Home",
     "twofa_title": "Two-Step Verification",
     "twofa_description": "Enter the 6-digit code sent to your email.",
@@ -70,7 +75,7 @@
     "faq": "Questions and answers",
     "blog": "Blog",
     "bus_routes": "Bus routes",
-    "oll_countries": "All cities",
+    "all_countries": "All bus destinations",
     "carriers": "Carriers",
     "agents": "Agencies",
     "oferta": "Offer agreement",

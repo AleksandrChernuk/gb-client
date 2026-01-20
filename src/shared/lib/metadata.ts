@@ -70,12 +70,12 @@ const buildBaseMetadata = (
     metadataBase: new URL('https://greenbus.com.ua'),
     ...(isPublic && {
       alternates: {
-        canonical: `${baseUrl}/${path}`,
+        canonical: `${baseUrl}${getLocalizedPath(lng, path)}`,
         languages: {
-          'x-default': `${baseUrl}${getLocalizedPath('uk', path)}`,
-          uk: `${baseUrl}${getLocalizedPath('uk', path)}`,
-          ru: `${baseUrl}${getLocalizedPath('ru', path)}`,
-          en: `${baseUrl}${getLocalizedPath('en', path)}`,
+          'x-default': `${baseUrl}/uk${path.startsWith('/') ? path : '/' + path}`,
+          uk: `${baseUrl}/uk${path.startsWith('/') ? path : '/' + path}`,
+          ru: `${baseUrl}/ru${path.startsWith('/') ? path : '/' + path}`,
+          en: `${baseUrl}/en${path.startsWith('/') ? path : '/' + path}`,
         },
       },
     }),

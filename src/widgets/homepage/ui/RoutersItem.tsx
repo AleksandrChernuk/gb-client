@@ -1,12 +1,13 @@
 'use client';
 
 import { IconPath } from '@/assets/icons/icon-path';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { ILocation } from '@/shared/types/location.types';
 import { format } from 'date-fns';
 import { ChevronRight } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 type TIRoutersItem = {
   from: ILocation;
@@ -15,6 +16,7 @@ type TIRoutersItem = {
 
 export default function RoutersItem({ from, to }: TIRoutersItem) {
   const locale = useLocale();
+  const t = useTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   const formatted = format(new Date(), 'yyyy-MM-dd');
 
@@ -26,6 +28,10 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
         query: { from: from.id, to: to.id, date: formatted, voyagers: 1 },
       }}
       scroll={true}
+      title={t('router_link_title', {
+        from: extractLocationDetails(from, locale).locationName,
+        to: extractLocationDetails(to, locale).locationName,
+      })}
       className="truncate block h-auto bg-white hover:bg-slate-50 focus:bg-slate-50 border-[1px] 
       border-transparent focus:border-black dark:bg-slate-900 dark:hover:bg-black 
       dark:focus:bg-slate-700 dark:focus:border-slate-200 px-3 py-2 tablet:py-[18px] laptop:p-5 rounded-lg laptop:rounded-2xl transition-colors duration-300"
@@ -48,6 +54,12 @@ export default function RoutersItem({ from, to }: TIRoutersItem) {
           <ChevronRight className=" dark:stroke-slate-50" />
         </div>
       </div>
+      <span className="sr-only">
+        {t('router_sr_only', {
+          from: extractLocationDetails(from, locale).locationName,
+          to: extractLocationDetails(to, locale).locationName,
+        })}
+      </span>
     </Link>
   );
 }

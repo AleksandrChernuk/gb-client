@@ -23,7 +23,8 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
         icon ? (
           <li key={href}>
             <Link
-              target="_blanck"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
               prefetch={false}
               aria-label={t(ariaLabel || '')}
               href={href}

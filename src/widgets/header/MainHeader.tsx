@@ -11,7 +11,7 @@ export default function MainHeader() {
   return (
     <header className="bg-white border-b-2 dark:bg-slate-800 border-b-[#e6e6e6] dark:border-b-slate-700 ">
       <Container size="l" className="flex items-center justify-between py-4">
-        <Logo />
+        <Logo location="header" />
 
         <nav>
           <ul className="items-center hidden tablet:flex tablet:gap-6 laptop:gap-8">

@@ -38,7 +38,7 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
             <SheetTitle className="sr-only"></SheetTitle>
             <SheetDescription className="sr-only"></SheetDescription>
             <SheetClose>
-              <Logo />
+              <Logo location="mobile" />
             </SheetClose>
             <SheetClose asChild>
               <Button variant={'default'} size={'icon'} className="p-2 rounded-md">

@@ -9,9 +9,9 @@ export default async function PopularRoutes() {
   return (
     <section className="py-6 bg-green-500 dark:bg-slate-800">
       <Container size="m" className="tablet:px-8">
-        <h3 className="mb-4 text-white text-lg font-bold tracking-tighter leading-[21.6px] tablet:text-2xl ftablet:leading-[28.8px] laptop:mb-8 laptop:text-[32px] laptop:leading-[38.4px]">
+        <h2 className="mb-4 text-white text-lg font-bold tracking-tighter leading-[21.6px] tablet:text-2xl ftablet:leading-[28.8px] laptop:mb-8 laptop:text-[32px] laptop:leading-[38.4px]">
           {t('popular_title')}
-        </h3>
+        </h2>
         <PopularRoutesList />
       </Container>
     </section>

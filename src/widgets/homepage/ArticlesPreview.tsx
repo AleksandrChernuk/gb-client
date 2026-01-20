@@ -41,9 +41,9 @@ export const ArticlesPreview = async () => {
   return (
     <section className="py-8 tablet:py-16 ">
       <Container size="m">
-        <h3 className="mb-4 text-2xl leading-[28.8px] laptop:text-[32px] font-bold tracking-normal laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
+        <h2 className="mb-4 text-2xl leading-[28.8px] laptop:text-[32px] font-bold tracking-normal laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
           {t('articles_title')}
-        </h3>
+        </h2>
         <ul className="grid grid-cols-1 tablet:grid-cols-3 gap-4 mb-4">
           {items.map((article) => (
             <li key={article.id}>
@@ -53,7 +53,7 @@ export const ArticlesPreview = async () => {
         </ul>
         <div className="text-right">
           <Button variant={'default'} size={'secondary'} asChild>
-            <Link prefetch={false} href={'/blog'}>
+            <Link prefetch={false} href={'/blog'} title={t('articles_link_title')}>
               {t('all_news')}
             </Link>
           </Button>

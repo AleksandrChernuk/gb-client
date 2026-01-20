@@ -77,7 +77,7 @@ export default async function MainFooter({ className }: TMainFooter) {
           </li>
           <li className="tablet:row-start-1 tablet:col-start-1">
             <div className="flex items-center justify-between">
-              <Logo />
+              <Logo location="footer" />
               <div className="tablet:hidden">
                 <FooterLinksList navLinks={footerNavLinks['social']} className="flex flex-row gap-2" />
               </div>

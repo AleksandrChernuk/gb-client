@@ -2,8 +2,8 @@ import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.webp';
-import desc from '@/assets/images/desc_full_2x.webp';
-import mob from '@/assets/images/mob_full_2x.webp';
+import desc from '@/assets/images/avtobusni-kvytky-online-desktop.webp';
+import mob from '@/assets/images/avtobusni-kvytky-online-mobile.webp';
 import Benefits from '@/widgets/homepage/Benefits';
 import PopularRoutes from '@/widgets/homepage/PopularRoutes';
 import Questions from '@/widgets/homepage/Questions';
@@ -75,10 +75,8 @@ export default async function Home({
           />
 
           <Container size="l" className="-mt-10">
-            <div>
-              <h1 className="sr-only">{t('herow_title')}</h1>
-              <MainSearch />
-            </div>
+            <h1 className="sr-only">{t('herow_title')}</h1>
+            <MainSearch />
           </Container>
         </section>
         <Benefits />
@@ -98,9 +96,9 @@ export default async function Home({
                 </AspectRatio>
               </li>
               <li className="flex flex-col tablet:w-1/2">
-                <h3 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
+                <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
                   {t('buses_title')}
-                </h3>
+                </h2>
                 <p className="mb-4 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200">
                   {t('buses_description')}
                 </p>

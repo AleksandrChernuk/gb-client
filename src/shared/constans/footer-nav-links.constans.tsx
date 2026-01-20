@@ -42,7 +42,7 @@ export const footerNavLinks = {
     //   href: '/route-planner',
     // },
     {
-      title: 'oll_countries',
+      title: 'all_countries',
       href: '/all-countries',
     },
     // {
