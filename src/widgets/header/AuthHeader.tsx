@@ -1,8 +1,7 @@
 import { Container } from '@/shared/ui/Container';
-import { Suspense } from 'react';
 import Logo from '@/entities/company/Logo';
 import Support from '@/entities/company/Support';
-import SelectLocale from '@/entities/common/SelectLocale';
+// import SelectLocale from '@/entities/common/SelectLocale';
 import SwitchTheme from '@/shared/ui/SwitchTheme';
 import { HeaderMobileMenu } from '@/widgets/header/MobileMenu';
 
@@ -17,11 +16,11 @@ export default function AuthHeader() {
             <li className="laptop:hidden">
               <Support variant="desktop" />
             </li>
-            <li>
+            {/* <li>
               <Suspense>
                 <SelectLocale variant="desktop" />
               </Suspense>
-            </li>
+            </li> */}
             <li>
               <SwitchTheme />
             </li>

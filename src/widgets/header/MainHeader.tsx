@@ -1,11 +1,10 @@
-import SelectLocale from '@/entities/common/SelectLocale';
+// import SelectLocale from '@/entities/common/SelectLocale';
 import Logo from '@/entities/company/Logo';
 import Support from '@/entities/company/Support';
 import { ProfileLink } from '@/entities/profile/ProfileLink';
 import { Container } from '@/shared/ui/Container';
 import SwitchTheme from '@/shared/ui/SwitchTheme';
 import { HeaderMobileMenu } from '@/widgets/header/MobileMenu';
-import { Suspense } from 'react';
 
 export default function MainHeader() {
   return (
@@ -19,9 +18,9 @@ export default function MainHeader() {
               <Support variant="desktop" />
             </li>
             <li>
-              <Suspense>
+              {/* <Suspense>
                 <SelectLocale variant="desktop" />
-              </Suspense>
+              </Suspense> */}
             </li>
             <li>
               <SwitchTheme />

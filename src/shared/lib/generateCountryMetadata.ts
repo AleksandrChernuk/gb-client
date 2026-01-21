@@ -11,7 +11,6 @@ interface GenerateCountryMetadataParams {
   locations: ILocation[];
 }
 
-// ✅ Хелпер для формування URL країни з правильними префіксами
 function buildCountryUrl(locale: Locale, countrySlug: string, countryId?: number): string {
   const baseUrl = 'https://greenbus.com.ua';
   const path = `all-countries/${countrySlug}`;
@@ -44,10 +43,8 @@ export async function generateCountryMetadata({ lng, slug, countryId, locations 
   const countryName = details.countryName;
   const countrySlug = detailsEn.countryName.toLowerCase();
 
-  // ✅ Canonical URL для поточної мови
   const canonicalUrl = buildCountryUrl(lng, countrySlug, countryId);
 
-  // ✅ Динамічний manifest в залежності від мови
   const manifestPath = lng === 'uk' ? '/manifest.json' : `/manifest.${lng}.json`;
 
   return {

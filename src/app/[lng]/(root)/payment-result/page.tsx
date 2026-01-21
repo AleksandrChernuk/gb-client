@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { getOrderStatusAndPdf } from '@/shared/api/orders.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';

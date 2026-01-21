@@ -1,7 +1,8 @@
+'use client';
 import { IconLogo } from '@/assets/icons/IconLogo';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { Mulish } from 'next/font/google';
 
 const mullish = Mulish({
@@ -16,8 +17,8 @@ interface LogoProps {
   location?: 'header' | 'footer' | 'mobile';
 }
 
-const Logo = async ({ location = 'header' }: LogoProps) => {
-  const t = await getTranslations(MESSAGE_FILES.COMMON);
+const Logo = ({ location = 'header' }: LogoProps) => {
+  const t = useTranslations(MESSAGE_FILES.COMMON);
   const ariaLabels = {
     header: t('logo_aria_label_header'),
     footer: t('logo_aria_label_footer'),

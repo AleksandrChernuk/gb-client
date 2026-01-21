@@ -13,6 +13,18 @@ const buildBaseMetadata = (
   const isPublic = pageType === 'public';
   const baseUrl = 'https://greenbus.com.ua';
 
+  const safeT = (key: string, fallback = '') => {
+    try {
+      return t(key);
+    } catch {
+      return fallback;
+    }
+  };
+
+  const title = safeT(`${slug}.title`, 'GreenBus');
+  const description = safeT(`${slug}.description`, '');
+  const keywords = safeT(`${slug}.keywords`, '');
+
   const getLocalizedPath = (locale: Locale, urlPath: string) => {
     const cleanPath = urlPath.startsWith('/') ? urlPath.slice(1) : urlPath;
     return cleanPath ? `/${locale}/${cleanPath}` : `/${locale}`;
@@ -30,9 +42,9 @@ const buildBaseMetadata = (
   const fullPath = getLocalizedPath(lng, path);
 
   return {
-    title: t(`${slug}.title`),
-    description: t(`${slug}.description`),
-    keywords: t(`${slug}.keywords`) ?? '',
+    title: title,
+    description: description,
+    keywords,
     appleWebApp: {
       title: 'GreenBus',
       capable: true,
@@ -81,8 +93,8 @@ const buildBaseMetadata = (
     }),
     ...(isPublic && {
       openGraph: {
-        title: t(`${slug}.title`),
-        description: t(`${slug}.description`),
+        title: title,
+        description: description,
         url: `${baseUrl}${fullPath}`,
         siteName: 'GreenBus',
         images: [
@@ -100,8 +112,9 @@ const buildBaseMetadata = (
     ...(isPublic && {
       twitter: {
         card: 'summary_large_image' as const,
-        title: t(`${slug}.title`),
-        description: t(`${slug}.description`),
+
+        title,
+        description,
         images: [`${baseUrl}/og-image.png`],
       },
     }),

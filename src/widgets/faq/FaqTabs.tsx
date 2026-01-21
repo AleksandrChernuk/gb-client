@@ -13,7 +13,10 @@ export default function FaqTabs() {
 
   const searchValue = params?.get('q');
 
-  const slug = pathname === '/faq' ? '/faq/bronjuvannja-mists' : (pathname as keyof typeof faqConstans);
+  const normalizedPath = pathname.replace(/^\/(uk|ru|en)/, '');
+  const defaultSlug = '/faq/bronjuvannja-mists';
+
+  const slug = (normalizedPath in faqConstans ? normalizedPath : defaultSlug) as keyof typeof faqConstans;
 
   return (
     <Container size="l">

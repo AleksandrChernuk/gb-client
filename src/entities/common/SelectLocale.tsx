@@ -2,14 +2,14 @@
 
 import { ChevronUp } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { usePathname as useNextPathname } from 'next/navigation';
 import { useState } from 'react';
 import { Locale } from '@/shared/i18n/locales';
 import { supportLocalesList } from '@/shared/constans/support-locales.constans';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
 import { Button } from '@/shared/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/shared/ui/accordion';
-import { Link, usePathname } from '@/shared/i18n/routing';
+import { Link } from '@/shared/i18n/routing';
 
 type Props = {
   variant: 'mobile' | 'desktop';
@@ -18,8 +18,10 @@ type Props = {
 const SelectLocale = ({ variant }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale() as Locale;
-  const pathname = usePathname();
-  const searchParams = useSearchParams()?.toString();
+  const fullPathname = useNextPathname();
+
+  const pathname =
+    fullPathname.replace(new RegExp(`^/(${supportLocalesList.map((l) => l.value).join('|')})`), '') || '/';
 
   if (pathname === '/checkout') {
     return null;
@@ -50,7 +52,7 @@ const SelectLocale = ({ variant }: Props) => {
                   >
                     <Link
                       prefetch={false}
-                      href={`${pathname}?${searchParams}`}
+                      href={pathname}
                       locale={el.value as Locale}
                       onClick={() => {
                         if (locale === el.value) {
@@ -89,7 +91,7 @@ const SelectLocale = ({ variant }: Props) => {
                       asChild
                       className="justify-start text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]"
                     >
-                      <Link prefetch={false} href={`${pathname}?${searchParams}`} locale={el.value as Locale}>
+                      <Link prefetch={false} href={pathname} locale={el.value as Locale}>
                         <div className="w-6 h-6"> {el.icon} </div>
                         {el.shortName}
                       </Link>
