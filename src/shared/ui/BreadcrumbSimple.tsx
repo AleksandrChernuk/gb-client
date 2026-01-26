@@ -22,9 +22,7 @@ export function BreadcrumbSimple({ items }: { items: Crumb[] }) {
               {idx > 0 && <BreadcrumbSeparator />}
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={item.href} prefetch={false} rel="nofollow noopener noreferrer">
-                    {item.label}
-                  </Link>
+                  <Link href={item.href}>{item.label}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </span>

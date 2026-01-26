@@ -1,8 +1,8 @@
+import { getArticles } from '@/shared/api/articles.actions';
 import { BASE_URL } from '@/shared/configs/constants';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { buildBreadcrumbSchema } from '@/shared/seo/breadcrumbs.schema';
-import { Params } from '@/shared/types/common.types';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 import { Container } from '@/shared/ui/Container';
 import { H1 } from '@/shared/ui/H1';
@@ -14,9 +14,7 @@ import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Script from 'next/script';
 
-type Props = {
-  params: Params;
-};
+const perPage = 20;
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
@@ -28,13 +26,22 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-export default async function Blog({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
+type Props = {
+  params: Promise<{ lng: Locale }>;
+  searchParams: Promise<{ page?: string }>;
+};
+
+export default async function Blog({ params, searchParams }: Props) {
   const { lng } = await params;
-  setRequestLocale(lng as Locale);
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+
+  setRequestLocale(lng);
+
+  const res = await getArticles({
+    page: currentPage,
+    perPage,
+  });
 
   const t = await getTranslations(MESSAGE_FILES.COMMON);
 
@@ -62,16 +69,14 @@ export default async function Blog({
       <Main>
         <Section>
           <Container size="m">
-            <div className="mb-2 flex items-center justify-between gap-2">
-              <BreadcrumbSimple
-                items={[
-                  { label: t('breadcrumb_main'), href: '/' },
-                  { label: t('breadcrumb_blog'), href: '/blog' },
-                ]}
-              />
-            </div>
+            <BreadcrumbSimple
+              items={[
+                { label: t('breadcrumb_main'), href: '/' },
+                { label: t('breadcrumb_blog'), href: '/blog' },
+              ]}
+            />
             <H1>{t('articles_title')}</H1>
-            <AcriclesList />
+            <AcriclesList articles={res} />
           </Container>
         </Section>
       </Main>

@@ -1,68 +1,32 @@
-'use client';
-
-import { SkeletonCards } from '@/shared/ui/SkeletonCards';
-import { usePaginatedQuery } from '@/shared/hooks/usePaginatedQuery';
 import { CustomPagination } from '@/shared/ui/CustomPagination';
 import { TGetArticlesResponse } from '@/shared/types/article.types';
-import { getArticles } from '@/shared/api/articles.actions';
-import { useLocale } from 'next-intl';
 import { ArticleCard } from '@/features/acricles-card';
-const perPage = 20;
+import { getLocale } from 'next-intl/server';
 
-function isErrorResponse(res: TGetArticlesResponse | { error: string }): res is { error: string } {
-  return 'error' in res;
-}
+type ArticlesListProps = {
+  articles: TGetArticlesResponse;
+};
 
-export default function AcriclesList() {
-  const locale = useLocale();
-  const { data, isLoading, isFetching, currentPage, handlePageChange, totalPages } = usePaginatedQuery<
-    TGetArticlesResponse | { error: string }
-  >({
-    baseKey: ['articles', perPage],
-    perPage,
-    initialPage: 1,
-    fetchPage: (page, perPageArg) =>
-      getArticles({
-        page,
-        perPage: perPageArg,
-      }),
+export default async function AcriclesList({ articles }: ArticlesListProps) {
+  const locale = await getLocale();
 
-    getTotalPages: (d) => (!d || isErrorResponse(d) ? 1 : (d.pagination?.totalPages ?? 1)),
-  });
-
-  if (isLoading || isFetching) {
-    return (
-      <SkeletonCards
-        className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-4"
-        items={4}
-        skeletonClassName="min-h-[420px]"
-      />
-    );
-  }
-
-  if (!data || 'error' in data) {
-    return <div className="text-red-600 text-center py-10">{data?.error || 'Помилка завантаження'}</div>;
-  }
-
-  if (!data.data.length) {
-    return <div className="py-10 text-center">Данних не знайдено</div>;
+  if (!articles.data.length) {
+    return <div className="py-10 text-center">Даних не знайдено</div>;
   }
 
   return (
     <div className="flex flex-col flex-1">
-      <div className="flex-1">
-        <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-4 mb-4">
-          {data.data.map((article) => (
-            <ArticleCard key={article.createdAt.toString()} article={article} lang={locale} />
-          ))}
-        </div>
+      <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-4 mb-4">
+        {articles.data.map((article) => (
+          <ArticleCard key={article.id} article={article} lang={locale} />
+        ))}
       </div>
 
-      {totalPages > 1 && (
+      {articles.pagination && articles.pagination.totalPages > 1 && (
         <CustomPagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          handlePageChange={handlePageChange}
+          currentPage={articles.pagination.page}
+          totalPages={articles.pagination.totalPages}
+          handlePageChange={() => {}}
           maxVisiblePages={3}
         />
       )}

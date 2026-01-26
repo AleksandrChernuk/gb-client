@@ -16,6 +16,8 @@ import Image from 'next/image';
 import Script from 'next/script';
 import { buildBreadcrumbSchema } from '@/shared/seo/breadcrumbs.schema';
 import { BASE_URL } from '@/shared/configs/constants';
+import parse, { domToReact } from 'html-react-parser';
+import Link from 'next/link';
 
 export async function generateStaticParams() {
   const res = await getArticles({ perPage: 9999 });
@@ -31,6 +33,23 @@ export async function generateStaticParams() {
     })),
   );
 }
+
+const options = {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  replace(domNode: any) {
+    if (domNode.name === 'a' && domNode.attribs?.href) {
+      const href = domNode.attribs.href;
+
+      return (
+        <Link href={href} prefetch>
+          {domToReact(domNode.children, options)}
+        </Link>
+      );
+    }
+  },
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ lng: Locale; slug: string }> }) {
   const { lng, slug } = await params;
@@ -82,7 +101,6 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 items={[
                   { label: t('breadcrumb_main'), href: '/' },
                   { label: t('breadcrumb_blog'), href: '/blog' },
-                  { label: desc.title, href: `/blog/${article.slug}` },
                 ]}
               />
               <ShareButton shareUrl={`https://greenbus.com.ua/${lng}/blog/${article.slug}`} title={desc.title} />
@@ -93,10 +111,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 <Image src={cover.url} alt={cover.alt} fill className="h-full w-full rounded-lg object-cover" />
               </AspectRatio>
             )}
-            <div
-              className="prose max-w-none space-y-4 dark:text-slate-200"
-              dangerouslySetInnerHTML={{ __html: desc.content }}
-            />
+            <div className="prose max-w-none space-y-4 dark:text-slate-200">{parse(desc.content, options)}</div>
           </Container>
         </Section>
       </Main>

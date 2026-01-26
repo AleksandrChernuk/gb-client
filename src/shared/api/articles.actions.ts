@@ -46,32 +46,15 @@ export async function getArticleBySlug(slug: string): Promise<IArticleResponse> 
   }
 }
 
-export async function getArticles(quey?: IFindAllArticlesOptions): Promise<TGetArticlesResponse | { error: string }> {
+export async function getArticles(query?: IFindAllArticlesOptions): Promise<TGetArticlesResponse> {
   const queryParams = new URLSearchParams();
 
-  if (quey?.page !== undefined && quey.page !== null) {
-    queryParams.append('page', String(quey.page));
-  }
-
-  if (quey?.perPage !== undefined && quey.perPage !== null) {
-    queryParams.append('perPage', String(quey.perPage));
-  }
-
-  if (quey?.language) {
-    queryParams.append('language', quey.language);
-  }
-
-  if (quey?.countryId != null) {
-    queryParams.append('countryId', String(quey.countryId));
-  }
-
-  if (quey?.locationId != null) {
-    queryParams.append('locationId', String(quey.locationId));
-  }
-
-  if (quey?.hashtag && quey.hashtag.trim() !== '') {
-    queryParams.append('hashtag', quey.hashtag);
-  }
+  if (query?.page != null) queryParams.append('page', String(query.page));
+  if (query?.perPage != null) queryParams.append('perPage', String(query.perPage));
+  if (query?.language) queryParams.append('language', query.language);
+  if (query?.countryId != null) queryParams.append('countryId', String(query.countryId));
+  if (query?.locationId != null) queryParams.append('locationId', String(query.locationId));
+  if (query?.hashtag?.trim()) queryParams.append('hashtag', query.hashtag);
 
   const url =
     queryParams.toString().length > 0
@@ -85,21 +68,25 @@ export async function getArticles(quey?: IFindAllArticlesOptions): Promise<TGetA
         'Accept-Language': 'uk',
         Accept: 'application/json',
       },
-      next: {
-        revalidate: 3600,
-      },
+      next: { revalidate: 3600 },
       credentials: 'include',
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      return { error: errorData?.message || 'Failed to fetch articles' };
+      throw new Error('Failed to fetch articles');
     }
 
-    const data = (await response.json()) as TGetArticlesResponse;
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error('[geArticlesClientComponent] error:', error);
-    return { error: 'Failed to fetch articles' };
+    console.error('[getArticles] error:', error);
+
+    return {
+      data: [],
+      pagination: {
+        page: query?.page ?? 1,
+        perPage: query?.perPage ?? 20,
+        totalPages: 1,
+      },
+    };
   }
 }
