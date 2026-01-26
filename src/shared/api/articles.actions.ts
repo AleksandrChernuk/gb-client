@@ -85,6 +85,9 @@ export async function getArticles(quey?: IFindAllArticlesOptions): Promise<TGetA
         'Accept-Language': 'uk',
         Accept: 'application/json',
       },
+      next: {
+        revalidate: 3600,
+      },
       credentials: 'include',
     });
 

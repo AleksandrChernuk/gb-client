@@ -2,7 +2,6 @@
 
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { Globe, Menu, X } from 'lucide-react';
-// import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   Sheet,
@@ -18,9 +17,10 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import Logo from '@/entities/company/Logo';
 import Support from '@/entities/company/Support';
-// import SelectLocale from '@/entities/common/SelectLocale';
+import SelectLocale from '@/entities/common/SelectLocale';
 import { ProfileLink } from '@/entities/profile/ProfileLink';
 import SwitchTheme from '@/shared/ui/SwitchTheme';
+import { Suspense } from 'react';
 
 export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) => {
   const t = useTranslations(MESSAGE_FILES.COMMON);
@@ -53,9 +53,9 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
             </div>
             <Separator className="h-[1px] bg-[#e6e6e6] dark:bg-slate-700 my-2" />
             <div className="flex flex-col gap-2 p-5">
-              {/* <Suspense>
+              <Suspense>
                 <SelectLocale variant="mobile" />
-              </Suspense> */}
+              </Suspense>
 
               <div className="flex flex-row items-center justify-between py-2">
                 <div className="flex flex-row items-center gap-2">

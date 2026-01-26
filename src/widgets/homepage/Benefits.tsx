@@ -9,7 +9,7 @@ export default async function Benefits() {
   return (
     <section className="py-8 tablet:py-16 ">
       <Container size="l">
-        <ul className="space-y-4 tablet:space-y-0 tablet:grid tablet:grid-cols-[repeat(2,minmax(auto,1fr))] tablet:grid-rows-2 laptop:grid-cols-[repeat(4,minmax(auto,auto))] laptop:grid-rows-1 gap-2 tablet:gap-4 justify-between">
+        <ul className="space-y-4 tablet:space-y-0 tablet:grid tablet:grid-cols-[repeat(2,minmax(auto,1fr))] tablet:grid-rows-2 gap-2 tablet:gap-4 justify-between">
           {benefits &&
             benefits.map(({ title, id, text, icon }) => (
               <li key={id}>

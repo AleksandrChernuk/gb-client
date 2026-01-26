@@ -8,7 +8,6 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { RoutesResaltInformation } from '@/widgets/routes-resalt-information';
 import ResultList from '@/widgets/route-result-list';
 import { generatePrivatePageMetadata } from '@/shared/lib/metadata';
-import { redirect } from '@/shared/i18n/routing';
 import ScrollButton from '@/shared/ui/scroll-button';
 
 type Props = {
@@ -27,19 +26,13 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Buses({
   params,
-  searchParams,
 }: Readonly<{
   params: Params;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }>) {
   const { lng } = await params;
-  const resolvedSearchParams = await searchParams;
 
   setRequestLocale(lng as Locale);
-
-  if (!resolvedSearchParams?.from || !resolvedSearchParams?.to) {
-    redirect({ href: '/', locale: lng as Locale });
-  }
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-800">

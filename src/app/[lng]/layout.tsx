@@ -2,7 +2,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/shared/i18n/routing';
 import { Locale } from '@/shared/i18n/locales';
 import { notFound } from 'next/navigation';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Params } from '@/shared/types/common.types';
 import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
@@ -54,7 +54,6 @@ export default async function LocaleLayout({
     return notFound();
   }
 
-  const messages = await getMessages();
   setRequestLocale(lng as Locale);
 
   const websiteSchema = {
@@ -89,7 +88,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={lng} suppressHydrationWarning>
-      <body className={rubik.className}>
+      <body className={rubik.className} suppressHydrationWarning>
         <Script
           id="website-schema"
           type="application/ld+json"
@@ -108,7 +107,7 @@ export default async function LocaleLayout({
 
         <GTMNoScript />
 
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={lng as Locale}>
           <NuqsAdapter>
             <ReactQueryContext>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>

@@ -1,5 +1,3 @@
-'sr-only';
-
 import { getRequestConfig } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';

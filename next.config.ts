@@ -9,8 +9,20 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/',
+        destination: '/uk',
+        permanent: false,
+        missing: [
+          {
+            type: 'header',
+            key: 'x-middleware-rewrite',
+          },
+        ],
+      },
     ];
   },
+
   async headers() {
     return [
       {
@@ -19,6 +31,15 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2678400, immutable',
           },
         ],
       },
@@ -72,6 +93,14 @@ const nextConfig: NextConfig = {
   },
 
   reactStrictMode: false,
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
+
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@/shared/ui'],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin('./src/shared/i18n/request.ts');

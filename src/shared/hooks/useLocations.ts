@@ -1,3 +1,4 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import { getLocationById, getLocations, getFavoriteLocations } from '@/shared/api/location.actions';
 
