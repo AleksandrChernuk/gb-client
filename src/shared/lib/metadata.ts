@@ -25,9 +25,35 @@ const buildBaseMetadata = (
   const description = safeT(`${slug}.description`, '');
   const keywords = safeT(`${slug}.keywords`, '');
 
-  const getLocalizedPath = (locale: Locale, urlPath: string) => {
-    const cleanPath = urlPath.startsWith('/') ? urlPath.slice(1) : urlPath;
-    return cleanPath ? `/${locale}/${cleanPath}` : `/${locale}`;
+  // ✅ Функция для нормализации URL с trailing slash
+  const normalizeUrl = (urlPath: string): string => {
+    // Убираем начальный и конечный слеши
+    let cleanPath = urlPath.replace(/^\/+|\/+$/g, '');
+
+    // Если путь не пустой, добавляем слеш в начало
+    if (cleanPath) {
+      cleanPath = `/${cleanPath}`;
+    }
+
+    // Добавляем trailing slash в конце для консистентности
+    // НО не добавляем для путей с расширением файла
+    if (!cleanPath.match(/\.[a-z]+$/i)) {
+      cleanPath = cleanPath ? `${cleanPath}/` : '/';
+    }
+
+    return cleanPath;
+  };
+
+  const getLocalizedPath = (locale: Locale, urlPath: string): string => {
+    const normalizedPath = normalizeUrl(urlPath);
+
+    // Для главной страницы
+    if (normalizedPath === '/') {
+      return `/${locale}/`;
+    }
+
+    // Для остальных страниц
+    return `/${locale}${normalizedPath}`;
   };
 
   const getOgLocale = (lng: Locale): string => {
@@ -40,6 +66,7 @@ const buildBaseMetadata = (
   };
 
   const fullPath = getLocalizedPath(lng, path);
+  const normalizedPath = normalizeUrl(path);
 
   return {
     title: title,
@@ -82,12 +109,13 @@ const buildBaseMetadata = (
     metadataBase: new URL('https://greenbus.com.ua'),
     ...(isPublic && {
       alternates: {
-        canonical: `${baseUrl}${getLocalizedPath(lng, path)}`,
+        // ✅ Canonical с trailing slash
+        canonical: `${baseUrl}${fullPath}`,
         languages: {
-          'x-default': `${baseUrl}/uk${path.startsWith('/') ? path : '/' + path}`,
-          uk: `${baseUrl}/uk${path.startsWith('/') ? path : '/' + path}`,
-          ru: `${baseUrl}/ru${path.startsWith('/') ? path : '/' + path}`,
-          en: `${baseUrl}/en${path.startsWith('/') ? path : '/' + path}`,
+          'x-default': `${baseUrl}/uk${normalizedPath}`,
+          uk: `${baseUrl}/uk${normalizedPath}`,
+          ru: `${baseUrl}/ru${normalizedPath}`,
+          en: `${baseUrl}/en${normalizedPath}`,
         },
       },
     }),
@@ -112,7 +140,6 @@ const buildBaseMetadata = (
     ...(isPublic && {
       twitter: {
         card: 'summary_large_image' as const,
-
         title,
         description,
         images: [`${baseUrl}/og-image.png`],

@@ -9,17 +9,6 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
-      {
-        source: '/',
-        destination: '/uk',
-        permanent: false,
-        missing: [
-          {
-            type: 'header',
-            key: 'x-middleware-rewrite',
-          },
-        ],
-      },
     ];
   },
 
@@ -93,6 +82,7 @@ const nextConfig: NextConfig = {
   },
 
   reactStrictMode: false,
+  trailingSlash: true,
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,

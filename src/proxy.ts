@@ -86,29 +86,37 @@ export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
 
-  // 👉 СРАЗУ получаем intl-response
-  const response = intlMiddleware(request);
-
   const accessToken = request.cookies.get('accessToken')?.value;
   const refreshToken = request.cookies.get('refreshToken')?.value;
   const deviceId = request.cookies.get('deviceId')?.value;
 
-  // 🔄 refresh токена
+  // 🔄 refresh токена - НАПРЯМУЮ к бэкенду, не через /api/auth/refresh
   if (!accessToken && refreshToken && deviceId) {
     try {
-      const refreshResponse = await fetch(new URL('/api/auth/refresh', request.url), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Cookie: `refreshToken=${refreshToken}; deviceId=${deviceId}`,
-          'Accept-Language': request.headers.get('accept-language') || 'en',
-        },
-      });
+      // ✅ Используем прямой URL бэкенда
+      const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
 
-      if (refreshResponse.ok) {
-        refreshResponse.headers.getSetCookie().forEach((cookie) => {
-          response.headers.append('Set-Cookie', cookie);
+      if (backendUrl) {
+        const refreshResponse = await fetch(`${backendUrl}/auth/refresh`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Cookie: `refreshToken=${refreshToken}; deviceId=${deviceId}`,
+            'Accept-Language': request.headers.get('accept-language') || 'en',
+          },
         });
+
+        if (refreshResponse.ok) {
+          // 👉 Создаем intl response
+          const response = intlMiddleware(request);
+
+          // Добавляем новые куки к ответу
+          refreshResponse.headers.getSetCookie().forEach((cookie) => {
+            response.headers.append('Set-Cookie', cookie);
+          });
+
+          return response;
+        }
       }
     } catch (e) {
       console.error('Middleware refresh failed:', e);
@@ -127,12 +135,13 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 302);
   }
 
-  return response;
+  // 👉 Возвращаем intl response по умолчанию
+  return intlMiddleware(request);
 }
 
 function redirectToSignin(request: NextRequest, locale: string) {
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}/signin`;
+  url.pathname = `/${locale}/signin/`;
   return NextResponse.redirect(url);
 }
 

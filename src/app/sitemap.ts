@@ -48,6 +48,18 @@ function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 
+// ✅ Функция нормализации URL с trailing slash
+function normalizeUrl(url: string): string {
+  // Если URL заканчивается на "/" - оставляем как есть
+  if (url.endsWith('/')) return url;
+
+  // Если URL содержит расширение файла (.xml, .pdf и т.д.) - не добавляем "/"
+  if (url.match(/\.[a-z]+$/i)) return url;
+
+  // Во всех остальных случаях добавляем "/"
+  return url + '/';
+}
+
 function buildEntries(
   href: Href,
   seo: {
@@ -56,15 +68,25 @@ function buildEntries(
     lastModified?: string;
   },
 ) {
-  return routing.locales.map((locale) => ({
-    url: host + getPathname({ locale, href }),
-    priority: seo.priority,
-    changeFrequency: seo.changeFrequency,
-    ...(seo.lastModified && { lastModified: seo.lastModified }),
-    alternates: {
-      languages: Object.fromEntries(routing.locales.map((lng) => [lng, host + getPathname({ locale: lng, href })])),
-    },
-  }));
+  return routing.locales.map((locale) => {
+    // ✅ Нормализуем основной URL
+    const mainUrl = normalizeUrl(host + getPathname({ locale, href }));
+
+    // ✅ Нормализуем alternate URLs
+    const alternateLanguages = Object.fromEntries(
+      routing.locales.map((lng) => [lng, normalizeUrl(host + getPathname({ locale: lng, href }))]),
+    );
+
+    return {
+      url: mainUrl,
+      priority: seo.priority,
+      changeFrequency: seo.changeFrequency,
+      ...(seo.lastModified && { lastModified: seo.lastModified }),
+      alternates: {
+        languages: alternateLanguages,
+      },
+    };
+  });
 }
 
 function getPriority(href: string) {
