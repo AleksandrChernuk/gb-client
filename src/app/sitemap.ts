@@ -3,33 +3,16 @@ import { host } from '@/config';
 import { getPathname, routing } from '@/shared/i18n/routing';
 import { getArticles } from '@/shared/api/articles.actions';
 
-/* ---------- TYPES ---------- */
-
-type ArticleApiResponse = {
-  data: {
-    slug: string;
-    updatedAt: string;
-    descriptions: { language: 'uk' | 'ru' | 'en' }[];
-  }[];
-};
-
-/* ---------- ENTRY ---------- */
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = (await getArticles()) as ArticleApiResponse | { error: string };
+  const response = await getArticles();
 
-  const posts =
-    'data' in response
-      ? response.data.map((post) => ({
-          slug: post.slug,
-          updatedAt: post.updatedAt,
-        }))
-      : [];
+  const posts = response.data.map((post) => ({
+    slug: post.slug,
+    updatedAt: post.updatedAt instanceof Date ? post.updatedAt.toISOString() : new Date(post.updatedAt).toISOString(),
+  }));
 
   return [...getStaticPages(), ...getBlogPages(posts)];
 }
-
-/* ---------- STATIC PAGES ---------- */
 
 const pages: string[] = [
   '/',
@@ -53,8 +36,6 @@ function getStaticPages() {
   );
 }
 
-/* ---------- BLOG ---------- */
-
 function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
   return posts.flatMap((post) =>
     buildEntries(`/blog/${post.slug}`, {
@@ -64,8 +45,6 @@ function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
     }),
   );
 }
-
-/* ---------- HELPERS ---------- */
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 
@@ -88,15 +67,13 @@ function buildEntries(
   }));
 }
 
-/* ---------- SEO RULES ---------- */
-
 function getPriority(href: string) {
   if (href === '/') return 1.0;
   if (['/for-carriers', '/carriers'].includes(href)) return 0.9;
   return 0.6;
 }
 
-function getChangeFreq(href: string) {
+function getChangeFreq(href: string): MetadataRoute.Sitemap[number]['changeFrequency'] {
   if (href === '/') return 'daily';
   if (['/for-carriers', '/carriers'].includes(href)) return 'weekly';
   return 'monthly';
