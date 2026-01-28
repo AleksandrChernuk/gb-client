@@ -8,15 +8,16 @@ import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
 import { ThemeProvider } from '@/shared/providers/ThemeProvider';
 import { Rubik } from 'next/font/google';
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-import { Toaster } from 'sonner';
+// import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+// import { Toaster } from 'sonner';
 import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
-import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
+// import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
-import ClarityInit from '@/shared/ui/ClarityInit';
+// import ClarityInit from '@/shared/ui/ClarityInit';
+import ClientOnlyProviders from '@/shared/ClientOnlyProviders';
 
 const rubik = Rubik({
   variable: '--font-rubik',
@@ -101,27 +102,27 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
 
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MXK3BV2C'} />
+        {/* <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MXK3BV2C'} />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-QL65KW5KP6'} />
 
-        <GTMNoScript />
+        <GTMNoScript /> */}
 
         <NextIntlClientProvider locale={lng as Locale}>
           <NuqsAdapter>
             <ReactQueryContext>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
                 {children}
-                <ProfileCheckProvider />
-                <LocationsInitializer />
+                {/* <ProfileCheckProvider /> */}
+                {/* <LocationsInitializer /> */} <ClientOnlyProviders />
               </ThemeProvider>
             </ReactQueryContext>
 
-            <Toaster richColors position="top-center" closeButton duration={4000} />
+            {/* <Toaster richColors position="top-center" closeButton duration={4000} /> */}
           </NuqsAdapter>
         </NextIntlClientProvider>
 
-        <SpeedInsights />
-        <ClarityInit />
+        {/* <SpeedInsights />
+        <ClarityInit /> */}
       </body>
     </html>
   );

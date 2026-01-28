@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getLocationById } from '@/shared/api/location.actions';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';

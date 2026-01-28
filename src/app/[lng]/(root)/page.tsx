@@ -2,8 +2,8 @@ import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import aTravellerImage from '@/assets/images/a-traveller-on-the-street-with-a-suitcase-looking.webp';
-import desc from '@/assets/images/avtobusni-kvytky-online-desktop.webp';
-import mob from '@/assets/images/avtobusni-kvytky-online-mobile.webp';
+// import desc from '@/assets/images/avtobusni-kvytky-online-desktop.webp';
+// import mob from '@/assets/images/avtobusni-kvytky-online-mobile.webp';
 import Benefits from '@/widgets/homepage/Benefits';
 import PopularRoutes from '@/widgets/homepage/PopularRoutes';
 import Questions from '@/widgets/homepage/Questions';
@@ -45,7 +45,7 @@ export default async function Home({
     <>
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <section className="relative">
-          <Image
+          {/* <Image
             src={mob}
             alt={t_img_alts('herow')}
             placeholder="blur"
@@ -72,7 +72,20 @@ export default async function Home({
             decoding="sync"
             quality={75}
             sizes="(min-width: 769px) 100vw, 0vw"
-          />
+          /> */}
+
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/images/avtobusni-kvytky-online-mobile.webp" />
+            <img
+              src="/images/avtobusni-kvytky-online-desktop.webp"
+              alt={t_img_alts('herow')}
+              width="1240"
+              height="233"
+              fetchPriority="high"
+              decoding="async"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </picture>
 
           <Container size="l" className="-mt-10">
             <h1 className="sr-only">{t('herow_title')}</h1>
