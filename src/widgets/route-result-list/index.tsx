@@ -32,7 +32,7 @@ export default function ResultList() {
   if (!params.from || !params.to) return <CustomError />;
 
   const tocobusTickets = filteredTickets?.filter((route) => {
-    return route.providerName !== 'TOCOBUS' && route.providerName !== 'EUROCLUB';
+    return route.providerName !== 'TOCOBUS' && route.providerName !== 'EUROCLUB' && route.providerName !== 'EWE';
   });
 
   if (!tocobusTickets || tocobusTickets.length === 0) {
