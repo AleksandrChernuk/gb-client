@@ -43,7 +43,7 @@ const options = {
       const href = domNode.attribs.href;
 
       return (
-        <Link href={href} prefetch>
+        <Link href={href} prefetch className="hover:underline text-blue-700">
           {domToReact(domNode.children, options)}
         </Link>
       );
