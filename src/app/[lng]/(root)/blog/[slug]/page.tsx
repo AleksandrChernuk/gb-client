@@ -1,3 +1,5 @@
+export const revalidate = 600;
+
 import { getArticleBySlug, getArticles } from '@/shared/api/articles.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { buildArticleMetadata } from '@/shared/seo/articleMetadata';
@@ -43,7 +45,7 @@ const options = {
       const href = domNode.attribs.href;
 
       return (
-        <Link href={href} prefetch className="hover:underline text-blue-700">
+        <Link href={href} prefetch>
           {domToReact(domNode.children, options)}
         </Link>
       );
@@ -111,7 +113,9 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 <Image src={cover.url} alt={cover.alt} fill className="h-full w-full rounded-lg object-cover" />
               </AspectRatio>
             )}
-            <div className="prose max-w-none space-y-4 dark:text-slate-200">{parse(desc.content, options)}</div>
+            <article className="[&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mt-4 [&_p]:mb-2 [&_ol]:space-y-2 [&_ul]:space-y-2 max-w-none dark:text-slate-200">
+              {parse(desc.content, options)}
+            </article>
           </Container>
         </Section>
       </Main>

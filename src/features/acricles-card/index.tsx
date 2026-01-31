@@ -11,7 +11,7 @@ function getDescriptionByLang(article: IArticleResponse, lang: string) {
 export function ArticleCard({
   article,
   lang,
-  needDescription = true,
+  needDescription,
 }: {
   article: IArticleResponse;
   lang: string;
@@ -24,8 +24,8 @@ export function ArticleCard({
   const articleHref = `/${lang}/blog/${article.slug}`;
 
   return (
-    <article className="group border rounded-xl bg-white dark:bg-slate-800 shadow-sm flex flex-col justify-between min-h-100 transition-all hover:shadow-md">
-      <Link href={articleHref} className="flex flex-col h-full">
+    <article className="group border rounded-xl bg-white dark:bg-slate-800 shadow-sm transition-color hover:shadow-md min-h-86 flex flex-col justify-between">
+      <Link href={articleHref}>
         <div>
           {cover && (
             <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg overflow-hidden">
@@ -34,25 +34,24 @@ export function ArticleCard({
                 alt={cover.alt || desc.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="h-full w-full rounded-t-lg object-cover transition-transform group-hover:scale-105"
+                className="h-full w-full rounded-t-lg object-cover transition-transform"
               />
             </AspectRatio>
           )}
-          <div className="p-4 space-y-2">
-            <h3 className="text-lg font-semibold group-hover:text-green-600 transition-colors">{desc.title}</h3>
-
-            {needDescription && (
-              <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">{desc.description}</p>
-            )}
-          </div>
-        </div>
-
-        <div className="p-4 mt-auto border-t border-slate-50 dark:border-slate-700">
-          <time dateTime={article.createdAt.toString()} className="text-xs text-slate-400">
-            ⏱ {formatted}
-          </time>
+          <h3 className="text-lg font-semibold text-primary  group-hover:text-green-600 transition-colors p-2">
+            {desc.title}
+          </h3>
+          {needDescription && <p className="text-slate-700 dark:text-slate-50 p-2">{desc.description}</p>}
         </div>
       </Link>
+      <div className="p-4 dark:border-slate-700 w-fit">
+        <time
+          dateTime={article.createdAt.toString()}
+          className="text-xs text-green-200 p-2 border border-green-200 rounded-xl"
+        >
+          ⏱ {formatted}
+        </time>
+      </div>
     </article>
   );
 }

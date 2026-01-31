@@ -30,6 +30,8 @@ const Logo = ({ location = 'header' }: LogoProps) => {
   return (
     <Link
       href={'/'}
+      prefetch={location === 'header'}
+      rel={location !== 'header' ? 'noopener noreferrer nofollow' : undefined}
       aria-label={ariaLabel}
       scroll
       className={`flex items-center font-mulish text-[26.838px] font-extrabold tracking-normal leading-normal tablet:text-[31.88px] tablet:leading-[33.68px] ${mullish.className}`}

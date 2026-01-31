@@ -30,7 +30,7 @@ export async function getArticleBySlug(slug: string): Promise<IArticleResponse> 
       headers: {
         Accept: 'application/json',
       },
-      credentials: 'include',
+      next: { revalidate: 600 },
     });
 
     if (!response.ok) {
@@ -68,8 +68,7 @@ export async function getArticles(query?: IFindAllArticlesOptions): Promise<TGet
         'Accept-Language': 'uk',
         Accept: 'application/json',
       },
-      next: { revalidate: 3600 },
-      credentials: 'include',
+      next: { revalidate: 300 },
     });
 
     if (!response.ok) {
