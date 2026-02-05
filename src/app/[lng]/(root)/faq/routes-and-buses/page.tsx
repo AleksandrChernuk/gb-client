@@ -1,12 +1,14 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { navItems } from '@/shared/constans/faq.nav.items';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
-import { Params } from '@/shared/types/common.types';
-import FaqTabs from '@/widgets/faq/FaqTabs';
+import { Container } from '@/shared/ui/Container';
+import { FaqDisplay } from '@/widgets/faq/FaqDisplay';
+import FaqNav from '@/widgets/faq/FaqNav';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
 
 type Props = {
-  params: Params;
+  params: Promise<{ lng: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props) {
@@ -19,13 +21,16 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-export default async function RoutesAndBuses({
-  params,
-}: Readonly<{
-  params: Params;
-}>) {
-  const { lng } = await params;
+export default async function RoutesAndBuses({ searchParams }: Props) {
+  const search = await searchParams;
+  const searchQuery = search.q as string | undefined;
 
-  setRequestLocale(lng as Locale);
-  return <FaqTabs />;
+  return (
+    <Container size="l">
+      <div className="grid grid-cols-1 tablet:grid-cols-4 gap-2">
+        <FaqNav slug={navItems[1].href} />
+        <FaqDisplay slug={navItems[1].href} value={searchQuery ? searchQuery : undefined} />
+      </div>
+    </Container>
+  );
 }

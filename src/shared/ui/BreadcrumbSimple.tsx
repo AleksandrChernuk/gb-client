@@ -12,9 +12,9 @@ export type Crumb = {
   href: string;
 };
 
-export function BreadcrumbSimple({ items }: { items: Crumb[] }) {
+export function BreadcrumbSimple({ items, className }: { items: Crumb[]; className?: string }) {
   return (
-    <Breadcrumb>
+    <Breadcrumb className={className}>
       <BreadcrumbList>
         {items.map((item, idx) => {
           return (

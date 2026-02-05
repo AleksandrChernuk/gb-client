@@ -4,8 +4,8 @@ import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Container } from '@/shared/ui/Container';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import BackRouteButton from '@/shared/ui/BackRouteButton';
 import FaqSeach from '@/widgets/faq/FaqSeach';
+import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 
 export default async function FaqLayout({
   children,
@@ -19,14 +19,20 @@ export default async function FaqLayout({
   setRequestLocale(lng as Locale);
 
   const t = await getTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
+  const t_common = await getTranslations(MESSAGE_FILES.COMMON);
+
   return (
     <>
       <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-slate-50 dark:bg-slate-900 ">
         <Container size="l">
-          <div className="mb-4 ">
-            <BackRouteButton />
-          </div>
-          <h1 className="text-center text-base font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+          <BreadcrumbSimple
+            className="mb-8"
+            items={[
+              { label: t_common('breadcrumb_main'), href: '/' },
+              { label: t_common('faq_breadcrumb'), href: '/faq' },
+            ]}
+          />
+          <h1 className="text-center text-xl font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
             {t('title')}
           </h1>
           <FaqSeach />

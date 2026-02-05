@@ -1,5 +1,6 @@
 {
   "common": {
+    "faq_breadcrumb": "FAQ",
     "logo_aria_label_header": "GreenBus — home page",
     "logo_aria_label_footer": "GreenBus — back to home (footer)",
     "logo_aria_label_mobile": "GreenBus — home page (mobile menu)",

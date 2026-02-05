@@ -1,5 +1,6 @@
 {
   "common": {
+    "faq_breadcrumb": "Часто задаваемые вопросы",
     "logo_aria_label_header": "GreenBus — главная страница",
     "logo_aria_label_footer": "GreenBus — вернуться на главную (футер)",
     "logo_aria_label_mobile": "GreenBus — главная страница (мобильное меню)",
