@@ -35,7 +35,7 @@ export default async function Questions() {
         </ul>
         <div className="text-right">
           <Link
-            prefetch={false}
+            scroll={true}
             href={'/faq'}
             className="underline-offset-4 py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal min-w-[168px] min-h-[48px] max-h-[48px] tablet:max-h-[52px] text-green-600! hover:underline transition-all"
           >
