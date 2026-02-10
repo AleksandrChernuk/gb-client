@@ -1,12 +1,12 @@
 'use client';
 
-import { GoogleTagManager } from '@next/third-parties/google';
-// import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import dynamic from 'next/dynamic';
 
-import { Toaster } from 'sonner';
-// import ClarityInit from '@/shared/ui/ClarityInit';
-import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
-import LocationsInitializer from '@/entities/locations/LocationsInitializer';
+import { GoogleTagManager } from '@next/third-parties/google';
+
+const Toaster = dynamic(() => import('sonner').then((m) => m.Toaster), { ssr: false });
+const LocationsInitializer = dynamic(() => import('@/entities/locations/LocationsInitializer'), { ssr: false });
+const ProfileCheckProvider = dynamic(() => import('@/shared/providers/ProfileCheck.provider'), { ssr: false });
 
 export default function ClientOnlyProviders() {
   return (
@@ -16,10 +16,6 @@ export default function ClientOnlyProviders() {
       <Toaster richColors position="top-center" closeButton duration={4000} />
 
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MXK3BV2C'} />
-      {/* <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-QL65KW5KP6'} /> */}
-
-      {/* <SpeedInsights /> */}
-      {/* <ClarityInit /> */}
     </>
   );
 }
