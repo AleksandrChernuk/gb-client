@@ -6,11 +6,10 @@ import { useTranslations } from 'next-intl';
 import { Mulish } from 'next/font/google';
 
 const mullish = Mulish({
-  variable: '--font-mulish',
   subsets: ['latin'],
   weight: '800',
   display: 'swap',
-  adjustFontFallback: true,
+  preload: false,
 });
 
 interface LogoProps {
