@@ -4,7 +4,6 @@ import { GoogleTagManager } from '@next/third-parties/google';
 // import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 import { Toaster } from 'sonner';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 // import ClarityInit from '@/shared/ui/ClarityInit';
 import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
 import LocationsInitializer from '@/entities/locations/LocationsInitializer';
