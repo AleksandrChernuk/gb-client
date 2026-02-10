@@ -102,27 +102,16 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
 
-        {/* <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-MXK3BV2C'} />
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-QL65KW5KP6'} />
-
-        <GTMNoScript /> */}
-
         <NextIntlClientProvider locale={lng as Locale}>
           <NuqsAdapter>
             <ReactQueryContext>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
                 {children}
-                {/* <ProfileCheckProvider /> */}
-                {/* <LocationsInitializer /> */} <ClientOnlyProviders />
+                <ClientOnlyProviders />
               </ThemeProvider>
             </ReactQueryContext>
-
-            {/* <Toaster richColors position="top-center" closeButton duration={4000} /> */}
           </NuqsAdapter>
         </NextIntlClientProvider>
-
-        {/* <SpeedInsights />
-        <ClarityInit /> */}
       </body>
     </html>
   );
