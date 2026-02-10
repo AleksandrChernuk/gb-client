@@ -8,15 +8,8 @@ import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
 import { ThemeProvider } from '@/shared/providers/ThemeProvider';
 import { Rubik } from 'next/font/google';
-// import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-// import { Toaster } from 'sonner';
-// import ProfileCheckProvider from '@/shared/providers/ProfileCheck.provider';
-// import { GTMNoScript } from '@/shared/providers/GTMAnalytics';
-// import LocationsInitializer from '@/entities/locations/LocationsInitializer';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-// import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
-// import ClarityInit from '@/shared/ui/ClarityInit';
 import ClientOnlyProviders from '@/shared/ClientOnlyProviders';
 
 const rubik = Rubik({
