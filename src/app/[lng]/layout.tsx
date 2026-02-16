@@ -84,7 +84,7 @@ export default async function LocaleLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       </head>
-      <body className={`${rubik.className} antialiased`}>
+      <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider locale={lng as Locale}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
