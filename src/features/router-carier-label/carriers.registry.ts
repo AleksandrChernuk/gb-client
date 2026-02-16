@@ -73,7 +73,8 @@ export const CARRIER_REGISTRY = [
   },
   {
     provider: PROVIDERS.KLR,
-    match: (name: string) => name.includes(PROVIDERS.KLR.toLowerCase().trim()),
+    match: (name: string) =>
+      ['ТОВ «ЛЮКС-РЕЙЗЕН БІС»', PROVIDERS.KLR].some((alias) => name.includes(alias.toLowerCase().trim())),
     logoSrc: '/images/klr.png',
     alt: 'klr',
   },

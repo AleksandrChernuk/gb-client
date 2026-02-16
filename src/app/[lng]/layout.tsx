@@ -1,16 +1,13 @@
+import '@/styles/globals.css';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/shared/i18n/routing';
 import { Locale } from '@/shared/i18n/locales';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { Params } from '@/shared/types/common.types';
-import ReactQueryContext from '@/shared/providers/ReactQueryProvider';
 import { ReactNode } from 'react';
-import { ThemeProvider } from '@/shared/providers/ThemeProvider';
 import { Rubik } from 'next/font/google';
-import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import Script from 'next/script';
-import ClientOnlyProviders from '@/shared/ClientOnlyProviders';
+import Providers from '@/app/[lng]/Providers';
 
 const rubik = Rubik({
   variable: '--font-rubik',
@@ -18,6 +15,7 @@ const rubik = Rubik({
   display: 'swap',
   weight: ['400', '500', '700'],
   preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 export async function generateMetadata() {
@@ -81,29 +79,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={lng} suppressHydrationWarning>
-      <body className={rubik.className} suppressHydrationWarning>
-        <Script
-          id="website-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
+      <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
 
         <NextIntlClientProvider locale={lng as Locale}>
-          <NuqsAdapter>
-            <ReactQueryContext>
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
-                {children}
-                <ClientOnlyProviders />
-              </ThemeProvider>
-            </ReactQueryContext>
-          </NuqsAdapter>
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

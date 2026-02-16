@@ -37,4 +37,3 @@ export const PROVIDERS = {
 } as const;
 
 export type ProviderName = (typeof PROVIDERS)[keyof typeof PROVIDERS];
-// EAST WEST EUROLINES/ТзОВ "Гал-Всесвіт"
