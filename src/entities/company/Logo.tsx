@@ -1,16 +1,9 @@
 'use client';
-import { IconLogo } from '@/assets/icons/IconLogo';
+
+import { GreenBusLogoIcon } from '@/assets/icons/GreenBusLogoIcon';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { Mulish } from 'next/font/google';
-
-const mullish = Mulish({
-  subsets: ['latin'],
-  weight: '800',
-  display: 'swap',
-  preload: false,
-});
 
 interface LogoProps {
   location?: 'header' | 'footer' | 'mobile';
@@ -33,15 +26,9 @@ const Logo = ({ location = 'header' }: LogoProps) => {
       rel={location !== 'header' ? 'noopener noreferrer nofollow' : undefined}
       aria-label={ariaLabel}
       scroll
-      className={`flex items-center font-mulish text-[26.838px] font-extrabold tracking-normal leading-normal tablet:text-[31.88px] tablet:leading-[33.68px] ${mullish.className}`}
+      className="flex items-center"
     >
-      <div className="w-[38px] h-[47px] " aria-hidden="true">
-        <IconLogo />
-      </div>
-      <span className="ml-1">
-        <span className="text-primary">Green</span>
-        <span className="text-secondary">Bus</span>
-      </span>
+      <GreenBusLogoIcon className={`w-48 h-12`} aria-hidden="true" />
     </Link>
   );
 };
