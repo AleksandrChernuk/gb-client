@@ -12,10 +12,11 @@ import Providers from '@/app/[lng]/Providers';
 const rubik = Rubik({
   variable: '--font-rubik',
   subsets: ['latin', 'cyrillic'],
-  display: 'swap',
+  display: 'optional',
   weight: ['400', '500', '700'],
   preload: true,
   fallback: ['system-ui', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
 export async function generateMetadata() {
@@ -78,11 +79,12 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={lng} suppressHydrationWarning>
-      <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
+    <html lang={lng}>
+      <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-
+      </head>
+      <body className={`${rubik.className} antialiased`}>
         <NextIntlClientProvider locale={lng as Locale}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
