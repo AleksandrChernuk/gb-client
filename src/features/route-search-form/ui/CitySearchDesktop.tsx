@@ -53,7 +53,7 @@ export default function CitySearchDesktop({
   const locale = useLocale();
 
   return (
-    <div role="dropdown-warapp" className="relative">
+    <div className="relative">
       <MainSearchInput
         classNames={`border-r border-r-slate-200 dark:border-r-slate-700  ${
           open && 'dark:border-r-transparent border-r-transparent'

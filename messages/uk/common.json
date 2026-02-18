@@ -1,5 +1,6 @@
 {
   "common": {
+    "buses_title": "Пошук автобусних квитків GreenBus",
     "faq_breadcrumb": "Часті запитання",
     "logo_aria_label_header": "GreenBus — головна сторінка",
     "logo_aria_label_footer": "GreenBus — повернутися вгору (футер)",

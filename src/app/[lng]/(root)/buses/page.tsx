@@ -1,6 +1,6 @@
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Container } from '@/shared/ui/Container';
 import MainSearch from '@/features/route-search-form';
 import DateTabs from '@/features/date-pagination-routes';
@@ -31,13 +31,14 @@ export default async function Buses({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }>) {
   const { lng } = await params;
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
 
   setRequestLocale(lng as Locale);
 
   return (
     <main role="main" className="pb-16 grow bg-slate-50 dark:bg-slate-800">
       <section>
-        <h1 className="sr-only">SearchPage</h1>
+        <h1 className="sr-only">{t('buses_title')}</h1>
         <search className="bg-green-500 dark:bg-slate-900">
           <Container size="l" className="py-5 tablet:pt-8 ">
             <MainSearch />

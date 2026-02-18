@@ -71,20 +71,6 @@ export default async function Home({
             quality={75}
             sizes="100vw"
           />
-
-          {/* <picture>
-            <source media="(max-width: 768px)" srcSet="/images/avtobusni-kvytky-online-mobile.webp" />
-            <img
-              src="/images/avtobusni-kvytky-online-desktop.webp"
-              alt={t_img_alts('herow')}
-              width="1240"
-              height="233"
-              fetchPriority="high"
-              decoding="async"
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </picture> */}
-
           <Container size="l" className="-mt-10">
             <h1 className="sr-only">{t('herow_title')}</h1>
             <MainSearch />
