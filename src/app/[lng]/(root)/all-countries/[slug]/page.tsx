@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getLocations } from '@/shared/api/location.actions';
 import Link from 'next/link';
 import { Container } from '@/shared/ui/Container';
