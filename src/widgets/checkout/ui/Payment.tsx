@@ -60,6 +60,7 @@ const Payment = () => {
           {selectedTicket?.allowedOperations.canPaymentToDriver &&
             selectedTicket?.providerName !== 'KLR' &&
             selectedTicket.carrier.name !== 'САНСАН БУС ТОВ' &&
+            selectedTicket.carrier.name !== 'СХІДНО-ЄВРОПЕЙСЬКА ПОДОРОЖ' &&
             selectedTicket.carrier.name !== 'ТУРЮКРЕЙН ТОВ' && (
               <FormItem className="flex items-center p-4 space-x-3 space-y-0 border-b border-solid border-slate-200 last:border-b-0 dark:border-b-slate-700">
                 <FormControl>
