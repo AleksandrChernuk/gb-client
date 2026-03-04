@@ -70,6 +70,7 @@ export default async function Blog({ params, searchParams }: Props) {
         <Section>
           <Container size="m">
             <BreadcrumbSimple
+              pageClassName="text-slate-700 dark:text-slate-50"
               items={[
                 { label: t('breadcrumb_main'), href: '/' },
                 { label: t('breadcrumb_blog'), href: '/blog' },

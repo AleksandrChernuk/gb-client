@@ -1,5 +1,6 @@
 export const MESSAGE_FILES = {
   ABOUT_PAGE: 'about-page',
+  POPULAR_ROUTES_PAGE: 'routes',
   BUSES_PAGE: 'buses-page',
   CHECKOUT_PAGE: 'checkout-page',
   COMMON: 'common',

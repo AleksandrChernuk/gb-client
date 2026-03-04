@@ -100,6 +100,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
           <Container size="m">
             <div className="mb-2 flex items-center justify-between gap-2">
               <BreadcrumbSimple
+                pageClassName="text-slate-700 dark:text-slate-50"
                 items={[
                   { label: t('breadcrumb_main'), href: '/' },
                   { label: t('breadcrumb_blog'), href: '/blog' },

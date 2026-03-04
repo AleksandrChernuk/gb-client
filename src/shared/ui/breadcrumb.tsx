@@ -39,7 +39,7 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, React.ComponentPropsW
       <Comp
         ref={ref}
         className={cn(
-          'block max-w-full truncate text-slate-700 transition-colors hover:text-green-200 dark:text-slate-50 dark:hover:text-green-200',
+          'block max-w-full truncate transition-colors text-slate-50 hover:text-green-200 dark:text-slate-50 dark:hover:text-green-200',
           className,
         )}
         {...props}
@@ -54,7 +54,7 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.ComponentPropsWit
     <span
       ref={ref}
       aria-current="page"
-      className={cn('block max-w-full truncate text-ellipsis font-normal text-slate-50', className)}
+      className={cn('block max-w-full truncate text-ellipsis font-normal text-slate-50 dark:text-slate-50', className)}
       {...props}
     />
   ),

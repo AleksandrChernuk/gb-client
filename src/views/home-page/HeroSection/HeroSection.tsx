@@ -1,14 +1,15 @@
-import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
-import desc from '@/assets/images/desc_full_2x.webp';
-import mob from '@/assets/images/mob_full_2x.webp';
+// import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
+import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import desc from '@/assets/images/avtobusni-kvytky-online-desktop.webp';
+import mob from '@/assets/images/avtobusni-kvytky-online-mobile.webp';
 import MainSearch from '@/features/route-search-form';
 
-export default async function Herow() {
+export default async function HeroSection() {
+  const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
   const t_img_alts = await getTranslations(MESSAGE_FILES.IMG_ALTS);
-  const t_main = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
     <section className="relative">
@@ -18,11 +19,12 @@ export default async function Herow() {
         placeholder="blur"
         width={740}
         height={233}
+        fetchPriority="high"
         className="tablet:hidden w-dvw h-auto"
         priority
         loading="eager"
-        decoding="sync"
         quality={75}
+        sizes="100vw"
       />
       <Image
         src={desc}
@@ -30,18 +32,16 @@ export default async function Herow() {
         placeholder="blur"
         width={1240}
         height={233}
+        fetchPriority="high"
         className="hidden tablet:block w-dvw h-auto"
         priority
         loading="eager"
-        decoding="sync"
         quality={75}
+        sizes="100vw"
       />
-
       <Container size="l" className="-mt-10">
-        <div>
-          <h1 className="sr-only">{t_main('herow_title')}</h1>
-          <MainSearch />
-        </div>
+        <h1 className="sr-only">{t('herow_title')}</h1>
+        <MainSearch />
       </Container>
     </section>
   );

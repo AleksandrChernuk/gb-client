@@ -15,7 +15,10 @@ const buildBaseMetadata = (
 
   const safeT = (key: string, fallback = '') => {
     try {
-      return t(key);
+      if (t.has(key)) {
+        return t(key);
+      }
+      return fallback;
     } catch {
       return fallback;
     }

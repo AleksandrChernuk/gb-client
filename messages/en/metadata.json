@@ -1,5 +1,19 @@
 {
   "metadata": {
+    "routes": {
+      "title": "Popular Routes — Buy Tickets Online | GreenBus 🚍",
+      "description": "Browse popular bus routes on GreenBus. Easy search, up-to-date schedules and great ticket prices across Ukraine and Europe.",
+      "keywords": "popular routes, bus routes, GreenBus, tickets online, bus schedule, Ukraine, Europe"
+    },
+    "route": {
+      "title": "Bus Tickets | GreenBus 🚍",
+      "description": "Buy bus tickets online on GreenBus.",
+      "keywords": "bus, tickets online, schedule, GreenBus"
+    },
+    "route_slug": {
+      "title": "Bus Tickets from {fromName} to {toName} | GreenBus 🚍",
+      "description": "Buy bus tickets from {fromName} to {toName} online. Up-to-date schedules, great prices and easy booking on GreenBus."
+    },
     "about": {
       "title": "GreenBus — Bus Transportation Across Ukraine and Europe 🚍",
       "description": "GreenBus offers comfortable bus transportation services across Ukraine and Europe. Safety, convenience, and affordable prices. Organization of group and individual trips.",

@@ -7,7 +7,7 @@ export const H1 = ({ className = '', ...props }: Props) => {
     <h1
       className={`mb-4 text-xl font-bold tracking-normal leading-[28.8px]
       laptop:text-[32px] laptop:leading-[38.4px]
-      text-slate-700 dark:text-slate-50 ${className}`}
+      text-slate-700 dark:text-slate-50 my-4 tablet:my-8 ${className}`}
       {...props}
     />
   );

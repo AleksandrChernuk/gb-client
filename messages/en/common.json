@@ -1,5 +1,8 @@
 {
   "common": {
+    "breadcrumbs_home": "Home",
+    "popularCities": "Popular cities",
+    "routes_title": "Popular Bus Routes — Buy Tickets Online",
     "buses_title": "GreenBus Bus Ticket Search",
     "faq_breadcrumb": "FAQ",
     "logo_aria_label_header": "GreenBus — home page",

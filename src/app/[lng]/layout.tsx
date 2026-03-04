@@ -3,7 +3,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/shared/i18n/routing';
 import { Locale } from '@/shared/i18n/locales';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Params } from '@/shared/types/common.types';
 import { ReactNode } from 'react';
 import { Rubik } from 'next/font/google';
@@ -43,10 +43,12 @@ export default async function LocaleLayout({
   const { lng } = await params;
 
   if (!hasLocale(routing.locales, lng as Locale)) {
-    return notFound();
+    notFound();
   }
 
   setRequestLocale(lng as Locale);
+
+  const messages = await getMessages();
 
   const websiteSchema = {
     '@context': 'https://schema.org',
@@ -79,13 +81,13 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={lng}>
+    <html lang={lng} suppressHydrationWarning>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       </head>
       <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
-        <NextIntlClientProvider locale={lng as Locale}>
+        <NextIntlClientProvider locale={lng as Locale} messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>

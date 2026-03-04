@@ -12,20 +12,17 @@ export default async function GetStarted() {
   return (
     <section className="py-8 tablet:py-16">
       <Container size="m">
-        <ul className="justify-between min-h-full tablet:flex tablet:gap-5 laptop:gap-40">
-          <li className="relative overflow-hidden max-w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
+        <div className="justify-between min-h-full tablet:flex tablet:gap-5 laptop:gap-40">
+          <div className="relative overflow-hidden max-w-[350px] h-[353px] mb-8 tablet:order-2 tablet:mb-0 mx-auto">
             <Image
               alt={t_img_alts('map')}
               src={pointOnCurt}
               placeholder="blur"
               sizes="100vw"
-              className="rounded-3xl"
-              style={{
-                objectFit: 'contain',
-              }}
+              className="rounded-3xl object-contain"
             />
-          </li>
-          <li className="flex flex-col tablet:order-2 tablet:w-1/2">
+          </div>
+          <div className="flex flex-col tablet:order-2 tablet:w-1/2">
             <h3 className="mb-4 text-2xl leading-[28.8px] laptop:text-[32px] font-bold tracking-normal laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
               {t('get_started_title')}
             </h3>
@@ -35,8 +32,8 @@ export default async function GetStarted() {
                 {t('get_started_button')}
               </Button>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </Container>
     </section>
   );

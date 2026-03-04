@@ -1,5 +1,8 @@
 {
   "common": {
+    "breadcrumbs_home": "Головна",
+    "popularCities": "Популярні міста",
+    "routes_title": "Популярні автобусні маршрути — купити квитки онлайн",
     "buses_title": "Пошук автобусних квитків GreenBus",
     "faq_breadcrumb": "Часті запитання",
     "logo_aria_label_header": "GreenBus — головна сторінка",
