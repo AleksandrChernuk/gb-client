@@ -21,17 +21,49 @@ const rubik = Rubik({
 
 export async function generateMetadata() {
   return {
+    title: 'GreenBus | Автобусні квитки онлайн',
+    description: 'Бронюйте автобусні квитки онлайн. Доступні маршрути по Україні та в Європу.',
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',
       apple: '/apple-touch-icon.png',
     },
+    metadataBase: new URL('https://greenbus.com.ua'),
+  };
+}
+
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
   };
 }
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lng: locale }));
 }
+
+const schemaTranslations = {
+  uk: {
+    name: 'GreenBus',
+    description: 'Онлайн бронювання автобусних квитків в Україну та Європу',
+    serviceDescription: 'Замовте автобусні квитки онлайн. Доступні маршрути по Україні та в Європу.',
+    countries: ['Україна', 'Польща', 'Чехія', 'Німеччина'],
+  },
+  ru: {
+    name: 'GreenBus',
+    description: 'Онлайн бронирование автобусных билетов в Украину и Европу',
+    serviceDescription: 'Закажите автобусные билеты онлайн. Доступные маршруты по Украине и в Европу.',
+    countries: ['Украина', 'Польша', 'Чехия', 'Германия'],
+  },
+  en: {
+    name: 'GreenBus',
+    description: 'Online bus ticket reservation to Ukraine and Europe',
+    serviceDescription: 'Book bus tickets online. Available routes throughout Ukraine and Europe.',
+    countries: ['Ukraine', 'Poland', 'Czechia', 'Germany'],
+  },
+};
 
 export default async function LocaleLayout({
   children,
@@ -50,20 +82,14 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const langTexts = schemaTranslations[lng as Locale] || schemaTranslations.uk;
+
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'GreenBus',
-    url: `https://greenbus.com.ua/${lng}`,
+    url: 'https://greenbus.com.ua',
     inLanguage: lng,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `https://greenbus.com.ua/${lng}/search?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   const organizationSchema = {
@@ -72,19 +98,30 @@ export default async function LocaleLayout({
     name: 'GreenBus',
     url: 'https://greenbus.com.ua',
     logo: 'https://greenbus.com.ua/logo.png',
-    description: 'Онлайн бронирование автобусных билетов',
+    description: langTexts.description,
+    inLanguage: lng,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
-      availableLanguage: ['Ukrainian', 'Russian', 'English'],
+      availableLanguage: ['uk', 'ru', 'en'],
     },
+    sameAs: [
+      'https://www.instagram.com/greenbus_ukraine',
+      'https://www.tiktok.com/@greenbusukraine',
+      'https://x.com/@GreenBusUkraine',
+      'https://www.facebook.com/greenbus.ukraine',
+    ],
   };
 
   return (
     <html lang={lng} suppressHydrationWarning>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider locale={lng as Locale} messages={messages}>

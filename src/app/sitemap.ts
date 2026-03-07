@@ -24,14 +24,16 @@ const pages: string[] = [
   '/',
   '/about',
   '/privacy-policy',
-  '/all-countries',
   '/oferta',
   '/for-carriers',
   '/for-agents',
+  '/blog',
   '/faq',
-  '/carriers',
-  '/agents',
-  '/routes', // ✅ Сторінка списку маршрутів
+  '/faq/bronjuvannja-mists',
+  '/faq/routes-and-buses',
+  '/faq/search',
+  '/faq/ticket-refund',
+  '/routes',
 ];
 
 function getStaticPages() {
@@ -101,13 +103,15 @@ function buildEntries(
 
 function getPriority(href: string) {
   if (href === '/') return 1.0;
-  if (['/for-carriers', '/carriers'].includes(href)) return 0.9;
-  if (href === '/routes') return 0.8;
+  if (href === '/for-carriers') return 0.9;
+  if (['/routes', '/blog'].includes(href)) return 0.8;
+  if (href.startsWith('/faq/')) return 0.7;
   return 0.6;
 }
 
 function getChangeFreq(href: string): MetadataRoute.Sitemap[number]['changeFrequency'] {
   if (href === '/') return 'daily';
-  if (['/for-carriers', '/carriers', '/routes'].includes(href)) return 'weekly';
+  if (['/for-carriers', '/routes'].includes(href)) return 'weekly';
+  if (href.startsWith('/faq')) return 'monthly';
   return 'monthly';
 }

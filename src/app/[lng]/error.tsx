@@ -5,33 +5,12 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import errorImg from '@/assets/images/something-happened-on-the-site.webp';
 
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
 import { Button } from '@/shared/ui/button';
 import CustomCard from '@/shared/ui/CustomCard';
-
-export async function generateMetadata() {
-  return {
-    manifest: '/manifest.json',
-
-    robots: {
-      index: false,
-      follow: false,
-      nocache: false,
-      googleBot: {
-        index: false,
-        follow: false,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  };
-}
 
 type Props = {
   error: Error;
@@ -47,11 +26,7 @@ export default function Error({ error, reset }: Props) {
 
   return (
     <>
-      <Head>
-        <title>{t('errorTitle')} | GreenBus</title>
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="description" content={t('errorDescription') ?? 'Виникла помилка.'} />
-      </Head>
+      <meta name="robots" content="noindex, nofollow" />
       <div className="flex flex-col h-svh">
         <MainHeader />
         <main className="grow flex flex-col items-center justify-center">

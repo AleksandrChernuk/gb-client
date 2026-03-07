@@ -24,21 +24,21 @@ export default async function MainFooter({ className }: TMainFooter) {
       <Container size="m">
         <nav className="grid grid-cols-2 gap-x-4 gap-y-8 tablet:grid-cols-3 laptop:grid-cols-4 laptop:gap-x-[114px] pb-8">
           <div>
-            <h5 className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">
+            <p className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">
               {t('forPassengersTitle')}
-            </h5>
+            </p>
             <FooterLinksList navLinks={footerNavLinks['passengers']} />
           </div>
 
           <div>
-            <h5 className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">
+            <p className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">
               {t('for_cooperation')}
-            </h5>
+            </p>
             <FooterLinksList navLinks={footerNavLinks['employees']} />
           </div>
 
           <div>
-            <h5 className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">{t('contacts')}</h5>
+            <p className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">{t('contacts')}</p>
             <div className="flex flex-col gap-4">
               <Support variant="footer" />
               <Link
@@ -55,7 +55,7 @@ export default async function MainFooter({ className }: TMainFooter) {
           </div>
 
           <div className="hidden laptop:block">
-            <h5 className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">{t('follow_us')}</h5>
+            <p className="mb-4 text-base font-bold leading-6 text-slate-700 dark:text-slate-50">{t('follow_us')}</p>
             <FooterLinksList navLinks={footerNavLinks['social']} className="flex flex-row gap-2" />
           </div>
         </nav>

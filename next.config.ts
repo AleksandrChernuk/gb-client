@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/:lng/route-planner',
+        destination: '/:lng',
+        permanent: true,
+      },
+      {
+        source: '/carriers',
+        destination: '/for-carriers',
+        permanent: true,
+      },
+      {
+        source: '/:lng/carriers',
+        destination: '/:lng/for-carriers',
+        permanent: true,
+      },
     ];
   },
 
