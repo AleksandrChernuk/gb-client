@@ -4,9 +4,9 @@ import { Locale } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { ServerPagination } from '@/shared/ui/server-pagination/ServerPagination';
 import { H1 } from '@/shared/ui/H1';
 import { RouteItem } from '@/shared/ui/route-item';
+import { ServerPagination } from '@/shared/ui/ServerPagination';
 
 export default async function RoutesList({ pageParam }: { pageParam?: string }) {
   const locale = (await getLocale()) as Locale;

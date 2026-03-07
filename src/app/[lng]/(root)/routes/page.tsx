@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import MainFooter from '@/widgets/footer/MainFooter';
 import { RoutesHerow } from '@/views/favorite-route/RoutesHerow';
 import { RoutesList } from '@/views/favorite-route/RoutesList';

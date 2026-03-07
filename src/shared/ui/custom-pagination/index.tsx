@@ -16,7 +16,7 @@ type TPagination = {
   handlePageChange: (page: number) => void;
 };
 
-export const PaginationTest = ({ currentPage, totalPages, handlePageChange }: TPagination) => {
+export const CustomPagination = ({ currentPage, totalPages, handlePageChange }: TPagination) => {
   if (totalPages <= 1) return null;
 
   const safePage = Math.min(currentPage, totalPages);
