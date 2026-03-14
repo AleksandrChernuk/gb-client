@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { getLocationById } from '@/shared/api/location.actions';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
@@ -9,32 +7,59 @@ import { notFound } from 'next/navigation';
 import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
-import slugify from 'slugify';
-import MainFooter from '@/widgets/footer/MainFooter';
-import { InfoAllCcountries } from '@/features/all-countries';
-import { generateLocationMetadata } from '@/shared/lib/generateLocationMetadata';
-
-export async function generateMetadata({ params, searchParams }: Readonly<Props>) {
-  const { lng } = (await params) as { lng: Locale };
-  const query = await searchParams;
-
-  return generateLocationMetadata({
-    lng,
-    locationId: Number(query.to),
-  });
-}
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
-  params: Promise<{ lng: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  params: Promise<{ lng: string; id: string }>;
 };
 
-export default async function LocationPage({ params, searchParams }: Props) {
-  const { lng } = await params;
+export async function generateMetadata({ params }: Props) {
+  const { lng, id } = (await params) as { lng: Locale; id: string };
+  const data = await getLocationById(Number(id));
+
+  if (!data) {
+    return { title: 'Not Found' };
+  }
+
+  const locationName = data.translations.find((e) => e.language === lng)?.locationName ?? '';
+
+  const meta = {
+    uk: {
+      title: `Купити автобусні квитки ${locationName} – ціни онлайн | GreenBus`,
+      description: `Забронюйте автобусні квитки з міста ${locationName} онлайн за вигідною ціною. Актуальний розклад рейсів, порівняння цін та швидка оплата на сайті GreenBus. 🚌`,
+    },
+    ru: {
+      title: `Купить билеты на автобус ${locationName} – цены онлайн | GreenBus`,
+      description: `Билеты на автобус из города ${locationName} по лучшей цене. Сравнивайте расписание и стоимость рейсов от сотен перевозчиков. Бронируйте билеты онлайн на GreenBus за 2 минуты!`,
+    },
+    en: {
+      title: `Bus Tickets from ${locationName}: Book Online & Prices | GreenBus`,
+      description: `Find and book cheap bus tickets from ${locationName} online. Compare schedules and ticket prices from hundreds of carriers. Fast and secure booking with GreenBus.`,
+    },
+  };
+
+  const current = meta[lng as keyof typeof meta] ?? meta.uk;
+
+  const baseMetadata = await generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: `all-countries/${data.countryId}/${id}/`,
+    path: `all-countries/${data.countryId}/${id}/`,
+  });
+
+  return {
+    ...baseMetadata,
+    title: current.title,
+    description: current.description,
+  };
+}
+
+export default async function LocationPage({ params }: Props) {
+  const { lng, id } = await params;
+
   setRequestLocale(lng as Locale);
 
-  const query = await searchParams;
-  const locationId = Number(query.to);
+  const locationId = Number(id);
 
   if (!locationId) {
     notFound();
@@ -50,24 +75,18 @@ export default async function LocationPage({ params, searchParams }: Props) {
 
   const details = extractLocationDetails(data, lng);
 
-  const slugCountry = slugify(extractLocationDetails(data, 'en').countryName.toLowerCase(), {
-    lower: true,
-    strict: true,
-    locale: 'en',
-  });
-
   return (
     <>
-      {' '}
       <main className="bg-slate-50 dark:bg-slate-800 flex-1" role="main" aria-label={t('search_section_title')}>
         <section className="bg-green-500 dark:bg-slate-900">
           <Container size="l" className="py-5">
             <div className="mb-4">
               <BreadcrumbSimple
+                locale={lng as Locale}
                 items={[
                   { label: t('breadcrumbs_home'), href: '/' },
-                  { label: t('breadcrumbs_all_countries'), href: `/${lng}/all-countries` },
-                  { label: `${details.countryName}`, href: `/${lng}/all-countries/${slugCountry}` },
+                  { label: t('buses_breadcrumb'), href: `/all-countries` },
+                  { label: `${details.countryName}`, href: `/all-countries/${data.country.id}/${locationId}` },
                 ]}
               />
             </div>
@@ -82,24 +101,21 @@ export default async function LocationPage({ params, searchParams }: Props) {
               {t('tickets_heading', { locationName: details.locationName })}
             </h1>
 
-            <InfoAllCcountries text={t('teaser_text', { locationName: details.locationName })} />
-
-            <h2 className="text-lg tablet:text-xl font-bold mb-4">
-              {t('about_city_heading', { locationName: details.locationName })}
-            </h2>
-
-            <div className="grid grid-cols-1 tablet:grid-cols-3 gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
-              <div className="tablet:col-span-2">
+            <div className="flex flex-col tablet:flex-row gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm">
+              <div className="tablet:w-1/2">
+                <h2 className="text-lg tablet:text-xl font-bold mb-4">
+                  {t('about_city_heading', { locationName: details.locationName })}
+                </h2>
                 <p className="text-sm tablet:text-lg text-slate-700 dark:text-slate-100 mb-6">{details.description}</p>
               </div>
 
-              <div className="border-2 border-green-300 rounded-2xl">
+              <div className="border-2 border-green-300 rounded-2xl tablet:w-1/2">
                 <iframe
                   width="100%"
-                  height="100%"
+                  height="500px"
                   loading="lazy"
                   className="rounded-2xl overflow-hidden "
-                  src={`https://www.google.com/maps?q=${data.lat},${data.lon}&z=12&output=embed`}
+                  src={`https://www.google.com/maps?q=${data.lat},${data.lon}&z=19&output=embed`}
                   title={t('map_title', { locationName: details.locationName })}
                   aria-label={t('map_aria_label', { locationName: details.locationName })}
                 ></iframe>
@@ -108,7 +124,6 @@ export default async function LocationPage({ params, searchParams }: Props) {
           </Container>
         </section>
       </main>
-      <MainFooter />
     </>
   );
 }

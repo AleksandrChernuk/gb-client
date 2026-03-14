@@ -9,6 +9,7 @@ import { AllCountriesSection } from '@/views/home-page/AllCountriesSection';
 import { BenefitsSection } from '@/views/home-page/BenefitsSection';
 import { PopularRoutesSection } from '@/views/home-page/PopularRoutesSection';
 import { QuestionsSection } from '@/views/home-page/QuestionsSection';
+import { setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Params;
@@ -23,14 +24,22 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: Readonly<{
+  params: Params;
+}>) {
+  const { lng } = await params;
+
+  setRequestLocale(lng as Locale);
+
   return (
     <>
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <HeroSection />
         <BenefitsSection />
-        <AllCountriesSection />
         <PopularRoutesSection />
+        <AllCountriesSection />
         <ArticlesPreviewSection />
         <QuestionsSection />
       </main>

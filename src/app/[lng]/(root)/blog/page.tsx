@@ -70,12 +70,15 @@ export default async function Blog({ params, searchParams }: Props) {
         <Section>
           <Container size="m">
             <BreadcrumbSimple
+              linkClassName="text-slate-700 dark:text-slate-50"
               pageClassName="text-slate-700 dark:text-slate-50"
+              locale={lng}
               items={[
                 { label: t('breadcrumb_main'), href: '/' },
                 { label: t('breadcrumb_blog'), href: '/blog' },
               ]}
             />
+
             <H1>{t('articles_title')}</H1>
             <AcriclesList articles={res} />
           </Container>

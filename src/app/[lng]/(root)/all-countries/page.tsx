@@ -1,24 +1,19 @@
-import MainSearch from '@/features/route-search-form';
+export const dynamic = 'force-dynamic';
+
 import { getLocations } from '@/shared/api/location.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Params, TParams } from '@/shared/types/common.types';
-import { Container } from '@/shared/ui/Container';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { ILocation } from '@/shared/types/location.types';
-import { mapCountries } from '@/shared/lib/mapCountries';
 import MainFooter from '@/widgets/footer/MainFooter';
-import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 import { notFound } from 'next/navigation';
-import { CitySearch, CountriesList, GroupedCitiesListClient } from '@/features/all-countries';
-import { H1 } from '@/shared/ui/H1';
-
-export interface ICountryListItem {
-  slug: string;
-  name: string;
-  countryId: number;
-}
+import { CountriesListSection } from '@/views/all-countries-page/CountriesListSection';
+import { getAllCountries } from '@/shared/api/countries.actions';
+import { CitySearchSection } from '@/views/all-countries-page/CitySearchSection';
+import { GroupedCitiesSection } from '@/views/all-countries-page/GroupedCitiesSection';
+import { СountriesSearchHero } from '@/views/all-countries-page/СountriesSearchHero';
 
 export async function generateMetadata({ params }: TParams) {
   const { lng } = (await params) as { lng: Locale };
@@ -39,50 +34,22 @@ export default async function AllCountries({
 
   setRequestLocale(lng as Locale);
 
-  const data = await getLocations({ query: '', perPage: 1000 });
+  const [locationsData, countries] = await Promise.all([getLocations({ query: '', perPage: 1000 }), getAllCountries()]);
 
-  if (!data) {
+  if (!locationsData || !countries) {
     notFound();
   }
 
-  const locations: ILocation[] = data.data;
-  const countries = mapCountries(locations, lng);
-  const t = await getTranslations({ locale: lng as Locale, namespace: MESSAGE_FILES.ALL_COUNTRIES });
+  const locations: ILocation[] = locationsData.data;
 
   return (
     <>
       <main className="bg-slate-50 dark:bg-slate-800 flex-1">
-        <section className="bg-green-500 dark:bg-slate-900">
-          <Container size="l" className="py-5">
-            <div className="mb-4">
-              <BreadcrumbSimple items={[{ label: t('breadcrumbs_home'), href: '/' }]} />
-            </div>
-            <MainSearch />
-          </Container>
-        </section>
+        <СountriesSearchHero />
+        <CountriesListSection countries={countries} locale={lng} />
 
-        <section className="pt-10">
-          <Container size="m">
-            <H1>{t('meet_buses_in_your_city')}</H1>
-
-            <CountriesList countries={countries} locale={lng} />
-          </Container>
-        </section>
-
-        <section className="pt-8 pb-4">
-          <Container size="m">
-            <h2 className="mb-1 text-lg font-bold tracking-normal leading-[28.8px] laptop:text-[28px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-              {t('select_departure_country')}
-            </h2>
-            <CitySearch />
-          </Container>
-        </section>
-
-        <section>
-          <Container size="m">
-            <GroupedCitiesListClient initialLocations={locations} locale={lng} />
-          </Container>
-        </section>
+        <CitySearchSection />
+        <GroupedCitiesSection locations={locations} locale={lng} />
       </main>
       <MainFooter />
     </>

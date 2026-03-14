@@ -71,7 +71,7 @@ export default async function FavoriteRoutePage({ params }: Props) {
 
   return (
     <>
-      <main className="bg-slate-50 dark:bg-slate-800">
+      <main className="bg-slate-50 dark:bg-slate-900">
         <RouteHerow currentHref={route.slug ?? '/'} fromName={fromName} toName={toName} />
 
         <RouteContent content={description ?? ''} />

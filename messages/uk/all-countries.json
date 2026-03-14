@@ -2,11 +2,15 @@
   "all-countries": {
     "breadcrumbs_home": "Головна",
     "breadcrumbs_all_countries": "Всі країни",
+    "buses_breadcrumb": "Усі напрямки",
     "bus_tickets": "Квитки на автобуси",
+    "bus_tickets_online": "автобусні квитки онлайн",
+    "no_description_placeholder": "Оберіть місто в {country} та пункт призначення",
+    "no_cities_found": "На жаль, у {country} поки немає доступних міст для замовлення",
     "all": "Усі",
-    "select_departure_country": "Виберіть країну від'їзду автобуса",
-    "meet_buses_in_your_city": "Зустрічайте автобуси у своєму місті!",
-    "find_your_city": "Шукайте своє місто",
+    "select_departure_country": "Усі доступні маршрути та міста виїзду",
+    "meet_buses_in_your_city": "Автобусні маршрути по Україні та Європі: усі міста та країни",
+    "find_your_city": "Пошук рейсів за алфавітом",
     "select_country": "Оберіть країну",
     "select_city": "Оберіть місто",
 

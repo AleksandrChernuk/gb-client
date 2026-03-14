@@ -85,7 +85,7 @@ const MainSearchForm = () => {
           {renderFields(isMobile ? 'mobile' : 'desktop')}
         </div>
         <Button
-          variant="main"
+          variant="cta"
           size="mainSearch"
           disabled={isPending}
           onClick={handleSubmit}

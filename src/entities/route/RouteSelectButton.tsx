@@ -1,14 +1,25 @@
 import { BorderBeam } from '@/shared/ui/border-beam';
 import { Button } from '@/shared/ui/button';
+import { cn } from '@/shared/lib/utils';
 import { LoaderCircle } from 'lucide-react';
 import { ComponentProps } from 'react';
+import { type VariantProps } from 'class-variance-authority';
+import { buttonVariants } from '@/shared/ui/button';
+
+type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 type Props = {
   buttonText: string;
   loading: boolean;
   price?: number;
-  currency: string;
+  currency?: string;
   variant: 'mobile' | 'desktop' | 'details';
+};
+
+const variantMap: Record<Props['variant'], { variant: ButtonVariants['variant']; size: ButtonVariants['size'] }> = {
+  mobile: { variant: 'select', size: 'select_mobile' },
+  desktop: { variant: 'select', size: 'select_desktop' },
+  details: { variant: 'select', size: 'primary' },
 };
 
 export default function SelectButton({
@@ -17,56 +28,28 @@ export default function SelectButton({
   variant,
   price,
   currency,
+  className,
+  disabled,
   ...props
 }: ComponentProps<'button'> & Props) {
-  switch (variant) {
-    case 'mobile':
-      return (
-        <Button
-          {...props}
-          variant={'default'}
-          size={'primary'}
-          className="relative w-full text-amber-50 py-3 px-4 rounded-none rounded-b-2xl slashed-zero"
-        >
-          {loading ? (
-            <LoaderCircle className="animate-spin" stroke="white" />
-          ) : (
-            <>
-              {price}
-              <span className="text-xs ml-[2px]">{currency}</span>
-            </>
-          )}{' '}
-          {!props.disabled && (
-            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
-          )}
-        </Button>
-      );
+  const { variant: btnVariant, size } = variantMap[variant];
 
-    case 'desktop':
-      return (
-        <Button
-          {...props}
-          size={'primary'}
-          className="relative w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px]  tablet:min-w-[205px] text-[12px] font-bold tracking-normal leading-[18px] tablet:text-base tablet:leading-6 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full [&_svg]:shrink-0"
-        >
-          {loading ? <LoaderCircle className="animate-spin" /> : buttonText}{' '}
-          {!props.disabled && (
-            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
-          )}{' '}
-        </Button>
-      );
-
-    case 'details':
-      return (
-        <Button {...props} variant={'default'} size={'primary'} className="relative">
-          {loading ? <LoaderCircle className="animate-spin" /> : buttonText}{' '}
-          {!props.disabled && (
-            <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />
-          )}{' '}
-        </Button>
-      );
-
-    default:
-      return null;
-  }
+  return (
+    <Button {...props} disabled={disabled} variant={btnVariant} size={size} className={cn('relative', className)}>
+      {loading ? (
+        <LoaderCircle className="animate-spin" />
+      ) : variant === 'mobile' ? (
+        <>
+          {buttonText}
+          <span className="font-bold">
+            {price}
+            <span className="text-xs ml-0.5">{currency}</span>
+          </span>
+        </>
+      ) : (
+        buttonText
+      )}
+      {!disabled && <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />}
+    </Button>
+  );
 }

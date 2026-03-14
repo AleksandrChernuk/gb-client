@@ -1,10 +1,13 @@
 {
   "common": {
+    "popular_routes_from": "From",
+    "currencypopular_routes_from": "UAH",
     "breadcrumbs_home": "Home",
     "popularCities": "Popular cities",
-    "routes_title": "Popular Bus Routes — Buy Tickets Online",
+    "routes_title": "Popular bus routes and ticket prices online",
     "buses_title": "GreenBus Bus Ticket Search",
     "faq_breadcrumb": "FAQ",
+    "breadcrumb_popular_routes": "Popular bus routes",
     "logo_aria_label_header": "GreenBus — home page",
     "logo_aria_label_footer": "GreenBus — back to home (footer)",
     "logo_aria_label_mobile": "GreenBus — home page (mobile menu)",
@@ -16,13 +19,15 @@
     "PAYMENT_AT_BOARDING": "Payment at boarding",
     "RESERVE": "Reserve",
     "details": "Details",
+    "breadcrumb_buses": "Routes",
     "breadcrumb_blog": "News & Articles",
+
     "no_travel": "No available routes",
     "no_travel_find": "No trips found",
     "articles_title": "Travel blog and bus news",
     "articles_link_title": "Useful tips and news about international bus routes",
 
-    "all_news": "Read all articles",
+    "all_news": "Read blog",
     "read": "Read",
     "breadcrumb_main": "Home",
     "twofa_title": "Two-Step Verification",

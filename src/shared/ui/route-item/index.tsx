@@ -1,6 +1,8 @@
 import { IconPath } from '@/assets/icons/icon-path';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
 import { ChevronRight } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 interface RouteItemProps {
   fromName: string;
   toName: string;
@@ -12,7 +14,17 @@ interface RouteItemProps {
   toId?: string;
 }
 
-export function RouteItem({ fromName, toName, price, fromCountry, toCountry, href, fromId, toId }: RouteItemProps) {
+export async function RouteItem({
+  fromName,
+  toName,
+  price,
+  fromCountry,
+  toCountry,
+  href,
+  fromId,
+  toId,
+}: RouteItemProps) {
+  const t = await getTranslations(MESSAGE_FILES.COMMON);
   const searchParams = new URLSearchParams();
   if (fromId) searchParams.set('from', fromId);
   if (toId) searchParams.set('to', toId);
@@ -23,7 +35,7 @@ export function RouteItem({ fromName, toName, price, fromCountry, toCountry, hre
     <Link
       href={fullHref}
       prefetch={false}
-      className="flex items-center justify-between gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 hover:border-green-500 dark:hover:border-green-500 transition-colors"
+      className="flex items-center justify-between gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 hover:border-green-500 dark:hover:border-green-500 transition-colors"
     >
       <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
         <div className="flex flex-col gap-0.5">
@@ -48,11 +60,12 @@ export function RouteItem({ fromName, toName, price, fromCountry, toCountry, hre
       <div className="flex items-center gap-2 shrink-0">
         {price != null && (
           <p className="text-sm text-green-400 dark:text-green-200 font-bold">
-            Від{'  '}
+            {t('popular_routes_from')}
+            {'  '}
             <span className="text-slate-700 dark:text-slate-50 text-lg tablet:text-xl">
               {price.toLocaleString('uk-UA')}
             </span>{' '}
-            грн
+            {t('currencypopular_routes_from')}
           </p>
         )}
         <ChevronRight size={18} className="text-slate-400" />

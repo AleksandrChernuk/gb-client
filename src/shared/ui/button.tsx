@@ -11,8 +11,8 @@ const buttonVariants = cva(
     'disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-[#de2a1a] dark:aria-invalid:border-[#de2a1a]',
     'outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-    'transition-colors motion-safe:duration-200',
-    'active:opacity-95',
+    'transition-all motion-safe:duration-200',
+    'active:scale-[0.98]',
   ].join(' '),
   {
     variants: {
@@ -36,9 +36,17 @@ const buttonVariants = cva(
 
         link: 'text-green-300 underline-offset-4 hover:underline active:opacity-90',
 
+        cta:
+          'bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-base font-bold leading-6 tracking-normal text-white ' +
+          'dark:shadow-orange-500/30 dark:hover:shadow-orange-500/40 ' +
+          'rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
+
         main:
           'bg-green-600 hover:bg-green-600/80 active:bg-green-600/75 text-base font-bold leading-6 tracking-normal text-black ' +
           'rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
+        select:
+          'bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white slashed-zero ' +
+          'dark:shadow-orange-500/30 dark:hover:shadow-orange-500/40',
       },
 
       size: {
@@ -57,6 +65,9 @@ const buttonVariants = cva(
           'w-full px-2 py-3 text-white rounded-full text-sm font-medium leading-6 tracking-normal tablet:max-h-[52px] laptop:max-h-[52px]',
 
         mainSearch: 'h-auto px-6 py-4 tablet:min-w-[120px] laptop:min-w-[187px] laptop:max-w-[187px] grow-0',
+        select_mobile: 'w-full py-3 px-4 rounded-none rounded-b-2xl',
+        select_desktop:
+          'w-full py-3 px-4 laptop:py-[14px] laptop:px-[24px] tablet:min-w-[205px] text-xs font-bold leading-[18px] tablet:text-base tablet:leading-6 tablet:max-h-[44px] laptop:max-h-[48px] rounded-full [&_svg]:shrink-0',
       },
     },
     defaultVariants: {

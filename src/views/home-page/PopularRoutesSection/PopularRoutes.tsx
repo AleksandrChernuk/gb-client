@@ -8,6 +8,7 @@ import { IFavoriteRoute } from '@/shared/types/favoriteRoutes';
 import { getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { RouteItem } from '@/shared/ui/route-item';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+import { H2 } from '@/shared/ui/H2';
 
 export default async function PopularRoutes() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
@@ -23,11 +24,9 @@ export default async function PopularRoutes() {
   }
 
   return (
-    <section className="py-6 bg-green-500 dark:bg-slate-800">
-      <Container size="m" className="tablet:px-8">
-        <h2 className="mb-4 text-white text-lg font-bold tracking-tighter leading-[21.6px] tablet:text-2xl tablet:leading-[28.8px] laptop:mb-8 laptop:text-[32px] laptop:leading-[38.4px]">
-          {t('popular_title')}
-        </h2>
+    <section className="py-6">
+      <Container size="m">
+        <H2>{t('popular_title')}</H2>
 
         {routes.length > 0 ? (
           <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4 mb-0 duration-300 animate-in fade-in slide-in-from-top-1">
@@ -36,12 +35,11 @@ export default async function PopularRoutes() {
               const toName = extractLocationDetails(route.toLocation, locale).locationName;
               const fromCountry = extractLocationDetails(route.fromLocation, locale).countryName;
               const toCountry = extractLocationDetails(route.toLocation, locale).countryName;
-              const enSlug = route.slug ?? '';
 
               return (
                 <RouteItem
                   key={route.id}
-                  href={`/routes/${enSlug}`}
+                  href={`/buses/?from=${route.fromLocation.id}&to=${route.toLocation.id}&date=${new Date().toISOString().split('T')[0]}`}
                   fromName={fromName}
                   toName={toName}
                   fromCountry={fromCountry}
@@ -57,8 +55,8 @@ export default async function PopularRoutes() {
           <p className="text-white/70 text-sm">{t('popular_empty')}</p>
         )}
 
-        <div className="text-right laptop:text-center">
-          <Button variant="link" className="h-auto p-0 mt-4 text-base font-normal text-white" asChild>
+        <div className="flex items-center justify-end mt-4">
+          <Button variant={'default'} size={'secondary'}>
             <Link href="/routes">{t('popular_button')}</Link>
           </Button>
         </div>

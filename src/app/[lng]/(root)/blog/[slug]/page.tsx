@@ -100,10 +100,16 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
           <Container size="m">
             <div className="mb-2 flex items-center justify-between gap-2">
               <BreadcrumbSimple
+                linkClassName="text-slate-700 dark:text-slate-50"
                 pageClassName="text-slate-700 dark:text-slate-50"
+                locale={lng as Locale}
                 items={[
                   { label: t('breadcrumb_main'), href: '/' },
                   { label: t('breadcrumb_blog'), href: '/blog' },
+                  {
+                    label: article.descriptions.find((e) => e.language === lng)?.title ?? '',
+                    href: `/blog/${article.slug}`,
+                  },
                 ]}
               />
               <ShareButton shareUrl={`https://greenbus.com.ua/${lng}/blog/${article.slug}`} title={desc.title} />

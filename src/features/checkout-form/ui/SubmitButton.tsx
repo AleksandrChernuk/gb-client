@@ -27,8 +27,8 @@ const SubmitButton = memo(function SubmitButton() {
   return (
     <>
       <Button
-        variant="default"
-        size="primary"
+        variant="select"
+        size="select_desktop"
         type="submit"
         className="w-full"
         // onClick={() => setOpen((p) => !p)}

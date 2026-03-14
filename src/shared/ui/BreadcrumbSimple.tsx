@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,48 +6,65 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/shared/ui/breadcrumb';
+import { cn } from '@/shared/lib/utils';
+import Link from 'next/link';
 
 export type Crumb = {
   label: string;
   href: string;
-  className?: string;
 };
 
 export function BreadcrumbSimple({
   items,
   className,
+  locale,
+  linkClassName,
   pageClassName,
-  ItemClassName,
-  LinkClassName,
+  baseUrl = 'https://greenbus.com.ua',
 }: {
   items: Crumb[];
   className?: string;
+  linkClassName?: string;
   pageClassName?: string;
-  ItemClassName?: string;
-  LinkClassName?: string;
+  locale: 'uk' | 'ru' | 'en';
+  baseUrl?: string;
 }) {
-  return (
-    <Breadcrumb className={className}>
-      <BreadcrumbList>
-        {items.map((item, idx) => {
-          const isLast = items.length > 1 && idx === items.length - 1;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: item.label,
+      item: `${baseUrl}/${locale}${item.href}`,
+    })),
+  };
 
-          return (
-            <span key={idx} className="flex items-center gap-1 truncate">
-              {idx > 0 && <BreadcrumbSeparator />}
-              <BreadcrumbItem className={ItemClassName}>
-                {isLast ? (
-                  <BreadcrumbPage className={pageClassName}>{item.label}</BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink asChild className={LinkClassName}>
-                    <Link href={item.href}>{item.label}</Link>
-                  </BreadcrumbLink>
-                )}
-              </BreadcrumbItem>
-            </span>
-          );
-        })}
-      </BreadcrumbList>
-    </Breadcrumb>
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <Breadcrumb className={cn('text-current', className)}>
+        <BreadcrumbList>
+          {items.map((item, idx) => {
+            const isLast = items.length > 1 && idx === items.length - 1;
+
+            return (
+              <span key={idx} className="flex items-center gap-1 truncate">
+                {idx > 0 && <BreadcrumbSeparator />}
+                <BreadcrumbItem>
+                  {isLast ? (
+                    <BreadcrumbPage className={pageClassName}>{item.label}</BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink className={linkClassName} asChild>
+                      <Link href={item.href}>{item.label}</Link>
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              </span>
+            );
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+    </>
   );
 }

@@ -1,11 +1,26 @@
 import MainFooter from '@/widgets/footer/MainFooter';
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Container } from '@/shared/ui/Container';
+import { setRequestLocale } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import FaqSeach from '@/widgets/faq/FaqSeach';
-import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import FaqHero from '@/views/faq-page/FaqHero';
+
+type Props = {
+  params: Promise<{ lng: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+
+  return await generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'faq',
+    path: 'faq',
+  });
+}
 
 export default async function FaqLayout({
   children,
@@ -18,25 +33,10 @@ export default async function FaqLayout({
 
   setRequestLocale(lng as Locale);
 
-  const t = await getTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
-  const t_common = await getTranslations(MESSAGE_FILES.COMMON);
-
   return (
     <>
-      <main role="main" className="pt-4 pb-20 tablet:pt-8 grow bg-slate-50 dark:bg-slate-900 ">
-        <Container size="l">
-          <BreadcrumbSimple
-            className="mb-8"
-            items={[
-              { label: t_common('breadcrumb_main'), href: '/' },
-              { label: t_common('faq_breadcrumb'), href: '/faq' },
-            ]}
-          />
-          <h1 className="text-center text-xl font-bold leading-6 tracking-normal tablet:text-2xl tablet:leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
-            {t('title')}
-          </h1>
-          <FaqSeach />
-        </Container>
+      <main role="main" className="pb-20 pt-4 grow bg-slate-50 dark:bg-slate-900 ">
+        <FaqHero />
 
         {children}
       </main>

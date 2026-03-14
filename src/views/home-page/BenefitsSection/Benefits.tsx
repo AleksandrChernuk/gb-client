@@ -7,7 +7,7 @@ export default async function Benefits() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
-    <section className="py-8 tablet:py-16 ">
+    <section className="py-4 tablet:py-8 ">
       <Container size="l">
         <ul className="space-y-4 tablet:space-y-0 tablet:grid tablet:grid-cols-[repeat(2,minmax(auto,1fr))] tablet:grid-rows-2 gap-2 tablet:gap-4 justify-between">
           <h2 className="sr-only">{t('benefits_title')}</h2>

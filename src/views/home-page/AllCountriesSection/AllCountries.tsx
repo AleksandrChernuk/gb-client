@@ -6,15 +6,17 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import { Link } from '@/shared/i18n/routing';
 import { AspectRatio } from '@/shared/ui/aspect-ratio';
+import { H2 } from '@/shared/ui/H2';
 
 export default async function AllCountries() {
   const t = await getTranslations(MESSAGE_FILES.MAIN_PAGE);
 
   return (
-    <section className="pb-8 tablet:pb-16">
+    <section className="py-6">
       <Container size="m">
         <div className="flex flex-col tablet:flex-row justify-between gap-5 laptop:gap-40">
-          <div className="relative min-w-0 max-w-[350px] mb-8 tablet:order-2 tablet:mb-0 tablet:w-1/2 mx-auto">
+          <div className="relative w-full max-w-87.5 mb-8 tablet:order-2 tablet:mb-0 tablet:w-1/2 mx-auto">
+            {' '}
             <AspectRatio ratio={1}>
               <Image
                 alt={t('buses_title')}
@@ -28,10 +30,8 @@ export default async function AllCountries() {
           </div>
 
           <div className="flex flex-col tablet:w-1/2">
-            <h2 className="mb-4 text-2xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] laptop:mb-8 text-slate-700 dark:text-slate-50">
-              {t('buses_title')}
-            </h2>
-            <p className="mb-4 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200">
+            <H2>{t('buses_title')}</H2>
+            <p className="whitespace-pre-line mb-4 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200">
               {t('buses_description')}
             </p>
             <div className="mt-auto ml-auto tablet:ml-0">
