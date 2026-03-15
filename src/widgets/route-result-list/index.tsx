@@ -7,41 +7,36 @@ import { CustomError } from '@/entities/common/CustomError';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
-import { useFilterTickets } from '@/shared/store/useFilterTickets';
 import { SingleRouteCard } from '@/features/route-card/variants-ui/SingleRouteCard';
+import { useMemo } from 'react';
+import { sortRoutes } from '@/shared/lib/sortRoutes';
+
+const EXCLUDED_PROVIDERS = ['TOCOBUS', 'EUROCLUB', 'EWE'];
 
 export default function ResultList() {
   const t = useTranslations(MESSAGE_FILES.COMMON);
-  const { isFetching, error } = useTicketsSearch();
-  const filteredTickets = useFilterTickets((state) => state.filteredTickets);
-
   const [params] = useRouterSearch();
+  const { isFetching, error, tickets } = useTicketsSearch();
+
+  const sortedTickets = useMemo(() => {
+    if (!tickets.length) return [];
+    return sortRoutes(params.sort, tickets).filter((route) => !EXCLUDED_PROVIDERS.includes(route.providerName));
+  }, [tickets, params.sort]);
 
   if (isFetching) {
     return (
       <div className="pt-10">
-        <BusLoader className={'flex items-center justify-center my-2'} />
+        <BusLoader className="flex items-center justify-center my-2" />
       </div>
     );
   }
-  if (error) return <CustomError />;
 
-  if (!isFetching && filteredTickets && filteredTickets.length === 0)
-    return <RouteNotFound text={t('no_travel_find')} />;
-
-  if (!params.from || !params.to) return <CustomError />;
-
-  const tocobusTickets = filteredTickets?.filter((route) => {
-    return route.providerName !== 'TOCOBUS' && route.providerName !== 'EUROCLUB' && route.providerName !== 'EWE';
-  });
-
-  if (!tocobusTickets || tocobusTickets.length === 0) {
-    return <RouteNotFound text={t('no_travel_find')} />;
-  }
+  if (error || !params.from || !params.to) return <CustomError />;
+  if (sortedTickets.length === 0) return <RouteNotFound text={t('no_travel_find')} />;
 
   return (
     <div className="flex flex-col space-y-10">
-      {tocobusTickets.map((route) => (
+      {sortedTickets.map((route) => (
         <SingleRouteCard key={route.ticketId} data={route} />
       ))}
     </div>

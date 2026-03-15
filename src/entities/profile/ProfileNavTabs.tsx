@@ -1,6 +1,7 @@
 'use client';
 
 import { Link, usePathname } from '@/shared/i18n/routing';
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/Container';
 import { useTranslations } from 'next-intl';
@@ -15,6 +16,7 @@ type Props = {
 const ProfileNavTabs = ({ namespace, items }: Props) => {
   const t = useTranslations(namespace);
   const pathname = usePathname();
+  const isActive = (slug: string) => pathname === slug || pathname.endsWith(slug);
 
   return (
     <Container size="m" className="px-0">
@@ -24,7 +26,13 @@ const ProfileNavTabs = ({ namespace, items }: Props) => {
             <Button
               asChild
               variant="link"
-              className={`hover:no-underline px-2 py-6 text-sm font-normal tracking-normal leading-[21px] tablet:leading-4 laptop:text-base laptop:leading-[27px] text-slate-700 dark:text-slate-50 rounded-none border-l-2 border-l-[#e6e6e6] dark:border-l-slate-700 ${pathname === item.slug && 'text-green-200  border-b-green-200 tablet:border-b-none  dark:text-green-100 border-l-green-200  dark:border-l-green-100 font-medium'}`}
+              className={cn(
+                'hover:no-underline px-2 py-6 text-sm font-normal tracking-normal leading-5.25',
+                'tablet:leading-4 laptop:text-base laptop:leading-6.75',
+                'text-slate-700 dark:text-slate-50 rounded-none border-l-2 border-l-[#e6e6e6] dark:border-l-slate-700',
+                isActive(item.slug) &&
+                  'text-green-200 dark:text-green-100 border-l-green-200 dark:border-l-green-100 font-medium',
+              )}
             >
               <Link href={item.slug}>{t(item.title)}</Link>
             </Button>

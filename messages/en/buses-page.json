@@ -1,5 +1,11 @@
 {
   "buses-page": {
+    "sort_label": "Sort by",
+    "price_asc_sort": "Price: low to high",
+    "price_desc_sort": "Price: high to low",
+    "departure_time_sort": "Departure time",
+    "arrival_time_sort": "Arrival time",
+    "time_on_road": "Travel time",
     "shortHours": "г",
     "shortMinutes": "хв",
     "sort_buy_default": "Default",
@@ -8,7 +14,7 @@
     "sort_buy_departure_time": "Departure time",
     "sort_buy_arrival_time": "Arrival time",
     "sort_buy_time_on_road": "Shortest journey",
-    "resul_count": "results",
+    "resul_count": "Results",
     "amenities": "Amenities",
     "return_policy": "Return policy",
     "luggage": "Luggage",

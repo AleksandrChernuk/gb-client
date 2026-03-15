@@ -15,45 +15,38 @@ import { CustomPagination } from '@/shared/ui/CustomPagination';
 
 const perPage = 5;
 
-const CompletedTrips = () => {
+export default function CompletedTrips() {
   const user = useUserStore((state) => state.currentUser);
   const t = useTranslations();
-
   const locale = useLocale();
 
-  const { data, isLoading, isFetching, isError, error, currentPage, handlePageChange, totalPages } =
+  const { data, isLoading, isError, error, currentPage, handlePageChange, totalPages } =
     usePaginatedQuery<IUserCompletedTrips>({
       baseKey: ['completedTrips', user?.id, locale],
       enabled: Boolean(user?.id),
       perPage,
       initialPage: 1,
-      fetchPage: (page, perPageArg) => getCompletedTrips({ userId: user!.id, locale, page, perPage: perPageArg }),
+      fetchPage: (page, perPageArg) => getCompletedTrips({ userId: user?.id ?? '', locale, page, perPage: perPageArg }),
       getTotalPages: (d) => d?.pagination?.totalPages ?? 1,
     });
 
+  if (!user) return null;
+  if (isLoading) return <SkeletonCards items={perPage} />;
   if (isError && isNoTripsError(error)) {
     return <RouteNotFound text={t(parseErrorKey(error))} className="dark:bg-slate-700" />;
   }
-
-  if (isError) {
-    return <TryAgain className="dark:bg-slate-700" />;
+  if (isError) return <TryAgain className="dark:bg-slate-700" />;
+  if (!data?.data?.length) {
+    return <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />;
   }
 
   return (
     <div className="flex flex-col flex-1">
       <div className="flex-1">
-        <div className="container mx-auto max-w-[805px] py-6">
-          {isLoading || isFetching ? (
-            <SkeletonCards items={perPage} />
-          ) : !data || !data.data?.length ? (
-            <RouteNotFound text={t(TRANSLATION_KEYS.common.not_found)} className="dark:bg-slate-700" />
-          ) : (
-            <div className="space-y-8">
-              {data.data.map((trip) => (
-                <TripCard item={trip} key={trip.myOrderId} />
-              ))}
-            </div>
-          )}
+        <div className="space-y-8 py-6">
+          {data.data.map((trip) => (
+            <TripCard item={trip} key={trip.myOrderId} />
+          ))}
         </div>
       </div>
 
@@ -67,6 +60,4 @@ const CompletedTrips = () => {
       )}
     </div>
   );
-};
-
-export default CompletedTrips;
+}

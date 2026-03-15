@@ -20,6 +20,7 @@ import TicketCardRoute from '@/features/route-card/base-ui/TicketCardRoute';
 import MobileDetails from '@/features/route-card/details-ui/RouteMobileDetails';
 import RouteCardDetails from '@/features/route-card/details-ui/RouteCardDetails';
 import CarrierLabel from '@/features/router-carier-label';
+import { cn } from '@/shared/lib/utils';
 
 type Props = {
   data: IRouteResponse;
@@ -184,9 +185,10 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
       </div>
 
       <div
-        className={`hidden tablet:block overflow-hidden transition-all duration-100 ${
-          isOpen ? 'max-h-[4000px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={cn(
+          'hidden tablet:block overflow-hidden transition-all duration-100',
+          isOpen ? 'max-h-1000 opacity-100' : 'max-h-0 opacity-0',
+        )}
       >
         {isOpen && <RouteCardDetailsComponent />}
       </div>

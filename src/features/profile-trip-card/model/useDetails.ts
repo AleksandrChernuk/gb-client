@@ -9,7 +9,7 @@ import { useMemo, useState } from 'react';
 
 export const useDetails = ({ item }: { item: UserCurrentTripType }) => {
   const locale = useLocale();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const rowData = useMemo(() => {
     const timetableId = item.timetableId ?? (item.intervalId ? String(item.intervalId) : undefined);
@@ -22,7 +22,6 @@ export const useDetails = ({ item }: { item: UserCurrentTripType }) => {
       ...(item.toCityId && { toCityId: Number(item.toCityId) }),
       ...(item.fromStationId && { fromStationId: String(item.fromStationId) }),
       ...(item.toStationId && { toStationId: String(item.toStationId) }),
-      ...(item.toStationId && { toStationId: String(item.toStationId) }),
       basePrice: Number(item.totalPrice),
       providerId: String(item.providerId),
       travelDate: item.departureDateTime || undefined,
@@ -33,13 +32,8 @@ export const useDetails = ({ item }: { item: UserCurrentTripType }) => {
     };
   }, [item, locale]);
 
-  const queryKey = useMemo(
-    () => ['currentTripsDetails', item.providerId, item.routeId, item.intervalId, item.timetableId, locale] as const,
-    [item.providerId, item.routeId, item.intervalId, item.timetableId, locale],
-  );
-
   const { data, isLoading } = useQuery<IRouteDetailsResponse | null | undefined>({
-    queryKey,
+    queryKey: ['currentTripsDetails', item.providerId, item.routeId, item.intervalId, item.timetableId, locale],
     queryFn: () => getRouteDetails(rowData),
     enabled: isOpen,
     placeholderData: keepPreviousData,

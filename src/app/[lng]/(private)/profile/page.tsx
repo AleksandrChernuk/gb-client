@@ -1,5 +1,4 @@
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 import { getTranslations } from 'next-intl/server';
 import ProfileSettingsCard from '@/entities/profile/ProfileSettingsCard';
