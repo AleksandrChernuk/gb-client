@@ -93,7 +93,6 @@ export default async function middleware(request: NextRequest) {
   // 🔄 refresh токена - НАПРЯМУЮ к бэкенду, не через /api/auth/refresh
   if (!accessToken && refreshToken && deviceId) {
     try {
-      // ✅ Используем прямой URL бэкенда
       const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
 
       if (backendUrl) {
@@ -107,19 +106,26 @@ export default async function middleware(request: NextRequest) {
         });
 
         if (refreshResponse.ok) {
-          // 👉 Создаем intl response
           const response = intlMiddleware(request);
-
-          // Добавляем новые куки к ответу
           refreshResponse.headers.getSetCookie().forEach((cookie) => {
             response.headers.append('Set-Cookie', cookie);
           });
-
           return response;
         }
+
+        // ✅ Рефреш не удался — чистим протухшие куки
+        const response = intlMiddleware(request);
+        response.cookies.delete('accessToken');
+        response.cookies.delete('refreshToken');
+        return response;
       }
     } catch (e) {
       console.error('Middleware refresh failed:', e);
+      // ✅ И при ошибке сети тоже чистим
+      const response = intlMiddleware(request);
+      response.cookies.delete('accessToken');
+      response.cookies.delete('refreshToken');
+      return response;
     }
   }
 
