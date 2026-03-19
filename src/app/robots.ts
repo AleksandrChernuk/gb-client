@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/opengraph-image',
           '/_next/static',
+          '/_next/image',
+          '/favicon.ico',
           '/api',
           '/signin',
           '/signup',
