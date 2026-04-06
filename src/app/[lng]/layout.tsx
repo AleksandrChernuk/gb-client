@@ -8,6 +8,12 @@ import { Params } from '@/shared/types/common.types';
 import { ReactNode } from 'react';
 import { Rubik } from 'next/font/google';
 import Providers from '@/app/[lng]/Providers';
+import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+
+type Props = {
+  params: Params;
+};
 
 const rubik = Rubik({
   variable: '--font-rubik',
@@ -19,17 +25,14 @@ const rubik = Rubik({
   adjustFontFallback: true,
 });
 
-export async function generateMetadata() {
-  return {
-    title: 'GreenBus | Автобусні квитки онлайн',
-    description: 'Бронюйте автобусні квитки онлайн. Доступні маршрути по Україні та в Європу.',
-    icons: {
-      icon: '/favicon.ico',
-      shortcut: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
-    },
-    metadataBase: new URL('https://greenbus.com.ua'),
-  };
+export async function generateMetadata({ params }: Props) {
+  const { lng } = (await params) as { lng: Locale };
+  return await generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'main',
+    path: '/',
+  });
 }
 
 export function generateViewport() {

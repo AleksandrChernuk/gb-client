@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props) {
   return await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
-    slug: 'for-cariers',
-    path: 'for-cariers',
+    slug: 'for-carriers',
+    path: 'for-carriers',
   });
 }
 
