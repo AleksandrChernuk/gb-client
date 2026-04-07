@@ -18,9 +18,9 @@ type Props = {
 const rubik = Rubik({
   variable: '--font-rubik',
   subsets: ['latin', 'cyrillic'],
-  display: 'optional',
-  weight: ['400', '500', '700'],
+  display: 'swap',
   preload: true,
+  weight: ['400', '500', '700'],
   fallback: ['system-ui', 'sans-serif'],
   adjustFontFallback: true,
 });
@@ -85,6 +85,26 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  // Только namespaces, которые реально используются клиентскими компонентами (useTranslations).
+  // Серверные компоненты (getTranslations) продолжают получать ВСЕ переводы напрямую.
+  // Это убирает ~138 КБ (oferta-page 88KB, privacy-policy 24KB, metadata 16KB и др.)
+  // из HTML-payload каждой страницы.
+  const CLIENT_NAMESPACES = [
+    MESSAGE_FILES.COMMON,
+    MESSAGE_FILES.FORM,
+    MESSAGE_FILES.CHECKOUT_PAGE,
+    MESSAGE_FILES.BUSES_PAGE,
+    MESSAGE_FILES.PROFILE,
+    MESSAGE_FILES.QUESTIONS_PAGE,
+    MESSAGE_FILES.PAYMENT_RESULT_PAGE,
+    MESSAGE_FILES.MAIN_PAGE,
+    MESSAGE_FILES.ALL_COUNTRIES,
+  ] as string[];
+
+  const clientMessages = Object.fromEntries(
+    Object.entries(messages).filter(([key]) => CLIENT_NAMESPACES.includes(key)),
+  );
+
   const langTexts = schemaTranslations[lng as Locale] || schemaTranslations.uk;
 
   const websiteSchema = {
@@ -127,7 +147,7 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
-        <NextIntlClientProvider locale={lng as Locale} messages={messages}>
+        <NextIntlClientProvider locale={lng as Locale} messages={clientMessages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
