@@ -95,7 +95,10 @@ function buildEntries(
       changeFrequency: seo.changeFrequency,
       ...(seo.lastModified && { lastModified: seo.lastModified }),
       alternates: {
-        languages: alternateLanguages,
+        languages: {
+          'x-default': normalizeUrl(host + getPathname({ locale: 'uk', href })),
+          ...alternateLanguages,
+        },
       },
     };
   });

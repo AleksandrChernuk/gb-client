@@ -85,10 +85,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
-  // Только namespaces, которые реально используются клиентскими компонентами (useTranslations).
-  // Серверные компоненты (getTranslations) продолжают получать ВСЕ переводы напрямую.
-  // Это убирает ~138 КБ (oferta-page 88KB, privacy-policy 24KB, metadata 16KB и др.)
-  // из HTML-payload каждой страницы.
+
   const CLIENT_NAMESPACES = [
     MESSAGE_FILES.COMMON,
     MESSAGE_FILES.FORM,

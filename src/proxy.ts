@@ -84,6 +84,7 @@ const PROTECTED_PATHS = ['/profile'];
 
 export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
   const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
 
   const accessToken = request.cookies.get('accessToken')?.value;
