@@ -9,8 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: [
           '/opengraph-image',
-          '/_next/static',
-          '/_next/image',
+          '/_next/',
           '/api',
           '/*/signin',
           '/*/signup',
