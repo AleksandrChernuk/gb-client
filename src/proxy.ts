@@ -6,6 +6,34 @@ const intlMiddleware = createMiddleware(routing);
 
 const PROTECTED_PATHS = ['/profile'];
 
+// SEO: апгрейдим 307 → 308 для постоянных редиректов локали
+function upgradeRedirectForSEO(response: NextResponse, request: NextRequest): NextResponse {
+  // Только для GET и HEAD — для остальных методов 307 правильный, чтобы сохранить body
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return response;
+  }
+
+  // Только если это редирект
+  if (response.status !== 307) {
+    return response;
+  }
+
+  const location = response.headers.get('location');
+  if (!location) {
+    return response;
+  }
+
+  // Создаём новый 308 редирект, но сохраняем все cookies от next-intl
+  const newResponse = NextResponse.redirect(new URL(location, request.url), 308);
+
+  // Копируем Set-Cookie заголовки (NEXT_LOCALE и т.п.)
+  response.headers.getSetCookie().forEach((cookie) => {
+    newResponse.headers.append('Set-Cookie', cookie);
+  });
+
+  return newResponse;
+}
+
 export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -35,39 +63,35 @@ export default async function middleware(request: NextRequest) {
           refreshResponse.headers.getSetCookie().forEach((cookie) => {
             response.headers.append('Set-Cookie', cookie);
           });
-          return response;
+          return upgradeRedirectForSEO(response, request);
         }
 
-        // ✅ Рефреш не удался — чистим протухшие куки
         const response = intlMiddleware(request);
         response.cookies.delete('accessToken');
         response.cookies.delete('refreshToken');
-        return response;
+        return upgradeRedirectForSEO(response, request);
       }
     } catch (e) {
       console.error('Middleware refresh failed:', e);
-      // ✅ И при ошибке сети тоже чистим
       const response = intlMiddleware(request);
       response.cookies.delete('accessToken');
       response.cookies.delete('refreshToken');
-      return response;
+      return upgradeRedirectForSEO(response, request);
     }
   }
 
-  // 🔐 protected routes
   if (isProtected && !accessToken && !refreshToken) {
     const locale = pathname.split('/')[1] || routing.defaultLocale;
     return redirectToSignin(request, locale);
   }
 
-  // ❗ POST redirect — ТОЛЬКО через clone()
   if (pathname.startsWith('/payment-result/') && request.method === 'POST') {
     const url = request.nextUrl.clone();
     return NextResponse.redirect(url, 302);
   }
 
-  // 👉 Возвращаем intl response по умолчанию
-  return intlMiddleware(request);
+  // 👉 Возвращаем intl response + SEO upgrade
+  return upgradeRedirectForSEO(intlMiddleware(request), request);
 }
 
 function redirectToSignin(request: NextRequest, locale: string) {
