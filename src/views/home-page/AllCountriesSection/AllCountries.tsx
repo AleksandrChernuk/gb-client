@@ -36,7 +36,7 @@ export default async function AllCountries() {
             </p>
             <div className="mt-auto ml-auto tablet:ml-0">
               <Button asChild variant="default" size="secondary">
-                <Link href="/all-countries">{t('buses_button')}</Link>
+                <Link href="/all-countries/">{t('buses_button')}</Link>
               </Button>
             </div>
           </div>

@@ -19,7 +19,9 @@ import Script from 'next/script';
 import { buildBreadcrumbSchema } from '@/shared/seo/breadcrumbs.schema';
 import { BASE_URL } from '@/shared/configs/constants';
 import parse, { domToReact } from 'html-react-parser';
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Link } from '@/shared/i18n/routing';
+import { buildArticleSchema } from '@/shared/seo/article.schema';
 
 export async function generateStaticParams() {
   const res = await getArticles({ perPage: 9999 });
@@ -43,9 +45,18 @@ const options = {
   replace(domNode: any) {
     if (domNode.name === 'a' && domNode.attribs?.href) {
       const href = domNode.attribs.href;
+      const isExternal = /^https?:\/\//i.test(href);
+
+      if (isExternal) {
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {domToReact(domNode.children, options)}
+          </a>
+        );
+      }
 
       return (
-        <Link href={href} prefetch>
+        <Link href={href} prefetch={false}>
           {domToReact(domNode.children, options)}
         </Link>
       );
@@ -56,6 +67,10 @@ const options = {
 export async function generateMetadata({ params }: { params: Promise<{ lng: Locale; slug: string }> }) {
   const { lng, slug } = await params;
   const article = await getArticleBySlug(slug);
+
+  if (!article) {
+    return { title: 'Not Found', robots: { index: false, follow: true } };
+  }
 
   return buildArticleMetadata(article, lng, slug);
 }
@@ -68,6 +83,9 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
   const { lng, slug } = await params;
 
   const article = await getArticleBySlug(slug);
+
+  if (!article) notFound();
+
   const cover = article.photos.find((p) => p.isCover);
   const t = await getTranslations(MESSAGE_FILES.COMMON);
 
@@ -77,16 +95,18 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
     [
       {
         name: t('breadcrumb_main'),
-        url: `${BASE_URL}/${lng}`,
+        url: `${BASE_URL}/${lng}/`,
       },
       {
         name: t('breadcrumb_blog'),
-        url: `${BASE_URL}/${lng}/blog`,
+        url: `${BASE_URL}/${lng}/blog/`,
       },
-      { name: desc.title, url: `/blog/${article.slug}` },
+      { name: desc.title, url: `${BASE_URL}/${lng}/blog/${article.slug}/` },
     ],
     lng,
   );
+
+  const articleSchema = buildArticleSchema(article, lng as Locale);
 
   return (
     <>
@@ -94,6 +114,11 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
         id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Script
+        id="article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <Main>
         <Section>
@@ -105,14 +130,14 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 locale={lng as Locale}
                 items={[
                   { label: t('breadcrumb_main'), href: '/' },
-                  { label: t('breadcrumb_blog'), href: '/blog' },
+                  { label: t('breadcrumb_blog'), href: '/blog/' },
                   {
-                    label: article.descriptions.find((e) => e.language === lng)?.title ?? '',
-                    href: `/blog/${article.slug}`,
+                    label: desc.title,
+                    href: `/blog/${article.slug}/`,
                   },
                 ]}
               />
-              <ShareButton shareUrl={`https://greenbus.com.ua/${lng}/blog/${article.slug}`} title={desc.title} />
+              <ShareButton shareUrl={`${BASE_URL}/${lng}/blog/${article.slug}/`} title={desc.title} />
             </div>
             <H1>{desc.title}</H1>{' '}
             {cover && (

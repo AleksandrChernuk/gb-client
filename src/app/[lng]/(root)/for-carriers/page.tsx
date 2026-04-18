@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'for-carriers',
-    path: 'for-carriers',
+    path: 'for-carriers/',
   });
 }
 
@@ -64,8 +64,9 @@ export default async function ForCarriers({
                   placeholder="blur"
                   draggable={false}
                   quality={75}
-                  className=" max-h-[318px] rounded-3xl"
-                  alt="people-with-suitcases-looking-straight-ahead-goin "
+                  priority
+                  className="max-h-[318px] rounded-3xl"
+                  alt={t_for_carriers('joinGreenBus_title')}
                 />
               </li>
             </ul>
@@ -85,7 +86,7 @@ export default async function ForCarriers({
                       src={icon.src}
                       width={icon.w}
                       height={icon.h}
-                      alt={icon.alt}
+                      alt={t_for_carriers(`powerful_tools_text.${title}`)}
                       className="size-14 tablet:size-16 laptop:size-[72px]"
                     />
                     <h3 className="text-base font-bold leading-6 tracking-normal text-green-100">
@@ -103,7 +104,7 @@ export default async function ForCarriers({
 
         <section className="py-16">
           <Container size="l">
-            <ul className="flex flex-col gap-12 tablet:flex-row tablet:items-center ">
+            <ul className="flex flex-col gap-12 tablet:flex-row tablet:items-center">
               <li className="tablet:w-1/2">
                 <h2 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                   {t_for_carriers('choose_us_title')}
@@ -117,7 +118,7 @@ export default async function ForCarriers({
                   src={peopleWithSuitcases}
                   quality={75}
                   placeholder="blur"
-                  alt="people-with-suitcases-looking-straight-ahead-goin"
+                  alt={t_for_carriers('choose_us_title')}
                   className="h-auto rounded-3xl"
                 />
               </li>
@@ -128,14 +129,14 @@ export default async function ForCarriers({
         <section>
           <Container size="l">
             <ul className="flex flex-col gap-12 tablet:flex-row tablet:items-start">
-              <li className="flex items-center justify-center order-1 text-center tablet:order-1 tablet:w-1/2   ">
+              <li className="flex items-center justify-center order-1 text-center tablet:order-1 tablet:w-1/2">
                 <Image
-                  alt="direction-with-a-road-in-the-city"
+                  alt={t_for_carriers('security_data_title')}
                   src={directionWith}
                   placeholder="blur"
                   quality={75}
                   className="mx-auto overflow-hidden rounded-3xl max-w-[350px] max-h-[353px]"
-                />{' '}
+                />
               </li>
               <li className="flex flex-col w-full tablet:order-2 tablet:w-1/2">
                 <h2 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">

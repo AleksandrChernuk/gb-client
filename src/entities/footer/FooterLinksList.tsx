@@ -19,32 +19,30 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
 
   return (
     <ul className={cn('flex flex-col gap-1 tablet:gap-2', className)}>
-      {navLinks.map(({ title, href, icon, ariaLabel }) =>
-        icon ? (
+      {navLinks.map(({ title, href, icon, ariaLabel }) => {
+        const isExternalSocial = !!icon;
+
+        return (
           <li key={href}>
             <Link
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              prefetch={false}
-              aria-label={t(ariaLabel || '')}
               href={href}
-              className="inline-block p-2 bg-green-100 rounded-full hover:underline"
+              prefetch={false}
+              {...(isExternalSocial && {
+                target: '_blank',
+                rel: 'noopener noreferrer nofollow',
+                'aria-label': t(ariaLabel || ''),
+              })}
+              className={
+                isExternalSocial
+                  ? 'inline-block p-2 bg-green-100 rounded-full hover:underline'
+                  : 'inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200 hover:underline'
+              }
             >
-              {icon}
+              {isExternalSocial ? icon : t(`${title}`)}
             </Link>
           </li>
-        ) : (
-          <li key={href}>
-            <Link
-              prefetch={false}
-              href={href}
-              className="inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200 hover:underline"
-            >
-              {t(`${title}`)}
-            </Link>
-          </li>
-        ),
-      )}
+        );
+      })}
     </ul>
   );
 };

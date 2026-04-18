@@ -12,12 +12,17 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  return await generatePublicPageMetadata({
+  const baseMetadata = await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'oferta',
-    path: 'oferta',
+    path: 'oferta/',
   });
+
+  return {
+    ...baseMetadata,
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function Oferta({

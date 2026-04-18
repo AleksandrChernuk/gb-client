@@ -28,10 +28,10 @@ export async function generateMetadata({ params }: Props) {
   try {
     route = await getFavoriteRouteBySlug({ slug });
   } catch {
-    return {};
+    return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
-  if (!route) return {};
+  if (!route) return { title: 'Not Found', robots: { index: false, follow: true } };
 
   const fromName = route.fromLocation?.translations?.find((t) => t.language === lng)?.locationName ?? '';
   const toName = route.toLocation?.translations?.find((t) => t.language === lng)?.locationName ?? '';
@@ -39,14 +39,13 @@ export async function generateMetadata({ params }: Props) {
   const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
 
   const title = t('route_slug.title', { fromName, toName });
-
   const description = t('route_slug.description', { fromName, toName }).slice(0, 160);
 
   return await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'route',
-    path: `/routes/${slug}`,
+    path: `routes/${slug}/`,
     overrides: { title, description },
   });
 }

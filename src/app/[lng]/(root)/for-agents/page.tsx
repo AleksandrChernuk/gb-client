@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'for-agents',
-    path: 'for-agents',
+    path: 'for-agents/',
   });
 }
 
@@ -56,7 +56,7 @@ export default async function ForAgents({
                   height={318}
                   priority
                   draggable={false}
-                  alt="people-with-suitcases-looking-straight-ahead-goin"
+                  alt={t_for_agents('automate_ticket_title')}
                 />
               </li>
               <li className="tablet:w-1/2">
@@ -83,7 +83,7 @@ export default async function ForAgents({
                     src={icon.src}
                     width={icon.w}
                     height={icon.h}
-                    alt={icon.alt}
+                    alt={t_for_agents(`why_join_us_text.${title}`)}
                     className="size-14 tablet:size-16 laptop:size-[72px]"
                   />
                   <h3 className="text-base font-bold leading-6 tracking-normal text-green-100">
@@ -100,7 +100,7 @@ export default async function ForAgents({
 
         <section className="pt-16 bg-slate-50 dark:bg-slate-900">
           <Container size="m">
-            <ul className="flex flex-col gap-12 tablet:flex-row ">
+            <ul className="flex flex-col gap-12 tablet:flex-row">
               <li className="tablet:w-1/2">
                 <h2 className="mb-4 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                   {t_for_agents('features_title')}
@@ -111,7 +111,7 @@ export default async function ForAgents({
               </li>
               <li className="mx-auto">
                 <Image
-                  alt="direction-with-a-road-in-the-city"
+                  alt={t_for_agents('features_title')}
                   src={directionWith}
                   width={350}
                   height={353}
@@ -125,9 +125,9 @@ export default async function ForAgents({
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <Container size="xs" className="my-auto">
             <CustomCard className="dark:bg-slate-800">
-              <h3 className="mb-6 text-center text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              <h2 className="mb-6 text-center text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
                 {t_common('leave_a_request')}
-              </h3>
+              </h2>
               <CooperationForm />
             </CustomCard>
           </Container>

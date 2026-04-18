@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import { Params } from '@/shared/types/common.types';
 import { Locale } from 'next-intl';
 import MainFooter from '@/widgets/footer/MainFooter';
@@ -10,6 +12,7 @@ import { BenefitsSection } from '@/views/home-page/BenefitsSection';
 import { PopularRoutesSection } from '@/views/home-page/PopularRoutesSection';
 import { QuestionsSection } from '@/views/home-page/QuestionsSection';
 import { setRequestLocale } from 'next-intl/server';
+import { SeoTextSection } from '@/views/home-page/SeoTextSection';
 
 type Props = {
   params: Params;
@@ -21,6 +24,7 @@ export async function generateMetadata({ params }: Props) {
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'main',
+    path: '',
   });
 }
 
@@ -42,6 +46,7 @@ export default async function Home({
         <AllCountriesSection />
         <ArticlesPreviewSection />
         <QuestionsSection />
+        <SeoTextSection />
       </main>
       <MainFooter />
     </>

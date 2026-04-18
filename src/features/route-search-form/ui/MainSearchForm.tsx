@@ -50,7 +50,7 @@ const MainSearchForm = () => {
     if (voyagers !== 1) searchParams.set('voyagers', String(voyagers));
 
     startTransition(() => {
-      route.push(`/buses?${searchParams.toString()}`, { scroll: true });
+      route.push(`/buses/?${searchParams.toString()}`, { scroll: true });
     });
   };
 

@@ -16,7 +16,6 @@ export default function Logo({ location = 'header' }: Props) {
     <Link
       href="/"
       prefetch={location === 'header'}
-      rel={location !== 'header' ? 'noopener noreferrer nofollow' : undefined}
       aria-label={t(`logo_aria_label_${location}`)}
       scroll
       className="flex items-center"

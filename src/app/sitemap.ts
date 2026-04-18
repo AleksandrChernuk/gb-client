@@ -23,10 +23,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 const pages: string[] = [
   '/',
   '/about',
-  '/privacy-policy',
-  '/oferta',
-  '/for-carriers',
-  '/for-agents',
   '/blog',
   '/faq',
   '/faq/bronjuvannja-mists',

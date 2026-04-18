@@ -10,6 +10,7 @@ import { Rubik } from 'next/font/google';
 import Providers from '@/app/[lng]/Providers';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import { BASE_URL } from '@/shared/configs/constants';
 
 type Props = {
   params: Params;
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'main',
-    path: '/',
+    path: '',
   });
 }
 
@@ -49,22 +50,13 @@ export function generateStaticParams() {
 
 const schemaTranslations = {
   uk: {
-    name: 'GreenBus',
     description: 'Онлайн бронювання автобусних квитків в Україну та Європу',
-    serviceDescription: 'Замовте автобусні квитки онлайн. Доступні маршрути по Україні та в Європу.',
-    countries: ['Україна', 'Польща', 'Чехія', 'Німеччина'],
   },
   ru: {
-    name: 'GreenBus',
     description: 'Онлайн бронирование автобусных билетов в Украину и Европу',
-    serviceDescription: 'Закажите автобусные билеты онлайн. Доступные маршруты по Украине и в Европу.',
-    countries: ['Украина', 'Польша', 'Чехия', 'Германия'],
   },
   en: {
-    name: 'GreenBus',
     description: 'Online bus ticket reservation to Ukraine and Europe',
-    serviceDescription: 'Book bus tickets online. Available routes throughout Ukraine and Europe.',
-    countries: ['Ukraine', 'Poland', 'Czechia', 'Germany'],
   },
 };
 
@@ -85,7 +77,6 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
-
   const CLIENT_NAMESPACES = [
     MESSAGE_FILES.COMMON,
     MESSAGE_FILES.FORM,
@@ -103,33 +94,59 @@ export default async function LocaleLayout({
   );
 
   const langTexts = schemaTranslations[lng as Locale] || schemaTranslations.uk;
+  const localeHomeUrl = `${BASE_URL}/${lng}/`;
 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'GreenBus',
-    url: 'https://greenbus.com.ua',
+    url: localeHomeUrl,
+    description: langTexts.description,
     inLanguage: lng,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${BASE_URL}/${lng}/buses/?from={from}&to={to}`,
+      },
+      'query-input': 'required name=from required name=to',
+    },
   };
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'GreenBus',
-    url: 'https://greenbus.com.ua',
-    logo: 'https://greenbus.com.ua/logo.png',
+    url: BASE_URL,
     description: langTexts.description,
     inLanguage: lng,
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Service',
-      availableLanguage: ['uk', 'ru', 'en'],
-    },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        telephone: '+380987446419',
+        availableLanguage: ['uk', 'ru', 'en'],
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        telephone: '+380996033832',
+        availableLanguage: ['uk', 'ru', 'en'],
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'greenbus.ukraine@gmail.com',
+        availableLanguage: ['uk', 'ru', 'en'],
+      },
+    ],
     sameAs: [
       'https://www.instagram.com/greenbus_ukraine',
       'https://www.tiktok.com/@greenbusukraine',
-      'https://x.com/@GreenBusUkraine',
+      'https://x.com/GreenBusUkraine',
       'https://www.facebook.com/greenbus.ukraine',
+      'https://t.me/+380987446419',
+      'https://wa.me/380987446419',
     ],
   };
 

@@ -27,6 +27,12 @@
     "secure_title": "Secure online payment",
     "secure_description": "Your data is fully protected. We use international PCI DSS standards for safe bus ticket booking.",
     "refunds_title": "Easy ticket refunds",
-    "refunds_description": "Plans changed? Refund your bus tickets quickly via your personal account without hassle or calls."
+    "refunds_description": "Plans changed? Refund your bus tickets quickly via your personal account without hassle or calls.",
+    "seoText": {
+      "title": "Bus Tickets Online — Fast, Convenient, Affordable",
+      "p1": "GreenBus is a bus ticket aggregator connecting carriers across Ukraine and Europe. Buy a bus ticket online in just a few minutes: choose your route, date and number of seats — and proceed to payment right away.",
+      "p2": "Routes available to Germany, Czech Republic, Poland, Austria and other countries. Up-to-date bus schedules, price comparison from multiple carriers and e-tickets — all in one place.",
+      "p3": "Booking bus tickets online with GreenBus is convenient for passengers from any city in Ukraine: Kyiv, Lviv, Odesa, Dnipro, Kharkiv, Vinnytsia, Ivano-Frankivsk and more."
+    }
   }
 }

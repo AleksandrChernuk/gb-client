@@ -12,14 +12,22 @@ type Props = {
   searchParams: Promise<{ page?: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params, searchParams }: Props) {
   const { lng } = (await params) as { lng: Locale };
-  return await generatePublicPageMetadata({
+  const { page } = await searchParams;
+  const isPaginated = Number(page) > 1;
+
+  const baseMetadata = await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: 'routes',
-    path: '/routes',
+    path: 'routes/',
   });
+
+  return {
+    ...baseMetadata,
+    ...(isPaginated && { robots: { index: false, follow: true } }),
+  };
 }
 
 export default async function Routes({ params, searchParams }: Props) {

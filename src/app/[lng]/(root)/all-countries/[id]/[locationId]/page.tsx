@@ -7,18 +7,24 @@ import { notFound } from 'next/navigation';
 import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
-import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
 type Props = {
-  params: Promise<{ lng: string; id: string }>;
+  params: Promise<{ lng: string; id: string; locationId: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
-  const { lng, id } = (await params) as { lng: Locale; id: string };
-  const data = await getLocationById(Number(id));
+import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
+export async function generateMetadata({ params }: Props) {
+  const { lng, id, locationId } = (await params) as { lng: Locale; id: string; locationId: string };
+
+  const cityId = Number(locationId);
+  if (!cityId || isNaN(cityId)) {
+    return { title: 'Not Found', robots: { index: false, follow: true } };
+  }
+
+  const data = await getLocationById(cityId);
   if (!data) {
-    return { title: 'Not Found' };
+    return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
   const locationName = data.translations.find((e) => e.language === lng)?.locationName ?? '';
@@ -43,31 +49,38 @@ export async function generateMetadata({ params }: Props) {
   const baseMetadata = await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
-    slug: `all-countries/${data.countryId}/${id}/`,
-    path: `all-countries/${data.countryId}/${id}/`,
+    slug: `all-countries/${id}/${locationId}/`,
+    path: `all-countries/${id}/${locationId}/`,
   });
 
   return {
     ...baseMetadata,
     title: current.title,
     description: current.description,
+    robots: { index: false, follow: true },
   };
 }
 
 export default async function LocationPage({ params }: Props) {
-  const { lng, id } = await params;
+  const { lng, id, locationId } = await params;
 
   setRequestLocale(lng as Locale);
 
-  const locationId = Number(id);
+  const cityId = Number(locationId);
+  const countryId = Number(id);
 
-  if (!locationId) {
+  if (!cityId || isNaN(cityId) || !countryId || isNaN(countryId)) {
     notFound();
   }
 
-  const data = await getLocationById(locationId);
+  const data = await getLocationById(cityId);
 
   if (!data) {
+    notFound();
+  }
+
+  // URL должен соответствовать реальной принадлежности города стране
+  if (data.countryId !== countryId) {
     notFound();
   }
 
@@ -85,8 +98,8 @@ export default async function LocationPage({ params }: Props) {
                 locale={lng as Locale}
                 items={[
                   { label: t('breadcrumbs_home'), href: '/' },
-                  { label: t('buses_breadcrumb'), href: `/all-countries` },
-                  { label: `${details.countryName}`, href: `/all-countries/${data.country.id}/${locationId}` },
+                  { label: t('buses_breadcrumb'), href: `/all-countries/` },
+                  { label: details.countryName, href: `/all-countries/${data.country.id}/${cityId}/` },
                 ]}
               />
             </div>
@@ -114,7 +127,7 @@ export default async function LocationPage({ params }: Props) {
                   width="100%"
                   height="500px"
                   loading="lazy"
-                  className="rounded-2xl overflow-hidden "
+                  className="rounded-2xl overflow-hidden"
                   src={`https://www.google.com/maps?q=${data.lat},${data.lon}&z=19&output=embed`}
                   title={t('map_title', { locationName: details.locationName })}
                   aria-label={t('map_aria_label', { locationName: details.locationName })}

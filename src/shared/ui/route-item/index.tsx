@@ -3,6 +3,7 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Link } from '@/shared/i18n/routing';
 import { ChevronRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+
 interface RouteItemProps {
   fromName: string;
   toName: string;
@@ -10,30 +11,14 @@ interface RouteItemProps {
   toCountry: string;
   price?: number | null;
   href: string;
-  fromId?: string;
-  toId?: string;
 }
 
-export async function RouteItem({
-  fromName,
-  toName,
-  price,
-  fromCountry,
-  toCountry,
-  href,
-  fromId,
-  toId,
-}: RouteItemProps) {
+export async function RouteItem({ fromName, toName, price, fromCountry, toCountry, href }: RouteItemProps) {
   const t = await getTranslations(MESSAGE_FILES.COMMON);
-  const searchParams = new URLSearchParams();
-  if (fromId) searchParams.set('from', fromId);
-  if (toId) searchParams.set('to', toId);
-
-  const fullHref = searchParams.toString() ? `${href}?${searchParams.toString()}` : href;
 
   return (
     <Link
-      href={fullHref}
+      href={href}
       prefetch={false}
       className="flex items-center justify-between gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 hover:border-green-500 dark:hover:border-green-500 transition-colors"
     >
@@ -45,7 +30,7 @@ export async function RouteItem({
           <span className="truncate text-xs font-medium text-slate-700 dark:text-slate-200">{fromCountry}</span>
         </div>
 
-        <div className="w-12 h-3 tablet:w-16 tablet:h-5 flex items-center shrink-0">
+        <div className="w-12 h-3 tablet:w-16 tablet:h-5 flex items-center shrink-0" aria-hidden="true">
           <IconPath />
         </div>
 
@@ -68,7 +53,7 @@ export async function RouteItem({
             {t('currencypopular_routes_from')}
           </p>
         )}
-        <ChevronRight size={18} className="text-slate-400" />
+        <ChevronRight size={18} className="text-slate-400" aria-hidden="true" />
       </div>
     </Link>
   );

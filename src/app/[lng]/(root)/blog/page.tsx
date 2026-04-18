@@ -16,20 +16,28 @@ import Script from 'next/script';
 
 const perPage = 20;
 
-export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: Locale };
-  return await generatePublicPageMetadata({
-    lng,
-    namespace: MESSAGE_FILES.METADATA,
-    slug: 'blog',
-    path: 'blog',
-  });
-}
-
 type Props = {
   params: Promise<{ lng: Locale }>;
   searchParams: Promise<{ page?: string }>;
 };
+
+export async function generateMetadata({ params, searchParams }: Props) {
+  const { lng } = await params;
+  const { page } = await searchParams;
+  const isPaginated = Number(page) > 1;
+
+  const baseMetadata = await generatePublicPageMetadata({
+    lng,
+    namespace: MESSAGE_FILES.METADATA,
+    slug: 'blog',
+    path: 'blog/',
+  });
+
+  return {
+    ...baseMetadata,
+    ...(isPaginated && { robots: { index: false, follow: true } }),
+  };
+}
 
 export default async function Blog({ params, searchParams }: Props) {
   const { lng } = await params;
@@ -49,11 +57,11 @@ export default async function Blog({ params, searchParams }: Props) {
     [
       {
         name: t('breadcrumb_main'),
-        url: `${BASE_URL}/${lng}`,
+        url: `${BASE_URL}/${lng}/`,
       },
       {
         name: t('breadcrumb_blog'),
-        url: `${BASE_URL}/${lng}/blog`,
+        url: `${BASE_URL}/${lng}/blog/`,
       },
     ],
     lng,
@@ -75,7 +83,7 @@ export default async function Blog({ params, searchParams }: Props) {
               locale={lng}
               items={[
                 { label: t('breadcrumb_main'), href: '/' },
-                { label: t('breadcrumb_blog'), href: '/blog' },
+                { label: t('breadcrumb_blog'), href: '/blog/' },
               ]}
             />
 

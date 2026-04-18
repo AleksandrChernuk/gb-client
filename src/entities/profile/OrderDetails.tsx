@@ -59,13 +59,7 @@ export default function OrderDetails({ item, tickets, orderStatus }: Props) {
           <p className={S.label}>{t(TRANSLATION_KEYS.profile.carrier_phone)}</p>
           <div className="flex flex-col gap-1">
             {item.carrierPhone.split(',').map((phone, idx) => (
-              <Link
-                key={idx}
-                href={`tel:${phone.trim()}`}
-                className={S.value + ' hover:underline'}
-                target="_blank"
-                rel="nofollow noopener noreferrer"
-              >
+              <Link key={idx} href={`tel:${phone.trim()}`} className={S.value + ' hover:underline'} target="_blank">
                 {phone.trim()}
               </Link>
             ))}

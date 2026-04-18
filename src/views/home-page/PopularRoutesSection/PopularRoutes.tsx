@@ -39,14 +39,12 @@ export default async function PopularRoutes() {
               return (
                 <RouteItem
                   key={route.id}
-                  href={`/buses/?from=${route.fromLocation.id}&to=${route.toLocation.id}&date=${new Date().toISOString().split('T')[0]}`}
+                  href={`/buses/?from=${route.fromLocation.id}&to=${route.toLocation.id}`}
                   fromName={fromName}
                   toName={toName}
                   fromCountry={fromCountry}
                   toCountry={toCountry}
                   price={route.price}
-                  fromId={route.fromLocation?.id ? String(route.fromLocation.id) : undefined}
-                  toId={route.toLocation?.id ? String(route.toLocation.id) : undefined}
                 />
               );
             })}
@@ -56,8 +54,8 @@ export default async function PopularRoutes() {
         )}
 
         <div className="flex items-center justify-end mt-4">
-          <Button variant={'default'} size={'secondary'}>
-            <Link href="/routes">{t('popular_button')}</Link>
+          <Button variant={'default'} size={'secondary'} asChild>
+            <Link href="/routes/">{t('popular_button')}</Link>
           </Button>
         </div>
       </Container>

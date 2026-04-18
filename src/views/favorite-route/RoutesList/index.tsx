@@ -39,14 +39,12 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
                 return (
                   <RouteItem
                     key={route.id}
-                    href={`/routes/${route.slug}`}
+                    href={`/routes/${route.slug}/`}
                     fromName={fromName}
                     toName={toName}
                     fromCountry={fromCountry}
                     toCountry={toCountry}
                     price={route.price}
-                    fromId={route.fromLocation?.id ? String(route.fromLocation.id) : undefined}
-                    toId={route.toLocation?.id ? String(route.toLocation.id) : undefined}
                   />
                 );
               })}
