@@ -10,6 +10,7 @@ export const routing = defineRouting({
     sameSite: 'lax',
   },
   localePrefix: 'always',
+  alternateLinks: false,
 });
 
 export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
