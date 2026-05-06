@@ -13,6 +13,7 @@ import { PopularRoutesSection } from '@/views/home-page/PopularRoutesSection';
 import { QuestionsSection } from '@/views/home-page/QuestionsSection';
 import { setRequestLocale } from 'next-intl/server';
 import { SeoTextSection } from '@/views/home-page/SeoTextSection';
+import { Suspense } from 'react';
 
 type Props = {
   params: Params;
@@ -42,7 +43,9 @@ export default async function Home({
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <HeroSection />
         <BenefitsSection />
-        <PopularRoutesSection />
+        <Suspense fallback={null}>
+          <PopularRoutesSection />
+        </Suspense>
         <AllCountriesSection />
         <ArticlesPreviewSection />
         <QuestionsSection />

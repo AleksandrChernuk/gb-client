@@ -7,6 +7,7 @@ import { RouteContent } from '@/views/favorite-route-slug/RouteContent';
 import MainFooter from '@/widgets/footer/MainFooter';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import { RouteSchema } from '@/views/favorite-route-slug/RouteSchema';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
@@ -38,8 +39,12 @@ export async function generateMetadata({ params }: Props) {
 
   const t = await getTranslations({ locale: lng, namespace: MESSAGE_FILES.METADATA });
 
-  const title = t('route_slug.title', { fromName, toName });
-  const description = t('route_slug.description', { fromName, toName }).slice(0, 160);
+  const title = t('route_slug.title', { fromName, toName, price: route.price ?? '' });
+  const description = t('route_slug.description', {
+    fromName,
+    toName,
+    price: route.price ?? '',
+  });
 
   return await generatePublicPageMetadata({
     lng,
@@ -70,6 +75,7 @@ export default async function FavoriteRoutePage({ params }: Props) {
 
   return (
     <>
+      <RouteSchema route={route} lng={lng as Locale} host={'https://greenbus.com.ua'} />
       <main className="bg-slate-50 dark:bg-slate-900">
         <RouteHerow currentHref={route.slug ?? '/'} fromName={fromName} toName={toName} />
 

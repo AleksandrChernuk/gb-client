@@ -11,8 +11,8 @@
       "keywords": "bus, tickets online, schedule, GreenBus"
     },
     "route_slug": {
-      "title": "Bus Tickets from {fromName} to {toName} | GreenBus 🚍",
-      "description": "Buy bus tickets from {fromName} to {toName} online. Up-to-date schedules, great prices and easy booking on GreenBus."
+      "title": "Bus {fromName} — {toName}: tickets from {price} UAH | GreenBus",
+      "description": "Buy a bus ticket from {fromName} to {toName} from {price} UAH. Current schedule, carriers and online booking on GreenBus."
     },
     "about": {
       "title": "GreenBus — Bus Transportation Across Ukraine and Europe 🚍",
@@ -25,9 +25,9 @@
       "keywords": "GreenBus, agents, partnership, bus transportation, cooperation, transport, Ukraine, Europe, bus, tickets, become a partner"
     },
     "main": {
-      "title": "Bus Tickets Online — Buy Bus Ticket | GreenBus",
-      "description": "Buy bus tickets online at GreenBus. Routes across Ukraine and to Germany, Czech Republic, Poland. Up-to-date schedules, affordable prices, fast payment.",
-      "keywords": "bus tickets, buy bus ticket online, bus tickets Ukraine, bus schedule, Ukraine Germany bus, Ukraine Czech Republic bus"
+      "title": "GreenBus — Search for Buses in Ukraine and Europe | Price Comparison",
+      "description": "Compare bus ticket prices from 100+ carriers. Routes: Ukraine to Poland, Germany, Czech Republic. Booking with no commission.",
+      "keywords": "bus tickets, cheap bus travel, Europe bus search, Ukraine Poland bus, price comparison, online booking"
     },
     "oferta": {
       "title": "Public Offer Agreement | GreenBus 🚍",
