@@ -22,6 +22,7 @@ export default function robots(): MetadataRoute.Robots {
           '/*/verify-email',
           '/*/profile',
           '/*/buses',
+          '/*/buses/',
           '/*/checkout',
           '/*/payment-result',
         ],
