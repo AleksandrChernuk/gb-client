@@ -13,6 +13,7 @@ export default function SeoTextSection() {
           <p>{t('seoText.p1')}</p>
           <p>{t('seoText.p2')}</p>
           <p>{t('seoText.p3')}</p>
+          <p>{t('seoText.p4')}</p>
         </div>
       </Container>
     </section>

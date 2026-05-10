@@ -29,10 +29,11 @@
     "refunds_title": "Easy ticket refunds",
     "refunds_description": "Plans changed? Refund your bus tickets quickly via your personal account without hassle or calls.",
     "seoText": {
-      "title": "Bus Tickets Online — Fast, Convenient, Affordable",
-      "p1": "GreenBus is a bus ticket aggregator connecting carriers across Ukraine and Europe. Buy a bus ticket online in just a few minutes: choose your route, date and number of seats — and proceed to payment right away.",
-      "p2": "Routes available to Germany, Czech Republic, Poland, Austria and other countries. Up-to-date bus schedules, price comparison from multiple carriers and e-tickets — all in one place.",
-      "p3": "Booking bus tickets online with GreenBus is convenient for passengers from any city in Ukraine: Kyiv, Lviv, Odesa, Dnipro, Kharkiv, Vinnytsia, Ivano-Frankivsk and more."
+      "title": "Bus tickets online — fast, convenient, affordable",
+      "p1": "Buying a bus ticket on GreenBus is a simple and intuitive process that requires no extra effort. You simply choose your route and date, enter the number of passengers, and proceed to payment. All available trips are updated regularly, so the bus schedule stays up to date. You can pay for your ticket by bank card or another convenient method, and after payment confirmation, your electronic ticket is sent directly to your email.",
+      "p2": "Our aggregator brings together offers from bus operators across Europe. Popular destinations include routes to Poland, Germany, the Czech Republic, Austria, Slovakia, and other countries. The system makes it easy to compare prices from different carriers and find the best option. With filters, you can sort trips by departure time, travel duration, number of available seats, or arrival point.",
+      "p3": "GreenBus offers routes from Kyiv, Lviv, Odesa, Dnipro, Kharkiv, Vinnytsia, Ivano-Frankivsk, and many other cities in Ukraine. Among international destinations, the most popular are Warsaw, Krakow, Prague, Berlin, Vienna, Budapest, and Bratislava. We constantly expand our route network by adding new destinations, so passengers can travel comfortably and with fewer transfers.",
+      "p4": "Our service combines the convenience of online booking with the reliability of the carriers we work with. All companies go through a careful review, which helps ensure safety and comfort during the trip. The website interface is adapted for mobile devices, so you can buy tickets from your phone or tablet at any time. Our support team helps passengers with any questions — from choosing the best route to getting a refund."
     }
   }
 }
