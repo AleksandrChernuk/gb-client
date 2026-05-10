@@ -7,14 +7,11 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Params } from '@/shared/types/common.types';
 import { ReactNode } from 'react';
 import { Rubik } from 'next/font/google';
+import Script from 'next/script';
 import Providers from '@/app/[lng]/Providers';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { BASE_URL } from '@/shared/configs/constants';
-
-type Props = {
-  params: Params;
-};
+import type { Metadata } from 'next';
 
 const rubik = Rubik({
   variable: '--font-rubik',
@@ -26,15 +23,30 @@ const rubik = Rubik({
   adjustFontFallback: true,
 });
 
-export async function generateMetadata({ params }: Props) {
-  const { lng } = (await params) as { lng: Locale };
-  return await generatePublicPageMetadata({
-    lng,
-    namespace: MESSAGE_FILES.METADATA,
-    slug: 'main',
-    path: '',
-  });
-}
+export const metadata: Metadata = {
+  metadataBase: new URL('https://greenbus.com.ua'),
+  applicationName: 'GreenBus',
+  appleWebApp: {
+    title: 'GreenBus',
+    capable: true,
+    statusBarStyle: 'default',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png' },
+      { url: '/apple-touch-icon-57x57.png', sizes: '57x57', type: 'image/png' },
+      { url: '/apple-touch-icon-72x72.png', sizes: '72x72', type: 'image/png' },
+      { url: '/apple-touch-icon-76x76.png', sizes: '76x76', type: 'image/png' },
+      { url: '/apple-touch-icon-114x114.png', sizes: '114x114', type: 'image/png' },
+      { url: '/apple-touch-icon-120x120.png', sizes: '120x120', type: 'image/png' },
+      { url: '/apple-touch-icon-144x144.png', sizes: '144x144', type: 'image/png' },
+      { url: '/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+      { url: '/apple-touch-icon-180x180.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+};
 
 export function generateViewport() {
   return {
@@ -49,15 +61,9 @@ export function generateStaticParams() {
 }
 
 const schemaTranslations = {
-  uk: {
-    description: 'Онлайн бронювання автобусних квитків в Україну та Європу',
-  },
-  ru: {
-    description: 'Онлайн бронирование автобусных билетов в Украину и Европу',
-  },
-  en: {
-    description: 'Online bus ticket reservation to Ukraine and Europe',
-  },
+  uk: { description: 'Онлайн бронювання автобусних квитків в Україну та Європу' },
+  ru: { description: 'Онлайн бронирование автобусных билетов в Украину и Европу' },
+  en: { description: 'Online bus ticket reservation to Ukraine and Europe' },
 };
 
 export default async function LocaleLayout({
@@ -152,15 +158,22 @@ export default async function LocaleLayout({
 
   return (
     <html lang={lng} suppressHydrationWarning>
-      <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-
+      <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-      </head>
-      <body className={`${rubik.className} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider locale={lng as Locale} messages={clientMessages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
