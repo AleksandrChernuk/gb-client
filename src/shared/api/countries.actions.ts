@@ -28,3 +28,16 @@ export async function getCountryById(id: number): Promise<ICountry | null> {
 
   return response.json() as Promise<ICountry>;
 }
+
+export const getCountryBySlug = async (slug: string): Promise<ICountry | null> => {
+  const response = await fetch(`${BACKEND_URL_API}/countries/slug/${slug}`, {
+    headers: { Accept: 'application/json' },
+    next: { revalidate: 600 },
+  });
+
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+};

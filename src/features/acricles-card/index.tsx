@@ -21,7 +21,7 @@ export function ArticleCard({
   const cover = article.photos.find((p) => p.isCover);
   const formatted = format(article.createdAt || new Date(), 'dd.MM.yyyy');
 
-  const articleHref = `/${lang}/blog/${article.slug}`;
+  const articleHref = `/${lang}/blog/${article.slug}/`;
 
   return (
     <article className="group border rounded-xl bg-white dark:bg-slate-800 shadow-sm transition-color hover:shadow-md min-h-86 flex flex-col justify-between">

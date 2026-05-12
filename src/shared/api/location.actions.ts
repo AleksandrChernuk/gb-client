@@ -39,6 +39,11 @@ export const getLocationById = async (id: number) => {
   return fetchFromApi<ILocation>(endpoint);
 };
 
+export const getLocationBySlug = async (slug: string) => {
+  const endpoint = `locations/slug/${slug}`;
+  return fetchFromApi<ILocation>(endpoint);
+};
+
 export const getFavoriteLocations = async () => {
   const endpoint = `locations/favorites`;
   return fetchFromApi<ILocation[]>(endpoint);

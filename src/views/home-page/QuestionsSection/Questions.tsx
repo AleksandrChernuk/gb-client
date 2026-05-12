@@ -25,7 +25,7 @@ export default async function Questions() {
               <Link
                 prefetch={false}
                 className="block text-sm font-bold text-green-600! hover:underline transition-all laptop:text-base"
-                href={`${'/faq/routes-and-buses'}?q=${slug}`}
+                href={`/faq/routes-and-buses/?q=${slug}`}
               >
                 {t_main('learn_more')}
                 <span className="sr-only">: {t(`${title}.title`)}</span>

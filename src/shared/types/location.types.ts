@@ -23,6 +23,7 @@ export interface ILocationDetails {
 
 export interface ILocation {
   id: number;
+  slug: string;
   locationTypeId: number;
   timezoneId: number;
   lat: number;
@@ -79,6 +80,7 @@ export interface ITimezone {
 
 export interface ICountry {
   id: number;
+  slug: string;
   code: string;
   currencyId: number;
   createdAt: Date;

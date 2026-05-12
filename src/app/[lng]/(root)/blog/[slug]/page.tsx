@@ -146,7 +146,6 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
               </AspectRatio>
             )}
             <article className="[&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mt-4 [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_ol]:space-y-2 [&_li]:pl-1 [&_a]:text-green-300 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-green-300/40 hover:[&_a]:text-green-400 hover:[&_a]:decoration-green-400 dark:[&_a]:text-green-100 dark:[&_a]:decoration-green-100/30 dark:hover:[&_a]:text-green-200 dark:hover:[&_a]:decoration-green-200 max-w-none dark:text-slate-200">
-              {' '}
               {parse(desc.content, options)}
             </article>
           </Container>

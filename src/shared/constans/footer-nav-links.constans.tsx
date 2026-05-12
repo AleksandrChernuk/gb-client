@@ -7,52 +7,40 @@ export const footerNavLinks = {
   documents: [
     {
       title: 'oferta',
-      href: '/oferta',
+      href: '/oferta/',
     },
     {
       title: 'privacy_policy',
-      href: '/privacy-policy',
+      href: '/privacy-policy/',
     },
   ],
   employees: [
     {
       title: 'about',
-      href: '/about',
+      href: '/about/',
     },
     {
       title: 'for_carriers',
-      href: '/for-carriers',
+      href: '/for-carriers/',
     },
     {
       title: 'for_agents',
-      href: '/for-agents',
+      href: '/for-agents/',
     },
   ],
   passengers: [
     {
       title: 'faq',
-      href: '/faq',
+      href: '/faq/',
     },
     {
       title: 'blog',
-      href: '/blog',
+      href: '/blog/',
     },
-    // {
-    //   title: 'bus_routes',
-    //   href: '/route-planner',
-    // },
     {
       title: 'all_countries',
-      href: '/all-countries',
+      href: '/all-countries/',
     },
-    // {
-    //   title: 'carriers',
-    //   href: '/carriers',
-    // },
-    // {
-    //   title: 'agents',
-    //   href: '/agents',
-    // },
   ],
   social: [
     {

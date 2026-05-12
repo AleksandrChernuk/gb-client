@@ -20,7 +20,7 @@ function GroupedCitiesList({ groups, locale }: Props) {
                   <Button variant="link" asChild className="dark:text-green-200">
                     <Link
                       prefetch={false}
-                      href={`/${locale}/all-countries/${city.countryId}/${city.id}/`}
+                      href={`/${locale}/all-countries/${city.country.slug}/${city.slug}/`}
                       rel="nofollow noopener noreferrer"
                     >
                       {extractLocationDetails(city, locale).locationName}

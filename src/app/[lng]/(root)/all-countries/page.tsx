@@ -15,6 +15,7 @@ import { CitySearchSection } from '@/views/all-countries-page/CitySearchSection'
 import { GroupedCitiesSection } from '@/views/all-countries-page/GroupedCitiesSection';
 import { СountriesSearchHero } from '@/views/all-countries-page/СountriesSearchHero';
 import { Suspense } from 'react';
+import { SeoSectionAllCountries } from '@/views/all-countries-page/SeoSection';
 
 export async function generateMetadata({ params }: TParams) {
   const { lng } = (await params) as { lng: Locale };
@@ -27,7 +28,6 @@ export async function generateMetadata({ params }: TParams) {
 
   return {
     ...baseMetadata,
-    robots: { index: false, follow: true },
   };
 }
 
@@ -59,8 +59,10 @@ export default async function AllCountries({
           <CitySearchSection />
 
           <GroupedCitiesSection locations={locations} locale={lng} />
+          <SeoSectionAllCountries />
         </main>
       </Suspense>
+
       <MainFooter />
     </>
   );

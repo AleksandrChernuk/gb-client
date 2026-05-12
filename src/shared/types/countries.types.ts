@@ -50,6 +50,7 @@ export interface ICountry {
   currencyId: number;
   createdAt: string;
   updatedAt: string;
+  slug: string;
   translations: ICountryTranslation[];
   description: ICountryDescription[];
   currency: ICurrency;

@@ -15,7 +15,7 @@ export default function CountriesList({ countries, locale }: Props) {
           return (
             <li key={c.id}>
               <Button variant="link" asChild className="dark:text-green-200">
-                <Link prefetch={false} href={`/${locale}/all-countries/${c.id}/`}>
+                <Link prefetch={false} href={`/${locale}/all-countries/${c.slug}/`}>
                   {name}
                 </Link>
               </Button>

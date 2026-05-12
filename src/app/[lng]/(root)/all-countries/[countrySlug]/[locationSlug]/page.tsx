@@ -1,4 +1,4 @@
-import { getLocationById } from '@/shared/api/location.actions';
+import { getLocationBySlug } from '@/shared/api/location.actions';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Container } from '@/shared/ui/Container';
@@ -9,20 +9,19 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 
 type Props = {
-  params: Promise<{ lng: string; id: string; locationId: string }>;
+  params: Promise<{ lng: string; locationSlug: string }>;
 };
 
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 
 export async function generateMetadata({ params }: Props) {
-  const { lng, id, locationId } = (await params) as { lng: Locale; id: string; locationId: string };
+  const { lng, locationSlug } = (await params) as { lng: Locale; locationSlug: string };
 
-  const cityId = Number(locationId);
-  if (!cityId || isNaN(cityId)) {
+  if (!locationSlug.length) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
-  const data = await getLocationById(cityId);
+  const data = await getLocationBySlug(locationSlug);
   if (!data) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
   }
@@ -31,16 +30,17 @@ export async function generateMetadata({ params }: Props) {
 
   const meta = {
     uk: {
-      title: `Купити автобусні квитки ${locationName} – ціни онлайн | GreenBus`,
-      description: `Забронюйте автобусні квитки з міста ${locationName} онлайн за вигідною ціною. Актуальний розклад рейсів, порівняння цін та швидка оплата на сайті GreenBus. 🚌`,
+      title: `Автобусні квитки з ${locationName} онлайн без комісії | GreenBus `,
+      description: `Купіть автобусні квитки з ${locationName} онлайн за 3 хвилини. 100+ перевізників, актуальний розклад, оплата картою без комісії — e-квиток на email.
+`,
     },
     ru: {
-      title: `Купить билеты на автобус ${locationName} – цены онлайн | GreenBus`,
-      description: `Билеты на автобус из города ${locationName} по лучшей цене. Сравнивайте расписание и стоимость рейсов от сотен перевозчиков. Бронируйте билеты онлайн на GreenBus за 2 минуты!`,
+      title: `Автобусные билеты из ${locationName} онлайн без комиссии | GreenBus`,
+      description: `Купите автобусные билеты из ${locationName} онлайн за 3 минуты. 100+ перевозчиков, актуальное расписание, оплата картой без комиссии — e-билет на email.`,
     },
     en: {
-      title: `Bus Tickets from ${locationName}: Book Online & Prices | GreenBus`,
-      description: `Find and book cheap bus tickets from ${locationName} online. Compare schedules and ticket prices from hundreds of carriers. Fast and secure booking with GreenBus.`,
+      title: `Bus Tickets from ${locationName} Online with No Booking Fee | GreenBus`,
+      description: `Book bus tickets from ${locationName} online in 3 minutes. 100+ carriers, up-to-date schedules, pay by card with no booking fee — e-ticket sent to your email.`,
     },
   };
 
@@ -49,38 +49,29 @@ export async function generateMetadata({ params }: Props) {
   const baseMetadata = await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
-    slug: `all-countries/${id}/${locationId}/`,
-    path: `all-countries/${id}/${locationId}/`,
+    slug: ``,
+    path: `all-countries/${data.country.slug}/${data.slug}/`,
   });
 
   return {
     ...baseMetadata,
     title: current.title,
     description: current.description,
-    robots: { index: false, follow: true },
   };
 }
 
 export default async function LocationPage({ params }: Props) {
-  const { lng, id, locationId } = await params;
+  const { lng, locationSlug } = await params;
 
   setRequestLocale(lng as Locale);
 
-  const cityId = Number(locationId);
-  const countryId = Number(id);
-
-  if (!cityId || isNaN(cityId) || !countryId || isNaN(countryId)) {
-    notFound();
-  }
-
-  const data = await getLocationById(cityId);
+  const data = await getLocationBySlug(locationSlug);
 
   if (!data) {
     notFound();
   }
 
-  // URL должен соответствовать реальной принадлежности города стране
-  if (data.countryId !== countryId) {
+  if (data.slug !== locationSlug) {
     notFound();
   }
 
@@ -99,7 +90,8 @@ export default async function LocationPage({ params }: Props) {
                 items={[
                   { label: t('breadcrumbs_home'), href: '/' },
                   { label: t('buses_breadcrumb'), href: `/all-countries/` },
-                  { label: details.countryName, href: `/all-countries/${data.country.id}/${cityId}/` },
+                  { label: details.countryName, href: `/all-countries/${data.country.slug}/` },
+                  { label: details.locationName, href: `/all-countries/${data.slug}/` },
                 ]}
               />
             </div>

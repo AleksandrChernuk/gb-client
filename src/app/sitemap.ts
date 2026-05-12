@@ -27,8 +27,8 @@ const pages: string[] = [
   '/faq',
   '/faq/bronjuvannja-mists',
   '/faq/routes-and-buses',
-  '/faq/search',
   '/faq/ticket-refund',
+  '/all-countries',
   '/routes',
 ];
 
@@ -51,7 +51,6 @@ function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
   );
 }
 
-// ✅ Динамічні сторінки маршрутів
 function getRoutePages(routes: { slug: string }[]) {
   return routes.flatMap((route) =>
     buildEntries(`/routes/${route.slug}` as Parameters<typeof getPathname>[0]['href'], {
@@ -102,8 +101,7 @@ function buildEntries(
 
 function getPriority(href: string) {
   if (href === '/') return 1.0;
-  if (href === '/for-carriers') return 0.9;
-  if (['/routes', '/blog'].includes(href)) return 0.8;
+  if (['/routes', '/blog', '/all-countries'].includes(href)) return 0.9;
   if (href.startsWith('/faq/')) return 0.7;
   return 0.6;
 }
