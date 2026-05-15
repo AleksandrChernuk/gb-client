@@ -45,17 +45,13 @@ const parserOptions: HTMLReactParserOptions = {
 
     if (isExternal) {
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a href={href} target="_blank">
           {domToReact(children, parserOptions)}
         </a>
       );
     }
 
-    return (
-      <Link href={href} prefetch={false}>
-        {domToReact(children, parserOptions)}
-      </Link>
-    );
+    return <Link href={href}>{domToReact(children, parserOptions)}</Link>;
   },
 };
 

@@ -8,11 +8,35 @@ import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 
+import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
+
+const parserOptions: HTMLReactParserOptions = {
+  replace(domNode) {
+    if (!(domNode instanceof Element)) return;
+    if (domNode.name !== 'a' || !domNode.attribs?.href) return;
+
+    const href = domNode.attribs.href;
+    const isExternal = /^https?:\/\//i.test(href);
+    const children = domNode.children as DOMNode[];
+
+    if (isExternal) {
+      return (
+        <a href={href} target="_blank">
+          {domToReact(children, parserOptions)}
+        </a>
+      );
+    }
+
+    return <Link href={href}>{domToReact(children, parserOptions)}</Link>;
+  },
+};
+
 type Props = {
   params: Promise<{ lng: string; locationSlug: string }>;
 };
 
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import Link from 'next/link';
 
 export async function generateMetadata({ params }: Props) {
   const { lng, locationSlug } = (await params) as { lng: Locale; locationSlug: string };
@@ -103,18 +127,10 @@ export default async function LocationPage({ params }: Props) {
         <section className="py-10">
           <Container size="l">
             <h1 className="text-xl tablet:text-2xl font-bold mb-4">
-              {t('tickets_heading', { locationName: details.locationName })}
+              {t('about_city_heading', { locationName: details.locationName })}
             </h1>
 
-            <div className="flex flex-col tablet:flex-row gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm">
-              <div className="tablet:w-1/2">
-                <h2 className="text-lg tablet:text-xl font-bold mb-4">
-                  {t('about_city_heading', { locationName: details.locationName })}
-                </h2>
-                <p className="text-sm tablet:text-lg text-slate-700 dark:text-slate-100 mb-6">{details.description}</p>
-              </div>
-
-              <div className="border-2 border-green-300 rounded-2xl tablet:w-1/2">
+            {/* <div className="border-2 border-green-300 rounded-2xl tablet:w-1/2">
                 <iframe
                   width="100%"
                   height="500px"
@@ -124,8 +140,16 @@ export default async function LocationPage({ params }: Props) {
                   title={t('map_title', { locationName: details.locationName })}
                   aria-label={t('map_aria_label', { locationName: details.locationName })}
                 ></iframe>
+              </div> */}
+            {!!details.description ? (
+              <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
+                <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none">
+                  {parse(details.description, parserOptions)}
+                </div>
               </div>
-            </div>
+            ) : (
+              <p></p>
+            )}
           </Container>
         </section>
       </main>
