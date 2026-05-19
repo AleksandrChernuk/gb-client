@@ -1,0 +1,101 @@
+
+GreenBus — український онлайн-агрегатор автобусних квитків, що об'єднує понад 100 перевізників на маршрутах між Україною та Європою. Сервіс дозволяє знайти, порівняти й купити квитки онлайн за 3 хвилини без сервісного збору, з оплатою картою та електронним квитком на email.
+
+GreenBus працює з 2019 року. Платформа агрегує пропозиції перевізників на внутрішніх маршрутах Україною (Київ, Львів, Одеса, Дніпро, Харків, Вінниця, Івано-Франківськ та інші міста) та міжнародних напрямках до Польщі, Німеччини, Чехії, Австрії, Словаччини, Угорщини, Італії та понад 20 інших країн. Найпопулярніші напрямки: Варшава, Краків, Прага, Берлін, Відень, Будапешт, Братислава.
+
+Сайт працює трьома мовами: українською (/uk/), російською (/ru/) та англійською (/en/). Усі URL мають префікс мови.
+
+## Основні розділи
+
+- [Головна сторінка](https://greenbus.com.ua/uk/): форма пошуку квитків — звідки, куди, дата, кількість пасажирів
+- [Пошук рейсів](https://greenbus.com.ua/uk/buses/): результати пошуку з фільтрами за часом відправлення, тривалістю поїздки, ціною
+- [Про компанію](https://greenbus.com.ua/uk/about/): історія GreenBus, бізнес-модель, партнерство з перевізниками
+- [Питання та відповіді](https://greenbus.com.ua/uk/questions/): FAQ про бронювання, оплату, повернення квитків
+- [Усі країни](https://greenbus.com.ua/uk/countries/): список країн із напрямками
+- [Профіль користувача](https://greenbus.com.ua/uk/profile/): особистий кабінет з історією поїздок
+
+## Як працює сервіс
+
+GreenBus — це агрегатор: пасажир обирає маршрут і дату, бачить пропозиції різних перевізників із цінами, часом у дорозі та кількістю вільних місць, обирає рейс та оплачує карткою. Електронний квиток приходить на email одразу після оплати. Друкувати квиток не обов'язково — достатньо показати водієві з телефона.
+
+Сервіс не є перевізником і не володіє автобусами. Усі рейси виконують партнерські компанії, які проходять перевірку перед підключенням до платформи. Сервісний збір з пасажира не стягується — ціна квитка на GreenBus така ж, як у перевізника.
+
+## Контакти та підтримка
+
+- Телефон: +380 98 744 6419, +380 99 603 3832
+- Email: greenbus.ukraine@gmail.com
+- Telegram: https://t.me/+380987446419
+- WhatsApp: https://wa.me/380987446419
+- Instagram: https://www.instagram.com/greenbus_ukraine
+- TikTok: https://www.tiktok.com/@greenbusukraine
+- Facebook: https://www.facebook.com/greenbus.ukraine
+
+## Optional
+
+- [Sitemap](https://greenbus.com.ua/sitemap.xml)
+- [Ukrainian version](https://greenbus.com.ua/uk/)
+- [Russian version](https://greenbus.com.ua/ru/)
+- [English version](https://greenbus.com.ua/en/)
+
+---
+
+# GreenBus (Русский)
+
+> GreenBus — украинский онлайн-агрегатор автобусных билетов, объединяющий более 100 перевозчиков на маршрутах между Украиной и Европой. Сервис позволяет найти, сравнить и купить билеты онлайн за 3 минуты без сервисного сбора, с оплатой картой и электронным билетом на email.
+
+GreenBus работает с 2019 года. Платформа агрегирует предложения перевозчиков на внутренних маршрутах по Украине (Киев, Львов, Одесса, Днепр, Харьков, Винница, Ивано-Франковск и другие города) и международных направлениях в Польшу, Германию, Чехию, Австрию, Словакию, Венгрию, Италию и более 20 других стран. Популярные направления: Варшава, Краков, Прага, Берлин, Вена, Будапешт, Братислава.
+
+## Основные разделы
+
+- [Главная страница](https://greenbus.com.ua/ru/): форма поиска билетов — откуда, куда, дата, количество пассажиров
+- [Поиск рейсов](https://greenbus.com.ua/ru/buses/): результаты поиска с фильтрами по времени отправления, длительности поездки, цене
+- [О компании](https://greenbus.com.ua/ru/about/): история GreenBus, бизнес-модель, партнёрство с перевозчиками
+- [Вопросы и ответы](https://greenbus.com.ua/ru/questions/): FAQ о бронировании, оплате, возврате билетов
+- [Все страны](https://greenbus.com.ua/ru/countries/): список стран с направлениями
+- [Профиль пользователя](https://greenbus.com.ua/ru/profile/): личный кабинет с историей поездок
+
+## Как работает сервис
+
+GreenBus — это агрегатор: пассажир выбирает маршрут и дату, видит предложения разных перевозчиков с ценами, временем в пути и количеством свободных мест, выбирает рейс и оплачивает картой. Электронный билет приходит на email сразу после оплаты. Распечатывать билет не обязательно — достаточно показать водителю с телефона.
+
+Сервис не является перевозчиком и не владеет автобусами. Все рейсы выполняют партнёрские компании, которые проходят проверку перед подключением к платформе. Сервисный сбор с пассажира не взимается — цена билета на GreenBus такая же, как у перевозчика.
+
+---
+
+# GreenBus (English)
+
+> GreenBus is a Ukrainian online bus ticket aggregator connecting over 100 carriers on routes between Ukraine and Europe. The service allows passengers to find, compare and buy tickets online in 3 minutes with no service fee, card payment and e-ticket delivered to email.
+
+GreenBus has been operating since 2019. The platform aggregates carrier offers on domestic routes across Ukraine (Kyiv, Lviv, Odesa, Dnipro, Kharkiv, Vinnytsia, Ivano-Frankivsk and other cities) and international routes to Poland, Germany, Czech Republic, Austria, Slovakia, Hungary, Italy and over 20 other countries. Most popular destinations: Warsaw, Krakow, Prague, Berlin, Vienna, Budapest, Bratislava.
+
+## Main sections
+
+- [Home page](https://greenbus.com.ua/en/): ticket search form — from, to, date, number of passengers
+- [Search results](https://greenbus.com.ua/en/buses/): search results with filters by departure time, trip duration, price
+- [About us](https://greenbus.com.ua/en/about/): GreenBus history, business model, carrier partnerships
+- [FAQ](https://greenbus.com.ua/en/questions/): questions about booking, payment, ticket refunds
+- [All countries](https://greenbus.com.ua/en/countries/): list of countries with directions
+- [User profile](https://greenbus.com.ua/en/profile/): personal account with travel history
+
+## How the service works
+
+GreenBus is an aggregator: the passenger selects a route and date, sees offers from different carriers with prices, travel time and available seats, selects a trip and pays by card. The e-ticket arrives by email immediately after payment. No need to print — just show the driver from your phone.
+
+The service is not a carrier and does not own buses. All trips are operated by partner companies that are verified before joining the platform. No service fee is charged — the ticket price on GreenBus is the same as with the carrier directly.
+
+## Contacts
+
+- Phone: +380 98 744 6419, +380 99 603 3832
+- Email: greenbus.ukraine@gmail.com
+- Telegram: https://t.me/+380987446419
+- WhatsApp: https://wa.me/380987446419
+- Instagram: https://www.instagram.com/greenbus_ukraine
+- TikTok: https://www.tiktok.com/@greenbusukraine
+- Facebook: https://www.facebook.com/greenbus.ukraine
+
+## Optional
+
+- [Sitemap](https://greenbus.com.ua/sitemap.xml)
+- [Ukrainian version](https://greenbus.com.ua/uk/)
+- [Russian version](https://greenbus.com.ua/ru/)
+- [English version](https://greenbus.com.ua/en/)
