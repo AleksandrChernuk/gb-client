@@ -101,5 +101,7 @@ function redirectToSignin(request: NextRequest, locale: string) {
 }
 
 export const config = {
-  matcher: ['/((?!api|trpc|_next|_vercel|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|favicon\\.ico|.*\\..*$).*)'],
+  matcher: [
+    '/((?!api|trpc|_next|_vercel|sitemap\\.xml|robots\\.txt|llms\\.txt|manifest\\.webmanifest|favicon\\.ico|.*\\..*$).*)',
+  ],
 };
