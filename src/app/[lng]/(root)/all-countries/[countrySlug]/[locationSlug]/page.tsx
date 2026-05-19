@@ -129,18 +129,6 @@ export default async function LocationPage({ params }: Props) {
             <h1 className="text-xl tablet:text-2xl font-bold mb-4">
               {t('about_city_heading', { locationName: details.locationName })}
             </h1>
-
-            {/* <div className="border-2 border-green-300 rounded-2xl tablet:w-1/2">
-                <iframe
-                  width="100%"
-                  height="500px"
-                  loading="lazy"
-                  className="rounded-2xl overflow-hidden"
-                  src={`https://www.google.com/maps?q=${data.lat},${data.lon}&z=19&output=embed`}
-                  title={t('map_title', { locationName: details.locationName })}
-                  aria-label={t('map_aria_label', { locationName: details.locationName })}
-                ></iframe>
-              </div> */}
             {!!details.description ? (
               <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
                 <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none">
