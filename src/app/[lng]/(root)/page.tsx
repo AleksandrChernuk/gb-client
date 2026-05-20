@@ -7,6 +7,8 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { HeroSection } from '@/views/home-page/HeroSection';
 import { ArticlesPreviewSection } from '@/views/home-page/ArticlesPreviewSection';
+import { PopularRoutesSkeleton } from '@/views/home-page/PopularRoutesSection/PopularRoutesSkeleton';
+import { Container } from '@/shared/ui/Container';
 import { AllCountriesSection } from '@/views/home-page/AllCountriesSection';
 import { BenefitsSection } from '@/views/home-page/BenefitsSection';
 import { PopularRoutesSection } from '@/views/home-page/PopularRoutesSection';
@@ -43,7 +45,11 @@ export default async function Home({
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <HeroSection />
         <BenefitsSection />
-        <Suspense fallback={null}>
+        <Suspense fallback={
+          <section className="py-6">
+            <Container size="m"><PopularRoutesSkeleton /></Container>
+          </section>
+        }>
           <PopularRoutesSection />
         </Suspense>
         <AllCountriesSection />

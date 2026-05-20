@@ -26,6 +26,7 @@ export const useDate = () => {
 
   return {
     open,
+    setOpen,
     handleToggleOpen,
     handleSelectDate,
     handleBlur,

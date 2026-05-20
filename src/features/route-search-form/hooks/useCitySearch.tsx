@@ -1,154 +1,326 @@
-'use client';
+// // 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
-import { ILocation } from '@/shared/types/location.types';
-import { useLocale, useTranslations } from 'next-intl';
-import { useShallow } from 'zustand/react/shallow';
-import { useLocationsStore } from '@/shared/store/useLocations';
-import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { useCityData } from '@/features/route-search-form/hooks/useCityData';
-import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+// // import { useCallback, useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
+// // import { ILocation } from '@/shared/types/location.types';
+// // import { useLocale, useTranslations } from 'next-intl';
+// // import { useShallow } from 'zustand/react/shallow';
+// // import { useLocationsStore } from '@/shared/store/useLocations';
+// // import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+// // import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+// // import { useCityData } from '@/features/route-search-form/hooks/useCityData';
+// // import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 
-type Tname = 'from' | 'to';
+// // type Tname = 'from' | 'to';
 
-type Props = {
-  name: Tname;
-};
+// // type Props = {
+// //   name: Tname;
+// // };
 
-export const useCitySearch = ({ name }: Props) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState('');
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+// // export const useCitySearch = ({ name }: Props) => {
+// //   const [open, setOpen] = useState<boolean>(false);
+// //   const [inputValue, setInputValue] = useState('');
+// //   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-  const deferredInputValue = useDeferredValue(inputValue);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+// //   const deferredInputValue = useDeferredValue(inputValue);
+// //   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const locations = useLocationsStore((state) => state.locations);
-  const favoriteLocations = useLocationsStore(useShallow((state) => state.favoriteLocations));
+// //   const locations = useLocationsStore((state) => state.locations);
+// //   const favoriteLocations = useLocationsStore(useShallow((state) => state.favoriteLocations));
 
-  const [, actions] = useRouterSearch();
+// //   const [, actions] = useRouterSearch();
 
-  const { fromCity, toCity } = useCityData();
-  const city = name === 'from' ? fromCity : toCity;
+// //   const { fromCity, toCity } = useCityData();
+// //   const city = name === 'from' ? fromCity : toCity;
 
-  const language = useLocale();
-  const t = useTranslations(MESSAGE_FILES.COMMON);
+// //   const language = useLocale();
+// //   const t = useTranslations(MESSAGE_FILES.COMMON);
 
-  const placeholder = useMemo(() => {
-    return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
-  }, [name, t]);
+// //   const placeholder = useMemo(() => {
+// //     return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
+// //   }, [name, t]);
 
-  const cities = useMemo(() => {
-    if (deferredInputValue.trim().length === 0) {
-      return favoriteLocations || [];
-    }
+// //   const cities = useMemo(() => {
+// //     if (deferredInputValue.trim().length === 0) {
+// //       return favoriteLocations || [];
+// //     }
 
-    const query = deferredInputValue.trim().toLowerCase();
-    return (locations || []).filter((loc) => {
-      const { locationName } = extractLocationDetails(loc, language);
-      return locationName.toLowerCase().startsWith(query);
-    });
-  }, [deferredInputValue, locations, favoriteLocations, language]);
+// //     const query = deferredInputValue.trim().toLowerCase();
+// //     return (locations || []).filter((loc) => {
+// //       const { locationName } = extractLocationDetails(loc, language);
+// //       return locationName.toLowerCase().startsWith(query);
+// //     });
+// //   }, [deferredInputValue, locations, favoriteLocations, language]);
 
-  const updateCityValue = useCallback(
-    (selectedCity: ILocation) => {
-      setInputValue(extractLocationDetails(selectedCity, language).locationName);
-    },
-    [language],
-  );
+// //   const updateCityValue = useCallback(
+// //     (selectedCity: ILocation) => {
+// //       setInputValue(extractLocationDetails(selectedCity, language).locationName);
+// //     },
+// //     [language],
+// //   );
 
-  const onSelectCity = useCallback(
-    (newCity: ILocation) => {
-      actions.setCityId(name, String(newCity.id));
-      const cityIndex = cities.findIndex((el) => el.id === newCity.id);
-      setHighlightedIndex(cityIndex >= 0 ? cityIndex : -1);
-      updateCityValue(newCity);
-      setOpen(false);
-      inputRef.current?.blur();
-    },
-    [actions, name, cities, updateCityValue],
-  );
+// //   const onSelectCity = useCallback(
+// //     (newCity: ILocation) => {
+// //       actions.setCityId(name, String(newCity.id));
+// //       const cityIndex = cities.findIndex((el) => el.id === newCity.id);
+// //       setHighlightedIndex(cityIndex >= 0 ? cityIndex : -1);
+// //       updateCityValue(newCity);
+// //       setOpen(false);
+// //       inputRef.current?.blur();
+// //     },
+// //     [actions, name, cities, updateCityValue],
+// //   );
 
-  const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    if (event.currentTarget.contains(event.relatedTarget)) return;
-    setOpen(false);
-  }, []);
+// //   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+// //     if (event.currentTarget.contains(event.relatedTarget)) return;
+// //     setOpen(false);
+// //   }, []);
 
-  const onKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!cities || cities.length === 0) return;
+// //   const onKeyDown = useCallback(
+// //     (event: React.KeyboardEvent<HTMLInputElement>) => {
+// //       if (!cities || cities.length === 0) return;
 
-      switch (event.key) {
-        case 'ArrowDown':
-          event.preventDefault();
-          setHighlightedIndex((prevIndex) => (prevIndex < cities.length - 1 ? prevIndex + 1 : prevIndex));
-          break;
-        case 'ArrowUp':
-          event.preventDefault();
-          setHighlightedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
-          break;
-        case 'Enter':
-          event.preventDefault();
-          if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
-            onSelectCity(cities[highlightedIndex]);
-          }
-          break;
-        case 'Escape':
-          event.preventDefault();
-          setOpen(false);
-          inputRef.current?.blur();
-          break;
-      }
-    },
-    [cities, highlightedIndex, onSelectCity],
-  );
+// //       switch (event.key) {
+// //         case 'ArrowDown':
+// //           event.preventDefault();
+// //           setHighlightedIndex((prevIndex) => (prevIndex < cities.length - 1 ? prevIndex + 1 : prevIndex));
+// //           break;
+// //         case 'ArrowUp':
+// //           event.preventDefault();
+// //           setHighlightedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+// //           break;
+// //         case 'Enter':
+// //           event.preventDefault();
+// //           if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
+// //             onSelectCity(cities[highlightedIndex]);
+// //           }
+// //           break;
+// //         case 'Escape':
+// //           event.preventDefault();
+// //           setOpen(false);
+// //           inputRef.current?.blur();
+// //           break;
+// //       }
+// //     },
+// //     [cities, highlightedIndex, onSelectCity],
+// //   );
 
-  const onInputChange = (newValue: string) => {
-    setInputValue(newValue);
-    setHighlightedIndex(-1);
-    if (!open) setOpen(true);
-  };
+// //   const onInputChange = (newValue: string) => {
+// //     setInputValue(newValue);
+// //     setHighlightedIndex(-1);
+// //     if (!open) setOpen(true);
+// //   };
 
-  const handleClearMobileInput = () => {
-    setInputValue('');
-    setHighlightedIndex(-1);
-  };
+// //   const handleClearMobileInput = () => {
+// //     setInputValue('');
+// //     setHighlightedIndex(-1);
+// //   };
 
-  const handleToggleOpen = () => setOpen((p) => !p);
+// //   const handleToggleOpen = () => setOpen((p) => !p);
 
-  useEffect(() => {
-    if (city) {
-      updateCityValue(city);
-    } else {
-      setInputValue('');
-    }
-  }, [city, updateCityValue]);
+// //   useEffect(() => {
+// //     if (city) {
+// //       updateCityValue(city);
+// //     } else {
+// //       setInputValue('');
+// //     }
+// //   }, [city, updateCityValue]);
 
-  useEffect(() => {
-    if (!open && inputValue.trim().length === 0 && city) {
-      updateCityValue(city);
-    }
-  }, [open, inputValue, city, updateCityValue]);
+// //   useEffect(() => {
+// //     if (!open && inputValue.trim().length === 0 && city) {
+// //       updateCityValue(city);
+// //     }
+// //   }, [open, inputValue, city, updateCityValue]);
 
-  useEffect(() => {
-    if (highlightedIndex >= cities.length) {
-      setHighlightedIndex(-1);
-    }
-  }, [cities.length, highlightedIndex]);
+// //   useEffect(() => {
+// //     if (highlightedIndex >= cities.length) {
+// //       setHighlightedIndex(-1);
+// //     }
+// //   }, [cities.length, highlightedIndex]);
+
+// //   return {
+// //     open,
+// //     handleToggleOpen,
+// //     cities,
+// //     highlightedIndex,
+// //     onSelectCity,
+// //     inputRef,
+// //     onKeyDown,
+// //     onInputChange,
+// //     handleBlur,
+// //     value: inputValue,
+// //     handleClearMobileInput,
+// //     placeholder,
+// //   };
+// // };
+
+// 'use client';
+
+// import { useCallback, useEffect, useMemo, useRef, useState, useDeferredValue } from 'react';
+// import { ILocation } from '@/shared/types/location.types';
+// import { useLocale, useTranslations } from 'next-intl';
+// import { useShallow } from 'zustand/react/shallow';
+// import { useLocationsStore } from '@/shared/store/useLocations';
+// import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+// import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
+// import { useCityData } from '@/features/route-search-form/hooks/useCityData';
+// import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
+
+// type Tname = 'from' | 'to';
+
+// type Props = {
+//   name: Tname;
+// };
+
+// export const useCitySearch = ({ name }: Props) => {
+//   const [open, setOpen] = useState<boolean>(false);
+//   const [inputValue, setInputValue] = useState('');
+//   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
+//   const deferredInputValue = useDeferredValue(inputValue);
+//   const inputRef = useRef<HTMLInputElement | null>(null);
+
+//   const [, actions] = useRouterSearch();
+
+//   const { fromCity, toCity } = useCityData();
+//   const city = name === 'from' ? fromCity : toCity;
+
+//   const language = useLocale();
+//   const t = useTranslations(MESSAGE_FILES.COMMON);
+
+//   const placeholder = useMemo(() => {
+//     return name === 'from' ? t('placeholderFrom') : t('placeholderTo');
+//   }, [name, t]);
+
+//   const cities = useMemo(() => {
+//     if (deferredInputValue.trim().length === 0) {
+//       return favoriteLocations || [];
+//     }
+
+//     const query = deferredInputValue.trim().toLowerCase();
+//     return (locations || []).filter((loc) => {
+//       const { locationName } = extractLocationDetails(loc, language);
+//       return locationName.toLowerCase().startsWith(query);
+//     });
+//   }, [deferredInputValue, locations, favoriteLocations, language]);
+
+//   const updateCityValue = useCallback(
+//     (selectedCity: ILocation) => {
+//       setInputValue(extractLocationDetails(selectedCity, language).locationName);
+//     },
+//     [language],
+//   );
+
+//   const onSelectCity = useCallback(
+//     (newCity: ILocation) => {
+//       actions.setCityId(name, String(newCity.id));
+//       const cityIndex = cities.findIndex((el) => el.id === newCity.id);
+//       setHighlightedIndex(cityIndex >= 0 ? cityIndex : -1);
+//       updateCityValue(newCity);
+//       setOpen(false);
+//       inputRef.current?.blur();
+//     },
+//     [actions, name, cities, updateCityValue],
+//   );
+
+//   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+//     if (event.currentTarget.contains(event.relatedTarget)) return;
+//     setOpen(false);
+//   }, []);
+
+//   const onKeyDown = useCallback(
+//     (event: React.KeyboardEvent<HTMLInputElement>) => {
+//       if (!cities || cities.length === 0) return;
+
+//       switch (event.key) {
+//         case 'ArrowDown':
+//           event.preventDefault();
+//           setHighlightedIndex((prevIndex) => (prevIndex < cities.length - 1 ? prevIndex + 1 : prevIndex));
+//           break;
+//         case 'ArrowUp':
+//           event.preventDefault();
+//           setHighlightedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+//           break;
+//         case 'Enter':
+//           event.preventDefault();
+//           if (highlightedIndex >= 0 && highlightedIndex < cities.length) {
+//             onSelectCity(cities[highlightedIndex]);
+//           }
+//           break;
+//         case 'Escape':
+//           event.preventDefault();
+//           setOpen(false);
+//           inputRef.current?.blur();
+//           break;
+//       }
+//     },
+//     [cities, highlightedIndex, onSelectCity],
+//   );
+
+//   const onInputChange = (newValue: string) => {
+//     setInputValue(newValue);
+//     setHighlightedIndex(-1);
+//     if (!open) setOpen(true);
+//   };
+
+//   const handleClearMobileInput = () => {
+//     setInputValue('');
+//     setHighlightedIndex(-1);
+//   };
+
+//   const handleToggleOpen = () => setOpen((p) => !p);
+
+//   useEffect(() => {
+//     if (city) {
+//       updateCityValue(city);
+//     } else {
+//       setInputValue('');
+//     }
+//   }, [city, updateCityValue]);
+
+//   useEffect(() => {
+//     if (!open && inputValue.trim().length === 0 && city) {
+//       updateCityValue(city);
+//     }
+//   }, [open, inputValue, city, updateCityValue]);
+
+//   useEffect(() => {
+//     if (highlightedIndex >= cities.length) {
+//       setHighlightedIndex(-1);
+//     }
+//   }, [cities.length, highlightedIndex]);
+
+//   return {
+//     open,
+//     handleToggleOpen,
+//     cities,
+//     highlightedIndex,
+//     onSelectCity,
+//     inputRef,
+//     onKeyDown,
+//     onInputChange,
+//     handleBlur,
+//     value: inputValue,
+//     handleClearMobileInput,
+//     placeholder,
+//   };
+// };
+import { format } from 'date-fns';
+import { useQueryState } from 'nuqs';
+
+const opts = { defaultValue: '' };
+
+export default function useSearchRouteParams() {
+  const [from, setFrom] = useQueryState('from', opts);
+  const [to, setTo] = useQueryState('to', opts);
+  const [date, setDate] = useQueryState('date', {
+    defaultValue: format(new Date(), 'yyyy-MM-dd'),
+  });
+  const [voyagers, setVoyagers] = useQueryState('voyagers', {
+    defaultValue: '1',
+  });
 
   return {
-    open,
-    handleToggleOpen,
-    cities,
-    highlightedIndex,
-    onSelectCity,
-    inputRef,
-    onKeyDown,
-    onInputChange,
-    handleBlur,
-    value: inputValue,
-    handleClearMobileInput,
-    placeholder,
+    values: { from, to, date, voyagers },
+    set: { setFrom, setTo, setDate, setVoyagers },
   };
-};
+}

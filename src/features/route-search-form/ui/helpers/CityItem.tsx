@@ -17,7 +17,7 @@ export const CityItem = memo(({ el, isSelected, handleSelectCity, isHighlighted,
   return (
     <div
       className={clsx(
-        'z-0 p-2 rounded-lg flex items-center justify-between gap-1 cursor-pointer h-20 w-full tablet:w-[355px]',
+        'z-0 p-2 rounded-lg flex items-center justify-between gap-1 cursor-pointer h-20 w-full',
         (isHighlighted || isSelected) && 'dark:bg-slate-700 bg-slate-200',
         hasBorder && 'border border-slate-300 dark:border-slate-600',
       )}

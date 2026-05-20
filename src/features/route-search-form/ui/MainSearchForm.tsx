@@ -3,7 +3,6 @@
 import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { LoaderCircle } from 'lucide-react';
-import CitySearch from './CitySearch';
 import DatePicker from './DatePicker';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useRouter } from '@/shared/i18n/routing';
@@ -14,6 +13,7 @@ import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { validateField } from '@/features/route-search-form/helpers/validateField';
+import { AutocompleteV2 } from '@/features/route-search-form/ui/AutocompleteV2';
 
 const MainSearchForm = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -56,7 +56,7 @@ const MainSearchForm = () => {
 
   const renderFields = (variant: 'mobile' | 'desktop') => (
     <>
-      <CitySearch
+      <AutocompleteV2
         name="from"
         variant={variant}
         error={errors.from}
@@ -64,13 +64,14 @@ const MainSearchForm = () => {
         setErrorsRaw={setErrors}
       />
       {variant === 'mobile' && <Separator className="h-[1px] my-2  bg-slate-300 dark:bg-slate-700" />}
-      <CitySearch
+      <AutocompleteV2
         name="to"
         variant={variant}
         error={errors.to}
         resetError={() => setErrors((prev) => ({ ...prev, to: null }))}
         setErrorsRaw={setErrors}
       />
+
       {variant === 'mobile' && <Separator className="h-[1px] my-2  bg-slate-300 dark:bg-slate-700" />}
       <DatePicker variant={variant} />
       {variant === 'mobile' && <Separator className="h-[1px] my-2 bg-slate-300 dark:bg-slate-700" />}
@@ -80,8 +81,8 @@ const MainSearchForm = () => {
 
   return (
     <div className="relative bg-white shadow-xs rounded-2xl dark:bg-slate-800">
-      <div className="flex flex-col h-full tablet:flex-row">
-        <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10">
+      <div className="flex flex-col h-full tablet:flex-row w-full">
+        <div className="items-center grid-cols-4 p-4 tablet:grid tablet:gap-4 laptop:gap-10 grow">
           {renderFields(isMobile ? 'mobile' : 'desktop')}
         </div>
         <Button

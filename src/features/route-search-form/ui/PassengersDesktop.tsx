@@ -1,9 +1,10 @@
-import { PassengersButton } from './helpers/PassengersButton';
 import { MainSearchInput } from './MainSearchInput';
 import { IconPass } from '@/assets/icons/IconPass';
 import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction } from 'react';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
+import { Button } from '@/shared/ui/button';
 
 type Props = {
   v: number;
@@ -12,7 +13,6 @@ type Props = {
   handleIncrement: () => void;
   handleDecrement: () => void;
   handleOpenChange: (isOpen: boolean) => void;
-  handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
   passCount: number;
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
@@ -20,43 +20,59 @@ type Props = {
 export default function PassengersDesktop({
   v,
   open,
+  value,
   handleIncrement,
   handleDecrement,
-  handleBlur,
-  passCount,
   setOpen,
 }: Props) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <div role="dropdown-warapp" className="relative" onBlur={handleBlur}>
-      <MainSearchInput
-        name="date"
-        startIcon={<IconPass />}
-        type="button"
-        value={
-          passCount === 1
-            ? `${passCount} ${t('placeholderPassenger')}`
-            : passCount > 4
-              ? `${passCount} ${t('placeholderPassengersGenitive')}`
-              : `${passCount} ${t('placeholderPassengers')}`
-        }
-        onClick={() => {
-          setOpen((p) => !p);
-        }}
-      />
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <MainSearchInput
+          classNames="w-full"
+          name="date"
+          startIcon={<IconPass />}
+          type="button"
+          value={value}
+        />
+      </PopoverTrigger>
+      <PopoverContent
+        className="p-4 w-64 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
+        align="start"
+      >
+        <div className="p-2 space-y-4">
+          <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+            {t('passengers_count_title')}
+          </p>
+          <div className="flex items-center justify-between gap-3">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 rounded-lg text-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              onClick={handleDecrement}
+              disabled={v <= 1}
+            >
+              −
+            </Button>
 
-      {open ? (
-        <div
-          className="absolute right-0 z-50 p-4 mt-5 space-y-2 duration-200 bg-white top-full w-fit rounded-2xl dark:bg-slate-800 dark:border dark:border-slate-900 animate-in fade-in zoom-in tablet:min-w-[397px] shadow-sm"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-          }}
-        >
-          <PassengersButton value={v} handleIcrement={handleIncrement} handleDecrement={handleDecrement} />
+            <span className="text-2xl font-bold tabular-nums w-12 text-center text-slate-700 dark:text-slate-50">
+              {v}
+            </span>
+
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 rounded-lg text-2xl font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              onClick={handleIncrement}
+              disabled={v >= 10}
+            >
+              +
+            </Button>
+          </div>
         </div>
-      ) : null}
-    </div>
+      </PopoverContent>
+    </Popover>
   );
 }

@@ -4,9 +4,9 @@ import { useIsFetching } from '@tanstack/react-query';
 import CitySearchDesktop from './CitySearchDesktop';
 import CitySearchMobile from './CitySearchMobile';
 import { useCityData } from '@/features/route-search-form/hooks/useCityData';
-import { useCitySearch } from '@/features/route-search-form/hooks/useCitySearch';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { Dispatch, SetStateAction } from 'react';
+import { useAutocomplete } from '@/features/route-search-form/hooks/useAutocomplete';
 
 type Props = {
   name: 'from' | 'to';
@@ -22,27 +22,36 @@ type Props = {
 };
 
 export default function CitySearch({ name, variant, error, resetError, setErrorsRaw }: Props) {
+  const autocomplete = useAutocomplete({ name });
+
   const [, actions] = useRouterSearch();
 
   const isFetchingLocations = useIsFetching({ queryKey: ['locations'] });
 
   const { fromCity, toCity } = useCityData();
-
   const city = name === 'from' ? fromCity : toCity;
-
-  const search = useCitySearch({
-    name,
-  });
 
   const commonProps = {
     name,
-    city: city,
+    city,
     errors: error,
     setErrors: setErrorsRaw,
     swap: actions.swap,
     isFetchingLocations: !!isFetchingLocations,
     resetError,
-    ...search,
+    // все з useAutocomplete
+    open: autocomplete.open,
+    value: autocomplete.value,
+    inputRef: autocomplete.inputRef,
+    cities: autocomplete.cities,
+    highlightedIndex: autocomplete.highlightedIndex,
+    placeholder: autocomplete.placeholder,
+    onInputChange: autocomplete.onInputChange,
+    onKeyDown: autocomplete.onKeyDown,
+    onSelectCity: autocomplete.onSelectCity,
+    handleBlur: autocomplete.handleBlur,
+    handleToggleOpen: autocomplete.handleToggleOpen,
+    handleClearMobileInput: autocomplete.handleClearMobileInput,
   };
 
   switch (variant) {

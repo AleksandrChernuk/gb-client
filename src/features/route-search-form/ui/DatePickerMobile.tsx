@@ -1,5 +1,6 @@
+import React, { Dispatch, SetStateAction } from 'react';
 import { IconCalendar } from '@/assets/icons/IconCalendar';
-import { format, toDate } from 'date-fns';
+import { format, isBefore, addMonths, toDate } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import {
   Sheet,
@@ -10,19 +11,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/sheet';
-import { Button } from '@/shared/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, CalendarDays } from 'lucide-react';
 import { MainSearchInput } from './MainSearchInput';
-
 import { Calendar } from '@/shared/ui/calendar';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 
 type Props = {
   open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   handleToggleOpen: () => void;
   handleSelectDate: (data: Date) => void;
-  handleBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
   currentDate: string;
   month: Date;
   setMonth: (newMonth: Date) => void;
@@ -32,11 +31,10 @@ type Props = {
 
 export default function DatePickerMobile({
   open,
-  handleToggleOpen,
+  setOpen,
   handleSelectDate,
   currentDate,
   month,
-  setMonth,
   incrementMonth,
   decrementMonth,
 }: Props) {
@@ -44,7 +42,7 @@ export default function DatePickerMobile({
   const { locale } = useDateLocale();
 
   return (
-    <Sheet open={open} onOpenChange={handleToggleOpen}>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <MainSearchInput
           name="date"
@@ -53,63 +51,49 @@ export default function DatePickerMobile({
           value={format(currentDate || new Date(), 'dd MMMM', { locale })}
         />
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle className="sr-only">Edit profile</SheetTitle>
-          <SheetDescription className="sr-only">
-            Make changes to your profile here. Click save when youre done.
-          </SheetDescription>
+      <SheetContent
+        side="bottom"
+        className="rounded-t-[32px] p-0 h-auto overflow-hidden border-t shadow-2xl"
+      >
+        <SheetTitle className="sr-only"></SheetTitle>
+        <SheetDescription className="sr-only"></SheetDescription>
 
-          <SheetClose asChild>
-            <Button
-              variant={'link'}
-              className="flex items-center gap-1 text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50"
-            >
-              <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
-              {t('backBtn')}
-            </Button>
-          </SheetClose>
-        </SheetHeader>
-        <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
-          <div className="sticky top-0 left-0 right-0 z-50">
-            <div className="flex items-center justify-between w-full py-6 bg-slate-50 dark:bg-slate-900">
-              <h3 className="text-base font-bold leading-6 tracking-normal grow text-slate-700 dark:text-slate-50">
-                {t('date_picker_title')}
-              </h3>
-              <div className="flex items-center justify-end gap-2">
-                <Button
-                  className="w-8 h-8"
-                  size={'icon'}
-                  variant={'ghost'}
-                  onClick={decrementMonth}
-                  disabled={month < new Date()}
-                >
-                  <ChevronLeft className={'h-5 w-5 stroke-[#212529] dark:stroke-slate-200'} />
-                </Button>
-                <Button className="w-8 h-8" size={'icon'} variant={'ghost'} onClick={incrementMonth}>
-                  <ChevronRight className={'h-5 w-5 stroke-[#212529] dark:stroke-slate-200'} />
-                </Button>
-              </div>
+        <div className="flex flex-col bg-background pb-8">
+          <SheetHeader className="p-4 border-b bg-muted/20 text-left flex flex-row items-center justify-between border-none">
+            <div className="text-lg font-black flex items-center gap-2 text-slate-700 dark:text-slate-50">
+              <CalendarDays className="w-5 h-5 text-primary" />
+              {t('date_picker_title')}
             </div>
+            <SheetClose asChild>
+              <button
+                className="p-1 hover:bg-muted rounded-full transition-colors outline-none"
+                aria-label="Close"
+              >
+                <X className="w-6 h-6 text-primary stroke-[2.5]" />
+              </button>
+            </SheetClose>
+          </SheetHeader>
+          <div className="flex items-center justify-center p-4">
+            <Calendar
+              mode="single"
+              locale={locale}
+              month={month}
+              onMonthChange={(e) => {
+                if (isBefore(addMonths(e, 1), new Date())) return;
+                if (isBefore(month, e)) {
+                  return incrementMonth();
+                }
+                decrementMonth();
+              }}
+              selected={currentDate ? toDate(currentDate) : new Date()}
+              today={currentDate ? toDate(currentDate) : new Date()}
+              onSelect={(value) => {
+                handleSelectDate(value || new Date());
+              }}
+              disabled={{ before: new Date() }}
+              className="w-full flex justify-center scale-100 sm:scale-100"
+            />
           </div>
-          <Calendar
-            mode="single"
-            month={month}
-            hideNavigation
-            selected={currentDate ? toDate(currentDate) : toDate(new Date())}
-            today={currentDate ? toDate(currentDate) : toDate(new Date())}
-            onSelect={(value) => {
-              if (value) {
-                setMonth(toDate(value));
-              }
-              handleSelectDate(value || new Date());
-            }}
-            disabled={{ before: new Date() }}
-            className="rounded-none"
-            classNames={{ months: 'flex flex-col gap-4' }}
-            numberOfMonths={3}
-            locale={locale}
-          />
         </div>
       </SheetContent>
     </Sheet>

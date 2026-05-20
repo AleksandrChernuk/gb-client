@@ -1,6 +1,5 @@
 'use client';
 
-import { Separator } from '@radix-ui/react-dropdown-menu';
 import { Globe, Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import {
@@ -12,7 +11,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/sheet';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import Logo from '@/entities/company/Logo';
@@ -29,45 +27,88 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
     <div className="block tablet:hidden">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
-            <Menu size={24} className="stroke-white" />
+          <Button
+            variant="default"
+            size="icon"
+            className="p-2 rounded-xl bg-primary/10 hover:bg-primary/20 border-none shadow-none"
+            aria-label="Open menu"
+          >
+            <Menu size={22} className="stroke-primary" />
           </Button>
         </SheetTrigger>
-        <SheetContent>
-          <SheetHeader className="justify-between">
-            <SheetTitle className="sr-only"></SheetTitle>
-            <SheetDescription className="sr-only"></SheetDescription>
-            <SheetClose>
-              <Logo location="mobile" />
+
+        <SheetContent
+          side="bottom"
+          className="px-0 pb-0 pt-0 rounded-t-[28px] border-t-0 overflow-hidden bg-white dark:bg-slate-800 shadow-2xl"
+        >
+          {/* Drag handle */}
+          <div className="flex justify-center pt-3 pb-1">
+            <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+          </div>
+
+          <SheetHeader className="sr-only">
+            <SheetTitle>Menu</SheetTitle>
+            <SheetDescription>Navigation menu</SheetDescription>
+          </SheetHeader>
+
+          {/* Header row: logo + close */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 dark:border-slate-800">
+            <SheetClose asChild>
+              <button aria-label="Close menu" className="outline-none">
+                <Logo location="mobile" />
+              </button>
             </SheetClose>
             <SheetClose asChild>
-              <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
-                <X size={24} className="stroke-white" />
-              </Button>
+              <button
+                className="p-1.5 rounded-full hover:bg-muted transition-colors outline-none"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 text-primary stroke-[2.5]" />
+              </button>
             </SheetClose>
-          </SheetHeader>
-          <ScrollArea className="relative w-full mx-auto overflow-y-scroll shadow-xs grow bg-slate-50 dark:bg-slate-900 ">
-            <div className="flex flex-col gap-2 p-5">
-              {!isAuthHeader && <ProfileLink variant="mobile" />}
+          </div>
+
+          {/* Menu items */}
+          <div className="px-4 py-4 space-y-1 overflow-y-auto max-h-[70dvh]">
+
+            {/* Profile */}
+            {!isAuthHeader && (
+              <SheetClose asChild>
+                <div className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+                  <ProfileLink variant="mobile" />
+                </div>
+              </SheetClose>
+            )}
+
+            {/* Support */}
+            <div className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
               <Support variant="mobile" />
             </div>
-            <Separator className="h-[1px] bg-[#e6e6e6] dark:bg-slate-700 my-2" />
-            <div className="flex flex-col gap-2 p-5">
+
+            {/* Divider */}
+            <div className="h-px bg-slate-100 dark:bg-slate-800 my-2" />
+
+            {/* Language */}
+            <div className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
               <Suspense>
                 <SelectLocale variant="mobile" />
               </Suspense>
-
-              <div className="flex flex-row items-center justify-between py-2">
-                <div className="flex flex-row items-center gap-2">
-                  <Globe size={24} className="stroke-primary" />
-                  <p className="text-slate-700 dark:text-slate-50 text-base font-medium tracking-normal leading-[24px]">
-                    {t('site_theme')}
-                  </p>
-                </div>
-                <SwitchTheme />
-              </div>
             </div>
-          </ScrollArea>
+
+            {/* Theme toggle */}
+            <div className="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <div className="flex items-center gap-2">
+                <Globe size={24} className="stroke-primary shrink-0" />
+                <p className="text-slate-700 dark:text-slate-50 text-base font-medium leading-6">
+                  {t('site_theme')}
+                </p>
+              </div>
+              <SwitchTheme />
+            </div>
+          </div>
+
+          {/* Safe area bottom spacer */}
+          <div className="pb-8 bg-white dark:bg-slate-800" />
         </SheetContent>
       </Sheet>
     </div>
