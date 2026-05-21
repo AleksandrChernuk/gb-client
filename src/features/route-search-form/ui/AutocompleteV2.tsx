@@ -77,7 +77,7 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
                 target.setSelectionRange(val.length, val.length);
               }, 10);
             }}
-            className="flex h-12 w-full bg-transparent py-2 text-[15px] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 px-2"
+            className="flex h-12 w-full bg-transparent py-2 text-[16px] outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 px-2"
           />
           {inputValue && (
             <button

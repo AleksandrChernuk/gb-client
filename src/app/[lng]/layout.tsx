@@ -48,11 +48,12 @@ export const metadata: Metadata = {
   },
 };
 
-export function generateViewport() {
+export function generateViewport(): import('next').Viewport {
   return {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 5,
+    maximumScale: 1,
+    userScalable: false,
   };
 }
 

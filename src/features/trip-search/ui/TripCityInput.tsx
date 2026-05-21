@@ -123,7 +123,7 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
                 autoComplete="off"
                 autoCapitalize="off"
                 spellCheck={false}
-                className="text-slate-700 dark:text-slate-50 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-4 pr-12 w-full bg-white dark:bg-slate-800 rounded-lg border border-slate-300 dark:border-slate-600 focus:border-green-400 focus:outline-none"
+                className="text-[16px] text-slate-700 dark:text-slate-50 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-4 pr-12 w-full bg-white dark:bg-slate-800 rounded-lg border border-slate-300 dark:border-slate-600 focus:border-green-400 focus:outline-none"
               />
               {inputValue.length > 0 && <ClearInputButton onClear={handleClear} />}
             </div>
