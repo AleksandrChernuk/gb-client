@@ -21,7 +21,6 @@ function GroupedCitiesList({ groups, locale }: Props) {
                     <Link
                       prefetch={false}
                       href={`/${locale}/all-countries/${city.country.slug}/${city.slug}/`}
-                      rel="nofollow noopener noreferrer"
                     >
                       {extractLocationDetails(city, locale).locationName}
                     </Link>

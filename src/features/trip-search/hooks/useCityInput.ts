@@ -155,7 +155,8 @@ export const useCityInput = ({ name, initialFavorites, initialCity, resetError }
     setInputValue('');
     setIsSelected(false);
     setHighlightedIndex(-1);
-  }, []);
+    actions.setCityId(name, '');
+  }, [actions, name]);
 
   return {
     open,

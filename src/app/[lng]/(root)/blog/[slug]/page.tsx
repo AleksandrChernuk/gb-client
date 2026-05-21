@@ -38,6 +38,8 @@ export async function generateStaticParams() {
   );
 }
 
+const OWN_HOST = 'greenbus.com.ua';
+
 const options = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -45,11 +47,22 @@ const options = {
   replace(domNode: any) {
     if (domNode.name === 'a' && domNode.attribs?.href) {
       const href = domNode.attribs.href;
-      const isExternal = /^https?:\/\//i.test(href);
+      const isAbsolute = /^https?:\/\//i.test(href);
 
-      if (isExternal) {
+      if (isAbsolute) {
+        try {
+          const url = new URL(href);
+          if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
+            return (
+              <Link href={url.pathname + url.search + url.hash} prefetch={false}>
+                {domToReact(domNode.children, options)}
+              </Link>
+            );
+          }
+        } catch {}
+
         return (
-          <a href={href} target="_blank" rel="noopener noreferrer">
+          <a href={href} target="_blank" rel="nofollow noopener noreferrer">
             {domToReact(domNode.children, options)}
           </a>
         );

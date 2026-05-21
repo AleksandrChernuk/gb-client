@@ -36,7 +36,7 @@ export default async function Questions() {
         </ul>
         <div className="text-right">
           <Link
-            href={'/faq'}
+            href={'/faq/'}
             className="underline-offset-4 py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal  text-green-600! hover:underline transition-all"
           >
             {`${t_main('questions_button')} >`}

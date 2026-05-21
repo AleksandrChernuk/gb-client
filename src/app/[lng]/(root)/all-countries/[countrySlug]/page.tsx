@@ -34,18 +34,27 @@ const META_BY_LOCALE = {
   }),
 } as const;
 
+const OWN_HOST = 'greenbus.com.ua';
+
 const parserOptions: HTMLReactParserOptions = {
   replace(domNode) {
     if (!(domNode instanceof Element)) return;
     if (domNode.name !== 'a' || !domNode.attribs?.href) return;
 
     const href = domNode.attribs.href;
-    const isExternal = /^https?:\/\//i.test(href);
+    const isAbsolute = /^https?:\/\//i.test(href);
     const children = domNode.children as DOMNode[];
 
-    if (isExternal) {
+    if (isAbsolute) {
+      try {
+        const url = new URL(href);
+        if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
+          return <Link href={url.pathname + url.search + url.hash}>{domToReact(children, parserOptions)}</Link>;
+        }
+      } catch {}
+
       return (
-        <a href={href} target="_blank">
+        <a href={href} target="_blank" rel="nofollow noopener noreferrer">
           {domToReact(children, parserOptions)}
         </a>
       );

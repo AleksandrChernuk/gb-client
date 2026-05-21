@@ -32,7 +32,7 @@ export default function Legal() {
           {t.rich('consent_text', {
             pp: (chunks) => (
               <Link
-                href="/privacy-policy"
+                href="/privacy-policy/"
                 prefetch={false}
                 target="_blanck"
                 className={`underline  hover:text-green-100 ${!!error && 'text-[#de2a1a]'}`}

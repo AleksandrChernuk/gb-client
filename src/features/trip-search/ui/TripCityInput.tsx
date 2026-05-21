@@ -65,7 +65,7 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
   const mobilePlaceholder = city ? extractLocationDetails(city, locale).locationName : placeholder;
 
   const cityList = (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       {!isSearching && (
         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">{t('popularCities')}</p>
       )}
@@ -74,8 +74,8 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
       ) : !cities.length ? (
         <NotFoundCity />
       ) : (
-        <ScrollArea>
-          <div className="max-h-83.5">
+        <ScrollArea className="flex-1">
+          <div className={variant === 'mobile' ? 'pb-20' : 'max-h-[334px]'}>
             {cities.map((el, idx) => (
               <CityItem
                 key={el.id}

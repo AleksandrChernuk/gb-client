@@ -90,7 +90,12 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
           )}
         </div>
       </div>
-      <CommandList className="max-h-[340px] overflow-y-auto px-2 pt-2 pb-2 scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20">
+      <CommandList 
+        className={cn(
+          "overflow-y-auto px-2 pt-2 pb-2 scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20",
+          variant === 'mobile' ? "max-h-none h-full flex-1" : "max-h-[340px]"
+        )}
+      >
         <CommandEmpty className="py-12 text-center">
           {isLoading ? (
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">

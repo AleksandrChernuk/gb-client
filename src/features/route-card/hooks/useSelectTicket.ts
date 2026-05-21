@@ -19,7 +19,7 @@ export function useSelectTicket() {
     if (['euroclub'].includes(route.providerName.toLowerCase())) {
       setSelectedTicket({ route: route, voyagers: params.voyagers });
 
-      router.push('/checkout');
+      router.push('/checkout/');
       return;
     }
 
@@ -37,7 +37,7 @@ export function useSelectTicket() {
 
       setSelectedTicket({ route: updatedRoute, voyagers: params.voyagers });
 
-      router.push('/checkout');
+      router.push('/checkout/');
     } finally {
       setLoading(null);
     }

@@ -56,7 +56,7 @@ export function TripSearchForm({ initialFavorites }: Props) {
     if (voyagers !== 1) searchParams.set('voyagers', String(voyagers));
 
     startTransition(() => {
-      router.push(`/buses?${searchParams.toString()}`, { scroll: true });
+      router.push(`/buses/?${searchParams.toString()}`, { scroll: true });
     });
   };
 
