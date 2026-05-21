@@ -9,15 +9,15 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { PassengersButton } from '@/features/route-search-form/ui/helpers/PassengersButton';
 import { IconPass } from '@/assets/icons/IconPass';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { Button } from '@/shared/ui/button';
 import { TripSearchInput } from './TripSearchInput';
 
@@ -48,38 +48,29 @@ export function TripPassengers({ variant }: Props) {
 
   if (variant === 'mobile') {
     return (
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>
           <TripSearchInput name="voyagers" startIcon={<IconPass />} type="button" value={label} />
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle className="sr-only" />
-            <SheetDescription className="sr-only" />
-            <SheetClose asChild>
-              <Button
-                variant="link"
-                className="flex items-center gap-1 text-base font-bold text-slate-700 dark:text-slate-50"
-              >
-                <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
-                {t('backBtn')}
-              </Button>
-            </SheetClose>
-          </SheetHeader>
+        </DrawerTrigger>
+        <DrawerContent className="h-[92dvh] max-h-[92dvh] px-0 pb-0 rounded-t-[24px] overflow-hidden border-t shadow-2xl flex flex-col">
+          <DrawerHeader className="text-left border-none">
+            <DrawerTitle className="sr-only" />
+            <DrawerDescription className="sr-only" />
+          </DrawerHeader>
           <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
             <div className="my-5">
               <PassengersButton value={count} handleIcrement={increment} handleDecrement={decrement} />
             </div>
           </div>
-          <SheetFooter>
-            <SheetClose asChild>
-              <Button variant="default" size="primary" className="w-full text-base font-bold rounded-full">
+          <DrawerFooter>
+            <DrawerClose asChild>
+              <Button variant="default" size="primary" className="w-full text-base font-bold rounded-full mb-6">
                 {t('continue')}
               </Button>
-            </SheetClose>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     );
   }
 

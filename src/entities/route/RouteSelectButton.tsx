@@ -49,7 +49,7 @@ export default function SelectButton({
       ) : (
         buttonText
       )}
-      {!disabled && <BorderBeam duration={8} size={50} className="from-transparent via-green-100 to-transparent" />}
+      {!disabled && <BorderBeam duration={8} size={50} className="from-transparent via-[#7AF2A6]/60 to-transparent" />}
     </Button>
   );
 }

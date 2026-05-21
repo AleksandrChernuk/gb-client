@@ -11,14 +11,14 @@ import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import MainLoader from '@/shared/ui/MainLoader';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { Button } from '@/shared/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
@@ -93,8 +93,8 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
 
   if (variant === 'mobile') {
     return (
-      <Sheet open={open} onOpenChange={handleOpenChangeMobile}>
-        <SheetTrigger asChild>
+      <Drawer open={open} onOpenChange={handleOpenChangeMobile}>
+        <DrawerTrigger asChild>
           <TripSearchInput
             name={name}
             startIcon={startIcon}
@@ -105,21 +105,12 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
             error={error}
             errorMessage={t_form('required')}
           />
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle className="sr-only" />
-            <SheetDescription className="sr-only" />
-            <SheetClose asChild>
-              <Button
-                variant="link"
-                className="flex items-center gap-1 text-base font-bold text-slate-700 dark:text-slate-50"
-              >
-                <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
-                {t('backBtn')}
-              </Button>
-            </SheetClose>
-          </SheetHeader>
+        </DrawerTrigger>
+        <DrawerContent className="h-[92dvh] max-h-[92dvh] px-0 pb-0 rounded-t-[24px] overflow-hidden border-t shadow-2xl flex flex-col">
+          <DrawerHeader className="text-left border-none">
+            <DrawerTitle className="sr-only" />
+            <DrawerDescription className="sr-only" />
+          </DrawerHeader>
 
           {/* sticky инпут поиска */}
           <div className="sticky top-0 z-10 px-5 py-3 bg-slate-50 dark:bg-slate-900">
@@ -140,8 +131,8 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
 
           {/* список городов */}
           <div className="flex-1 overflow-y-auto px-5 py-2 bg-slate-50 dark:bg-slate-900">{cityList}</div>
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     );
   }
 

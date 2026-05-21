@@ -37,16 +37,14 @@ const buttonVariants = cva(
         link: 'text-green-300 underline-offset-4 hover:underline active:opacity-90',
 
         cta:
-          'bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-base font-bold leading-6 tracking-normal text-white ' +
-          'dark:shadow-orange-500/30 dark:hover:shadow-orange-500/40 ' +
+          'bg-[#7AF2A6] hover:bg-[#5CE08E] active:bg-[#4AD47E] text-base font-bold leading-6 tracking-normal text-slate-900 ' +
           'rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
 
         main:
           'bg-green-600 hover:bg-green-600/80 active:bg-green-600/75 text-base font-bold leading-6 tracking-normal text-black ' +
           'rounded-none rounded-br-[16px] rounded-bl-[16px] tablet:rounded-tl-none tablet:rounded-tr-[16px] tablet:rounded-bl-none',
         select:
-          'bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white slashed-zero ' +
-          'dark:shadow-orange-500/30 dark:hover:shadow-orange-500/40',
+          'bg-[#7AF2A6] hover:bg-[#5CE08E] active:bg-[#4AD47E] text-slate-900 slashed-zero',
       },
 
       size: {

@@ -3,14 +3,14 @@ import { IconCalendar } from '@/assets/icons/IconCalendar';
 import { format, isBefore, addMonths, toDate } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { X, CalendarDays } from 'lucide-react';
 import { MainSearchInput } from './MainSearchInput';
 import { Calendar } from '@/shared/ui/calendar';
@@ -42,37 +42,26 @@ export default function DatePickerMobile({
   const { locale } = useDateLocale();
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <MainSearchInput
           name="date"
           startIcon={<IconCalendar />}
           type="button"
           value={format(currentDate || new Date(), 'dd MMMM', { locale })}
         />
-      </SheetTrigger>
-      <SheetContent
-        side="bottom"
-        className="rounded-t-[32px] p-0 h-auto overflow-hidden border-t shadow-2xl"
-      >
-        <SheetTitle className="sr-only"></SheetTitle>
-        <SheetDescription className="sr-only"></SheetDescription>
+      </DrawerTrigger>
+      <DrawerContent className="rounded-t-[32px] p-0 h-auto overflow-hidden border-t shadow-2xl">
+        <DrawerTitle className="sr-only"></DrawerTitle>
+        <DrawerDescription className="sr-only"></DrawerDescription>
 
         <div className="flex flex-col bg-background pb-8">
-          <SheetHeader className="p-4 border-b bg-muted/20 text-left flex flex-row items-center justify-between border-none">
+          <DrawerHeader className="p-4 border-b text-left flex flex-row items-center justify-between border-none">
             <div className="text-lg font-black flex items-center gap-2 text-slate-700 dark:text-slate-50">
               <CalendarDays className="w-5 h-5 text-primary" />
               {t('date_picker_title')}
             </div>
-            <SheetClose asChild>
-              <button
-                className="p-1 hover:bg-muted rounded-full transition-colors outline-none"
-                aria-label="Close"
-              >
-                <X className="w-6 h-6 text-primary stroke-[2.5]" />
-              </button>
-            </SheetClose>
-          </SheetHeader>
+          </DrawerHeader>
           <div className="flex items-center justify-center p-4">
             <Calendar
               mode="single"
@@ -95,7 +84,7 @@ export default function DatePickerMobile({
             />
           </div>
         </div>
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 }

@@ -95,7 +95,7 @@ export function TripSearchForm({ initialFavorites }: Props) {
           onClick={handleSubmit}
           className="disabled:opacity-100"
         >
-          {isPending ? <LoaderCircle className="animate-spin" stroke="white" /> : t('searchBtn')}
+          {isPending ? <LoaderCircle className="animate-spin" stroke="currentColor" /> : t('searchBtn')}
         </Button>
       </div>
     </div>

@@ -63,19 +63,15 @@ export default function Support({ variant }: Props) {
 
   if (variant === 'mobile') {
     return (
-      <Accordion type="single" collapsible>
-        <AccordionItem value="support">
-          <AccordionTrigger className="py-2" aria-label={t('mainNavSupportLink')}>
-            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium leading-6">
-              <Phone size={24} className="stroke-primary" aria-hidden="true" />
-              {t('mainNavSupportLink')}
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="pt-2 pb-0 pl-1">
-            <SupportLinksList className="justify-start text-base font-normal text-black dark:text-slate-50" />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2 text-slate-700 dark:text-slate-50 text-base font-medium leading-6 py-2">
+          <Phone size={24} className="stroke-primary" aria-hidden="true" />
+          {t('mainNavSupportLink')}
+        </div>
+        <div className="pl-1 pb-2">
+          <SupportLinksList className="justify-start text-base font-normal text-black dark:text-slate-50" />
+        </div>
+      </div>
     );
   }
 

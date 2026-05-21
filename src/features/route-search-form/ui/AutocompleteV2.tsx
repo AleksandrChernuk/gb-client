@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useAutocomplete } from '../hooks/useAutocomplete';
 import { useCityData } from '../hooks/useCityData';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose, SheetDescription } from '@/shared/ui/sheet';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose, DrawerDescription } from '@/shared/ui/drawer';
 import { MapPin, X, Search } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
@@ -90,7 +90,7 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
           )}
         </div>
       </div>
-      <CommandList 
+      <CommandList
         className={cn(
           "overflow-y-auto px-2 pt-2 pb-2 scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20",
           variant === 'mobile' ? "max-h-none h-full flex-1" : "max-h-[340px]"
@@ -142,9 +142,8 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
       classNames={cn(
         'w-full',
         variant === 'desktop'
-          ? `border-r border-r-slate-200 dark:border-r-slate-700 ${
-              open && 'dark:border-r-transparent border-r-transparent'
-            } ${Boolean(error) && 'dark:border-r-transparent border-r-transparent'}`
+          ? `border-r border-r-slate-200 dark:border-r-slate-700 ${open && 'dark:border-r-transparent border-r-transparent'
+          } ${Boolean(error) && 'dark:border-r-transparent border-r-transparent'}`
           : '',
       )}
       startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
@@ -170,34 +169,25 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
     return (
       <div className="w-full">
         {trigger}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent
-            side="bottom"
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerContent
             className="h-[92dvh] max-h-[92dvh] px-0 pb-0 rounded-t-[24px] overflow-hidden border-t shadow-2xl flex flex-col"
           >
             <div className="flex flex-col h-full bg-background">
-              <SheetHeader className="px-5 pb-1 pt-4 text-left border-none">
-                <SheetTitle className="sr-only"></SheetTitle>
-                <SheetDescription className="sr-only"></SheetDescription>
+              <DrawerHeader className="text-left border-none">
+                <DrawerTitle className="sr-only"></DrawerTitle>
+                <DrawerDescription className="sr-only"></DrawerDescription>
 
                 <div className="flex items-center justify-between w-full">
                   <span className="text-base font-black tracking-tight text-slate-700 dark:text-slate-50">
                     {name === 'from' ? t('headerFrom') : t('headerTo')}
                   </span>
-                  <SheetClose asChild>
-                    <button
-                      className="p-1 hover:bg-muted rounded-full transition-colors outline-none"
-                      aria-label="Close"
-                    >
-                      <X className="w-6 h-6 text-primary stroke-[2.5]" />
-                    </button>
-                  </SheetClose>
                 </div>
-              </SheetHeader>
+              </DrawerHeader>
               <div className="flex-1 overflow-hidden pt-3">{commandContent}</div>
             </div>
-          </SheetContent>
-        </Sheet>
+          </DrawerContent>
+        </Drawer>
       </div>
     );
   }

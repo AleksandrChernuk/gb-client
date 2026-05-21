@@ -3,14 +3,14 @@
 import { Globe, Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Button } from '@/shared/ui/button';
 import Logo from '@/entities/company/Logo';
@@ -25,8 +25,8 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
 
   return (
     <div className="block tablet:hidden">
-      <Sheet>
-        <SheetTrigger asChild>
+      <Drawer>
+        <DrawerTrigger asChild>
           <Button
             variant="default"
             size="icon"
@@ -35,49 +35,26 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
           >
             <Menu size={22} className="stroke-primary" />
           </Button>
-        </SheetTrigger>
+        </DrawerTrigger>
 
-        <SheetContent
-          side="bottom"
-          className="px-0 pb-0 pt-0 rounded-t-[28px] border-t-0 overflow-hidden bg-white dark:bg-slate-800 shadow-2xl"
-        >
-          {/* Drag handle */}
-          <div className="flex justify-center pt-3 pb-1">
-            <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
-          </div>
+        <DrawerContent className="px-0 pb-0 pt-0 rounded-t-[28px] border-t-0 overflow-hidden bg-white dark:bg-slate-800 shadow-2xl">
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>Menu</DrawerTitle>
+            <DrawerDescription>Navigation menu</DrawerDescription>
+          </DrawerHeader>
 
-          <SheetHeader className="sr-only">
-            <SheetTitle>Menu</SheetTitle>
-            <SheetDescription>Navigation menu</SheetDescription>
-          </SheetHeader>
 
-          {/* Header row: logo + close */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 dark:border-slate-800">
-            <SheetClose asChild>
-              <button aria-label="Close menu" className="outline-none">
-                <Logo location="mobile" />
-              </button>
-            </SheetClose>
-            <SheetClose asChild>
-              <button
-                className="p-1.5 rounded-full hover:bg-muted transition-colors outline-none"
-                aria-label="Close"
-              >
-                <X className="w-5 h-5 text-primary stroke-[2.5]" />
-              </button>
-            </SheetClose>
-          </div>
 
           {/* Menu items */}
           <div className="px-4 py-4 space-y-1 overflow-y-auto max-h-[70dvh]">
 
             {/* Profile */}
             {!isAuthHeader && (
-              <SheetClose asChild>
+              <DrawerClose asChild>
                 <div className="px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer">
                   <ProfileLink variant="mobile" />
                 </div>
-              </SheetClose>
+              </DrawerClose>
             )}
 
             {/* Support */}
@@ -109,8 +86,8 @@ export const HeaderMobileMenu = ({ isAuthHeader }: { isAuthHeader?: boolean }) =
 
           {/* Safe area bottom spacer */}
           <div className="pb-8 bg-white dark:bg-slate-800" />
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };

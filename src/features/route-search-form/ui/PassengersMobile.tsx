@@ -1,12 +1,12 @@
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { Button } from '@/shared/ui/button';
 import { ChevronLeft, X } from 'lucide-react';
 import { MainSearchInput } from './MainSearchInput';
@@ -38,31 +38,20 @@ export default function PassengersMobile({
   const t = useTranslations(MESSAGE_FILES.COMMON);
 
   return (
-    <Sheet open={open} onOpenChange={handleOpenChange}>
-      <SheetTrigger asChild>
+    <Drawer open={open} onOpenChange={handleOpenChange}>
+      <DrawerTrigger asChild>
         <MainSearchInput name="date" startIcon={<IconPass />} type="button" value={value} />
-      </SheetTrigger>
-      <SheetContent
-        side="bottom"
-        className="rounded-t-3xl p-0 h-auto pb-6 overflow-hidden border-t shadow-2xl"
-      >
-        <SheetDescription className="sr-only"></SheetDescription>
+      </DrawerTrigger>
+      <DrawerContent className="rounded-t-3xl p-0 h-auto overflow-hidden border-t shadow-2xl">
+        <DrawerDescription className="sr-only"></DrawerDescription>
 
-        <SheetHeader className="p-4 border-b bg-muted/20 text-left flex flex-row items-center justify-between border-none">
-          <SheetTitle className="text-lg font-bold flex items-center gap-2 text-slate-700 dark:text-slate-50">
+        <DrawerHeader className="p-4 border-b text-left flex flex-row items-center justify-between border-none">
+          <DrawerTitle className="text-lg font-bold flex items-center gap-2 text-slate-700 dark:text-slate-50">
             <IconPass />
             {t('placeholderPassengers')}
-          </SheetTitle>
-          <SheetClose asChild>
-            <button
-              className="p-1 hover:bg-muted rounded-full transition-colors outline-none"
-              aria-label="Close"
-            >
-              <X className="w-6 h-6 text-primary stroke-[2.5]" />
-            </button>
-          </SheetClose>
-        </SheetHeader>
-        <div className="p-6 bg-background">
+          </DrawerTitle>
+        </DrawerHeader>
+        <div className="p-6 pb-8 bg-background">
           <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-4 text-center">
             {t('passengers_count_title')}
           </p>
@@ -91,13 +80,13 @@ export default function PassengersMobile({
               +
             </Button>
           </div>
-          <SheetClose asChild>
+          <DrawerClose asChild>
             <Button className="w-full mt-8 h-10 rounded-xl font-black text-sm">
               {t('done')}
             </Button>
-          </SheetClose>
+          </DrawerClose>
         </div>
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 }

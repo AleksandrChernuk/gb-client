@@ -12,14 +12,14 @@ import { IconCalendar } from '@/assets/icons/IconCalendar';
 import useDateLocale from '@/shared/hooks/useDateLocale';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { TripSearchInput } from './TripSearchInput';
 
 type Props = {
@@ -71,24 +71,15 @@ export function TripDatePicker({ variant }: Props) {
 
   if (variant === 'mobile') {
     return (
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>
           <TripSearchInput name="date" startIcon={<IconCalendar />} type="button" value={displayValue} />
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle className="sr-only" />
-            <SheetDescription className="sr-only" />
-            <SheetClose asChild>
-              <Button
-                variant="link"
-                className="flex items-center gap-1 text-base font-bold text-slate-700 dark:text-slate-50"
-              >
-                <ChevronLeft size={24} className="stroke-slate-700 dark:stroke-slate-50" />
-                {t('backBtn')}
-              </Button>
-            </SheetClose>
-          </SheetHeader>
+        </DrawerTrigger>
+        <DrawerContent className="h-[92dvh] max-h-[92dvh] px-0 pb-0 rounded-t-[24px] overflow-hidden border-t shadow-2xl flex flex-col">
+          <DrawerHeader className="text-left border-none">
+            <DrawerTitle className="sr-only" />
+            <DrawerDescription className="sr-only" />
+          </DrawerHeader>
           <div className="relative px-5 overflow-y-scroll grow bg-slate-50 dark:bg-slate-900">
             <div className="sticky top-0 z-50">
               <div className="flex items-center justify-between w-full py-6 bg-slate-50 dark:bg-slate-900">
@@ -118,8 +109,8 @@ export function TripDatePicker({ variant }: Props) {
               onMonthChange={setMonth}
             />
           </div>
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     );
   }
 
