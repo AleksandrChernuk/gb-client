@@ -93,7 +93,7 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
 
   if (variant === 'mobile') {
     return (
-      <Drawer open={open} onOpenChange={handleOpenChangeMobile}>
+      <Drawer open={open} onOpenChange={handleOpenChangeMobile} repositionInputs={false}>
         <DrawerTrigger asChild>
           <TripSearchInput
             name={name}

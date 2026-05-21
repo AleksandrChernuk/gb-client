@@ -169,7 +169,7 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
     return (
       <div className="w-full">
         {trigger}
-        <Drawer open={open} onOpenChange={setOpen}>
+        <Drawer open={open} onOpenChange={setOpen} repositionInputs={false}>
           <DrawerContent
             className="h-[92dvh] max-h-[92dvh] px-0 pb-0 rounded-t-[24px] overflow-hidden border-t shadow-2xl flex flex-col"
           >
