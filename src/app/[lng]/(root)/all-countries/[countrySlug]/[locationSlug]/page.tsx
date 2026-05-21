@@ -12,6 +12,15 @@ import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'htm
 
 const OWN_HOST = 'greenbus.com.ua';
 
+function cleanPathname(pathname: string) {
+  const locales = ['uk', 'ru', 'en'];
+  const parts = pathname.split('/').filter(Boolean);
+  if (locales.includes(parts[0])) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return pathname;
+}
+
 const parserOptions: HTMLReactParserOptions = {
   replace(domNode) {
     if (!(domNode instanceof Element)) return;
@@ -25,7 +34,8 @@ const parserOptions: HTMLReactParserOptions = {
       try {
         const url = new URL(href);
         if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
-          return <Link href={url.pathname + url.search + url.hash}>{domToReact(children, parserOptions)}</Link>;
+          const pathname = cleanPathname(url.pathname);
+          return <Link href={pathname + url.search + url.hash}>{domToReact(children, parserOptions)}</Link>;
         }
       } catch {}
 
@@ -36,7 +46,8 @@ const parserOptions: HTMLReactParserOptions = {
       );
     }
 
-    return <Link href={href}>{domToReact(children, parserOptions)}</Link>;
+    const pathname = cleanPathname(href);
+    return <Link href={pathname}>{domToReact(children, parserOptions)}</Link>;
   },
 };
 
@@ -45,7 +56,7 @@ type Props = {
 };
 
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
-import Link from 'next/link';
+import { Link } from '@/shared/i18n/routing';
 
 export async function generateMetadata({ params }: Props) {
   const { lng, locationSlug } = (await params) as { lng: Locale; locationSlug: string };

@@ -40,6 +40,15 @@ export async function generateStaticParams() {
 
 const OWN_HOST = 'greenbus.com.ua';
 
+function cleanPathname(pathname: string) {
+  const locales = ['uk', 'ru', 'en'];
+  const parts = pathname.split('/').filter(Boolean);
+  if (locales.includes(parts[0])) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return pathname;
+}
+
 const options = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -53,8 +62,10 @@ const options = {
         try {
           const url = new URL(href);
           if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
+            const pathname = cleanPathname(url.pathname);
+            
             return (
-              <Link href={url.pathname + url.search + url.hash} prefetch={false}>
+              <Link href={pathname + url.search + url.hash} prefetch={false}>
                 {domToReact(domNode.children, options)}
               </Link>
             );
@@ -68,8 +79,9 @@ const options = {
         );
       }
 
+      const pathname = cleanPathname(href);
       return (
-        <Link href={href} prefetch={false}>
+        <Link href={pathname} prefetch={false}>
           {domToReact(domNode.children, options)}
         </Link>
       );
