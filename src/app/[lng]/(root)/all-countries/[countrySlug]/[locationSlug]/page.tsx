@@ -1,4 +1,6 @@
-import { getLocationBySlug } from '@/shared/api/location.actions';
+export const revalidate = 3600;
+
+import { getFavoriteLocations, getLocationBySlug } from '@/shared/api/location.actions';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Container } from '@/shared/ui/Container';
@@ -55,6 +57,21 @@ type Props = {
   params: Promise<{ lng: string; locationSlug: string }>;
 };
 
+export async function generateStaticParams() {
+  try {
+    const favorites = await getFavoriteLocations();
+
+    return favorites.flatMap((location) =>
+      location.translations.map((tr) => ({
+        lng: tr.language,
+        countrySlug: location.country.slug,
+        locationSlug: location.slug,
+      })),
+    );
+  } catch {
+    return [];
+  }
+}
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Link } from '@/shared/i18n/routing';
 

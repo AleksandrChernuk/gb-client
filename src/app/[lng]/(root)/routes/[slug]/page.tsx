@@ -8,18 +8,25 @@ import MainFooter from '@/widgets/footer/MainFooter';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { RouteSchema } from '@/views/favorite-route-slug/RouteSchema';
+import { locales } from '@/shared/i18n/locales';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
 };
 
 export async function generateStaticParams() {
-  try {
-    const res = await getFavoriteRoutes({ page: 1, perPage: 1000, lang: 'uk' });
-    return res.data.map((route) => ({ slug: route.slug }));
-  } catch {
-    return [];
-  }
+  const results = await Promise.all(
+    locales.map(async (lng) => {
+      try {
+        const res = await getFavoriteRoutes({ page: 1, perPage: 1000, lang: lng });
+        return res.data.map((route) => ({ lng, slug: route.slug }));
+      } catch {
+        return [];
+      }
+    }),
+  );
+
+  return results.flat();
 }
 
 export async function generateMetadata({ params }: Props) {

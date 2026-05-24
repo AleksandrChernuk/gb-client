@@ -5,7 +5,7 @@ import { Locale } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 import { notFound } from 'next/navigation';
-import { getCountryBySlug } from '@/shared/api/countries.actions';
+import { getAllCountries, getCountryBySlug } from '@/shared/api/countries.actions';
 import { H1 } from '@/shared/ui/H1';
 import CustomCard from '@/shared/ui/CustomCard';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
@@ -18,6 +18,23 @@ import { H2 } from '@/shared/ui/H2';
 type Props = {
   params: Promise<{ lng: Locale; countrySlug: string }>;
 };
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  try {
+    const countries = await getAllCountries();
+
+    return countries.flatMap((country) =>
+      country.translations.map((tr) => ({
+        lng: tr.language,
+        countrySlug: country.slug,
+      })),
+    );
+  } catch {
+    return [];
+  }
+}
 
 const META_BY_LOCALE = {
   uk: (name: string) => ({
