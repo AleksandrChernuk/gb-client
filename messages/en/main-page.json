@@ -1,10 +1,11 @@
 {
   "main-page": {
+    "buses_image_alt": "Bus travel from Ukraine to Europe — passenger with a suitcase",
     "benefits_title": "Benefits of booking bus tickets with GreenBus",
     "herow_title": "Buy Bus Tickets Online",
-    "buses_title": "Choose your destination and go",
-    "buses_description": "Buy bus tickets online in just a few clicks, without queues or overpayments. GreenBus is a modern aggregator bringing together offers from hundreds of carriers in one place.\n\nNo more checking dozens of websites to compare prices or find a convenient bus schedule — we’ve already done it for you.\n\nPlanning a trip within Ukraine or a long journey to Europe? Our service offers tickets for international routes to Poland, Germany, the Czech Republic, Italy, and over 20 other countries.",
-    "buses_button": "All destinations",
+    "buses_title": "Bus Tickets Online — Ukraine and Europe Routes",
+    "buses_description": "GreenBus is a bus ticket aggregator with hundreds of carriers across Ukraine and Europe. Compare prices, choose a convenient schedule and buy your ticket online without queues or extra fees. Your e-ticket will be sent to your email immediately after payment.\n\nInternational routes available to Poland, Germany, Czech Republic, Italy, Austria, Slovakia and 20+ more countries. Domestic routes across Ukraine — Kyiv, Lviv, Odesa, Kharkiv, Dnipro and more.",
+    "buses_button": "Buy Ticket",
     "сarriers_title": "Reliable Carriers",
     "сarriers_description": "We partner only with verified companies. Compare ratings, read real reviews, and choose the best service at the best price.",
     "сarriers_button": "All Carriers",

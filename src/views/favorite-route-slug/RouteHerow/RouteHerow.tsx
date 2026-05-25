@@ -24,7 +24,7 @@ export default async function RouteHerow({ fromName, toName, currentHref }: Rout
             items={[
               { label: t('breadcrumbs_home'), href: '/' },
               { label: t('breadcrumb_popular_routes'), href: '/routes/' },
-              { label: `${fromName} — ${toName}`, href: `/routes/${currentHref}` },
+              { label: `${fromName} — ${toName}`, href: `/routes/${currentHref}/` },
             ]}
           />
         </div>

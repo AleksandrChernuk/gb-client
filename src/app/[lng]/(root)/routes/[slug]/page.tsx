@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { getFavoriteRouteBySlug, getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -9,6 +10,10 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { RouteSchema } from '@/views/favorite-route-slug/RouteSchema';
 import { locales } from '@/shared/i18n/locales';
+import ResultList from '@/widgets/route-result-list';
+import { Container } from '@/shared/ui/Container';
+import RouteSort from '@/features/route-sort';
+import { BusesDateTabs } from '@/views/buses-page/BusesDateTabs';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
@@ -85,7 +90,21 @@ export default async function FavoriteRoutePage({ params }: Props) {
       <RouteSchema route={route} lng={lng as Locale} host={'https://greenbus.com.ua'} />
       <main className="bg-slate-50 dark:bg-slate-900">
         <RouteHerow currentHref={route.slug ?? '/'} fromName={fromName} toName={toName} />
-
+        <Suspense fallback={null}>
+          <BusesDateTabs />
+        </Suspense>
+        <section>
+          <Container size="sm" className="relative">
+            <div className="pt-4 pb-6 space-y-6 laptop:py-8 laptop:space-y-8">
+              <Suspense fallback={null}>
+                <RouteSort />
+              </Suspense>
+              <Suspense fallback={null}>
+                <ResultList />
+              </Suspense>
+            </div>
+          </Container>
+        </section>
         <RouteContent content={description ?? ''} />
       </main>
       <MainFooter />

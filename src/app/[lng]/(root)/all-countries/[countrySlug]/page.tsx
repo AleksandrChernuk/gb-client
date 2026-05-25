@@ -9,11 +9,11 @@ import { getAllCountries, getCountryBySlug } from '@/shared/api/countries.action
 import { H1 } from '@/shared/ui/H1';
 import CustomCard from '@/shared/ui/CustomCard';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { Button } from '@/shared/ui/button';
 import { Link } from '@/shared/i18n/routing';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
 import { H2 } from '@/shared/ui/H2';
+import { MapPin, ChevronRight } from 'lucide-react';
 
 type Props = {
   params: Promise<{ lng: Locale; countrySlug: string }>;
@@ -117,8 +117,9 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function CountryPage({ params }: Props) {
+export default async function CountryPage({ params }: { params: Promise<{ lng: Locale; countrySlug: string }> }) {
   const { lng, countrySlug } = await params;
+
   setRequestLocale(lng);
 
   const [t, country] = await Promise.all([
@@ -152,24 +153,38 @@ export default async function CountryPage({ params }: Props) {
 
       <section className="py-10">
         <Container size="l">
-          <H2>{t('available_cities_title', { country: countryName })}</H2>
-          <CustomCard className="shadow-sm">
-            <div className="flex flex-row flex-wrap items-center gap-2 my-2">
-              {validLocations.length > 0 ? (
-                validLocations.map((location) => (
-                  <Button key={location.id} asChild variant="link" className="dark:text-green-200">
-                    <Link href={`/all-countries/${country.slug}/${location.slug}/`} prefetch={false}>
-                      {extractLocationDetails(location, lng).locationName}
-                    </Link>
-                  </Button>
-                ))
-              ) : (
-                <p className="text-sm tablet:text-base text-slate-700 dark:text-slate-100">
-                  {t('no_cities_found', { country: countryName })}
-                </p>
-              )}
-            </div>
-          </CustomCard>
+          <H2 className="mb-6">{t('available_cities_title', { country: countryName })}</H2>
+          {validLocations.length > 0 ? (
+            <ul className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 tablet:gap-4">
+              {validLocations.map((location) => (
+                <li key={location.id}>
+                  <Link
+                    href={`/all-countries/${country.slug}/${location.slug}/`}
+                    prefetch={false}
+                    className="group relative flex items-center justify-between w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-green-500 dark:hover:border-green-400 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 shrink-0 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <span className="text-base font-semibold text-slate-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-1">
+                        {extractLocationDetails(location, lng).locationName}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 group-hover:bg-green-50 dark:group-hover:bg-green-900/30 transition-colors shrink-0 ml-2">
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-all group-hover:translate-x-0.5 duration-300" />
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <CustomCard className="shadow-sm">
+              <p className="text-sm tablet:text-base text-slate-700 dark:text-slate-100">
+                {t('no_cities_found', { country: countryName })}
+              </p>
+            </CustomCard>
+          )}
         </Container>
       </section>
 
@@ -180,14 +195,10 @@ export default async function CountryPage({ params }: Props) {
           </H1>
 
           {!!countryDescription ? (
-            <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
-              <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none">
-                {parse(countryDescription, parserOptions)}
-              </div>
+            <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none">
+              {parse(countryDescription, parserOptions)}
             </div>
-          ) : (
-            <p></p>
-          )}
+          ) : null}
         </Container>
       </section>
     </main>

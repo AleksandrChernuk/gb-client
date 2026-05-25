@@ -8,7 +8,7 @@ export default function SeoTextSection() {
   return (
     <section className="py-12">
       <Container size="m">
-        <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">{t('seoText.title')}</h2>
+        <p className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">{t('seoText.title')}</p>
         <div className="text-slate-600 dark:text-slate-300 space-y-4 text-sm leading-relaxed">
           <p>{t('seoText.p1')}</p>
           <p>{t('seoText.p2')}</p>

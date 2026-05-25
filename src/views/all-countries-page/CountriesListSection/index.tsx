@@ -12,7 +12,7 @@ export async function CountriesListSection({ countries, locale }: Props) {
 
   return (
     <section>
-      <Container size="m">
+      <Container size="l">
         <H1>{t('meet_buses_in_your_city')}</H1>
         <CountriesList countries={countries} locale={locale} />
       </Container>

@@ -19,7 +19,7 @@ export default async function AllCountries() {
             {' '}
             <AspectRatio ratio={1}>
               <Image
-                alt={t('buses_title')}
+                alt={t('buses_image_alt')}
                 src={aTravellerImage}
                 placeholder="blur"
                 fill

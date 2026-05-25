@@ -39,7 +39,7 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
                 return (
                   <RouteItem
                     key={route.id}
-                    href={`/routes/${route.slug}/`}
+                    href={`/routes/${route.slug}/?from=${route.fromLocation.id}&to=${route.toLocation.id}`}
                     fromName={fromName}
                     toName={toName}
                     fromCountry={fromCountry}

@@ -45,11 +45,15 @@ export default async function Home({
       <main role="main" className="bg-slate-50 dark:bg-slate-900">
         <HeroSection />
         <BenefitsSection />
-        <Suspense fallback={
-          <section className="py-6">
-            <Container size="m"><PopularRoutesSkeleton /></Container>
-          </section>
-        }>
+        <Suspense
+          fallback={
+            <section className="py-6">
+              <Container size="m">
+                <PopularRoutesSkeleton />
+              </Container>
+            </section>
+          }
+        >
           <PopularRoutesSection />
         </Suspense>
         <AllCountriesSection />

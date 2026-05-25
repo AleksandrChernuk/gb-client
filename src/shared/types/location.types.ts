@@ -1,3 +1,5 @@
+import { IFavoriteRoute } from '@/shared/types/favoriteRoutes';
+
 export interface ILocationQueryParams {
   query?: string;
   page?: number;
@@ -36,6 +38,7 @@ export interface ILocation {
   translations: ILocationTranslations[];
   description: ILocationDescription[];
   locationType: ILocationType;
+  favoriteRoutesFrom: IFavoriteRoute[];
   timezone: ITimezone;
   country: ICountry;
   region: IRegion;

@@ -1,9 +1,9 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { Container } from '@/shared/ui/Container';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export function SeoSectionAllCountries() {
-  const t = useTranslations(MESSAGE_FILES.ALL_COUNTRIES);
+export async function SeoSectionAllCountries() {
+  const t = await getTranslations(MESSAGE_FILES.ALL_COUNTRIES);
 
   const faqItems = [
     { q: t('seo_text.faq.q1'), a: t('seo_text.faq.a1') },
@@ -26,7 +26,7 @@ export function SeoSectionAllCountries() {
 
   return (
     <section className="py-12">
-      <Container size="m">
+      <Container size="l">
         <div className="prose dark:prose-invert max-w-none">
           <h2>{t('seo_text.how.title')}</h2>
           <p>{t('seo_text.how.text')}</p>
