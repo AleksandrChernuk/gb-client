@@ -23,11 +23,11 @@ export default function CountriesList({ countries, locale }: Props) {
             >
               <div className="flex items-center gap-4">
                 {Flag ? (
-                  <div className="w-9 h-6 shrink-0 rounded-[4px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-center bg-slate-50 dark:bg-slate-800 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-cover">
+                  <div className="w-9 h-6 shrink-0 rounded-sm overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-center bg-slate-50 dark:bg-slate-800 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-cover">
                     <Flag title={country.countryFullName} />
                   </div>
                 ) : (
-                  <div className="w-9 h-6 shrink-0 rounded-[4px] bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 text-[10px] font-bold uppercase">
+                  <div className="w-9 h-6 shrink-0 rounded-sm bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 text-[10px] font-bold uppercase">
                     {c.code || '?'}
                   </div>
                 )}
