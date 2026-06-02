@@ -44,7 +44,7 @@ export default function FaqSearchResult() {
           <Link
             prefetch={false}
             className="text-base font-bold leading-6 tracking-normal text-slate-400 dark:text-slate-200 hover:underline"
-            href="/faq/"
+            href="/faq/bronjuvannja-mists/"
           >
             {t('go_to_section')} <span className="text-green-200 dark:text-green-100">&laquo;{t('title')}&raquo;</span>
           </Link>
@@ -59,7 +59,7 @@ export default function FaqSearchResult() {
         {t('results_found')}: {matchedQuestions.length}
       </h3>
       {matchedQuestions.map(({ slug, id, title, text, textSlug }) => (
-        <SearchCard key={id} title={t(`${title}.title`)} text={text} href={`/${slug}?q=${textSlug}`} />
+        <SearchCard key={id} title={t(`${title}.title`)} text={text} href={`${slug}/#${textSlug}`} />
       ))}
     </Container>
   );

@@ -18,6 +18,7 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
   let res;
   try {
     res = await getFavoriteRoutes({ page, perPage, lang: locale });
+    res.data = res.data.filter((route) => route.slug && route.fromLocation && route.toLocation);
   } catch {
     res = null;
   }
@@ -39,7 +40,7 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
                 return (
                   <RouteItem
                     key={route.id}
-                    href={`/routes/${route.slug}/?from=${route.fromLocation.id}&to=${route.toLocation.id}`}
+                    href={`/routes/${route.slug}/`}
                     fromName={fromName}
                     toName={toName}
                     fromCountry={fromCountry}

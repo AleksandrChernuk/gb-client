@@ -21,6 +21,7 @@ export default function Logo({ location = 'header' }: Props) {
       className="flex items-center"
     >
       <GreenBusLogoIcon className="w-48 h-12" aria-hidden="true" />
+      <span className="sr-only">{t(`logo_aria_label_${location}`)}</span>
     </Link>
   );
 }

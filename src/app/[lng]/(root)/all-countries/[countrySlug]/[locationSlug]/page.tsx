@@ -9,6 +9,8 @@ import { notFound } from 'next/navigation';
 import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
+import { H2 } from '@/shared/ui/H2';
+import { RouteItem } from '@/shared/ui/route-item';
 
 import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
 
@@ -139,6 +141,9 @@ export default async function LocationPage({ params }: Props) {
   const t = await getTranslations({ locale: lng as Locale, namespace: MESSAGE_FILES.ALL_COUNTRIES });
 
   const details = extractLocationDetails(data, lng);
+  const popularRoutes = (data.favoriteRoutesFrom ?? [])
+    .filter((route) => route.slug && route.fromLocation && route.toLocation)
+    .slice(0, 6);
 
   return (
     <>
@@ -152,7 +157,7 @@ export default async function LocationPage({ params }: Props) {
                   { label: t('breadcrumbs_home'), href: '/' },
                   { label: t('buses_breadcrumb'), href: `/all-countries/` },
                   { label: details.countryName, href: `/all-countries/${data.country.slug}/` },
-                  { label: details.locationName, href: `/all-countries/${data.slug}/` },
+                  { label: details.locationName, href: `/all-countries/${data.country.slug}/${data.slug}/` },
                 ]}
               />
             </div>
@@ -160,6 +165,32 @@ export default async function LocationPage({ params }: Props) {
             <MainSearch aria-label={t('search_aria_label')} />
           </Container>
         </section>
+
+        {popularRoutes.length > 0 && (
+          <section className="py-10">
+            <Container size="l">
+              <H2 className="mb-6">{t('popular_routes_from_city', { locationName: details.locationName })}</H2>
+              <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
+                {popularRoutes.map((route) => {
+                  const fromDetails = extractLocationDetails(route.fromLocation, lng);
+                  const toDetails = extractLocationDetails(route.toLocation, lng);
+
+                  return (
+                    <RouteItem
+                      key={route.id}
+                      href={`/routes/${route.slug}/`}
+                      fromName={fromDetails.locationName}
+                      toName={toDetails.locationName}
+                      fromCountry={fromDetails.countryName}
+                      toCountry={toDetails.countryName}
+                      price={route.price}
+                    />
+                  );
+                })}
+              </div>
+            </Container>
+          </section>
+        )}
 
         <section className="py-10">
           <Container size="l">

@@ -23,12 +23,17 @@ export async function generateMetadata({ params }: Props) {
   const page = FAQ_PAGES[slug];
   if (!page) return {};
 
-  return await generatePublicPageMetadata({
+  const baseMetadata = await generatePublicPageMetadata({
     lng,
     namespace: MESSAGE_FILES.METADATA,
     slug: page.metaSlug,
     path: `/faq/${slug}`,
   });
+
+  return {
+    ...baseMetadata,
+    ...(slug === 'search' && { robots: { index: false, follow: true } }),
+  };
 }
 
 export default async function FaqPage({ params, searchParams }: Props) {

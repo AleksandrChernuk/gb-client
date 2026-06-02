@@ -1,21 +1,28 @@
 import { MetadataRoute } from 'next';
-import { host } from '@/config';
+import { BASE_URL } from '@/shared/configs/constants';
 import { getPathname, routing } from '@/shared/i18n/routing';
 import { getArticles } from '@/shared/api/articles.actions';
-import { getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
+import { getAllFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { getAllCountries } from '@/shared/api/countries.actions';
-import { getLocations } from '@/shared/api/location.actions';
+import { getFavoriteLocations } from '@/shared/api/location.actions';
 
 export const revalidate = 3600;
 
 type Href = Parameters<typeof getPathname>[0]['href'];
+type SitemapRoute = {
+  slug: string;
+  fromLocation?: { slug?: string; country?: { slug?: string } };
+  toLocation?: { slug?: string; country?: { slug?: string } };
+};
+
+type SitemapLocation = { slug: string; countrySlug: string };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articlesResponse, routesResponse, countries, locations] = await Promise.all([
+  const [articlesResponse, routesResponse, countries, favoriteLocations] = await Promise.all([
     getArticles().catch(() => ({ data: [] })),
-    getFavoriteRoutes({ page: 1, perPage: 1000, lang: 'uk' }).catch(() => ({ data: [] })),
+    getAllFavoriteRoutes({ lang: 'uk' }).catch(() => []),
     getAllCountries().catch(() => []),
-    getAllLocationsForSitemap().catch(() => []),
+    getFavoriteLocations().catch(() => []),
   ]);
 
   const posts = articlesResponse.data.map((post) => ({
@@ -23,39 +30,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     updatedAt: post.updatedAt instanceof Date ? post.updatedAt.toISOString() : new Date(post.updatedAt).toISOString(),
   }));
 
-  const routes = routesResponse.data.map((route) => ({ slug: route.slug }));
+  const routes = routesResponse.filter((route) => route.slug).map((route) => ({
+    slug: route.slug,
+    fromLocation: route.fromLocation,
+    toLocation: route.toLocation,
+  }));
+  const locations = getSeoLocationsForSitemap(routes, favoriteLocations);
+  const countrySlugs = getSeoCountrySlugs(locations);
 
   return [
     ...getStaticPages(),
     ...getBlogPages(posts),
     ...getRoutePages(routes),
-    ...getCountryPages(countries),
+    ...getCountryPages(countries, countrySlugs),
     ...getLocationPages(locations),
   ];
 }
 
 // ────────────────────────────────────────────────────────────
-// Все локации со всеми страницами пагинации
+// SEO локации: только города из избранных маршрутов и favorites API.
+// Не пушим весь справочник городов в sitemap, чтобы не раздувать
+// "Discovered, currently not indexed" тонкими программными страницами.
 // ────────────────────────────────────────────────────────────
-async function getAllLocationsForSitemap() {
-  const all: { slug: string; countrySlug: string }[] = [];
-  let page = 1;
-  const perPage = 500;
+function getSeoLocationsForSitemap(
+  routes: SitemapRoute[],
+  favoriteLocations: { slug?: string; country?: { slug?: string } }[],
+): SitemapLocation[] {
+  const byPath = new Map<string, SitemapLocation>();
 
-  while (true) {
-    const res = await getLocations({ page, perPage });
+  const addLocation = (location?: { slug?: string; country?: { slug?: string } }) => {
+    if (!location?.slug || !location.country?.slug) return;
 
-    for (const loc of res.data) {
-      if (loc.slug && loc.country?.slug) {
-        all.push({ slug: loc.slug, countrySlug: loc.country.slug });
-      }
-    }
+    const item = { slug: location.slug, countrySlug: location.country.slug };
+    byPath.set(`${item.countrySlug}/${item.slug}`, item);
+  };
 
-    if (page >= res.totalPages) break;
-    page++;
+  favoriteLocations.forEach(addLocation);
+
+  for (const route of routes) {
+    addLocation(route.fromLocation);
+    addLocation(route.toLocation);
   }
 
-  return all;
+  return [...byPath.values()].sort((a, b) => `${a.countrySlug}/${a.slug}`.localeCompare(`${b.countrySlug}/${b.slug}`));
+}
+
+function getSeoCountrySlugs(locations: SitemapLocation[]) {
+  return new Set(locations.map((location) => location.countrySlug));
 }
 
 // ────────────────────────────────────────────────────────────
@@ -65,10 +86,12 @@ const pages: string[] = [
   '/',
   '/about',
   '/blog',
-  '/faq',
   '/faq/bronjuvannja-mists',
   '/faq/routes-and-buses',
   '/faq/ticket-refund',
+  '/for-carriers',
+  '/for-agents',
+  '/privacy-policy',
   '/all-countries',
   '/routes',
 ];
@@ -101,8 +124,10 @@ function getRoutePages(routes: { slug: string }[]) {
   );
 }
 
-function getCountryPages(countries: { slug: string }[]) {
-  return countries.flatMap((country) =>
+function getCountryPages(countries: { slug: string }[], countrySlugs: Set<string>) {
+  const seoCountries = countrySlugs.size > 0 ? countries.filter((country) => countrySlugs.has(country.slug)) : countries;
+
+  return seoCountries.flatMap((country) =>
     buildEntries(`/all-countries/${country.slug}` as Href, {
       priority: 0.8,
       changeFrequency: 'weekly',
@@ -137,10 +162,10 @@ function buildEntries(
   },
 ) {
   return routing.locales.map((locale) => {
-    const mainUrl = normalizeUrl(host + getPathname({ locale, href }));
+    const mainUrl = normalizeUrl(BASE_URL + getPathname({ locale, href }));
 
     const alternateLanguages = Object.fromEntries(
-      routing.locales.map((lng) => [lng, normalizeUrl(host + getPathname({ locale: lng, href }))]),
+      routing.locales.map((lng) => [lng, normalizeUrl(BASE_URL + getPathname({ locale: lng, href }))]),
     );
 
     return {
@@ -150,7 +175,7 @@ function buildEntries(
       ...(seo.lastModified && { lastModified: seo.lastModified }),
       alternates: {
         languages: {
-          'x-default': normalizeUrl(host + getPathname({ locale: 'uk', href })),
+          'x-default': normalizeUrl(BASE_URL + getPathname({ locale: 'uk', href })),
           ...alternateLanguages,
         },
       },
@@ -167,7 +192,7 @@ function getPriority(href: string) {
 
 function getChangeFreq(href: string): MetadataRoute.Sitemap[number]['changeFrequency'] {
   if (href === '/') return 'daily';
-  if (['/for-carriers', '/routes'].includes(href)) return 'weekly';
+  if (['/for-carriers', '/for-agents', '/routes'].includes(href)) return 'weekly';
   if (href.startsWith('/faq')) return 'monthly';
   return 'monthly';
 }

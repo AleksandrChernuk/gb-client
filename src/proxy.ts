@@ -1,4 +1,5 @@
 import { routing } from '@/shared/i18n/routing';
+import { getCleanSeoQueryRedirectPath, getQueryRobotsHeader } from '@/shared/seo/route-query-indexing';
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -34,8 +35,40 @@ function upgradeRedirectForSEO(response: NextResponse, request: NextRequest): Ne
   return newResponse;
 }
 
+function applyQueryRobotsHeader(response: NextResponse, request: NextRequest): NextResponse {
+  const robotsHeader = getQueryRobotsHeader(request.nextUrl.pathname, request.nextUrl.search);
+
+  if (robotsHeader) {
+    response.headers.set('X-Robots-Tag', robotsHeader);
+  }
+
+  return response;
+}
+
+function prepareSeoResponse(response: NextResponse, request: NextRequest): NextResponse {
+  return applyQueryRobotsHeader(upgradeRedirectForSEO(response, request), request);
+}
+
+function getCleanSeoQueryRedirect(request: NextRequest): NextResponse | undefined {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return undefined;
+
+  const redirectPath = getCleanSeoQueryRedirectPath(request.nextUrl.pathname, request.nextUrl.search);
+  if (!redirectPath) return undefined;
+
+  const url = request.nextUrl.clone();
+  url.pathname = redirectPath;
+  url.search = '';
+
+  return NextResponse.redirect(url, 308);
+}
+
 export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const cleanSeoQueryRedirect = getCleanSeoQueryRedirect(request);
+
+  if (cleanSeoQueryRedirect) {
+    return cleanSeoQueryRedirect;
+  }
 
   const isProtected = PROTECTED_PATHS.some((path) => pathname.includes(path));
 
@@ -63,20 +96,20 @@ export default async function middleware(request: NextRequest) {
           refreshResponse.headers.getSetCookie().forEach((cookie) => {
             response.headers.append('Set-Cookie', cookie);
           });
-          return upgradeRedirectForSEO(response, request);
+          return prepareSeoResponse(response, request);
         }
 
         const response = intlMiddleware(request);
         response.cookies.delete('accessToken');
         response.cookies.delete('refreshToken');
-        return upgradeRedirectForSEO(response, request);
+        return prepareSeoResponse(response, request);
       }
     } catch (e) {
       console.error('Middleware refresh failed:', e);
       const response = intlMiddleware(request);
       response.cookies.delete('accessToken');
       response.cookies.delete('refreshToken');
-      return upgradeRedirectForSEO(response, request);
+      return prepareSeoResponse(response, request);
     }
   }
 
@@ -91,7 +124,7 @@ export default async function middleware(request: NextRequest) {
   }
 
   // 👉 Возвращаем intl response + SEO upgrade
-  return upgradeRedirectForSEO(intlMiddleware(request), request);
+  return prepareSeoResponse(intlMiddleware(request), request);
 }
 
 function redirectToSignin(request: NextRequest, locale: string) {

@@ -14,9 +14,17 @@ const activeClass =
 const inactiveClass =
   'border-slate-200 text-slate-700 bg-white hover:border-slate-300 dark:border-slate-600 dark:text-slate-200 dark:bg-slate-800 dark:hover:border-slate-500';
 
-export default function RouteSort() {
+type RouteSortProps = {
+  hideWithoutSearchParams?: boolean;
+};
+
+export default function RouteSort({ hideWithoutSearchParams = false }: RouteSortProps) {
   const [params, actions] = useRouterSearch();
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
+
+  if (hideWithoutSearchParams && (!params.from || !params.to)) {
+    return null;
+  }
 
   const isActive = (type: string) => params.sort === type;
 

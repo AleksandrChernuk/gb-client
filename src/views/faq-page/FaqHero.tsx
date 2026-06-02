@@ -21,7 +21,7 @@ export default async function FaqHero() {
             locale={lng}
             items={[
               { label: t_common('breadcrumb_main'), href: '/' },
-              { label: t_common('faq_breadcrumb'), href: '/faq' },
+              { label: t_common('faq_breadcrumb'), href: '/faq/bronjuvannja-mists/' },
             ]}
           />
         </div>

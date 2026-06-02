@@ -1,6 +1,17 @@
 import { BACKEND_URL } from '@/shared/configs/constants';
 import { IFavoriteRoute, IFavoriteRouteBySlugParams, IFavoriteRoutesResponse } from '@/shared/types/favoriteRoutes';
 
+export class FavoriteRouteNotFoundError extends Error {
+  constructor(slug: string) {
+    super(`Favorite route not found for slug: ${slug}`);
+    this.name = 'FavoriteRouteNotFoundError';
+  }
+}
+
+export function isFavoriteRouteNotFoundError(error: unknown): error is FavoriteRouteNotFoundError {
+  return error instanceof FavoriteRouteNotFoundError;
+}
+
 export async function getFavoriteRoutes(params?: {
   page?: number;
   perPage?: number;
@@ -23,6 +34,27 @@ export async function getFavoriteRoutes(params?: {
   return response.json();
 }
 
+export async function getAllFavoriteRoutes(params?: { lang?: string }): Promise<IFavoriteRoute[]> {
+  const routesBySlug = new Map<string, IFavoriteRoute>();
+  let page = 1;
+  let totalPages = 1;
+
+  do {
+    const response = await getFavoriteRoutes({ page, perPage: 100, lang: params?.lang });
+
+    for (const route of response.data) {
+      if (route.slug) {
+        routesBySlug.set(route.slug, route);
+      }
+    }
+
+    totalPages = response.totalPages || page;
+    page++;
+  } while (page <= totalPages && page <= 100);
+
+  return [...routesBySlug.values()];
+}
+
 export async function getFavoriteRouteBySlug(params: IFavoriteRouteBySlugParams): Promise<IFavoriteRoute> {
   if (!BACKEND_URL) throw new Error('BACKEND_URL is not configured');
 
@@ -37,6 +69,10 @@ export async function getFavoriteRouteBySlug(params: IFavoriteRouteBySlugParams)
   });
 
   if (!response.ok) {
+    if (response.status === 404) {
+      throw new FavoriteRouteNotFoundError(params.slug);
+    }
+
     throw new Error(`Failed to fetch favorite route by slug: ${response.status} ${response.statusText}`);
   }
 

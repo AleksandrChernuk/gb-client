@@ -110,14 +110,6 @@ export default async function LocaleLayout({
     url: localeHomeUrl,
     description: langTexts.description,
     inLanguage: lng,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${BASE_URL}/${lng}/buses/?from={from}&to={to}`,
-      },
-      'query-input': 'required name=from required name=to',
-    },
   };
 
   const organizationSchema = {

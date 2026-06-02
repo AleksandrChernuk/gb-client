@@ -25,7 +25,7 @@ export default async function Questions() {
               <Link
                 prefetch={false}
                 className="block text-sm font-bold text-green-600! hover:underline transition-all laptop:text-base"
-                href={`/faq/routes-and-buses/?q=${slug}`}
+                href={`/faq/routes-and-buses/#${slug}`}
               >
                 {t_main('learn_more')}
                 <span className="sr-only">: {t(`${title}.title`)}</span>
@@ -36,7 +36,7 @@ export default async function Questions() {
         </ul>
         <div className="text-right">
           <Link
-            href={'/faq/'}
+            href={'/faq/bronjuvannja-mists/'}
             className="underline-offset-4 py-2 px-6 tablet:py-4 rounded-full tablet:text-base font-bold leading-6 tracking-normal  text-green-600! hover:underline transition-all"
           >
             {`${t_main('questions_button')} >`}

@@ -18,7 +18,7 @@ export default async function PopularRoutes() {
 
   try {
     const res = await getFavoriteRoutes({ page: 1, perPage: 10, lang: locale });
-    routes = res.data;
+    routes = res.data.filter((route) => route.slug && route.fromLocation && route.toLocation);
   } catch {
     routes = [];
   }
@@ -39,7 +39,7 @@ export default async function PopularRoutes() {
               return (
                 <RouteItem
                   key={route.id}
-                  href={`/buses/?from=${route.fromLocation.id}&to=${route.toLocation.id}`}
+                  href={`/routes/${route.slug}/`}
                   fromName={fromName}
                   toName={toName}
                   fromCountry={fromCountry}

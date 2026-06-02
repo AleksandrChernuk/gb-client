@@ -1,8 +1,12 @@
 import { Suspense } from 'react';
-import { getFavoriteRouteBySlug, getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
+import {
+  getAllFavoriteRoutes,
+  getFavoriteRouteBySlug,
+  isFavoriteRouteNotFoundError,
+} from '@/shared/api/favoriteRoutes.server';
 import { Locale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 import { RouteHerow } from '@/views/favorite-route-slug/RouteHerow';
 import { RouteContent } from '@/views/favorite-route-slug/RouteContent';
 import MainFooter from '@/widgets/footer/MainFooter';
@@ -20,18 +24,13 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const results = await Promise.all(
-    locales.map(async (lng) => {
-      try {
-        const res = await getFavoriteRoutes({ page: 1, perPage: 1000, lang: lng });
-        return res.data.map((route) => ({ lng, slug: route.slug }));
-      } catch {
-        return [];
-      }
-    }),
-  );
+  try {
+    const routes = await getAllFavoriteRoutes({ lang: 'uk' });
 
-  return results.flat();
+    return locales.flatMap((lng) => routes.map((route) => ({ lng, slug: route.slug })));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -40,7 +39,11 @@ export async function generateMetadata({ params }: Props) {
   let route;
   try {
     route = await getFavoriteRouteBySlug({ slug });
-  } catch {
+  } catch (error) {
+    if (isFavoriteRouteNotFoundError(error)) {
+      return { title: 'Not Found', robots: { index: false, follow: true } };
+    }
+
     return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
@@ -75,11 +78,17 @@ export default async function FavoriteRoutePage({ params }: Props) {
   let route;
   try {
     route = await getFavoriteRouteBySlug({ slug });
-  } catch {
-    notFound();
+  } catch (error) {
+    if (isFavoriteRouteNotFoundError(error)) {
+      permanentRedirect(`/${lng}/routes/`);
+    }
+
+    throw error;
   }
 
-  if (!route) notFound();
+  if (!route) {
+    permanentRedirect(`/${lng}/routes/`);
+  }
 
   const fromName = route.fromLocation?.translations?.find((t) => t.language === lng)?.locationName ?? '—';
   const toName = route.toLocation?.translations?.find((t) => t.language === lng)?.locationName ?? '—';
@@ -97,10 +106,10 @@ export default async function FavoriteRoutePage({ params }: Props) {
           <Container size="sm" className="relative">
             <div className="pt-4 pb-6 space-y-6 laptop:py-8 laptop:space-y-8">
               <Suspense fallback={null}>
-                <RouteSort />
+                <RouteSort hideWithoutSearchParams />
               </Suspense>
               <Suspense fallback={null}>
-                <ResultList />
+                <ResultList showMissingSearchError={false} />
               </Suspense>
             </div>
           </Container>

@@ -5,6 +5,7 @@ import { faqConstans } from '@/shared/constans/faq.constans';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/shared/ui/accordion';
 import CustomCard from '@/shared/ui/CustomCard';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 interface Props {
   slug?: keyof typeof faqConstans;
@@ -14,6 +15,27 @@ interface Props {
 export function FaqDisplay({ slug = '/faq/bronjuvannja-mists', value }: Props) {
   const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
   const { title, questions } = faqConstans[slug];
+  const [activeValue, setActiveValue] = useState<string | undefined>(value);
+
+  useEffect(() => {
+    setActiveValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    const syncHash = () => {
+      const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+      if (hash && questions.some((question) => question.slug === hash)) {
+        setActiveValue(hash);
+      }
+    };
+
+    syncHash();
+    window.addEventListener('hashchange', syncHash);
+
+    return () => {
+      window.removeEventListener('hashchange', syncHash);
+    };
+  }, [questions]);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -34,9 +56,15 @@ export function FaqDisplay({ slug = '/faq/bronjuvannja-mists', value }: Props) {
       <h3 className="mb-2 text-base font-bold leading-6 tracking-normal text-green-200 dark:text-green-100 tablet:mb-4">
         {t(title)}
       </h3>
-      <Accordion defaultValue={value} type="single" collapsible className="w-full">
+      <Accordion
+        value={activeValue}
+        onValueChange={(nextValue) => setActiveValue(nextValue || undefined)}
+        type="single"
+        collapsible
+        className="w-full"
+      >
         {questions.map((el) => (
-          <AccordionItem value={el.slug} key={el.id}>
+          <AccordionItem id={el.slug} value={el.slug} key={el.id}>
             <AccordionTrigger className="text-base font-bold leading-6 tracking-normal text-slate-700 dark:text-slate-50 data-[state=open]:text-green-200 dark:data-[state=open]:text-green-200">
               {t(`${el.title}.title`)}
             </AccordionTrigger>

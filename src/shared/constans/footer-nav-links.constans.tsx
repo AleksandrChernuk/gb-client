@@ -31,11 +31,15 @@ export const footerNavLinks = {
   passengers: [
     {
       title: 'faq',
-      href: '/faq/',
+      href: '/faq/bronjuvannja-mists/',
     },
     {
       title: 'blog',
       href: '/blog/',
+    },
+    {
+      title: 'bus_routes',
+      href: '/routes/',
     },
     {
       title: 'all_countries',

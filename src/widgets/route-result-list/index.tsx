@@ -13,7 +13,11 @@ import { sortRoutes } from '@/shared/lib/sortRoutes';
 
 const EXCLUDED_PROVIDERS = ['TOCOBUS', 'EUROCLUB', 'EWE'];
 
-export default function ResultList() {
+type ResultListProps = {
+  showMissingSearchError?: boolean;
+};
+
+export default function ResultList({ showMissingSearchError = true }: ResultListProps) {
   const t = useTranslations(MESSAGE_FILES.COMMON);
   const [params] = useRouterSearch();
   const { isFetching, error, tickets } = useTicketsSearch();
@@ -31,7 +35,10 @@ export default function ResultList() {
     );
   }
 
-  if (error || !params.from || !params.to) return <CustomError />;
+  if (!params.from || !params.to) {
+    return showMissingSearchError ? <CustomError /> : null;
+  }
+  if (error) return <CustomError />;
   if (sortedTickets.length === 0) return <RouteNotFound text={t('no_travel_find')} />;
 
   return (

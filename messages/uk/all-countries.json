@@ -19,6 +19,7 @@
     "search_aria_label": "Пошук автобусних квитків",
 
     "tickets_heading": "Автобусні квитки з {locationName}",
+    "popular_routes_from_city": "Популярні маршрути з міста {locationName}",
 
     "teaser_text": "Хочете поїхати в {locationName}? На сайті greenbus.com.ua ви знайдете квитки на автобуси в {locationName}. Скористайтеся пошуковою формою вгорі, щоб забронювати місце на сучасний автобус від перевірених перевізників.",
 

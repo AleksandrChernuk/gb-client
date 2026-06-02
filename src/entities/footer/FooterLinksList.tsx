@@ -38,7 +38,14 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
                   : 'inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200 hover:underline'
               }
             >
-              {isExternalSocial ? icon : t(`${title}`)}
+              {isExternalSocial ? (
+                <>
+                  {icon}
+                  <span className="sr-only">{t(ariaLabel || title)}</span>
+                </>
+              ) : (
+                t(`${title}`)
+              )}
             </Link>
           </li>
         );

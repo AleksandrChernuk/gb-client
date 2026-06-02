@@ -9,10 +9,40 @@ import {
 import { cn } from '@/shared/lib/utils';
 import Link from 'next/link';
 
+const locales = ['uk', 'ru', 'en'] as const;
+
 export type Crumb = {
   label: string;
   href: string;
 };
+
+function isExternalHref(href: string) {
+  return /^(https?:|mailto:|tel:)/i.test(href);
+}
+
+function normalizeInternalHref(locale: (typeof locales)[number], href: string) {
+  if (isExternalHref(href)) return href;
+
+  const [pathname = '/', suffix = ''] = href.match(/^([^?#]*)(.*)$/)?.slice(1) ?? [];
+  const parts = pathname.split('/').filter(Boolean);
+
+  if (locales.includes(parts[0] as (typeof locales)[number])) {
+    parts.shift();
+  }
+
+  let cleanPath = parts.length > 0 ? `/${parts.join('/')}` : '/';
+
+  if (!cleanPath.match(/\.[a-z]+$/i) && !cleanPath.endsWith('/')) {
+    cleanPath += '/';
+  }
+
+  return `/${locale}${cleanPath}${suffix}`;
+}
+
+function toAbsoluteUrl(baseUrl: string, href: string) {
+  if (isExternalHref(href)) return href;
+  return `${baseUrl.replace(/\/+$/, '')}${href}`;
+}
 
 export function BreadcrumbSimple({
   items,
@@ -32,12 +62,17 @@ export function BreadcrumbSimple({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: item.label,
-      item: `${baseUrl}/${locale}${item.href}`,
-    })),
+    itemListElement: items.map((item, idx) => {
+      const isLast = items.length > 1 && idx === items.length - 1;
+      const href = normalizeInternalHref(locale, item.href);
+
+      return {
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: item.label,
+        ...(isLast ? {} : { item: toAbsoluteUrl(baseUrl, href) }),
+      };
+    }),
   };
 
   return (
@@ -47,6 +82,7 @@ export function BreadcrumbSimple({
         <BreadcrumbList>
           {items.map((item, idx) => {
             const isLast = items.length > 1 && idx === items.length - 1;
+            const href = normalizeInternalHref(locale, item.href);
 
             return (
               <span key={idx} className="flex items-center gap-1 truncate">
@@ -56,7 +92,7 @@ export function BreadcrumbSimple({
                     <BreadcrumbPage className={pageClassName}>{item.label}</BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink className={linkClassName} asChild>
-                      <Link href={item.href}>{item.label}</Link>
+                      <Link href={href}>{item.label}</Link>
                     </BreadcrumbLink>
                   )}
                 </BreadcrumbItem>

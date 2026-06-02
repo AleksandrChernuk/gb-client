@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next';
-import { host } from '@/config';
+import { BASE_URL } from '@/shared/configs/constants';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/', '/_next/static/', '/_next/image'],
         disallow: [
           '/api/',
           '/*/signin',
@@ -27,6 +27,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${host}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

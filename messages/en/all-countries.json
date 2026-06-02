@@ -19,6 +19,7 @@
     "search_aria_label": "Bus ticket search",
 
     "tickets_heading": "Bus Tickets from {locationName}",
+    "popular_routes_from_city": "Popular routes from {locationName}",
 
     "teaser_text": "Planning to visit {locationName}? On greenbus.com.ua you can find bus tickets to {locationName}. Use the search form above to reserve a seat on a modern bus from trusted carriers.",
 
