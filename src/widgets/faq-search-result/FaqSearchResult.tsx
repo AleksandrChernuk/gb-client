@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import SearchCard from './SearchCard';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useMessages } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { faqConstans } from '@/shared/constans/faq.constans';
 import { Container } from '@/shared/ui/Container';
@@ -14,15 +14,25 @@ export default function FaqSearchResult() {
   const params = useSearchParams();
   const searchQuery = params?.get('q')?.toLowerCase() || '';
   const t = useTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
+  // Відповіді містять HTML — беремо сирий текст і прибираємо теги (інакше next-intl
+  // парсить <a href> як ICU-тег → INVALID_TAG).
+  const messages = useMessages() as Record<string, Record<string, Record<string, string>>>;
+  const qp = messages?.[MESSAGE_FILES.QUESTIONS_PAGE] ?? {};
 
   const matchedQuestions = useMemo(() => {
     if (!searchQuery) return [];
+
+    const stripHtml = (html: string) =>
+      html
+        .replace(/<[^>]+>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
 
     const results: { slug: string; id: number; title: string; text: string; textSlug: string }[] = [];
 
     Object.entries(faqConstans).forEach(([slug, category]) => {
       category.questions.forEach(({ id, title, text, slug: textSlug }) => {
-        const translatedText = text.map((_, i) => t(`${title}.text_${i + 1}`));
+        const translatedText = text.map((_, i) => stripHtml(qp?.[title]?.[`text_${i + 1}`] ?? ''));
         if (translatedText.some((p) => p.toLowerCase().includes(searchQuery))) {
           results.push({ textSlug, slug, id, title, text: translatedText.join(' ') });
         }
@@ -30,7 +40,7 @@ export default function FaqSearchResult() {
     });
 
     return results;
-  }, [searchQuery, t]);
+  }, [searchQuery, qp]);
 
   if (!searchQuery) return null;
 

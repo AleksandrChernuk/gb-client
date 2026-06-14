@@ -7,7 +7,6 @@
     "available_cities_title": "Cities in {country} where you can buy bus tickets",
     "no_description_placeholder": "Select a city in {country} and a destination",
     "buses_breadcrumb": "All destinations",
-
     "no_cities_found": "Unfortunately, there are no cities currently available for order in {country}",
     "all": "All",
     "select_departure_country": "All available routes and departure cities",
@@ -17,14 +16,10 @@
     "select_city": "Select a city",
     "search_section_title": "Search section",
     "search_aria_label": "Bus ticket search",
-
     "tickets_heading": "Bus Tickets from {locationName}",
     "popular_routes_from_city": "Popular routes from {locationName}",
-
     "teaser_text": "Planning to visit {locationName}? On greenbus.com.ua you can find bus tickets to {locationName}. Use the search form above to reserve a seat on a modern bus from trusted carriers.",
-
     "about_city_heading": "About {locationName}",
-
     "map_title": "Map of {locationName}",
     "map_aria_label": "Location map of {locationName}",
     "seo_text": {
@@ -62,6 +57,8 @@
         "q6": "Are there domestic routes within Ukraine?",
         "a6": "Yes, GreenBus offers domestic bus routes between major Ukrainian cities — Kyiv, Lviv, Odesa, Kharkiv, Dnipro and others."
       }
-    }
+    },
+    "country_h1": "Bus tickets to {country}",
+    "country_h1_ua": "Bus tickets across Ukraine and Europe"
   }
 }

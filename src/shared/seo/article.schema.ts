@@ -16,7 +16,7 @@ export function buildArticleSchema(article: IArticleResponse, lng: Locale) {
     '@type': 'Article',
     headline: desc.title,
     description: desc.description,
-    image: cover?.url ? [cover.url] : [`${BASE_URL}/og-image.png`],
+    image: cover?.url ? [cover.url] : [`${BASE_URL}/${lng}/opengraph-image`],
     datePublished: toIsoString(article.createdAt),
     dateModified: toIsoString(article.updatedAt),
     inLanguage: lng,

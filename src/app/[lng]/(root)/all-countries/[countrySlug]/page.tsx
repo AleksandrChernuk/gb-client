@@ -14,6 +14,8 @@ import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
 import { H2 } from '@/shared/ui/H2';
 import { MapPin, ChevronRight } from 'lucide-react';
+import { getInternalSeoHref } from '@/shared/seo/internal-links';
+import MainFooter from '@/widgets/footer/MainFooter';
 
 type Props = {
   params: Promise<{ lng: Locale; countrySlug: string }>;
@@ -36,31 +38,34 @@ export async function generateStaticParams() {
   }
 }
 
+const isUkraineCountry = (name: string) => ['україна', 'украина', 'ukraine'].includes(name.trim().toLowerCase());
+
 const META_BY_LOCALE = {
   uk: (name: string) => ({
-    title: `GreenBus Автобусні квитки ${name} онлайн без комісії | GreenBus`,
-    description: `Автобусні квитки зі ${name} в Україну та Європу, з України в Словаччину. Рейси з Братислави, Нітри, Кошице. Оплата картою без комісії, e-квиток на email.`,
+    title: isUkraineCountry(name)
+      ? 'Автобусні квитки: Україна та Європа | GreenBus'
+      : `Автобусні квитки: ${name} — Україна та Європа | GreenBus`,
+    description: isUkraineCountry(name)
+      ? 'Знайдіть автобусні напрямки Україною та Європою, порівняйте розклад і ціни перевізників. Оплата картою без комісії, e-квиток надходить на email.'
+      : `Знайдіть автобусні напрямки для ${name}, порівняйте розклад і ціни перевізників. Оплата картою без комісії, e-квиток надходить на email.`,
   }),
   ru: (name: string) => ({
-    title: `Автобусные билеты ${name} онлайн без комиссии | GreenBus`,
-    description: `Автобусные билеты из ${name} в Украину и Европу, из Украины в Словакию. Рейсы из Братиславы, Нитры, Кошице. Оплата картой без комиссии, e-билет на email.`,
+    title: isUkraineCountry(name)
+      ? 'Автобусные билеты: Украина и Европа | GreenBus'
+      : `Автобусные билеты: ${name} — Украина и Европа | GreenBus`,
+    description: isUkraineCountry(name)
+      ? 'Найдите автобусные направления по Украине и Европе, сравните расписание и цены перевозчиков. Оплата картой без комиссии, e-билет приходит на email.'
+      : `Найдите автобусные направления для ${name}, сравните расписание и цены перевозчиков. Оплата картой без комиссии, e-билет приходит на email.`,
   }),
   en: (name: string) => ({
-    title: `Bus Tickets ${name} Online with No Booking Fee | GreenBus`,
-    description: `Bus tickets from ${name} to Ukraine and Europe, from Ukraine to Slovakia. Routes from Bratislava, Nitra, Košice. Pay by card with no booking fee, e-ticket to email.`,
+    title: isUkraineCountry(name)
+      ? 'Bus Tickets: Ukraine and Europe | GreenBus'
+      : `Bus Tickets: ${name}, Ukraine and Europe | GreenBus`,
+    description: isUkraineCountry(name)
+      ? 'Find bus routes across Ukraine and Europe, compare carrier schedules and prices. Pay by card with no booking fee, and receive your e-ticket by email.'
+      : `Find bus routes for ${name}, compare carrier schedules and prices. Pay by card with no booking fee, and receive your e-ticket by email.`,
   }),
 } as const;
-
-const OWN_HOST = 'greenbus.com.ua';
-
-function cleanPathname(pathname: string) {
-  const locales = ['uk', 'ru', 'en'];
-  const parts = pathname.split('/').filter(Boolean);
-  if (locales.includes(parts[0])) {
-    return '/' + parts.slice(1).join('/');
-  }
-  return pathname;
-}
 
 const parserOptions: HTMLReactParserOptions = {
   replace(domNode) {
@@ -68,18 +73,15 @@ const parserOptions: HTMLReactParserOptions = {
     if (domNode.name !== 'a' || !domNode.attribs?.href) return;
 
     const href = domNode.attribs.href;
+    const internalHref = getInternalSeoHref(href);
     const isAbsolute = /^https?:\/\//i.test(href);
     const children = domNode.children as DOMNode[];
 
-    if (isAbsolute) {
-      try {
-        const url = new URL(href);
-        if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
-          const pathname = cleanPathname(url.pathname);
-          return <Link href={pathname + url.search + url.hash}>{domToReact(children, parserOptions)}</Link>;
-        }
-      } catch {}
+    if (internalHref) {
+      return <Link href={internalHref}>{domToReact(children, parserOptions)}</Link>;
+    }
 
+    if (isAbsolute) {
       return (
         <a href={href} target="_blank" rel="nofollow noopener noreferrer">
           {domToReact(children, parserOptions)}
@@ -87,8 +89,7 @@ const parserOptions: HTMLReactParserOptions = {
       );
     }
 
-    const pathname = cleanPathname(href);
-    return <Link href={pathname}>{domToReact(children, parserOptions)}</Link>;
+    return <a href={href}>{domToReact(children, parserOptions)}</a>;
   },
 };
 
@@ -110,10 +111,16 @@ export async function generateMetadata({ params }: Props) {
     path: `all-countries/${countrySlug}/`,
   });
 
+  // Країна без жодного валідного міста — тонка сторінка, не індексуємо (follow лишаємо).
+  const hasCities = country.locations?.some((loc) => loc.translations.length > 0) ?? false;
+  const hasDescription = !!country.description?.find((e) => e.language === lng)?.description;
+  const isThin = !hasCities && !hasDescription;
+
   return {
     ...baseMetadata,
     title: current.title,
     description: current.description,
+    ...(isThin && { robots: { index: false, follow: true } }),
   };
 }
 
@@ -140,67 +147,107 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
 
   const validLocations = country.locations.filter((loc) => loc.translations.length > 0);
 
+  // Structured data для країни-хабу: хлібні крихти + список міст із квитками.
+  const BASE = 'https://greenbus.com.ua';
+  const geoSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: t('breadcrumbs_home'), item: `${BASE}/${lng}/` },
+          { '@type': 'ListItem', position: 2, name: t('buses_breadcrumb'), item: `${BASE}/${lng}/all-countries/` },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: countryName,
+            item: `${BASE}/${lng}/all-countries/${country.slug}/`,
+          },
+        ],
+      },
+      ...(validLocations.length > 0
+        ? [
+            {
+              '@type': 'ItemList',
+              name: t('available_cities_title', { country: countryName }),
+              itemListElement: validLocations.map((loc, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                url: `${BASE}/${lng}/all-countries/${country.slug}/${loc.slug}/`,
+                name: extractLocationDetails(loc, lng).locationName,
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
-    <main className="bg-slate-50 dark:bg-slate-800 flex-1">
-      <section className="bg-green-500 dark:bg-slate-900">
-        <Container size="l" className="py-5">
-          <div className="mb-4">
-            <BreadcrumbSimple locale={lng} items={breadcrumbItems} />
-          </div>
-          <MainSearch />
-        </Container>
-      </section>
-
-      <section className="py-10">
-        <Container size="l">
-          <H2 className="mb-6">{t('available_cities_title', { country: countryName })}</H2>
-          {validLocations.length > 0 ? (
-            <ul className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 tablet:gap-4">
-              {validLocations.map((location) => (
-                <li key={location.id}>
-                  <Link
-                    href={`/all-countries/${country.slug}/${location.slug}/`}
-                    prefetch={false}
-                    className="group relative flex items-center justify-between w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-green-500 dark:hover:border-green-400 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 shrink-0 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                        <MapPin className="w-5 h-5" />
-                      </div>
-                      <span className="text-base font-semibold text-slate-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-1">
-                        {extractLocationDetails(location, lng).locationName}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 group-hover:bg-green-50 dark:group-hover:bg-green-900/30 transition-colors shrink-0 ml-2">
-                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-all group-hover:translate-x-0.5 duration-300" />
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <CustomCard className="shadow-sm">
-              <p className="text-sm tablet:text-base text-slate-700 dark:text-slate-100">
-                {t('no_cities_found', { country: countryName })}
-              </p>
-            </CustomCard>
-          )}
-        </Container>
-      </section>
-
-      <section className="pb-10">
-        <Container size="l">
-          <H1 className="sr-only">
-            {t('bus_tickets_online')} - {countryName}
-          </H1>
-
-          {!!countryDescription ? (
-            <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none">
-              {parse(countryDescription, parserOptions)}
+    <>
+      {' '}
+      <main className="bg-slate-50 dark:bg-slate-800 flex-1">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(geoSchema) }} />
+        <section className="bg-green-500 dark:bg-slate-900">
+          <Container size="l" className="py-5">
+            <div className="mb-4">
+              <BreadcrumbSimple locale={lng} items={breadcrumbItems} />
             </div>
-          ) : null}
-        </Container>
-      </section>
-    </main>
+            <MainSearch />
+          </Container>
+        </section>
+
+        <section className="py-10">
+          <Container size="l">
+            <H2 className="mb-6">{t('available_cities_title', { country: countryName })}</H2>
+            {validLocations.length > 0 ? (
+              <ul className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 tablet:gap-4">
+                {validLocations.map((location) => (
+                  <li key={location.id}>
+                    <Link
+                      href={`/all-countries/${country.slug}/${location.slug}/`}
+                      prefetch={false}
+                      className="group relative flex items-center justify-between w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-green-500 dark:hover:border-green-400 transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                          <MapPin className="w-5 h-5" />
+                        </div>
+                        <span className="text-base font-semibold text-slate-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-1">
+                          {extractLocationDetails(location, lng).locationName}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 group-hover:bg-green-50 dark:group-hover:bg-green-900/30 transition-colors shrink-0 ml-2">
+                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-all group-hover:translate-x-0.5 duration-300" />
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <CustomCard className="shadow-sm">
+                <p className="text-sm tablet:text-base text-slate-700 dark:text-slate-100">
+                  {t('no_cities_found', { country: countryName })}
+                </p>
+              </CustomCard>
+            )}
+          </Container>
+        </section>
+
+        <section className="pb-10">
+          <Container size="l">
+            <H1 className="sr-only">
+              {isUkraineCountry(countryName) ? t('country_h1_ua') : t('country_h1', { country: countryName })}
+            </H1>
+
+            {!!countryDescription ? (
+              <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-s">
+                {parse(countryDescription, parserOptions)}
+              </div>
+            ) : null}
+          </Container>
+        </section>
+      </main>
+      <MainFooter />
+    </>
   );
 }

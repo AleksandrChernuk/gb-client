@@ -12,6 +12,9 @@ export function buildArticleMetadata(article: IArticleResponse, lng: Locale, slu
   const cover = article.photos.find((p) => p.isCover);
   const path = `blog/${slug}/`;
   const url = `${BASE_URL}/${lng}/${path}`;
+  // Якщо у статті немає обкладинки — використовуємо динамічний OG-генератор
+  // замість неіснуючого статичного /og-image.png.
+  const fallbackImage = `${BASE_URL}/${lng}/opengraph-image`;
 
   const getOgLocale = (locale: Locale): string => {
     const map: Record<Locale, string> = {
@@ -52,7 +55,7 @@ export function buildArticleMetadata(article: IArticleResponse, lng: Locale, slu
           ]
         : [
             {
-              url: `${BASE_URL}/og-image.png`,
+              url: fallbackImage,
               width: 1200,
               height: 630,
               alt: 'GreenBus',
@@ -68,7 +71,7 @@ export function buildArticleMetadata(article: IArticleResponse, lng: Locale, slu
       card: 'summary_large_image',
       title: desc.title,
       description: desc.description,
-      images: cover ? [cover.url] : [`${BASE_URL}/og-image.png`],
+      images: cover ? [cover.url] : [fallbackImage],
     },
 
     robots: {

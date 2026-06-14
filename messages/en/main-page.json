@@ -2,7 +2,7 @@
   "main-page": {
     "buses_image_alt": "Bus travel from Ukraine to Europe — passenger with a suitcase",
     "benefits_title": "Benefits of booking bus tickets with GreenBus",
-    "herow_title": "Buy Bus Tickets Online",
+    "herow_title": "Bus Tickets Ukraine-Europe Online",
     "buses_title": "Bus Tickets Online — Ukraine and Europe Routes",
     "buses_description": "GreenBus is a bus ticket aggregator with hundreds of carriers across Ukraine and Europe. Compare prices, choose a convenient schedule and buy your ticket online without queues or extra fees. Your e-ticket will be sent to your email immediately after payment.\n\nInternational routes available to Poland, Germany, Czech Republic, Italy, Austria, Slovakia and 20+ more countries. Domestic routes across Ukraine — Kyiv, Lviv, Odesa, Kharkiv, Dnipro and more.",
     "buses_button": "Buy Ticket",
@@ -35,6 +35,15 @@
       "p2": "Our aggregator brings together offers from bus operators across Europe. Popular destinations include routes to Poland, Germany, the Czech Republic, Austria, Slovakia, and other countries. The system makes it easy to compare prices from different carriers and find the best option. With filters, you can sort trips by departure time, travel duration, number of available seats, or arrival point.",
       "p3": "GreenBus offers routes from Kyiv, Lviv, Odesa, Dnipro, Kharkiv, Vinnytsia, Ivano-Frankivsk, and many other cities in Ukraine. Among international destinations, the most popular are Warsaw, Krakow, Prague, Berlin, Vienna, Budapest, and Bratislava. We constantly expand our route network by adding new destinations, so passengers can travel comfortably and with fewer transfers.",
       "p4": "Our service combines the convenience of online booking with the reliability of the carriers we work with. All companies go through a careful review, which helps ensure safety and comfort during the trip. The website interface is adapted for mobile devices, so you can buy tickets from your phone or tablet at any time. Our support team helps passengers with any questions — from choosing the best route to getting a refund."
-    }
+    },
+    "seo_links_title": "Popular destinations",
+    "seo_link_routes": "All routes",
+    "seo_link_all": "Countries and cities",
+    "c_ukraine": "Ukraine",
+    "c_poland": "Poland",
+    "c_germany": "Germany",
+    "c_czech": "Czechia",
+    "c_austria": "Austria",
+    "c_slovakia": "Slovakia"
   }
 }

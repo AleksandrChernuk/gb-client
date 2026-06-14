@@ -22,6 +22,7 @@ import parse, { domToReact } from 'html-react-parser';
 import { notFound } from 'next/navigation';
 import { Link } from '@/shared/i18n/routing';
 import { buildArticleSchema } from '@/shared/seo/article.schema';
+import { getInternalSeoHref } from '@/shared/seo/internal-links';
 
 export async function generateStaticParams() {
   const res = await getArticles({ perPage: 9999 });
@@ -38,17 +39,6 @@ export async function generateStaticParams() {
   );
 }
 
-const OWN_HOST = 'greenbus.com.ua';
-
-function cleanPathname(pathname: string) {
-  const locales = ['uk', 'ru', 'en'];
-  const parts = pathname.split('/').filter(Boolean);
-  if (locales.includes(parts[0])) {
-    return '/' + parts.slice(1).join('/');
-  }
-  return pathname;
-}
-
 const options = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -56,22 +46,18 @@ const options = {
   replace(domNode: any) {
     if (domNode.name === 'a' && domNode.attribs?.href) {
       const href = domNode.attribs.href;
+      const internalHref = getInternalSeoHref(href);
       const isAbsolute = /^https?:\/\//i.test(href);
 
-      if (isAbsolute) {
-        try {
-          const url = new URL(href);
-          if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
-            const pathname = cleanPathname(url.pathname);
-            
-            return (
-              <Link href={pathname + url.search + url.hash} prefetch={false}>
-                {domToReact(domNode.children, options)}
-              </Link>
-            );
-          }
-        } catch {}
+      if (internalHref) {
+        return (
+          <Link href={internalHref} prefetch={false}>
+            {domToReact(domNode.children, options)}
+          </Link>
+        );
+      }
 
+      if (isAbsolute) {
         return (
           <a href={href} target="_blank" rel="nofollow noopener noreferrer">
             {domToReact(domNode.children, options)}
@@ -79,12 +65,7 @@ const options = {
         );
       }
 
-      const pathname = cleanPathname(href);
-      return (
-        <Link href={pathname} prefetch={false}>
-          {domToReact(domNode.children, options)}
-        </Link>
-      );
+      return <a href={href}>{domToReact(domNode.children, options)}</a>;
     }
   },
 };

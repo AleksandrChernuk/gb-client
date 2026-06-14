@@ -14,6 +14,8 @@ import business from '@/assets/images/business.webp';
 import group from '@/assets/images/group.webp';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import ContactForm from '@/features/contact-form';
+import { Link } from '@/shared/i18n/routing';
+import { BASE_URL } from '@/shared/configs/constants';
 
 type Props = {
   params: Params;
@@ -42,8 +44,56 @@ export default async function About({
 
   setRequestLocale(lng as Locale);
 
+  const faqItems = [1, 2, 3, 4, 5].map((i) => ({
+    question: t_about(`faq_q${i}`),
+    answer: t_about(`faq_a${i}`),
+  }));
+
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${BASE_URL}/#organization`,
+        name: 'GreenBus',
+        url: BASE_URL,
+        foundingDate: '2019',
+        description: t_about('route_to_europe_text'),
+        contactPoint: [
+          { '@type': 'ContactPoint', contactType: 'customer support', telephone: '+380987446419', availableLanguage: ['uk', 'ru', 'en'] },
+          { '@type': 'ContactPoint', contactType: 'customer support', telephone: '+380996033832', availableLanguage: ['uk', 'ru', 'en'] },
+          { '@type': 'ContactPoint', contactType: 'customer support', email: 'greenbus.ukraine@gmail.com', availableLanguage: ['uk', 'ru', 'en'] },
+        ],
+        sameAs: [
+          'https://www.instagram.com/greenbus_ukraine',
+          'https://www.tiktok.com/@greenbusukraine',
+          'https://x.com/GreenBusUkraine',
+          'https://www.facebook.com/greenbus.ukraine',
+          'https://t.me/+380987446419',
+          'https://wa.me/380987446419',
+        ],
+      },
+      {
+        '@type': 'AboutPage',
+        url: `${BASE_URL}/${lng}/about/`,
+        inLanguage: lng,
+        name: t_about('route_to_europe_title'),
+        mainEntity: { '@id': `${BASE_URL}/#organization` },
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       <main className="bg-slate-50 dark:bg-slate-900">
         <section className="pt-8">
           <Container size="m">
@@ -59,7 +109,7 @@ export default async function About({
               </li>
               <li className="overflow-hidden tablet:w-1/2 tablet:mr-auto max-w-[400px]">
                 <Image
-                  alt="direction-with-a-road-in-the-city"
+                  alt={t_about('alt_route')}
                   src={irectionWith}
                   priority
                   draggable={false}
@@ -101,7 +151,7 @@ export default async function About({
               </li>
               <li className="ml-auto max-w-[400px]">
                 <Image
-                  alt="group"
+                  alt={t_about('alt_team')}
                   src={group}
                   draggable={false}
                   placeholder="blur"
@@ -138,7 +188,7 @@ export default async function About({
               </li>
               <li className="ml-auto max-w-[400px]">
                 <Image
-                  alt="world"
+                  alt={t_about('alt_world')}
                   src={world}
                   draggable={false}
                   placeholder="blur"
@@ -155,7 +205,7 @@ export default async function About({
             <ul className="items-start justify-between space-y-8 tablet:space-y-0 tablet:flex tablet:gap-5 ">
               <li className="mr-auto max-w-[400px]">
                 <Image
-                  alt="group"
+                  alt={t_about('alt_business')}
                   src={business}
                   draggable={false}
                   className="mx-auto tablet:mx-0 rounded-3xl max-w-[400px]"
@@ -173,6 +223,53 @@ export default async function About({
             </ul>
           </Container>
         </section>
+        <section className="pt-16">
+          <Container size="m">
+            <h2 className="mb-6 text-xl font-bold leading-[28.8px] tracking-normal text-slate-700 dark:text-slate-50 laptop:text-[32px] laptop:leading-[38.4px]">
+              {t_about('faq_title')}
+            </h2>
+            <dl className="space-y-5">
+              {faqItems.map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                >
+                  <dt className="mb-1.5 text-base font-bold text-slate-800 dark:text-slate-50 tablet:text-lg">
+                    {item.question}
+                  </dt>
+                  <dd className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 tablet:text-base">
+                    {item.answer}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Container>
+        </section>
+
+        <section className="pt-16">
+          <Container size="m">
+            <h2 className="mb-4 text-xl font-bold leading-[28.8px] tracking-normal text-slate-700 dark:text-slate-50 laptop:text-[32px] laptop:leading-[38.4px]">
+              {t_about('useful_links_title')}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { href: '/routes/', label: t_about('link_routes') },
+                { href: '/all-countries/', label: t_about('link_countries') },
+                { href: '/faq/bronjuvannja-mists/', label: t_about('link_faq') },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  prefetch={false}
+                  className="inline-flex items-center rounded-full border border-green-500/30 bg-green-50 px-4 py-2 text-sm font-medium text-green-700 transition-colors hover:border-green-500 hover:bg-green-100 dark:border-green-500/30 dark:bg-green-500/10 dark:text-green-300 dark:hover:bg-green-500/20"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </section>
+
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <Container size="xs" className="my-auto">
             <CustomCard className="dark:bg-slate-800">

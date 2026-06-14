@@ -13,13 +13,29 @@ export function RouteSchema({ route, lng, host }: RouteSchemaProps) {
   const fromCountry = route.fromLocation.country.code;
   const toCountry = route.toLocation.country.code;
 
-  // FAQ з description — витягуємо питання/відповіді
   const descHtml = route.description.find((d) => d.language === lng)?.description ?? '';
-  const faqMatches = [...descHtml.matchAll(/<strong>([\s\S]*?)<\/strong><br>([\s\S]*?)(?=<\/p>)/g)];
-  const faqItems = faqMatches.map((m) => ({
-    question: m[1].replace(/<[^>]+>/g, '').trim(),
-    answer: m[2].replace(/<[^>]+>/g, '').trim(),
-  }));
+
+  // FAQ з description — витягуємо питання/відповіді.
+  // Допускаємо різні інлайн-роздільники між питанням і відповіддю (<br>, </p><p> тощо),
+  // щоб дрібні зміни HTML-розмітки не ламали FAQ-розмітку мовчки.
+  const faqMatches = [
+    ...descHtml.matchAll(
+      /<strong>([\s\S]*?)<\/strong>\s*(?:<br\s*\/?>|<\/p>\s*<p[^>]*>)?\s*([\s\S]*?)(?=<strong>|<\/p>|$)/g,
+    ),
+  ];
+  const faqItems = faqMatches
+    .map((m) => ({
+      question: m[1].replace(/<[^>]+>/g, '').trim(),
+      answer: m[2].replace(/<[^>]+>/g, '').trim(),
+    }))
+    .filter((item) => item.question.length > 0 && item.answer.length > 0);
+
+  // Самодостатня відповідь-витяг для AI: перше речення опису без HTML,
+  // інакше — згенероване речення з ключовими фактами маршруту.
+  const plainDesc = descHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const priceText = route.price ? ` від ${route.price} грн` : '';
+  const fallbackDesc = `Автобус ${fromName} — ${toName}: квитки${priceText}, онлайн-бронювання та електронний квиток на email. Рейси виконують перевізники-партнери GreenBus.`;
+  const tripDescription = (plainDesc.split(/(?<=[.!?])\s/)[0] || fallbackDesc).slice(0, 300);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -28,6 +44,8 @@ export function RouteSchema({ route, lng, host }: RouteSchemaProps) {
       {
         '@type': 'BusTrip',
         name: `${fromName} — ${toName}`,
+        description: tripDescription,
+        inLanguage: lng,
         url: `${host}/${lng}/routes/${route.slug}/`,
         departureBusStop: {
           '@type': 'BusStation',

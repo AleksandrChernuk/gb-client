@@ -18,6 +18,8 @@ import busDirectly from '@/assets/images/bus-directly-to-the-bus-stop.webp';
 import directionWith from '@/assets/images/direction-with-a-road-in-the-city.webp';
 import { joinUsAgents } from '@/shared/constans/join.us.agents.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
+import { Link } from '@/shared/i18n/routing';
+import { BASE_URL } from '@/shared/configs/constants';
 
 export async function generateMetadata({ params }: Props) {
   const { lng } = (await params) as { lng: Locale };
@@ -39,8 +41,37 @@ export default async function ForAgents({
   const t_for_agents = await getTranslations(MESSAGE_FILES.FORAGENTS_PAGE);
   setRequestLocale(lng as Locale);
 
+  const faqItems = [1, 2, 3, 4, 5].map((i) => ({
+    question: t_for_agents(`faq_q${i}`),
+    answer: t_for_agents(`faq_a${i}`),
+  }));
+
+  const pageSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: t_for_agents('automate_ticket_title'),
+        serviceType: 'Bus ticket sales platform for agents',
+        description: t_for_agents('automate_ticket_text'),
+        areaServed: ['UA', 'EU'],
+        provider: { '@type': 'Organization', name: 'GreenBus', url: BASE_URL },
+        url: `${BASE_URL}/${lng}/for-agents/`,
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <main>
         <section className="pt-8 pb-16">
           <Container size="m">
@@ -119,6 +150,49 @@ export default async function ForAgents({
                 />
               </li>
             </ul>
+          </Container>
+        </section>
+
+        <section className="py-16 bg-slate-50 dark:bg-slate-900">
+          <Container size="m">
+            <h2 className="mb-6 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              {t_for_agents('faq_title')}
+            </h2>
+            <dl className="space-y-5">
+              {faqItems.map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800"
+                >
+                  <dt className="mb-1.5 text-base font-bold text-slate-800 dark:text-slate-50 tablet:text-lg">
+                    {item.question}
+                  </dt>
+                  <dd className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 tablet:text-base">
+                    {item.answer}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <h2 className="mb-4 mt-12 text-xl font-bold tracking-normal leading-[28.8px] laptop:text-[32px] laptop:leading-[38.4px] text-slate-700 dark:text-slate-50">
+              {t_for_agents('useful_links_title')}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { href: '/for-carriers/', label: t_for_agents('link_carriers') },
+                { href: '/about/', label: t_for_agents('link_about') },
+                { href: '/routes/', label: t_for_agents('link_routes') },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  prefetch={false}
+                  className="inline-flex items-center rounded-full border border-green-500/30 bg-green-50 px-4 py-2 text-sm font-medium text-green-700 transition-colors hover:border-green-500 hover:bg-green-100 dark:border-green-500/30 dark:bg-green-500/10 dark:text-green-300 dark:hover:bg-green-500/20"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
           </Container>
         </section>
 

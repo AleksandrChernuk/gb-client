@@ -5,11 +5,22 @@ import { Container } from '@/shared/ui/Container';
 import { H1 } from '@/shared/ui/H1';
 import { Locale } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 
-export default async function FaqHero() {
+// Пострінковий H1 під тему сторінки (узгоджений з Title), щоб ключі збігалися.
+const HEADING_BY_SLUG: Record<string, string> = {
+  'bronjuvannja-mists': 'heading_booking',
+  'routes-and-buses': 'heading_routes',
+  'ticket-refund': 'heading_refund',
+};
+
+export default async function FaqHero({ slug }: { slug?: string }) {
   const t = await getTranslations(MESSAGE_FILES.QUESTIONS_PAGE);
   const t_common = await getTranslations(MESSAGE_FILES.COMMON);
   const lng = (await getLocale()) as Locale;
+
+  const headingKey = slug ? HEADING_BY_SLUG[slug] : undefined;
+  const heading = headingKey ? t(headingKey) : t('title');
 
   return (
     <section className="py-6">
@@ -26,8 +37,10 @@ export default async function FaqHero() {
           />
         </div>
 
-        <H1 className="text-center">{t('title')}</H1>
-        <FaqSearch />
+        <H1 className="text-center">{heading}</H1>
+        <Suspense fallback={null}>
+          <FaqSearch />
+        </Suspense>
       </Container>
     </section>
   );

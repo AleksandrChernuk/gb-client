@@ -2,9 +2,11 @@ import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { navItems } from '@/shared/constans/faq.nav.items';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import FaqContent from '@/views/faq-page/FaqContent';
+import FaqHero from '@/views/faq-page/FaqHero';
 import FaqSearchResult from '@/widgets/faq-search-result/FaqSearchResult';
 import { Locale } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
@@ -41,7 +43,14 @@ export default async function FaqPage({ params, searchParams }: Props) {
   const search = await searchParams;
 
   if (slug === 'search') {
-    return <FaqSearchResult />;
+    return (
+      <>
+        <FaqHero />
+        <Suspense fallback={null}>
+          <FaqSearchResult />
+        </Suspense>
+      </>
+    );
   }
 
   const page = FAQ_PAGES[slug];
@@ -50,5 +59,10 @@ export default async function FaqPage({ params, searchParams }: Props) {
   const searchQuery = search.q as string | undefined;
   const href = navItems[page.navIndex].href;
 
-  return <FaqContent slug={href} searchQuery={searchQuery} />;
+  return (
+    <>
+      <FaqHero slug={slug} />
+      <FaqContent slug={href} searchQuery={searchQuery} />
+    </>
+  );
 }

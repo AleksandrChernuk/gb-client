@@ -75,7 +75,7 @@
 //     () => ({
 //       from: rawParams.from,
 //       to: rawParams.to,
-//       date: rawParams.date || format(new Date(), 'yyyy-MM-dd'),
+//       date: rawParams.date || format(addDays(new Date(), 1), 'yyyy-MM-dd'),
 //       voyagers: rawParams.voyagers,
 //     }),
 //     [rawParams],
@@ -119,7 +119,7 @@
 // }
 
 import { useQueryStates, parseAsInteger, createParser } from 'nuqs';
-import { format, isValid, parseISO, isBefore, startOfDay } from 'date-fns';
+import { format, isValid, parseISO, isBefore, startOfDay, addDays } from 'date-fns';
 import { useMemo } from 'react';
 import { sortBuy, TSortBuy } from '@/shared/constans/sortbuylist.constans';
 
@@ -197,7 +197,7 @@ export function useRouterSearch(): UseRouterSearchReturn {
     () => ({
       from: rawParams.from,
       to: rawParams.to,
-      date: rawParams.date || format(new Date(), 'yyyy-MM-dd'),
+      date: rawParams.date || format(addDays(new Date(), 1), 'yyyy-MM-dd'),
       voyagers: rawParams.voyagers,
       sort: (rawParams.sort as TSortBuy) || sortBuy.SORT_BUY_PRICE_ASC,
     }),
@@ -230,7 +230,7 @@ export function useRouterSearch(): UseRouterSearchReturn {
         setRawParams({
           from: null,
           to: null,
-          date: format(new Date(), 'yyyy-MM-dd'),
+          date: format(addDays(new Date(), 1), 'yyyy-MM-dd'),
           voyagers: 1,
           sort: null,
         });

@@ -3,9 +3,8 @@
     "breadcrumbs_home": "Главная",
     "breadcrumbs_all_countries": "Все страны",
     "buses_breadcrumb": "Все направления",
-
     "bus_tickets": "Билеты на автобусы",
-    "bus_tickets_online": "втобусные билеты",
+    "bus_tickets_online": "Автобусные билеты",
     "available_cities_title": "Города {country}, куда можно купить автобусные билеты",
     "no_description_placeholder": "Выберите город в {country} и пункт назначения",
     "no_cities_found": "К сожалению, в {country} пока нет доступных городов для заказа",
@@ -17,14 +16,10 @@
     "select_city": "Выберите город",
     "search_section_title": "Поисковой раздел",
     "search_aria_label": "Поиск автобусных билетов",
-
     "tickets_heading": "Автобусные билеты из {locationName}",
     "popular_routes_from_city": "Популярные маршруты из города {locationName}",
-
     "teaser_text": "Хотите поехать в {locationName}? На сайте greenbus.com.ua вы найдёте билеты на автобусы в {locationName}. Воспользуйтесь поисковой формой сверху, чтобы забронировать место на современный автобус от проверенных перевозчиков.",
-
     "about_city_heading": "О городе {locationName}",
-
     "map_title": "Карта города {locationName}",
     "map_aria_label": "Карта расположения {locationName}",
     "seo_text": {
@@ -62,6 +57,8 @@
         "q6": "Есть ли рейсы по Украине?",
         "a6": "Да, есть внутренние рейсы между крупными городами — Киев, Львов, Одесса, Харьков, Днепр и другими."
       }
-    }
+    },
+    "country_h1": "Автобусные билеты: {country}",
+    "country_h1_ua": "Автобусные билеты по Украине и Европе"
   }
 }

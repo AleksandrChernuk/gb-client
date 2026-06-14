@@ -13,17 +13,7 @@ import { H2 } from '@/shared/ui/H2';
 import { RouteItem } from '@/shared/ui/route-item';
 
 import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
-
-const OWN_HOST = 'greenbus.com.ua';
-
-function cleanPathname(pathname: string) {
-  const locales = ['uk', 'ru', 'en'];
-  const parts = pathname.split('/').filter(Boolean);
-  if (locales.includes(parts[0])) {
-    return '/' + parts.slice(1).join('/');
-  }
-  return pathname;
-}
+import { getInternalSeoHref } from '@/shared/seo/internal-links';
 
 const parserOptions: HTMLReactParserOptions = {
   replace(domNode) {
@@ -31,18 +21,15 @@ const parserOptions: HTMLReactParserOptions = {
     if (domNode.name !== 'a' || !domNode.attribs?.href) return;
 
     const href = domNode.attribs.href;
+    const internalHref = getInternalSeoHref(href);
     const isAbsolute = /^https?:\/\//i.test(href);
     const children = domNode.children as DOMNode[];
 
-    if (isAbsolute) {
-      try {
-        const url = new URL(href);
-        if (url.hostname === OWN_HOST || url.hostname === `www.${OWN_HOST}`) {
-          const pathname = cleanPathname(url.pathname);
-          return <Link href={pathname + url.search + url.hash}>{domToReact(children, parserOptions)}</Link>;
-        }
-      } catch {}
+    if (internalHref) {
+      return <Link href={internalHref}>{domToReact(children, parserOptions)}</Link>;
+    }
 
+    if (isAbsolute) {
       return (
         <a href={href} target="_blank" rel="nofollow noopener noreferrer">
           {domToReact(children, parserOptions)}
@@ -50,8 +37,7 @@ const parserOptions: HTMLReactParserOptions = {
       );
     }
 
-    const pathname = cleanPathname(href);
-    return <Link href={pathname}>{domToReact(children, parserOptions)}</Link>;
+    return <a href={href}>{domToReact(children, parserOptions)}</a>;
   },
 };
 
@@ -76,6 +62,7 @@ export async function generateStaticParams() {
 }
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { Link } from '@/shared/i18n/routing';
+import MainFooter from '@/widgets/footer/MainFooter';
 
 export async function generateMetadata({ params }: Props) {
   const { lng, locationSlug } = (await params) as { lng: Locale; locationSlug: string };
@@ -116,10 +103,17 @@ export async function generateMetadata({ params }: Props) {
     path: `all-countries/${data.country.slug}/${data.slug}/`,
   });
 
+  // Тонкі гео-сторінки без маршрутів і без опису не індексуємо (захист від index bloat),
+  // але лишаємо follow, щоб краулер ходив по внутрішніх посиланнях.
+  const hasRoutes = (data.favoriteRoutesFrom ?? []).some((r) => r.slug && r.fromLocation && r.toLocation);
+  const hasDescription = !!extractLocationDetails(data, lng).description;
+  const isThin = !hasRoutes && !hasDescription;
+
   return {
     ...baseMetadata,
     title: current.title,
     description: current.description,
+    ...(isThin && { robots: { index: false, follow: true } }),
   };
 }
 
@@ -145,8 +139,45 @@ export default async function LocationPage({ params }: Props) {
     .filter((route) => route.slug && route.fromLocation && route.toLocation)
     .slice(0, 6);
 
+  // Structured data для гео-хабу: хлібні крихти + список популярних маршрутів із міста.
+  const BASE = 'https://greenbus.com.ua';
+  const cityUrl = `${BASE}/${lng}/all-countries/${data.country.slug}/${data.slug}/`;
+  const geoSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: t('breadcrumbs_home'), item: `${BASE}/${lng}/` },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: details.countryName,
+            item: `${BASE}/${lng}/all-countries/${data.country.slug}/`,
+          },
+          { '@type': 'ListItem', position: 3, name: details.locationName, item: cityUrl },
+        ],
+      },
+      ...(popularRoutes.length > 0
+        ? [
+            {
+              '@type': 'ItemList',
+              name: t('popular_routes_from_city', { locationName: details.locationName }),
+              itemListElement: popularRoutes.map((route, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                url: `${BASE}/${lng}/routes/${route.slug}/`,
+                name: `${extractLocationDetails(route.fromLocation, lng).locationName} — ${extractLocationDetails(route.toLocation, lng).locationName}`,
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(geoSchema) }} />
       <main className="bg-slate-50 dark:bg-slate-800 flex-1" role="main" aria-label={t('search_section_title')}>
         <section className="bg-green-500 dark:bg-slate-900">
           <Container size="l" className="py-5">
@@ -209,6 +240,7 @@ export default async function LocationPage({ params }: Props) {
           </Container>
         </section>
       </main>
+      <MainFooter />
     </>
   );
 }

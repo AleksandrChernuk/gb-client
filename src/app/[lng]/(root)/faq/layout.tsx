@@ -4,7 +4,6 @@ import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
-import FaqHero from '@/views/faq-page/FaqHero';
 
 type Props = {
   params: Promise<{ lng: string; slug: string }>;
@@ -36,8 +35,6 @@ export default async function FaqLayout({
   return (
     <>
       <main role="main" className="pb-20 pt-4 grow bg-slate-50 dark:bg-slate-900 ">
-        <FaqHero />
-
         {children}
       </main>
       <MainFooter className="bg-white dark:bg-slate-800" />

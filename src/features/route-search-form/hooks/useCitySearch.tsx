@@ -304,7 +304,7 @@
 //     placeholder,
 //   };
 // };
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { useQueryState } from 'nuqs';
 
 const opts = { defaultValue: '' };
@@ -313,7 +313,7 @@ export default function useSearchRouteParams() {
   const [from, setFrom] = useQueryState('from', opts);
   const [to, setTo] = useQueryState('to', opts);
   const [date, setDate] = useQueryState('date', {
-    defaultValue: format(new Date(), 'yyyy-MM-dd'),
+    defaultValue: format(addDays(new Date(), 1), 'yyyy-MM-dd'),
   });
   const [voyagers, setVoyagers] = useQueryState('voyagers', {
     defaultValue: '1',

@@ -21,12 +21,10 @@
     "details": "Details",
     "breadcrumb_buses": "Routes",
     "breadcrumb_blog": "News & Articles",
-
     "no_travel": "No available routes",
     "no_travel_find": "No trips found",
     "articles_title": "Latest Travel Articles",
     "articles_link_title": "Useful tips and news about international bus routes",
-
     "all_news": "Read blog",
     "read": "Read",
     "breadcrumb_main": "Home",
@@ -42,13 +40,11 @@
     "delete_account_text": "After confirmation, your account will be deactivated and permanently deleted within 7 days.",
     "delete_account_cancel": "Cancel",
     "delete_account_btn": "Delete",
-
     "delete_account_title": "Account Deactivated",
     "delete_account_message": "Your account has been successfully deactivated and will be permanently deleted within 7 days.",
     "delete_account_thanks": "Thank you for using our service!",
     "delete_account_back": "Return to Home",
     "delete_account_redirect": "You will be automatically redirected in 10 seconds",
-
     "page_in_progress": "We are working on this page to make it as helpful and convenient for you as possible. Very soon you’ll find new information and features here!",
     "errorDescription": "An unexpected error has occurred. Please try again or return to the homepage.",
     "follow_us": "Follow us",
@@ -148,12 +144,10 @@
     "total_price": "Total (incl. VAT)",
     "accept_rules": "I accept the terms of the public offer, privacy policy, and returns policy.",
     "processing_data": "Consent for processing personal data.",
-
     "name_validate": {
       "required": "Name is required",
       "noSpecialCharacters": "Name must not contain special characters"
     },
-
     "password_validate": {
       "minLength": "Password is too short (minimum 8 characters)",
       "maxLength": "Password is too long (maximum 20 characters)",
@@ -162,12 +156,10 @@
       "number": "Password must contain at least one number",
       "special": "Password must contain at least one special character (!@#$%^&*)"
     },
-
     "otp_validate": {
       "required": "Code is required",
       "invalid": "The code must be exactly 6 digits"
     },
-
     "updatePassword_validate": {
       "required": "Please confirm your password",
       "passwordMismatchErrorMessage": "Passwords do not match"
@@ -222,6 +214,8 @@
     "x_aria": "GreenBus page on X (Twitter)",
     "facebook_aria": "GreenBus page on Facebook",
     "payment_card": "Card payment",
-    "payment_driver": "Payment to the driver"
+    "payment_driver": "Payment to the driver",
+    "no_results_title": "No trips found",
+    "no_results_hint": "No trips for the selected date. Try another date."
   }
 }

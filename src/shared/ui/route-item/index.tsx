@@ -20,7 +20,7 @@ export async function RouteItem({ fromName, toName, price, fromCountry, toCountr
     <Link
       href={href}
       prefetch={false}
-      className="flex items-center justify-between gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 hover:border-green-500 dark:hover:border-green-500 transition-colors"
+      className="flex items-center justify-between gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 hover:border-green-500 dark:hover:border-green-500 transition-colors"
     >
       <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
         <div className="flex flex-col gap-0.5">

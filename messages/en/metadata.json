@@ -11,12 +11,18 @@
       "keywords": "bus, tickets online, schedule, GreenBus"
     },
     "route_slug": {
-      "title": "Bus {fromName} — {toName}: tickets from {price} UAH | GreenBus",
-      "description": "Buy a bus ticket from {fromName} to {toName} from {price} UAH. Current schedule, carriers and online booking on GreenBus."
+      "title": "{fromName} — {toName} bus tickets: from {price} UAH | GreenBus",
+      "description": "Buy {fromName} — {toName} bus tickets from {price} UAH online. Live schedule, carriers and booking on GreenBus.",
+      "lead": "The {fromName} — {toName} bus is a popular route with online booking on GreenBus. Compare partner carrier trips by price and time and book your ticket in minutes.",
+      "lead_no_price": "The {fromName} — {toName} bus is a popular route with online booking on GreenBus. Compare partner carrier trips by price and time and book your ticket in minutes.",
+      "trust_payment": "Card payment, no booking fee",
+      "trust_eticket": "E-ticket instantly by email",
+      "trust_carriers": "100+ partner carriers",
+      "results_heading": "{fromName} — {toName} bus schedule and prices"
     },
     "about": {
-      "title": "GreenBus — Bus Transportation Across Ukraine and Europe 🚍",
-      "description": "GreenBus offers comfortable bus transportation services across Ukraine and Europe. Safety, convenience, and affordable prices. Organization of group and individual trips.",
+      "title": "About GreenBus — bus tickets online across Ukraine and Europe",
+      "description": "GreenBus is an online bus ticket service connecting Ukraine with Europe since 2019. 100+ carriers, live schedules, card payment with no fee, e-ticket by email.",
       "keywords": "GreenBus, bus transportation, passenger transportation, bus, transport, group trips, individual trips, Ukraine, Europe, buy ticket, bus tickets"
     },
     "agents": {
@@ -25,8 +31,8 @@
       "keywords": "GreenBus, agents, partnership, bus transportation, cooperation, transport, Ukraine, Europe, bus, tickets, become a partner"
     },
     "main": {
-      "title": "Buy Bus Tickets Online with No Booking Fee | GreenBus",
-      "description": "Buy bus tickets online in 3 minutes: 100+ carriers, routes Ukraine-Poland-Germany-Czechia. Zero booking fee, secure card payment, e-ticket to email.",
+      "title": "Bus Tickets Ukraine-Europe Online | GreenBus",
+      "description": "Book bus tickets between Ukraine and Europe in minutes. Compare 100+ carriers, routes to Poland, Germany and Czechia, secure card payment and e-ticket by email.",
       "keywords": "bus tickets, cheap bus travel, Europe bus search, Ukraine Poland bus, price comparison, online booking"
     },
     "oferta": {
@@ -94,7 +100,6 @@
       "description": "Manage your personal data, view trip history, tickets, and payments. Customize your account in the convenient GreenBus personal cabinet.",
       "keywords": "GreenBus, profile, personal account, my trips, tickets, bookings, payments, settings"
     },
-
     "faq": {
       "title": "Bus Tickets: Questions and Answers | GreenBus",
       "description": "Find answers about bus tickets online. Check schedules, prices for routes across Ukraine and Europe, and travel conditions on GreenBus.",

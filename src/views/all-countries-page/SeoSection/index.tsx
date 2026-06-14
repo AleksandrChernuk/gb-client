@@ -27,7 +27,7 @@ export async function SeoSectionAllCountries() {
   return (
     <section className="py-12">
       <Container size="l">
-        <div className="prose dark:prose-invert max-w-none">
+        <div className="prose dark:prose-invert max-w-none bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
           <h2>{t('seo_text.how.title')}</h2>
           <p>{t('seo_text.how.text')}</p>
 
@@ -45,7 +45,7 @@ export async function SeoSectionAllCountries() {
           <p>{t('seo_text.benefits.text')}</p>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-sm">
           <h2 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">{t('seo_text.faq.title')}</h2>
 
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

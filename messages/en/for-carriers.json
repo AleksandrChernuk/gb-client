@@ -16,6 +16,21 @@
     "choose_us_title": "Why choose us?",
     "choose_us_text": "We offer the most advanced online system for managing passenger transportation. Our powerful tools enable ticket sales automation, route and fare management, and ensure data security. All these benefits allow you to focus on growing your business, while we take care of the other aspects of your operations.",
     "security_data_title": "We guarantee the security of your data",
-    "security_data_text": "We use a modern end-to-end data encryption system, ensuring the highest level of security. All your confidential information — from client data to financial reports — will be fully protected. Our servers comply with all security standards, preventing leaks and external threats."
+    "security_data_text": "We use a modern end-to-end data encryption system, ensuring the highest level of security. All your confidential information — from client data to financial reports — will be fully protected. Our servers comply with all security standards, preventing leaks and external threats.",
+    "faq_title": "Questions and answers for carriers",
+    "faq_q1": "Who can become a GreenBus partner?",
+    "faq_a1": "Bus carriers, bus stations and agencies that want to sell tickets online and automate trip management can become GreenBus partners.",
+    "faq_q2": "What does the GreenBus platform give a carrier?",
+    "faq_a2": "A carrier gets online ticket sales, a trip dispatch system, route and seat management, and sales analytics in a single dashboard.",
+    "faq_q3": "How much does onboarding cost?",
+    "faq_a3": "Cooperation terms are calculated individually depending on the volume of trips and the features you need. Leave a request and we will send an offer.",
+    "faq_q4": "Is data on the platform secure?",
+    "faq_a4": "Yes. We use modern end-to-end data encryption that protects both carrier and passenger information.",
+    "faq_q5": "How do I start cooperation?",
+    "faq_a5": "Fill in the request form on this page — our manager will contact you, explain the terms and help with onboarding.",
+    "useful_links_title": "Useful sections",
+    "link_agents": "For agents",
+    "link_about": "About GreenBus",
+    "link_routes": "Popular routes"
   }
 }

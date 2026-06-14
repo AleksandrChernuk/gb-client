@@ -15,6 +15,7 @@ import {
   getRouteRobotsForSearchParams,
   shouldNoindexQueryUrl,
 } from '@/shared/seo/route-query-indexing';
+import { getInternalSeoHref } from '@/shared/seo/internal-links';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
 
 jest.mock('@/shared/api/articles.actions', () => ({
@@ -138,7 +139,7 @@ describe('SEO safety invariants', () => {
     }
   });
 
-  it('keeps robots pointing to the production sitemap while blocking query URLs', () => {
+  it('keeps robots pointing to the production sitemap without globally blocking query URLs', () => {
     const result = robots();
     const rules = Array.isArray(result.rules) ? result.rules : [result.rules];
     const allow = rules.flatMap((rule) => rule.allow ?? []);
@@ -148,14 +149,14 @@ describe('SEO safety invariants', () => {
     expect(allow).toContain('/');
     expect(allow).toContain('/_next/static/');
     expect(allow).toContain('/_next/image');
-    expect(disallow).toContain('/*?*');
+    expect(disallow).not.toContain('/*?*');
     expect(disallow).toContain('/_next/');
     expect(disallow).toContain('/*/profile');
     expect(disallow).toContain('/*/checkout');
     expect(disallow).not.toContain('/llms.txt');
   });
 
-  it('keeps buses private and route query URLs out of the index', () => {
+  it('keeps query URLs out of the index without blocking crawlers from seeing noindex', () => {
     const busesPage = readProjectFile('src/app/[lng]/(root)/buses/page.tsx');
     const cleanRouteRobots = getRouteRobotsForSearchParams({});
     const routeQueryRobots = getRouteRobotsForSearchParams({ from: '126', to: '16' });
@@ -174,18 +175,43 @@ describe('SEO safety invariants', () => {
     expect(shouldNoindexQueryUrl('/uk/routes/kryvyi-rih-prague/', '')).toBe(false);
     expect(shouldNoindexQueryUrl('/uk/routes/kryvyi-rih-prague/', '?from=126&to=16')).toBe(true);
     expect(shouldNoindexQueryUrl('/uk/buses/', '?from=11&to=8&date=2025-11-21')).toBe(true);
-    expect(shouldNoindexQueryUrl('/uk/blog/', '?page=2')).toBe(false);
+    expect(shouldNoindexQueryUrl('/uk/blog/', '?page=2')).toBe(true);
+    expect(shouldNoindexQueryUrl('/uk/faq/search/', '?q=bus+schedule')).toBe(true);
     expect(getQueryRobotsHeader('/uk/routes/kryvyi-rih-prague/', '?from=126&to=16')).toBe('noindex, follow');
     expect(getQueryRobotsHeader('/uk/buses/', '?from=11&to=8&date=2025-11-21')).toBe('noindex, nofollow');
+    expect(getQueryRobotsHeader('/uk/blog/', '?page=2')).toBe('noindex, follow');
+    expect(getQueryRobotsHeader('/uk/faq/search/', '?q=bus+schedule')).toBe('noindex, follow');
     expect(getQueryRobotsHeader('/uk/routes/kryvyi-rih-prague/', '')).toBeUndefined();
     expect(getCleanSeoQueryRedirectPath('/uk/all-countries/ukraine/poltava', '?to=36')).toBe(
       '/uk/all-countries/ukraine/poltava/',
     );
+    expect(getCleanSeoQueryRedirectPath('/uk/all-countries/ukraine/', '?utm_source=google')).toBe(
+      '/uk/all-countries/ukraine/',
+    );
     expect(getCleanSeoQueryRedirectPath('/uk/faq/routes-and-buses', '?q=available-flights-schedules')).toBe(
       '/uk/faq/routes-and-buses/',
     );
+    expect(getCleanSeoQueryRedirectPath('/ru/faq/routes-and-buses/', '?q=available-flights-schedules')).toBe(
+      '/ru/faq/routes-and-buses/',
+    );
     expect(getCleanSeoQueryRedirectPath('/uk/routes/kryvyi-rih-prague/', '?from=126&to=16')).toBeUndefined();
     expect(getCleanSeoQueryRedirectPath('/uk/buses/', '?from=11&to=8&date=2025-11-21')).toBeUndefined();
+  });
+
+  it('normalizes CMS internal SEO links to clean trailing-slash URLs', () => {
+    expect(getInternalSeoHref('https://greenbus.com.ua/ru/blog/bus-travel-ukraine-germany-guide')).toBe(
+      '/blog/bus-travel-ukraine-germany-guide/',
+    );
+    expect(
+      getInternalSeoHref('https://www.greenbus.com.ua/uk/faq/routes-and-buses?q=available-flights-schedules'),
+    ).toBe('/faq/routes-and-buses/');
+    expect(getInternalSeoHref('/uk/all-countries/ukraine?utm_source=google')).toBe('/all-countries/ukraine/');
+    expect(getInternalSeoHref('/uk/routes/kryvyi-rih-prague?from=126&to=16')).toBe(
+      '/routes/kryvyi-rih-prague/?from=126&to=16',
+    );
+    expect(getInternalSeoHref('/llms.txt')).toBe('/llms.txt');
+    expect(getInternalSeoHref('https://example.com/uk/routes/kryvyi-rih-prague')).toBeUndefined();
+    expect(getInternalSeoHref('#section')).toBeUndefined();
   });
 
   it('generates a production sitemap with indexable localized URLs only', async () => {
@@ -278,6 +304,16 @@ describe('SEO safety invariants', () => {
     expect(favoriteRoutesApi).toContain('response.status === 404');
   });
 
+  it('links route detail pages back to endpoint city pages for crawl discovery', () => {
+    const routePage = readProjectFile('src/app/[lng]/(root)/routes/[slug]/page.tsx');
+    const routeContent = readProjectFile('src/views/favorite-route-slug/RouteContent/RouteContent.tsx');
+
+    expect(routePage).toContain('/all-countries/${route.fromLocation.country.slug}/${route.fromLocation.slug}/');
+    expect(routePage).toContain('/all-countries/${route.toLocation.country.slug}/${route.toLocation.slug}/');
+    expect(routePage).toContain('endpointLinks={endpointLinks}');
+    expect(routeContent).toContain('endpointLinks');
+  });
+
   it('preserves faq/search query params and does not strip them via SEO redirect', () => {
     // Regression: /faq/search?q=... was being 308-redirected to /faq/search/ (losing ?q=)
     expect(getCleanSeoQueryRedirectPath('/uk/faq/search', '?q=bus+schedule')).toBeUndefined();
@@ -288,9 +324,7 @@ describe('SEO safety invariants', () => {
     expect(getCleanSeoQueryRedirectPath('/uk/faq/bronjuvannja-mists', '?q=something')).toBe(
       '/uk/faq/bronjuvannja-mists/',
     );
-    expect(getCleanSeoQueryRedirectPath('/uk/faq/routes-and-buses', '?anchor=foo')).toBe(
-      '/uk/faq/routes-and-buses/',
-    );
+    expect(getCleanSeoQueryRedirectPath('/uk/faq/routes-and-buses', '?anchor=foo')).toBe('/uk/faq/routes-and-buses/');
     expect(getCleanSeoQueryRedirectPath('/uk/faq/ticket-refund/', '?ref=email')).toBe('/uk/faq/ticket-refund/');
   });
 

@@ -25,7 +25,7 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
 
   return (
     <section className="py-5 laptop:py-10 flex-1">
-      <Container size="m" className="flex flex-col">
+      <Container size="l" className="flex flex-col">
         <H1>{t('routes_title')}</H1>
 
         {res && res.data.length > 0 ? (
@@ -37,10 +37,18 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
                 const fromCountry = extractLocationDetails(route.fromLocation, locale).countryName;
                 const toCountry = extractLocationDetails(route.toLocation, locale).countryName;
 
+                // Передаємо id міст у query — на сторінці маршруту одразу підвантажаться
+                // рейси з цінами (дата підставляється на сьогодні). Query-URL має noindex,
+                // тож сміття в індексі не з'являється.
+                const searchHref =
+                  route.fromLocation?.id && route.toLocation?.id
+                    ? `/routes/${route.slug}/?from=${route.fromLocation.id}&to=${route.toLocation.id}`
+                    : `/routes/${route.slug}/`;
+
                 return (
                   <RouteItem
                     key={route.id}
-                    href={`/routes/${route.slug}/`}
+                    href={searchHref}
                     fromName={fromName}
                     toName={toName}
                     fromCountry={fromCountry}

@@ -36,6 +36,10 @@ export function getQueryRobotsHeader(pathname: string, search: string): string |
     return PRIVATE_QUERY_NOINDEX_HEADER;
   }
 
+  if (/^\/(uk|ru|en)(?:\/.*)?$/.test(pathname)) {
+    return QUERY_NOINDEX_HEADER;
+  }
+
   return undefined;
 }
 

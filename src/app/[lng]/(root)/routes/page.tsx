@@ -39,7 +39,7 @@ export default async function Routes({ params, searchParams }: Props) {
 
   return (
     <>
-      <main className="bg-slate-50 dark:bg-slate-900">
+      <main className="bg-slate-50 dark:bg-slate-800">
         <RoutesHerow />
         <RoutesList pageParam={pageParam} />
       </main>

@@ -86,21 +86,15 @@ export async function generateLocationMetadata({ lng, locationId }: GenerateLoca
       type: 'website',
       siteName: 'GreenBus',
       locale: lng,
-      images: [
-        {
-          url: 'https://greenbus.com.ua/og-image.png',
-          width: 1200,
-          height: 630,
-          alt: `GreenBus - ${displayCity}, ${displayCountry}`,
-        },
-      ],
+      // og:image не задаємо вручну — Next автоматично підставить динамічний
+      // opengraph-image.tsx (локалізований, 1200×630).
     },
 
     twitter: {
       card: 'summary_large_image',
       title: t('location.og_title', { city: displayCity, countryName: displayCountry }),
       description: t('location.og_description', { city: displayCity }),
-      images: ['https://greenbus.com.ua/og-image.png'],
+      // twitter:image успадковується від opengraph-image.tsx.
     },
 
     appleWebApp: {

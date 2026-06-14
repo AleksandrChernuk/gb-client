@@ -14,17 +14,12 @@
     "find_your_city": "Пошук рейсів за алфавітом",
     "select_country": "Оберіть країну",
     "select_city": "Оберіть місто",
-
     "search_section_title": "Пошуковий розділ",
     "search_aria_label": "Пошук автобусних квитків",
-
     "tickets_heading": "Автобусні квитки з {locationName}",
     "popular_routes_from_city": "Популярні маршрути з міста {locationName}",
-
     "teaser_text": "Хочете поїхати в {locationName}? На сайті greenbus.com.ua ви знайдете квитки на автобуси в {locationName}. Скористайтеся пошуковою формою вгорі, щоб забронювати місце на сучасний автобус від перевірених перевізників.",
-
     "about_city_heading": "Про місто {locationName}",
-
     "map_title": "Карта міста {locationName}",
     "map_aria_label": "Карта розташування {locationName}",
     "seo_text": {
@@ -62,6 +57,8 @@
         "q6": "Чи є рейси по Україні?",
         "a6": "Так, є внутрішні рейси між великими містами — Київ, Львів, Одеса, Харків, Дніпро та іншими."
       }
-    }
+    },
+    "country_h1": "Автобусні квитки: {country}",
+    "country_h1_ua": "Автобусні квитки Україною та Європою"
   }
 }
