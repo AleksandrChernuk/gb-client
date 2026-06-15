@@ -196,6 +196,17 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
           </Container>
         </section>
 
+        <section className="pt-8 pb-2">
+          <Container size="l">
+            <H1 className="mb-3 text-2xl font-bold text-slate-900 dark:text-white tablet:text-3xl">
+              {isUkraineCountry(countryName) ? t('country_h1_ua') : t('country_h1', { country: countryName })}
+            </H1>
+            <p className="max-w-3xl text-sm text-slate-600 dark:text-slate-300 tablet:text-base">
+              {isUkraineCountry(countryName) ? t('country_lead_ua') : t('country_lead', { country: countryName })}
+            </p>
+          </Container>
+        </section>
+
         <section className="py-10">
           <Container size="l">
             <H2 className="mb-6">{t('available_cities_title', { country: countryName })}</H2>
@@ -235,10 +246,6 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
 
         <section className="pb-10">
           <Container size="l">
-            <H1 className="sr-only">
-              {isUkraineCountry(countryName) ? t('country_h1_ua') : t('country_h1', { country: countryName })}
-            </H1>
-
             {!!countryDescription ? (
               <div className="text-sm tablet:text-base text-slate-700 dark:text-slate-100 prose prose-sm dark:prose-invert max-w-none bg-white dark:bg-slate-900 p-4 rounded-2xl mb-8 shadow-s">
                 {parse(countryDescription, parserOptions)}
