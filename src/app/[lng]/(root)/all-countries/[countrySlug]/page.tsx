@@ -147,7 +147,14 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
 
   const validLocations = country.locations.filter((loc) => loc.translations.length > 0);
 
-  // Structured data для країни-хабу: хлібні крихти + список міст із квитками.
+  // FAQ з реальними відповідями (оплата, повернення, e-квиток) — спільні для всіх країн-хабів.
+  // Дають passage-level контент для AI Overviews і FAQPage-розмітку.
+  const faqItems = [1, 2, 3, 4, 5, 6].map((i) => ({
+    question: t(`seo_text.faq.q${i}`),
+    answer: t(`seo_text.faq.a${i}`),
+  }));
+
+  // Structured data для країни-хабу: хлібні крихти + список міст із квитками + FAQ.
   const BASE = 'https://greenbus.com.ua';
   const geoSchema = {
     '@context': 'https://schema.org',
@@ -179,6 +186,15 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
             },
           ]
         : []),
+      {
+        '@type': 'FAQPage',
+        inLanguage: lng,
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
     ],
   };
 
@@ -241,6 +257,25 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
                 </p>
               </CustomCard>
             )}
+          </Container>
+        </section>
+
+        <section className="pb-4">
+          <Container size="l">
+            <H2 className="mb-6">{t('seo_text.faq.title')}</H2>
+            <div className="flex flex-col gap-3">
+              {faqItems.map((item, i) => (
+                <details
+                  key={i}
+                  className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                >
+                  <summary className="cursor-pointer list-none text-sm font-semibold text-slate-800 marker:content-none dark:text-slate-100 tablet:text-base">
+                    {item.question}
+                  </summary>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 tablet:text-base">{item.answer}</p>
+                </details>
+              ))}
+            </div>
           </Container>
         </section>
 
