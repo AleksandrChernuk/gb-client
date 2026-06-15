@@ -277,12 +277,15 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
               {faqItems.map((item, i) => (
                 <details
                   key={i}
-                  className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                  className="group rounded-2xl border border-slate-200 bg-white px-4 shadow-sm transition-colors open:border-green-200 hover:border-green-300 dark:border-slate-800 dark:bg-slate-900 dark:open:border-green-900 dark:hover:border-green-800"
                 >
-                  <summary className="cursor-pointer list-none text-sm font-semibold text-slate-800 marker:content-none dark:text-slate-100 tablet:text-base">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-sm font-semibold text-slate-800 marker:content-none dark:text-slate-100 tablet:text-base">
                     {item.question}
+                    <ChevronRight className="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-90 group-open:text-green-600 dark:group-open:text-green-400" />
                   </summary>
-                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 tablet:text-base">{item.answer}</p>
+                  <p className="pb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300 tablet:text-base">
+                    {item.answer}
+                  </p>
                 </details>
               ))}
             </div>
@@ -302,21 +305,23 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
         <section className="pb-10">
           <Container size="l">
             <H2 className="mb-4">{t('other_directions_title')}</H2>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {otherCountries.map((c) => (
                 <Link
                   key={c.slug}
                   href={`/all-countries/${c.slug}/`}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-green-500 hover:text-green-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-green-400 dark:hover:text-green-400"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white py-2 pl-3 pr-4 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:border-green-500 hover:text-green-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-green-400 dark:hover:text-green-400"
                 >
+                  <MapPin className="h-4 w-4 text-slate-400" />
                   {c.name}
                 </Link>
               ))}
               <Link
                 href="/routes/"
-                className="rounded-full border border-green-500 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition-colors hover:bg-green-100 dark:border-green-400 dark:bg-green-900/30 dark:text-green-300"
+                className="inline-flex items-center gap-1.5 rounded-full bg-green-500 py-2 pl-4 pr-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-600"
               >
                 {t('all_routes_link')}
+                <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
           </Container>
