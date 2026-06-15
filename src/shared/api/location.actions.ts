@@ -39,9 +39,21 @@ export const getLocationById = async (id: number) => {
   return fetchFromApi<ILocation>(endpoint);
 };
 
-export const getLocationBySlug = async (slug: string) => {
-  const endpoint = `locations/slug/${slug}`;
-  return fetchFromApi<ILocation>(endpoint);
+export const getLocationBySlug = async (slug: string): Promise<ILocation | null> => {
+  // Неіснуючий слаг (404) → null, щоб сторінка віддала 404 (notFound), а не 500.
+  const response = await fetch(`${BASE_URL}/locations/slug/${slug}`, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
 };
 
 export const getFavoriteLocations = async () => {

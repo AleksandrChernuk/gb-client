@@ -35,6 +35,12 @@ export const getCountryBySlug = async (slug: string): Promise<ICountry | null> =
     next: { revalidate: 600 },
   });
 
+  // Неіснуючий слаг (404) — це не помилка сервера, а відсутня сторінка:
+  // повертаємо null, щоб сторінка віддала коректний 404 (notFound), а не 500.
+  if (response.status === 404) {
+    return null;
+  }
+
   if (!response.ok) {
     throw new Error(`API error: ${response.status} ${response.statusText}`);
   }
