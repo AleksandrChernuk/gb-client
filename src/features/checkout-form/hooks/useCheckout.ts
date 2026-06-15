@@ -46,7 +46,7 @@ function useCheckout() {
     defaultValues: {
       passengers: defaultPassengers,
       email: user?.email || '',
-      payment: 'BOOK',
+      payment: selectedTicket?.orderType || 'BOOK',
       accept_rules: false,
       phone: '',
       selectedSeats: [],

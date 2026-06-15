@@ -40,7 +40,9 @@ export async function getAllFavoriteRoutes(params?: { lang?: string }): Promise<
   let totalPages = 1;
 
   do {
-    const response = await getFavoriteRoutes({ page, perPage: 100, lang: params?.lang });
+    // perPage 20 тримає відповідь < 2 МБ, щоб Next data cache кешував її
+    // (повний об'єкт маршруту важкий; 100 шт давали ~5 МБ і не кешувались).
+    const response = await getFavoriteRoutes({ page, perPage: 20, lang: params?.lang });
 
     for (const route of response.data) {
       if (route.slug) {

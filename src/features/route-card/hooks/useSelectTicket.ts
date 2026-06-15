@@ -4,7 +4,7 @@ import { updateRouteDetails } from '@/features/route-card/helpers/updateRouteDet
 import { getRouteDetails } from '@/shared/api/route.actions';
 import { useRouter } from '@/shared/i18n/routing';
 import { buildRouteDetailsRequest, RouteDetailsParams } from '@/shared/lib/buildRouteDetailsRequest';
-import { useSelectedTickets } from '@/shared/store/useSelectedTickets';
+import { TOrderType, useSelectedTickets } from '@/shared/store/useSelectedTickets';
 import { IRouteResponse, IRouteDetailsResponse } from '@/shared/types/route.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
@@ -15,9 +15,9 @@ export function useSelectTicket() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  return async (route: IRouteResponse, detailsParams: RouteDetailsParams) => {
+  return async (route: IRouteResponse, detailsParams: RouteDetailsParams, orderType: TOrderType = 'BOOK') => {
     if (['euroclub'].includes(route.providerName.toLowerCase())) {
-      setSelectedTicket({ route: route, voyagers: params.voyagers });
+      setSelectedTicket({ route: route, voyagers: params.voyagers, orderType });
 
       router.push('/checkout/');
       return;
@@ -31,11 +31,14 @@ export function useSelectTicket() {
       const details = await queryClient.fetchQuery<IRouteDetailsResponse | null>({
         queryKey: ['route-details', route.ticketId, params],
         queryFn: () => getRouteDetails(requestBody),
+        // на момент выбора всегда тянем свежие детали (юзер мог долго висеть на странице),
+        // не полагаясь на разницу ключей кэша
+        staleTime: 0,
       });
 
       const updatedRoute = updateRouteDetails(route, details);
 
-      setSelectedTicket({ route: updatedRoute, voyagers: params.voyagers });
+      setSelectedTicket({ route: updatedRoute, voyagers: params.voyagers, orderType });
 
       router.push('/checkout/');
     } finally {

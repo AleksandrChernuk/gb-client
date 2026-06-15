@@ -16,6 +16,7 @@ import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import { RouteSchema } from '@/views/favorite-route-slug/RouteSchema';
 import { locales } from '@/shared/i18n/locales';
 import { RouteResults } from '@/views/favorite-route-slug/RouteResults';
+import { RouteSearchInit } from '@/views/favorite-route-slug/RouteResults/RouteSearchInit';
 import { getRouteRobotsForSearchParams } from '@/shared/seo/route-query-indexing';
 
 type Props = {
@@ -116,6 +117,9 @@ export default async function FavoriteRoutePage({ params }: Props) {
     <>
       <RouteSchema route={route} lng={lng as Locale} host={'https://greenbus.com.ua'} />
       <main className="bg-slate-50 dark:bg-slate-800">
+        <Suspense fallback={null}>
+          <RouteSearchInit from={route.fromLocation?.id} to={route.toLocation?.id} />
+        </Suspense>
         <RouteHerow currentHref={route.slug ?? '/'} fromName={fromName} toName={toName} />
         <RouteLead fromName={fromName} toName={toName} price={route.price} lng={lng as Locale} />
         <Suspense fallback={null}>

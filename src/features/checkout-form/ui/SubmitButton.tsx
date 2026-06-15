@@ -30,7 +30,7 @@ const SubmitButton = memo(function SubmitButton() {
         variant="select"
         size="select_desktop"
         type="submit"
-        className="w-full"
+        className="w-full min-h-[56px] !max-h-none py-4 text-base tablet:text-lg [&_svg]:size-6"
         // onClick={() => setOpen((p) => !p)}
         disabled={isLoading}
       >

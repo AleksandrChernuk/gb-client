@@ -16,7 +16,6 @@ export default function Cleanup() {
       reset();
       resetSelectedTicket();
       resetInitiateNewOrder();
-      sessionStorage.removeItem('checkout-form');
     };
   }, []);
 

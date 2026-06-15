@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import { IRouteResponse } from '@/shared/types/route.types';
+import { TOrderType } from '@/shared/store/useSelectedTickets';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
@@ -60,6 +61,32 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
   const { singlePrice, totalPrice } = usePricing(element.ticketPricing.basePrice ?? 0, params.voyagers);
 
   const updatedRoute = updateRouteDetails(element, details);
+
+  // оплата у водителя доступна → даём отдельную кнопку «Забронировать»
+  const canPayDriver = !!element.allowedOperations.canPaymentToDriver;
+
+  const handleSelect = (orderType: TOrderType) => {
+    if (isSoldOutForPassengers) return;
+    if (isPending) return;
+    setLoading(true);
+
+    startTransition(async () => {
+      await setSelectedTicket(
+        element,
+        {
+          route: element,
+          fromCityId: element.departure.fromLocation.id ?? 0,
+          toCityId: element.arrival.toLocation.id ?? 0,
+          locale: locale,
+          passCount: params.voyagers,
+          travelDate: element.departure.dateTime ?? '',
+        },
+        orderType,
+      );
+    });
+  };
+
+  // доступна оплата у водителя → показываем только «Забронировать», иначе только «Купить»
   const SelectButtonComponent = ({ variant }: { variant: 'mobile' | 'desktop' | 'details' }) => (
     <SelectButton
       currency={element.ticketPricing.currency}
@@ -67,24 +94,8 @@ export const SingleRouteCard = ({ data: element, disabled }: Props) => {
       variant={variant}
       loading={loading}
       disabled={isSoldOutForPassengers || loading || disabled}
-      buttonText={t('selectButton')}
-      onClick={() => {
-        if (isSoldOutForPassengers) return;
-
-        if (isPending) return;
-        setLoading(true);
-
-        startTransition(async () => {
-          await setSelectedTicket(element, {
-            route: element,
-            fromCityId: element.departure.fromLocation.id ?? 0,
-            toCityId: element.arrival.toLocation.id ?? 0,
-            locale: locale,
-            passCount: params.voyagers,
-            travelDate: element.departure.dateTime ?? '',
-          });
-        });
-      }}
+      buttonText={canPayDriver ? t('selectButton') : t('buyButton')}
+      onClick={() => handleSelect(canPayDriver ? 'PAYMENT_AT_BOARDING' : 'BOOK')}
     />
   );
 

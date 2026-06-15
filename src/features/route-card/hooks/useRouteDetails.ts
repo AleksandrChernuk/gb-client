@@ -24,7 +24,7 @@ export function useRouteDetails({ ticketId, params, providerName }: Props) {
       const requestBody = buildRouteDetailsRequest({ ...params });
       return await getRouteDetails(requestBody);
     },
-    enabled: enabled && !['EUROCLUB'].includes(providerName),
+    enabled: enabled && !['euroclub'].includes(providerName?.toLowerCase()),
     staleTime: 5 * 60 * 1000,
   });
 

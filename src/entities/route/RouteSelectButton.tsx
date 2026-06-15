@@ -35,7 +35,13 @@ export default function SelectButton({
   const { variant: btnVariant, size } = variantMap[variant];
 
   return (
-    <Button {...props} disabled={disabled} variant={btnVariant} size={size} className={cn('relative', className)}>
+    <Button
+      {...props}
+      disabled={disabled}
+      variant={btnVariant}
+      size={size}
+      className={cn('relative', variant === 'details' && 'text-slate-900', className)}
+    >
       {loading ? (
         <LoaderCircle className="animate-spin" />
       ) : variant === 'mobile' ? (

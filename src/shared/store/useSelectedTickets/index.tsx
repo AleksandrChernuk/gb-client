@@ -4,9 +4,12 @@ import { immer } from 'zustand/middleware/immer';
 import { IRouteResponse } from '@/shared/types/route.types';
 import { IFreeSeats } from '@/shared/types/free.seats.interface';
 
+export type TOrderType = 'BOOK' | 'PAYMENT_AT_BOARDING';
+
 type TSelectedTicket = {
   route: IRouteResponse;
   voyagers: number;
+  orderType?: TOrderType;
 };
 
 export type useSelectedTicketsStore = {

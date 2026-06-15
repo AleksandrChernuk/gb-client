@@ -5,15 +5,15 @@ import { ReactNode } from 'react';
 import { Button } from '@/shared/ui/button';
 
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/sheet';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/ui/drawer';
 import { useTranslations } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import CarrierLabel from '@/shared/ui/RouteCarrierLabel';
@@ -36,8 +36,8 @@ export default function MobileDetails({
   const t = useTranslations(MESSAGE_FILES.BUSES_PAGE);
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Drawer>
+      <DrawerTrigger asChild>
         <Button
           disabled={disabledTrigger}
           variant={'link'}
@@ -46,24 +46,28 @@ export default function MobileDetails({
         >
           {t('details')}
         </Button>
-      </SheetTrigger>
-      <SheetContent className="h-full">
-        <SheetHeader className="justify-between">
-          <SheetTitle className="sr-only"></SheetTitle>
-          <SheetDescription className="sr-only"></SheetDescription>
+      </DrawerTrigger>
+
+      <DrawerContent className="px-0 pb-0 pt-0 rounded-t-[28px] border-t-0 overflow-hidden bg-white dark:bg-slate-900 shadow-2xl">
+        <DrawerHeader className="flex flex-row items-center justify-between px-4 py-3 space-y-0">
+          <DrawerTitle className="sr-only">{t('details')}</DrawerTitle>
+          <DrawerDescription className="sr-only">{carrierName}</DrawerDescription>
           <CarrierLabel carrierName={carrierName} />
-          <SheetClose asChild>
+          <DrawerClose asChild>
             <Button variant={'default'} size={'icon'} className="p-2 rounded-md">
               <X color="#ffffff" />
             </Button>
-          </SheetClose>
-        </SheetHeader>
+          </DrawerClose>
+        </DrawerHeader>
 
-        <div className="relative w-full px-5 mx-auto overflow-y-scroll shadow-xs grow bg-white dark:bg-slate-900">
+        <div className="relative w-full px-5 mx-auto overflow-y-auto shadow-xs grow bg-white dark:bg-slate-900 max-h-[70dvh]">
           {children}
         </div>
-        <SheetFooter className="flex justify-between gap-2 bg-white dark:bg-slate-800 ">{detailsFooter}</SheetFooter>
-      </SheetContent>
-    </Sheet>
+
+        <DrawerFooter className="flex flex-row justify-between gap-2 bg-white dark:bg-slate-800 pb-8">
+          {detailsFooter}
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   );
 }

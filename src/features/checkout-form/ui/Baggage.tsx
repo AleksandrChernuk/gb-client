@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function Baggage({ baggage, index }: Props) {
-  const { grouped, handleRemove, handleAdd, localCounts } = useBaggag({ index, baggage });
+  const { grouped, handleRemove, handleAdd, counts } = useBaggag({ index, baggage });
   const { register } = useFormContext();
   const t = useTranslations(MESSAGE_FILES.CHECKOUT_PAGE);
 
@@ -33,28 +33,32 @@ export default function Baggage({ baggage, index }: Props) {
       {Object.entries(grouped).map(([type, items]) => (
         <div key={type} className="flex flex-col gap-4">
           {items.map((el) => {
-            const count = localCounts[el.baggageId] ?? 0;
+            const isPaid = el.price !== 0;
+            const description = t('baggage_description', {
+              length: el.length,
+              width: el.width,
+              height: el.height,
+              kg: el.kg,
+            });
 
-            if (el.price !== 0) {
-              return (
-                <BaggageItem
-                  key={el.baggageId}
-                  icon={el.price === 0 ? <BaggageFree /> : <BaggagePay />}
-                  title={el.baggageTitle}
-                  description={t('baggage_description', {
-                    length: el.length,
-                    width: el.width,
-                    height: el.height,
-                    kg: el.kg,
-                  })}
-                  price={el.price}
-                  count={count}
-                  currency={el.currency}
-                  onIncrease={() => handleAdd(el)}
-                  onDecrease={() => handleRemove(el)}
-                />
-              );
+            // бесплатный багаж — показываем без счётчика
+            if (!isPaid) {
+              return <BaggageItem key={el.baggageId} icon={<BaggageFree />} title={el.baggageTitle} description={description} />;
             }
+
+            return (
+              <BaggageItem
+                key={el.baggageId}
+                icon={<BaggagePay />}
+                title={el.baggageTitle}
+                description={description}
+                price={el.price}
+                count={counts[el.baggageId] ?? 0}
+                currency={el.currency}
+                onIncrease={() => handleAdd(el)}
+                onDecrease={() => handleRemove(el)}
+              />
+            );
           })}
         </div>
       ))}

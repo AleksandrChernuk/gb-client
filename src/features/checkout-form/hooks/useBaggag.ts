@@ -1,6 +1,6 @@
 import { TPaidBaggage } from '@/shared/types/paid.baggage.types';
 import { IBaggagePrice } from '@/shared/types/route.types';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 type TuseBaggag = {
@@ -9,11 +9,9 @@ type TuseBaggag = {
 };
 
 export const useBaggag = ({ index, baggage }: TuseBaggag) => {
-  const [localCounts, setLocalCounts] = useState<Record<string, number>>({});
-
   const { control, setValue } = useFormContext();
 
-  // безопасно достаём текущие данные багажа
+  // единственный источник правды — данные формы, а не локальный стейт
   const selectedPaidBaggage: TPaidBaggage[] =
     useWatch({
       control,
@@ -28,6 +26,16 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
         (b): b is IBaggagePrice => !!b && typeof b.baggageId === 'string' && typeof b.maxPerPerson !== 'undefined',
       )
     : [];
+
+  // количество считаем из формы — UI и оплата не могут разойтись
+  const counts = useMemo(() => {
+    const acc: Record<string, number> = {};
+    for (const b of selectedPaidBaggage) {
+      if (!b?.baggageId) continue;
+      acc[b.baggageId] = (acc[b.baggageId] ?? 0) + 1;
+    }
+    return acc;
+  }, [selectedPaidBaggage]);
 
   const updateBackend = (baggageId: string, count: number, baggageItem: TPaidBaggage) => {
     if (!baggageId || !baggageItem) return; // защита
@@ -53,21 +61,17 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
   const handleAdd = (item: IBaggagePrice) => {
     if (!item?.baggageId) return;
     const max = Number(item.maxPerPerson ?? 0);
-    const current = localCounts[item.baggageId] ?? 0;
+    const current = counts[item.baggageId] ?? 0;
     if (current < max) {
-      const newCount = current + 1;
-      setLocalCounts((prev) => ({ ...prev, [item.baggageId]: newCount }));
-      updateBackend(item.baggageId, newCount, item);
+      updateBackend(item.baggageId, current + 1, item);
     }
   };
 
   const handleRemove = (item: TPaidBaggage) => {
     if (!item?.baggageId) return;
-    const current = localCounts[item.baggageId] ?? 0;
+    const current = counts[item.baggageId] ?? 0;
     if (current > 0) {
-      const newCount = current - 1;
-      setLocalCounts((prev) => ({ ...prev, [item.baggageId]: newCount }));
-      updateBackend(item.baggageId, newCount, item);
+      updateBackend(item.baggageId, current - 1, item);
     }
   };
 
@@ -84,5 +88,5 @@ export const useBaggag = ({ index, baggage }: TuseBaggag) => {
     return acc;
   }, [safeBaggage]);
 
-  return { grouped, handleRemove, handleAdd, localCounts };
+  return { grouped, handleRemove, handleAdd, counts };
 };
