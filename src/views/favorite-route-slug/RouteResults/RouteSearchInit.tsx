@@ -15,12 +15,21 @@ interface RouteSearchInitProps {
 export function RouteSearchInit({ from, to }: RouteSearchInitProps) {
   const [q, setQ] = useQueryStates({ from: parseAsString, to: parseAsString }, { history: 'replace' });
 
+  // Залежність від from/to: при клієнтській навігації між маршрутами компонент
+  // не перемонтовується, тож ефект із [] раніше спрацьовував лише після повного
+  // перезавантаження. Тепер синхронізуємо URL щоразу, коли id міст маршруту
+  // відрізняються від поточних параметрів.
   useEffect(() => {
-    if (from && to && !q.from && !q.to) {
-      setQ({ from: String(from), to: String(to) });
+    if (!from || !to) return;
+
+    const nextFrom = String(from);
+    const nextTo = String(to);
+
+    if (q.from !== nextFrom || q.to !== nextTo) {
+      setQ({ from: nextFrom, to: nextTo });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [from, to]);
 
   return null;
 }
