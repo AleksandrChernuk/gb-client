@@ -15,21 +15,18 @@ interface RouteSearchInitProps {
 export function RouteSearchInit({ from, to }: RouteSearchInitProps) {
   const [q, setQ] = useQueryStates({ from: parseAsString, to: parseAsString }, { history: 'replace' });
 
-  // Залежність від from/to: при клієнтській навігації між маршрутами компонент
-  // не перемонтовується, тож ефект із [] раніше спрацьовував лише після повного
-  // перезавантаження. Тепер синхронізуємо URL щоразу, коли id міст маршруту
-  // відрізняються від поточних параметрів.
+  // Підставляємо id міст маршруту, лише коли в URL немає from/to:
+  //  • не перебиваємо ручний вибір користувача (тоді q.from/q.to вже не порожні);
+  //  • q.from/q.to у залежностях самовідновлюють параметри після клієнтської
+  //    навігації — роутер Next інколи фіналізує URL уже після ефекту й затирає
+  //    запис (через це раніше працювало лише після повного перезавантаження).
+  //    Щойно q знову порожній — ефект спрацьовує й вписує параметри. Без циклу:
+  //    після успішного запису q заповнений і умова вже не виконується.
   useEffect(() => {
-    if (!from || !to) return;
-
-    const nextFrom = String(from);
-    const nextTo = String(to);
-
-    if (q.from !== nextFrom || q.to !== nextTo) {
-      setQ({ from: nextFrom, to: nextTo });
+    if (from && to && !q.from && !q.to) {
+      setQ({ from: String(from), to: String(to) });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [from, to]);
+  }, [from, to, q.from, q.to, setQ]);
 
   return null;
 }
