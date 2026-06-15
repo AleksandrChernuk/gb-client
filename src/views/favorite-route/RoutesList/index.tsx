@@ -5,6 +5,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { getFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
 import { H1 } from '@/shared/ui/H1';
+import TrustBadges from '@/shared/ui/TrustBadges';
 import { RouteItem } from '@/shared/ui/route-item';
 import { ServerPagination } from '@/shared/ui/ServerPagination';
 
@@ -30,6 +31,7 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
         <p className="mt-3 max-w-3xl text-sm text-slate-600 dark:text-slate-300 tablet:text-base">
           {t('routes_lead')}
         </p>
+        <TrustBadges className="mt-6" />
 
         {res && res.data.length > 0 ? (
           <>

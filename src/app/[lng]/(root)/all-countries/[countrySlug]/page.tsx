@@ -1,5 +1,6 @@
 import { Container } from '@/shared/ui/Container';
 import MainSearch from '@/features/route-search-form';
+import TrustBadges from '@/shared/ui/TrustBadges';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
@@ -228,6 +229,7 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
             <p className="max-w-3xl text-sm text-slate-600 dark:text-slate-300 tablet:text-base">
               {isUkraineCountry(countryName) ? t('country_lead_ua') : t('country_lead', { country: countryName })}
             </p>
+            <TrustBadges className="mt-6" />
           </Container>
         </section>
 

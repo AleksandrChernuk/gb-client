@@ -103,22 +103,33 @@ export default async function LocaleLayout({
   const langTexts = schemaTranslations[lng as Locale] || schemaTranslations.uk;
   const localeHomeUrl = `${BASE_URL}/${lng}/`;
 
+  // Стабільні @id для зв'язування сутностей (WebSite ↔ Organization).
+  const ORG_ID = `${BASE_URL}/#organization`;
+  const WEBSITE_ID = `${BASE_URL}/#website`;
+
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': WEBSITE_ID,
     name: 'GreenBus',
     url: localeHomeUrl,
     description: langTexts.description,
     inLanguage: lng,
+    publisher: { '@id': ORG_ID },
   };
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORG_ID,
     name: 'GreenBus',
     url: BASE_URL,
+    logo: `${BASE_URL}/icon-192x192.png`,
+    image: `${BASE_URL}/icon-192x192.png`,
+    email: 'greenbus.ukraine@gmail.com',
     description: langTexts.description,
     inLanguage: lng,
+    areaServed: ['UA', 'PL', 'DE', 'CZ', 'IT', 'ES'],
     contactPoint: [
       {
         '@type': 'ContactPoint',
