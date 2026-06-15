@@ -61,6 +61,8 @@
     "country_h1": "Bus tickets to {country}",
     "country_h1_ua": "Bus tickets across Ukraine and Europe",
     "country_lead": "Bus tickets to {country}. Compare schedules and carrier prices and book your seat online. Pay by card with no aggregator fee — your e-ticket arrives by email instantly.",
-    "country_lead_ua": "Bus tickets across Ukraine and to Europe. Compare schedules and carrier prices and book online. Pay by card with no fee — your e-ticket arrives by email instantly."
+    "country_lead_ua": "Bus tickets across Ukraine and to Europe. Compare schedules and carrier prices and book online. Pay by card with no fee — your e-ticket arrives by email instantly.",
+    "other_directions_title": "Other directions",
+    "all_routes_link": "All popular routes"
   }
 }

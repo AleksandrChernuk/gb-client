@@ -129,15 +129,23 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
 
   setRequestLocale(lng);
 
-  const [t, country] = await Promise.all([
+  const [t, country, allCountries] = await Promise.all([
     getTranslations({ locale: lng, namespace: MESSAGE_FILES.ALL_COUNTRIES }),
     getCountryBySlug(countrySlug),
+    getAllCountries().catch(() => []),
   ]);
 
   if (!country) notFound();
 
   const countryName = country.translations.find((e) => e.language === lng)?.countryName ?? '';
   const countryDescription = country.description.find((e) => e.language === lng)?.description;
+
+  // Межхабова перелінковка: посилання на інші країни-напрямки розподіляють вагу
+  // між хабами (раніше країни не лінкувались одна на одну).
+  const otherCountries = allCountries
+    .filter((c) => c.slug !== country.slug)
+    .map((c) => ({ slug: c.slug, name: c.translations.find((tr) => tr.language === lng)?.countryName ?? c.slug }))
+    .filter((c) => c.name);
 
   const breadcrumbItems = [
     { label: t('breadcrumbs_home'), href: '/' },
@@ -286,6 +294,29 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
                 {parse(countryDescription, parserOptions)}
               </div>
             ) : null}
+          </Container>
+        </section>
+
+        <section className="pb-10">
+          <Container size="l">
+            <H2 className="mb-4">{t('other_directions_title')}</H2>
+            <div className="flex flex-wrap gap-2">
+              {otherCountries.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/all-countries/${c.slug}/`}
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-green-500 hover:text-green-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-green-400 dark:hover:text-green-400"
+                >
+                  {c.name}
+                </Link>
+              ))}
+              <Link
+                href="/routes/"
+                className="rounded-full border border-green-500 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition-colors hover:bg-green-100 dark:border-green-400 dark:bg-green-900/30 dark:text-green-300"
+              >
+                {t('all_routes_link')}
+              </Link>
+            </div>
           </Container>
         </section>
       </main>
