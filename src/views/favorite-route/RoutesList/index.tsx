@@ -27,6 +27,9 @@ export default async function RoutesList({ pageParam }: { pageParam?: string }) 
     <section className="py-5 laptop:py-10 flex-1">
       <Container size="l" className="flex flex-col">
         <H1>{t('routes_title')}</H1>
+        <p className="mt-3 max-w-3xl text-sm text-slate-600 dark:text-slate-300 tablet:text-base">
+          {t('routes_lead')}
+        </p>
 
         {res && res.data.length > 0 ? (
           <>
