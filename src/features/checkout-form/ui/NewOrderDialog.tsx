@@ -60,7 +60,7 @@ const NewOrderDialog = () => {
             {amount} {currency}
           </p>
           {priceChanged && (
-            <p className="text-sm text-red-600">
+            <p className="mx-auto max-w-sm rounded-lg bg-red-50 dark:bg-red-950/40 px-3 py-2 text-xs leading-relaxed text-red-600 text-balance">
               {t('price_changed_notice', { base: expectedAmount, currency })}
             </p>
           )}
