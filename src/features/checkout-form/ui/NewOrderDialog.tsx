@@ -8,6 +8,7 @@ import { DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/sh
 import { Button } from '@/shared/ui/button';
 import { useNewOrderResult } from '@/shared/store/useOrderResult';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
+import { getTotalPriceFromPassengers } from '@/features/checkout-form/helpers';
 import { usePaymentConfirm } from '@/features/checkout-form/hooks';
 import { LoadingScreen } from '@/shared/ui/loading-screen';
 
@@ -17,6 +18,7 @@ const NewOrderDialog = () => {
 
   const { control } = useFormContext();
   const paymentType = useWatch({ control, name: 'payment', exact: true });
+  const passengers = useWatch({ control, name: 'passengers' });
 
   const initiateNewOrder = useNewOrderResult((s) => s.initiateNewOrder);
   const { handleCancelOrder, payLoading, handlePayOrder, handleConfirmOrder } = usePaymentConfirm();
@@ -25,6 +27,13 @@ const NewOrderDialog = () => {
   const alert = initiateNewOrder?.alertMessage;
   const amount = Number(initiateNewOrder?.amount ?? 0);
   const currency = initiateNewOrder?.currency ?? 'UAH';
+
+  // стоимость, которую видел пользователь на сайте (цены пассажиров + платный багаж + скидки)
+  const expectedAmount = Array.isArray(passengers) ? getTotalPriceFromPassengers(passengers) : 0;
+
+  // финальная сумма от провайдера отличается от показанной — подсветим (с допуском на округление)
+  const priceChanged =
+    !isError && expectedAmount > 0 && amount > 0 && Math.abs(amount - expectedAmount) > 0.5;
 
   const showBookButton = !isError && paymentType !== 'BOOK';
   const showCancelButton = !isError;
@@ -47,9 +56,14 @@ const NewOrderDialog = () => {
       ) : (
         <>
           <p className="text-base">{t('payment_confirm_final_amount')}</p>
-          <p className="font-bold text-xl">
+          <p className={`font-bold text-xl ${priceChanged ? 'text-red-600' : ''}`}>
             {amount} {currency}
           </p>
+          {priceChanged && (
+            <p className="text-sm text-red-600">
+              {t('price_changed_notice', { base: expectedAmount, currency })}
+            </p>
+          )}
           {paymentType === 'PAYMENT_AT_BOARDING' && (
             <p className="text-xs text-green-200 text-left">
               <span className="text-red-600 text-lg">*</span>

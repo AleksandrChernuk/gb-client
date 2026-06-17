@@ -41,6 +41,7 @@
     "payment_confirm_title": "Підтвердження платежу",
     "payment_confirm_error_description": "Сталася помилка під час підтвердження платежу",
     "payment_confirm_final_amount": "Кінцева сума до оплати",
+    "price_changed_notice": "Увага: фінальна вартість відрізняється від показаної раніше ({base} {currency}) через ціну обраного місця.",
     "sms_confirmation_notice": "Для завершення бронювання потрібне SMS-підтвердження",
     "payment_confirm_book": "Забронювати",
     "payment_confirm_pay": "Оплатити",

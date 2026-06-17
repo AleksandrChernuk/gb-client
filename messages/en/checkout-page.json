@@ -42,6 +42,7 @@
     "payment_confirm_title": "Payment confirmation",
     "payment_confirm_error_description": "An error occurred while confirming the payment",
     "payment_confirm_final_amount": "Final amount to pay",
+    "price_changed_notice": "Note: the final price differs from the one shown earlier ({base} {currency}) due to the selected seat price.",
     "sms_confirmation_notice": "An SMS confirmation is required to complete the booking",
     "payment_confirm_book": "Book",
     "payment_confirm_pay": "Pay",

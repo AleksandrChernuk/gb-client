@@ -41,6 +41,7 @@
     "payment_confirm_title": "Подтверждение платежа",
     "payment_confirm_error_description": "Произошла ошибка при подтверждении платежа",
     "payment_confirm_final_amount": "Итоговая сумма к оплате",
+    "price_changed_notice": "Внимание: итоговая стоимость отличается от показанной ранее ({base} {currency}) из-за цены выбранного места.",
     "sms_confirmation_notice": "Для завершения бронирования потребуется SMS-подтверждение",
     "payment_confirm_book": "Забронировать",
     "payment_confirm_pay": "Оплатить",
