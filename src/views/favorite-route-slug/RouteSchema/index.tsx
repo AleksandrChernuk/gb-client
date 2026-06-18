@@ -59,13 +59,20 @@ export function RouteSchema({ route, lng, host }: RouteSchemaProps) {
           address: { '@type': 'PostalAddress', addressCountry: toCountry },
           geo: { '@type': 'GeoCoordinates', latitude: route.toLocation.lat, longitude: route.toLocation.lon },
         },
-        offers: {
-          '@type': 'Offer',
-          price: route.price ?? 0,
-          priceCurrency: 'UAH',
-          availability: 'https://schema.org/InStock',
-          url: `${host}/${lng}/routes/${route.slug}/`,
-        },
+        // Ціни на рейси різні — віддаємо AggregateOffer з lowPrice ("від X").
+        // Якщо ціни немає — не додаємо offers зовсім (price: 0 ламає rich-результат).
+        ...(route.price
+          ? {
+              offers: {
+                '@type': 'AggregateOffer',
+                lowPrice: route.price,
+                priceCurrency: 'UAH',
+                availability: 'https://schema.org/InStock',
+                url: `${host}/${lng}/routes/${route.slug}/`,
+                priceValidUntil: new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10),
+              },
+            }
+          : {}),
         provider: {
           '@type': 'Organization',
           name: 'GreenBus',
