@@ -35,7 +35,7 @@ const FooterLinksList = async ({ navLinks, className }: Props) => {
               className={
                 isExternalSocial
                   ? 'inline-block p-2 bg-green-100 rounded-full hover:underline'
-                  : 'inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-400 dark:text-slate-200 hover:underline'
+                  : 'inline-block text-sm font-normal tracking-normal leading-[21px] tablet:text-base tablet:leading-6 text-slate-500 dark:text-slate-200 hover:underline'
               }
             >
               {isExternalSocial ? (

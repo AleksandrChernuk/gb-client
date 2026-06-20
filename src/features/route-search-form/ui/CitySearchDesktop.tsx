@@ -82,6 +82,7 @@ export default function CitySearchDesktop({
         aria-invalid={Boolean(city)}
         spellCheck="false"
         endIcon={name === 'from' && <IconSwap />}
+        endIconLabel={t_form('swap_directions')}
         swap={swap}
         disabled={isFetchingLocations}
       />

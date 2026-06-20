@@ -23,7 +23,7 @@ export default async function Benefits() {
                   </h3>
                 </div>
 
-                <p className="text-sm leading-[21px] tablet:text-base font-normal tablet:leading-6 tracking-normal text-slate-400 dark:text-slate-200">
+                <p className="text-sm leading-[21px] tablet:text-base font-normal tablet:leading-6 tracking-normal text-slate-500 dark:text-slate-200">
                   {t(`${text}`)}
                 </p>
               </li>

@@ -3,9 +3,7 @@
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { supportNavlinks } from '@/shared/constans/support-navlinks.constans';
 import { Link } from '@/shared/i18n/routing';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/shared/ui/accordion';
 import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover';
 import { ChevronUp, Phone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -81,22 +79,21 @@ export default function Support({ variant }: Props) {
     return (
       <Popover>
         <PopoverTrigger asChild className="group">
-          <div className="relative w-fit">
-            <div className="absolute size-6 -translate-y-1/2 pointer-events-none left-2 top-1/2" aria-hidden="true">
+          <button
+            type="button"
+            aria-label={supportNavlinks[0].title}
+            className="relative flex h-auto w-auto items-center rounded-md border border-slate-200 bg-background px-10 py-3 text-base font-normal leading-6 tracking-normal text-slate-700 outline-hidden hover:border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-50 dark:hover:border-slate-700 dark:hover:bg-black"
+          >
+            <span className="absolute size-6 -translate-y-1/2 pointer-events-none left-2 top-1/2" aria-hidden="true">
               <Icon aria-label={supportNavlinks[0].title} />
-            </div>
-            <Input
-              defaultValue={supportNavlinks[0].title}
-              type="button"
-              className="w-auto px-10"
-              aria-label={supportNavlinks[0].title}
-            />
+            </span>
+            {supportNavlinks[0].title}
             <ChevronUp
               size={24}
               className="absolute -translate-y-1/2 group-data-[state=open]:rotate-180 right-2 top-1/2 stroke-black group-data-[state=open]:stroke-[#6f8b90] dark:stroke-slate-200"
               aria-hidden="true"
             />
-          </div>
+          </button>
         </PopoverTrigger>
         <PopoverContent side="bottom" className="w-full">
           <SupportLinksList className="justify-start text-slate-700 dark:text-slate-50 text-sm font-normal leading-5.25" />

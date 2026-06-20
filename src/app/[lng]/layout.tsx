@@ -52,8 +52,6 @@ export function generateViewport(): import('next').Viewport {
   return {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
   };
 }
 
@@ -175,8 +173,7 @@ export default async function LocaleLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <link rel="preconnect" href="https://res.cloudinary.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <NextIntlClientProvider locale={lng as Locale} messages={clientMessages}>
           <Providers>{children}</Providers>

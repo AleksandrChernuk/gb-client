@@ -33,7 +33,8 @@ export function ArticleCard({
                 src={cover.url}
                 alt={cover.alt || desc.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={65}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 400px"
                 className="h-full w-full rounded-t-lg object-cover transition-transform"
               />
             </AspectRatio>
@@ -47,7 +48,7 @@ export function ArticleCard({
       <div className="p-4 dark:border-slate-700 w-fit">
         <time
           dateTime={article.createdAt.toString()}
-          className="text-xs text-green-200 p-2 border border-green-200 rounded-xl"
+          className="text-xs text-green-400 dark:text-green-200 p-2 border border-green-200 rounded-xl"
         >
           ⏱ {formatted}
         </time>

@@ -23,7 +23,8 @@ export default async function AllCountries() {
                 src={aTravellerImage}
                 placeholder="blur"
                 fill
-                sizes="(min-width: 768px) 50vw, 100vw"
+                quality={75}
+                sizes="(max-width: 350px) 100vw, 350px"
                 className="rounded-3xl object-contain"
               />
             </AspectRatio>
@@ -31,7 +32,7 @@ export default async function AllCountries() {
 
           <div className="flex flex-col tablet:w-1/2">
             <H2>{t('buses_title')}</H2>
-            <p className="whitespace-pre-line mb-4 text-base font-normal leading-6 tracking-normal text-slate-400 dark:text-slate-200">
+            <p className="whitespace-pre-line mb-4 text-base font-normal leading-6 tracking-normal text-slate-500 dark:text-slate-200">
               {t('buses_description')}
             </p>
             <div className="mt-auto ml-auto tablet:ml-0">

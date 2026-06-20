@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 2678400,
+    deviceSizes: [384, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    qualities: [65, 75, 90],
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'odri-ua.com' },
@@ -48,6 +50,7 @@ const nextConfig: NextConfig = {
 
   experimental: {
     optimizePackageImports: ['lucide-react', '@/shared/ui'],
+    inlineCss: true,
   },
 
   poweredByHeader: false,

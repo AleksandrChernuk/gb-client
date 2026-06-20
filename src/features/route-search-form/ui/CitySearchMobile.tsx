@@ -80,6 +80,7 @@ export default function CitySearchMobile({
             }
           }}
           endIcon={name === 'from' && <IconSwap />}
+          endIconLabel={t_form('swap_directions')}
           swap={swap}
           error={errors}
           errorMassage={t_form('required')}

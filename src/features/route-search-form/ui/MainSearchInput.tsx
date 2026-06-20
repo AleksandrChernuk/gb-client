@@ -10,6 +10,7 @@ interface MainSearchInputProps extends React.ComponentProps<'input'> {
   readOnly?: boolean;
   startIcon: ReactNode;
   endIcon?: ReactNode;
+  endIconLabel?: string;
   onInputChange?: (value: string) => void;
   swap?: () => void;
   handleBlur?: () => void;
@@ -28,6 +29,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
       startIcon,
       readOnly,
       endIcon,
+      endIconLabel,
       classNames,
       onInputChange,
       onFocus,
@@ -42,7 +44,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
     ref,
   ) => {
     return (
-      <div className={cn('relative', classNames)} role="input-wrapp">
+      <div className={cn('relative', classNames)}>
         <div className="absolute transform -translate-y-1/2 pointer-events-none left-1 tablet:left-2 laptop:left-5 top-1/2">
           {startIcon}
         </div>
@@ -89,7 +91,9 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
         />
 
         {endIcon && (
-          <div
+          <button
+            type="button"
+            aria-label={endIconLabel}
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
@@ -98,7 +102,7 @@ export const MainSearchInput = forwardRef<HTMLInputElement, MainSearchInputProps
             className="absolute transform rotate-90 -translate-y-1/2 cursor-pointer tablet:rotate-0 target:rotate-180 right-1 tablet:right-2 laptop:right-5 top-1/2 z-20"
           >
             {endIcon}
-          </div>
+          </button>
         )}
 
         {!!error && (

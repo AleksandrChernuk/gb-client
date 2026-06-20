@@ -70,6 +70,7 @@ export function CityInput({
         errorMassage={t('required')}
         startIcon={name === 'from' ? <IconFrom /> : <IconTo />}
         endIcon={name === 'from' ? <IconSwap /> : undefined}
+        endIconLabel={t('swap_directions')}
         swap={swap}
         spellCheck={false}
         classNames={`border-r border-r-slate-200 dark:border-r-slate-700
