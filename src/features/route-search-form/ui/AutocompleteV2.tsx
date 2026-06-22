@@ -155,6 +155,7 @@ export function AutocompleteV2({ name, variant, error, resetError }: Props) {
       error={error}
       errorMassage={t_form('required')}
       endIcon={name === 'from' ? <IconSwap /> : undefined}
+      endIconLabel={t_form('swap_directions')}
       swap={swap}
       onClick={() => {
         if (error && resetError) {

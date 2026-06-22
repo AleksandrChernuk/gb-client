@@ -12,15 +12,12 @@ import MainLoader from '@/shared/ui/MainLoader';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from '@/shared/ui/drawer';
-import { Button } from '@/shared/ui/button';
-import { ChevronLeft } from 'lucide-react';
 import { useRouterSearch } from '@/shared/hooks/useRouterSearch';
 import { useCityInput } from '@/features/trip-search/hooks/useCityInput';
 import { CityItem } from '@/features/trip-search/ui/CityItem';
@@ -99,6 +96,7 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
             name={name}
             startIcon={startIcon}
             endIcon={endIcon}
+            endIconLabel={t_form('swap_directions')}
             swap={actions.swap}
             type="button"
             value={inputValue.length ? inputValue : placeholder}
@@ -148,6 +146,7 @@ export function TripCityInput({ name, variant, initialFavorites, city, error, re
         errorMessage={t_form('required')}
         startIcon={startIcon}
         endIcon={endIcon}
+        endIconLabel={t_form('swap_directions')}
         swap={actions.swap}
         spellCheck={false}
         className={[

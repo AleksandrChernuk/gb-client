@@ -10,11 +10,12 @@ interface TripSearchInputProps extends React.ComponentProps<'input'> {
   errorMessage?: string;
   startIcon: ReactNode;
   endIcon?: ReactNode;
+  endIconLabel?: string;
   swap?: () => void;
 }
 
 export const TripSearchInput = forwardRef<HTMLInputElement, TripSearchInputProps>(
-  ({ name, value, placeholder, error, errorMessage, startIcon, endIcon, className, swap, ...props }, ref) => {
+  ({ name, value, placeholder, error, errorMessage, startIcon, endIcon, endIconLabel, className, swap, ...props }, ref) => {
     return (
       <div className={cn('relative', className)}>
         {/* start icon */}
@@ -51,7 +52,9 @@ export const TripSearchInput = forwardRef<HTMLInputElement, TripSearchInputProps
 
         {/* end icon / swap */}
         {endIcon && (
-          <div
+          <button
+            type="button"
+            aria-label={endIconLabel}
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               e.preventDefault();
@@ -60,7 +63,7 @@ export const TripSearchInput = forwardRef<HTMLInputElement, TripSearchInputProps
             className="absolute right-1 tablet:right-2 laptop:right-5 top-1/2 -translate-y-1/2 z-20 cursor-pointer rotate-90 tablet:rotate-0"
           >
             {endIcon}
-          </div>
+          </button>
         )}
 
         {/* error badge */}

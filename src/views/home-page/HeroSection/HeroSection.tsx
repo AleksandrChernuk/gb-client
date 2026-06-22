@@ -32,9 +32,7 @@ export default async function HeroSection() {
         placeholder="blur"
         width={1240}
         height={233}
-        fetchPriority="high"
         className="hidden tablet:block w-dvw h-auto"
-        priority
         loading="eager"
         quality={75}
         sizes="100vw"
