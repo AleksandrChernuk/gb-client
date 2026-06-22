@@ -19,7 +19,7 @@ type SitemapLocation = { slug: string; countrySlug: string };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articlesResponse, routesResponse, countries, favoriteLocations] = await Promise.all([
-    getArticles().catch(() => ({ data: [] })),
+    getArticles({ perPage: 100 }).catch(() => ({ data: [] })),
     getAllFavoriteRoutes({ lang: 'uk' }).catch(() => []),
     getAllCountries().catch(() => []),
     getFavoriteLocations().catch(() => []),
@@ -29,6 +29,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     slug: post.slug,
     updatedAt: post.updatedAt instanceof Date ? post.updatedAt.toISOString() : new Date(post.updatedAt).toISOString(),
   }));
+
+  // Сторінки авторів беремо зі статей: публічний список авторів закритий (EDITOR),
+  // тож індексуємо лише авторів, у яких є опубліковані статті.
+  const authorSlugs = [
+    ...new Set(
+      articlesResponse.data
+        .map((post) => post.author?.slug)
+        .filter((slug): slug is string => typeof slug === 'string' && slug.length > 0),
+    ),
+  ];
 
   const routes = routesResponse.filter((route) => route.slug).map((route) => ({
     slug: route.slug,
@@ -41,6 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...getStaticPages(),
     ...getBlogPages(posts),
+    ...getAuthorPages(authorSlugs),
     ...getRoutePages(routes),
     ...getCountryPages(countries, countrySlugs),
     ...getLocationPages(locations),
@@ -111,6 +122,15 @@ function getBlogPages(posts: { slug: string; updatedAt: string }[]) {
       priority: 0.8,
       changeFrequency: 'weekly',
       lastModified: post.updatedAt,
+    }),
+  );
+}
+
+function getAuthorPages(authorSlugs: string[]) {
+  return authorSlugs.flatMap((slug) =>
+    buildEntries(`/authors/${slug}` as Href, {
+      priority: 0.6,
+      changeFrequency: 'monthly',
     }),
   );
 }

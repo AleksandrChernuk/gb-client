@@ -61,6 +61,39 @@ export interface ICountry {
 
 export type ICountryListItem = Omit<ICountry, 'regions' | 'description' | 'currency' | 'locations' | 'countryPhotos'>;
 
+// ===== Полегшений об'єкт країни (GET /countries/slug/:slug?language=xx) =====
+export interface ICountryLightName {
+  language: string;
+  countryName: string;
+}
+
+export interface ICountryLightDescription {
+  language: string;
+  description: string;
+}
+
+export interface ICountryLightLocationTranslation {
+  language: string;
+  locationName: string;
+}
+
+export interface ICountryLightLocation {
+  id: number;
+  slug: string;
+  translations: ICountryLightLocationTranslation | null;
+}
+
+export interface ICountryLight {
+  id: number;
+  slug: string;
+  code: string;
+  priceFrom: number;
+  currency: string;
+  name: ICountryLightName | null;
+  description: ICountryLightDescription | null;
+  locations: ICountryLightLocation[];
+}
+
 export interface ICountriesResponse {
   data: ICountry[];
   totalCountries: number;

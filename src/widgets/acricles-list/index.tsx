@@ -32,12 +32,8 @@ export default async function AcriclesList({ articles }: ArticlesListProps) {
         })}
       </ul>
 
-      {articles.pagination && articles.pagination.totalPages > 1 && (
-        <CustomPagination
-          currentPage={articles.pagination.page}
-          totalPages={articles.pagination.totalPages}
-          maxVisiblePages={3}
-        />
+      {articles.totalPages > 1 && (
+        <CustomPagination currentPage={articles.page} totalPages={articles.totalPages} maxVisiblePages={3} />
       )}
     </div>
   );

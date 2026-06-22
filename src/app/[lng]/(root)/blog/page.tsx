@@ -49,6 +49,7 @@ export default async function Blog({ params, searchParams }: Props) {
   const res = await getArticles({
     page: currentPage,
     perPage,
+    language: lng,
   });
 
   const t = await getTranslations(MESSAGE_FILES.COMMON);

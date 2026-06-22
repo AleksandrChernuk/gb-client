@@ -1,6 +1,7 @@
 export const revalidate = 600;
 
 import { getArticleBySlug, getArticles } from '@/shared/api/articles.actions';
+import { getAuthorBySlug } from '@/shared/api/authors.actions';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { buildArticleMetadata } from '@/shared/seo/articleMetadata';
 import { IArticleResponse } from '@/shared/types/article.types';
@@ -20,20 +21,30 @@ import { buildBreadcrumbSchema } from '@/shared/seo/breadcrumbs.schema';
 import { BASE_URL } from '@/shared/configs/constants';
 import parse, { domToReact } from 'html-react-parser';
 import { notFound } from 'next/navigation';
-import { Link } from '@/shared/i18n/routing';
+import { Link, routing } from '@/shared/i18n/routing';
 import { buildArticleSchema } from '@/shared/seo/article.schema';
 import { getInternalSeoHref } from '@/shared/seo/internal-links';
+import { ArticleAuthorBox } from '@/features/article-author';
+import { ArticleCta } from '@/features/article-cta';
+import { RelatedArticles } from '@/widgets/related-articles';
+import { format } from 'date-fns';
+import { CalendarDays } from 'lucide-react';
+import { Separator } from '@/shared/ui/separator';
 
 export async function generateStaticParams() {
-  const res = await getArticles({ perPage: 9999 });
+  const PER_PAGE = 100;
 
-  if ('error' in res) return [];
+  const first = await getArticles({ page: 1, perPage: PER_PAGE });
+  const articles = [...first.data];
 
-  const articles = res.data;
+  for (let page = 2; page <= first.totalPages; page++) {
+    const res = await getArticles({ page, perPage: PER_PAGE });
+    articles.push(...res.data);
+  }
 
   return articles.flatMap((article) =>
-    article.descriptions.map((desc) => ({
-      lng: desc.language,
+    routing.locales.map((lng) => ({
+      lng,
       slug: article.slug,
     })),
   );
@@ -72,7 +83,7 @@ const options = {
 
 export async function generateMetadata({ params }: { params: Promise<{ lng: Locale; slug: string }> }) {
   const { lng, slug } = await params;
-  const article = await getArticleBySlug(slug);
+  const article = await getArticleBySlug(slug, lng);
 
   if (!article) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
@@ -88,12 +99,18 @@ function getDescriptionByLang(article: IArticleResponse, lang: string) {
 export default async function SlugPage({ params }: { params: Promise<{ lng: string; slug: string }> }) {
   const { lng, slug } = await params;
 
-  const article = await getArticleBySlug(slug);
+  const article = await getArticleBySlug(slug, lng);
 
   if (!article) notFound();
 
   const cover = article.photos.find((p) => p.isCover);
   const t = await getTranslations(MESSAGE_FILES.COMMON);
+
+  // Підвантажуємо повний профіль автора (з біо) для блоку в кінці статті —
+  // у відповіді статті автор приходить без біографії.
+  const fullAuthor = article.author
+    ? await getAuthorBySlug(article.author.slug, lng).catch(() => null)
+    : null;
 
   const desc = getDescriptionByLang(article, lng);
 
@@ -112,7 +129,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
     lng,
   );
 
-  const articleSchema = buildArticleSchema(article, lng as Locale);
+  const articleSchema = buildArticleSchema(article, lng as Locale, fullAuthor);
 
   return (
     <>
@@ -129,7 +146,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
       <Main>
         <Section>
           <Container size="m">
-            <div className="mb-2 flex items-center justify-between gap-2">
+            <div className="mb-6 flex items-center justify-between gap-2">
               <BreadcrumbSimple
                 linkClassName="text-slate-700 dark:text-slate-50"
                 pageClassName="text-slate-700 dark:text-slate-50"
@@ -143,7 +160,56 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                   },
                 ]}
               />
-              <ShareButton shareUrl={`${BASE_URL}/${lng}/blog/${article.slug}/`} title={desc.title} />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <CalendarDays className="stroke-slate-700 dark:stroke-slate-50" />{' '}
+                  <p className="text-slate-700 dark:text-slate-50">
+                    {format(new Date(article.createdAt), 'dd.MM.yyyy')}
+                  </p>
+                </div>
+                {format(new Date(article.updatedAt), 'dd.MM.yyyy') !==
+                  format(new Date(article.createdAt), 'dd.MM.yyyy') && (
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    {t('updated_label')} {format(new Date(article.updatedAt), 'dd.MM.yyyy')}
+                  </p>
+                )}
+                <Separator className="h-4 bg-stro-400 dark:bg-stone-200" orientation="vertical" />
+                <div>
+                  <ShareButton shareUrl={`${BASE_URL}/${lng}/blog/${article.slug}/`} title={desc.title} />
+                </div>
+              </div>
+              {article.author?.name?.authorName && (
+                <Link
+                  href={`/authors/${article.author.slug}/`}
+                  prefetch={false}
+                  className="flex items-center gap-2"
+                >
+                  {article.author.photo ? (
+                    <Image
+                      src={article.author.photo}
+                      alt={article.author.name.authorName}
+                      width={32}
+                      height={32}
+                      className="h-8 w-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-green-200 text-sm font-semibold text-green-700 dark:bg-slate-700 dark:text-green-200"
+                    >
+                      {article.author.name.authorName.charAt(0)}
+                    </span>
+                  )}
+                  <span className="text-slate-500 dark:text-slate-300">
+                    {t('author_label')}{' '}
+                    <span className="font-semibold text-green-600 dark:text-green-300">
+                      {article.author.name.authorName}
+                    </span>
+                  </span>
+                </Link>
+              )}
             </div>
             <H1>{desc.title}</H1>{' '}
             {cover && (
@@ -154,6 +220,22 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
             <article className="[&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mt-4 [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_ol]:space-y-2 [&_li]:pl-1 [&_a]:text-green-300 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-green-300/40 hover:[&_a]:text-green-400 hover:[&_a]:decoration-green-400 dark:[&_a]:text-green-100 dark:[&_a]:decoration-green-100/30 dark:hover:[&_a]:text-green-200 dark:hover:[&_a]:decoration-green-200 max-w-none dark:text-slate-200">
               {parse(desc.content, options)}
             </article>
+            <ArticleCta />
+            {article.author && (
+              <ArticleAuthorBox
+                slug={article.author.slug}
+                name={article.author.name?.authorName ?? fullAuthor?.name?.authorName ?? ''}
+                role={article.author.role?.authorRole ?? fullAuthor?.role?.authorRole}
+                photo={article.author.photo ?? fullAuthor?.photo}
+                bio={fullAuthor?.bio?.authorBio}
+              />
+            )}
+            <RelatedArticles
+              lng={lng as Locale}
+              currentSlug={article.slug}
+              countryId={article.countryId}
+              locationId={article.locationId}
+            />
           </Container>
         </Section>
       </Main>

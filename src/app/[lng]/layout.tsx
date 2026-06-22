@@ -10,7 +10,7 @@ import { Rubik } from 'next/font/google';
 import Script from 'next/script';
 import Providers from '@/app/[lng]/Providers';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
-import { BASE_URL } from '@/shared/configs/constants';
+import { BASE_URL, ORG_ID, WEBSITE_ID } from '@/shared/configs/constants';
 import type { Metadata } from 'next';
 
 const rubik = Rubik({
@@ -100,10 +100,6 @@ export default async function LocaleLayout({
 
   const langTexts = schemaTranslations[lng as Locale] || schemaTranslations.uk;
   const localeHomeUrl = `${BASE_URL}/${lng}/`;
-
-  // Стабільні @id для зв'язування сутностей (WebSite ↔ Organization).
-  const ORG_ID = `${BASE_URL}/#organization`;
-  const WEBSITE_ID = `${BASE_URL}/#website`;
 
   const websiteSchema = {
     '@context': 'https://schema.org',

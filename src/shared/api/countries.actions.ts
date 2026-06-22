@@ -1,5 +1,7 @@
 import { BACKEND_URL_API } from '@/shared/configs/constants';
-import { ICountriesResponse, ICountry } from '@/shared/types/countries.types';
+import { ICountriesResponse, ICountry, ICountryLight } from '@/shared/types/countries.types';
+
+const DEFAULT_LANGUAGE = 'uk';
 
 export async function getAllCountries(): Promise<ICountry[]> {
   const response = await fetch(`${BACKEND_URL_API}/countries?perPage=1000`, {
@@ -29,8 +31,11 @@ export async function getCountryById(id: number): Promise<ICountry | null> {
   return response.json() as Promise<ICountry>;
 }
 
-export const getCountryBySlug = async (slug: string): Promise<ICountry | null> => {
-  const response = await fetch(`${BACKEND_URL_API}/countries/slug/${slug}`, {
+export const getCountryBySlug = async (
+  slug: string,
+  language: string = DEFAULT_LANGUAGE,
+): Promise<ICountryLight | null> => {
+  const response = await fetch(`${BACKEND_URL_API}/countries/slug/${slug}?language=${language}`, {
     headers: { Accept: 'application/json' },
     next: { revalidate: 600 },
   });

@@ -69,8 +69,11 @@ describe('SEO safety invariants', () => {
 
     mockedGetArticles.mockResolvedValue({
       data: [{ slug: 'avtovokzaly-pragy', updatedAt: '2026-01-15T12:00:00.000Z' }],
-      pagination: { page: 1, perPage: 20, totalPages: 1 },
-    } as Awaited<ReturnType<typeof getArticles>>);
+      totalArticles: 1,
+      page: 1,
+      perPage: 20,
+      totalPages: 1,
+    } as unknown as Awaited<ReturnType<typeof getArticles>>);
 
     mockedGetAllFavoriteRoutes.mockResolvedValue([
       {

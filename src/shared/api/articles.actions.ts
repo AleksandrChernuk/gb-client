@@ -6,6 +6,8 @@ import {
   TGetArticlesResponse,
 } from '@/shared/types/article.types';
 
+const DEFAULT_LANGUAGE = 'uk';
+
 export async function createArticles(body: IArticleRequest) {
   const response = await fetch(`${BACKEND_URL}/articles`, {
     method: 'POST',
@@ -21,8 +23,11 @@ export async function createArticles(body: IArticleRequest) {
   return null;
 }
 
-export async function getArticleBySlug(slug: string): Promise<IArticleResponse> {
-  const url = `${BACKEND_URL_API}/articles/${slug}`;
+export async function getArticleBySlug(
+  slug: string,
+  language: string = DEFAULT_LANGUAGE,
+): Promise<IArticleResponse> {
+  const url = `${BACKEND_URL_API}/articles/${slug}?language=${language}`;
 
   try {
     const response = await fetch(url, {
@@ -47,25 +52,23 @@ export async function getArticleBySlug(slug: string): Promise<IArticleResponse> 
 }
 
 export async function getArticles(query?: IFindAllArticlesOptions): Promise<TGetArticlesResponse> {
+  const language = query?.language ?? DEFAULT_LANGUAGE;
   const queryParams = new URLSearchParams();
 
+  queryParams.append('language', language);
   if (query?.page != null) queryParams.append('page', String(query.page));
   if (query?.perPage != null) queryParams.append('perPage', String(query.perPage));
-  if (query?.language) queryParams.append('language', query.language);
   if (query?.countryId != null) queryParams.append('countryId', String(query.countryId));
   if (query?.locationId != null) queryParams.append('locationId', String(query.locationId));
+  if (query?.authorId != null) queryParams.append('authorId', String(query.authorId));
   if (query?.hashtag?.trim()) queryParams.append('hashtag', query.hashtag);
 
-  const url =
-    queryParams.toString().length > 0
-      ? `${BACKEND_URL_API}/articles?${queryParams.toString()}`
-      : `${BACKEND_URL_API}/articles`;
+  const url = `${BACKEND_URL_API}/articles?${queryParams.toString()}`;
 
   try {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Accept-Language': 'uk',
         Accept: 'application/json',
       },
       next: { revalidate: 300 },
@@ -81,11 +84,10 @@ export async function getArticles(query?: IFindAllArticlesOptions): Promise<TGet
 
     return {
       data: [],
-      pagination: {
-        page: query?.page ?? 1,
-        perPage: query?.perPage ?? 20,
-        totalPages: 1,
-      },
+      totalArticles: 0,
+      page: query?.page ?? 1,
+      perPage: query?.perPage ?? 20,
+      totalPages: 1,
     };
   }
 }

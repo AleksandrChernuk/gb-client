@@ -14,7 +14,7 @@ export const ArticlesPreview = async () => {
   const locale = (await getLocale()) as Locale;
 
   const t = await getTranslations(MESSAGE_FILES.COMMON);
-  const data = await getArticles({ page: 1, perPage: 3 });
+  const data = await getArticles({ page: 1, perPage: 3, language: locale });
 
   if (isErrorResponse(data)) {
     return (

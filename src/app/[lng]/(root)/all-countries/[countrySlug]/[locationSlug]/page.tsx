@@ -49,9 +49,10 @@ export async function generateStaticParams() {
   try {
     const favorites = await getFavoriteLocations();
 
+    // Усі локалі для кожного міста — щоб локалізовані URL існували статично.
     return favorites.flatMap((location) =>
-      location.translations.map((tr) => ({
-        lng: tr.language,
+      routing.locales.map((lng) => ({
+        lng,
         countrySlug: location.country.slug,
         locationSlug: location.slug,
       })),
@@ -61,7 +62,7 @@ export async function generateStaticParams() {
   }
 }
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
-import { Link } from '@/shared/i18n/routing';
+import { Link, routing } from '@/shared/i18n/routing';
 import MainFooter from '@/widgets/footer/MainFooter';
 
 export async function generateMetadata({ params }: Props) {

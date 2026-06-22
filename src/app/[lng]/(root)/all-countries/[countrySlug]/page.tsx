@@ -9,8 +9,7 @@ import { notFound } from 'next/navigation';
 import { getAllCountries, getCountryBySlug } from '@/shared/api/countries.actions';
 import { H1 } from '@/shared/ui/H1';
 import CustomCard from '@/shared/ui/CustomCard';
-import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { Link } from '@/shared/i18n/routing';
+import { Link, routing } from '@/shared/i18n/routing';
 import { generatePublicPageMetadata } from '@/shared/lib/metadata';
 import parse, { domToReact, HTMLReactParserOptions, Element, DOMNode } from 'html-react-parser';
 import { H2 } from '@/shared/ui/H2';
@@ -28,9 +27,11 @@ export async function generateStaticParams() {
   try {
     const countries = await getAllCountries();
 
+    // Пре-рендеримо всі локалі для кожної країни (а не лише наявні переклади),
+    // щоб усі локалізовані URL існували статично під hreflang.
     return countries.flatMap((country) =>
-      country.translations.map((tr) => ({
-        lng: tr.language,
+      routing.locales.map((lng) => ({
+        lng,
         countrySlug: country.slug,
       })),
     );
@@ -96,13 +97,13 @@ const parserOptions: HTMLReactParserOptions = {
 
 export async function generateMetadata({ params }: Props) {
   const { lng, countrySlug } = await params;
-  const country = await getCountryBySlug(countrySlug);
+  const country = await getCountryBySlug(countrySlug, lng);
 
   if (!country) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
-  const countryName = country.translations.find((e) => e.language === lng)?.countryName ?? '';
+  const countryName = country.name?.countryName ?? '';
   const current = (META_BY_LOCALE[lng as keyof typeof META_BY_LOCALE] ?? META_BY_LOCALE.uk)(countryName);
 
   const baseMetadata = await generatePublicPageMetadata({
@@ -113,8 +114,8 @@ export async function generateMetadata({ params }: Props) {
   });
 
   // Країна без жодного валідного міста — тонка сторінка, не індексуємо (follow лишаємо).
-  const hasCities = country.locations?.some((loc) => loc.translations.length > 0) ?? false;
-  const hasDescription = !!country.description?.find((e) => e.language === lng)?.description;
+  const hasCities = country.locations?.some((loc) => !!loc.translations?.locationName) ?? false;
+  const hasDescription = !!country.description?.description;
   const isThin = !hasCities && !hasDescription;
 
   return {
@@ -132,14 +133,14 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
 
   const [t, country, allCountries] = await Promise.all([
     getTranslations({ locale: lng, namespace: MESSAGE_FILES.ALL_COUNTRIES }),
-    getCountryBySlug(countrySlug),
+    getCountryBySlug(countrySlug, lng),
     getAllCountries().catch(() => []),
   ]);
 
   if (!country) notFound();
 
-  const countryName = country.translations.find((e) => e.language === lng)?.countryName ?? '';
-  const countryDescription = country.description.find((e) => e.language === lng)?.description;
+  const countryName = country.name?.countryName ?? '';
+  const countryDescription = country.description?.description;
 
   // Межхабова перелінковка: посилання на інші країни-напрямки розподіляють вагу
   // між хабами (раніше країни не лінкувались одна на одну).
@@ -154,7 +155,7 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
     { label: countryName, href: `/all-countries/${country.slug}/` },
   ];
 
-  const validLocations = country.locations.filter((loc) => loc.translations.length > 0);
+  const validLocations = country.locations.filter((loc) => !!loc.translations?.locationName);
 
   // FAQ з реальними відповідями (оплата, повернення, e-квиток) — спільні для всіх країн-хабів.
   // Дають passage-level контент для AI Overviews і FAQPage-розмітку.
@@ -190,7 +191,7 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
                 '@type': 'ListItem',
                 position: i + 1,
                 url: `${BASE}/${lng}/all-countries/${country.slug}/${loc.slug}/`,
-                name: extractLocationDetails(loc, lng).locationName,
+                name: loc.translations?.locationName ?? '',
               })),
             },
           ]
@@ -250,7 +251,7 @@ export default async function CountryPage({ params }: { params: Promise<{ lng: L
                           <MapPin className="w-5 h-5" />
                         </div>
                         <span className="text-base font-semibold text-slate-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-1">
-                          {extractLocationDetails(location, lng).locationName}
+                          {location.translations?.locationName ?? ''}
                         </span>
                       </div>
                       <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 group-hover:bg-green-50 dark:group-hover:bg-green-900/30 transition-colors shrink-0 ml-2">

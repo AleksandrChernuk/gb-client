@@ -32,8 +32,9 @@ export const ShareButton = ({ title, shareUrl }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" aria-label="Поделиться" size={'icon'}>
+        <Button variant="ghost" aria-label="Поделиться" size={'default'}>
           <Share2 className="size-4" />
+          Telegram
         </Button>
       </DropdownMenuTrigger>
 
