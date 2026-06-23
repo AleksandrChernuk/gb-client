@@ -27,12 +27,13 @@ describe('regression guards', () => {
   });
 
   describe('getAllFavoriteRoutes pagination', () => {
-    it('uses perPage of at least 100 to avoid excessive sequential API calls during build', () => {
+    it('uses cache-safe pagination while still walking all favorite-route pages', () => {
       const src = readProjectFile('src/shared/api/favoriteRoutes.server.ts');
 
-      // perPage: 10 caused 20+ sequential HTTP requests during SSG when there are 200 routes
+      // Keep each response under the Next data cache limit; the loop still walks every backend page.
       expect(src).not.toMatch(/perPage:\s*10[^0]/);
-      expect(src).toMatch(/perPage:\s*1\d{2,}/);
+      expect(src).toMatch(/perPage:\s*20/);
+      expect(src).toContain('while (page <= totalPages');
     });
   });
 

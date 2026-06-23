@@ -6,22 +6,52 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/route-planner',
-        destination: '/',
+        destination: '/uk/',
         permanent: true,
       },
       {
-        source: '/:lng/route-planner',
-        destination: '/:lng',
+        source: '/route-planner/',
+        destination: '/uk/',
+        permanent: true,
+      },
+      {
+        source: '/:lng(uk|ru|en)/route-planner',
+        destination: '/:lng/',
+        permanent: true,
+      },
+      {
+        source: '/:lng(uk|ru|en)/route-planner/',
+        destination: '/:lng/',
         permanent: true,
       },
       {
         source: '/carriers',
-        destination: '/for-carriers',
+        destination: '/uk/for-carriers/',
         permanent: true,
       },
       {
-        source: '/:lng/carriers',
-        destination: '/:lng/for-carriers',
+        source: '/carriers/',
+        destination: '/uk/for-carriers/',
+        permanent: true,
+      },
+      {
+        source: '/:lng(uk|ru|en)/carriers',
+        destination: '/:lng/for-carriers/',
+        permanent: true,
+      },
+      {
+        source: '/:lng(uk|ru|en)/carriers/',
+        destination: '/:lng/for-carriers/',
+        permanent: true,
+      },
+      {
+        source: '/manifest.json',
+        destination: '/manifest.webmanifest',
+        permanent: true,
+      },
+      {
+        source: '/apple-touch-icon.png',
+        destination: '/icon-192x192.png',
         permanent: true,
       },
     ];

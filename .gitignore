@@ -24,6 +24,11 @@
 .DS_Store
 *.pem
 
+# local agent/workflow artifacts
+/.agents/
+/.claude/
+/.dto/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -22,11 +22,10 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import { format } from 'date-fns';
 
 type Params = { lng: Locale; slug: string };
 
-const SSG_PER_PAGE = 100; // бекенд обмежує perPage значенням 100
+const SSG_PER_PAGE = 100;
 
 export async function generateStaticParams() {
   try {
@@ -114,8 +113,8 @@ export default async function AuthorPage({ params }: { params: Promise<Params> }
             />
 
             {/* Картка автора */}
-            <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 tablet:p-8">
-              <div className="flex flex-col gap-6 tablet:flex-row tablet:items-start">
+            <div className="mt-4 ">
+              <div className="flex flex-col gap-6 items-center tablet:flex-row tablet:items-center">
                 {author.photo ? (
                   <Image
                     src={author.photo}
@@ -152,9 +151,6 @@ export default async function AuthorPage({ params }: { params: Promise<Params> }
                   <div className="mt-5">
                     <AuthorSocials links={author.socialLinks} />
                   </div>
-                  <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
-                    {t('updated_label')} {format(new Date(author.updatedAt), 'dd.MM.yyyy')}
-                  </p>
                 </div>
               </div>
             </div>

@@ -4,7 +4,6 @@ import { getPathname, routing } from '@/shared/i18n/routing';
 import { getArticles } from '@/shared/api/articles.actions';
 import { getAllFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { getAllCountries } from '@/shared/api/countries.actions';
-import { getFavoriteLocations } from '@/shared/api/location.actions';
 
 export const revalidate = 3600;
 
@@ -18,11 +17,10 @@ type SitemapRoute = {
 type SitemapLocation = { slug: string; countrySlug: string };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articlesResponse, routesResponse, countries, favoriteLocations] = await Promise.all([
+  const [articlesResponse, routesResponse, countries] = await Promise.all([
     getArticles({ perPage: 100 }).catch(() => ({ data: [] })),
     getAllFavoriteRoutes({ lang: 'uk' }).catch(() => []),
     getAllCountries().catch(() => []),
-    getFavoriteLocations().catch(() => []),
   ]);
 
   const posts = articlesResponse.data.map((post) => ({
@@ -45,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fromLocation: route.fromLocation,
     toLocation: route.toLocation,
   }));
-  const locations = getSeoLocationsForSitemap(routes, favoriteLocations);
+  const locations = getSeoLocationsForSitemap(routes);
   const countrySlugs = getSeoCountrySlugs(locations);
 
   return [
@@ -59,14 +57,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 // ────────────────────────────────────────────────────────────
-// SEO локации: только города из избранных маршрутов и favorites API.
-// Не пушим весь справочник городов в sitemap, чтобы не раздувать
-// "Discovered, currently not indexed" тонкими программными страницами.
+// SEO локации: только endpoint-города индексируемых маршрутов.
+// Так каждый city/country URL в sitemap бьётся с route-графом и не создаёт orphan pages.
 // ────────────────────────────────────────────────────────────
-function getSeoLocationsForSitemap(
-  routes: SitemapRoute[],
-  favoriteLocations: { slug?: string; country?: { slug?: string } }[],
-): SitemapLocation[] {
+function getSeoLocationsForSitemap(routes: SitemapRoute[]): SitemapLocation[] {
   const byPath = new Map<string, SitemapLocation>();
 
   const addLocation = (location?: { slug?: string; country?: { slug?: string } }) => {
@@ -75,8 +69,6 @@ function getSeoLocationsForSitemap(
     const item = { slug: location.slug, countrySlug: location.country.slug };
     byPath.set(`${item.countrySlug}/${item.slug}`, item);
   };
-
-  favoriteLocations.forEach(addLocation);
 
   for (const route of routes) {
     addLocation(route.fromLocation);

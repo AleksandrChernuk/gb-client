@@ -19,13 +19,13 @@ export async function ArticleAuthorBox({ slug, name, role, photo, bio }: Article
 
   return (
     <aside className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-      <div className="flex flex-col gap-5 tablet:flex-row tablet:items-start">
+      <div className="flex flex-col items-center gap-5 tablet:flex-row tablet:items-start">
         {photo ? (
           <Image
             src={photo}
             alt={name}
-            width={120}
-            height={120}
+            width={150}
+            height={150}
             className="h-28 w-28 shrink-0 rounded-full object-cover"
           />
         ) : (
@@ -38,16 +38,12 @@ export async function ArticleAuthorBox({ slug, name, role, photo, bio }: Article
         )}
         <div className="min-w-0">
           <p className="text-xl font-bold text-slate-900 dark:text-slate-50">{name}</p>
-          {role && (
-            <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-green-600 dark:text-green-300">
-              {role}
-            </p>
-          )}
+          {role && <p className="mt-1 text-sm tracking-wide font-bold text-green-300 dark:text-green-600">{role}</p>}
           {bio && <p className="mt-3 text-slate-700 dark:text-slate-200">{bio}</p>}
           <Link
             href={authorHref}
             prefetch={false}
-            className="mt-4 inline-block font-semibold text-green-600 transition-colors hover:text-green-700 dark:text-green-300"
+            className="mt-4 inline-block font-semibold text-green-300 transition-colors hover:text-green-400 dark:text-green-600"
           >
             {t('author_more')}
           </Link>

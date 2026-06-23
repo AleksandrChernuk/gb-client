@@ -30,6 +30,7 @@ import { RelatedArticles } from '@/widgets/related-articles';
 import { format } from 'date-fns';
 import { CalendarDays } from 'lucide-react';
 import { Separator } from '@/shared/ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 
 export async function generateStaticParams() {
   const PER_PAGE = 100;
@@ -106,11 +107,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
   const cover = article.photos.find((p) => p.isCover);
   const t = await getTranslations(MESSAGE_FILES.COMMON);
 
-  // Підвантажуємо повний профіль автора (з біо) для блоку в кінці статті —
-  // у відповіді статті автор приходить без біографії.
-  const fullAuthor = article.author
-    ? await getAuthorBySlug(article.author.slug, lng).catch(() => null)
-    : null;
+  const fullAuthor = article.author ? await getAuthorBySlug(article.author.slug, lng).catch(() => null) : null;
 
   const desc = getDescriptionByLang(article, lng);
 
@@ -146,7 +143,7 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
       <Main>
         <Section>
           <Container size="m">
-            <div className="mb-6 flex items-center justify-between gap-2">
+            <div className="mb-10 flex items-center justify-between gap-2">
               <BreadcrumbSimple
                 linkClassName="text-slate-700 dark:text-slate-50"
                 pageClassName="text-slate-700 dark:text-slate-50"
@@ -161,65 +158,64 @@ export default async function SlugPage({ params }: { params: Promise<{ lng: stri
                 ]}
               />
             </div>
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-10">
+              <div className="flex items-center gap-2 text-xs tablet:text-base">
                 <div className="flex items-center gap-2">
                   <CalendarDays className="stroke-slate-700 dark:stroke-slate-50" />{' '}
                   <p className="text-slate-700 dark:text-slate-50">
-                    {format(new Date(article.createdAt), 'dd.MM.yyyy')}
+                    {format(new Date(article.updatedAt), 'dd.MM.yyyy')}
                   </p>
                 </div>
-                {format(new Date(article.updatedAt), 'dd.MM.yyyy') !==
-                  format(new Date(article.createdAt), 'dd.MM.yyyy') && (
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {t('updated_label')} {format(new Date(article.updatedAt), 'dd.MM.yyyy')}
-                  </p>
-                )}
+
                 <Separator className="h-4 bg-stro-400 dark:bg-stone-200" orientation="vertical" />
                 <div>
                   <ShareButton shareUrl={`${BASE_URL}/${lng}/blog/${article.slug}/`} title={desc.title} />
                 </div>
               </div>
               {article.author?.name?.authorName && (
-                <Link
-                  href={`/authors/${article.author.slug}/`}
-                  prefetch={false}
-                  className="flex items-center gap-2"
-                >
-                  {article.author.photo ? (
-                    <Image
-                      src={article.author.photo}
-                      alt={article.author.name.authorName}
-                      width={32}
-                      height={32}
-                      className="h-8 w-8 rounded-full object-cover"
-                    />
-                  ) : (
-                    <span
-                      aria-hidden
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-green-200 text-sm font-semibold text-green-700 dark:bg-slate-700 dark:text-green-200"
-                    >
-                      {article.author.name.authorName.charAt(0)}
-                    </span>
-                  )}
-                  <span className="text-slate-500 dark:text-slate-300">
-                    {t('author_label')}{' '}
-                    <span className="font-semibold text-green-600 dark:text-green-300">
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={`/authors/${article.author.slug}/`}
+                    prefetch={false}
+                    className="group flex items-center gap-2.5 rounded-full border border-slate-200/80 bg-white/60 dark:border-slate-800/80 dark:bg-slate-900/30 p-1 pr-3.5 hover:border-green-300 dark:hover:border-green-600/50 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-all duration-200 shadow-2xs"
+                  >
+                    {article.author.photo ? (
+                      <Avatar className="h-7 w-7 ring-2 ring-transparent group-hover:ring-green-100 dark:group-hover:ring-green-950 transition-all duration-200">
+                        <AvatarImage
+                          src={article.author.photo}
+                          alt={article.author.name.authorName}
+                          className="object-cover"
+                        />
+                        <AvatarFallback className="bg-green-50 dark:bg-green-950 text-[10px] font-bold text-green-700 dark:text-green-300">
+                          {article.author.name.authorName.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                    ) : (
+                      <span
+                        aria-hidden
+                        className="flex h-7 w-7 items-center justify-center rounded-full bg-green-50 text-[10px] font-bold text-green-700 dark:bg-green-950 dark:text-green-300 ring-2 ring-transparent group-hover:ring-green-100 dark:group-hover:ring-green-950 transition-all"
+                      >
+                        {article.author.name.authorName.charAt(0)}
+                      </span>
+                    )}
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 group-hover:text-green-300 dark:group-hover:text-green-600 transition-colors duration-200">
                       {article.author.name.authorName}
                     </span>
-                  </span>
-                </Link>
+                  </Link>
+                </div>
               )}
             </div>
-            <H1>{desc.title}</H1>{' '}
+
+            <H1>{desc.title}</H1>
             {cover && (
               <AspectRatio ratio={16 / 9} className="bg-muted rounded-lg mb-4">
                 <Image src={cover.url} alt={cover.alt} fill className="h-full w-full rounded-lg object-cover" />
               </AspectRatio>
             )}
-            <article className="[&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mt-4 [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_ol]:space-y-2 [&_li]:pl-1 [&_a]:text-green-300 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-green-300/40 hover:[&_a]:text-green-400 hover:[&_a]:decoration-green-400 dark:[&_a]:text-green-100 dark:[&_a]:decoration-green-100/30 dark:hover:[&_a]:text-green-200 dark:hover:[&_a]:decoration-green-200 max-w-none dark:text-slate-200">
+            <article className="[&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mt-4 [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_ol]:space-y-2 [&_li]:pl-1 [&_a]:text-green-300 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-green-300/40 hover:[&_a]:text-green-400 hover:[&_a]:decoration-green-400 dark:[&_a]:text-green-100 dark:[&_a]:decoration-green-100/30 dark:hover:[&_a]:text-green-200 dark:hover:[&_a]:decoration-green-200 max-w-none dark:text-slate-200 ">
               {parse(desc.content, options)}
             </article>
+
             <ArticleCta />
             {article.author && (
               <ArticleAuthorBox

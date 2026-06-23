@@ -109,6 +109,16 @@ Prefer existing structure:
 - For SEO pages/routes, check localized URLs and metadata.
 - Do not remove existing schema/metadata without a reason.
 
+### SEO Decisions To Preserve
+
+- Sitemap route graph: indexed route pages, city pages, and country pages must match the same graph. Build city/country sitemap entries only from endpoint locations of indexed favorite routes. Do not add all locations or `getFavoriteLocations()` back into `src/app/sitemap.ts`, because it creates orphan city/country pages.
+- City URLs must validate both `countrySlug` and `locationSlug`. If the city belongs to a different country, redirect to the canonical `/[lng]/all-countries/{real-country}/{city}/` URL instead of indexing duplicates.
+- Thin city pages: keep `noindex, follow` for city pages that have no route slug and fewer than 500 localized description words. Do not rewrite city text just to bypass this gate.
+- Blog E-E-A-T: legacy articles without CMS authors use the editorial GreenBus Person fallback in Article JSON-LD. Do not assign a human author unless CMS/backend data confirms authorship or review.
+- PWA assets: keep the manifest in `src/app/manifest.ts` and use the existing root `public/icon-*.png` files. Do not reintroduce `public/manifest.ts` or references to missing `apple-touch-icon-*` files.
+- Favorite routes pagination: `getAllFavoriteRoutes()` intentionally uses `perPage: 20` to keep each backend response under Next data cache limits while paging through all route pages. Do not “fix” it back to `100` unless backend payload size is reduced.
+- Legacy redirects should point directly to localized trailing-slash destinations to avoid multi-hop chains.
+
 ## API And Data
 
 - Reuse existing API clients and TanStack Query patterns.

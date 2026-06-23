@@ -5,7 +5,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
 import { Container } from '@/shared/ui/Container';
 import { extractLocationDetails } from '@/shared/lib/extractLocationDetails';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import MainSearch from '@/features/route-search-form';
 import { MESSAGE_FILES } from '@/shared/configs/message.file.constans';
 import { BreadcrumbSimple } from '@/shared/ui/BreadcrumbSimple';
@@ -42,8 +42,41 @@ const parserOptions: HTMLReactParserOptions = {
 };
 
 type Props = {
-  params: Promise<{ lng: string; locationSlug: string }>;
+  params: Promise<{ lng: string; countrySlug: string; locationSlug: string }>;
 };
+
+const MIN_INDEXABLE_CITY_DESCRIPTION_WORDS = 500;
+
+function getDescriptionWordCount(description: string | undefined): number {
+  if (!description) return 0;
+
+  return description
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[^;]+;/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function humanizeRouteSlugPart(slugPart: string): string {
+  return slugPart
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function getRouteEndpointNames(routeSlug: string, fallbackFromName: string) {
+  const [fromSlug, ...toSlugParts] = routeSlug.split('-');
+  const toSlug = toSlugParts.join('-');
+
+  return {
+    fromName: fallbackFromName || humanizeRouteSlugPart(fromSlug),
+    toName: humanizeRouteSlugPart(toSlug),
+  };
+}
 
 export async function generateStaticParams() {
   try {
@@ -66,7 +99,11 @@ import { Link, routing } from '@/shared/i18n/routing';
 import MainFooter from '@/widgets/footer/MainFooter';
 
 export async function generateMetadata({ params }: Props) {
-  const { lng, locationSlug } = (await params) as { lng: Locale; locationSlug: string };
+  const { lng, countrySlug, locationSlug } = (await params) as {
+    lng: Locale;
+    countrySlug: string;
+    locationSlug: string;
+  };
 
   if (!locationSlug.length) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
@@ -74,6 +111,10 @@ export async function generateMetadata({ params }: Props) {
 
   const data = await getLocationBySlug(locationSlug);
   if (!data) {
+    return { title: 'Not Found', robots: { index: false, follow: true } };
+  }
+
+  if (data.country.slug !== countrySlug) {
     return { title: 'Not Found', robots: { index: false, follow: true } };
   }
 
@@ -104,11 +145,14 @@ export async function generateMetadata({ params }: Props) {
     path: `all-countries/${data.country.slug}/${data.slug}/`,
   });
 
-  // Тонкі гео-сторінки без маршрутів і без опису не індексуємо (захист від index bloat),
+  const localizedDescription = data.description?.find((item) => item.language === lng)?.description;
+  const descriptionWordCount = getDescriptionWordCount(localizedDescription);
+
+  // Тонкі гео-сторінки без маршрутів і без достатнього опису не індексуємо (захист від index bloat),
   // але лишаємо follow, щоб краулер ходив по внутрішніх посиланнях.
-  const hasRoutes = (data.favoriteRoutesFrom ?? []).some((r) => r.slug && r.fromLocation && r.toLocation);
-  const hasDescription = !!extractLocationDetails(data, lng).description;
-  const isThin = !hasRoutes && !hasDescription;
+  const hasRoutes = (data.favoriteRoutesFrom ?? []).some((r) => !!r.slug);
+  const hasEnoughDescription = descriptionWordCount >= MIN_INDEXABLE_CITY_DESCRIPTION_WORDS;
+  const isThin = !hasRoutes && !hasEnoughDescription;
 
   return {
     ...baseMetadata,
@@ -119,7 +163,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function LocationPage({ params }: Props) {
-  const { lng, locationSlug } = await params;
+  const { lng, countrySlug, locationSlug } = await params;
 
   setRequestLocale(lng as Locale);
 
@@ -133,12 +177,14 @@ export default async function LocationPage({ params }: Props) {
     notFound();
   }
 
+  if (data.country.slug !== countrySlug) {
+    permanentRedirect(`/${lng}/all-countries/${data.country.slug}/${data.slug}/`);
+  }
+
   const t = await getTranslations({ locale: lng as Locale, namespace: MESSAGE_FILES.ALL_COUNTRIES });
 
   const details = extractLocationDetails(data, lng);
-  const popularRoutes = (data.favoriteRoutesFrom ?? [])
-    .filter((route) => route.slug && route.fromLocation && route.toLocation)
-    .slice(0, 6);
+  const popularRoutes = (data.favoriteRoutesFrom ?? []).filter((route) => !!route.slug).slice(0, 6);
 
   // Structured data для гео-хабу: хлібні крихти + список популярних маршрутів із міста.
   const BASE = 'https://greenbus.com.ua';
@@ -168,7 +214,10 @@ export default async function LocationPage({ params }: Props) {
                 '@type': 'ListItem',
                 position: i + 1,
                 url: `${BASE}/${lng}/routes/${route.slug}/`,
-                name: `${extractLocationDetails(route.fromLocation, lng).locationName} — ${extractLocationDetails(route.toLocation, lng).locationName}`,
+                name:
+                  route.fromLocation && route.toLocation
+                    ? `${extractLocationDetails(route.fromLocation, lng).locationName} — ${extractLocationDetails(route.toLocation, lng).locationName}`
+                    : route.slug,
               })),
             },
           ]
@@ -204,17 +253,18 @@ export default async function LocationPage({ params }: Props) {
               <H2 className="mb-6">{t('popular_routes_from_city', { locationName: details.locationName })}</H2>
               <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
                 {popularRoutes.map((route) => {
-                  const fromDetails = extractLocationDetails(route.fromLocation, lng);
-                  const toDetails = extractLocationDetails(route.toLocation, lng);
+                  const fallbackNames = getRouteEndpointNames(route.slug, details.locationName);
+                  const fromDetails = route.fromLocation ? extractLocationDetails(route.fromLocation, lng) : null;
+                  const toDetails = route.toLocation ? extractLocationDetails(route.toLocation, lng) : null;
 
                   return (
                     <RouteItem
                       key={route.id}
                       href={`/routes/${route.slug}/`}
-                      fromName={fromDetails.locationName}
-                      toName={toDetails.locationName}
-                      fromCountry={fromDetails.countryName}
-                      toCountry={toDetails.countryName}
+                      fromName={fromDetails?.locationName ?? fallbackNames.fromName}
+                      toName={toDetails?.locationName ?? fallbackNames.toName}
+                      fromCountry={fromDetails?.countryName ?? details.countryName}
+                      toCountry={toDetails?.countryName ?? ''}
                       price={route.price}
                     />
                   );

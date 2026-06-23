@@ -6,6 +6,7 @@ export interface IArticleRequest {
   photos?: IArticlePhoto[];
   countryId?: number;
   locationId?: number;
+  authorId?: number | null;
 }
 
 interface IArticleDescription {

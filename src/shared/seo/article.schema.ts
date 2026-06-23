@@ -8,6 +8,35 @@ const toIsoString = (date: Date | string): string => {
   return typeof date === 'string' ? date : date.toISOString();
 };
 
+const EDITORIAL_AUTHOR_ID = `${BASE_URL}/#editorial-author`;
+
+const editorialAuthorByLocale: Partial<Record<string, { name: string; jobTitle: string }>> = {
+  uk: {
+    name: 'Редакція GreenBus',
+    jobTitle: 'Редакція автобусних подорожей',
+  },
+  ru: {
+    name: 'Редакция GreenBus',
+    jobTitle: 'Редакция автобусных путешествий',
+  },
+  en: {
+    name: 'GreenBus Editorial Team',
+    jobTitle: 'Bus travel editorial team',
+  },
+};
+
+function buildEditorialAuthor(lng: Locale) {
+  const editorialAuthor = editorialAuthorByLocale[lng] ?? editorialAuthorByLocale.uk;
+
+  return {
+    '@type': 'Person',
+    '@id': EDITORIAL_AUTHOR_ID,
+    name: editorialAuthor?.name ?? 'GreenBus Editorial Team',
+    ...(editorialAuthor?.jobTitle ? { jobTitle: editorialAuthor.jobTitle } : {}),
+    worksFor: { '@id': ORG_ID },
+  };
+}
+
 /**
  * Будує Article JSON-LD з акцентом на E-E-A-T:
  * - author — реальна Person, пов'язана за стабільним @id зі сторінкою автора
@@ -43,7 +72,7 @@ export function buildArticleSchema(article: IArticleResponse, lng: Locale, fullA
       worksFor: { '@id': ORG_ID },
     };
   } else {
-    author = { '@id': ORG_ID };
+    author = buildEditorialAuthor(lng);
   }
 
   return {

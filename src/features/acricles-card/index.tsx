@@ -42,7 +42,11 @@ export function ArticleCard({
       </Link>
       <div className="flex items-center justify-between gap-2 p-4 dark:border-slate-700">
         {author?.name?.authorName && (
-          <div className="flex min-w-0 items-center gap-2">
+          <Link
+            href={`/${lang}/authors/${author.slug}/`}
+            prefetch={false}
+            className="flex min-w-0 items-center gap-2"
+          >
             {author.photo && (
               <Image
                 src={author.photo}
@@ -55,7 +59,7 @@ export function ArticleCard({
             <span className="truncate text-xs text-slate-600 dark:text-slate-300">
               {author.name.authorName}
             </span>
-          </div>
+          </Link>
         )}
         <time
           dateTime={article.createdAt.toString()}
