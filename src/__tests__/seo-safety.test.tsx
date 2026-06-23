@@ -8,6 +8,7 @@ import sitemap from '@/app/sitemap';
 import { getArticles } from '@/shared/api/articles.actions';
 import { getAllCountries } from '@/shared/api/countries.actions';
 import { getAllFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
+import { getAllLocationsForSitemap } from '@/shared/api/location.actions';
 import {
   getCleanSeoQueryRedirectPath,
   getQueryRobotsHeader,
@@ -27,6 +28,10 @@ jest.mock('@/shared/api/favoriteRoutes.server', () => ({
 
 jest.mock('@/shared/api/countries.actions', () => ({
   getAllCountries: jest.fn(),
+}));
+
+jest.mock('@/shared/api/location.actions', () => ({
+  getAllLocationsForSitemap: jest.fn(),
 }));
 
 jest.mock('@/shared/i18n/routing', () => ({
@@ -52,6 +57,7 @@ jest.mock('next/link', () => {
 const mockedGetArticles = jest.mocked(getArticles);
 const mockedGetAllFavoriteRoutes = jest.mocked(getAllFavoriteRoutes);
 const mockedGetAllCountries = jest.mocked(getAllCountries);
+const mockedGetAllLocationsForSitemap = jest.mocked(getAllLocationsForSitemap);
 
 function readProjectFile(filePath: string) {
   return fs.readFileSync(path.join(process.cwd(), filePath), 'utf8');
@@ -89,6 +95,15 @@ describe('SEO safety invariants', () => {
       { slug: 'germany' },
       { slug: 'france' },
     ] as Awaited<ReturnType<typeof getAllCountries>>);
+
+    mockedGetAllLocationsForSitemap.mockResolvedValue([
+      { slug: 'kyiv', country: { slug: 'ukraine' } },
+      { slug: 'prague', country: { slug: 'czech-republic' } },
+      { slug: 'berlin', country: { slug: 'germany' } },
+      { slug: 'zaporizhzhia', country: { slug: 'ukraine' } },
+      { slug: 'lviv', country: { slug: 'ukraine' } },
+      { slug: 'paris', country: { slug: 'france' } },
+    ] as Awaited<ReturnType<typeof getAllLocationsForSitemap>>);
 
   });
 
@@ -228,6 +243,9 @@ describe('SEO safety invariants', () => {
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/ukraine/zaporizhzhia/');
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/czech-republic/prague/');
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/germany/berlin/');
+    expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/france/');
+    expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/france/paris/');
+    expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/ukraine/lviv/');
     expect(urls).toContain('https://greenbus.com.ua/uk/faq/bronjuvannja-mists/');
     expect(urls).toContain('https://greenbus.com.ua/uk/for-carriers/');
     expect(urls).toContain('https://greenbus.com.ua/uk/for-agents/');
@@ -239,8 +257,6 @@ describe('SEO safety invariants', () => {
     expect(urls.some((url) => /\/(profile|checkout|payment-result|buses)\//.test(url))).toBe(false);
     expect(urls).not.toContain('https://greenbus.com.ua/uk/faq/');
     expect(urls).not.toContain('https://greenbus.com.ua/uk/oferta/');
-    expect(urls).not.toContain('https://greenbus.com.ua/uk/all-countries/france/');
-    expect(urls).not.toContain('https://greenbus.com.ua/uk/all-countries/ukraine/lviv/');
     expect(urls.every((url) => url.endsWith('/'))).toBe(true);
 
     const routeEntry = entries.find((entry) => entry.url === 'https://greenbus.com.ua/uk/routes/kyiv-prague/');
@@ -338,15 +354,15 @@ describe('SEO safety invariants', () => {
     expect(locationPage).toContain('/routes/${route.slug}/');
   });
 
-  it('uses a real content threshold before indexing city pages without route links', () => {
+  it('keeps real city pages indexable instead of applying a route-only thin-page gate', () => {
     const locationPage = readProjectFile(
       'src/app/[lng]/(root)/all-countries/[countrySlug]/[locationSlug]/page.tsx',
     );
 
-    expect(locationPage).toContain('MIN_INDEXABLE_CITY_DESCRIPTION_WORDS = 500');
-    expect(locationPage).toContain('getDescriptionWordCount(localizedDescription)');
-    expect(locationPage).toContain('const hasRoutes = (data.favoriteRoutesFrom ?? []).some((r) => !!r.slug)');
-    expect(locationPage).toContain('const isThin = !hasRoutes && !hasEnoughDescription');
+    expect(locationPage).not.toContain('MIN_INDEXABLE_CITY_DESCRIPTION_WORDS');
+    expect(locationPage).not.toContain('getDescriptionWordCount(localizedDescription)');
+    expect(locationPage).not.toContain('const isThin');
+    expect(locationPage).not.toContain('!hasRoutes');
   });
 
   it('preserves faq/search query params and does not strip them via SEO redirect', () => {
@@ -363,19 +379,12 @@ describe('SEO safety invariants', () => {
     expect(getCleanSeoQueryRedirectPath('/uk/faq/ticket-refund/', '?ref=email')).toBe('/uk/faq/ticket-refund/');
   });
 
-  it('deduplicates city pages in sitemap when a city appears in multiple routes', async () => {
-    mockedGetAllFavoriteRoutes.mockResolvedValueOnce([
-      {
-        slug: 'kyiv-prague',
-        fromLocation: { slug: 'kyiv', country: { slug: 'ukraine' } },
-        toLocation: { slug: 'prague', country: { slug: 'czech-republic' } },
-      },
-      {
-        slug: 'kyiv-berlin',
-        fromLocation: { slug: 'kyiv', country: { slug: 'ukraine' } },
-        toLocation: { slug: 'berlin', country: { slug: 'germany' } },
-      },
-    ] as Awaited<ReturnType<typeof getAllFavoriteRoutes>>);
+  it('deduplicates city pages in sitemap when backend returns the same city more than once', async () => {
+    mockedGetAllLocationsForSitemap.mockResolvedValueOnce([
+      { slug: 'kyiv', country: { slug: 'ukraine' } },
+      { slug: 'kyiv', country: { slug: 'ukraine' } },
+      { slug: 'berlin', country: { slug: 'germany' } },
+    ] as Awaited<ReturnType<typeof getAllLocationsForSitemap>>);
 
     const entries = await sitemap();
     const kyivUrls = entries.filter((e) => e.url.includes('/all-countries/ukraine/kyiv/'));
@@ -384,7 +393,7 @@ describe('SEO safety invariants', () => {
     expect(kyivUrls).toHaveLength(3);
   });
 
-  it('keeps route, city, and country sitemap entries in the same route endpoint graph', async () => {
+  it('keeps all backend countries and cities in the sitemap across locales', async () => {
     mockedGetAllFavoriteRoutes.mockResolvedValueOnce([
       {
         slug: 'kyiv-prague',
@@ -408,8 +417,10 @@ describe('SEO safety invariants', () => {
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/ukraine/zaporizhzhia/');
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/czech-republic/');
     expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/germany/');
-    expect(urls).not.toContain('https://greenbus.com.ua/uk/all-countries/france/');
-    expect(urls).not.toContain('https://greenbus.com.ua/uk/all-countries/ukraine/lviv/');
+    expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/france/');
+    expect(urls).toContain('https://greenbus.com.ua/ru/all-countries/france/');
+    expect(urls).toContain('https://greenbus.com.ua/en/all-countries/france/');
+    expect(urls).toContain('https://greenbus.com.ua/uk/all-countries/ukraine/lviv/');
   });
 
   it('strips existing locale prefix in BreadcrumbSimple hrefs before re-applying correct locale', () => {

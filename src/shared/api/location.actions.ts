@@ -60,3 +60,18 @@ export const getFavoriteLocations = async () => {
   const endpoint = `locations/favorites`;
   return fetchFromApi<ILocation[]>(endpoint);
 };
+
+export const getAllLocationsForSitemap = async () => {
+  const perPage = 1000;
+  const firstPage = await getLocations({ page: 1, perPage });
+
+  if (firstPage.totalPages <= 1) {
+    return firstPage.data;
+  }
+
+  const remainingPages = await Promise.all(
+    Array.from({ length: firstPage.totalPages - 1 }, (_, index) => getLocations({ page: index + 2, perPage })),
+  );
+
+  return [firstPage, ...remainingPages].flatMap((page) => page.data);
+};

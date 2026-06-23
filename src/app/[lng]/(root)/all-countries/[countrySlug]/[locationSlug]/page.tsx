@@ -45,21 +45,6 @@ type Props = {
   params: Promise<{ lng: string; countrySlug: string; locationSlug: string }>;
 };
 
-const MIN_INDEXABLE_CITY_DESCRIPTION_WORDS = 500;
-
-function getDescriptionWordCount(description: string | undefined): number {
-  if (!description) return 0;
-
-  return description
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&[^;]+;/g, ' ')
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean).length;
-}
-
 function humanizeRouteSlugPart(slugPart: string): string {
   return slugPart
     .split('-')
@@ -145,20 +130,10 @@ export async function generateMetadata({ params }: Props) {
     path: `all-countries/${data.country.slug}/${data.slug}/`,
   });
 
-  const localizedDescription = data.description?.find((item) => item.language === lng)?.description;
-  const descriptionWordCount = getDescriptionWordCount(localizedDescription);
-
-  // Тонкі гео-сторінки без маршрутів і без достатнього опису не індексуємо (захист від index bloat),
-  // але лишаємо follow, щоб краулер ходив по внутрішніх посиланнях.
-  const hasRoutes = (data.favoriteRoutesFrom ?? []).some((r) => !!r.slug);
-  const hasEnoughDescription = descriptionWordCount >= MIN_INDEXABLE_CITY_DESCRIPTION_WORDS;
-  const isThin = !hasRoutes && !hasEnoughDescription;
-
   return {
     ...baseMetadata,
     title: current.title,
     description: current.description,
-    ...(isThin && { robots: { index: false, follow: true } }),
   };
 }
 

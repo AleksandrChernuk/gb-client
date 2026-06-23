@@ -4,23 +4,19 @@ import { getPathname, routing } from '@/shared/i18n/routing';
 import { getArticles } from '@/shared/api/articles.actions';
 import { getAllFavoriteRoutes } from '@/shared/api/favoriteRoutes.server';
 import { getAllCountries } from '@/shared/api/countries.actions';
+import { getAllLocationsForSitemap } from '@/shared/api/location.actions';
 
 export const revalidate = 3600;
 
 type Href = Parameters<typeof getPathname>[0]['href'];
-type SitemapRoute = {
-  slug: string;
-  fromLocation?: { slug?: string; country?: { slug?: string } };
-  toLocation?: { slug?: string; country?: { slug?: string } };
-};
-
 type SitemapLocation = { slug: string; countrySlug: string };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articlesResponse, routesResponse, countries] = await Promise.all([
+  const [articlesResponse, routesResponse, countries, locationsResponse] = await Promise.all([
     getArticles({ perPage: 100 }).catch(() => ({ data: [] })),
     getAllFavoriteRoutes({ lang: 'uk' }).catch(() => []),
     getAllCountries().catch(() => []),
+    getAllLocationsForSitemap().catch(() => []),
   ]);
 
   const posts = articlesResponse.data.map((post) => ({
@@ -43,24 +39,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fromLocation: route.fromLocation,
     toLocation: route.toLocation,
   }));
-  const locations = getSeoLocationsForSitemap(routes);
-  const countrySlugs = getSeoCountrySlugs(locations);
+  const locations = getSeoLocationsForSitemap(locationsResponse);
 
   return [
     ...getStaticPages(),
     ...getBlogPages(posts),
     ...getAuthorPages(authorSlugs),
     ...getRoutePages(routes),
-    ...getCountryPages(countries, countrySlugs),
+    ...getCountryPages(countries),
     ...getLocationPages(locations),
   ];
 }
 
 // ────────────────────────────────────────────────────────────
-// SEO локации: только endpoint-города индексируемых маршрутов.
-// Так каждый city/country URL в sitemap бьётся с route-графом и не создаёт orphan pages.
+// SEO локації: усі публічні міста з backend, локалізовані через buildEntries().
+// Це зберігає широку індексаційну структуру GreenBus: країни, міста, маршрути, FAQ і блог у 3 мовах.
 // ────────────────────────────────────────────────────────────
-function getSeoLocationsForSitemap(routes: SitemapRoute[]): SitemapLocation[] {
+function getSeoLocationsForSitemap(locations: { slug?: string; country?: { slug?: string } }[]): SitemapLocation[] {
   const byPath = new Map<string, SitemapLocation>();
 
   const addLocation = (location?: { slug?: string; country?: { slug?: string } }) => {
@@ -70,16 +65,9 @@ function getSeoLocationsForSitemap(routes: SitemapRoute[]): SitemapLocation[] {
     byPath.set(`${item.countrySlug}/${item.slug}`, item);
   };
 
-  for (const route of routes) {
-    addLocation(route.fromLocation);
-    addLocation(route.toLocation);
-  }
+  locations.forEach(addLocation);
 
   return [...byPath.values()].sort((a, b) => `${a.countrySlug}/${a.slug}`.localeCompare(`${b.countrySlug}/${b.slug}`));
-}
-
-function getSeoCountrySlugs(locations: SitemapLocation[]) {
-  return new Set(locations.map((location) => location.countrySlug));
 }
 
 // ────────────────────────────────────────────────────────────
@@ -136,10 +124,8 @@ function getRoutePages(routes: { slug: string }[]) {
   );
 }
 
-function getCountryPages(countries: { slug: string }[], countrySlugs: Set<string>) {
-  const seoCountries = countrySlugs.size > 0 ? countries.filter((country) => countrySlugs.has(country.slug)) : countries;
-
-  return seoCountries.flatMap((country) =>
+function getCountryPages(countries: { slug: string }[]) {
+  return countries.flatMap((country) =>
     buildEntries(`/all-countries/${country.slug}` as Href, {
       priority: 0.8,
       changeFrequency: 'weekly',
