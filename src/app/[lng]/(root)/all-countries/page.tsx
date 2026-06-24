@@ -11,6 +11,7 @@ import { CountriesListSection } from '@/views/all-countries-page/CountriesListSe
 import { getAllCountries } from '@/shared/api/countries.actions';
 import { СountriesSearchHero } from '@/views/all-countries-page/СountriesSearchHero';
 import { SeoSectionAllCountries } from '@/views/all-countries-page/SeoSection';
+import { buildCountryDirectorySchema } from '@/shared/seo/country-directory.schema';
 
 export async function generateMetadata({ params }: TParams) {
   const { lng } = (await params) as { lng: Locale };
@@ -41,9 +42,12 @@ export default async function AllCountries({
     notFound();
   }
 
+  const countryDirectorySchema = buildCountryDirectorySchema(countries, lng);
+
   return (
     <>
       <main className="bg-slate-50 dark:bg-slate-800 flex-1">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(countryDirectorySchema) }} />
         <СountriesSearchHero />
         <CountriesListSection countries={countries} locale={lng} />
         <SeoSectionAllCountries />

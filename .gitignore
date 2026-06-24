@@ -28,6 +28,7 @@
 /.agents/
 /.claude/
 /.dto/
+.seo-cache/
 
 # debug
 npm-debug.log*

@@ -26,9 +26,12 @@ export default async function RouteLead({ fromName, toName, price, lng }: RouteL
   ];
 
   return (
-    <section className="pt-6 laptop:pt-8">
+    <section className="pt-6 laptop:pt-8" aria-labelledby="route-summary-heading">
       <Container size="l">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 laptop:p-6">
+          <h2 id="route-summary-heading" className="sr-only">
+            {t('route_slug.results_heading', { fromName, toName })}
+          </h2>
           <p className="text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">{lead}</p>
 
           <ul className="mt-5 grid grid-cols-1 gap-3 tablet:grid-cols-3">
