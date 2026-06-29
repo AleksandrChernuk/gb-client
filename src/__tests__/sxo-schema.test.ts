@@ -89,7 +89,7 @@ describe('SXO schema helpers', () => {
       },
     });
     expect(faq?.mainEntity).toHaveLength(1);
-    expect(faq?.mainEntity[0].name).toBe('Чи є електронний квиток?');
-    expect(breadcrumbs?.itemListElement[2].item).toBe('https://greenbus.com.ua/uk/routes/kyiv-prague/');
+    expect(faq?.mainEntity?.[0]?.name).toBe('Чи є електронний квиток?');
+    expect(breadcrumbs?.itemListElement?.[2]?.item).toBe('https://greenbus.com.ua/uk/routes/kyiv-prague/');
   });
 });

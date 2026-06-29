@@ -34,6 +34,16 @@ export interface IAuthorArticle {
   descriptions: IAuthorArticleDescription | null;
 }
 
+export interface IAuthorSimpleResponse {
+  id: number;
+  slug: string;
+  name: IAuthorNameTranslation | null;
+  role: IAuthorRoleTranslation | null;
+  photo: string | null;
+  updatedAt: Date;
+  createdAt: Date;
+}
+
 export interface IAuthorFullResponse {
   id: number;
   slug: string;
@@ -47,3 +57,18 @@ export interface IAuthorFullResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IFindAllAuthorsOptions {
+  language?: string;
+  query?: string;
+  page?: number;
+  perPage?: number;
+}
+
+export type TGetAuthorsResponse = {
+  data: IAuthorSimpleResponse[];
+  totalAuthors: number;
+  page: number;
+  perPage: number;
+  totalPages: number;
+};

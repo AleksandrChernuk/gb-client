@@ -82,12 +82,12 @@ export default function Support({ variant }: Props) {
           <button
             type="button"
             aria-label={supportNavlinks[0].title}
-            className="relative flex h-auto w-auto items-center rounded-md border border-slate-200 bg-background px-10 py-3 text-base font-normal leading-6 tracking-normal text-slate-700 outline-hidden hover:border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-50 dark:hover:border-slate-700 dark:hover:bg-black"
+            className="relative flex h-auto min-w-[206px] items-center rounded-md border border-slate-200 bg-background px-10 py-3 text-base font-normal leading-6 tracking-normal text-slate-700 outline-hidden hover:border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-50 dark:hover:border-slate-700 dark:hover:bg-black"
           >
             <span className="absolute size-6 -translate-y-1/2 pointer-events-none left-2 top-1/2" aria-hidden="true">
               <Icon aria-label={supportNavlinks[0].title} />
             </span>
-            {supportNavlinks[0].title}
+            <span className="whitespace-nowrap">{supportNavlinks[0].title}</span>
             <ChevronUp
               size={24}
               className="absolute -translate-y-1/2 group-data-[state=open]:rotate-180 right-2 top-1/2 stroke-black group-data-[state=open]:stroke-[#6f8b90] dark:stroke-slate-200"
@@ -95,7 +95,7 @@ export default function Support({ variant }: Props) {
             />
           </button>
         </PopoverTrigger>
-        <PopoverContent side="bottom" className="w-full">
+        <PopoverContent side="bottom" className="min-w-[206px]">
           <SupportLinksList className="justify-start text-slate-700 dark:text-slate-50 text-sm font-normal leading-5.25" />
         </PopoverContent>
       </Popover>
