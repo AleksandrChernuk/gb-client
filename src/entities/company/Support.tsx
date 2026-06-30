@@ -82,20 +82,20 @@ export default function Support({ variant }: Props) {
           <button
             type="button"
             aria-label={supportNavlinks[0].title}
-            className="relative flex h-auto min-w-[206px] items-center rounded-md border border-slate-200 bg-background px-10 py-3 text-base font-normal leading-6 tracking-normal text-slate-700 outline-hidden hover:border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-50 dark:hover:border-slate-700 dark:hover:bg-black"
+            className="flex h-auto min-w-[260px] items-center gap-4 rounded-md border border-slate-200 bg-background px-4 py-3 text-base font-normal leading-6 tracking-normal text-slate-700 outline-hidden hover:border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-50 dark:hover:border-slate-700 dark:hover:bg-black"
           >
-            <span className="absolute size-6 -translate-y-1/2 pointer-events-none left-2 top-1/2" aria-hidden="true">
+            <span className="size-6 shrink-0 pointer-events-none" aria-hidden="true">
               <Icon aria-label={supportNavlinks[0].title} />
             </span>
             <span className="whitespace-nowrap">{supportNavlinks[0].title}</span>
             <ChevronUp
               size={24}
-              className="absolute -translate-y-1/2 group-data-[state=open]:rotate-180 right-2 top-1/2 stroke-black group-data-[state=open]:stroke-[#6f8b90] dark:stroke-slate-200"
+              className="ml-auto shrink-0 group-data-[state=open]:rotate-180 stroke-black group-data-[state=open]:stroke-[#6f8b90] dark:stroke-slate-200"
               aria-hidden="true"
             />
           </button>
         </PopoverTrigger>
-        <PopoverContent side="bottom" className="min-w-[206px]">
+        <PopoverContent side="bottom" className="w-[var(--radix-popover-trigger-width)] min-w-[260px]">
           <SupportLinksList className="justify-start text-slate-700 dark:text-slate-50 text-sm font-normal leading-5.25" />
         </PopoverContent>
       </Popover>
